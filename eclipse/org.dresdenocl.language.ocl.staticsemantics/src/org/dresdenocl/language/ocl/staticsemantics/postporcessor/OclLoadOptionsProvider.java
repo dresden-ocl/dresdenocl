@@ -3,9 +3,9 @@ package org.dresdenocl.language.ocl.staticsemantics.postporcessor;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveHelper;
 import org.dresdenocl.language.ocl.resource.ocl.IOclOptionProvider;
 import org.dresdenocl.language.ocl.resource.ocl.IOclOptions;
+import org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveHelper;
 import org.dresdenocl.language.ocl.resource.ocl.IOclResourcePostProcessorProvider;
 
 public class OclLoadOptionsProvider implements IOclOptionProvider {

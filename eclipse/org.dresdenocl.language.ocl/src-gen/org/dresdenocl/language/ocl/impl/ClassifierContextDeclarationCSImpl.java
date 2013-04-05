@@ -8,6 +8,10 @@ package org.dresdenocl.language.ocl.impl;
 
 import java.util.Collection;
 
+import org.dresdenocl.language.ocl.ClassifierContextDeclarationCS;
+import org.dresdenocl.language.ocl.InvariantOrDefinitionCS;
+import org.dresdenocl.language.ocl.ModelElementCS;
+import org.dresdenocl.language.ocl.OclPackage;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -16,11 +20,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
-import org.dresdenocl.language.ocl.ClassifierContextDeclarationCS;
-import org.dresdenocl.language.ocl.InvariantOrDefinitionCS;
-import org.dresdenocl.language.ocl.OclPackage;
-import org.dresdenocl.language.ocl.TypeCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -45,7 +44,7 @@ public class ClassifierContextDeclarationCSImpl extends ContextDeclarationCSImpl
    * @generated
    * @ordered
    */
-	protected TypeCS typeName;
+	protected ModelElementCS typeName;
 
 	/**
    * The cached value of the '{@link #getInvariantsAndDefinitions() <em>Invariants And Definitions</em>}' containment reference list.
@@ -81,7 +80,7 @@ public class ClassifierContextDeclarationCSImpl extends ContextDeclarationCSImpl
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public TypeCS getTypeName() {
+	public ModelElementCS getTypeName() {
     return typeName;
   }
 
@@ -90,8 +89,8 @@ public class ClassifierContextDeclarationCSImpl extends ContextDeclarationCSImpl
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public NotificationChain basicSetTypeName(TypeCS newTypeName, NotificationChain msgs) {
-    TypeCS oldTypeName = typeName;
+	public NotificationChain basicSetTypeName(ModelElementCS newTypeName, NotificationChain msgs) {
+    ModelElementCS oldTypeName = typeName;
     typeName = newTypeName;
     if (eNotificationRequired())
     {
@@ -106,7 +105,7 @@ public class ClassifierContextDeclarationCSImpl extends ContextDeclarationCSImpl
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public void setTypeName(TypeCS newTypeName) {
+	public void setTypeName(ModelElementCS newTypeName) {
     if (newTypeName != typeName)
     {
       NotificationChain msgs = null;
@@ -179,7 +178,7 @@ public class ClassifierContextDeclarationCSImpl extends ContextDeclarationCSImpl
     switch (featureID)
     {
       case OclPackage.CLASSIFIER_CONTEXT_DECLARATION_CS__TYPE_NAME:
-        setTypeName((TypeCS)newValue);
+        setTypeName((ModelElementCS)newValue);
         return;
       case OclPackage.CLASSIFIER_CONTEXT_DECLARATION_CS__INVARIANTS_AND_DEFINITIONS:
         getInvariantsAndDefinitions().clear();
@@ -199,7 +198,7 @@ public class ClassifierContextDeclarationCSImpl extends ContextDeclarationCSImpl
     switch (featureID)
     {
       case OclPackage.CLASSIFIER_CONTEXT_DECLARATION_CS__TYPE_NAME:
-        setTypeName((TypeCS)null);
+        setTypeName((ModelElementCS)null);
         return;
       case OclPackage.CLASSIFIER_CONTEXT_DECLARATION_CS__INVARIANTS_AND_DEFINITIONS:
         getInvariantsAndDefinitions().clear();

@@ -73,7 +73,7 @@ RULES {
 	OperationContextDeclarationCS		::= "context" operation !0 prePostOrBodyDeclarations+;
 	
 	@Foldable
-	AttributeContextDeclarationCS		::= "context" typeName "::" property[SIMPLE_NAME] (":" type)? !0 initOrDeriveValue initOrDeriveValue?;
+	AttributeContextDeclarationCS		::= "context" typeName (":" type)? !0 initOrDeriveValue initOrDeriveValue?;
 	
 	@Foldable
 	ClassifierContextDeclarationCS		::= "context" typeName !0 invariantsAndDefinitions+;
@@ -167,14 +167,12 @@ RULES {
 	IteratorExpVariableCS				::= variableName (":" typeName)?;
 	
 	
-	// *** TypeCS: pathName, tuple type or collection type ***
-	TypePathNameSimpleCS				::= typeName[SIMPLE_NAME];
-	
-	TypePathNameNestedCS				::= namespace[SIMPLE_NAME] #0 "::" #0 typePathName;
-	
+	// *** TypeCS: pathName, tuple type or collection type ***	
 	TupleTypeCS							::= "Tuple" "(" #0 variableDeclarationList? #0 ")";
 	
 	CollectionTypeIdentifierCS			::= typeName[COLLECTION_TYPES] ( #0 "(" #0 genericType #0 ")")?;
+
+	TypeModelElementCS					::= modelElement;
 	
 	
 	// *** VariableDeclarationWithoutInitCS ***
@@ -205,9 +203,14 @@ RULES {
 	@Operator(type="primitive", weight="20", superclass="OclExpressionCS")
 	StaticOperationCallExpCS			::= typeName #0 "::" #0 operationName[SIMPLE_NAME] #0 "(" (#0 arguments ("," arguments)*)? #0 ")";
 	
+	@Operator(type="primitive", weight="20", superclass="OclExpressionCS")	
+	ModelElementCS							::= pathName;
 	
-	@Operator(type="primitive", weight="20", superclass="OclExpressionCS")
-	EnumLiteralOrStaticPropertyExpCS	::= typeName "::" enumLiteralOrStaticProperty[SIMPLE_NAME];
+	PathNameSimpleCS						::= namedElement[SIMPLE_NAME];
+	
+	PathNamePathCS							::= (pathName #0 "::" #0)+  pathName;		
+	
+	NamedElementCS							::= namedElement[SIMPLE_NAME];
 	
 	@Operator(type="primitive", weight="20", superclass="OclExpressionCS")
 	TupleLiteralExpCS					::= "Tuple" "{" variableDeclarations "}";
@@ -254,10 +257,7 @@ RULES {
 	
 	@Operator(type="primitive", weight="20", superclass="OclExpressionCS")
 	NullLiteralExpCS					::= "null";
-	
-	@Operator(type="primitive", weight="20", superclass="OclExpressionCS")
-	NamedLiteralExpCS 					::= namedElement[SIMPLE_NAME];
-		
+			
 	@Operator(type="primitive", weight="20", superclass="OclExpressionCS")
 	BracketExpCS						::= "(" #0 oclExpression #0 ")";
 

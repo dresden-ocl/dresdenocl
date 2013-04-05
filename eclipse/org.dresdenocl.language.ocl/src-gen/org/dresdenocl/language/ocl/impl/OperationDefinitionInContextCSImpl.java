@@ -6,15 +6,14 @@
  */
 package org.dresdenocl.language.ocl.impl;
 
+import org.dresdenocl.language.ocl.ModelElementCS;
+import org.dresdenocl.language.ocl.OclPackage;
+import org.dresdenocl.language.ocl.OperationDefinitionInContextCS;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.dresdenocl.language.ocl.OclPackage;
-import org.dresdenocl.language.ocl.OperationDefinitionInContextCS;
-import org.dresdenocl.language.ocl.TypePathNameCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -38,7 +37,7 @@ public class OperationDefinitionInContextCSImpl extends OperationDefinitionCSImp
    * @generated
    * @ordered
    */
-	protected TypePathNameCS typeName;
+	protected ModelElementCS typeName;
 
 	/**
    * <!-- begin-user-doc -->
@@ -64,7 +63,7 @@ public class OperationDefinitionInContextCSImpl extends OperationDefinitionCSImp
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public TypePathNameCS getTypeName() {
+	public ModelElementCS getTypeName() {
     return typeName;
   }
 
@@ -73,8 +72,8 @@ public class OperationDefinitionInContextCSImpl extends OperationDefinitionCSImp
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public NotificationChain basicSetTypeName(TypePathNameCS newTypeName, NotificationChain msgs) {
-    TypePathNameCS oldTypeName = typeName;
+	public NotificationChain basicSetTypeName(ModelElementCS newTypeName, NotificationChain msgs) {
+    ModelElementCS oldTypeName = typeName;
     typeName = newTypeName;
     if (eNotificationRequired())
     {
@@ -89,7 +88,7 @@ public class OperationDefinitionInContextCSImpl extends OperationDefinitionCSImp
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public void setTypeName(TypePathNameCS newTypeName) {
+	public void setTypeName(ModelElementCS newTypeName) {
     if (newTypeName != typeName)
     {
       NotificationChain msgs = null;
@@ -144,7 +143,7 @@ public class OperationDefinitionInContextCSImpl extends OperationDefinitionCSImp
     switch (featureID)
     {
       case OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME:
-        setTypeName((TypePathNameCS)newValue);
+        setTypeName((ModelElementCS)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -160,7 +159,7 @@ public class OperationDefinitionInContextCSImpl extends OperationDefinitionCSImp
     switch (featureID)
     {
       case OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME:
-        setTypeName((TypePathNameCS)null);
+        setTypeName((ModelElementCS)null);
         return;
     }
     super.eUnset(featureID);

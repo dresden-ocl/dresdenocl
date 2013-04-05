@@ -34,21 +34,13 @@ package org.dresdenocl.pivotmodel.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.dresdenocl.pivotmodel.Constraint;
 import org.dresdenocl.pivotmodel.ConstraintKind;
+import org.dresdenocl.pivotmodel.Enumeration;
 import org.dresdenocl.pivotmodel.Feature;
 import org.dresdenocl.pivotmodel.GenericElement;
 import org.dresdenocl.pivotmodel.NamedElement;
@@ -59,6 +51,15 @@ import org.dresdenocl.pivotmodel.PivotModelPackage;
 import org.dresdenocl.pivotmodel.Property;
 import org.dresdenocl.pivotmodel.Type;
 import org.dresdenocl.pivotmodel.TypeParameter;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -425,7 +426,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 		Type type = null;
 
 		for (Type ownedType : getOwnedType()) {
-			if (ownedType.getName().equals(name)) {
+			if (name.equals(ownedType.getName())) {
 				type = ownedType;
 				break;
 			}
@@ -569,6 +570,62 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 		// no else.
 
 		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public LinkedList<NamedElement> lookupPathName(List<String> names) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("lookupPathName(name=" + names + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+
+		LinkedList<NamedElement> namedElements = new LinkedList<NamedElement>();
+		NamedElement namedElement = null;
+		if (names.size() <= 2) {
+			namedElement = lookupType(names.get(0));
+			if (namedElement != null) {
+				namedElements.add(namedElement);
+				if (names.size() == 2) {
+					if (namedElement instanceof Enumeration) {
+						namedElement = ((Enumeration) namedElement)
+								.lookupLiteral(names.get(1));
+					} else {
+						namedElement = ((Type) namedElement).lookupProperty(names
+								.get(1));
+					}
+					if (namedElement == null) {
+						namedElements.clear();
+					} else {
+						namedElements.add(namedElement);
+					}
+			}
+				
+			}
+		}
+
+		if (namedElements.size() == 0) {
+			namedElement = this.lookupNamespace(names.get(0));
+			if (namedElement == null && getNestingNamespace() != null) {
+				namedElements = getNestingNamespace().lookupPathName(names);
+			} else if (namedElement != null) {
+				if (names.size() > 1) {
+					namedElements = ((Namespace) namedElement)
+							.lookupPathName(names.subList(1, names.size()));
+					if (namedElements.size() > 0) namedElements.addFirst(namedElement);
+				} else {
+					namedElements.add(namedElement);
+				}
+			}
+		}
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("lookupPathName() - exit - return value=" + namedElements); //$NON-NLS-1$
+		}
+
+		return namedElements;
 	}
 
 	/**

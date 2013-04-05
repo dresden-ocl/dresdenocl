@@ -6,11 +6,6 @@
  */
 package org.dresdenocl.language.ocl.util;
 
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-import org.eclipse.emf.ecore.EObject;
-
 import org.dresdenocl.language.ocl.*;
 import org.dresdenocl.language.ocl.AdditiveOperationCallExpCS;
 import org.dresdenocl.language.ocl.AttributeContextDeclarationCS;
@@ -31,7 +26,6 @@ import org.dresdenocl.language.ocl.DefinitionExpOperationCS;
 import org.dresdenocl.language.ocl.DefinitionExpPartCS;
 import org.dresdenocl.language.ocl.DefinitionExpPropertyCS;
 import org.dresdenocl.language.ocl.DeriveValueCS;
-import org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS;
 import org.dresdenocl.language.ocl.EqualityOperationCallExpCS;
 import org.dresdenocl.language.ocl.FeatureCallExpCS;
 import org.dresdenocl.language.ocl.IfExpCS;
@@ -55,8 +49,9 @@ import org.dresdenocl.language.ocl.LogicalNotOperationCallExpCS;
 import org.dresdenocl.language.ocl.LogicalOrOperationCallExpCS;
 import org.dresdenocl.language.ocl.LogicalXorOperationCallExpCS;
 import org.dresdenocl.language.ocl.LoopExpCS;
+import org.dresdenocl.language.ocl.ModelElementCS;
 import org.dresdenocl.language.ocl.MultOperationCallExpCS;
-import org.dresdenocl.language.ocl.NamedLiteralExpCS;
+import org.dresdenocl.language.ocl.NamedElementCS;
 import org.dresdenocl.language.ocl.NavigationCallExp;
 import org.dresdenocl.language.ocl.NullLiteralExpCS;
 import org.dresdenocl.language.ocl.OclExpressionCS;
@@ -77,6 +72,8 @@ import org.dresdenocl.language.ocl.PackageDeclarationWithNamespaceCS;
 import org.dresdenocl.language.ocl.PackageDeclarationWithoutNamespaceCS;
 import org.dresdenocl.language.ocl.ParameterCS;
 import org.dresdenocl.language.ocl.PathNameCS;
+import org.dresdenocl.language.ocl.PathNamePathCS;
+import org.dresdenocl.language.ocl.PathNameSimpleCS;
 import org.dresdenocl.language.ocl.PostConditionDeclarationCS;
 import org.dresdenocl.language.ocl.PreConditionDeclarationCS;
 import org.dresdenocl.language.ocl.PrePostOrBodyDeclarationCS;
@@ -94,15 +91,18 @@ import org.dresdenocl.language.ocl.TupleLiteralExpCS;
 import org.dresdenocl.language.ocl.TupleTypeCS;
 import org.dresdenocl.language.ocl.TupleTypeLiteralExpCS;
 import org.dresdenocl.language.ocl.TypeCS;
-import org.dresdenocl.language.ocl.TypePathNameCS;
-import org.dresdenocl.language.ocl.TypePathNameNestedCS;
-import org.dresdenocl.language.ocl.TypePathNameSimpleCS;
+import org.dresdenocl.language.ocl.TypeModelElementCS;
 import org.dresdenocl.language.ocl.UnaryOperationCallExpCS;
+import org.dresdenocl.language.ocl.UnreservedSimpleNameCS;
 import org.dresdenocl.language.ocl.VariableDeclarationCS;
 import org.dresdenocl.language.ocl.VariableDeclarationWithInitCS;
 import org.dresdenocl.language.ocl.VariableDeclarationWithInitListCS;
 import org.dresdenocl.language.ocl.VariableDeclarationWithoutInitCS;
 import org.dresdenocl.language.ocl.VariableDeclarationWithoutInitListCS;
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -175,14 +175,34 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
         return createBracketExpCSAdapter();
       }
       @Override
-      public Adapter caseNamedLiteralExpCS(NamedLiteralExpCS object)
+      public Adapter caseModelElementCS(ModelElementCS object)
       {
-        return createNamedLiteralExpCSAdapter();
+        return createModelElementCSAdapter();
       }
       @Override
       public Adapter casePathNameCS(PathNameCS object)
       {
         return createPathNameCSAdapter();
+      }
+      @Override
+      public Adapter casePathNameSimpleCS(PathNameSimpleCS object)
+      {
+        return createPathNameSimpleCSAdapter();
+      }
+      @Override
+      public Adapter casePathNamePathCS(PathNamePathCS object)
+      {
+        return createPathNamePathCSAdapter();
+      }
+      @Override
+      public Adapter caseUnreservedSimpleNameCS(UnreservedSimpleNameCS object)
+      {
+        return createUnreservedSimpleNameCSAdapter();
+      }
+      @Override
+      public Adapter caseNamedElementCS(NamedElementCS object)
+      {
+        return createNamedElementCSAdapter();
       }
       @Override
       public Adapter caseSimpleNameCS(SimpleNameCS object)
@@ -195,19 +215,9 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
         return createTypeCSAdapter();
       }
       @Override
-      public Adapter caseTypePathNameCS(TypePathNameCS object)
+      public Adapter caseTypeModelElementCS(TypeModelElementCS object)
       {
-        return createTypePathNameCSAdapter();
-      }
-      @Override
-      public Adapter caseTypePathNameSimpleCS(TypePathNameSimpleCS object)
-      {
-        return createTypePathNameSimpleCSAdapter();
-      }
-      @Override
-      public Adapter caseTypePathNameNestedCS(TypePathNameNestedCS object)
-      {
-        return createTypePathNameNestedCSAdapter();
+        return createTypeModelElementCSAdapter();
       }
       @Override
       public Adapter caseTupleTypeCS(TupleTypeCS object)
@@ -253,11 +263,6 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
       public Adapter caseLiteralExpCS(LiteralExpCS object)
       {
         return createLiteralExpCSAdapter();
-      }
-      @Override
-      public Adapter caseEnumLiteralOrStaticPropertyExpCS(EnumLiteralOrStaticPropertyExpCS object)
-      {
-        return createEnumLiteralOrStaticPropertyExpCSAdapter();
       }
       @Override
       public Adapter caseCollectionLiteralExpCS(CollectionLiteralExpCS object)
@@ -664,16 +669,16 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.NamedLiteralExpCS <em>Named Literal Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.ModelElementCS <em>Model Element CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.dresdenocl.language.ocl.NamedLiteralExpCS
+   * @see org.dresdenocl.language.ocl.ModelElementCS
    * @generated
    */
-	public Adapter createNamedLiteralExpCSAdapter() {
+	public Adapter createModelElementCSAdapter() {
     return null;
   }
 
@@ -688,6 +693,62 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
    * @generated
    */
 	public Adapter createPathNameCSAdapter() {
+    return null;
+  }
+
+	/**
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.PathNameSimpleCS <em>Path Name Simple CS</em>}'.
+   * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.dresdenocl.language.ocl.PathNameSimpleCS
+   * @generated
+   */
+	public Adapter createPathNameSimpleCSAdapter() {
+    return null;
+  }
+
+	/**
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.PathNamePathCS <em>Path Name Path CS</em>}'.
+   * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.dresdenocl.language.ocl.PathNamePathCS
+   * @generated
+   */
+	public Adapter createPathNamePathCSAdapter() {
+    return null;
+  }
+
+	/**
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.UnreservedSimpleNameCS <em>Unreserved Simple Name CS</em>}'.
+   * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.dresdenocl.language.ocl.UnreservedSimpleNameCS
+   * @generated
+   */
+	public Adapter createUnreservedSimpleNameCSAdapter() {
+    return null;
+  }
+
+	/**
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.NamedElementCS <em>Named Element CS</em>}'.
+   * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.dresdenocl.language.ocl.NamedElementCS
+   * @generated
+   */
+	public Adapter createNamedElementCSAdapter() {
     return null;
   }
 
@@ -720,44 +781,16 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.TypePathNameCS <em>Type Path Name CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.TypeModelElementCS <em>Type Model Element CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.dresdenocl.language.ocl.TypePathNameCS
+   * @see org.dresdenocl.language.ocl.TypeModelElementCS
    * @generated
    */
-	public Adapter createTypePathNameCSAdapter() {
-    return null;
-  }
-
-	/**
-   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.TypePathNameSimpleCS <em>Type Path Name Simple CS</em>}'.
-   * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.dresdenocl.language.ocl.TypePathNameSimpleCS
-   * @generated
-   */
-	public Adapter createTypePathNameSimpleCSAdapter() {
-    return null;
-  }
-
-	/**
-   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.TypePathNameNestedCS <em>Type Path Name Nested CS</em>}'.
-   * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.dresdenocl.language.ocl.TypePathNameNestedCS
-   * @generated
-   */
-	public Adapter createTypePathNameNestedCSAdapter() {
+	public Adapter createTypeModelElementCSAdapter() {
     return null;
   }
 
@@ -884,20 +917,6 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
    * @generated
    */
 	public Adapter createLiteralExpCSAdapter() {
-    return null;
-  }
-
-	/**
-   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS <em>Enum Literal Or Static Property Exp CS</em>}'.
-   * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS
-   * @generated
-   */
-	public Adapter createEnumLiteralOrStaticPropertyExpCSAdapter() {
     return null;
   }
 

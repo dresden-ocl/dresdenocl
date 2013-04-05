@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.IdentityHashMap;
 import java.util.Map;
 
-import org.eclipse.core.runtime.Platform;
-
 import org.dresdenocl.language.ocl.resource.ocl.mopp.IOclResource;
 import org.dresdenocl.language.ocl.staticsemantics.factory.OclStaticSemanticsFactoryEP;
 import org.dresdenocl.language.ocl.staticsemantics.impl.OclStaticSemanticsFactoryImpl;

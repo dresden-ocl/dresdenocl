@@ -35,12 +35,12 @@ public interface ClassifierContextDeclarationCS extends ContextDeclarationCS {
 	 * </p>
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Type Name</em>' containment reference.
-   * @see #setTypeName(TypeCS)
+   * @see #setTypeName(ModelElementCS)
    * @see org.dresdenocl.language.ocl.OclPackage#getClassifierContextDeclarationCS_TypeName()
    * @model containment="true" required="true"
    * @generated
    */
-	TypeCS getTypeName();
+	ModelElementCS getTypeName();
 
 	/**
    * Sets the value of the '{@link org.dresdenocl.language.ocl.ClassifierContextDeclarationCS#getTypeName <em>Type Name</em>}' containment reference.
@@ -50,7 +50,7 @@ public interface ClassifierContextDeclarationCS extends ContextDeclarationCS {
    * @see #getTypeName()
    * @generated
    */
-	void setTypeName(TypeCS value);
+	void setTypeName(ModelElementCS value);
 
 	/**
    * Returns the value of the '<em><b>Invariants And Definitions</b></em>' containment reference list.

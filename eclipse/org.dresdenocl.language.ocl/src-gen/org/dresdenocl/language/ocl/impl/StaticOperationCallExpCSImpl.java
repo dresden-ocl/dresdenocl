@@ -8,6 +8,11 @@ package org.dresdenocl.language.ocl.impl;
 
 import java.util.Collection;
 
+import org.dresdenocl.language.ocl.ModelElementCS;
+import org.dresdenocl.language.ocl.OclExpressionCS;
+import org.dresdenocl.language.ocl.OclPackage;
+import org.dresdenocl.language.ocl.StaticOperationCallExpCS;
+import org.dresdenocl.pivotmodel.Operation;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -16,12 +21,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
-import org.dresdenocl.language.ocl.OclExpressionCS;
-import org.dresdenocl.language.ocl.OclPackage;
-import org.dresdenocl.language.ocl.StaticOperationCallExpCS;
-import org.dresdenocl.language.ocl.TypePathNameCS;
-import org.dresdenocl.pivotmodel.Operation;
 
 /**
  * <!-- begin-user-doc -->
@@ -47,7 +46,7 @@ public class StaticOperationCallExpCSImpl extends OperationCallExpCSImpl impleme
    * @generated
    * @ordered
    */
-	protected TypePathNameCS typeName;
+	protected ModelElementCS typeName;
 
 	/**
    * The cached value of the '{@link #getOperationName() <em>Operation Name</em>}' reference.
@@ -93,7 +92,7 @@ public class StaticOperationCallExpCSImpl extends OperationCallExpCSImpl impleme
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public TypePathNameCS getTypeName() {
+	public ModelElementCS getTypeName() {
     return typeName;
   }
 
@@ -102,8 +101,8 @@ public class StaticOperationCallExpCSImpl extends OperationCallExpCSImpl impleme
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public NotificationChain basicSetTypeName(TypePathNameCS newTypeName, NotificationChain msgs) {
-    TypePathNameCS oldTypeName = typeName;
+	public NotificationChain basicSetTypeName(ModelElementCS newTypeName, NotificationChain msgs) {
+    ModelElementCS oldTypeName = typeName;
     typeName = newTypeName;
     if (eNotificationRequired())
     {
@@ -118,7 +117,7 @@ public class StaticOperationCallExpCSImpl extends OperationCallExpCSImpl impleme
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public void setTypeName(TypePathNameCS newTypeName) {
+	public void setTypeName(ModelElementCS newTypeName) {
     if (newTypeName != typeName)
     {
       NotificationChain msgs = null;
@@ -234,7 +233,7 @@ public class StaticOperationCallExpCSImpl extends OperationCallExpCSImpl impleme
     switch (featureID)
     {
       case OclPackage.STATIC_OPERATION_CALL_EXP_CS__TYPE_NAME:
-        setTypeName((TypePathNameCS)newValue);
+        setTypeName((ModelElementCS)newValue);
         return;
       case OclPackage.STATIC_OPERATION_CALL_EXP_CS__OPERATION_NAME:
         setOperationName((Operation)newValue);
@@ -257,7 +256,7 @@ public class StaticOperationCallExpCSImpl extends OperationCallExpCSImpl impleme
     switch (featureID)
     {
       case OclPackage.STATIC_OPERATION_CALL_EXP_CS__TYPE_NAME:
-        setTypeName((TypePathNameCS)null);
+        setTypeName((ModelElementCS)null);
         return;
       case OclPackage.STATIC_OPERATION_CALL_EXP_CS__OPERATION_NAME:
         setOperationName((Operation)null);

@@ -7,13 +7,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-
-import scala.Tuple2;
 import org.dresdenocl.essentialocl.expressions.Variable;
 import org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource;
 import org.dresdenocl.language.ocl.staticsemantics.OclStaticSemanticsException;
@@ -25,6 +18,13 @@ import org.dresdenocl.parser.ParseException;
 import org.dresdenocl.parser.SemanticException;
 import org.dresdenocl.pivotmodel.Constraint;
 import org.dresdenocl.pivotmodel.Type;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+
+import scala.Tuple2;
 
 public class Ocl22Parser implements IOclParser {
 

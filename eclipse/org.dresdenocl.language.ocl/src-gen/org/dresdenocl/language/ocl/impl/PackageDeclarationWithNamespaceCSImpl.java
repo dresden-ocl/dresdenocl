@@ -6,15 +6,14 @@
  */
 package org.dresdenocl.language.ocl.impl;
 
+import org.dresdenocl.language.ocl.OclPackage;
+import org.dresdenocl.language.ocl.PackageDeclarationNestedNamespaceCS;
+import org.dresdenocl.language.ocl.PackageDeclarationWithNamespaceCS;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.dresdenocl.language.ocl.OclPackage;
-import org.dresdenocl.language.ocl.PackageDeclarationNestedNamespaceCS;
-import org.dresdenocl.language.ocl.PackageDeclarationWithNamespaceCS;
 
 /**
  * <!-- begin-user-doc -->

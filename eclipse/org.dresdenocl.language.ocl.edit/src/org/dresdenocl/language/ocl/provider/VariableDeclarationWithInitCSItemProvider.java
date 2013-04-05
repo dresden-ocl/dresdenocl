@@ -9,6 +9,9 @@ package org.dresdenocl.language.ocl.provider;
 import java.util.Collection;
 import java.util.List;
 
+import org.dresdenocl.language.ocl.OclFactory;
+import org.dresdenocl.language.ocl.OclPackage;
+import org.dresdenocl.language.ocl.VariableDeclarationWithInitCS;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -21,10 +24,6 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
-import org.dresdenocl.language.ocl.OclFactory;
-import org.dresdenocl.language.ocl.OclPackage;
-import org.dresdenocl.language.ocl.VariableDeclarationWithInitCS;
 
 /**
  * This is the item provider adapter for a {@link org.dresdenocl.language.ocl.VariableDeclarationWithInitCS} object.
@@ -201,7 +200,7 @@ public class VariableDeclarationWithInitCSItemProvider extends
 		newChildDescriptors.add
 			(createChildParameter
 				(OclPackage.Literals.VARIABLE_DECLARATION_WITH_INIT_CS__INITIALIZATION,
-				 OclFactory.eINSTANCE.createNamedLiteralExpCS()));
+				 OclFactory.eINSTANCE.createModelElementCS()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -212,11 +211,6 @@ public class VariableDeclarationWithInitCSItemProvider extends
 			(createChildParameter
 				(OclPackage.Literals.VARIABLE_DECLARATION_WITH_INIT_CS__INITIALIZATION,
 				 OclFactory.eINSTANCE.createTupleTypeLiteralExpCS()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OclPackage.Literals.VARIABLE_DECLARATION_WITH_INIT_CS__INITIALIZATION,
-				 OclFactory.eINSTANCE.createEnumLiteralOrStaticPropertyExpCS()));
 
 		newChildDescriptors.add
 			(createChildParameter

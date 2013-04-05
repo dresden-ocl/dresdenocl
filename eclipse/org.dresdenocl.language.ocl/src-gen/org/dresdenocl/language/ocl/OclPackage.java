@@ -107,32 +107,32 @@ public interface OclPackage extends EPackage {
 	int BRACKET_EXP_CS_FEATURE_COUNT = OCL_EXPRESSION_CS_FEATURE_COUNT + 1;
 
 	/**
-   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.NamedLiteralExpCSImpl <em>Named Literal Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.ModelElementCSImpl <em>Model Element CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see org.dresdenocl.language.ocl.impl.NamedLiteralExpCSImpl
-   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getNamedLiteralExpCS()
+   * @see org.dresdenocl.language.ocl.impl.ModelElementCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getModelElementCS()
    * @generated
    */
-	int NAMED_LITERAL_EXP_CS = 2;
+	int MODEL_ELEMENT_CS = 2;
 
 	/**
-   * The feature id for the '<em><b>Named Element</b></em>' reference.
+   * The feature id for the '<em><b>Path Name</b></em>' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int NAMED_LITERAL_EXP_CS__NAMED_ELEMENT = OCL_EXPRESSION_CS_FEATURE_COUNT + 0;
+	int MODEL_ELEMENT_CS__PATH_NAME = OCL_EXPRESSION_CS_FEATURE_COUNT + 0;
 
 	/**
-   * The number of structural features of the '<em>Named Literal Exp CS</em>' class.
+   * The number of structural features of the '<em>Model Element CS</em>' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int NAMED_LITERAL_EXP_CS_FEATURE_COUNT = OCL_EXPRESSION_CS_FEATURE_COUNT + 1;
+	int MODEL_ELEMENT_CS_FEATURE_COUNT = OCL_EXPRESSION_CS_FEATURE_COUNT + 1;
 
 	/**
    * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.PathNameCSImpl <em>Path Name CS</em>}' class.
@@ -145,31 +145,116 @@ public interface OclPackage extends EPackage {
 	int PATH_NAME_CS = 3;
 
 	/**
-   * The feature id for the '<em><b>Simple Name</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int PATH_NAME_CS__SIMPLE_NAME = 0;
-
-	/**
-   * The feature id for the '<em><b>Path Name</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int PATH_NAME_CS__PATH_NAME = 1;
-
-	/**
    * The number of structural features of the '<em>Path Name CS</em>' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int PATH_NAME_CS_FEATURE_COUNT = 2;
+	int PATH_NAME_CS_FEATURE_COUNT = 0;
+
+	/**
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.PathNameSimpleCSImpl <em>Path Name Simple CS</em>}' class.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @see org.dresdenocl.language.ocl.impl.PathNameSimpleCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPathNameSimpleCS()
+   * @generated
+   */
+	int PATH_NAME_SIMPLE_CS = 4;
+
+	/**
+   * The feature id for the '<em><b>Named Element</b></em>' reference.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+	int PATH_NAME_SIMPLE_CS__NAMED_ELEMENT = PATH_NAME_CS_FEATURE_COUNT + 0;
+
+	/**
+   * The number of structural features of the '<em>Path Name Simple CS</em>' class.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+	int PATH_NAME_SIMPLE_CS_FEATURE_COUNT = PATH_NAME_CS_FEATURE_COUNT + 1;
+
+	/**
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.PathNamePathCSImpl <em>Path Name Path CS</em>}' class.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @see org.dresdenocl.language.ocl.impl.PathNamePathCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPathNamePathCS()
+   * @generated
+   */
+	int PATH_NAME_PATH_CS = 5;
+
+	/**
+   * The feature id for the '<em><b>Path Name</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+	int PATH_NAME_PATH_CS__PATH_NAME = PATH_NAME_CS_FEATURE_COUNT + 0;
+
+	/**
+   * The number of structural features of the '<em>Path Name Path CS</em>' class.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+	int PATH_NAME_PATH_CS_FEATURE_COUNT = PATH_NAME_CS_FEATURE_COUNT + 1;
+
+	/**
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.UnreservedSimpleNameCSImpl <em>Unreserved Simple Name CS</em>}' class.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @see org.dresdenocl.language.ocl.impl.UnreservedSimpleNameCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getUnreservedSimpleNameCS()
+   * @generated
+   */
+	int UNRESERVED_SIMPLE_NAME_CS = 6;
+
+	/**
+   * The number of structural features of the '<em>Unreserved Simple Name CS</em>' class.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+	int UNRESERVED_SIMPLE_NAME_CS_FEATURE_COUNT = 0;
+
+	/**
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.NamedElementCSImpl <em>Named Element CS</em>}' class.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @see org.dresdenocl.language.ocl.impl.NamedElementCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getNamedElementCS()
+   * @generated
+   */
+	int NAMED_ELEMENT_CS = 7;
+
+	/**
+   * The feature id for the '<em><b>Named Element</b></em>' reference.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+	int NAMED_ELEMENT_CS__NAMED_ELEMENT = UNRESERVED_SIMPLE_NAME_CS_FEATURE_COUNT + 0;
+
+	/**
+   * The number of structural features of the '<em>Named Element CS</em>' class.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+	int NAMED_ELEMENT_CS_FEATURE_COUNT = UNRESERVED_SIMPLE_NAME_CS_FEATURE_COUNT + 1;
 
 	/**
    * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.SimpleNameCSImpl <em>Simple Name CS</em>}' class.
@@ -179,7 +264,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getSimpleNameCS()
    * @generated
    */
-	int SIMPLE_NAME_CS = 4;
+	int SIMPLE_NAME_CS = 8;
 
 	/**
    * The feature id for the '<em><b>Simple Name</b></em>' attribute.
@@ -207,7 +292,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getTypeCS()
    * @generated
    */
-	int TYPE_CS = 5;
+	int TYPE_CS = 9;
 
 	/**
    * The number of structural features of the '<em>Type CS</em>' class.
@@ -219,88 +304,32 @@ public interface OclPackage extends EPackage {
 	int TYPE_CS_FEATURE_COUNT = 0;
 
 	/**
-   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.TypePathNameCSImpl <em>Type Path Name CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.TypeModelElementCSImpl <em>Type Model Element CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see org.dresdenocl.language.ocl.impl.TypePathNameCSImpl
-   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getTypePathNameCS()
+   * @see org.dresdenocl.language.ocl.impl.TypeModelElementCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getTypeModelElementCS()
    * @generated
    */
-	int TYPE_PATH_NAME_CS = 6;
+	int TYPE_MODEL_ELEMENT_CS = 10;
 
 	/**
-   * The number of structural features of the '<em>Type Path Name CS</em>' class.
+   * The feature id for the '<em><b>Model Element</b></em>' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int TYPE_PATH_NAME_CS_FEATURE_COUNT = TYPE_CS_FEATURE_COUNT + 0;
+	int TYPE_MODEL_ELEMENT_CS__MODEL_ELEMENT = TYPE_CS_FEATURE_COUNT + 0;
 
 	/**
-   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.TypePathNameSimpleCSImpl <em>Type Path Name Simple CS</em>}' class.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @see org.dresdenocl.language.ocl.impl.TypePathNameSimpleCSImpl
-   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getTypePathNameSimpleCS()
-   * @generated
-   */
-	int TYPE_PATH_NAME_SIMPLE_CS = 7;
-
-	/**
-   * The feature id for the '<em><b>Type Name</b></em>' reference.
+   * The number of structural features of the '<em>Type Model Element CS</em>' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int TYPE_PATH_NAME_SIMPLE_CS__TYPE_NAME = TYPE_PATH_NAME_CS_FEATURE_COUNT + 0;
-
-	/**
-   * The number of structural features of the '<em>Type Path Name Simple CS</em>' class.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int TYPE_PATH_NAME_SIMPLE_CS_FEATURE_COUNT = TYPE_PATH_NAME_CS_FEATURE_COUNT + 1;
-
-	/**
-   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.TypePathNameNestedCSImpl <em>Type Path Name Nested CS</em>}' class.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @see org.dresdenocl.language.ocl.impl.TypePathNameNestedCSImpl
-   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getTypePathNameNestedCS()
-   * @generated
-   */
-	int TYPE_PATH_NAME_NESTED_CS = 8;
-
-	/**
-   * The feature id for the '<em><b>Namespace</b></em>' reference.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int TYPE_PATH_NAME_NESTED_CS__NAMESPACE = TYPE_PATH_NAME_CS_FEATURE_COUNT + 0;
-
-	/**
-   * The feature id for the '<em><b>Type Path Name</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME = TYPE_PATH_NAME_CS_FEATURE_COUNT + 1;
-
-	/**
-   * The number of structural features of the '<em>Type Path Name Nested CS</em>' class.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int TYPE_PATH_NAME_NESTED_CS_FEATURE_COUNT = TYPE_PATH_NAME_CS_FEATURE_COUNT + 2;
+	int TYPE_MODEL_ELEMENT_CS_FEATURE_COUNT = TYPE_CS_FEATURE_COUNT + 1;
 
 	/**
    * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.TupleTypeCSImpl <em>Tuple Type CS</em>}' class.
@@ -310,7 +339,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getTupleTypeCS()
    * @generated
    */
-	int TUPLE_TYPE_CS = 9;
+	int TUPLE_TYPE_CS = 11;
 
 	/**
    * The feature id for the '<em><b>Variable Declaration List</b></em>' containment reference.
@@ -338,7 +367,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getVariableDeclarationCS()
    * @generated
    */
-	int VARIABLE_DECLARATION_CS = 12;
+	int VARIABLE_DECLARATION_CS = 14;
 
 	/**
    * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.VariableDeclarationWithInitCSImpl <em>Variable Declaration With Init CS</em>}' class.
@@ -348,7 +377,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getVariableDeclarationWithInitCS()
    * @generated
    */
-	int VARIABLE_DECLARATION_WITH_INIT_CS = 13;
+	int VARIABLE_DECLARATION_WITH_INIT_CS = 15;
 
 	/**
    * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.VariableDeclarationWithoutInitCSImpl <em>Variable Declaration Without Init CS</em>}' class.
@@ -358,7 +387,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getVariableDeclarationWithoutInitCS()
    * @generated
    */
-	int VARIABLE_DECLARATION_WITHOUT_INIT_CS = 14;
+	int VARIABLE_DECLARATION_WITHOUT_INIT_CS = 16;
 
 	/**
    * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.VariableDeclarationWithInitListCSImpl <em>Variable Declaration With Init List CS</em>}' class.
@@ -368,7 +397,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getVariableDeclarationWithInitListCS()
    * @generated
    */
-	int VARIABLE_DECLARATION_WITH_INIT_LIST_CS = 15;
+	int VARIABLE_DECLARATION_WITH_INIT_LIST_CS = 17;
 
 	/**
    * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.VariableDeclarationWithoutInitListCSImpl <em>Variable Declaration Without Init List CS</em>}' class.
@@ -378,7 +407,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getVariableDeclarationWithoutInitListCS()
    * @generated
    */
-	int VARIABLE_DECLARATION_WITHOUT_INIT_LIST_CS = 16;
+	int VARIABLE_DECLARATION_WITHOUT_INIT_LIST_CS = 18;
 
 	/**
    * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.LiteralExpCSImpl <em>Literal Exp CS</em>}' class.
@@ -388,7 +417,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getLiteralExpCS()
    * @generated
    */
-	int LITERAL_EXP_CS = 17;
+	int LITERAL_EXP_CS = 19;
 
 	/**
    * The number of structural features of the '<em>Literal Exp CS</em>' class.
@@ -407,7 +436,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getCollectionTypeLiteralExpCS()
    * @generated
    */
-	int COLLECTION_TYPE_LITERAL_EXP_CS = 10;
+	int COLLECTION_TYPE_LITERAL_EXP_CS = 12;
 
 	/**
    * The feature id for the '<em><b>Collection Type</b></em>' containment reference.
@@ -435,7 +464,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getTupleTypeLiteralExpCS()
    * @generated
    */
-	int TUPLE_TYPE_LITERAL_EXP_CS = 11;
+	int TUPLE_TYPE_LITERAL_EXP_CS = 13;
 
 	/**
    * The feature id for the '<em><b>Tuple Type</b></em>' containment reference.
@@ -582,43 +611,6 @@ public interface OclPackage extends EPackage {
 	int VARIABLE_DECLARATION_WITHOUT_INIT_LIST_CS_FEATURE_COUNT = 1;
 
 	/**
-   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.EnumLiteralOrStaticPropertyExpCSImpl <em>Enum Literal Or Static Property Exp CS</em>}' class.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @see org.dresdenocl.language.ocl.impl.EnumLiteralOrStaticPropertyExpCSImpl
-   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getEnumLiteralOrStaticPropertyExpCS()
-   * @generated
-   */
-	int ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS = 18;
-
-	/**
-   * The feature id for the '<em><b>Type Name</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS__TYPE_NAME = LITERAL_EXP_CS_FEATURE_COUNT + 0;
-
-	/**
-   * The feature id for the '<em><b>Enum Literal Or Static Property</b></em>' reference.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS__ENUM_LITERAL_OR_STATIC_PROPERTY = LITERAL_EXP_CS_FEATURE_COUNT + 1;
-
-	/**
-   * The number of structural features of the '<em>Enum Literal Or Static Property Exp CS</em>' class.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS_FEATURE_COUNT = LITERAL_EXP_CS_FEATURE_COUNT + 2;
-
-	/**
    * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.CollectionLiteralExpCSImpl <em>Collection Literal Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -626,7 +618,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getCollectionLiteralExpCS()
    * @generated
    */
-	int COLLECTION_LITERAL_EXP_CS = 19;
+	int COLLECTION_LITERAL_EXP_CS = 20;
 
 	/**
    * The feature id for the '<em><b>Collection Type</b></em>' containment reference.
@@ -663,7 +655,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getCollectionTypeIdentifierCS()
    * @generated
    */
-	int COLLECTION_TYPE_IDENTIFIER_CS = 20;
+	int COLLECTION_TYPE_IDENTIFIER_CS = 21;
 
 	/**
    * The feature id for the '<em><b>Type Name</b></em>' reference.
@@ -700,7 +692,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getCollectionLiteralPartsCS()
    * @generated
    */
-	int COLLECTION_LITERAL_PARTS_CS = 21;
+	int COLLECTION_LITERAL_PARTS_CS = 22;
 
 	/**
    * The number of structural features of the '<em>Collection Literal Parts CS</em>' class.
@@ -719,7 +711,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getCollectionLiteralPartsOclExpCS()
    * @generated
    */
-	int COLLECTION_LITERAL_PARTS_OCL_EXP_CS = 22;
+	int COLLECTION_LITERAL_PARTS_OCL_EXP_CS = 23;
 
 	/**
    * The feature id for the '<em><b>Ocl Expression</b></em>' containment reference.
@@ -747,7 +739,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getCollectionRangeCS()
    * @generated
    */
-	int COLLECTION_RANGE_CS = 23;
+	int COLLECTION_RANGE_CS = 24;
 
 	/**
    * The feature id for the '<em><b>From</b></em>' containment reference.
@@ -784,7 +776,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getCallExpCS()
    * @generated
    */
-	int CALL_EXP_CS = 24;
+	int CALL_EXP_CS = 25;
 
 	/**
    * The number of structural features of the '<em>Call Exp CS</em>' class.
@@ -803,7 +795,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getLoopExpCS()
    * @generated
    */
-	int LOOP_EXP_CS = 25;
+	int LOOP_EXP_CS = 26;
 
 	/**
    * The number of structural features of the '<em>Loop Exp CS</em>' class.
@@ -822,7 +814,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getIteratorExpVariableCS()
    * @generated
    */
-	int ITERATOR_EXP_VARIABLE_CS = 26;
+	int ITERATOR_EXP_VARIABLE_CS = 27;
 
 	/**
    * The feature id for the '<em><b>Variable Name</b></em>' containment reference.
@@ -859,7 +851,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getIteratorExpCS()
    * @generated
    */
-	int ITERATOR_EXP_CS = 27;
+	int ITERATOR_EXP_CS = 28;
 
 	/**
    * The feature id for the '<em><b>Iterator Name</b></em>' attribute.
@@ -905,7 +897,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getIterateExpCS()
    * @generated
    */
-	int ITERATE_EXP_CS = 28;
+	int ITERATE_EXP_CS = 29;
 
 	/**
    * The feature id for the '<em><b>Iterator Variable</b></em>' containment reference.
@@ -951,7 +943,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getFeatureCallExpCS()
    * @generated
    */
-	int FEATURE_CALL_EXP_CS = 29;
+	int FEATURE_CALL_EXP_CS = 30;
 
 	/**
    * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.NavigationCallExpImpl <em>Navigation Call Exp</em>}' class.
@@ -961,7 +953,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getNavigationCallExp()
    * @generated
    */
-	int NAVIGATION_CALL_EXP = 30;
+	int NAVIGATION_CALL_EXP = 31;
 
 	/**
    * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.ImplicitFeatureCallCSImpl <em>Implicit Feature Call CS</em>}' class.
@@ -971,7 +963,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getImplicitFeatureCallCS()
    * @generated
    */
-	int IMPLICIT_FEATURE_CALL_CS = 33;
+	int IMPLICIT_FEATURE_CALL_CS = 34;
 
 	/**
    * The number of structural features of the '<em>Feature Call Exp CS</em>' class.
@@ -1026,7 +1018,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getOperationCallBaseExpCS()
    * @generated
    */
-	int OPERATION_CALL_BASE_EXP_CS = 31;
+	int OPERATION_CALL_BASE_EXP_CS = 32;
 
 	/**
    * The feature id for the '<em><b>Operation Name</b></em>' reference.
@@ -1072,7 +1064,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPropertyCallBaseExpCS()
    * @generated
    */
-	int PROPERTY_CALL_BASE_EXP_CS = 32;
+	int PROPERTY_CALL_BASE_EXP_CS = 33;
 
 	/**
    * The feature id for the '<em><b>Property</b></em>' reference.
@@ -1118,7 +1110,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPropertyCallExpCS()
    * @generated
    */
-	int PROPERTY_CALL_EXP_CS = 36;
+	int PROPERTY_CALL_EXP_CS = 37;
 
 	/**
    * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.ImplicitPropertyCallCSImpl <em>Implicit Property Call CS</em>}' class.
@@ -1128,7 +1120,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getImplicitPropertyCallCS()
    * @generated
    */
-	int IMPLICIT_PROPERTY_CALL_CS = 34;
+	int IMPLICIT_PROPERTY_CALL_CS = 35;
 
 	/**
    * The feature id for the '<em><b>Property</b></em>' reference.
@@ -1165,7 +1157,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPropertyCallExplicitPathExpCS()
    * @generated
    */
-	int PROPERTY_CALL_EXPLICIT_PATH_EXP_CS = 38;
+	int PROPERTY_CALL_EXPLICIT_PATH_EXP_CS = 39;
 
 	/**
    * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.OperationCallExpCSImpl <em>Operation Call Exp CS</em>}' class.
@@ -1175,7 +1167,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getOperationCallExpCS()
    * @generated
    */
-	int OPERATION_CALL_EXP_CS = 39;
+	int OPERATION_CALL_EXP_CS = 40;
 
 	/**
    * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.UnaryOperationCallExpCSImpl <em>Unary Operation Call Exp CS</em>}' class.
@@ -1185,7 +1177,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getUnaryOperationCallExpCS()
    * @generated
    */
-	int UNARY_OPERATION_CALL_EXP_CS = 42;
+	int UNARY_OPERATION_CALL_EXP_CS = 43;
 
 	/**
    * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.LogicalNotOperationCallExpCSImpl <em>Logical Not Operation Call Exp CS</em>}' class.
@@ -1195,7 +1187,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getLogicalNotOperationCallExpCS()
    * @generated
    */
-	int LOGICAL_NOT_OPERATION_CALL_EXP_CS = 43;
+	int LOGICAL_NOT_OPERATION_CALL_EXP_CS = 44;
 
 	/**
    * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.OperationCallWithSourceExpCSImpl <em>Operation Call With Source Exp CS</em>}' class.
@@ -1205,7 +1197,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getOperationCallWithSourceExpCS()
    * @generated
    */
-	int OPERATION_CALL_WITH_SOURCE_EXP_CS = 44;
+	int OPERATION_CALL_WITH_SOURCE_EXP_CS = 45;
 
 	/**
    * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.OperationCallBinaryExpCSImpl <em>Operation Call Binary Exp CS</em>}' class.
@@ -1215,7 +1207,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getOperationCallBinaryExpCS()
    * @generated
    */
-	int OPERATION_CALL_BINARY_EXP_CS = 45;
+	int OPERATION_CALL_BINARY_EXP_CS = 46;
 
 	/**
    * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.AdditiveOperationCallExpCSImpl <em>Additive Operation Call Exp CS</em>}' class.
@@ -1225,7 +1217,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getAdditiveOperationCallExpCS()
    * @generated
    */
-	int ADDITIVE_OPERATION_CALL_EXP_CS = 46;
+	int ADDITIVE_OPERATION_CALL_EXP_CS = 47;
 
 	/**
    * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.MultOperationCallExpCSImpl <em>Mult Operation Call Exp CS</em>}' class.
@@ -1235,7 +1227,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getMultOperationCallExpCS()
    * @generated
    */
-	int MULT_OPERATION_CALL_EXP_CS = 47;
+	int MULT_OPERATION_CALL_EXP_CS = 48;
 
 	/**
    * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.RelationalOperationCallExpCSImpl <em>Relational Operation Call Exp CS</em>}' class.
@@ -1245,7 +1237,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getRelationalOperationCallExpCS()
    * @generated
    */
-	int RELATIONAL_OPERATION_CALL_EXP_CS = 48;
+	int RELATIONAL_OPERATION_CALL_EXP_CS = 49;
 
 	/**
    * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.EqualityOperationCallExpCSImpl <em>Equality Operation Call Exp CS</em>}' class.
@@ -1255,7 +1247,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getEqualityOperationCallExpCS()
    * @generated
    */
-	int EQUALITY_OPERATION_CALL_EXP_CS = 49;
+	int EQUALITY_OPERATION_CALL_EXP_CS = 50;
 
 	/**
    * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.LogicalAndOperationCallExpCSImpl <em>Logical And Operation Call Exp CS</em>}' class.
@@ -1265,7 +1257,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getLogicalAndOperationCallExpCS()
    * @generated
    */
-	int LOGICAL_AND_OPERATION_CALL_EXP_CS = 50;
+	int LOGICAL_AND_OPERATION_CALL_EXP_CS = 51;
 
 	/**
    * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.LogicalOrOperationCallExpCSImpl <em>Logical Or Operation Call Exp CS</em>}' class.
@@ -1275,7 +1267,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getLogicalOrOperationCallExpCS()
    * @generated
    */
-	int LOGICAL_OR_OPERATION_CALL_EXP_CS = 51;
+	int LOGICAL_OR_OPERATION_CALL_EXP_CS = 52;
 
 	/**
    * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.LogicalXorOperationCallExpCSImpl <em>Logical Xor Operation Call Exp CS</em>}' class.
@@ -1285,7 +1277,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getLogicalXorOperationCallExpCS()
    * @generated
    */
-	int LOGICAL_XOR_OPERATION_CALL_EXP_CS = 52;
+	int LOGICAL_XOR_OPERATION_CALL_EXP_CS = 53;
 
 	/**
    * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.LogicalImpliesOperationCallExpCSImpl <em>Logical Implies Operation Call Exp CS</em>}' class.
@@ -1295,7 +1287,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getLogicalImpliesOperationCallExpCS()
    * @generated
    */
-	int LOGICAL_IMPLIES_OPERATION_CALL_EXP_CS = 53;
+	int LOGICAL_IMPLIES_OPERATION_CALL_EXP_CS = 54;
 
 	/**
    * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.OperationCallWithImlicitSourceExpCSImpl <em>Operation Call With Imlicit Source Exp CS</em>}' class.
@@ -1305,7 +1297,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getOperationCallWithImlicitSourceExpCS()
    * @generated
    */
-	int OPERATION_CALL_WITH_IMLICIT_SOURCE_EXP_CS = 54;
+	int OPERATION_CALL_WITH_IMLICIT_SOURCE_EXP_CS = 55;
 
 	/**
    * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.ImplicitOperationCallCSImpl <em>Implicit Operation Call CS</em>}' class.
@@ -1315,7 +1307,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getImplicitOperationCallCS()
    * @generated
    */
-	int IMPLICIT_OPERATION_CALL_CS = 35;
+	int IMPLICIT_OPERATION_CALL_CS = 36;
 
 	/**
    * The feature id for the '<em><b>Operation Name</b></em>' reference.
@@ -1370,7 +1362,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPropertyCallOnSelfExpCS()
    * @generated
    */
-	int PROPERTY_CALL_ON_SELF_EXP_CS = 37;
+	int PROPERTY_CALL_ON_SELF_EXP_CS = 38;
 
 	/**
    * The feature id for the '<em><b>Property</b></em>' reference.
@@ -1461,7 +1453,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getOperationCallOnSelfExpCS()
    * @generated
    */
-	int OPERATION_CALL_ON_SELF_EXP_CS = 40;
+	int OPERATION_CALL_ON_SELF_EXP_CS = 41;
 
 	/**
    * The feature id for the '<em><b>Operation Name</b></em>' reference.
@@ -1507,7 +1499,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getStaticOperationCallExpCS()
    * @generated
    */
-	int STATIC_OPERATION_CALL_EXP_CS = 41;
+	int STATIC_OPERATION_CALL_EXP_CS = 42;
 
 	/**
    * The feature id for the '<em><b>Type Name</b></em>' containment reference.
@@ -2075,7 +2067,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getTupleLiteralExpCS()
    * @generated
    */
-	int TUPLE_LITERAL_EXP_CS = 55;
+	int TUPLE_LITERAL_EXP_CS = 56;
 
 	/**
    * The feature id for the '<em><b>Variable Declarations</b></em>' containment reference.
@@ -2103,7 +2095,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPrimitiveLiteralExpCS()
    * @generated
    */
-	int PRIMITIVE_LITERAL_EXP_CS = 56;
+	int PRIMITIVE_LITERAL_EXP_CS = 57;
 
 	/**
    * The number of structural features of the '<em>Primitive Literal Exp CS</em>' class.
@@ -2122,7 +2114,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getIntegerLiteralExpCS()
    * @generated
    */
-	int INTEGER_LITERAL_EXP_CS = 57;
+	int INTEGER_LITERAL_EXP_CS = 58;
 
 	/**
    * The feature id for the '<em><b>Integer Literal</b></em>' attribute.
@@ -2150,7 +2142,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getRealLiteralExpCS()
    * @generated
    */
-	int REAL_LITERAL_EXP_CS = 58;
+	int REAL_LITERAL_EXP_CS = 59;
 
 	/**
    * The feature id for the '<em><b>Int Value</b></em>' attribute.
@@ -2196,7 +2188,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getBooleanLiteralExpCS()
    * @generated
    */
-	int BOOLEAN_LITERAL_EXP_CS = 59;
+	int BOOLEAN_LITERAL_EXP_CS = 60;
 
 	/**
    * The feature id for the '<em><b>Boolean Literal</b></em>' attribute.
@@ -2224,7 +2216,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getStringLiteralExpCS()
    * @generated
    */
-	int STRING_LITERAL_EXP_CS = 60;
+	int STRING_LITERAL_EXP_CS = 61;
 
 	/**
    * The feature id for the '<em><b>String Literal</b></em>' attribute.
@@ -2252,7 +2244,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getInvalidLiteralExpCS()
    * @generated
    */
-	int INVALID_LITERAL_EXP_CS = 61;
+	int INVALID_LITERAL_EXP_CS = 62;
 
 	/**
    * The number of structural features of the '<em>Invalid Literal Exp CS</em>' class.
@@ -2271,7 +2263,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getNullLiteralExpCS()
    * @generated
    */
-	int NULL_LITERAL_EXP_CS = 62;
+	int NULL_LITERAL_EXP_CS = 63;
 
 	/**
    * The number of structural features of the '<em>Null Literal Exp CS</em>' class.
@@ -2290,7 +2282,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getLetExpCS()
    * @generated
    */
-	int LET_EXP_CS = 63;
+	int LET_EXP_CS = 64;
 
 	/**
    * The feature id for the '<em><b>Variable Declarations</b></em>' containment reference list.
@@ -2327,7 +2319,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getIfExpCS()
    * @generated
    */
-	int IF_EXP_CS = 64;
+	int IF_EXP_CS = 65;
 
 	/**
    * The feature id for the '<em><b>Condition</b></em>' containment reference.
@@ -2373,7 +2365,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPackageDeclarationCS()
    * @generated
    */
-	int PACKAGE_DECLARATION_CS = 65;
+	int PACKAGE_DECLARATION_CS = 66;
 
 	/**
    * The feature id for the '<em><b>Context Declarations</b></em>' containment reference list.
@@ -2410,7 +2402,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPackageDeclarationWithNamespaceCS()
    * @generated
    */
-	int PACKAGE_DECLARATION_WITH_NAMESPACE_CS = 66;
+	int PACKAGE_DECLARATION_WITH_NAMESPACE_CS = 67;
 
 	/**
    * The feature id for the '<em><b>Context Declarations</b></em>' containment reference list.
@@ -2456,7 +2448,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPackageDeclarationNestedNamespaceCS()
    * @generated
    */
-	int PACKAGE_DECLARATION_NESTED_NAMESPACE_CS = 67;
+	int PACKAGE_DECLARATION_NESTED_NAMESPACE_CS = 68;
 
 	/**
    * The feature id for the '<em><b>Namespace</b></em>' reference.
@@ -2502,7 +2494,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPackageDeclarationWithoutNamespaceCS()
    * @generated
    */
-	int PACKAGE_DECLARATION_WITHOUT_NAMESPACE_CS = 68;
+	int PACKAGE_DECLARATION_WITHOUT_NAMESPACE_CS = 69;
 
 	/**
    * The feature id for the '<em><b>Context Declarations</b></em>' containment reference list.
@@ -2539,7 +2531,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getContextDeclarationCS()
    * @generated
    */
-	int CONTEXT_DECLARATION_CS = 69;
+	int CONTEXT_DECLARATION_CS = 70;
 
 	/**
    * The number of structural features of the '<em>Context Declaration CS</em>' class.
@@ -2558,7 +2550,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getAttributeContextDeclarationCS()
    * @generated
    */
-	int ATTRIBUTE_CONTEXT_DECLARATION_CS = 70;
+	int ATTRIBUTE_CONTEXT_DECLARATION_CS = 71;
 
 	/**
    * The feature id for the '<em><b>Type Name</b></em>' containment reference.
@@ -2570,22 +2562,13 @@ public interface OclPackage extends EPackage {
 	int ATTRIBUTE_CONTEXT_DECLARATION_CS__TYPE_NAME = CONTEXT_DECLARATION_CS_FEATURE_COUNT + 0;
 
 	/**
-   * The feature id for the '<em><b>Property</b></em>' reference.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-	int ATTRIBUTE_CONTEXT_DECLARATION_CS__PROPERTY = CONTEXT_DECLARATION_CS_FEATURE_COUNT + 1;
-
-	/**
    * The feature id for the '<em><b>Type</b></em>' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int ATTRIBUTE_CONTEXT_DECLARATION_CS__TYPE = CONTEXT_DECLARATION_CS_FEATURE_COUNT + 2;
+	int ATTRIBUTE_CONTEXT_DECLARATION_CS__TYPE = CONTEXT_DECLARATION_CS_FEATURE_COUNT + 1;
 
 	/**
    * The feature id for the '<em><b>Init Or Derive Value</b></em>' containment reference list.
@@ -2594,7 +2577,7 @@ public interface OclPackage extends EPackage {
    * @generated
    * @ordered
    */
-	int ATTRIBUTE_CONTEXT_DECLARATION_CS__INIT_OR_DERIVE_VALUE = CONTEXT_DECLARATION_CS_FEATURE_COUNT + 3;
+	int ATTRIBUTE_CONTEXT_DECLARATION_CS__INIT_OR_DERIVE_VALUE = CONTEXT_DECLARATION_CS_FEATURE_COUNT + 2;
 
 	/**
    * The number of structural features of the '<em>Attribute Context Declaration CS</em>' class.
@@ -2603,7 +2586,7 @@ public interface OclPackage extends EPackage {
    * @generated
    * @ordered
    */
-	int ATTRIBUTE_CONTEXT_DECLARATION_CS_FEATURE_COUNT = CONTEXT_DECLARATION_CS_FEATURE_COUNT + 4;
+	int ATTRIBUTE_CONTEXT_DECLARATION_CS_FEATURE_COUNT = CONTEXT_DECLARATION_CS_FEATURE_COUNT + 3;
 
 	/**
    * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.ClassifierContextDeclarationCSImpl <em>Classifier Context Declaration CS</em>}' class.
@@ -2613,7 +2596,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getClassifierContextDeclarationCS()
    * @generated
    */
-	int CLASSIFIER_CONTEXT_DECLARATION_CS = 71;
+	int CLASSIFIER_CONTEXT_DECLARATION_CS = 72;
 
 	/**
    * The feature id for the '<em><b>Type Name</b></em>' containment reference.
@@ -2650,7 +2633,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getOperationContextDeclarationCS()
    * @generated
    */
-	int OPERATION_CONTEXT_DECLARATION_CS = 72;
+	int OPERATION_CONTEXT_DECLARATION_CS = 73;
 
 	/**
    * The feature id for the '<em><b>Operation</b></em>' containment reference.
@@ -2687,7 +2670,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getInitOrDeriveValueCS()
    * @generated
    */
-	int INIT_OR_DERIVE_VALUE_CS = 73;
+	int INIT_OR_DERIVE_VALUE_CS = 74;
 
 	/**
    * The feature id for the '<em><b>Ocl Expression</b></em>' containment reference.
@@ -2715,7 +2698,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getInitValueCS()
    * @generated
    */
-	int INIT_VALUE_CS = 74;
+	int INIT_VALUE_CS = 75;
 
 	/**
    * The feature id for the '<em><b>Ocl Expression</b></em>' containment reference.
@@ -2743,7 +2726,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getDeriveValueCS()
    * @generated
    */
-	int DERIVE_VALUE_CS = 75;
+	int DERIVE_VALUE_CS = 76;
 
 	/**
    * The feature id for the '<em><b>Ocl Expression</b></em>' containment reference.
@@ -2771,7 +2754,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getInvariantOrDefinitionCS()
    * @generated
    */
-	int INVARIANT_OR_DEFINITION_CS = 76;
+	int INVARIANT_OR_DEFINITION_CS = 77;
 
 	/**
    * The number of structural features of the '<em>Invariant Or Definition CS</em>' class.
@@ -2790,7 +2773,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getInvariantExpCS()
    * @generated
    */
-	int INVARIANT_EXP_CS = 77;
+	int INVARIANT_EXP_CS = 78;
 
 	/**
    * The feature id for the '<em><b>Name</b></em>' containment reference.
@@ -2827,7 +2810,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getDefinitionExpCS()
    * @generated
    */
-	int DEFINITION_EXP_CS = 78;
+	int DEFINITION_EXP_CS = 79;
 
 	/**
    * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -2864,7 +2847,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getDefinitionExpPartCS()
    * @generated
    */
-	int DEFINITION_EXP_PART_CS = 79;
+	int DEFINITION_EXP_PART_CS = 80;
 
 	/**
    * The number of structural features of the '<em>Definition Exp Part CS</em>' class.
@@ -2883,7 +2866,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getDefinitionExpPropertyCS()
    * @generated
    */
-	int DEFINITION_EXP_PROPERTY_CS = 80;
+	int DEFINITION_EXP_PROPERTY_CS = 81;
 
 	/**
    * The feature id for the '<em><b>Variable Declaration</b></em>' containment reference.
@@ -2911,7 +2894,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getDefinitionExpOperationCS()
    * @generated
    */
-	int DEFINITION_EXP_OPERATION_CS = 81;
+	int DEFINITION_EXP_OPERATION_CS = 82;
 
 	/**
    * The feature id for the '<em><b>Operation</b></em>' containment reference.
@@ -2957,7 +2940,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPrePostOrBodyDeclarationCS()
    * @generated
    */
-	int PRE_POST_OR_BODY_DECLARATION_CS = 82;
+	int PRE_POST_OR_BODY_DECLARATION_CS = 83;
 
 	/**
    * The feature id for the '<em><b>Name</b></em>' containment reference.
@@ -2994,7 +2977,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPreConditionDeclarationCS()
    * @generated
    */
-	int PRE_CONDITION_DECLARATION_CS = 83;
+	int PRE_CONDITION_DECLARATION_CS = 84;
 
 	/**
    * The feature id for the '<em><b>Name</b></em>' containment reference.
@@ -3031,7 +3014,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPostConditionDeclarationCS()
    * @generated
    */
-	int POST_CONDITION_DECLARATION_CS = 84;
+	int POST_CONDITION_DECLARATION_CS = 85;
 
 	/**
    * The feature id for the '<em><b>Name</b></em>' containment reference.
@@ -3068,7 +3051,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getBodyDeclarationCS()
    * @generated
    */
-	int BODY_DECLARATION_CS = 85;
+	int BODY_DECLARATION_CS = 86;
 
 	/**
    * The feature id for the '<em><b>Name</b></em>' containment reference.
@@ -3105,7 +3088,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getOperationDefinitionCS()
    * @generated
    */
-	int OPERATION_DEFINITION_CS = 86;
+	int OPERATION_DEFINITION_CS = 87;
 
 	/**
    * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -3151,7 +3134,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getOperationDefinitionInContextCS()
    * @generated
    */
-	int OPERATION_DEFINITION_IN_CONTEXT_CS = 87;
+	int OPERATION_DEFINITION_IN_CONTEXT_CS = 88;
 
 	/**
    * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -3206,7 +3189,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getOperationDefinitionInDefCS()
    * @generated
    */
-	int OPERATION_DEFINITION_IN_DEF_CS = 88;
+	int OPERATION_DEFINITION_IN_DEF_CS = 89;
 
 	/**
    * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -3252,7 +3235,7 @@ public interface OclPackage extends EPackage {
    * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getParameterCS()
    * @generated
    */
-	int PARAMETER_CS = 89;
+	int PARAMETER_CS = 90;
 
 	/**
    * The feature id for the '<em><b>Parameter</b></em>' reference.
@@ -3314,25 +3297,25 @@ public interface OclPackage extends EPackage {
 	EReference getBracketExpCS_OclExpression();
 
 	/**
-   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.NamedLiteralExpCS <em>Named Literal Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.ModelElementCS <em>Model Element CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Named Literal Exp CS</em>'.
-   * @see org.dresdenocl.language.ocl.NamedLiteralExpCS
+   * @return the meta object for class '<em>Model Element CS</em>'.
+   * @see org.dresdenocl.language.ocl.ModelElementCS
    * @generated
    */
-	EClass getNamedLiteralExpCS();
+	EClass getModelElementCS();
 
 	/**
-   * Returns the meta object for the reference '{@link org.dresdenocl.language.ocl.NamedLiteralExpCS#getNamedElement <em>Named Element</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.ModelElementCS#getPathName <em>Path Name</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Named Element</em>'.
-   * @see org.dresdenocl.language.ocl.NamedLiteralExpCS#getNamedElement()
-   * @see #getNamedLiteralExpCS()
+   * @return the meta object for the containment reference '<em>Path Name</em>'.
+   * @see org.dresdenocl.language.ocl.ModelElementCS#getPathName()
+   * @see #getModelElementCS()
    * @generated
    */
-	EReference getNamedLiteralExpCS_NamedElement();
+	EReference getModelElementCS_PathName();
 
 	/**
    * Returns the meta object for class '{@link org.dresdenocl.language.ocl.PathNameCS <em>Path Name CS</em>}'.
@@ -3345,26 +3328,77 @@ public interface OclPackage extends EPackage {
 	EClass getPathNameCS();
 
 	/**
-   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.PathNameCS#getSimpleName <em>Simple Name</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.PathNameSimpleCS <em>Path Name Simple CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Simple Name</em>'.
-   * @see org.dresdenocl.language.ocl.PathNameCS#getSimpleName()
-   * @see #getPathNameCS()
+   * @return the meta object for class '<em>Path Name Simple CS</em>'.
+   * @see org.dresdenocl.language.ocl.PathNameSimpleCS
    * @generated
    */
-	EReference getPathNameCS_SimpleName();
+	EClass getPathNameSimpleCS();
 
 	/**
-   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.PathNameCS#getPathName <em>Path Name</em>}'.
+   * Returns the meta object for the reference '{@link org.dresdenocl.language.ocl.PathNameSimpleCS#getNamedElement <em>Named Element</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Path Name</em>'.
-   * @see org.dresdenocl.language.ocl.PathNameCS#getPathName()
-   * @see #getPathNameCS()
+   * @return the meta object for the reference '<em>Named Element</em>'.
+   * @see org.dresdenocl.language.ocl.PathNameSimpleCS#getNamedElement()
+   * @see #getPathNameSimpleCS()
    * @generated
    */
-	EReference getPathNameCS_PathName();
+	EReference getPathNameSimpleCS_NamedElement();
+
+	/**
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.PathNamePathCS <em>Path Name Path CS</em>}'.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Path Name Path CS</em>'.
+   * @see org.dresdenocl.language.ocl.PathNamePathCS
+   * @generated
+   */
+	EClass getPathNamePathCS();
+
+	/**
+   * Returns the meta object for the containment reference list '{@link org.dresdenocl.language.ocl.PathNamePathCS#getPathName <em>Path Name</em>}'.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Path Name</em>'.
+   * @see org.dresdenocl.language.ocl.PathNamePathCS#getPathName()
+   * @see #getPathNamePathCS()
+   * @generated
+   */
+	EReference getPathNamePathCS_PathName();
+
+	/**
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.UnreservedSimpleNameCS <em>Unreserved Simple Name CS</em>}'.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Unreserved Simple Name CS</em>'.
+   * @see org.dresdenocl.language.ocl.UnreservedSimpleNameCS
+   * @generated
+   */
+	EClass getUnreservedSimpleNameCS();
+
+	/**
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.NamedElementCS <em>Named Element CS</em>}'.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Named Element CS</em>'.
+   * @see org.dresdenocl.language.ocl.NamedElementCS
+   * @generated
+   */
+	EClass getNamedElementCS();
+
+	/**
+   * Returns the meta object for the reference '{@link org.dresdenocl.language.ocl.NamedElementCS#getNamedElement <em>Named Element</em>}'.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Named Element</em>'.
+   * @see org.dresdenocl.language.ocl.NamedElementCS#getNamedElement()
+   * @see #getNamedElementCS()
+   * @generated
+   */
+	EReference getNamedElementCS_NamedElement();
 
 	/**
    * Returns the meta object for class '{@link org.dresdenocl.language.ocl.SimpleNameCS <em>Simple Name CS</em>}'.
@@ -3398,67 +3432,25 @@ public interface OclPackage extends EPackage {
 	EClass getTypeCS();
 
 	/**
-   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.TypePathNameCS <em>Type Path Name CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.TypeModelElementCS <em>Type Model Element CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Type Path Name CS</em>'.
-   * @see org.dresdenocl.language.ocl.TypePathNameCS
+   * @return the meta object for class '<em>Type Model Element CS</em>'.
+   * @see org.dresdenocl.language.ocl.TypeModelElementCS
    * @generated
    */
-	EClass getTypePathNameCS();
+	EClass getTypeModelElementCS();
 
 	/**
-   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.TypePathNameSimpleCS <em>Type Path Name Simple CS</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.TypeModelElementCS#getModelElement <em>Model Element</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Type Path Name Simple CS</em>'.
-   * @see org.dresdenocl.language.ocl.TypePathNameSimpleCS
+   * @return the meta object for the containment reference '<em>Model Element</em>'.
+   * @see org.dresdenocl.language.ocl.TypeModelElementCS#getModelElement()
+   * @see #getTypeModelElementCS()
    * @generated
    */
-	EClass getTypePathNameSimpleCS();
-
-	/**
-   * Returns the meta object for the reference '{@link org.dresdenocl.language.ocl.TypePathNameSimpleCS#getTypeName <em>Type Name</em>}'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Type Name</em>'.
-   * @see org.dresdenocl.language.ocl.TypePathNameSimpleCS#getTypeName()
-   * @see #getTypePathNameSimpleCS()
-   * @generated
-   */
-	EReference getTypePathNameSimpleCS_TypeName();
-
-	/**
-   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.TypePathNameNestedCS <em>Type Path Name Nested CS</em>}'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Type Path Name Nested CS</em>'.
-   * @see org.dresdenocl.language.ocl.TypePathNameNestedCS
-   * @generated
-   */
-	EClass getTypePathNameNestedCS();
-
-	/**
-   * Returns the meta object for the reference '{@link org.dresdenocl.language.ocl.TypePathNameNestedCS#getNamespace <em>Namespace</em>}'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Namespace</em>'.
-   * @see org.dresdenocl.language.ocl.TypePathNameNestedCS#getNamespace()
-   * @see #getTypePathNameNestedCS()
-   * @generated
-   */
-	EReference getTypePathNameNestedCS_Namespace();
-
-	/**
-   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.TypePathNameNestedCS#getTypePathName <em>Type Path Name</em>}'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Type Path Name</em>'.
-   * @see org.dresdenocl.language.ocl.TypePathNameNestedCS#getTypePathName()
-   * @see #getTypePathNameNestedCS()
-   * @generated
-   */
-	EReference getTypePathNameNestedCS_TypePathName();
+	EReference getTypeModelElementCS_ModelElement();
 
 	/**
    * Returns the meta object for class '{@link org.dresdenocl.language.ocl.TupleTypeCS <em>Tuple Type CS</em>}'.
@@ -3659,38 +3651,6 @@ public interface OclPackage extends EPackage {
    * @generated
    */
 	EClass getLiteralExpCS();
-
-	/**
-   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS <em>Enum Literal Or Static Property Exp CS</em>}'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Enum Literal Or Static Property Exp CS</em>'.
-   * @see org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS
-   * @generated
-   */
-	EClass getEnumLiteralOrStaticPropertyExpCS();
-
-	/**
-   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS#getTypeName <em>Type Name</em>}'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Type Name</em>'.
-   * @see org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS#getTypeName()
-   * @see #getEnumLiteralOrStaticPropertyExpCS()
-   * @generated
-   */
-	EReference getEnumLiteralOrStaticPropertyExpCS_TypeName();
-
-	/**
-   * Returns the meta object for the reference '{@link org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS#getEnumLiteralOrStaticProperty <em>Enum Literal Or Static Property</em>}'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Enum Literal Or Static Property</em>'.
-   * @see org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS#getEnumLiteralOrStaticProperty()
-   * @see #getEnumLiteralOrStaticPropertyExpCS()
-   * @generated
-   */
-	EReference getEnumLiteralOrStaticPropertyExpCS_EnumLiteralOrStaticProperty();
 
 	/**
    * Returns the meta object for class '{@link org.dresdenocl.language.ocl.CollectionLiteralExpCS <em>Collection Literal Exp CS</em>}'.
@@ -4840,17 +4800,6 @@ public interface OclPackage extends EPackage {
 	EReference getAttributeContextDeclarationCS_TypeName();
 
 	/**
-   * Returns the meta object for the reference '{@link org.dresdenocl.language.ocl.AttributeContextDeclarationCS#getProperty <em>Property</em>}'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Property</em>'.
-   * @see org.dresdenocl.language.ocl.AttributeContextDeclarationCS#getProperty()
-   * @see #getAttributeContextDeclarationCS()
-   * @generated
-   */
-	EReference getAttributeContextDeclarationCS_Property();
-
-	/**
    * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.AttributeContextDeclarationCS#getType <em>Type</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5344,22 +5293,22 @@ public interface OclPackage extends EPackage {
 		EReference BRACKET_EXP_CS__OCL_EXPRESSION = eINSTANCE.getBracketExpCS_OclExpression();
 
 		/**
-     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.NamedLiteralExpCSImpl <em>Named Literal Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.ModelElementCSImpl <em>Model Element CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see org.dresdenocl.language.ocl.impl.NamedLiteralExpCSImpl
-     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getNamedLiteralExpCS()
+     * @see org.dresdenocl.language.ocl.impl.ModelElementCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getModelElementCS()
      * @generated
      */
-		EClass NAMED_LITERAL_EXP_CS = eINSTANCE.getNamedLiteralExpCS();
+		EClass MODEL_ELEMENT_CS = eINSTANCE.getModelElementCS();
 
 		/**
-     * The meta object literal for the '<em><b>Named Element</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Path Name</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
      * @generated
      */
-		EReference NAMED_LITERAL_EXP_CS__NAMED_ELEMENT = eINSTANCE.getNamedLiteralExpCS_NamedElement();
+		EReference MODEL_ELEMENT_CS__PATH_NAME = eINSTANCE.getModelElementCS_PathName();
 
 		/**
      * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.PathNameCSImpl <em>Path Name CS</em>}' class.
@@ -5372,20 +5321,68 @@ public interface OclPackage extends EPackage {
 		EClass PATH_NAME_CS = eINSTANCE.getPathNameCS();
 
 		/**
-     * The meta object literal for the '<em><b>Simple Name</b></em>' containment reference feature.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.PathNameSimpleCSImpl <em>Path Name Simple CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+     * @see org.dresdenocl.language.ocl.impl.PathNameSimpleCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPathNameSimpleCS()
      * @generated
      */
-		EReference PATH_NAME_CS__SIMPLE_NAME = eINSTANCE.getPathNameCS_SimpleName();
+		EClass PATH_NAME_SIMPLE_CS = eINSTANCE.getPathNameSimpleCS();
 
 		/**
-     * The meta object literal for the '<em><b>Path Name</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Named Element</b></em>' reference feature.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
      * @generated
      */
-		EReference PATH_NAME_CS__PATH_NAME = eINSTANCE.getPathNameCS_PathName();
+		EReference PATH_NAME_SIMPLE_CS__NAMED_ELEMENT = eINSTANCE.getPathNameSimpleCS_NamedElement();
+
+		/**
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.PathNamePathCSImpl <em>Path Name Path CS</em>}' class.
+     * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+     * @see org.dresdenocl.language.ocl.impl.PathNamePathCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPathNamePathCS()
+     * @generated
+     */
+		EClass PATH_NAME_PATH_CS = eINSTANCE.getPathNamePathCS();
+
+		/**
+     * The meta object literal for the '<em><b>Path Name</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+     * @generated
+     */
+		EReference PATH_NAME_PATH_CS__PATH_NAME = eINSTANCE.getPathNamePathCS_PathName();
+
+		/**
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.UnreservedSimpleNameCSImpl <em>Unreserved Simple Name CS</em>}' class.
+     * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+     * @see org.dresdenocl.language.ocl.impl.UnreservedSimpleNameCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getUnreservedSimpleNameCS()
+     * @generated
+     */
+		EClass UNRESERVED_SIMPLE_NAME_CS = eINSTANCE.getUnreservedSimpleNameCS();
+
+		/**
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.NamedElementCSImpl <em>Named Element CS</em>}' class.
+     * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+     * @see org.dresdenocl.language.ocl.impl.NamedElementCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getNamedElementCS()
+     * @generated
+     */
+		EClass NAMED_ELEMENT_CS = eINSTANCE.getNamedElementCS();
+
+		/**
+     * The meta object literal for the '<em><b>Named Element</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+     * @generated
+     */
+		EReference NAMED_ELEMENT_CS__NAMED_ELEMENT = eINSTANCE.getNamedElementCS_NamedElement();
 
 		/**
      * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.SimpleNameCSImpl <em>Simple Name CS</em>}' class.
@@ -5416,58 +5413,22 @@ public interface OclPackage extends EPackage {
 		EClass TYPE_CS = eINSTANCE.getTypeCS();
 
 		/**
-     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.TypePathNameCSImpl <em>Type Path Name CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.TypeModelElementCSImpl <em>Type Model Element CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see org.dresdenocl.language.ocl.impl.TypePathNameCSImpl
-     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getTypePathNameCS()
+     * @see org.dresdenocl.language.ocl.impl.TypeModelElementCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getTypeModelElementCS()
      * @generated
      */
-		EClass TYPE_PATH_NAME_CS = eINSTANCE.getTypePathNameCS();
+		EClass TYPE_MODEL_ELEMENT_CS = eINSTANCE.getTypeModelElementCS();
 
 		/**
-     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.TypePathNameSimpleCSImpl <em>Type Path Name Simple CS</em>}' class.
-     * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @see org.dresdenocl.language.ocl.impl.TypePathNameSimpleCSImpl
-     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getTypePathNameSimpleCS()
-     * @generated
-     */
-		EClass TYPE_PATH_NAME_SIMPLE_CS = eINSTANCE.getTypePathNameSimpleCS();
-
-		/**
-     * The meta object literal for the '<em><b>Type Name</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Model Element</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
      * @generated
      */
-		EReference TYPE_PATH_NAME_SIMPLE_CS__TYPE_NAME = eINSTANCE.getTypePathNameSimpleCS_TypeName();
-
-		/**
-     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.TypePathNameNestedCSImpl <em>Type Path Name Nested CS</em>}' class.
-     * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @see org.dresdenocl.language.ocl.impl.TypePathNameNestedCSImpl
-     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getTypePathNameNestedCS()
-     * @generated
-     */
-		EClass TYPE_PATH_NAME_NESTED_CS = eINSTANCE.getTypePathNameNestedCS();
-
-		/**
-     * The meta object literal for the '<em><b>Namespace</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @generated
-     */
-		EReference TYPE_PATH_NAME_NESTED_CS__NAMESPACE = eINSTANCE.getTypePathNameNestedCS_Namespace();
-
-		/**
-     * The meta object literal for the '<em><b>Type Path Name</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @generated
-     */
-		EReference TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME = eINSTANCE.getTypePathNameNestedCS_TypePathName();
+		EReference TYPE_MODEL_ELEMENT_CS__MODEL_ELEMENT = eINSTANCE.getTypeModelElementCS_ModelElement();
 
 		/**
      * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.TupleTypeCSImpl <em>Tuple Type CS</em>}' class.
@@ -5638,32 +5599,6 @@ public interface OclPackage extends EPackage {
      * @generated
      */
 		EClass LITERAL_EXP_CS = eINSTANCE.getLiteralExpCS();
-
-		/**
-     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.EnumLiteralOrStaticPropertyExpCSImpl <em>Enum Literal Or Static Property Exp CS</em>}' class.
-     * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @see org.dresdenocl.language.ocl.impl.EnumLiteralOrStaticPropertyExpCSImpl
-     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getEnumLiteralOrStaticPropertyExpCS()
-     * @generated
-     */
-		EClass ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS = eINSTANCE.getEnumLiteralOrStaticPropertyExpCS();
-
-		/**
-     * The meta object literal for the '<em><b>Type Name</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @generated
-     */
-		EReference ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS__TYPE_NAME = eINSTANCE.getEnumLiteralOrStaticPropertyExpCS_TypeName();
-
-		/**
-     * The meta object literal for the '<em><b>Enum Literal Or Static Property</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @generated
-     */
-		EReference ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS__ENUM_LITERAL_OR_STATIC_PROPERTY = eINSTANCE.getEnumLiteralOrStaticPropertyExpCS_EnumLiteralOrStaticProperty();
 
 		/**
      * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.CollectionLiteralExpCSImpl <em>Collection Literal Exp CS</em>}' class.
@@ -6640,14 +6575,6 @@ public interface OclPackage extends EPackage {
      * @generated
      */
 		EReference ATTRIBUTE_CONTEXT_DECLARATION_CS__TYPE_NAME = eINSTANCE.getAttributeContextDeclarationCS_TypeName();
-
-		/**
-     * The meta object literal for the '<em><b>Property</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-     * @generated
-     */
-		EReference ATTRIBUTE_CONTEXT_DECLARATION_CS__PROPERTY = eINSTANCE.getAttributeContextDeclarationCS_Property();
 
 		/**
      * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.

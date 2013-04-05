@@ -1,104 +1,147 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmi:version="2.0" name="ocl" nsURI="http://www.tu-dresden.de/ocl20/pivot/language/ocl" nsPrefix="ocl">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ocl" nsURI="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+    nsPrefix="ocl">
   <eClassifiers xsi:type="ecore:EClass" name="OclExpressionCS" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="BracketExpCS" eSuperTypes="#//OclExpressionCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="oclExpression" lowerBound="1" eType="#//OclExpressionCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="oclExpression" lowerBound="1"
+        eType="#//OclExpressionCS" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NamedLiteralExpCS" eSuperTypes="#//OclExpressionCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="namedElement" lowerBound="1" eType="ecore:EClass ../../org.dresdenocl.pivotmodel/model/pivotmodel.ecore#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ModelElementCS" eSuperTypes="#//OclExpressionCS">
+    <eOperations name="getNamedElement" lowerBound="1" eType="ecore:EClass ../../org.dresdenocl.pivotmodel/model/pivotmodel.ecore#//NamedElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pathName" lowerBound="1"
+        eType="#//PathNameCS" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PathNameCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="simpleName" lowerBound="1" eType="#//SimpleNameCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="pathName" eType="#//PathNameCS" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PathNameCS" abstract="true">
+    <eOperations name="getNamedElement" lowerBound="1" eType="ecore:EClass ../../org.dresdenocl.pivotmodel/model/pivotmodel.ecore#//NamedElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PathNameSimpleCS" eSuperTypes="#//PathNameCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="namedElement" lowerBound="1"
+        eType="ecore:EClass ../../org.dresdenocl.pivotmodel/model/pivotmodel.ecore#//NamedElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PathNamePathCS" eSuperTypes="#//PathNameCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pathName" lowerBound="2"
+        upperBound="-1" eType="#//UnreservedSimpleNameCS" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnreservedSimpleNameCS" abstract="true">
+    <eOperations name="getNamedElement" lowerBound="1" eType="ecore:EClass ../../org.dresdenocl.pivotmodel/model/pivotmodel.ecore#//NamedElement"/>
+    <eOperations name="isProxy" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElementCS" eSuperTypes="#//UnreservedSimpleNameCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="namedElement" lowerBound="1"
+        eType="ecore:EClass ../../org.dresdenocl.pivotmodel/model/pivotmodel.ecore#//NamedElement"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SimpleNameCS">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="simpleName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="simpleName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypeCS" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="TypePathNameCS" abstract="true" eSuperTypes="#//TypeCS"/>
-  <eClassifiers xsi:type="ecore:EClass" name="TypePathNameSimpleCS" eSuperTypes="#//TypePathNameCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" lowerBound="1" eType="ecore:EClass ../../org.dresdenocl.pivotmodel/model/pivotmodel.ecore#//Type"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TypePathNameNestedCS" eSuperTypes="#//TypePathNameCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="namespace" lowerBound="1" eType="ecore:EClass ../../org.dresdenocl.pivotmodel/model/pivotmodel.ecore#//Namespace"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="typePathName" lowerBound="1" eType="#//TypePathNameCS" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeModelElementCS" eSuperTypes="#//TypeCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modelElement" lowerBound="1"
+        eType="#//ModelElementCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TupleTypeCS" eSuperTypes="#//TypeCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variableDeclarationList" eType="#//VariableDeclarationWithoutInitListCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variableDeclarationList"
+        eType="#//VariableDeclarationWithoutInitListCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CollectionTypeLiteralExpCS" eSuperTypes="#//LiteralExpCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="collectionType" lowerBound="1" eType="#//CollectionTypeIdentifierCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="collectionType" lowerBound="1"
+        eType="#//CollectionTypeIdentifierCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TupleTypeLiteralExpCS" eSuperTypes="#//LiteralExpCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="tupleType" lowerBound="1" eType="#//TupleTypeCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tupleType" lowerBound="1"
+        eType="#//TupleTypeCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VariableDeclarationCS" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variableName" lowerBound="1" eType="#//SimpleNameCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variableName" lowerBound="1"
+        eType="#//SimpleNameCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VariableDeclarationWithInitCS" eSuperTypes="#//VariableDeclarationCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" eType="#//TypeCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="initialization" lowerBound="1" eType="#//OclExpressionCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" eType="#//TypeCS"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initialization" lowerBound="1"
+        eType="#//OclExpressionCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="equal" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VariableDeclarationWithoutInitCS" eSuperTypes="#//VariableDeclarationCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" lowerBound="1" eType="#//TypeCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" lowerBound="1"
+        eType="#//TypeCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VariableDeclarationWithInitListCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variableDeclarations" lowerBound="1" upperBound="-1" eType="#//VariableDeclarationWithInitCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variableDeclarations" lowerBound="1"
+        upperBound="-1" eType="#//VariableDeclarationWithInitCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VariableDeclarationWithoutInitListCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variableDeclarations" lowerBound="1" upperBound="-1" eType="#//VariableDeclarationWithoutInitCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variableDeclarations" lowerBound="1"
+        upperBound="-1" eType="#//VariableDeclarationWithoutInitCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LiteralExpCS" abstract="true" eSuperTypes="#//OclExpressionCS"/>
-  <eClassifiers xsi:type="ecore:EClass" name="EnumLiteralOrStaticPropertyExpCS" eSuperTypes="#//LiteralExpCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" lowerBound="1" eType="#//TypePathNameCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="enumLiteralOrStaticProperty" lowerBound="1" eType="ecore:EClass ../../org.dresdenocl.pivotmodel/model/pivotmodel.ecore#//NamedElement"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CollectionLiteralExpCS" eSuperTypes="#//LiteralExpCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="collectionType" lowerBound="1" eType="#//CollectionTypeIdentifierCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="collectionLiteralParts" upperBound="-1" eType="#//CollectionLiteralPartsCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="collectionType" lowerBound="1"
+        eType="#//CollectionTypeIdentifierCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="collectionLiteralParts"
+        upperBound="-1" eType="#//CollectionLiteralPartsCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CollectionTypeIdentifierCS" eSuperTypes="#//TypeCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" lowerBound="1" eType="ecore:EClass ../../org.dresdenocl.pivotmodel/model/pivotmodel.ecore#//Type"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="genericType" eType="#//TypeCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" lowerBound="1"
+        eType="ecore:EClass ../../org.dresdenocl.pivotmodel/model/pivotmodel.ecore#//Type"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="genericType" eType="#//TypeCS"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CollectionLiteralPartsCS" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="CollectionLiteralPartsOclExpCS" eSuperTypes="#//CollectionLiteralPartsCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="oclExpression" lowerBound="1" eType="#//OclExpressionCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="oclExpression" lowerBound="1"
+        eType="#//OclExpressionCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CollectionRangeCS" eSuperTypes="#//CollectionLiteralPartsCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//OclExpressionCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//OclExpressionCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//OclExpressionCS"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//OclExpressionCS"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CallExpCS" abstract="true" eSuperTypes="#//OclExpressionCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="LoopExpCS" abstract="true" eSuperTypes="#//CallExpCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="IteratorExpVariableCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variableName" lowerBound="1" eType="#//SimpleNameCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" eType="#//TypeCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variableName" lowerBound="1"
+        eType="#//SimpleNameCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" eType="#//TypeCS"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IteratorExpCS" eSuperTypes="#//LoopExpCS #//ImplicitFeatureCallCS">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="iteratorName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="iteratorVariables" upperBound="2" eType="#//IteratorExpVariableCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="bodyExpression" lowerBound="1" eType="#//OclExpressionCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="iteratorName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="iteratorVariables" upperBound="2"
+        eType="#//IteratorExpVariableCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bodyExpression" lowerBound="1"
+        eType="#//OclExpressionCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IterateExpCS" eSuperTypes="#//LoopExpCS #//ImplicitFeatureCallCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="iteratorVariable" eType="#//IteratorExpVariableCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="resultVariable" lowerBound="1" eType="#//VariableDeclarationWithInitCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="bodyExpression" lowerBound="1" eType="#//OclExpressionCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="iteratorVariable" eType="#//IteratorExpVariableCS"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resultVariable" lowerBound="1"
+        eType="#//VariableDeclarationWithInitCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bodyExpression" lowerBound="1"
+        eType="#//OclExpressionCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FeatureCallExpCS" abstract="true" eSuperTypes="#//CallExpCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="NavigationCallExp" eSuperTypes="#//FeatureCallExpCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1" eType="#//OclExpressionCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="navigationOperator" unique="false" lowerBound="1" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="featureCalls" lowerBound="1" upperBound="-1" eType="#//ImplicitFeatureCallCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//OclExpressionCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="navigationOperator" unique="false"
+        lowerBound="1" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="featureCalls" lowerBound="1"
+        upperBound="-1" eType="#//ImplicitFeatureCallCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperationCallBaseExpCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="operationName" lowerBound="1" eType="ecore:EClass ../../org.dresdenocl.pivotmodel/model/pivotmodel.ecore#//Operation"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1" eType="#//OclExpressionCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operationName" lowerBound="1"
+        eType="ecore:EClass ../../org.dresdenocl.pivotmodel/model/pivotmodel.ecore#//Operation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
+        eType="#//OclExpressionCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isMarkedPre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PropertyCallBaseExpCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="property" lowerBound="1" eType="ecore:EClass ../../org.dresdenocl.pivotmodel/model/pivotmodel.ecore#//Property"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="property" lowerBound="1"
+        eType="ecore:EClass ../../org.dresdenocl.pivotmodel/model/pivotmodel.ecore#//Property"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isMarkedPre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ImplicitFeatureCallCS" abstract="true"/>
@@ -107,33 +150,49 @@
   <eClassifiers xsi:type="ecore:EClass" name="PropertyCallExpCS" abstract="true" eSuperTypes="#//FeatureCallExpCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="PropertyCallOnSelfExpCS" eSuperTypes="#//PropertyCallExpCS #//PropertyCallBaseExpCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="PropertyCallExplicitPathExpCS" eSuperTypes="#//PropertyCallExpCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1" eType="#//OclExpressionCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="propertyPath" lowerBound="1" eType="#//PathNameCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="propertyName" lowerBound="1" eType="#//SimpleNameCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//OclExpressionCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="propertyPath" lowerBound="1"
+        eType="#//PathNameCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="propertyName" lowerBound="1"
+        eType="#//SimpleNameCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isMarkedPre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OperationCallExpCS" abstract="true" eSuperTypes="#//FeatureCallExpCS"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OperationCallExpCS" abstract="true"
+      eSuperTypes="#//FeatureCallExpCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="OperationCallOnSelfExpCS" eSuperTypes="#//OperationCallExpCS #//OperationCallBaseExpCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="StaticOperationCallExpCS" eSuperTypes="#//OperationCallExpCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" lowerBound="1" eType="#//TypePathNameCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="operationName" lowerBound="1" eType="ecore:EClass ../../org.dresdenocl.pivotmodel/model/pivotmodel.ecore#//Operation"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1" eType="#//OclExpressionCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" lowerBound="1"
+        eType="#//ModelElementCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operationName" lowerBound="1"
+        eType="ecore:EClass ../../org.dresdenocl.pivotmodel/model/pivotmodel.ecore#//Operation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
+        eType="#//OclExpressionCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UnaryOperationCallExpCS" eSuperTypes="#//OperationCallExpCS">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operationName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1" eType="#//OclExpressionCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operationName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//OclExpressionCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LogicalNotOperationCallExpCS" eSuperTypes="#//OperationCallExpCS">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operationName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1" eType="#//OclExpressionCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operationName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//OclExpressionCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperationCallWithSourceExpCS" eSuperTypes="#//OperationCallExpCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1" eType="#//OclExpressionCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isMarkedPre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//OclExpressionCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isMarkedPre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OperationCallBinaryExpCS" abstract="true" eSuperTypes="#//OperationCallWithSourceExpCS">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operationName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1" eType="#//OclExpressionCS" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OperationCallBinaryExpCS" abstract="true"
+      eSuperTypes="#//OperationCallWithSourceExpCS">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operationName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//OclExpressionCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AdditiveOperationCallExpCS" eSuperTypes="#//OperationCallBinaryExpCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="MultOperationCallExpCS" eSuperTypes="#//OperationCallBinaryExpCS"/>
@@ -143,105 +202,147 @@
   <eClassifiers xsi:type="ecore:EClass" name="LogicalOrOperationCallExpCS" eSuperTypes="#//OperationCallBinaryExpCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="LogicalXorOperationCallExpCS" eSuperTypes="#//OperationCallBinaryExpCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="LogicalImpliesOperationCallExpCS" eSuperTypes="#//OperationCallBinaryExpCS"/>
-  <eClassifiers xsi:type="ecore:EClass" name="OperationCallWithImlicitSourceExpCS" eSuperTypes="#//OperationCallOnSelfExpCS"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OperationCallWithImlicitSourceExpCS"
+      eSuperTypes="#//OperationCallOnSelfExpCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="TupleLiteralExpCS" eSuperTypes="#//LiteralExpCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variableDeclarations" lowerBound="1" eType="#//VariableDeclarationWithInitListCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variableDeclarations" lowerBound="1"
+        eType="#//VariableDeclarationWithInitListCS" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveLiteralExpCS" abstract="true" eSuperTypes="#//LiteralExpCS"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveLiteralExpCS" abstract="true"
+      eSuperTypes="#//LiteralExpCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="IntegerLiteralExpCS" eSuperTypes="#//PrimitiveLiteralExpCS">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="integerLiteral" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="integerLiteral" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RealLiteralExpCS" eSuperTypes="#//PrimitiveLiteralExpCS">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="intValue" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="realValue" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="navigationOperator" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="intValue" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="realValue" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="navigationOperator" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteralExpCS" eSuperTypes="#//PrimitiveLiteralExpCS">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="booleanLiteral" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="booleanLiteral" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StringLiteralExpCS" eSuperTypes="#//PrimitiveLiteralExpCS">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stringLiteral" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stringLiteral" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InvalidLiteralExpCS" eSuperTypes="#//PrimitiveLiteralExpCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="NullLiteralExpCS" eSuperTypes="#//PrimitiveLiteralExpCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="LetExpCS" eSuperTypes="#//OclExpressionCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variableDeclarations" lowerBound="1" upperBound="-1" eType="#//VariableDeclarationWithInitCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="oclExpression" lowerBound="1" eType="#//OclExpressionCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variableDeclarations" lowerBound="1"
+        upperBound="-1" eType="#//VariableDeclarationWithInitCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="oclExpression" lowerBound="1"
+        eType="#//OclExpressionCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IfExpCS" eSuperTypes="#//OclExpressionCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" lowerBound="1" eType="#//OclExpressionCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="thenBranch" lowerBound="1" eType="#//OclExpressionCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="elseBranch" lowerBound="1" eType="#//OclExpressionCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" lowerBound="1"
+        eType="#//OclExpressionCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="thenBranch" lowerBound="1"
+        eType="#//OclExpressionCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elseBranch" lowerBound="1"
+        eType="#//OclExpressionCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PackageDeclarationCS" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="contextDeclarations" upperBound="-1" eType="#//ContextDeclarationCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="layoutInformation" upperBound="-1" eType="ecore:EClass platform:/plugin/org.emftext.commons.layout/metamodel/layout.ecore#//LayoutInformation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contextDeclarations" upperBound="-1"
+        eType="#//ContextDeclarationCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="layoutInformation" upperBound="-1"
+        eType="ecore:EClass platform:/plugin/org.emftext.commons.layout/metamodel/layout.ecore#//LayoutInformation"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PackageDeclarationWithNamespaceCS" eSuperTypes="#//PackageDeclarationCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="nestedNamespace" lowerBound="1" eType="#//PackageDeclarationNestedNamespaceCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nestedNamespace" lowerBound="1"
+        eType="#//PackageDeclarationNestedNamespaceCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PackageDeclarationNestedNamespaceCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="namespace" lowerBound="1" eType="ecore:EClass ../../org.dresdenocl.pivotmodel/model/pivotmodel.ecore#//Namespace"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="nestedNamespace" eType="#//PackageDeclarationNestedNamespaceCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="layoutInformation" upperBound="-1" eType="ecore:EClass platform:/plugin/org.emftext.commons.layout/metamodel/layout.ecore#//LayoutInformation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="namespace" lowerBound="1"
+        eType="ecore:EClass ../../org.dresdenocl.pivotmodel/model/pivotmodel.ecore#//Namespace"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nestedNamespace" eType="#//PackageDeclarationNestedNamespaceCS"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="layoutInformation" upperBound="-1"
+        eType="ecore:EClass platform:/plugin/org.emftext.commons.layout/metamodel/layout.ecore#//LayoutInformation"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PackageDeclarationWithoutNamespaceCS" eSuperTypes="#//PackageDeclarationCS"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PackageDeclarationWithoutNamespaceCS"
+      eSuperTypes="#//PackageDeclarationCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="ContextDeclarationCS" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="AttributeContextDeclarationCS" eSuperTypes="#//ContextDeclarationCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" lowerBound="1" eType="#//TypePathNameCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="property" lowerBound="1" eType="ecore:EClass ../../org.dresdenocl.pivotmodel/model/pivotmodel.ecore#//Property"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//TypeCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="initOrDeriveValue" lowerBound="1" upperBound="2" eType="#//InitOrDeriveValueCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" lowerBound="1"
+        eType="#//ModelElementCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//TypeCS"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initOrDeriveValue" lowerBound="1"
+        upperBound="2" eType="#//InitOrDeriveValueCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClassifierContextDeclarationCS" eSuperTypes="#//ContextDeclarationCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" lowerBound="1" eType="#//TypeCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="invariantsAndDefinitions" lowerBound="1" upperBound="-1" eType="#//InvariantOrDefinitionCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" lowerBound="1"
+        eType="#//ModelElementCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="invariantsAndDefinitions"
+        lowerBound="1" upperBound="-1" eType="#//InvariantOrDefinitionCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperationContextDeclarationCS" eSuperTypes="#//ContextDeclarationCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="operation" lowerBound="1" eType="#//OperationDefinitionInContextCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="prePostOrBodyDeclarations" lowerBound="1" upperBound="-1" eType="#//PrePostOrBodyDeclarationCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operation" lowerBound="1"
+        eType="#//OperationDefinitionInContextCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="prePostOrBodyDeclarations"
+        lowerBound="1" upperBound="-1" eType="#//PrePostOrBodyDeclarationCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InitOrDeriveValueCS" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="oclExpression" lowerBound="1" eType="#//OclExpressionCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="oclExpression" lowerBound="1"
+        eType="#//OclExpressionCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InitValueCS" eSuperTypes="#//InitOrDeriveValueCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="DeriveValueCS" eSuperTypes="#//InitOrDeriveValueCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="InvariantOrDefinitionCS" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="InvariantExpCS" eSuperTypes="#//InvariantOrDefinitionCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//SimpleNameCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="oclExpression" lowerBound="1" eType="#//OclExpressionCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//SimpleNameCS"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="oclExpression" lowerBound="1"
+        eType="#//OclExpressionCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DefinitionExpCS" eSuperTypes="#//InvariantOrDefinitionCS">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="static" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="definitionExpPart" lowerBound="1" eType="#//DefinitionExpPartCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="definitionExpPart" lowerBound="1"
+        eType="#//DefinitionExpPartCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DefinitionExpPartCS" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="DefinitionExpPropertyCS" eSuperTypes="#//DefinitionExpPartCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variableDeclaration" lowerBound="1" eType="#//VariableDeclarationWithInitCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variableDeclaration" lowerBound="1"
+        eType="#//VariableDeclarationWithInitCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DefinitionExpOperationCS" eSuperTypes="#//DefinitionExpPartCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="operation" lowerBound="1" eType="#//OperationDefinitionInDefCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operation" lowerBound="1"
+        eType="#//OperationDefinitionInDefCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="equal" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="oclExpression" lowerBound="1" eType="#//OclExpressionCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="oclExpression" lowerBound="1"
+        eType="#//OclExpressionCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PrePostOrBodyDeclarationCS" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//SimpleNameCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="oclExpression" lowerBound="1" eType="#//OclExpressionCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//SimpleNameCS"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="oclExpression" lowerBound="1"
+        eType="#//OclExpressionCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PreConditionDeclarationCS" eSuperTypes="#//PrePostOrBodyDeclarationCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="PostConditionDeclarationCS" eSuperTypes="#//PrePostOrBodyDeclarationCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="BodyDeclarationCS" eSuperTypes="#//PrePostOrBodyDeclarationCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="OperationDefinitionCS" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="operation" lowerBound="1" eType="ecore:EClass ../../org.dresdenocl.pivotmodel/model/pivotmodel.ecore#//Operation"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1" eType="#//ParameterCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" eType="#//TypeCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operation" lowerBound="1"
+        eType="ecore:EClass ../../org.dresdenocl.pivotmodel/model/pivotmodel.ecore#//Operation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//ParameterCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" eType="#//TypeCS"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperationDefinitionInContextCS" eSuperTypes="#//OperationDefinitionCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" lowerBound="1" eType="#//TypePathNameCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" lowerBound="1"
+        eType="#//ModelElementCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperationDefinitionInDefCS" eSuperTypes="#//OperationDefinitionCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="ParameterCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" lowerBound="1" eType="ecore:EClass ../../org.dresdenocl.pivotmodel/model/pivotmodel.ecore#//Parameter"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parameterType" lowerBound="1" eType="#//TypeCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" lowerBound="1"
+        eType="ecore:EClass ../../org.dresdenocl.pivotmodel/model/pivotmodel.ecore#//Parameter"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameterType" lowerBound="1"
+        eType="#//TypeCS" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

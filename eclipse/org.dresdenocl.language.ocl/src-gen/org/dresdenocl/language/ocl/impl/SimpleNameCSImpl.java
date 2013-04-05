@@ -6,13 +6,12 @@
  */
 package org.dresdenocl.language.ocl.impl;
 
+import org.dresdenocl.language.ocl.OclPackage;
+import org.dresdenocl.language.ocl.SimpleNameCS;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
-import org.dresdenocl.language.ocl.OclPackage;
-import org.dresdenocl.language.ocl.SimpleNameCS;
 
 /**
  * <!-- begin-user-doc -->

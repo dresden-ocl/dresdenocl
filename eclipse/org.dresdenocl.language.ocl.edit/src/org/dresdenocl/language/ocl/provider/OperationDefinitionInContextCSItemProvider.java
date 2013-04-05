@@ -9,6 +9,9 @@ package org.dresdenocl.language.ocl.provider;
 import java.util.Collection;
 import java.util.List;
 
+import org.dresdenocl.language.ocl.OclFactory;
+import org.dresdenocl.language.ocl.OclPackage;
+import org.dresdenocl.language.ocl.OperationDefinitionInContextCS;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -19,10 +22,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
-import org.dresdenocl.language.ocl.OclFactory;
-import org.dresdenocl.language.ocl.OclPackage;
-import org.dresdenocl.language.ocl.OperationDefinitionInContextCS;
 
 /**
  * This is the item provider adapter for a {@link org.dresdenocl.language.ocl.OperationDefinitionInContextCS} object.
@@ -145,37 +144,7 @@ public class OperationDefinitionInContextCSItemProvider extends
 		newChildDescriptors.add
 			(createChildParameter
 				(OclPackage.Literals.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME,
-				 OclFactory.eINSTANCE.createTypePathNameSimpleCS()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OclPackage.Literals.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME,
-				 OclFactory.eINSTANCE.createTypePathNameNestedCS()));
-	}
-
-	/**
-	 * This returns the label text for
-	 * {@link org.eclipse.emf.edit.command.CreateChildCommand}. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public String getCreateChildText(Object owner, Object feature,
-			Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
-
-		boolean qualify =
-			childFeature == OclPackage.Literals.OPERATION_DEFINITION_CS__RETURN_TYPE ||
-			childFeature == OclPackage.Literals.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME;
-
-		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
+				 OclFactory.eINSTANCE.createModelElementCS()));
 	}
 
 }

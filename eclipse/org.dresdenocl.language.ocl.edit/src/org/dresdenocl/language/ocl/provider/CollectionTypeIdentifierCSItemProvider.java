@@ -9,6 +9,9 @@ package org.dresdenocl.language.ocl.provider;
 import java.util.Collection;
 import java.util.List;
 
+import org.dresdenocl.language.ocl.CollectionTypeIdentifierCS;
+import org.dresdenocl.language.ocl.OclFactory;
+import org.dresdenocl.language.ocl.OclPackage;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -20,10 +23,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
-import org.dresdenocl.language.ocl.CollectionTypeIdentifierCS;
-import org.dresdenocl.language.ocl.OclFactory;
-import org.dresdenocl.language.ocl.OclPackage;
 
 /**
  * This is the item provider adapter for a {@link org.dresdenocl.language.ocl.CollectionTypeIdentifierCS} object.
@@ -166,12 +165,7 @@ public class CollectionTypeIdentifierCSItemProvider extends TypeCSItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(OclPackage.Literals.COLLECTION_TYPE_IDENTIFIER_CS__GENERIC_TYPE,
-				 OclFactory.eINSTANCE.createTypePathNameSimpleCS()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OclPackage.Literals.COLLECTION_TYPE_IDENTIFIER_CS__GENERIC_TYPE,
-				 OclFactory.eINSTANCE.createTypePathNameNestedCS()));
+				 OclFactory.eINSTANCE.createTypeModelElementCS()));
 
 		newChildDescriptors.add
 			(createChildParameter

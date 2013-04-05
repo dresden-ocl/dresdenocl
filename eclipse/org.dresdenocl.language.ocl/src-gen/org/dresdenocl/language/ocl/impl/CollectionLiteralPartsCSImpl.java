@@ -6,11 +6,10 @@
  */
 package org.dresdenocl.language.ocl.impl;
 
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.dresdenocl.language.ocl.CollectionLiteralPartsCS;
 import org.dresdenocl.language.ocl.OclPackage;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->

@@ -35,22 +35,40 @@ public interface OclFactory extends EFactory {
 	BracketExpCS createBracketExpCS();
 
 	/**
-   * Returns a new object of class '<em>Named Literal Exp CS</em>'.
+   * Returns a new object of class '<em>Model Element CS</em>'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @return a new object of class '<em>Named Literal Exp CS</em>'.
+   * @return a new object of class '<em>Model Element CS</em>'.
    * @generated
    */
-	NamedLiteralExpCS createNamedLiteralExpCS();
+	ModelElementCS createModelElementCS();
 
 	/**
-   * Returns a new object of class '<em>Path Name CS</em>'.
+   * Returns a new object of class '<em>Path Name Simple CS</em>'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @return a new object of class '<em>Path Name CS</em>'.
+   * @return a new object of class '<em>Path Name Simple CS</em>'.
    * @generated
    */
-	PathNameCS createPathNameCS();
+	PathNameSimpleCS createPathNameSimpleCS();
+
+	/**
+   * Returns a new object of class '<em>Path Name Path CS</em>'.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @return a new object of class '<em>Path Name Path CS</em>'.
+   * @generated
+   */
+	PathNamePathCS createPathNamePathCS();
+
+	/**
+   * Returns a new object of class '<em>Named Element CS</em>'.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @return a new object of class '<em>Named Element CS</em>'.
+   * @generated
+   */
+	NamedElementCS createNamedElementCS();
 
 	/**
    * Returns a new object of class '<em>Simple Name CS</em>'.
@@ -62,22 +80,13 @@ public interface OclFactory extends EFactory {
 	SimpleNameCS createSimpleNameCS();
 
 	/**
-   * Returns a new object of class '<em>Type Path Name Simple CS</em>'.
+   * Returns a new object of class '<em>Type Model Element CS</em>'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @return a new object of class '<em>Type Path Name Simple CS</em>'.
+   * @return a new object of class '<em>Type Model Element CS</em>'.
    * @generated
    */
-	TypePathNameSimpleCS createTypePathNameSimpleCS();
-
-	/**
-   * Returns a new object of class '<em>Type Path Name Nested CS</em>'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return a new object of class '<em>Type Path Name Nested CS</em>'.
-   * @generated
-   */
-	TypePathNameNestedCS createTypePathNameNestedCS();
+	TypeModelElementCS createTypeModelElementCS();
 
 	/**
    * Returns a new object of class '<em>Tuple Type CS</em>'.
@@ -141,15 +150,6 @@ public interface OclFactory extends EFactory {
    * @generated
    */
 	VariableDeclarationWithoutInitListCS createVariableDeclarationWithoutInitListCS();
-
-	/**
-   * Returns a new object of class '<em>Enum Literal Or Static Property Exp CS</em>'.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @return a new object of class '<em>Enum Literal Or Static Property Exp CS</em>'.
-   * @generated
-   */
-	EnumLiteralOrStaticPropertyExpCS createEnumLiteralOrStaticPropertyExpCS();
 
 	/**
    * Returns a new object of class '<em>Collection Literal Exp CS</em>'.

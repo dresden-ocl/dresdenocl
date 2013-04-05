@@ -8,6 +8,12 @@ package org.dresdenocl.language.ocl.impl;
 
 import java.util.Collection;
 
+import org.dresdenocl.language.ocl.AttributeContextDeclarationCS;
+import org.dresdenocl.language.ocl.InitOrDeriveValueCS;
+import org.dresdenocl.language.ocl.ModelElementCS;
+import org.dresdenocl.language.ocl.OclPackage;
+import org.dresdenocl.language.ocl.TypeCS;
+import org.dresdenocl.pivotmodel.Property;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -17,13 +23,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.dresdenocl.language.ocl.AttributeContextDeclarationCS;
-import org.dresdenocl.language.ocl.InitOrDeriveValueCS;
-import org.dresdenocl.language.ocl.OclPackage;
-import org.dresdenocl.language.ocl.TypeCS;
-import org.dresdenocl.language.ocl.TypePathNameCS;
-import org.dresdenocl.pivotmodel.Property;
-
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Attribute Context Declaration CS</b></em>'.
@@ -32,7 +31,6 @@ import org.dresdenocl.pivotmodel.Property;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.dresdenocl.language.ocl.impl.AttributeContextDeclarationCSImpl#getTypeName <em>Type Name</em>}</li>
- *   <li>{@link org.dresdenocl.language.ocl.impl.AttributeContextDeclarationCSImpl#getProperty <em>Property</em>}</li>
  *   <li>{@link org.dresdenocl.language.ocl.impl.AttributeContextDeclarationCSImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.dresdenocl.language.ocl.impl.AttributeContextDeclarationCSImpl#getInitOrDeriveValue <em>Init Or Derive Value</em>}</li>
  * </ul>
@@ -49,17 +47,7 @@ public class AttributeContextDeclarationCSImpl extends ContextDeclarationCSImpl 
    * @generated
    * @ordered
    */
-	protected TypePathNameCS typeName;
-
-	/**
-   * The cached value of the '{@link #getProperty() <em>Property</em>}' reference.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @see #getProperty()
-   * @generated
-   * @ordered
-   */
-	protected Property property;
+	protected ModelElementCS typeName;
 
 	/**
    * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
@@ -105,7 +93,7 @@ public class AttributeContextDeclarationCSImpl extends ContextDeclarationCSImpl 
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public TypePathNameCS getTypeName() {
+	public ModelElementCS getTypeName() {
     return typeName;
   }
 
@@ -114,8 +102,8 @@ public class AttributeContextDeclarationCSImpl extends ContextDeclarationCSImpl 
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public NotificationChain basicSetTypeName(TypePathNameCS newTypeName, NotificationChain msgs) {
-    TypePathNameCS oldTypeName = typeName;
+	public NotificationChain basicSetTypeName(ModelElementCS newTypeName, NotificationChain msgs) {
+    ModelElementCS oldTypeName = typeName;
     typeName = newTypeName;
     if (eNotificationRequired())
     {
@@ -130,7 +118,7 @@ public class AttributeContextDeclarationCSImpl extends ContextDeclarationCSImpl 
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public void setTypeName(TypePathNameCS newTypeName) {
+	public void setTypeName(ModelElementCS newTypeName) {
     if (newTypeName != typeName)
     {
       NotificationChain msgs = null;
@@ -143,46 +131,6 @@ public class AttributeContextDeclarationCSImpl extends ContextDeclarationCSImpl 
     }
     else if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__TYPE_NAME, newTypeName, newTypeName));
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public Property getProperty() {
-    if (property != null && property.eIsProxy())
-    {
-      InternalEObject oldProperty = (InternalEObject)property;
-      property = (Property)eResolveProxy(oldProperty);
-      if (property != oldProperty)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__PROPERTY, oldProperty, property));
-      }
-    }
-    return property;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public Property basicGetProperty() {
-    return property;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public void setProperty(Property newProperty) {
-    Property oldProperty = property;
-    property = newProperty;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__PROPERTY, oldProperty, property));
   }
 
 	/**
@@ -273,9 +221,6 @@ public class AttributeContextDeclarationCSImpl extends ContextDeclarationCSImpl 
     {
       case OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__TYPE_NAME:
         return getTypeName();
-      case OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__PROPERTY:
-        if (resolve) return getProperty();
-        return basicGetProperty();
       case OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__TYPE:
         return getType();
       case OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__INIT_OR_DERIVE_VALUE:
@@ -295,10 +240,7 @@ public class AttributeContextDeclarationCSImpl extends ContextDeclarationCSImpl 
     switch (featureID)
     {
       case OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__TYPE_NAME:
-        setTypeName((TypePathNameCS)newValue);
-        return;
-      case OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__PROPERTY:
-        setProperty((Property)newValue);
+        setTypeName((ModelElementCS)newValue);
         return;
       case OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__TYPE:
         setType((TypeCS)newValue);
@@ -321,10 +263,7 @@ public class AttributeContextDeclarationCSImpl extends ContextDeclarationCSImpl 
     switch (featureID)
     {
       case OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__TYPE_NAME:
-        setTypeName((TypePathNameCS)null);
-        return;
-      case OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__PROPERTY:
-        setProperty((Property)null);
+        setTypeName((ModelElementCS)null);
         return;
       case OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__TYPE:
         setType((TypeCS)null);
@@ -347,8 +286,6 @@ public class AttributeContextDeclarationCSImpl extends ContextDeclarationCSImpl 
     {
       case OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__TYPE_NAME:
         return typeName != null;
-      case OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__PROPERTY:
-        return property != null;
       case OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__TYPE:
         return type != null;
       case OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__INIT_OR_DERIVE_VALUE:

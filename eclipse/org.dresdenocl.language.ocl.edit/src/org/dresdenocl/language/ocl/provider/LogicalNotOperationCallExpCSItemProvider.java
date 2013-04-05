@@ -10,6 +10,9 @@ package org.dresdenocl.language.ocl.provider;
 import java.util.Collection;
 import java.util.List;
 
+import org.dresdenocl.language.ocl.LogicalNotOperationCallExpCS;
+import org.dresdenocl.language.ocl.OclFactory;
+import org.dresdenocl.language.ocl.OclPackage;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -22,10 +25,6 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
-import org.dresdenocl.language.ocl.LogicalNotOperationCallExpCS;
-import org.dresdenocl.language.ocl.OclFactory;
-import org.dresdenocl.language.ocl.OclPackage;
 
 /**
  * This is the item provider adapter for a {@link org.dresdenocl.language.ocl.LogicalNotOperationCallExpCS} object.
@@ -182,7 +181,7 @@ public class LogicalNotOperationCallExpCSItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(OclPackage.Literals.LOGICAL_NOT_OPERATION_CALL_EXP_CS__TARGET,
-				 OclFactory.eINSTANCE.createNamedLiteralExpCS()));
+				 OclFactory.eINSTANCE.createModelElementCS()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -193,11 +192,6 @@ public class LogicalNotOperationCallExpCSItemProvider
 			(createChildParameter
 				(OclPackage.Literals.LOGICAL_NOT_OPERATION_CALL_EXP_CS__TARGET,
 				 OclFactory.eINSTANCE.createTupleTypeLiteralExpCS()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OclPackage.Literals.LOGICAL_NOT_OPERATION_CALL_EXP_CS__TARGET,
-				 OclFactory.eINSTANCE.createEnumLiteralOrStaticPropertyExpCS()));
 
 		newChildDescriptors.add
 			(createChildParameter

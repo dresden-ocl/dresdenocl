@@ -65,13 +65,6 @@ trait OclAttributesImpl extends OclAttributes {selfType : OclStaticSemantics =>
           else
             Full(namespace)
         }
-        case t : TypePathNameNestedCS => {
-          val namespace = t.getNamespace
-          if (namespace.eIsProxy)
-            Empty
-          else
-            Full(namespace)
-        }
         case _ => super.__namespace(child)
       }
     }
@@ -144,11 +137,13 @@ trait OclAttributesImpl extends OclAttributes {selfType : OclStaticSemantics =>
             Full(op)
         }
         case a : AttributeContextDeclarationCS => {
-          val property = a.getProperty
+          val property = a.getTypeName.getNamedElement
           if (property.eIsProxy)
             Empty
+          else if (property.isInstanceOf[Property])
+            Full(property.asInstanceOf[Property])
           else
-            Full(property)
+            Empty
         }
         case _ => super.__context(child)
       }
@@ -330,25 +325,36 @@ trait OclAttributesImpl extends OclAttributes {selfType : OclStaticSemantics =>
   
   abstract override def __oclType : Attributable ==> Box[Type] = {
     attr {
-      case v : NamedLiteralExpCS => {
-        val namedElement = v.getNamedElement
-        if (namedElement.eIsProxy)
+      case m : ModelElementCS => {
+       oclType(m.getPathName)
+      }
+      case p : PathNamePathCS => {
+       oclType(p.getPathName.last)
+      }
+      case s : PathNameSimpleCS => {
+        val `type` = s.getNamedElement
+        if (`type`.eIsProxy)
           Empty
         else
-          namedElement match {
+          `type` match {
             case t : TypedElement => Full(t.getType)
             case t : Type => Full(t)
           }
       }
-      case t : TypePathNameSimpleCS => {
-        val `type` = t.getTypeName
+      case n : NamedElementCS => {
+        val `type` = n.getNamedElement
         if (`type`.eIsProxy)
           Empty
         else
-          Full(`type`)
+          `type` match {
+            case v : Variable => Full(v.getType)
+            case t : TypedElement => Full(t.getType)
+            case t : Type => Full(t)
+            
+          }
       }
-      case t : TypePathNameNestedCS => {
-        oclType(t.getTypePathName)
+      case t : TypeModelElementCS => {
+        oclType(t.getModelElement)
       }
       case t : TupleTypeCS => {
         val properties = t.getVariableDeclarationList.getVariableDeclarations.flatMap{vd =>
@@ -512,11 +518,14 @@ trait OclAttributesImpl extends OclAttributes {selfType : OclStaticSemantics =>
             operation.isStatic
         }
         case a : AttributeContextDeclarationCS => {
-          val property = a.getProperty
+          val property = a.getTypeName.getNamedElement
           if (property.eIsProxy)
             false
-          else
-            property.isStatic
+          else if (property.isInstanceOf[Property])  {
+            property.asInstanceOf[Property].isStatic
+          } else {
+            false
+          }
         }
         case _ => super.__isInStaticContext(child)
       }

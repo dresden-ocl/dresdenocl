@@ -9,6 +9,9 @@ package org.dresdenocl.language.ocl.provider;
 import java.util.Collection;
 import java.util.List;
 
+import org.dresdenocl.language.ocl.IteratorExpVariableCS;
+import org.dresdenocl.language.ocl.OclFactory;
+import org.dresdenocl.language.ocl.OclPackage;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
@@ -21,10 +24,6 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
-import org.dresdenocl.language.ocl.IteratorExpVariableCS;
-import org.dresdenocl.language.ocl.OclFactory;
-import org.dresdenocl.language.ocl.OclPackage;
 
 /**
  * This is the item provider adapter for a
@@ -154,12 +153,7 @@ public class IteratorExpVariableCSItemProvider extends ItemProviderAdapter
 		newChildDescriptors.add
 			(createChildParameter
 				(OclPackage.Literals.ITERATOR_EXP_VARIABLE_CS__TYPE_NAME,
-				 OclFactory.eINSTANCE.createTypePathNameSimpleCS()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OclPackage.Literals.ITERATOR_EXP_VARIABLE_CS__TYPE_NAME,
-				 OclFactory.eINSTANCE.createTypePathNameNestedCS()));
+				 OclFactory.eINSTANCE.createTypeModelElementCS()));
 
 		newChildDescriptors.add
 			(createChildParameter

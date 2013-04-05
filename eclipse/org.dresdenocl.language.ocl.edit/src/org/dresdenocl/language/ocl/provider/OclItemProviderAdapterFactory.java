@@ -9,6 +9,7 @@ package org.dresdenocl.language.ocl.provider;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.dresdenocl.language.ocl.util.OclAdapterFactory;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
@@ -23,8 +24,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-
-import org.dresdenocl.language.ocl.util.OclAdapterFactory;
 
 /**
  * This is the factory that is used to provide the interfaces needed to support Viewers.
@@ -98,49 +97,95 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.NamedLiteralExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.ModelElementCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected NamedLiteralExpCSItemProvider namedLiteralExpCSItemProvider;
+	protected ModelElementCSItemProvider modelElementCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.NamedLiteralExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.ModelElementCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createNamedLiteralExpCSAdapter() {
-		if (namedLiteralExpCSItemProvider == null) {
-			namedLiteralExpCSItemProvider = new NamedLiteralExpCSItemProvider(this);
+	public Adapter createModelElementCSAdapter() {
+		if (modelElementCSItemProvider == null) {
+			modelElementCSItemProvider = new ModelElementCSItemProvider(this);
 		}
 
-		return namedLiteralExpCSItemProvider;
+		return modelElementCSItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.PathNameCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.PathNameSimpleCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected PathNameCSItemProvider pathNameCSItemProvider;
+	protected PathNameSimpleCSItemProvider pathNameSimpleCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.PathNameCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.PathNameSimpleCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createPathNameCSAdapter() {
-		if (pathNameCSItemProvider == null) {
-			pathNameCSItemProvider = new PathNameCSItemProvider(this);
+	public Adapter createPathNameSimpleCSAdapter() {
+		if (pathNameSimpleCSItemProvider == null) {
+			pathNameSimpleCSItemProvider = new PathNameSimpleCSItemProvider(this);
 		}
 
-		return pathNameCSItemProvider;
+		return pathNameSimpleCSItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.PathNamePathCS} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PathNamePathCSItemProvider pathNamePathCSItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.PathNamePathCS}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPathNamePathCSAdapter() {
+		if (pathNamePathCSItemProvider == null) {
+			pathNamePathCSItemProvider = new PathNamePathCSItemProvider(this);
+		}
+
+		return pathNamePathCSItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.NamedElementCS} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected NamedElementCSItemProvider namedElementCSItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.NamedElementCS}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createNamedElementCSAdapter() {
+		if (namedElementCSItemProvider == null) {
+			namedElementCSItemProvider = new NamedElementCSItemProvider(this);
+		}
+
+		return namedElementCSItemProvider;
 	}
 
 	/**
@@ -167,49 +212,26 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.TypePathNameSimpleCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.TypeModelElementCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected TypePathNameSimpleCSItemProvider typePathNameSimpleCSItemProvider;
+	protected TypeModelElementCSItemProvider typeModelElementCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.TypePathNameSimpleCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.TypeModelElementCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createTypePathNameSimpleCSAdapter() {
-		if (typePathNameSimpleCSItemProvider == null) {
-			typePathNameSimpleCSItemProvider = new TypePathNameSimpleCSItemProvider(this);
+	public Adapter createTypeModelElementCSAdapter() {
+		if (typeModelElementCSItemProvider == null) {
+			typeModelElementCSItemProvider = new TypeModelElementCSItemProvider(this);
 		}
 
-		return typePathNameSimpleCSItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.TypePathNameNestedCS} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected TypePathNameNestedCSItemProvider typePathNameNestedCSItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.TypePathNameNestedCS}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createTypePathNameNestedCSAdapter() {
-		if (typePathNameNestedCSItemProvider == null) {
-			typePathNameNestedCSItemProvider = new TypePathNameNestedCSItemProvider(this);
-		}
-
-		return typePathNameNestedCSItemProvider;
+		return typeModelElementCSItemProvider;
 	}
 
 	/**
@@ -371,29 +393,6 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 		}
 
 		return variableDeclarationWithoutInitListCSItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected EnumLiteralOrStaticPropertyExpCSItemProvider enumLiteralOrStaticPropertyExpCSItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createEnumLiteralOrStaticPropertyExpCSAdapter() {
-		if (enumLiteralOrStaticPropertyExpCSItemProvider == null) {
-			enumLiteralOrStaticPropertyExpCSItemProvider = new EnumLiteralOrStaticPropertyExpCSItemProvider(this);
-		}
-
-		return enumLiteralOrStaticPropertyExpCSItemProvider;
 	}
 
 	/**
@@ -1761,11 +1760,12 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	 */
 	public void dispose() {
 		if (bracketExpCSItemProvider != null) bracketExpCSItemProvider.dispose();
-		if (namedLiteralExpCSItemProvider != null) namedLiteralExpCSItemProvider.dispose();
-		if (pathNameCSItemProvider != null) pathNameCSItemProvider.dispose();
+		if (modelElementCSItemProvider != null) modelElementCSItemProvider.dispose();
+		if (pathNameSimpleCSItemProvider != null) pathNameSimpleCSItemProvider.dispose();
+		if (pathNamePathCSItemProvider != null) pathNamePathCSItemProvider.dispose();
+		if (namedElementCSItemProvider != null) namedElementCSItemProvider.dispose();
 		if (simpleNameCSItemProvider != null) simpleNameCSItemProvider.dispose();
-		if (typePathNameSimpleCSItemProvider != null) typePathNameSimpleCSItemProvider.dispose();
-		if (typePathNameNestedCSItemProvider != null) typePathNameNestedCSItemProvider.dispose();
+		if (typeModelElementCSItemProvider != null) typeModelElementCSItemProvider.dispose();
 		if (tupleTypeCSItemProvider != null) tupleTypeCSItemProvider.dispose();
 		if (collectionTypeLiteralExpCSItemProvider != null) collectionTypeLiteralExpCSItemProvider.dispose();
 		if (tupleTypeLiteralExpCSItemProvider != null) tupleTypeLiteralExpCSItemProvider.dispose();
@@ -1773,7 +1773,6 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 		if (variableDeclarationWithoutInitCSItemProvider != null) variableDeclarationWithoutInitCSItemProvider.dispose();
 		if (variableDeclarationWithInitListCSItemProvider != null) variableDeclarationWithInitListCSItemProvider.dispose();
 		if (variableDeclarationWithoutInitListCSItemProvider != null) variableDeclarationWithoutInitListCSItemProvider.dispose();
-		if (enumLiteralOrStaticPropertyExpCSItemProvider != null) enumLiteralOrStaticPropertyExpCSItemProvider.dispose();
 		if (collectionLiteralExpCSItemProvider != null) collectionLiteralExpCSItemProvider.dispose();
 		if (collectionTypeIdentifierCSItemProvider != null) collectionTypeIdentifierCSItemProvider.dispose();
 		if (collectionLiteralPartsOclExpCSItemProvider != null) collectionLiteralPartsOclExpCSItemProvider.dispose();

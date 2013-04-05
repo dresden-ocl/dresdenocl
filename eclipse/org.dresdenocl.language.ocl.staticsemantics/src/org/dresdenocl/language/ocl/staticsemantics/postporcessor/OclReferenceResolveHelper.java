@@ -2,9 +2,6 @@ package org.dresdenocl.language.ocl.staticsemantics.postporcessor;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
-
 import org.dresdenocl.language.ocl.OclExpressionCS;
 import org.dresdenocl.language.ocl.ParameterCS;
 import org.dresdenocl.language.ocl.TypeCS;
@@ -16,6 +13,8 @@ import org.dresdenocl.pivotmodel.Operation;
 import org.dresdenocl.pivotmodel.Parameter;
 import org.dresdenocl.pivotmodel.Property;
 import org.dresdenocl.pivotmodel.Type;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 
 public class OclReferenceResolveHelper implements IOclReferenceResolveHelper {
 
@@ -86,5 +85,16 @@ public class OclReferenceResolveHelper implements IOclReferenceResolveHelper {
 				identifier, resolveFuzzy, container, reference, parameterType);
 		return ret;
 	}
+
+	@Override
+	public List<NamedElement> resolvePathName(String identifier,
+			boolean resolveFuzzy, EObject container) {
+		List<NamedElement> ret = OclStaticSemanticsProvider.getStaticSemantics(
+				(IOclResource) container.eResource()).resolvePathName(identifier,
+				resolveFuzzy, container);
+		return ret;
+	}
+	
+	
 
 }

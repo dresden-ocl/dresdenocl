@@ -9,6 +9,9 @@ package org.dresdenocl.language.ocl.provider;
 import java.util.Collection;
 import java.util.List;
 
+import org.dresdenocl.language.ocl.OclFactory;
+import org.dresdenocl.language.ocl.OclPackage;
+import org.dresdenocl.language.ocl.StaticOperationCallExpCS;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -20,10 +23,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
-import org.dresdenocl.language.ocl.OclFactory;
-import org.dresdenocl.language.ocl.OclPackage;
-import org.dresdenocl.language.ocl.StaticOperationCallExpCS;
 
 /**
  * This is the item provider adapter for a {@link org.dresdenocl.language.ocl.StaticOperationCallExpCS} object.
@@ -169,12 +168,7 @@ public class StaticOperationCallExpCSItemProvider extends
 		newChildDescriptors.add
 			(createChildParameter
 				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__TYPE_NAME,
-				 OclFactory.eINSTANCE.createTypePathNameSimpleCS()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__TYPE_NAME,
-				 OclFactory.eINSTANCE.createTypePathNameNestedCS()));
+				 OclFactory.eINSTANCE.createModelElementCS()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -184,7 +178,7 @@ public class StaticOperationCallExpCSItemProvider extends
 		newChildDescriptors.add
 			(createChildParameter
 				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				 OclFactory.eINSTANCE.createNamedLiteralExpCS()));
+				 OclFactory.eINSTANCE.createModelElementCS()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -195,11 +189,6 @@ public class StaticOperationCallExpCSItemProvider extends
 			(createChildParameter
 				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
 				 OclFactory.eINSTANCE.createTupleTypeLiteralExpCS()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				 OclFactory.eINSTANCE.createEnumLiteralOrStaticPropertyExpCS()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -345,6 +334,29 @@ public class StaticOperationCallExpCSItemProvider extends
 			(createChildParameter
 				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
 				 OclFactory.eINSTANCE.createIfExpCS()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__TYPE_NAME ||
+			childFeature == OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }

@@ -6,10 +6,6 @@
  */
 package org.dresdenocl.language.ocl.util;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.util.Switch;
-
 import org.dresdenocl.language.ocl.*;
 import org.dresdenocl.language.ocl.AdditiveOperationCallExpCS;
 import org.dresdenocl.language.ocl.AttributeContextDeclarationCS;
@@ -30,7 +26,6 @@ import org.dresdenocl.language.ocl.DefinitionExpOperationCS;
 import org.dresdenocl.language.ocl.DefinitionExpPartCS;
 import org.dresdenocl.language.ocl.DefinitionExpPropertyCS;
 import org.dresdenocl.language.ocl.DeriveValueCS;
-import org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS;
 import org.dresdenocl.language.ocl.EqualityOperationCallExpCS;
 import org.dresdenocl.language.ocl.FeatureCallExpCS;
 import org.dresdenocl.language.ocl.IfExpCS;
@@ -54,8 +49,9 @@ import org.dresdenocl.language.ocl.LogicalNotOperationCallExpCS;
 import org.dresdenocl.language.ocl.LogicalOrOperationCallExpCS;
 import org.dresdenocl.language.ocl.LogicalXorOperationCallExpCS;
 import org.dresdenocl.language.ocl.LoopExpCS;
+import org.dresdenocl.language.ocl.ModelElementCS;
 import org.dresdenocl.language.ocl.MultOperationCallExpCS;
-import org.dresdenocl.language.ocl.NamedLiteralExpCS;
+import org.dresdenocl.language.ocl.NamedElementCS;
 import org.dresdenocl.language.ocl.NavigationCallExp;
 import org.dresdenocl.language.ocl.NullLiteralExpCS;
 import org.dresdenocl.language.ocl.OclExpressionCS;
@@ -76,6 +72,8 @@ import org.dresdenocl.language.ocl.PackageDeclarationWithNamespaceCS;
 import org.dresdenocl.language.ocl.PackageDeclarationWithoutNamespaceCS;
 import org.dresdenocl.language.ocl.ParameterCS;
 import org.dresdenocl.language.ocl.PathNameCS;
+import org.dresdenocl.language.ocl.PathNamePathCS;
+import org.dresdenocl.language.ocl.PathNameSimpleCS;
 import org.dresdenocl.language.ocl.PostConditionDeclarationCS;
 import org.dresdenocl.language.ocl.PreConditionDeclarationCS;
 import org.dresdenocl.language.ocl.PrePostOrBodyDeclarationCS;
@@ -93,15 +91,17 @@ import org.dresdenocl.language.ocl.TupleLiteralExpCS;
 import org.dresdenocl.language.ocl.TupleTypeCS;
 import org.dresdenocl.language.ocl.TupleTypeLiteralExpCS;
 import org.dresdenocl.language.ocl.TypeCS;
-import org.dresdenocl.language.ocl.TypePathNameCS;
-import org.dresdenocl.language.ocl.TypePathNameNestedCS;
-import org.dresdenocl.language.ocl.TypePathNameSimpleCS;
+import org.dresdenocl.language.ocl.TypeModelElementCS;
 import org.dresdenocl.language.ocl.UnaryOperationCallExpCS;
+import org.dresdenocl.language.ocl.UnreservedSimpleNameCS;
 import org.dresdenocl.language.ocl.VariableDeclarationCS;
 import org.dresdenocl.language.ocl.VariableDeclarationWithInitCS;
 import org.dresdenocl.language.ocl.VariableDeclarationWithInitListCS;
 import org.dresdenocl.language.ocl.VariableDeclarationWithoutInitCS;
 import org.dresdenocl.language.ocl.VariableDeclarationWithoutInitListCS;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.util.Switch;
 
 /**
  * <!-- begin-user-doc -->
@@ -177,11 +177,11 @@ public class OclSwitch<T> extends Switch<T> {
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case OclPackage.NAMED_LITERAL_EXP_CS:
+      case OclPackage.MODEL_ELEMENT_CS:
       {
-        NamedLiteralExpCS namedLiteralExpCS = (NamedLiteralExpCS)theEObject;
-        T result = caseNamedLiteralExpCS(namedLiteralExpCS);
-        if (result == null) result = caseOclExpressionCS(namedLiteralExpCS);
+        ModelElementCS modelElementCS = (ModelElementCS)theEObject;
+        T result = caseModelElementCS(modelElementCS);
+        if (result == null) result = caseOclExpressionCS(modelElementCS);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -189,6 +189,37 @@ public class OclSwitch<T> extends Switch<T> {
       {
         PathNameCS pathNameCS = (PathNameCS)theEObject;
         T result = casePathNameCS(pathNameCS);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case OclPackage.PATH_NAME_SIMPLE_CS:
+      {
+        PathNameSimpleCS pathNameSimpleCS = (PathNameSimpleCS)theEObject;
+        T result = casePathNameSimpleCS(pathNameSimpleCS);
+        if (result == null) result = casePathNameCS(pathNameSimpleCS);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case OclPackage.PATH_NAME_PATH_CS:
+      {
+        PathNamePathCS pathNamePathCS = (PathNamePathCS)theEObject;
+        T result = casePathNamePathCS(pathNamePathCS);
+        if (result == null) result = casePathNameCS(pathNamePathCS);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case OclPackage.UNRESERVED_SIMPLE_NAME_CS:
+      {
+        UnreservedSimpleNameCS unreservedSimpleNameCS = (UnreservedSimpleNameCS)theEObject;
+        T result = caseUnreservedSimpleNameCS(unreservedSimpleNameCS);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case OclPackage.NAMED_ELEMENT_CS:
+      {
+        NamedElementCS namedElementCS = (NamedElementCS)theEObject;
+        T result = caseNamedElementCS(namedElementCS);
+        if (result == null) result = caseUnreservedSimpleNameCS(namedElementCS);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -206,29 +237,11 @@ public class OclSwitch<T> extends Switch<T> {
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case OclPackage.TYPE_PATH_NAME_CS:
+      case OclPackage.TYPE_MODEL_ELEMENT_CS:
       {
-        TypePathNameCS typePathNameCS = (TypePathNameCS)theEObject;
-        T result = caseTypePathNameCS(typePathNameCS);
-        if (result == null) result = caseTypeCS(typePathNameCS);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case OclPackage.TYPE_PATH_NAME_SIMPLE_CS:
-      {
-        TypePathNameSimpleCS typePathNameSimpleCS = (TypePathNameSimpleCS)theEObject;
-        T result = caseTypePathNameSimpleCS(typePathNameSimpleCS);
-        if (result == null) result = caseTypePathNameCS(typePathNameSimpleCS);
-        if (result == null) result = caseTypeCS(typePathNameSimpleCS);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case OclPackage.TYPE_PATH_NAME_NESTED_CS:
-      {
-        TypePathNameNestedCS typePathNameNestedCS = (TypePathNameNestedCS)theEObject;
-        T result = caseTypePathNameNestedCS(typePathNameNestedCS);
-        if (result == null) result = caseTypePathNameCS(typePathNameNestedCS);
-        if (result == null) result = caseTypeCS(typePathNameNestedCS);
+        TypeModelElementCS typeModelElementCS = (TypeModelElementCS)theEObject;
+        T result = caseTypeModelElementCS(typeModelElementCS);
+        if (result == null) result = caseTypeCS(typeModelElementCS);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -300,15 +313,6 @@ public class OclSwitch<T> extends Switch<T> {
         LiteralExpCS literalExpCS = (LiteralExpCS)theEObject;
         T result = caseLiteralExpCS(literalExpCS);
         if (result == null) result = caseOclExpressionCS(literalExpCS);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case OclPackage.ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS:
-      {
-        EnumLiteralOrStaticPropertyExpCS enumLiteralOrStaticPropertyExpCS = (EnumLiteralOrStaticPropertyExpCS)theEObject;
-        T result = caseEnumLiteralOrStaticPropertyExpCS(enumLiteralOrStaticPropertyExpCS);
-        if (result == null) result = caseLiteralExpCS(enumLiteralOrStaticPropertyExpCS);
-        if (result == null) result = caseOclExpressionCS(enumLiteralOrStaticPropertyExpCS);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1004,17 +1008,17 @@ public class OclSwitch<T> extends Switch<T> {
   }
 
 	/**
-   * Returns the result of interpreting the object as an instance of '<em>Named Literal Exp CS</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Model Element CS</em>'.
    * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Named Literal Exp CS</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Model Element CS</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-	public T caseNamedLiteralExpCS(NamedLiteralExpCS object) {
+	public T caseModelElementCS(ModelElementCS object) {
     return null;
   }
 
@@ -1030,6 +1034,66 @@ public class OclSwitch<T> extends Switch<T> {
    * @generated
    */
 	public T casePathNameCS(PathNameCS object) {
+    return null;
+  }
+
+	/**
+   * Returns the result of interpreting the object as an instance of '<em>Path Name Simple CS</em>'.
+   * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Path Name Simple CS</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+	public T casePathNameSimpleCS(PathNameSimpleCS object) {
+    return null;
+  }
+
+	/**
+   * Returns the result of interpreting the object as an instance of '<em>Path Name Path CS</em>'.
+   * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Path Name Path CS</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+	public T casePathNamePathCS(PathNamePathCS object) {
+    return null;
+  }
+
+	/**
+   * Returns the result of interpreting the object as an instance of '<em>Unreserved Simple Name CS</em>'.
+   * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Unreserved Simple Name CS</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+	public T caseUnreservedSimpleNameCS(UnreservedSimpleNameCS object) {
+    return null;
+  }
+
+	/**
+   * Returns the result of interpreting the object as an instance of '<em>Named Element CS</em>'.
+   * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Named Element CS</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+	public T caseNamedElementCS(NamedElementCS object) {
     return null;
   }
 
@@ -1064,47 +1128,17 @@ public class OclSwitch<T> extends Switch<T> {
   }
 
 	/**
-   * Returns the result of interpreting the object as an instance of '<em>Type Path Name CS</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Type Model Element CS</em>'.
    * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Type Path Name CS</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Type Model Element CS</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-	public T caseTypePathNameCS(TypePathNameCS object) {
-    return null;
-  }
-
-	/**
-   * Returns the result of interpreting the object as an instance of '<em>Type Path Name Simple CS</em>'.
-   * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Type Path Name Simple CS</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-	public T caseTypePathNameSimpleCS(TypePathNameSimpleCS object) {
-    return null;
-  }
-
-	/**
-   * Returns the result of interpreting the object as an instance of '<em>Type Path Name Nested CS</em>'.
-   * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Type Path Name Nested CS</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-	public T caseTypePathNameNestedCS(TypePathNameNestedCS object) {
+	public T caseTypeModelElementCS(TypeModelElementCS object) {
     return null;
   }
 
@@ -1240,21 +1274,6 @@ public class OclSwitch<T> extends Switch<T> {
    * @generated
    */
 	public T caseLiteralExpCS(LiteralExpCS object) {
-    return null;
-  }
-
-	/**
-   * Returns the result of interpreting the object as an instance of '<em>Enum Literal Or Static Property Exp CS</em>'.
-   * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Enum Literal Or Static Property Exp CS</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-	public T caseEnumLiteralOrStaticPropertyExpCS(EnumLiteralOrStaticPropertyExpCS object) {
     return null;
   }
 

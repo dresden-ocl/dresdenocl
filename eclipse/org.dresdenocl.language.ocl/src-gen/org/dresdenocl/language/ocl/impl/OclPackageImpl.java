@@ -6,13 +6,6 @@
  */
 package org.dresdenocl.language.ocl.impl;
 
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.impl.EPackageImpl;
-
-import org.emftext.commons.layout.LayoutPackage;
 import org.dresdenocl.datatypes.DatatypesPackage;
 import org.dresdenocl.language.ocl.AdditiveOperationCallExpCS;
 import org.dresdenocl.language.ocl.AttributeContextDeclarationCS;
@@ -33,7 +26,6 @@ import org.dresdenocl.language.ocl.DefinitionExpOperationCS;
 import org.dresdenocl.language.ocl.DefinitionExpPartCS;
 import org.dresdenocl.language.ocl.DefinitionExpPropertyCS;
 import org.dresdenocl.language.ocl.DeriveValueCS;
-import org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS;
 import org.dresdenocl.language.ocl.EqualityOperationCallExpCS;
 import org.dresdenocl.language.ocl.FeatureCallExpCS;
 import org.dresdenocl.language.ocl.IfExpCS;
@@ -57,8 +49,9 @@ import org.dresdenocl.language.ocl.LogicalNotOperationCallExpCS;
 import org.dresdenocl.language.ocl.LogicalOrOperationCallExpCS;
 import org.dresdenocl.language.ocl.LogicalXorOperationCallExpCS;
 import org.dresdenocl.language.ocl.LoopExpCS;
+import org.dresdenocl.language.ocl.ModelElementCS;
 import org.dresdenocl.language.ocl.MultOperationCallExpCS;
-import org.dresdenocl.language.ocl.NamedLiteralExpCS;
+import org.dresdenocl.language.ocl.NamedElementCS;
 import org.dresdenocl.language.ocl.NavigationCallExp;
 import org.dresdenocl.language.ocl.NullLiteralExpCS;
 import org.dresdenocl.language.ocl.OclExpressionCS;
@@ -80,6 +73,8 @@ import org.dresdenocl.language.ocl.PackageDeclarationWithNamespaceCS;
 import org.dresdenocl.language.ocl.PackageDeclarationWithoutNamespaceCS;
 import org.dresdenocl.language.ocl.ParameterCS;
 import org.dresdenocl.language.ocl.PathNameCS;
+import org.dresdenocl.language.ocl.PathNamePathCS;
+import org.dresdenocl.language.ocl.PathNameSimpleCS;
 import org.dresdenocl.language.ocl.PostConditionDeclarationCS;
 import org.dresdenocl.language.ocl.PreConditionDeclarationCS;
 import org.dresdenocl.language.ocl.PrePostOrBodyDeclarationCS;
@@ -97,16 +92,21 @@ import org.dresdenocl.language.ocl.TupleLiteralExpCS;
 import org.dresdenocl.language.ocl.TupleTypeCS;
 import org.dresdenocl.language.ocl.TupleTypeLiteralExpCS;
 import org.dresdenocl.language.ocl.TypeCS;
-import org.dresdenocl.language.ocl.TypePathNameCS;
-import org.dresdenocl.language.ocl.TypePathNameNestedCS;
-import org.dresdenocl.language.ocl.TypePathNameSimpleCS;
+import org.dresdenocl.language.ocl.TypeModelElementCS;
 import org.dresdenocl.language.ocl.UnaryOperationCallExpCS;
+import org.dresdenocl.language.ocl.UnreservedSimpleNameCS;
 import org.dresdenocl.language.ocl.VariableDeclarationCS;
 import org.dresdenocl.language.ocl.VariableDeclarationWithInitCS;
 import org.dresdenocl.language.ocl.VariableDeclarationWithInitListCS;
 import org.dresdenocl.language.ocl.VariableDeclarationWithoutInitCS;
 import org.dresdenocl.language.ocl.VariableDeclarationWithoutInitListCS;
 import org.dresdenocl.pivotmodel.PivotModelPackage;
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.emftext.commons.layout.LayoutPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -134,7 +134,7 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
 	 * <!-- end-user-doc -->
    * @generated
    */
-	private EClass namedLiteralExpCSEClass = null;
+	private EClass modelElementCSEClass = null;
 
 	/**
    * <!-- begin-user-doc -->
@@ -142,6 +142,34 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
    * @generated
    */
 	private EClass pathNameCSEClass = null;
+
+	/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
+	private EClass pathNameSimpleCSEClass = null;
+
+	/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
+	private EClass pathNamePathCSEClass = null;
+
+	/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
+	private EClass unreservedSimpleNameCSEClass = null;
+
+	/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
+	private EClass namedElementCSEClass = null;
 
 	/**
    * <!-- begin-user-doc -->
@@ -162,21 +190,7 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
 	 * <!-- end-user-doc -->
    * @generated
    */
-	private EClass typePathNameCSEClass = null;
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	private EClass typePathNameSimpleCSEClass = null;
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	private EClass typePathNameNestedCSEClass = null;
+	private EClass typeModelElementCSEClass = null;
 
 	/**
    * <!-- begin-user-doc -->
@@ -240,13 +254,6 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
    * @generated
    */
 	private EClass literalExpCSEClass = null;
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	private EClass enumLiteralOrStaticPropertyExpCSEClass = null;
 
 	/**
    * <!-- begin-user-doc -->
@@ -843,8 +850,8 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public EClass getNamedLiteralExpCS() {
-    return namedLiteralExpCSEClass;
+	public EClass getModelElementCS() {
+    return modelElementCSEClass;
   }
 
 	/**
@@ -852,8 +859,8 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public EReference getNamedLiteralExpCS_NamedElement() {
-    return (EReference)namedLiteralExpCSEClass.getEStructuralFeatures().get(0);
+	public EReference getModelElementCS_PathName() {
+    return (EReference)modelElementCSEClass.getEStructuralFeatures().get(0);
   }
 
 	/**
@@ -870,8 +877,8 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public EReference getPathNameCS_SimpleName() {
-    return (EReference)pathNameCSEClass.getEStructuralFeatures().get(0);
+	public EClass getPathNameSimpleCS() {
+    return pathNameSimpleCSEClass;
   }
 
 	/**
@@ -879,8 +886,53 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public EReference getPathNameCS_PathName() {
-    return (EReference)pathNameCSEClass.getEStructuralFeatures().get(1);
+	public EReference getPathNameSimpleCS_NamedElement() {
+    return (EReference)pathNameSimpleCSEClass.getEStructuralFeatures().get(0);
+  }
+
+	/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
+	public EClass getPathNamePathCS() {
+    return pathNamePathCSEClass;
+  }
+
+	/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
+	public EReference getPathNamePathCS_PathName() {
+    return (EReference)pathNamePathCSEClass.getEStructuralFeatures().get(0);
+  }
+
+	/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
+	public EClass getUnreservedSimpleNameCS() {
+    return unreservedSimpleNameCSEClass;
+  }
+
+	/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
+	public EClass getNamedElementCS() {
+    return namedElementCSEClass;
+  }
+
+	/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
+	public EReference getNamedElementCS_NamedElement() {
+    return (EReference)namedElementCSEClass.getEStructuralFeatures().get(0);
   }
 
 	/**
@@ -915,8 +967,8 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public EClass getTypePathNameCS() {
-    return typePathNameCSEClass;
+	public EClass getTypeModelElementCS() {
+    return typeModelElementCSEClass;
   }
 
 	/**
@@ -924,44 +976,8 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public EClass getTypePathNameSimpleCS() {
-    return typePathNameSimpleCSEClass;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public EReference getTypePathNameSimpleCS_TypeName() {
-    return (EReference)typePathNameSimpleCSEClass.getEStructuralFeatures().get(0);
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public EClass getTypePathNameNestedCS() {
-    return typePathNameNestedCSEClass;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public EReference getTypePathNameNestedCS_Namespace() {
-    return (EReference)typePathNameNestedCSEClass.getEStructuralFeatures().get(0);
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public EReference getTypePathNameNestedCS_TypePathName() {
-    return (EReference)typePathNameNestedCSEClass.getEStructuralFeatures().get(1);
+	public EReference getTypeModelElementCS_ModelElement() {
+    return (EReference)typeModelElementCSEClass.getEStructuralFeatures().get(0);
   }
 
 	/**
@@ -1133,33 +1149,6 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
    */
 	public EClass getLiteralExpCS() {
     return literalExpCSEClass;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public EClass getEnumLiteralOrStaticPropertyExpCS() {
-    return enumLiteralOrStaticPropertyExpCSEClass;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public EReference getEnumLiteralOrStaticPropertyExpCS_TypeName() {
-    return (EReference)enumLiteralOrStaticPropertyExpCSEClass.getEStructuralFeatures().get(0);
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public EReference getEnumLiteralOrStaticPropertyExpCS_EnumLiteralOrStaticProperty() {
-    return (EReference)enumLiteralOrStaticPropertyExpCSEClass.getEStructuralFeatures().get(1);
   }
 
 	/**
@@ -2148,7 +2137,7 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public EReference getAttributeContextDeclarationCS_Property() {
+	public EReference getAttributeContextDeclarationCS_Type() {
     return (EReference)attributeContextDeclarationCSEClass.getEStructuralFeatures().get(1);
   }
 
@@ -2157,17 +2146,8 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public EReference getAttributeContextDeclarationCS_Type() {
-    return (EReference)attributeContextDeclarationCSEClass.getEStructuralFeatures().get(2);
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
 	public EReference getAttributeContextDeclarationCS_InitOrDeriveValue() {
-    return (EReference)attributeContextDeclarationCSEClass.getEStructuralFeatures().get(3);
+    return (EReference)attributeContextDeclarationCSEClass.getEStructuralFeatures().get(2);
   }
 
 	/**
@@ -2563,26 +2543,29 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
     bracketExpCSEClass = createEClass(BRACKET_EXP_CS);
     createEReference(bracketExpCSEClass, BRACKET_EXP_CS__OCL_EXPRESSION);
 
-    namedLiteralExpCSEClass = createEClass(NAMED_LITERAL_EXP_CS);
-    createEReference(namedLiteralExpCSEClass, NAMED_LITERAL_EXP_CS__NAMED_ELEMENT);
+    modelElementCSEClass = createEClass(MODEL_ELEMENT_CS);
+    createEReference(modelElementCSEClass, MODEL_ELEMENT_CS__PATH_NAME);
 
     pathNameCSEClass = createEClass(PATH_NAME_CS);
-    createEReference(pathNameCSEClass, PATH_NAME_CS__SIMPLE_NAME);
-    createEReference(pathNameCSEClass, PATH_NAME_CS__PATH_NAME);
+
+    pathNameSimpleCSEClass = createEClass(PATH_NAME_SIMPLE_CS);
+    createEReference(pathNameSimpleCSEClass, PATH_NAME_SIMPLE_CS__NAMED_ELEMENT);
+
+    pathNamePathCSEClass = createEClass(PATH_NAME_PATH_CS);
+    createEReference(pathNamePathCSEClass, PATH_NAME_PATH_CS__PATH_NAME);
+
+    unreservedSimpleNameCSEClass = createEClass(UNRESERVED_SIMPLE_NAME_CS);
+
+    namedElementCSEClass = createEClass(NAMED_ELEMENT_CS);
+    createEReference(namedElementCSEClass, NAMED_ELEMENT_CS__NAMED_ELEMENT);
 
     simpleNameCSEClass = createEClass(SIMPLE_NAME_CS);
     createEAttribute(simpleNameCSEClass, SIMPLE_NAME_CS__SIMPLE_NAME);
 
     typeCSEClass = createEClass(TYPE_CS);
 
-    typePathNameCSEClass = createEClass(TYPE_PATH_NAME_CS);
-
-    typePathNameSimpleCSEClass = createEClass(TYPE_PATH_NAME_SIMPLE_CS);
-    createEReference(typePathNameSimpleCSEClass, TYPE_PATH_NAME_SIMPLE_CS__TYPE_NAME);
-
-    typePathNameNestedCSEClass = createEClass(TYPE_PATH_NAME_NESTED_CS);
-    createEReference(typePathNameNestedCSEClass, TYPE_PATH_NAME_NESTED_CS__NAMESPACE);
-    createEReference(typePathNameNestedCSEClass, TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME);
+    typeModelElementCSEClass = createEClass(TYPE_MODEL_ELEMENT_CS);
+    createEReference(typeModelElementCSEClass, TYPE_MODEL_ELEMENT_CS__MODEL_ELEMENT);
 
     tupleTypeCSEClass = createEClass(TUPLE_TYPE_CS);
     createEReference(tupleTypeCSEClass, TUPLE_TYPE_CS__VARIABLE_DECLARATION_LIST);
@@ -2611,10 +2594,6 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
     createEReference(variableDeclarationWithoutInitListCSEClass, VARIABLE_DECLARATION_WITHOUT_INIT_LIST_CS__VARIABLE_DECLARATIONS);
 
     literalExpCSEClass = createEClass(LITERAL_EXP_CS);
-
-    enumLiteralOrStaticPropertyExpCSEClass = createEClass(ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS);
-    createEReference(enumLiteralOrStaticPropertyExpCSEClass, ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS__TYPE_NAME);
-    createEReference(enumLiteralOrStaticPropertyExpCSEClass, ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS__ENUM_LITERAL_OR_STATIC_PROPERTY);
 
     collectionLiteralExpCSEClass = createEClass(COLLECTION_LITERAL_EXP_CS);
     createEReference(collectionLiteralExpCSEClass, COLLECTION_LITERAL_EXP_CS__COLLECTION_TYPE);
@@ -2776,7 +2755,6 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
 
     attributeContextDeclarationCSEClass = createEClass(ATTRIBUTE_CONTEXT_DECLARATION_CS);
     createEReference(attributeContextDeclarationCSEClass, ATTRIBUTE_CONTEXT_DECLARATION_CS__TYPE_NAME);
-    createEReference(attributeContextDeclarationCSEClass, ATTRIBUTE_CONTEXT_DECLARATION_CS__PROPERTY);
     createEReference(attributeContextDeclarationCSEClass, ATTRIBUTE_CONTEXT_DECLARATION_CS__TYPE);
     createEReference(attributeContextDeclarationCSEClass, ATTRIBUTE_CONTEXT_DECLARATION_CS__INIT_OR_DERIVE_VALUE);
 
@@ -2873,17 +2851,17 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
 
     // Add supertypes to classes
     bracketExpCSEClass.getESuperTypes().add(this.getOclExpressionCS());
-    namedLiteralExpCSEClass.getESuperTypes().add(this.getOclExpressionCS());
-    typePathNameCSEClass.getESuperTypes().add(this.getTypeCS());
-    typePathNameSimpleCSEClass.getESuperTypes().add(this.getTypePathNameCS());
-    typePathNameNestedCSEClass.getESuperTypes().add(this.getTypePathNameCS());
+    modelElementCSEClass.getESuperTypes().add(this.getOclExpressionCS());
+    pathNameSimpleCSEClass.getESuperTypes().add(this.getPathNameCS());
+    pathNamePathCSEClass.getESuperTypes().add(this.getPathNameCS());
+    namedElementCSEClass.getESuperTypes().add(this.getUnreservedSimpleNameCS());
+    typeModelElementCSEClass.getESuperTypes().add(this.getTypeCS());
     tupleTypeCSEClass.getESuperTypes().add(this.getTypeCS());
     collectionTypeLiteralExpCSEClass.getESuperTypes().add(this.getLiteralExpCS());
     tupleTypeLiteralExpCSEClass.getESuperTypes().add(this.getLiteralExpCS());
     variableDeclarationWithInitCSEClass.getESuperTypes().add(this.getVariableDeclarationCS());
     variableDeclarationWithoutInitCSEClass.getESuperTypes().add(this.getVariableDeclarationCS());
     literalExpCSEClass.getESuperTypes().add(this.getOclExpressionCS());
-    enumLiteralOrStaticPropertyExpCSEClass.getESuperTypes().add(this.getLiteralExpCS());
     collectionLiteralExpCSEClass.getESuperTypes().add(this.getLiteralExpCS());
     collectionTypeIdentifierCSEClass.getESuperTypes().add(this.getTypeCS());
     collectionLiteralPartsOclExpCSEClass.getESuperTypes().add(this.getCollectionLiteralPartsCS());
@@ -2954,26 +2932,37 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
     initEClass(bracketExpCSEClass, BracketExpCS.class, "BracketExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getBracketExpCS_OclExpression(), this.getOclExpressionCS(), null, "oclExpression", null, 1, 1, BracketExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(namedLiteralExpCSEClass, NamedLiteralExpCS.class, "NamedLiteralExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getNamedLiteralExpCS_NamedElement(), thePivotModelPackage.getNamedElement(), null, "namedElement", null, 1, 1, NamedLiteralExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(modelElementCSEClass, ModelElementCS.class, "ModelElementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getModelElementCS_PathName(), this.getPathNameCS(), null, "pathName", null, 1, 1, ModelElementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(pathNameCSEClass, PathNameCS.class, "PathNameCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getPathNameCS_SimpleName(), this.getSimpleNameCS(), null, "simpleName", null, 1, 1, PathNameCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getPathNameCS_PathName(), this.getPathNameCS(), null, "pathName", null, 0, 1, PathNameCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    addEOperation(modelElementCSEClass, thePivotModelPackage.getNamedElement(), "getNamedElement", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+    initEClass(pathNameCSEClass, PathNameCS.class, "PathNameCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    addEOperation(pathNameCSEClass, thePivotModelPackage.getNamedElement(), "getNamedElement", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+    initEClass(pathNameSimpleCSEClass, PathNameSimpleCS.class, "PathNameSimpleCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getPathNameSimpleCS_NamedElement(), thePivotModelPackage.getNamedElement(), null, "namedElement", null, 1, 1, PathNameSimpleCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(pathNamePathCSEClass, PathNamePathCS.class, "PathNamePathCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getPathNamePathCS_PathName(), this.getUnreservedSimpleNameCS(), null, "pathName", null, 2, -1, PathNamePathCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(unreservedSimpleNameCSEClass, UnreservedSimpleNameCS.class, "UnreservedSimpleNameCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    addEOperation(unreservedSimpleNameCSEClass, thePivotModelPackage.getNamedElement(), "getNamedElement", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+    addEOperation(unreservedSimpleNameCSEClass, ecorePackage.getEBoolean(), "isProxy", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+    initEClass(namedElementCSEClass, NamedElementCS.class, "NamedElementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getNamedElementCS_NamedElement(), thePivotModelPackage.getNamedElement(), null, "namedElement", null, 1, 1, NamedElementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(simpleNameCSEClass, SimpleNameCS.class, "SimpleNameCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSimpleNameCS_SimpleName(), ecorePackage.getEString(), "simpleName", null, 1, 1, SimpleNameCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(typeCSEClass, TypeCS.class, "TypeCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(typePathNameCSEClass, TypePathNameCS.class, "TypePathNameCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(typePathNameSimpleCSEClass, TypePathNameSimpleCS.class, "TypePathNameSimpleCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getTypePathNameSimpleCS_TypeName(), thePivotModelPackage.getType(), null, "typeName", null, 1, 1, TypePathNameSimpleCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(typePathNameNestedCSEClass, TypePathNameNestedCS.class, "TypePathNameNestedCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getTypePathNameNestedCS_Namespace(), thePivotModelPackage.getNamespace(), null, "namespace", null, 1, 1, TypePathNameNestedCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getTypePathNameNestedCS_TypePathName(), this.getTypePathNameCS(), null, "typePathName", null, 1, 1, TypePathNameNestedCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(typeModelElementCSEClass, TypeModelElementCS.class, "TypeModelElementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getTypeModelElementCS_ModelElement(), this.getModelElementCS(), null, "modelElement", null, 1, 1, TypeModelElementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(tupleTypeCSEClass, TupleTypeCS.class, "TupleTypeCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getTupleTypeCS_VariableDeclarationList(), this.getVariableDeclarationWithoutInitListCS(), null, "variableDeclarationList", null, 0, 1, TupleTypeCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3002,10 +2991,6 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
     initEReference(getVariableDeclarationWithoutInitListCS_VariableDeclarations(), this.getVariableDeclarationWithoutInitCS(), null, "variableDeclarations", null, 1, -1, VariableDeclarationWithoutInitListCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(literalExpCSEClass, LiteralExpCS.class, "LiteralExpCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(enumLiteralOrStaticPropertyExpCSEClass, EnumLiteralOrStaticPropertyExpCS.class, "EnumLiteralOrStaticPropertyExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEnumLiteralOrStaticPropertyExpCS_TypeName(), this.getTypePathNameCS(), null, "typeName", null, 1, 1, EnumLiteralOrStaticPropertyExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEnumLiteralOrStaticPropertyExpCS_EnumLiteralOrStaticProperty(), thePivotModelPackage.getNamedElement(), null, "enumLiteralOrStaticProperty", null, 1, 1, EnumLiteralOrStaticPropertyExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(collectionLiteralExpCSEClass, CollectionLiteralExpCS.class, "CollectionLiteralExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getCollectionLiteralExpCS_CollectionType(), this.getCollectionTypeIdentifierCS(), null, "collectionType", null, 1, 1, CollectionLiteralExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3079,7 +3064,7 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
     initEClass(operationCallOnSelfExpCSEClass, OperationCallOnSelfExpCS.class, "OperationCallOnSelfExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(staticOperationCallExpCSEClass, StaticOperationCallExpCS.class, "StaticOperationCallExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getStaticOperationCallExpCS_TypeName(), this.getTypePathNameCS(), null, "typeName", null, 1, 1, StaticOperationCallExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getStaticOperationCallExpCS_TypeName(), this.getModelElementCS(), null, "typeName", null, 1, 1, StaticOperationCallExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getStaticOperationCallExpCS_OperationName(), thePivotModelPackage.getOperation(), null, "operationName", null, 1, 1, StaticOperationCallExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getStaticOperationCallExpCS_Arguments(), this.getOclExpressionCS(), null, "arguments", null, 0, -1, StaticOperationCallExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -3166,13 +3151,12 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
     initEClass(contextDeclarationCSEClass, ContextDeclarationCS.class, "ContextDeclarationCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(attributeContextDeclarationCSEClass, AttributeContextDeclarationCS.class, "AttributeContextDeclarationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getAttributeContextDeclarationCS_TypeName(), this.getTypePathNameCS(), null, "typeName", null, 1, 1, AttributeContextDeclarationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getAttributeContextDeclarationCS_Property(), thePivotModelPackage.getProperty(), null, "property", null, 1, 1, AttributeContextDeclarationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAttributeContextDeclarationCS_TypeName(), this.getModelElementCS(), null, "typeName", null, 1, 1, AttributeContextDeclarationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAttributeContextDeclarationCS_Type(), this.getTypeCS(), null, "type", null, 0, 1, AttributeContextDeclarationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAttributeContextDeclarationCS_InitOrDeriveValue(), this.getInitOrDeriveValueCS(), null, "initOrDeriveValue", null, 1, 2, AttributeContextDeclarationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(classifierContextDeclarationCSEClass, ClassifierContextDeclarationCS.class, "ClassifierContextDeclarationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getClassifierContextDeclarationCS_TypeName(), this.getTypeCS(), null, "typeName", null, 1, 1, ClassifierContextDeclarationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getClassifierContextDeclarationCS_TypeName(), this.getModelElementCS(), null, "typeName", null, 1, 1, ClassifierContextDeclarationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getClassifierContextDeclarationCS_InvariantsAndDefinitions(), this.getInvariantOrDefinitionCS(), null, "invariantsAndDefinitions", null, 1, -1, ClassifierContextDeclarationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(operationContextDeclarationCSEClass, OperationContextDeclarationCS.class, "OperationContextDeclarationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3222,7 +3206,7 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
     initEReference(getOperationDefinitionCS_ReturnType(), this.getTypeCS(), null, "returnType", null, 0, 1, OperationDefinitionCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(operationDefinitionInContextCSEClass, OperationDefinitionInContextCS.class, "OperationDefinitionInContextCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getOperationDefinitionInContextCS_TypeName(), this.getTypePathNameCS(), null, "typeName", null, 1, 1, OperationDefinitionInContextCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getOperationDefinitionInContextCS_TypeName(), this.getModelElementCS(), null, "typeName", null, 1, 1, OperationDefinitionInContextCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(operationDefinitionInDefCSEClass, OperationDefinitionInDefCS.class, "OperationDefinitionInDefCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

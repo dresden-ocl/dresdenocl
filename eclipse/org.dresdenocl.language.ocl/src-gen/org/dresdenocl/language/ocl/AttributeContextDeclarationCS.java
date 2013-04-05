@@ -19,7 +19,6 @@ import org.dresdenocl.pivotmodel.Property;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.dresdenocl.language.ocl.AttributeContextDeclarationCS#getTypeName <em>Type Name</em>}</li>
- *   <li>{@link org.dresdenocl.language.ocl.AttributeContextDeclarationCS#getProperty <em>Property</em>}</li>
  *   <li>{@link org.dresdenocl.language.ocl.AttributeContextDeclarationCS#getType <em>Type</em>}</li>
  *   <li>{@link org.dresdenocl.language.ocl.AttributeContextDeclarationCS#getInitOrDeriveValue <em>Init Or Derive Value</em>}</li>
  * </ul>
@@ -39,12 +38,12 @@ public interface AttributeContextDeclarationCS extends ContextDeclarationCS {
 	 * </p>
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Type Name</em>' containment reference.
-   * @see #setTypeName(TypePathNameCS)
+   * @see #setTypeName(ModelElementCS)
    * @see org.dresdenocl.language.ocl.OclPackage#getAttributeContextDeclarationCS_TypeName()
    * @model containment="true" required="true"
    * @generated
    */
-	TypePathNameCS getTypeName();
+	ModelElementCS getTypeName();
 
 	/**
    * Sets the value of the '{@link org.dresdenocl.language.ocl.AttributeContextDeclarationCS#getTypeName <em>Type Name</em>}' containment reference.
@@ -54,33 +53,7 @@ public interface AttributeContextDeclarationCS extends ContextDeclarationCS {
    * @see #getTypeName()
    * @generated
    */
-	void setTypeName(TypePathNameCS value);
-
-	/**
-   * Returns the value of the '<em><b>Property</b></em>' reference.
-   * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Property</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Property</em>' reference.
-   * @see #setProperty(Property)
-   * @see org.dresdenocl.language.ocl.OclPackage#getAttributeContextDeclarationCS_Property()
-   * @model required="true"
-   * @generated
-   */
-	Property getProperty();
-
-	/**
-   * Sets the value of the '{@link org.dresdenocl.language.ocl.AttributeContextDeclarationCS#getProperty <em>Property</em>}' reference.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Property</em>' reference.
-   * @see #getProperty()
-   * @generated
-   */
-	void setProperty(Property value);
+	void setTypeName(ModelElementCS value);
 
 	/**
    * Returns the value of the '<em><b>Type</b></em>' containment reference.

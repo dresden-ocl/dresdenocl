@@ -6,52 +6,22 @@
  */
 package org.dresdenocl.language.ocl.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.dresdenocl.language.ocl.OclPackage;
 import org.dresdenocl.language.ocl.PathNameCS;
-import org.dresdenocl.language.ocl.SimpleNameCS;
+import org.dresdenocl.pivotmodel.NamedElement;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Path Name CS</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * The following features are implemented:
- * <ul>
- *   <li>{@link org.dresdenocl.language.ocl.impl.PathNameCSImpl#getSimpleName <em>Simple Name</em>}</li>
- *   <li>{@link org.dresdenocl.language.ocl.impl.PathNameCSImpl#getPathName <em>Path Name</em>}</li>
- * </ul>
  * </p>
  *
  * @generated
  */
-public class PathNameCSImpl extends EObjectImpl implements PathNameCS {
-	/**
-   * The cached value of the '{@link #getSimpleName() <em>Simple Name</em>}' containment reference.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @see #getSimpleName()
-   * @generated
-   * @ordered
-   */
-	protected SimpleNameCS simpleName;
-
-	/**
-   * The cached value of the '{@link #getPathName() <em>Path Name</em>}' containment reference.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @see #getPathName()
-   * @generated
-   * @ordered
-   */
-	protected PathNameCS pathName;
-
+public abstract class PathNameCSImpl extends EObjectImpl implements PathNameCS {
 	/**
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -72,190 +42,10 @@ public class PathNameCSImpl extends EObjectImpl implements PathNameCS {
   }
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public SimpleNameCS getSimpleName() {
-    return simpleName;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public NotificationChain basicSetSimpleName(SimpleNameCS newSimpleName, NotificationChain msgs) {
-    SimpleNameCS oldSimpleName = simpleName;
-    simpleName = newSimpleName;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OclPackage.PATH_NAME_CS__SIMPLE_NAME, oldSimpleName, newSimpleName);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public void setSimpleName(SimpleNameCS newSimpleName) {
-    if (newSimpleName != simpleName)
-    {
-      NotificationChain msgs = null;
-      if (simpleName != null)
-        msgs = ((InternalEObject)simpleName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OclPackage.PATH_NAME_CS__SIMPLE_NAME, null, msgs);
-      if (newSimpleName != null)
-        msgs = ((InternalEObject)newSimpleName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OclPackage.PATH_NAME_CS__SIMPLE_NAME, null, msgs);
-      msgs = basicSetSimpleName(newSimpleName, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.PATH_NAME_CS__SIMPLE_NAME, newSimpleName, newSimpleName));
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public PathNameCS getPathName() {
-    return pathName;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public NotificationChain basicSetPathName(PathNameCS newPathName, NotificationChain msgs) {
-    PathNameCS oldPathName = pathName;
-    pathName = newPathName;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OclPackage.PATH_NAME_CS__PATH_NAME, oldPathName, newPathName);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public void setPathName(PathNameCS newPathName) {
-    if (newPathName != pathName)
-    {
-      NotificationChain msgs = null;
-      if (pathName != null)
-        msgs = ((InternalEObject)pathName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OclPackage.PATH_NAME_CS__PATH_NAME, null, msgs);
-      if (newPathName != null)
-        msgs = ((InternalEObject)newPathName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OclPackage.PATH_NAME_CS__PATH_NAME, null, msgs);
-      msgs = basicSetPathName(newPathName, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.PATH_NAME_CS__PATH_NAME, newPathName, newPathName));
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-    switch (featureID)
-    {
-      case OclPackage.PATH_NAME_CS__SIMPLE_NAME:
-        return basicSetSimpleName(null, msgs);
-      case OclPackage.PATH_NAME_CS__PATH_NAME:
-        return basicSetPathName(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID)
-    {
-      case OclPackage.PATH_NAME_CS__SIMPLE_NAME:
-        return getSimpleName();
-      case OclPackage.PATH_NAME_CS__PATH_NAME:
-        return getPathName();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	@Override
-	public void eSet(int featureID, Object newValue) {
-    switch (featureID)
-    {
-      case OclPackage.PATH_NAME_CS__SIMPLE_NAME:
-        setSimpleName((SimpleNameCS)newValue);
-        return;
-      case OclPackage.PATH_NAME_CS__PATH_NAME:
-        setPathName((PathNameCS)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	@Override
-	public void eUnset(int featureID) {
-    switch (featureID)
-    {
-      case OclPackage.PATH_NAME_CS__SIMPLE_NAME:
-        setSimpleName((SimpleNameCS)null);
-        return;
-      case OclPackage.PATH_NAME_CS__PATH_NAME:
-        setPathName((PathNameCS)null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	@Override
-	public boolean eIsSet(int featureID) {
-    switch (featureID)
-    {
-      case OclPackage.PATH_NAME_CS__SIMPLE_NAME:
-        return simpleName != null;
-      case OclPackage.PATH_NAME_CS__PATH_NAME:
-        return pathName != null;
-    }
-    return super.eIsSet(featureID);
-  }
+	 * @generated NOT
+	 */
+	public abstract NamedElement getNamedElement();
 	
-	@Override
-	public String toString() {
-		String pathNameString = "";
-		if (pathName != null)
-			pathNameString = "::" + pathName.toString();
-		return simpleName + pathNameString;
-	}
-
 } //PathNameCSImpl

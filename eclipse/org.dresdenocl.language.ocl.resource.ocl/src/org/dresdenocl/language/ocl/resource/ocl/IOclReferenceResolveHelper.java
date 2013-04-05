@@ -43,4 +43,8 @@ public interface IOclReferenceResolveHelper {
 	List<Parameter> resolveParameterDefinition(String identifier,
 			boolean resolveFuzzy, EObject container, EReference reference,
 			TypeCS parameterType);
+
+	List<NamedElement> resolvePathName(String identifier, boolean resolveFuzzy,
+			EObject container);
+	
 }

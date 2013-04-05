@@ -78,26 +78,6 @@ trait OclReferenceResolver { selfType: OclStaticSemantics =>
   protected val _resolveNamedElement: Tuple2[String, Boolean] => Attributable ==> Box[List[NamedElement]] = {
     paramAttr {
       case (identifier, fuzzy) => {
-        case e: EnumLiteralOrStaticPropertyExpCS => {
-          (oclType(e.getTypeName)).flatMap { tipe =>
-            if (!fuzzy) {
-              tipe match {
-                case enum: Enumeration => (!!(enum.lookupLiteral(identifier))).flatMap { lit =>
-                  Full(List(lit))
-                }
-                case t: Type => lookupPropertyOnType(t, identifier, true).flatMap { p =>
-                  Full(List(p))
-                }
-              }
-            } else { // fuzzy == true
-              tipe match {
-                case enum: Enumeration =>
-                  Full(enum.getOwnedLiteral.filter(l => l.getName.startsWith(identifier)) toList)
-                case t: Type => Full(lookupPropertyOnTypeFuzzy(t, identifier, true))
-              }
-            }
-          }
-        }
         case aeo: AttributableEObject => {
           (sourceExpression(aeo)).flatMap { sourceExpression =>
             (variables(aeo)).flatMap {
@@ -161,23 +141,83 @@ trait OclReferenceResolver { selfType: OclStaticSemantics =>
     }
   }
 
+  protected val _resolvePathName: Tuple2[List[String], Boolean] => Attributable ==> Box[List[NamedElement]] = {
+    paramAttr {
+      case (identifier, fuzzy) => {
+        case s: PathNameSimpleCS => {
+          if (!fuzzy) {
+            for {
+              namespace <- namespace(s)
+              resolvedPath <- lookupPathName(List(cleanIdentifier(identifier.head)), namespace,s)
+            } yield resolvedPath
+          } else {
+            Empty
+          }
+        }
+        case n: NamedElementCS => {
+          if (!fuzzy) {
+            val pathName = n.eContainer.asInstanceOf[PathNamePathCS]
+            var names : List[String] = List()
+            for (uSN <- pathName.getPathName) {
+              names = names :+ cleanIdentifier(uSN.eAdapters.get(0).asInstanceOf[OclLayoutInformationAdapter].getLayoutInformations.get(0).getVisibleTokenText)
+            }
+            namespace(pathName) match {
+                case Full(namespace) => {
+                 lookupPathName(names,namespace,pathName) match {
+                   case Full(pathNames) => {
+                     if (pathNames.size == names.size) {
+                       var temp = pathNames.get(0)
+                       for (uSN <- pathName.getPathName) {
+                         if (n!=uSN) {
+                           if (uSN.isInstanceOf[NamedElementCS]) 
+                             uSN.asInstanceOf[NamedElementCS].setNamedElement(pathNames.get(pathName.getPathName.indexOf(uSN)))
+                         } else {
+                           temp = pathNames.get(pathName.getPathName.indexOf(uSN))
+                         }
+                       }
+                       Full(List(temp))
+                     } else {
+                       Empty
+                     }
+                   }
+                   case _ => {
+                     Empty
+                   }
+                 }
+                }
+                case Empty => { 
+                  Empty 
+                }
+              }
+          } else {
+            Empty
+          }
+        }
+      }
+    }
+  }
+  
   protected val _resolveOperation: Tuple4[String, Boolean, List[Type], Boolean] => Attributable ==> Box[List[Operation]] = {
     paramAttr {
       case (identifier, fuzzy, parameters, static) => {
         case soc: StaticOperationCallExpCS => {
           val cleanedIdentifier = cleanIdentifier(identifier)
           (oclType(soc.getTypeName)).flatMap { sourceType =>
-            val argumentsEOcl = soc.getArguments.flatMap(arg => computeOclExpression(arg))
-            if (soc.getArguments.size != argumentsEOcl.size)
-              Failure("Parameters for operation " + identifier + " cannot be computed.")
-            else {
-              if (!fuzzy) {
-                lookupOperationOnType(sourceType, cleanedIdentifier, true, argumentsEOcl.map(_.getType) toList).flatMap { o =>
-                  Full(List(o))
-                }
-              } else {
-                Full(lookupOperationOnTypeFuzzy(sourceType, cleanedIdentifier, true))
-              }
+            if (soc.getTypeName.getNamedElement.isInstanceOf[Variable] && static) {
+              Failure("Variable "+soc.getTypeName.getNamedElement.getName + "is not allowed by a static operation")
+            } else {
+	            val argumentsEOcl = soc.getArguments.flatMap(arg => computeOclExpression(arg))
+	            if (soc.getArguments.size != argumentsEOcl.size)
+	              Failure("Parameters for operation " + identifier + " cannot be computed.")
+	            else {
+	              if (!fuzzy) {
+	                lookupOperationOnType(sourceType, cleanedIdentifier, true, argumentsEOcl.map(_.getType) toList).flatMap { o =>
+	                  Full(List(o))
+	                }
+	              } else {
+	                Full(lookupOperationOnTypeFuzzy(sourceType, cleanedIdentifier, true))
+	              }
+	            }
             }
           }
         }
@@ -253,6 +293,13 @@ trait OclReferenceResolver { selfType: OclStaticSemantics =>
 
   def resolveNamedElement(identifier: String, fuzzy: Boolean, container: EObject): java.util.List[NamedElement] = {
     _resolveNamedElement(identifier, fuzzy)(container) match {
+      case Full(namedElementList) => namedElementList
+      case Failure(_, _, _) | Empty => List()
+    }
+  }
+  
+  def resolvePathName(identifier: String, fuzzy: Boolean, container: EObject): java.util.List[NamedElement] = {
+    _resolvePathName(List(identifier), fuzzy)(container) match {
       case Full(namedElementList) => namedElementList
       case Failure(_, _, _) | Empty => List()
     }

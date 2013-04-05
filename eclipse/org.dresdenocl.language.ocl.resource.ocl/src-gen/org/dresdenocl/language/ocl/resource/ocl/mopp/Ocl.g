@@ -306,17 +306,14 @@ options {
 			if (type.getInstanceClass() == org.dresdenocl.language.ocl.IteratorExpVariableCS.class) {
 				return parse_org_dresdenocl_language_ocl_IteratorExpVariableCS();
 			}
-			if (type.getInstanceClass() == org.dresdenocl.language.ocl.TypePathNameSimpleCS.class) {
-				return parse_org_dresdenocl_language_ocl_TypePathNameSimpleCS();
-			}
-			if (type.getInstanceClass() == org.dresdenocl.language.ocl.TypePathNameNestedCS.class) {
-				return parse_org_dresdenocl_language_ocl_TypePathNameNestedCS();
-			}
 			if (type.getInstanceClass() == org.dresdenocl.language.ocl.TupleTypeCS.class) {
 				return parse_org_dresdenocl_language_ocl_TupleTypeCS();
 			}
 			if (type.getInstanceClass() == org.dresdenocl.language.ocl.CollectionTypeIdentifierCS.class) {
 				return parse_org_dresdenocl_language_ocl_CollectionTypeIdentifierCS();
+			}
+			if (type.getInstanceClass() == org.dresdenocl.language.ocl.TypeModelElementCS.class) {
+				return parse_org_dresdenocl_language_ocl_TypeModelElementCS();
 			}
 			if (type.getInstanceClass() == org.dresdenocl.language.ocl.VariableDeclarationWithoutInitCS.class) {
 				return parse_org_dresdenocl_language_ocl_VariableDeclarationWithoutInitCS();
@@ -329,6 +326,15 @@ options {
 			}
 			if (type.getInstanceClass() == org.dresdenocl.language.ocl.VariableDeclarationWithInitListCS.class) {
 				return parse_org_dresdenocl_language_ocl_VariableDeclarationWithInitListCS();
+			}
+			if (type.getInstanceClass() == org.dresdenocl.language.ocl.PathNameSimpleCS.class) {
+				return parse_org_dresdenocl_language_ocl_PathNameSimpleCS();
+			}
+			if (type.getInstanceClass() == org.dresdenocl.language.ocl.PathNamePathCS.class) {
+				return parse_org_dresdenocl_language_ocl_PathNamePathCS();
+			}
+			if (type.getInstanceClass() == org.dresdenocl.language.ocl.NamedElementCS.class) {
+				return parse_org_dresdenocl_language_ocl_NamedElementCS();
 			}
 			if (type.getInstanceClass() == org.dresdenocl.language.ocl.CollectionRangeCS.class) {
 				return parse_org_dresdenocl_language_ocl_CollectionRangeCS();
@@ -430,7 +436,7 @@ options {
 				break;
 			}
 		}
-		int followSetID = 257;
+		int followSetID = 255;
 		int i;
 		for (i = tokenIndexOfLastCompleteElement; i < tokenStream.size(); i++) {
 			org.antlr.runtime3_4_0.CommonToken nextToken = (org.antlr.runtime3_4_0.CommonToken) tokenStream.get(i);
@@ -1061,7 +1067,7 @@ parse_org_dresdenocl_language_ocl_AttributeContextDeclarationCS returns [org.dre
 	}
 	
 	(
-		a1_0 = parse_org_dresdenocl_language_ocl_TypePathNameCS		{
+		a1_0 = parse_org_dresdenocl_language_ocl_ModelElementCS		{
 			if (terminateParsing) {
 				throw new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTerminateParsingException();
 			}
@@ -1084,85 +1090,31 @@ parse_org_dresdenocl_language_ocl_AttributeContextDeclarationCS returns [org.dre
 	{
 		// expected elements (follow set)
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[70]);
-	}
-	
-	a2 = '::' {
-		if (element == null) {
-			element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createAttributeContextDeclarationCS();
-			startIncompleteElement(element);
-		}
-		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_2, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
-	}
-	{
-		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[71]);
-	}
-	
-	(
-		a3 = SIMPLE_NAME		
-		{
-			if (terminateParsing) {
-				throw new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTerminateParsingException();
-			}
-			if (element == null) {
-				element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createAttributeContextDeclarationCS();
-				startIncompleteElement(element);
-			}
-			if (a3 != null) {
-				org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("SIMPLE_NAME");
-				tokenResolver.setOptions(getOptions());
-				org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = getFreshTokenResolveResult();
-				tokenResolver.resolve(a3.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__PROPERTY), result);
-				Object resolvedObject = result.getResolvedToken();
-				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a3).getStopIndex());
-				}
-				String resolved = (String) resolvedObject;
-				org.dresdenocl.pivotmodel.Property proxy = org.dresdenocl.pivotmodel.PivotModelFactory.eINSTANCE.createProperty();
-				collectHiddenTokens(element);
-				registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.AttributeContextDeclarationCS, org.dresdenocl.pivotmodel.Property>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getAttributeContextDeclarationCSPropertyReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__PROPERTY), resolved, proxy);
-				if (proxy != null) {
-					Object value = proxy;
-					element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__PROPERTY), value);
-					completedElement(value, false);
-				}
-				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_3, proxy, true);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a3, element);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a3, proxy);
-			}
-		}
-	)
-	{
-		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[72]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[73]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[74]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[71]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[72]);
 	}
 	
 	(
 		(
-			a4 = ':' {
+			a2 = ':' {
 				if (element == null) {
 					element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createAttributeContextDeclarationCS();
 					startIncompleteElement(element);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_4_0_0_0, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a4, element);
+				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_2_0_0_0, null, true);
+				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
 			}
 			{
 				// expected elements (follow set)
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[73]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[74]);
 				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[75]);
 				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[76]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[77]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[78]);
 			}
 			
 			(
-				a5_0 = parse_org_dresdenocl_language_ocl_TypeCS				{
+				a3_0 = parse_org_dresdenocl_language_ocl_TypeCS				{
 					if (terminateParsing) {
 						throw new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTerminateParsingException();
 					}
@@ -1170,34 +1122,34 @@ parse_org_dresdenocl_language_ocl_AttributeContextDeclarationCS returns [org.dre
 						element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createAttributeContextDeclarationCS();
 						startIncompleteElement(element);
 					}
-					if (a5_0 != null) {
-						if (a5_0 != null) {
-							Object value = a5_0;
+					if (a3_0 != null) {
+						if (a3_0 != null) {
+							Object value = a3_0;
 							element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__TYPE), value);
 							completedElement(value, true);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_4_0_0_1, a5_0, true);
-						copyLocalizationInfos(a5_0, element);
+						retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_2_0_0_1, a3_0, true);
+						copyLocalizationInfos(a3_0, element);
 					}
 				}
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[79]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[80]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[77]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[78]);
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[81]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[82]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[79]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[80]);
 	}
 	
 	(
-		a6_0 = parse_org_dresdenocl_language_ocl_InitOrDeriveValueCS		{
+		a4_0 = parse_org_dresdenocl_language_ocl_InitOrDeriveValueCS		{
 			if (terminateParsing) {
 				throw new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTerminateParsingException();
 			}
@@ -1205,31 +1157,31 @@ parse_org_dresdenocl_language_ocl_AttributeContextDeclarationCS returns [org.dre
 				element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createAttributeContextDeclarationCS();
 				startIncompleteElement(element);
 			}
-			if (a6_0 != null) {
-				if (a6_0 != null) {
-					Object value = a6_0;
+			if (a4_0 != null) {
+				if (a4_0 != null) {
+					Object value = a4_0;
 					addObjectToList(element, org.dresdenocl.language.ocl.OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__INIT_OR_DERIVE_VALUE, value);
 					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_6, a6_0, true);
-				copyLocalizationInfos(a6_0, element);
+				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_4, a4_0, true);
+				copyLocalizationInfos(a4_0, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[83]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[84]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[81]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[82]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[83]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[84]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[85]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[86]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[87]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[88]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[86]);
 	}
 	
 	(
 		(
-			a7_0 = parse_org_dresdenocl_language_ocl_InitOrDeriveValueCS			{
+			a5_0 = parse_org_dresdenocl_language_ocl_InitOrDeriveValueCS			{
 				if (terminateParsing) {
 					throw new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTerminateParsingException();
 				}
@@ -1237,25 +1189,25 @@ parse_org_dresdenocl_language_ocl_AttributeContextDeclarationCS returns [org.dre
 					element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createAttributeContextDeclarationCS();
 					startIncompleteElement(element);
 				}
-				if (a7_0 != null) {
-					if (a7_0 != null) {
-						Object value = a7_0;
+				if (a5_0 != null) {
+					if (a5_0 != null) {
+						Object value = a5_0;
 						addObjectToList(element, org.dresdenocl.language.ocl.OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__INIT_OR_DERIVE_VALUE, value);
 						completedElement(value, true);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_7, a7_0, true);
-					copyLocalizationInfos(a7_0, element);
+					retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_5, a5_0, true);
+					copyLocalizationInfos(a5_0, element);
 				}
 			}
 		)
 		
 	)?	{
 		// expected elements (follow set)
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[87]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[88]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[89]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[90]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[91]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[92]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[90]);
 	}
 	
 ;
@@ -1275,14 +1227,12 @@ parse_org_dresdenocl_language_ocl_ClassifierContextDeclarationCS returns [org.dr
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[93]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[94]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[95]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[96]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[91]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[92]);
 	}
 	
 	(
-		a1_0 = parse_org_dresdenocl_language_ocl_TypeCS		{
+		a1_0 = parse_org_dresdenocl_language_ocl_ModelElementCS		{
 			if (terminateParsing) {
 				throw new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTerminateParsingException();
 			}
@@ -1304,9 +1254,9 @@ parse_org_dresdenocl_language_ocl_ClassifierContextDeclarationCS returns [org.dr
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[97]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[98]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[99]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[93]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[94]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[95]);
 	}
 	
 	(
@@ -1334,13 +1284,13 @@ parse_org_dresdenocl_language_ocl_ClassifierContextDeclarationCS returns [org.dr
 		
 	)+	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[100]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[101]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[102]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[103]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[104]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[105]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[106]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[96]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[97]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[98]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[99]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[100]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[101]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[102]);
 	}
 	
 ;
@@ -1360,7 +1310,7 @@ parse_org_dresdenocl_language_ocl_InitValueCS returns [org.dresdenocl.language.o
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[107]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[103]);
 	}
 	
 	a1 = ':' {
@@ -1374,6 +1324,10 @@ parse_org_dresdenocl_language_ocl_InitValueCS returns [org.dresdenocl.language.o
 	}
 	{
 		// expected elements (follow set)
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInitValueCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[104]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInitValueCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[105]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInitValueCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[106]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInitValueCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[107]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInitValueCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[108]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInitValueCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[109]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInitValueCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[110]);
@@ -1397,11 +1351,6 @@ parse_org_dresdenocl_language_ocl_InitValueCS returns [org.dresdenocl.language.o
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInitValueCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[128]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInitValueCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[129]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInitValueCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[130]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInitValueCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[131]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInitValueCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[132]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInitValueCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[133]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInitValueCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[134]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInitValueCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[135]);
 	}
 	
 	(
@@ -1427,12 +1376,12 @@ parse_org_dresdenocl_language_ocl_InitValueCS returns [org.dresdenocl.language.o
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[136]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[137]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[138]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[139]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[140]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[141]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[131]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[132]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[133]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[134]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[135]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[136]);
 	}
 	
 ;
@@ -1452,7 +1401,7 @@ parse_org_dresdenocl_language_ocl_DeriveValueCS returns [org.dresdenocl.language
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[142]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[137]);
 	}
 	
 	a1 = ':' {
@@ -1466,6 +1415,11 @@ parse_org_dresdenocl_language_ocl_DeriveValueCS returns [org.dresdenocl.language
 	}
 	{
 		// expected elements (follow set)
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDeriveValueCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[138]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDeriveValueCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[139]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDeriveValueCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[140]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDeriveValueCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[141]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDeriveValueCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[142]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDeriveValueCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[143]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDeriveValueCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[144]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDeriveValueCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[145]);
@@ -1488,12 +1442,6 @@ parse_org_dresdenocl_language_ocl_DeriveValueCS returns [org.dresdenocl.language
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDeriveValueCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[162]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDeriveValueCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[163]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDeriveValueCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[164]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDeriveValueCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[165]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDeriveValueCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[166]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDeriveValueCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[167]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDeriveValueCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[168]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDeriveValueCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[169]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDeriveValueCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[170]);
 	}
 	
 	(
@@ -1519,12 +1467,12 @@ parse_org_dresdenocl_language_ocl_DeriveValueCS returns [org.dresdenocl.language
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[171]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[172]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[173]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[174]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[175]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[176]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[165]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[166]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[167]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[168]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[169]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[170]);
 	}
 	
 ;
@@ -1544,9 +1492,9 @@ parse_org_dresdenocl_language_ocl_InvariantExpCS returns [org.dresdenocl.languag
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInvariantExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[177]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInvariantExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[178]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[179]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInvariantExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[171]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInvariantExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[172]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[173]);
 	}
 	
 	(
@@ -1574,7 +1522,7 @@ parse_org_dresdenocl_language_ocl_InvariantExpCS returns [org.dresdenocl.languag
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[180]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[174]);
 	}
 	
 	a2 = ':' {
@@ -1588,6 +1536,12 @@ parse_org_dresdenocl_language_ocl_InvariantExpCS returns [org.dresdenocl.languag
 	}
 	{
 		// expected elements (follow set)
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInvariantExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[175]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInvariantExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[176]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInvariantExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[177]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInvariantExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[178]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInvariantExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[179]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInvariantExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[180]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInvariantExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[181]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInvariantExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[182]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInvariantExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[183]);
@@ -1609,13 +1563,6 @@ parse_org_dresdenocl_language_ocl_InvariantExpCS returns [org.dresdenocl.languag
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInvariantExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[199]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInvariantExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[200]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInvariantExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[201]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInvariantExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[202]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInvariantExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[203]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInvariantExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[204]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInvariantExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[205]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInvariantExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[206]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInvariantExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[207]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getInvariantExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[208]);
 	}
 	
 	(
@@ -1641,13 +1588,13 @@ parse_org_dresdenocl_language_ocl_InvariantExpCS returns [org.dresdenocl.languag
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[209]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[210]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[211]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[212]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[213]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[214]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[215]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[202]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[203]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[204]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[205]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[206]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[207]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[208]);
 	}
 	
 ;
@@ -1691,14 +1638,14 @@ parse_org_dresdenocl_language_ocl_DefinitionExpCS returns [org.dresdenocl.langua
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[216]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[209]);
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[217]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[210]);
 	}
 	
 	a1 = 'def' {
@@ -1712,7 +1659,7 @@ parse_org_dresdenocl_language_ocl_DefinitionExpCS returns [org.dresdenocl.langua
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[218]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[211]);
 	}
 	
 	a2 = ':' {
@@ -1726,9 +1673,9 @@ parse_org_dresdenocl_language_ocl_DefinitionExpCS returns [org.dresdenocl.langua
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDefinitionExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[219]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDefinitionExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[220]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDefinitionExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[221]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDefinitionExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[212]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDefinitionExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[213]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDefinitionExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[214]);
 	}
 	
 	(
@@ -1754,13 +1701,13 @@ parse_org_dresdenocl_language_ocl_DefinitionExpCS returns [org.dresdenocl.langua
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[222]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[223]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[224]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[225]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[226]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[227]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[228]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[215]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[216]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[217]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[218]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[219]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[220]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[221]);
 	}
 	
 ;
@@ -1792,13 +1739,13 @@ parse_org_dresdenocl_language_ocl_DefinitionExpPropertyCS returns [org.dresdenoc
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[229]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[230]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[231]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[232]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[233]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[234]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[235]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[222]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[223]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[224]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[225]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[226]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[227]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[228]);
 	}
 	
 ;
@@ -1830,7 +1777,7 @@ parse_org_dresdenocl_language_ocl_DefinitionExpOperationCS returns [org.dresdeno
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[236]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[229]);
 	}
 	
 	(
@@ -1866,6 +1813,13 @@ parse_org_dresdenocl_language_ocl_DefinitionExpOperationCS returns [org.dresdeno
 	)
 	{
 		// expected elements (follow set)
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDefinitionExpOperationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[230]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDefinitionExpOperationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[231]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDefinitionExpOperationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[232]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDefinitionExpOperationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[233]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDefinitionExpOperationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[234]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDefinitionExpOperationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[235]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDefinitionExpOperationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[236]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDefinitionExpOperationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[237]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDefinitionExpOperationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[238]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDefinitionExpOperationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[239]);
@@ -1886,14 +1840,6 @@ parse_org_dresdenocl_language_ocl_DefinitionExpOperationCS returns [org.dresdeno
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDefinitionExpOperationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[254]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDefinitionExpOperationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[255]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDefinitionExpOperationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[256]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDefinitionExpOperationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[257]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDefinitionExpOperationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[258]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDefinitionExpOperationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[259]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDefinitionExpOperationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[260]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDefinitionExpOperationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[261]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDefinitionExpOperationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[262]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDefinitionExpOperationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[263]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getDefinitionExpOperationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[264]);
 	}
 	
 	(
@@ -1919,13 +1865,13 @@ parse_org_dresdenocl_language_ocl_DefinitionExpOperationCS returns [org.dresdeno
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[265]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[266]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[267]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[268]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[269]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[270]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[271]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[257]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[258]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[259]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[260]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[261]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[262]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[263]);
 	}
 	
 ;
@@ -1945,9 +1891,9 @@ parse_org_dresdenocl_language_ocl_PreConditionDeclarationCS returns [org.dresden
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPreConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[272]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPreConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[273]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[274]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPreConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[264]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPreConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[265]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[266]);
 	}
 	
 	(
@@ -1975,14 +1921,14 @@ parse_org_dresdenocl_language_ocl_PreConditionDeclarationCS returns [org.dresden
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[275]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[267]);
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[276]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[268]);
 	}
 	
 	a2 = ':' {
@@ -1996,6 +1942,14 @@ parse_org_dresdenocl_language_ocl_PreConditionDeclarationCS returns [org.dresden
 	}
 	{
 		// expected elements (follow set)
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPreConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[269]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPreConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[270]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPreConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[271]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPreConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[272]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPreConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[273]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPreConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[274]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPreConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[275]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPreConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[276]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPreConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[277]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPreConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[278]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPreConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[279]);
@@ -2015,15 +1969,6 @@ parse_org_dresdenocl_language_ocl_PreConditionDeclarationCS returns [org.dresden
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPreConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[293]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPreConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[294]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPreConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[295]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPreConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[296]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPreConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[297]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPreConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[298]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPreConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[299]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPreConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[300]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPreConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[301]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPreConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[302]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPreConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[303]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPreConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[304]);
 	}
 	
 	(
@@ -2049,13 +1994,13 @@ parse_org_dresdenocl_language_ocl_PreConditionDeclarationCS returns [org.dresden
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[305]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[306]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[307]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[308]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[309]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[310]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[311]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[296]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[297]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[298]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[299]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[300]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[301]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[302]);
 	}
 	
 ;
@@ -2075,9 +2020,9 @@ parse_org_dresdenocl_language_ocl_PostConditionDeclarationCS returns [org.dresde
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPostConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[312]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPostConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[313]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[314]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPostConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[303]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPostConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[304]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[305]);
 	}
 	
 	(
@@ -2105,14 +2050,14 @@ parse_org_dresdenocl_language_ocl_PostConditionDeclarationCS returns [org.dresde
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[315]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[306]);
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[316]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[307]);
 	}
 	
 	a2 = ':' {
@@ -2126,6 +2071,15 @@ parse_org_dresdenocl_language_ocl_PostConditionDeclarationCS returns [org.dresde
 	}
 	{
 		// expected elements (follow set)
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPostConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[308]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPostConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[309]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPostConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[310]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPostConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[311]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPostConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[312]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPostConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[313]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPostConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[314]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPostConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[315]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPostConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[316]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPostConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[317]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPostConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[318]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPostConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[319]);
@@ -2144,16 +2098,6 @@ parse_org_dresdenocl_language_ocl_PostConditionDeclarationCS returns [org.dresde
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPostConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[332]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPostConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[333]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPostConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[334]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPostConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[335]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPostConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[336]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPostConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[337]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPostConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[338]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPostConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[339]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPostConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[340]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPostConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[341]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPostConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[342]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPostConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[343]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPostConditionDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[344]);
 	}
 	
 	(
@@ -2179,13 +2123,13 @@ parse_org_dresdenocl_language_ocl_PostConditionDeclarationCS returns [org.dresde
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[345]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[346]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[347]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[348]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[349]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[350]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[351]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[335]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[336]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[337]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[338]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[339]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[340]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[341]);
 	}
 	
 ;
@@ -2205,9 +2149,9 @@ parse_org_dresdenocl_language_ocl_BodyDeclarationCS returns [org.dresdenocl.lang
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBodyDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[352]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBodyDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[353]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[354]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBodyDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[342]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBodyDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[343]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[344]);
 	}
 	
 	(
@@ -2235,14 +2179,14 @@ parse_org_dresdenocl_language_ocl_BodyDeclarationCS returns [org.dresdenocl.lang
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[355]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[345]);
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[356]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[346]);
 	}
 	
 	a2 = ':' {
@@ -2256,6 +2200,16 @@ parse_org_dresdenocl_language_ocl_BodyDeclarationCS returns [org.dresdenocl.lang
 	}
 	{
 		// expected elements (follow set)
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBodyDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[347]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBodyDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[348]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBodyDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[349]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBodyDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[350]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBodyDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[351]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBodyDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[352]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBodyDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[353]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBodyDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[354]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBodyDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[355]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBodyDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[356]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBodyDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[357]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBodyDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[358]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBodyDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[359]);
@@ -2273,17 +2227,6 @@ parse_org_dresdenocl_language_ocl_BodyDeclarationCS returns [org.dresdenocl.lang
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBodyDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[371]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBodyDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[372]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBodyDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[373]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBodyDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[374]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBodyDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[375]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBodyDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[376]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBodyDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[377]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBodyDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[378]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBodyDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[379]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBodyDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[380]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBodyDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[381]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBodyDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[382]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBodyDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[383]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBodyDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[384]);
 	}
 	
 	(
@@ -2309,13 +2252,13 @@ parse_org_dresdenocl_language_ocl_BodyDeclarationCS returns [org.dresdenocl.lang
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[385]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[386]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[387]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[388]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[389]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[390]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[391]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[374]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[375]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[376]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[377]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[378]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[379]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[380]);
 	}
 	
 ;
@@ -2325,7 +2268,7 @@ parse_org_dresdenocl_language_ocl_OperationDefinitionInContextCS returns [org.dr
 }
 :
 	(
-		a0_0 = parse_org_dresdenocl_language_ocl_TypePathNameCS		{
+		a0_0 = parse_org_dresdenocl_language_ocl_ModelElementCS		{
 			if (terminateParsing) {
 				throw new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTerminateParsingException();
 			}
@@ -2347,7 +2290,7 @@ parse_org_dresdenocl_language_ocl_OperationDefinitionInContextCS returns [org.dr
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[392]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[381]);
 	}
 	
 	a1 = '::' {
@@ -2361,7 +2304,7 @@ parse_org_dresdenocl_language_ocl_OperationDefinitionInContextCS returns [org.dr
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[393]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[382]);
 	}
 	
 	(
@@ -2401,7 +2344,7 @@ parse_org_dresdenocl_language_ocl_OperationDefinitionInContextCS returns [org.dr
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[394]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[383]);
 	}
 	
 	a3 = '(' {
@@ -2415,8 +2358,8 @@ parse_org_dresdenocl_language_ocl_OperationDefinitionInContextCS returns [org.dr
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationDefinitionInContextCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[395]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[396]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationDefinitionInContextCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[384]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[385]);
 	}
 	
 	(
@@ -2444,8 +2387,8 @@ parse_org_dresdenocl_language_ocl_OperationDefinitionInContextCS returns [org.dr
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[397]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[398]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[386]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[387]);
 			}
 			
 			(
@@ -2461,7 +2404,7 @@ parse_org_dresdenocl_language_ocl_OperationDefinitionInContextCS returns [org.dr
 					}
 					{
 						// expected elements (follow set)
-						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationDefinitionInContextCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[399]);
+						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationDefinitionInContextCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[388]);
 					}
 					
 					(
@@ -2487,23 +2430,23 @@ parse_org_dresdenocl_language_ocl_OperationDefinitionInContextCS returns [org.dr
 					)
 					{
 						// expected elements (follow set)
-						addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[400]);
-						addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[401]);
+						addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[389]);
+						addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[390]);
 					}
 					
 				)
 				
 			)*			{
 				// expected elements (follow set)
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[402]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[403]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[391]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[392]);
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[404]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[393]);
 	}
 	
 	a7 = ')' {
@@ -2517,10 +2460,10 @@ parse_org_dresdenocl_language_ocl_OperationDefinitionInContextCS returns [org.dr
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[405]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[406]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[407]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[408]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[394]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[395]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[396]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[397]);
 	}
 	
 	(
@@ -2536,10 +2479,10 @@ parse_org_dresdenocl_language_ocl_OperationDefinitionInContextCS returns [org.dr
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationDefinitionInContextCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[409]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationDefinitionInContextCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[410]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationDefinitionInContextCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[411]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationDefinitionInContextCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[412]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationDefinitionInContextCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[398]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationDefinitionInContextCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[399]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationDefinitionInContextCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[400]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationDefinitionInContextCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[401]);
 			}
 			
 			(
@@ -2565,18 +2508,18 @@ parse_org_dresdenocl_language_ocl_OperationDefinitionInContextCS returns [org.dr
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[413]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[414]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[415]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[402]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[403]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[404]);
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[416]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[417]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[418]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[405]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[406]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[407]);
 	}
 	
 ;
@@ -2622,7 +2565,7 @@ parse_org_dresdenocl_language_ocl_OperationDefinitionInDefCS returns [org.dresde
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[419]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[408]);
 	}
 	
 	a1 = '(' {
@@ -2636,8 +2579,8 @@ parse_org_dresdenocl_language_ocl_OperationDefinitionInDefCS returns [org.dresde
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationDefinitionInDefCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[420]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[421]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationDefinitionInDefCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[409]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[410]);
 	}
 	
 	(
@@ -2665,8 +2608,8 @@ parse_org_dresdenocl_language_ocl_OperationDefinitionInDefCS returns [org.dresde
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[422]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[423]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[411]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[412]);
 			}
 			
 			(
@@ -2682,7 +2625,7 @@ parse_org_dresdenocl_language_ocl_OperationDefinitionInDefCS returns [org.dresde
 					}
 					{
 						// expected elements (follow set)
-						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationDefinitionInDefCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[424]);
+						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationDefinitionInDefCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[413]);
 					}
 					
 					(
@@ -2708,23 +2651,23 @@ parse_org_dresdenocl_language_ocl_OperationDefinitionInDefCS returns [org.dresde
 					)
 					{
 						// expected elements (follow set)
-						addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[425]);
-						addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[426]);
+						addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[414]);
+						addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[415]);
 					}
 					
 				)
 				
 			)*			{
 				// expected elements (follow set)
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[427]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[428]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[416]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[417]);
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[429]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[418]);
 	}
 	
 	a5 = ')' {
@@ -2738,8 +2681,8 @@ parse_org_dresdenocl_language_ocl_OperationDefinitionInDefCS returns [org.dresde
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[430]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[431]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[419]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[420]);
 	}
 	
 	(
@@ -2755,10 +2698,10 @@ parse_org_dresdenocl_language_ocl_OperationDefinitionInDefCS returns [org.dresde
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationDefinitionInDefCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[432]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationDefinitionInDefCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[433]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationDefinitionInDefCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[434]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationDefinitionInDefCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[435]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationDefinitionInDefCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[421]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationDefinitionInDefCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[422]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationDefinitionInDefCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[423]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationDefinitionInDefCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[424]);
 			}
 			
 			(
@@ -2784,14 +2727,14 @@ parse_org_dresdenocl_language_ocl_OperationDefinitionInDefCS returns [org.dresde
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[436]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[425]);
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[437]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[426]);
 	}
 	
 ;
@@ -2837,7 +2780,7 @@ parse_org_dresdenocl_language_ocl_ParameterCS returns [org.dresdenocl.language.o
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[438]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[427]);
 	}
 	
 	a1 = ':' {
@@ -2851,10 +2794,10 @@ parse_org_dresdenocl_language_ocl_ParameterCS returns [org.dresdenocl.language.o
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getParameterCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[439]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getParameterCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[440]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getParameterCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[441]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getParameterCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[442]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getParameterCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[428]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getParameterCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[429]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getParameterCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[430]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getParameterCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[431]);
 	}
 	
 	(
@@ -2880,10 +2823,10 @@ parse_org_dresdenocl_language_ocl_ParameterCS returns [org.dresdenocl.language.o
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[443]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[444]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[445]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[446]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[432]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[433]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[434]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[435]);
 	}
 	
 ;
@@ -2930,7 +2873,7 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[447]);
+			addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[436]);
 		}
 		
 		
@@ -2971,7 +2914,7 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[448]);
+			addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[437]);
 		}
 		
 		
@@ -3012,7 +2955,7 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[449]);
+			addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[438]);
 		}
 		
 		
@@ -3053,7 +2996,7 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[450]);
+			addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[439]);
 		}
 		
 		
@@ -3094,7 +3037,7 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[451]);
+			addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[440]);
 		}
 		
 		
@@ -3135,7 +3078,7 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[452]);
+			addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[441]);
 		}
 		
 		
@@ -3176,7 +3119,7 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[453]);
+			addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[442]);
 		}
 		
 		
@@ -3217,13 +3160,13 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[454]);
+			addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[443]);
 		}
 		
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[455]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[444]);
 	}
 	
 	a8 = '(' {
@@ -3237,6 +3180,17 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 	}
 	{
 		// expected elements (follow set)
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[445]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[446]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[447]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[448]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[449]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[450]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[451]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[452]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[453]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[454]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[455]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[456]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[457]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[458]);
@@ -3253,19 +3207,7 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[469]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[470]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[471]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[472]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[473]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[474]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[475]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[476]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[477]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[478]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[479]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[480]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[481]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[482]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[483]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[484]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[472]);
 	}
 	
 	(
@@ -3293,8 +3235,8 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[485]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[486]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[473]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[474]);
 			}
 			
 			(
@@ -3310,6 +3252,18 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 					}
 					{
 						// expected elements (follow set)
+						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[475]);
+						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[476]);
+						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[477]);
+						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[478]);
+						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[479]);
+						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[480]);
+						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[481]);
+						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[482]);
+						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[483]);
+						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[484]);
+						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[485]);
+						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[486]);
 						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[487]);
 						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[488]);
 						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[489]);
@@ -3325,19 +3279,6 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[499]);
 						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[500]);
 						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[501]);
-						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[502]);
-						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[503]);
-						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[504]);
-						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[505]);
-						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[506]);
-						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[507]);
-						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[508]);
-						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[509]);
-						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[510]);
-						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[511]);
-						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[512]);
-						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[513]);
-						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getImplicitOperationCallCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[514]);
 					}
 					
 					(
@@ -3363,23 +3304,23 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 					)
 					{
 						// expected elements (follow set)
-						addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[515]);
-						addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[516]);
+						addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[502]);
+						addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[503]);
 					}
 					
 				)
 				
 			)*			{
 				// expected elements (follow set)
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[517]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[518]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[504]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[505]);
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[519]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[506]);
 	}
 	
 	a12 = ')' {
@@ -3393,19 +3334,32 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 	}
 	{
 		// expected elements (follow set)
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[507]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[508]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[509]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[510]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[511]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[512]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[513]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[514]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[515]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[516]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[517]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[518]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[519]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[520]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[521]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[522]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[523]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[524]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[525]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[521]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[522]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[523]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[524]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[525]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[526]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[527]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[528]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[529]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[530]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[531]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[532]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[527]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[528]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[529]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[530]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[531]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[532]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[533]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[534]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[535]);
@@ -3419,19 +3373,6 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[543]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[544]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[545]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[546]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[547]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[548]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[549]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[550]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[551]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[552]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[553]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[554]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[555]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[556]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[557]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[558]);
 	}
 	
 ;
@@ -3477,20 +3418,33 @@ parse_org_dresdenocl_language_ocl_ImplicitPropertyCallCS returns [org.dresdenocl
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[559]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[546]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[547]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[548]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[549]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[550]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[551]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[552]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[553]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[554]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[555]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[556]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[557]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[558]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[559]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[560]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[561]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[562]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[563]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[564]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[565]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[561]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[562]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[563]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[564]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[565]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[566]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[567]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[568]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[569]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[570]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[571]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[572]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[567]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[568]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[569]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[570]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[571]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[572]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[573]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[574]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[575]);
@@ -3504,19 +3458,6 @@ parse_org_dresdenocl_language_ocl_ImplicitPropertyCallCS returns [org.dresdenocl
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[583]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[584]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[585]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[586]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[587]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[588]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[589]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[590]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[591]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[592]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[593]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[594]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[595]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[596]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[597]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[598]);
 	}
 	
 	(
@@ -3554,19 +3495,32 @@ parse_org_dresdenocl_language_ocl_ImplicitPropertyCallCS returns [org.dresdenocl
 			)
 			{
 				// expected elements (follow set)
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[586]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[587]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[588]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[589]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[590]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[591]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[592]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[593]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[594]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[595]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[596]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[597]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[598]);
 				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[599]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[600]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[601]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[602]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[603]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[604]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[600]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[601]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[602]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[603]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[604]);
 				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[605]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[606]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[607]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[608]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[609]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[610]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[611]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[606]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[607]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[608]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[609]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[610]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[611]);
 				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[612]);
 				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[613]);
 				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[614]);
@@ -3580,38 +3534,38 @@ parse_org_dresdenocl_language_ocl_ImplicitPropertyCallCS returns [org.dresdenocl
 				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[622]);
 				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[623]);
 				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[624]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[625]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[626]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[627]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[628]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[629]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[630]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[631]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[632]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[633]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[634]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[635]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[636]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[637]);
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[625]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[626]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[627]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[628]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[629]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[630]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[631]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[632]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[633]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[634]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[635]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[636]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[637]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[638]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[639]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[640]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[641]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[642]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[643]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[639]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[640]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[641]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[642]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[643]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[644]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[645]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[646]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[647]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[648]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[649]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[650]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[645]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[646]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[647]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[648]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[649]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[650]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[651]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[652]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[653]);
@@ -3625,19 +3579,6 @@ parse_org_dresdenocl_language_ocl_ImplicitPropertyCallCS returns [org.dresdenocl
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[661]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[662]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[663]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[664]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[665]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[666]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[667]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[668]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[669]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[670]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[671]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[672]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[673]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[674]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[675]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[676]);
 	}
 	
 ;
@@ -3679,7 +3620,7 @@ parse_org_dresdenocl_language_ocl_IteratorExpCS returns [org.dresdenocl.language
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[677]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[664]);
 	}
 	
 	a1 = '(' {
@@ -3693,6 +3634,19 @@ parse_org_dresdenocl_language_ocl_IteratorExpCS returns [org.dresdenocl.language
 	}
 	{
 		// expected elements (follow set)
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[665]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[666]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[667]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[668]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[669]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[670]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[671]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[672]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[673]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[674]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[675]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[676]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[677]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[678]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[679]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[680]);
@@ -3709,20 +3663,6 @@ parse_org_dresdenocl_language_ocl_IteratorExpCS returns [org.dresdenocl.language
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[691]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[692]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[693]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[694]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[695]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[696]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[697]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[698]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[699]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[700]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[701]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[702]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[703]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[704]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[705]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[706]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[707]);
 	}
 	
 	(
@@ -3750,8 +3690,8 @@ parse_org_dresdenocl_language_ocl_IteratorExpCS returns [org.dresdenocl.language
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[708]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[709]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[694]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[695]);
 			}
 			
 			(
@@ -3767,8 +3707,8 @@ parse_org_dresdenocl_language_ocl_IteratorExpCS returns [org.dresdenocl.language
 					}
 					{
 						// expected elements (follow set)
-						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[710]);
-						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[711]);
+						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[696]);
+						addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[697]);
 					}
 					
 					(
@@ -3794,14 +3734,14 @@ parse_org_dresdenocl_language_ocl_IteratorExpCS returns [org.dresdenocl.language
 					)
 					{
 						// expected elements (follow set)
-						addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[712]);
+						addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[698]);
 					}
 					
 				)
 				
 			)?			{
 				// expected elements (follow set)
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[713]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[699]);
 			}
 			
 			a5 = '|' {
@@ -3815,6 +3755,20 @@ parse_org_dresdenocl_language_ocl_IteratorExpCS returns [org.dresdenocl.language
 			}
 			{
 				// expected elements (follow set)
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[700]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[701]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[702]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[703]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[704]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[705]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[706]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[707]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[708]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[709]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[710]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[711]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[712]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[713]);
 				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[714]);
 				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[715]);
 				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[716]);
@@ -3828,27 +3782,27 @@ parse_org_dresdenocl_language_ocl_IteratorExpCS returns [org.dresdenocl.language
 				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[724]);
 				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[725]);
 				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[726]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[727]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[728]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[729]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[730]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[731]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[732]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[733]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[734]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[735]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[736]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[737]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[738]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[739]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[740]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[741]);
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[727]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[728]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[729]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[730]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[731]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[732]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[733]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[734]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[735]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[736]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[737]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[738]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[739]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[740]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[741]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[742]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[743]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[744]);
@@ -3861,22 +3815,6 @@ parse_org_dresdenocl_language_ocl_IteratorExpCS returns [org.dresdenocl.language
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[751]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[752]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[753]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[754]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[755]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[756]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[757]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[758]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[759]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[760]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[761]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[762]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[763]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[764]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[765]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[766]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[767]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[768]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[769]);
 	}
 	
 	(
@@ -3902,7 +3840,7 @@ parse_org_dresdenocl_language_ocl_IteratorExpCS returns [org.dresdenocl.language
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[770]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[754]);
 	}
 	
 	a7 = ')' {
@@ -3916,18 +3854,34 @@ parse_org_dresdenocl_language_ocl_IteratorExpCS returns [org.dresdenocl.language
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[771]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[772]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[773]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[774]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[775]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[755]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[756]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[757]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[758]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[759]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[760]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[761]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[762]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[763]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[764]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[765]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[766]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[767]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[768]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[769]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[770]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[771]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[772]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[773]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[774]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[775]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[776]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[777]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[778]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[779]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[780]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[781]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[782]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[777]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[778]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[779]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[780]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[781]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[782]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[783]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[784]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[785]);
@@ -3939,22 +3893,6 @@ parse_org_dresdenocl_language_ocl_IteratorExpCS returns [org.dresdenocl.language
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[791]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[792]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[793]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[794]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[795]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[796]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[797]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[798]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[799]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[800]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[801]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[802]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[803]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[804]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[805]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[806]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[807]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[808]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[809]);
 	}
 	
 ;
@@ -3974,7 +3912,7 @@ parse_org_dresdenocl_language_ocl_IterateExpCS returns [org.dresdenocl.language.
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[810]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[794]);
 	}
 	
 	a1 = '(' {
@@ -3988,8 +3926,8 @@ parse_org_dresdenocl_language_ocl_IterateExpCS returns [org.dresdenocl.language.
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[811]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[812]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[795]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[796]);
 	}
 	
 	(
@@ -4017,7 +3955,7 @@ parse_org_dresdenocl_language_ocl_IterateExpCS returns [org.dresdenocl.language.
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[813]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[797]);
 			}
 			
 			a3 = ';' {
@@ -4031,16 +3969,16 @@ parse_org_dresdenocl_language_ocl_IterateExpCS returns [org.dresdenocl.language.
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[814]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[815]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[798]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[799]);
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[816]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[817]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[800]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[801]);
 	}
 	
 	(
@@ -4066,7 +4004,7 @@ parse_org_dresdenocl_language_ocl_IterateExpCS returns [org.dresdenocl.language.
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[818]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[802]);
 	}
 	
 	a5 = '|' {
@@ -4080,6 +4018,22 @@ parse_org_dresdenocl_language_ocl_IterateExpCS returns [org.dresdenocl.language.
 	}
 	{
 		// expected elements (follow set)
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[803]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[804]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[805]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[806]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[807]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[808]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[809]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[810]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[811]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[812]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[813]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[814]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[815]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[816]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[817]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[818]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[819]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[820]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[821]);
@@ -4091,23 +4045,6 @@ parse_org_dresdenocl_language_ocl_IterateExpCS returns [org.dresdenocl.language.
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[827]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[828]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[829]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[830]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[831]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[832]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[833]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[834]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[835]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[836]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[837]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[838]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[839]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[840]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[841]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[842]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[843]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[844]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[845]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIterateExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[846]);
 	}
 	
 	(
@@ -4133,7 +4070,7 @@ parse_org_dresdenocl_language_ocl_IterateExpCS returns [org.dresdenocl.language.
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[847]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[830]);
 	}
 	
 	a7 = ')' {
@@ -4147,18 +4084,35 @@ parse_org_dresdenocl_language_ocl_IterateExpCS returns [org.dresdenocl.language.
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[848]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[849]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[850]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[851]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[852]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[831]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[832]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[833]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[834]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[835]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[836]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[837]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[838]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[839]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[840]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[841]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[842]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[843]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[844]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[845]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[846]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[847]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[848]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[849]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[850]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[851]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[852]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[853]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[854]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[855]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[856]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[857]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[858]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[859]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[854]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[855]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[856]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[857]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[858]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[859]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[860]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[861]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[862]);
@@ -4169,23 +4123,6 @@ parse_org_dresdenocl_language_ocl_IterateExpCS returns [org.dresdenocl.language.
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[867]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[868]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[869]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[870]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[871]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[872]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[873]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[874]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[875]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[876]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[877]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[878]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[879]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[880]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[881]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[882]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[883]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[884]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[885]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[886]);
 	}
 	
 ;
@@ -4217,10 +4154,10 @@ parse_org_dresdenocl_language_ocl_IteratorExpVariableCS returns [org.dresdenocl.
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[887]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[888]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[889]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[890]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[870]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[871]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[872]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[873]);
 	}
 	
 	(
@@ -4236,10 +4173,10 @@ parse_org_dresdenocl_language_ocl_IteratorExpVariableCS returns [org.dresdenocl.
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpVariableCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[891]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpVariableCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[892]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpVariableCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[893]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpVariableCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[894]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpVariableCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[874]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpVariableCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[875]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpVariableCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[876]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIteratorExpVariableCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[877]);
 			}
 			
 			(
@@ -4265,179 +4202,18 @@ parse_org_dresdenocl_language_ocl_IteratorExpVariableCS returns [org.dresdenocl.
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[895]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[896]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[897]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[878]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[879]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[880]);
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[898]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[899]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[900]);
-	}
-	
-;
-
-parse_org_dresdenocl_language_ocl_TypePathNameSimpleCS returns [org.dresdenocl.language.ocl.TypePathNameSimpleCS element = null]
-@init{
-}
-:
-	(
-		a0 = SIMPLE_NAME		
-		{
-			if (terminateParsing) {
-				throw new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTerminateParsingException();
-			}
-			if (element == null) {
-				element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createTypePathNameSimpleCS();
-				startIncompleteElement(element);
-			}
-			if (a0 != null) {
-				org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("SIMPLE_NAME");
-				tokenResolver.setOptions(getOptions());
-				org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = getFreshTokenResolveResult();
-				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.TYPE_PATH_NAME_SIMPLE_CS__TYPE_NAME), result);
-				Object resolvedObject = result.getResolvedToken();
-				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
-				}
-				String resolved = (String) resolvedObject;
-				org.dresdenocl.pivotmodel.Type proxy = org.dresdenocl.pivotmodel.PivotModelFactory.eINSTANCE.createType();
-				collectHiddenTokens(element);
-				registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.TypePathNameSimpleCS, org.dresdenocl.pivotmodel.Type>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getTypePathNameSimpleCSTypeNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.TYPE_PATH_NAME_SIMPLE_CS__TYPE_NAME), resolved, proxy);
-				if (proxy != null) {
-					Object value = proxy;
-					element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.TYPE_PATH_NAME_SIMPLE_CS__TYPE_NAME), value);
-					completedElement(value, false);
-				}
-				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_35_0_0_0, proxy, true);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, proxy);
-			}
-		}
-	)
-	{
-		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[901]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[902]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[903]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[904]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[905]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[906]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[907]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[908]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[909]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[910]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[911]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[912]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[913]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[914]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[915]);
-	}
-	
-;
-
-parse_org_dresdenocl_language_ocl_TypePathNameNestedCS returns [org.dresdenocl.language.ocl.TypePathNameNestedCS element = null]
-@init{
-}
-:
-	(
-		a0 = SIMPLE_NAME		
-		{
-			if (terminateParsing) {
-				throw new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTerminateParsingException();
-			}
-			if (element == null) {
-				element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createTypePathNameNestedCS();
-				startIncompleteElement(element);
-			}
-			if (a0 != null) {
-				org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("SIMPLE_NAME");
-				tokenResolver.setOptions(getOptions());
-				org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = getFreshTokenResolveResult();
-				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.TYPE_PATH_NAME_NESTED_CS__NAMESPACE), result);
-				Object resolvedObject = result.getResolvedToken();
-				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
-				}
-				String resolved = (String) resolvedObject;
-				org.dresdenocl.pivotmodel.Namespace proxy = org.dresdenocl.pivotmodel.PivotModelFactory.eINSTANCE.createNamespace();
-				collectHiddenTokens(element);
-				registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.TypePathNameNestedCS, org.dresdenocl.pivotmodel.Namespace>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getTypePathNameNestedCSNamespaceReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.TYPE_PATH_NAME_NESTED_CS__NAMESPACE), resolved, proxy);
-				if (proxy != null) {
-					Object value = proxy;
-					element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.TYPE_PATH_NAME_NESTED_CS__NAMESPACE), value);
-					completedElement(value, false);
-				}
-				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_36_0_0_0, proxy, true);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, proxy);
-			}
-		}
-	)
-	{
-		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[916]);
-	}
-	
-	a1 = '::' {
-		if (element == null) {
-			element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createTypePathNameNestedCS();
-			startIncompleteElement(element);
-		}
-		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_36_0_0_2, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
-	}
-	{
-		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getTypePathNameNestedCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[917]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getTypePathNameNestedCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[918]);
-	}
-	
-	(
-		a2_0 = parse_org_dresdenocl_language_ocl_TypePathNameCS		{
-			if (terminateParsing) {
-				throw new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTerminateParsingException();
-			}
-			if (element == null) {
-				element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createTypePathNameNestedCS();
-				startIncompleteElement(element);
-			}
-			if (a2_0 != null) {
-				if (a2_0 != null) {
-					Object value = a2_0;
-					element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME), value);
-					completedElement(value, true);
-				}
-				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_36_0_0_4, a2_0, true);
-				copyLocalizationInfos(a2_0, element);
-			}
-		}
-	)
-	{
-		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[919]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[920]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[921]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[922]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[923]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[924]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[925]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[926]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[927]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[928]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[929]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[930]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[931]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[932]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[933]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[881]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[882]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[883]);
 	}
 	
 ;
@@ -4452,12 +4228,12 @@ parse_org_dresdenocl_language_ocl_TupleTypeCS returns [org.dresdenocl.language.o
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_37_0_0_0, null, true);
+		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_35_0_0_0, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[934]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[884]);
 	}
 	
 	a1 = '(' {
@@ -4466,14 +4242,14 @@ parse_org_dresdenocl_language_ocl_TupleTypeCS returns [org.dresdenocl.language.o
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_37_0_0_1, null, true);
+		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_35_0_0_1, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getTupleTypeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[935]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getTupleTypeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[936]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[937]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getTupleTypeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[885]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getTupleTypeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[886]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[887]);
 	}
 	
 	(
@@ -4493,7 +4269,7 @@ parse_org_dresdenocl_language_ocl_TupleTypeCS returns [org.dresdenocl.language.o
 						completedElement(value, true);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_37_0_0_3, a2_0, true);
+					retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_35_0_0_3, a2_0, true);
 					copyLocalizationInfos(a2_0, element);
 				}
 			}
@@ -4501,7 +4277,7 @@ parse_org_dresdenocl_language_ocl_TupleTypeCS returns [org.dresdenocl.language.o
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[938]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[888]);
 	}
 	
 	a3 = ')' {
@@ -4510,48 +4286,52 @@ parse_org_dresdenocl_language_ocl_TupleTypeCS returns [org.dresdenocl.language.o
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_37_0_0_5, null, true);
+		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_35_0_0_5, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[939]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[940]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[941]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[942]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[943]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[944]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[945]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[946]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[947]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[948]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[949]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[950]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[951]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[952]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[953]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[954]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[955]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[956]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[957]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[958]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[959]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[960]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[961]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[962]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[963]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[964]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[965]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[966]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[967]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[968]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[969]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[970]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[971]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[972]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[973]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[974]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[975]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[889]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[890]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[891]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[892]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[893]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[894]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[895]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[896]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[897]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[898]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[899]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[900]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[901]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[902]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[903]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[904]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[905]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[906]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[907]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[908]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[909]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[910]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[911]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[912]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[913]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[914]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[915]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[916]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[917]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[918]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[919]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[920]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[921]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[922]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[923]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[924]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[925]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[926]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[927]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[928]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[929]);
 	}
 	
 ;
@@ -4589,7 +4369,7 @@ parse_org_dresdenocl_language_ocl_CollectionTypeIdentifierCS returns [org.dresde
 					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_38_0_0_0, proxy, true);
+				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_36_0_0_0, proxy, true);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, proxy);
 			}
@@ -4597,43 +4377,47 @@ parse_org_dresdenocl_language_ocl_CollectionTypeIdentifierCS returns [org.dresde
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[976]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[977]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[978]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[979]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[980]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[981]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[982]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[983]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[984]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[985]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[986]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[987]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[988]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[989]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[990]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[991]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[992]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[993]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[994]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[995]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[996]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[997]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[998]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[999]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1000]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1001]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1002]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1003]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1004]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1005]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1006]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1007]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1008]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1009]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1010]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1011]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1012]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[930]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[931]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[932]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[933]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[934]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[935]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[936]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[937]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[938]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[939]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[940]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[941]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[942]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[943]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[944]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[945]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[946]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[947]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[948]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[949]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[950]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[951]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[952]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[953]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[954]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[955]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[956]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[957]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[958]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[959]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[960]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[961]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[962]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[963]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[964]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[965]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[966]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[967]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[968]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[969]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[970]);
 	}
 	
 	(
@@ -4644,15 +4428,15 @@ parse_org_dresdenocl_language_ocl_CollectionTypeIdentifierCS returns [org.dresde
 					startIncompleteElement(element);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_38_0_0_1_0_0_1, null, true);
+				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_36_0_0_1_0_0_1, null, true);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionTypeIdentifierCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1013]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionTypeIdentifierCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1014]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionTypeIdentifierCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1015]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionTypeIdentifierCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1016]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionTypeIdentifierCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[971]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionTypeIdentifierCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[972]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionTypeIdentifierCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[973]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionTypeIdentifierCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[974]);
 			}
 			
 			(
@@ -4671,14 +4455,14 @@ parse_org_dresdenocl_language_ocl_CollectionTypeIdentifierCS returns [org.dresde
 							completedElement(value, true);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_38_0_0_1_0_0_3, a2_0, true);
+						retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_36_0_0_1_0_0_3, a2_0, true);
 						copyLocalizationInfos(a2_0, element);
 					}
 				}
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1017]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[975]);
 			}
 			
 			a3 = ')' {
@@ -4687,61 +4471,134 @@ parse_org_dresdenocl_language_ocl_CollectionTypeIdentifierCS returns [org.dresde
 					startIncompleteElement(element);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_38_0_0_1_0_0_5, null, true);
+				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_36_0_0_1_0_0_5, null, true);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1018]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1019]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1020]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1021]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1022]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1023]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1024]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1025]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1026]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1027]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1028]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1029]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1030]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1031]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1032]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1033]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1034]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1035]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1036]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1037]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1038]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1039]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1040]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1041]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1042]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1043]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1044]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1045]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1046]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1047]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1048]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1049]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1050]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1051]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1052]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1053]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[976]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[977]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[978]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[979]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[980]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[981]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[982]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[983]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[984]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[985]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[986]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[987]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[988]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[989]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[990]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[991]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[992]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[993]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[994]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[995]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[996]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[997]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[998]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[999]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1000]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1001]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1002]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1003]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1004]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1005]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1006]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1007]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1008]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1009]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1010]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1011]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1012]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1013]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1014]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1015]);
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1054]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1055]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1056]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1057]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1058]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1016]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1017]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1018]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1019]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1020]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1021]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1022]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1023]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1024]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1025]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1026]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1027]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1028]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1029]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1030]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1031]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1032]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1033]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1034]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1035]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1036]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1037]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1038]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1039]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1040]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1041]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1042]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1043]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1044]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1045]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1046]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1047]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1048]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1049]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1050]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1051]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1052]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1053]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1054]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1055]);
+	}
+	
+;
+
+parse_org_dresdenocl_language_ocl_TypeModelElementCS returns [org.dresdenocl.language.ocl.TypeModelElementCS element = null]
+@init{
+}
+:
+	(
+		a0_0 = parse_org_dresdenocl_language_ocl_ModelElementCS		{
+			if (terminateParsing) {
+				throw new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTerminateParsingException();
+			}
+			if (element == null) {
+				element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createTypeModelElementCS();
+				startIncompleteElement(element);
+			}
+			if (a0_0 != null) {
+				if (a0_0 != null) {
+					Object value = a0_0;
+					element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.TYPE_MODEL_ELEMENT_CS__MODEL_ELEMENT), value);
+					completedElement(value, true);
+				}
+				collectHiddenTokens(element);
+				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_37_0_0_0, a0_0, true);
+				copyLocalizationInfos(a0_0, element);
+			}
+		}
+	)
+	{
+		// expected elements (follow set)
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1056]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1057]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1058]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1059]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1060]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1061]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1061]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1062]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1063]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1064]);
@@ -4749,27 +4606,6 @@ parse_org_dresdenocl_language_ocl_CollectionTypeIdentifierCS returns [org.dresde
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1066]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1067]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1068]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1069]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1070]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1071]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1072]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1073]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1074]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1075]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1076]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1077]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1078]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1079]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1080]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1081]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1082]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1083]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1084]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1085]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1086]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1087]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1088]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1089]);
 	}
 	
 ;
@@ -4794,14 +4630,14 @@ parse_org_dresdenocl_language_ocl_VariableDeclarationWithoutInitCS returns [org.
 					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_39_0_0_0, a0_0, true);
+				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_38_0_0_0, a0_0, true);
 				copyLocalizationInfos(a0_0, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1090]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1069]);
 	}
 	
 	a1 = ':' {
@@ -4810,15 +4646,15 @@ parse_org_dresdenocl_language_ocl_VariableDeclarationWithoutInitCS returns [org.
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_39_0_0_1, null, true);
+		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_38_0_0_1, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithoutInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1091]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithoutInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1092]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithoutInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1093]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithoutInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1094]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithoutInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1070]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithoutInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1071]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithoutInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1072]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithoutInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1073]);
 	}
 	
 	(
@@ -4837,15 +4673,15 @@ parse_org_dresdenocl_language_ocl_VariableDeclarationWithoutInitCS returns [org.
 					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_39_0_0_2, a2_0, true);
+				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_38_0_0_2, a2_0, true);
 				copyLocalizationInfos(a2_0, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1095]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1096]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1074]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1075]);
 	}
 	
 ;
@@ -4870,15 +4706,15 @@ parse_org_dresdenocl_language_ocl_VariableDeclarationWithoutInitListCS returns [
 					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_40_0_0_0, a0_0, true);
+				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_39_0_0_0, a0_0, true);
 				copyLocalizationInfos(a0_0, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1097]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1098]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1076]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1077]);
 	}
 	
 	(
@@ -4889,13 +4725,13 @@ parse_org_dresdenocl_language_ocl_VariableDeclarationWithoutInitListCS returns [
 					startIncompleteElement(element);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_40_0_0_1_0_0_1, null, true);
+				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_39_0_0_1_0_0_1, null, true);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithoutInitListCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1099]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithoutInitListCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1100]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithoutInitListCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1078]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithoutInitListCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1079]);
 			}
 			
 			(
@@ -4914,23 +4750,23 @@ parse_org_dresdenocl_language_ocl_VariableDeclarationWithoutInitListCS returns [
 							completedElement(value, true);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_40_0_0_1_0_0_2, a2_0, true);
+						retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_39_0_0_1_0_0_2, a2_0, true);
 						copyLocalizationInfos(a2_0, element);
 					}
 				}
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1101]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1102]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1080]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1081]);
 			}
 			
 		)
 		
 	)*	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1103]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1104]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1082]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1083]);
 	}
 	
 ;
@@ -4955,15 +4791,15 @@ parse_org_dresdenocl_language_ocl_VariableDeclarationWithInitCS returns [org.dre
 					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_41_0_0_0, a0_0, true);
+				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_40_0_0_0, a0_0, true);
 				copyLocalizationInfos(a0_0, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1105]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1106]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1084]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1085]);
 	}
 	
 	(
@@ -4974,15 +4810,15 @@ parse_org_dresdenocl_language_ocl_VariableDeclarationWithInitCS returns [org.dre
 					startIncompleteElement(element);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_41_0_0_1_0_0_0, null, true);
+				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_40_0_0_1_0_0_0, null, true);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1107]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1108]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1109]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1110]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1086]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1087]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1088]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1089]);
 			}
 			
 			(
@@ -5001,21 +4837,21 @@ parse_org_dresdenocl_language_ocl_VariableDeclarationWithInitCS returns [org.dre
 							completedElement(value, true);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_41_0_0_1_0_0_1, a2_0, true);
+						retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_40_0_0_1_0_0_1, a2_0, true);
 						copyLocalizationInfos(a2_0, element);
 					}
 				}
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1111]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1090]);
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1112]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1091]);
 	}
 	
 	(
@@ -5044,41 +4880,40 @@ parse_org_dresdenocl_language_ocl_VariableDeclarationWithInitCS returns [org.dre
 					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_41_0_0_2, resolved, true);
+				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_40_0_0_2, resolved, true);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a3, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1092]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1093]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1094]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1095]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1096]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1097]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1098]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1099]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1100]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1101]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1102]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1103]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1104]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1105]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1106]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1107]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1108]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1109]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1110]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1111]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1112]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1113]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1114]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1115]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1116]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1117]);
 		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1118]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1119]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1120]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1121]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1122]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1123]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1124]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1125]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1126]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1127]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1128]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1129]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1130]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1131]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1132]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1133]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1134]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1135]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1136]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1137]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1138]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1139]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1140]);
 	}
 	
 	(
@@ -5097,25 +4932,25 @@ parse_org_dresdenocl_language_ocl_VariableDeclarationWithInitCS returns [org.dre
 					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_41_0_0_3, a4_0, true);
+				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_40_0_0_3, a4_0, true);
 				copyLocalizationInfos(a4_0, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1141]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1142]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1143]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1144]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1145]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1146]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1147]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1148]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1149]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1150]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1151]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1152]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1119]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1120]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1121]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1122]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1123]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1124]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1125]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1126]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1127]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1128]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1129]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1130]);
 	}
 	
 ;
@@ -5140,15 +4975,15 @@ parse_org_dresdenocl_language_ocl_VariableDeclarationWithInitListCS returns [org
 					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_0, a0_0, true);
+				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_41_0_0_0, a0_0, true);
 				copyLocalizationInfos(a0_0, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1153]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1154]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1131]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1132]);
 	}
 	
 	(
@@ -5159,13 +4994,13 @@ parse_org_dresdenocl_language_ocl_VariableDeclarationWithInitListCS returns [org
 					startIncompleteElement(element);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_1_0_0_1, null, true);
+				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_41_0_0_1_0_0_1, null, true);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitListCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1155]);
-				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitListCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1156]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitListCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1133]);
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getVariableDeclarationWithInitListCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1134]);
 			}
 			
 			(
@@ -5184,23 +5019,282 @@ parse_org_dresdenocl_language_ocl_VariableDeclarationWithInitListCS returns [org
 							completedElement(value, true);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_1_0_0_2, a2_0, true);
+						retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_41_0_0_1_0_0_2, a2_0, true);
 						copyLocalizationInfos(a2_0, element);
 					}
 				}
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1157]);
-				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1158]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1135]);
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1136]);
 			}
 			
 		)
 		
 	)*	{
 		// expected elements (follow set)
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1137]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1138]);
+	}
+	
+;
+
+parse_org_dresdenocl_language_ocl_PathNameSimpleCS returns [org.dresdenocl.language.ocl.PathNameSimpleCS element = null]
+@init{
+}
+:
+	(
+		a0 = SIMPLE_NAME		
+		{
+			if (terminateParsing) {
+				throw new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTerminateParsingException();
+			}
+			if (element == null) {
+				element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createPathNameSimpleCS();
+				startIncompleteElement(element);
+			}
+			if (a0 != null) {
+				org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("SIMPLE_NAME");
+				tokenResolver.setOptions(getOptions());
+				org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = getFreshTokenResolveResult();
+				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.PATH_NAME_SIMPLE_CS__NAMED_ELEMENT), result);
+				Object resolvedObject = result.getResolvedToken();
+				if (resolvedObject == null) {
+					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
+				}
+				String resolved = (String) resolvedObject;
+				org.dresdenocl.pivotmodel.NamedElement proxy = org.dresdenocl.pivotmodel.PivotModelFactory.eINSTANCE.createNamespace();
+				collectHiddenTokens(element);
+				registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.PathNameSimpleCS, org.dresdenocl.pivotmodel.NamedElement>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getPathNameSimpleCSNamedElementReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.PATH_NAME_SIMPLE_CS__NAMED_ELEMENT), resolved, proxy);
+				if (proxy != null) {
+					Object value = proxy;
+					element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.PATH_NAME_SIMPLE_CS__NAMED_ELEMENT), value);
+					completedElement(value, false);
+				}
+				collectHiddenTokens(element);
+				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_45_0_0_0, proxy, true);
+				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
+				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, proxy);
+			}
+		}
+	)
+	{
+		// expected elements (follow set)
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1139]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1140]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1141]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1142]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1143]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1144]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1145]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1146]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1147]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1148]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1149]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1150]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1151]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1152]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1153]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1154]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1155]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1156]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1157]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1158]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1159]);
 		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1160]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1161]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1162]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1163]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1164]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1165]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1166]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1167]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1168]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1169]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1170]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1171]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1172]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1173]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1174]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1175]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1176]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1177]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1178]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1179]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1180]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1181]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1182]);
+	}
+	
+;
+
+parse_org_dresdenocl_language_ocl_PathNamePathCS returns [org.dresdenocl.language.ocl.PathNamePathCS element = null]
+@init{
+}
+:
+	(
+		(
+			(
+				a0_0 = parse_org_dresdenocl_language_ocl_UnreservedSimpleNameCS				{
+					if (terminateParsing) {
+						throw new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTerminateParsingException();
+					}
+					if (element == null) {
+						element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createPathNamePathCS();
+						startIncompleteElement(element);
+					}
+					if (a0_0 != null) {
+						if (a0_0 != null) {
+							Object value = a0_0;
+							addObjectToList(element, org.dresdenocl.language.ocl.OclPackage.PATH_NAME_PATH_CS__PATH_NAME, value);
+							completedElement(value, true);
+						}
+						collectHiddenTokens(element);
+						retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_46_0_0_0_0_0_0, a0_0, true);
+						copyLocalizationInfos(a0_0, element);
+					}
+				}
+			)
+			{
+				// expected elements (follow set)
+				addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1183]);
+			}
+			
+			a1 = '::' {
+				if (element == null) {
+					element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createPathNamePathCS();
+					startIncompleteElement(element);
+				}
+				collectHiddenTokens(element);
+				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_46_0_0_0_0_0_2, null, true);
+				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
+			}
+			{
+				// expected elements (follow set)
+				addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPathNamePathCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1184]);
+			}
+			
+		)
+		
+	)+	{
+		// expected elements (follow set)
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPathNamePathCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1185]);
+	}
+	
+	(
+		a2_0 = parse_org_dresdenocl_language_ocl_UnreservedSimpleNameCS		{
+			if (terminateParsing) {
+				throw new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTerminateParsingException();
+			}
+			if (element == null) {
+				element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createPathNamePathCS();
+				startIncompleteElement(element);
+			}
+			if (a2_0 != null) {
+				if (a2_0 != null) {
+					Object value = a2_0;
+					addObjectToList(element, org.dresdenocl.language.ocl.OclPackage.PATH_NAME_PATH_CS__PATH_NAME, value);
+					completedElement(value, true);
+				}
+				collectHiddenTokens(element);
+				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_46_0_0_1, a2_0, true);
+				copyLocalizationInfos(a2_0, element);
+			}
+		}
+	)
+	{
+		// expected elements (follow set)
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1186]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1187]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1188]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1189]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1190]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1191]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1192]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1193]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1194]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1195]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1196]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1197]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1198]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1199]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1200]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1201]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1202]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1203]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1204]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1205]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1206]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1207]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1208]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1209]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1210]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1211]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1212]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1213]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1214]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1215]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1216]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1217]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1218]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1219]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1220]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1221]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1222]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1223]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1224]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1225]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1226]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1227]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1228]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1229]);
+	}
+	
+;
+
+parse_org_dresdenocl_language_ocl_NamedElementCS returns [org.dresdenocl.language.ocl.NamedElementCS element = null]
+@init{
+}
+:
+	(
+		a0 = SIMPLE_NAME		
+		{
+			if (terminateParsing) {
+				throw new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTerminateParsingException();
+			}
+			if (element == null) {
+				element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createNamedElementCS();
+				startIncompleteElement(element);
+			}
+			if (a0 != null) {
+				org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("SIMPLE_NAME");
+				tokenResolver.setOptions(getOptions());
+				org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = getFreshTokenResolveResult();
+				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.NAMED_ELEMENT_CS__NAMED_ELEMENT), result);
+				Object resolvedObject = result.getResolvedToken();
+				if (resolvedObject == null) {
+					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
+				}
+				String resolved = (String) resolvedObject;
+				org.dresdenocl.pivotmodel.NamedElement proxy = org.dresdenocl.pivotmodel.PivotModelFactory.eINSTANCE.createNamespace();
+				collectHiddenTokens(element);
+				registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.NamedElementCS, org.dresdenocl.pivotmodel.NamedElement>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getNamedElementCSNamedElementReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.NAMED_ELEMENT_CS__NAMED_ELEMENT), resolved, proxy);
+				if (proxy != null) {
+					Object value = proxy;
+					element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.NAMED_ELEMENT_CS__NAMED_ELEMENT), value);
+					completedElement(value, false);
+				}
+				collectHiddenTokens(element);
+				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47_0_0_0, proxy, true);
+				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
+				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, proxy);
+			}
+		}
+	)
+	{
+		// expected elements (follow set)
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1230]);
 	}
 	
 ;
@@ -5225,14 +5319,14 @@ parse_org_dresdenocl_language_ocl_CollectionRangeCS returns [org.dresdenocl.lang
 					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_49_0_0_0, a0_0, true);
+				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_51_0_0_0, a0_0, true);
 				copyLocalizationInfos(a0_0, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1161]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1231]);
 	}
 	
 	a1 = '..' {
@@ -5241,39 +5335,38 @@ parse_org_dresdenocl_language_ocl_CollectionRangeCS returns [org.dresdenocl.lang
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_49_0_0_2, null, true);
+		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_51_0_0_2, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1162]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1163]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1164]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1165]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1166]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1167]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1168]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1169]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1170]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1171]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1172]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1173]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1174]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1175]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1176]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1177]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1178]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1179]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1180]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1181]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1182]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1183]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1184]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1185]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1186]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1187]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1188]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1189]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1232]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1233]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1234]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1235]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1236]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1237]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1238]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1239]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1240]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1241]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1242]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1243]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1244]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1245]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1246]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1247]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1248]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1249]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1250]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1251]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1252]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1253]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1254]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1255]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1256]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1257]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionRangeCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1258]);
 	}
 	
 	(
@@ -5292,15 +5385,15 @@ parse_org_dresdenocl_language_ocl_CollectionRangeCS returns [org.dresdenocl.lang
 					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_49_0_0_4, a2_0, true);
+				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_51_0_0_4, a2_0, true);
 				copyLocalizationInfos(a2_0, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1190]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1191]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1259]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1260]);
 	}
 	
 ;
@@ -5325,15 +5418,15 @@ parse_org_dresdenocl_language_ocl_CollectionLiteralPartsOclExpCS returns [org.dr
 					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_50_0_0_0, a0_0, true);
+				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_52_0_0_0, a0_0, true);
 				copyLocalizationInfos(a0_0, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1192]);
-		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1193]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1261]);
+		addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1262]);
 	}
 	
 ;
@@ -5378,34 +5471,33 @@ parseop_OclExpressionCS_level_4 returns [org.dresdenocl.language.ocl.OclExpressi
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1194]);
-			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1195]);
-			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1196]);
-			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1197]);
-			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1198]);
-			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1199]);
-			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1200]);
-			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1201]);
-			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1202]);
-			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1203]);
-			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1204]);
-			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1205]);
-			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1206]);
-			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1207]);
-			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1208]);
-			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1209]);
-			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1210]);
-			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1211]);
-			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1212]);
-			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1213]);
-			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1214]);
-			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1215]);
-			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1216]);
-			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1217]);
-			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1218]);
-			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1219]);
-			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1220]);
-			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1221]);
+			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1263]);
+			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1264]);
+			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1265]);
+			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1266]);
+			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1267]);
+			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1268]);
+			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1269]);
+			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1270]);
+			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1271]);
+			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1272]);
+			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1273]);
+			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1274]);
+			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1275]);
+			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1276]);
+			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1277]);
+			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1278]);
+			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1279]);
+			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1280]);
+			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1281]);
+			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1282]);
+			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1283]);
+			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1284]);
+			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1285]);
+			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1286]);
+			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1287]);
+			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1288]);
+			addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalImpliesOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1289]);
 		}
 		
 		rightArg = parseop_OclExpressionCS_level_5		{
@@ -5492,34 +5584,33 @@ leftArg = parseop_OclExpressionCS_level_6((
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1222]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1223]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1224]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1225]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1226]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1227]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1228]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1229]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1230]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1231]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1232]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1233]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1234]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1235]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1236]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1237]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1238]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1239]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1240]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1241]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1242]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1243]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1244]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1245]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1246]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1247]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1248]);
-		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1249]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1290]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1291]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1292]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1293]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1294]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1295]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1296]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1297]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1298]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1299]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1300]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1301]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1302]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1303]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1304]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1305]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1306]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1307]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1308]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1309]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1310]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1311]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1312]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1313]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1314]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1315]);
+		addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalXorOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1316]);
 	}
 	
 	rightArg = parseop_OclExpressionCS_level_6	{
@@ -5606,34 +5697,33 @@ leftArg = parseop_OclExpressionCS_level_7((
 )
 {
 	// expected elements (follow set)
-	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1250]);
-	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1251]);
-	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1252]);
-	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1253]);
-	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1254]);
-	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1255]);
-	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1256]);
-	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1257]);
-	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1258]);
-	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1259]);
-	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1260]);
-	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1261]);
-	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1262]);
-	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1263]);
-	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1264]);
-	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1265]);
-	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1266]);
-	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1267]);
-	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1268]);
-	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1269]);
-	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1270]);
-	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1271]);
-	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1272]);
-	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1273]);
-	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1274]);
-	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1275]);
-	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1276]);
-	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1277]);
+	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1317]);
+	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1318]);
+	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1319]);
+	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1320]);
+	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1321]);
+	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1322]);
+	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1323]);
+	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1324]);
+	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1325]);
+	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1326]);
+	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1327]);
+	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1328]);
+	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1329]);
+	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1330]);
+	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1331]);
+	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1332]);
+	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1333]);
+	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1334]);
+	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1335]);
+	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1336]);
+	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1337]);
+	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1338]);
+	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1339]);
+	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1340]);
+	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1341]);
+	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1342]);
+	addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalOrOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1343]);
 }
 
 rightArg = parseop_OclExpressionCS_level_7{
@@ -5720,34 +5810,33 @@ a0 = AND_OPERATOR
 )
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1278]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1279]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1280]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1281]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1282]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1283]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1284]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1285]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1286]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1287]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1288]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1289]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1290]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1291]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1292]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1293]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1294]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1295]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1296]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1297]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1298]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1299]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1300]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1301]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1302]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1303]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1304]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1305]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1344]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1345]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1346]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1347]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1348]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1349]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1350]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1351]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1352]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1353]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1354]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1355]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1356]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1357]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1358]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1359]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1360]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1361]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1362]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1363]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1364]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1365]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1366]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1367]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1368]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1369]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalAndOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1370]);
 }
 
 rightArg = parseop_OclExpressionCS_level_8{
@@ -5835,34 +5924,33 @@ a0 = EQUALITY_OPERATOR
 )
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1306]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1307]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1308]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1309]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1310]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1311]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1312]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1313]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1314]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1315]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1316]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1317]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1318]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1319]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1320]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1321]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1322]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1323]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1324]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1325]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1326]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1327]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1328]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1329]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1330]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1331]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1332]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1333]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1371]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1372]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1373]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1374]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1375]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1376]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1377]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1378]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1379]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1380]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1381]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1382]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1383]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1384]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1385]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1386]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1387]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1388]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1389]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1390]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1391]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1392]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1393]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1394]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1395]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1396]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1397]);
 }
 
 
@@ -5899,67 +5987,65 @@ a1 = NEQUALITY_OPERATOR
 )
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1334]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1335]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1336]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1337]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1338]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1339]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1340]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1341]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1342]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1343]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1344]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1345]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1346]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1347]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1348]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1349]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1350]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1351]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1352]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1353]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1354]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1355]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1356]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1357]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1358]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1359]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1360]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1361]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1398]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1399]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1400]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1401]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1402]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1403]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1404]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1405]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1406]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1407]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1408]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1409]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1410]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1411]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1412]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1413]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1414]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1415]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1416]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1417]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1418]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1419]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1420]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1421]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1422]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1423]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1424]);
 }
 
 )
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1362]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1363]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1364]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1365]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1366]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1367]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1368]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1369]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1370]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1371]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1372]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1373]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1374]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1375]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1376]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1377]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1378]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1379]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1380]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1381]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1382]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1383]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1384]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1385]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1386]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1387]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1388]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1389]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1425]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1426]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1427]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1428]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1429]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1430]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1431]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1432]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1433]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1434]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1435]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1436]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1437]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1438]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1439]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1440]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1441]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1442]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1443]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1444]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1445]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1446]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1447]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1448]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1449]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1450]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEqualityOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1451]);
 }
 
 rightArg = parseop_OclExpressionCS_level_9{
@@ -6046,34 +6132,33 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
 )
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1390]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1391]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1392]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1393]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1394]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1395]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1396]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1397]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1398]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1399]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1400]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1401]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1402]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1403]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1404]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1405]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1406]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1407]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1408]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1409]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1410]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1411]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1412]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1413]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1414]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1415]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1416]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1417]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1452]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1453]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1454]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1455]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1456]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1457]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1458]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1459]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1460]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1461]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1462]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1463]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1464]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1465]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1466]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1467]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1468]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1469]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1470]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1471]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1472]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1473]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1474]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1475]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1476]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1477]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getRelationalOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1478]);
 }
 
 rightArg = parseop_OclExpressionCS_level_11{
@@ -6160,34 +6245,33 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
 )
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1418]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1419]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1420]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1421]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1422]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1423]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1424]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1425]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1426]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1427]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1428]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1429]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1430]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1431]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1432]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1433]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1434]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1435]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1436]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1437]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1438]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1439]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1440]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1441]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1442]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1443]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1444]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1445]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1479]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1480]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1481]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1482]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1483]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1484]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1485]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1486]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1487]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1488]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1489]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1490]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1491]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1492]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1493]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1494]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1495]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1496]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1497]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1498]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1499]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1500]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1501]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1502]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1503]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1504]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAdditiveOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1505]);
 }
 
 rightArg = parseop_OclExpressionCS_level_12{
@@ -6274,34 +6358,33 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
 )
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1446]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1447]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1448]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1449]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1450]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1451]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1452]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1453]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1454]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1455]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1456]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1457]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1458]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1459]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1460]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1461]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1462]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1463]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1464]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1465]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1466]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1467]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1468]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1469]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1470]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1471]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1472]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1473]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1506]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1507]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1508]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1509]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1510]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1511]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1512]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1513]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1514]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1515]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1516]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1517]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1518]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1519]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1520]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1521]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1522]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1523]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1524]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1525]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1526]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1527]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1528]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1529]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1530]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1531]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getMultOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1532]);
 }
 
 rightArg = parseop_OclExpressionCS_level_13{
@@ -6385,34 +6468,33 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
 )
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1474]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1475]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1476]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1477]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1478]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1479]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1480]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1481]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1482]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1483]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1484]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1485]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1486]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1487]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1488]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1489]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1490]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1491]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1492]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1493]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1494]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1495]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1496]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1497]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1498]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1499]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1500]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1501]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1533]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1534]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1535]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1536]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1537]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1538]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1539]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1540]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1541]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1542]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1543]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1544]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1545]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1546]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1547]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1548]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1549]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1550]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1551]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1552]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1553]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1554]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1555]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1556]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1557]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1558]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getUnaryOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1559]);
 }
 
 arg = parseop_OclExpressionCS_level_14{
@@ -6468,34 +6550,33 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
 )
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1502]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1503]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1504]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1505]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1506]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1507]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1508]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1509]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1510]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1511]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1512]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1513]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1514]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1515]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1516]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1517]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1518]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1519]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1520]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1521]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1522]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1523]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1524]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1525]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1526]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1527]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1528]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1529]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1560]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1561]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1562]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1563]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1564]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1565]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1566]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1567]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1568]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1569]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1570]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1571]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1572]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1573]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1574]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1575]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1576]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1577]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1578]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1579]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1580]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1581]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1582]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1583]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1584]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1585]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLogicalNotOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1586]);
 }
 
 arg = parseop_OclExpressionCS_level_14{
@@ -6560,17 +6641,17 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
 )
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1530]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1531]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1532]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1533]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1534]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1535]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1536]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1537]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1538]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1539]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1540]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1587]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1588]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1589]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1590]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1591]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1592]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1593]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1594]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1595]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1596]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1597]);
 }
 
 (
@@ -6596,46 +6677,46 @@ copyLocalizationInfos(a1_0, element);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1541]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1542]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1543]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1544]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1545]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1546]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1547]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1548]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1549]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1550]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1551]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1552]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1553]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1554]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1555]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1556]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1557]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1558]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1559]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1560]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1561]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1562]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1563]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1564]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1565]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1566]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1567]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1568]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1569]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1570]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1571]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1572]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1573]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1574]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1575]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1576]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1577]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1578]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1579]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1580]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1598]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1599]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1600]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1601]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1602]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1603]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1604]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1605]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1606]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1607]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1608]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1609]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1610]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1611]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1612]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1613]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1614]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1615]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1616]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1617]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1618]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1619]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1620]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1621]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1622]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1623]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1624]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1625]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1626]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1627]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1628]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1629]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1630]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1631]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1632]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1633]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1634]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1635]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1636]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1637]);
 }
 
 (
@@ -6673,17 +6754,17 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, element);
 )
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1581]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1582]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1583]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1584]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1585]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1586]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1587]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1588]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1589]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1590]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1591]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1638]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1639]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1640]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1641]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1642]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1643]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1644]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1645]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1646]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1647]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNavigationCallExp(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1648]);
 }
 
 (
@@ -6709,82 +6790,19 @@ copyLocalizationInfos(a3_0, element);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1592]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1593]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1594]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1595]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1596]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1597]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1598]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1599]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1600]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1601]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1602]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1603]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1604]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1605]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1606]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1607]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1608]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1609]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1610]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1611]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1612]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1613]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1614]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1615]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1616]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1617]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1618]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1619]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1620]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1621]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1622]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1623]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1624]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1625]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1626]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1627]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1628]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1629]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1630]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1631]);
-}
-
-)
-
-)*{
-// expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1632]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1633]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1634]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1635]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1636]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1637]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1638]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1639]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1640]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1641]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1642]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1643]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1644]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1645]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1646]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1647]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1648]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1649]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1650]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1651]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1652]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1653]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1654]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1650]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1651]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1652]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1653]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1654]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1655]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1656]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1657]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1658]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1659]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1660]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1661]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1656]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1657]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1658]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1659]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1660]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1661]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1662]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1663]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1664]);
@@ -6795,6 +6813,69 @@ addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpect
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1669]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1670]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1671]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1672]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1673]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1674]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1675]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1676]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1677]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1678]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1679]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1680]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1681]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1682]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1683]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1684]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1685]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1686]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1687]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1688]);
+}
+
+)
+
+)*{
+// expected elements (follow set)
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1689]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1690]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1691]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1692]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1693]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1694]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1695]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1696]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1697]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1698]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1699]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1700]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1701]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1702]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1703]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1704]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1705]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1706]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1707]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1708]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1709]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1710]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1711]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1712]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1713]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1714]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1715]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1716]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1717]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1718]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1719]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1720]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1721]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1722]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1723]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1724]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1725]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1726]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1727]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1728]);
 }
 
 {
@@ -6827,7 +6908,7 @@ parseop_OclExpressionCS_level_20 returns [org.dresdenocl.language.ocl.OclExpress
 :
 c0 = parse_org_dresdenocl_language_ocl_OperationCallOnSelfExpCS{ element = c0; /* this is a subclass or primitive expression choice */ }
 |c1 = parse_org_dresdenocl_language_ocl_StaticOperationCallExpCS{ element = c1; /* this is a subclass or primitive expression choice */ }
-|c2 = parse_org_dresdenocl_language_ocl_EnumLiteralOrStaticPropertyExpCS{ element = c2; /* this is a subclass or primitive expression choice */ }
+|c2 = parse_org_dresdenocl_language_ocl_ModelElementCS{ element = c2; /* this is a subclass or primitive expression choice */ }
 |c3 = parse_org_dresdenocl_language_ocl_TupleLiteralExpCS{ element = c3; /* this is a subclass or primitive expression choice */ }
 |c4 = parse_org_dresdenocl_language_ocl_IfExpCS{ element = c4; /* this is a subclass or primitive expression choice */ }
 |c5 = parse_org_dresdenocl_language_ocl_CollectionLiteralExpCS{ element = c5; /* this is a subclass or primitive expression choice */ }
@@ -6841,8 +6922,7 @@ c0 = parse_org_dresdenocl_language_ocl_OperationCallOnSelfExpCS{ element = c0; /
 |c13 = parse_org_dresdenocl_language_ocl_StringLiteralExpCS{ element = c13; /* this is a subclass or primitive expression choice */ }
 |c14 = parse_org_dresdenocl_language_ocl_InvalidLiteralExpCS{ element = c14; /* this is a subclass or primitive expression choice */ }
 |c15 = parse_org_dresdenocl_language_ocl_NullLiteralExpCS{ element = c15; /* this is a subclass or primitive expression choice */ }
-|c16 = parse_org_dresdenocl_language_ocl_NamedLiteralExpCS{ element = c16; /* this is a subclass or primitive expression choice */ }
-|c17 = parse_org_dresdenocl_language_ocl_BracketExpCS{ element = c17; /* this is a subclass or primitive expression choice */ }
+|c16 = parse_org_dresdenocl_language_ocl_BracketExpCS{ element = c16; /* this is a subclass or primitive expression choice */ }
 ;
 
 parse_org_dresdenocl_language_ocl_OperationCallOnSelfExpCS returns [org.dresdenocl.language.ocl.OperationCallOnSelfExpCS element = null]
@@ -6879,7 +6959,7 @@ element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.
 completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_0_0, proxy, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_0_0_0_0, proxy, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, proxy);
 }
@@ -6887,8 +6967,8 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, proxy);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1672]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1673]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1729]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1730]);
 }
 
 
@@ -6921,7 +7001,7 @@ element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.
 completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_1_0, proxy, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_0_0_1_0, proxy, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, element);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, proxy);
 }
@@ -6929,8 +7009,8 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, proxy);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1674]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1675]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1731]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1732]);
 }
 
 
@@ -6963,7 +7043,7 @@ element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.
 completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_2_0, proxy, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_0_0_2_0, proxy, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, element);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, proxy);
 }
@@ -6971,8 +7051,8 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, proxy);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1676]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1677]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1733]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1734]);
 }
 
 
@@ -7005,7 +7085,7 @@ element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.
 completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_3_0, proxy, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_0_0_3_0, proxy, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a3, element);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a3, proxy);
 }
@@ -7013,8 +7093,8 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a3, proxy);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1678]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1679]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1735]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1736]);
 }
 
 
@@ -7047,7 +7127,7 @@ element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.
 completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_4_0, proxy, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_0_0_4_0, proxy, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a4, element);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a4, proxy);
 }
@@ -7055,8 +7135,8 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a4, proxy);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1680]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1681]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1737]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1738]);
 }
 
 
@@ -7089,7 +7169,7 @@ element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.
 completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_5_0, proxy, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_0_0_5_0, proxy, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a5, element);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a5, proxy);
 }
@@ -7097,8 +7177,8 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a5, proxy);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1682]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1683]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1739]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1740]);
 }
 
 
@@ -7131,7 +7211,7 @@ element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.
 completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_6_0, proxy, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_0_0_6_0, proxy, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a6, element);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a6, proxy);
 }
@@ -7139,8 +7219,8 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a6, proxy);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1684]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1685]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1741]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1742]);
 }
 
 
@@ -7173,7 +7253,7 @@ element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.
 completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_7_0, proxy, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_0_0_7_0, proxy, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a7, element);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a7, proxy);
 }
@@ -7181,15 +7261,15 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a7, proxy);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1686]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1687]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1743]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1744]);
 }
 
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1688]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1689]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1745]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1746]);
 }
 
 (
@@ -7220,21 +7300,21 @@ element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.
 completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_2_0_0_0, resolved, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_2_0_0_0, resolved, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a8, element);
 }
 }
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1690]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1747]);
 }
 
 )
 
 )?{
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1691]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1748]);
 }
 
 a9 = '(' {
@@ -7243,40 +7323,39 @@ element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createOperationCallOn
 startIncompleteElement(element);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_3, null, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_3, null, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a9, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1692]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1693]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1694]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1695]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1696]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1697]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1698]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1699]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1700]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1701]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1702]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1703]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1704]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1705]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1706]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1707]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1708]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1709]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1710]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1711]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1712]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1713]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1714]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1715]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1716]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1717]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1718]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1719]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1720]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1749]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1750]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1751]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1752]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1753]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1754]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1755]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1756]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1757]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1758]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1759]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1760]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1761]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1762]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1763]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1764]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1765]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1766]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1767]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1768]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1769]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1770]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1771]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1772]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1773]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1774]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1775]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1776]);
 }
 
 (
@@ -7297,15 +7376,15 @@ addObjectToList(element, org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_O
 completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_4_0_0_1, a10_0, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_4_0_0_1, a10_0, true);
 copyLocalizationInfos(a10_0, element);
 }
 }
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1721]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1722]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1777]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1778]);
 }
 
 (
@@ -7316,39 +7395,38 @@ element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createOperationCallOn
 startIncompleteElement(element);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_4_0_0_2_0_0_0, null, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_4_0_0_2_0_0_0, null, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a11, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1723]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1724]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1725]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1726]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1727]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1728]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1729]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1730]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1731]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1732]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1733]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1734]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1735]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1736]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1737]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1738]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1739]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1740]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1741]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1742]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1743]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1744]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1745]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1746]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1747]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1748]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1749]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1750]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1779]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1780]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1781]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1782]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1783]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1784]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1785]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1786]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1787]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1788]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1789]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1790]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1791]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1792]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1793]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1794]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1795]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1796]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1797]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1798]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1799]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1800]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1801]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1802]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1803]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1804]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallOnSelfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1805]);
 }
 
 (
@@ -7367,30 +7445,30 @@ if (a12_0 != null) {
 	completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_4_0_0_2_0_0_1, a12_0, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_4_0_0_2_0_0_1, a12_0, true);
 copyLocalizationInfos(a12_0, element);
 }
 }
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1751]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1752]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1806]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1807]);
 }
 
 )
 
 )*{
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1753]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1754]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1808]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1809]);
 }
 
 )
 
 )?{
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1755]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1810]);
 }
 
 a13 = ')' {
@@ -7399,50 +7477,50 @@ element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createOperationCallOn
 startIncompleteElement(element);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_6, null, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_6, null, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a13, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1756]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1757]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1758]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1759]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1760]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1761]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1762]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1763]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1764]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1765]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1766]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1767]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1768]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1769]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1770]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1771]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1772]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1773]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1774]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1775]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1776]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1777]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1778]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1779]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1780]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1781]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1782]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1783]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1784]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1785]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1786]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1787]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1788]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1789]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1790]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1791]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1792]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1793]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1794]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1811]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1812]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1813]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1814]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1815]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1816]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1817]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1818]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1819]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1820]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1821]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1822]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1823]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1824]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1825]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1826]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1827]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1828]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1829]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1830]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1831]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1832]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1833]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1834]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1835]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1836]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1837]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1838]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1839]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1840]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1841]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1842]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1843]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1844]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1845]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1846]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1847]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1848]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1849]);
 }
 
 ;
@@ -7452,7 +7530,7 @@ parse_org_dresdenocl_language_ocl_StaticOperationCallExpCS returns [org.dresdeno
 }
 :
 (
-a0_0 = parse_org_dresdenocl_language_ocl_TypePathNameCS{
+a0_0 = parse_org_dresdenocl_language_ocl_ModelElementCS{
 if (terminateParsing) {
 throw new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTerminateParsingException();
 }
@@ -7467,14 +7545,14 @@ element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.
 completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_0, a0_0, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0, a0_0, true);
 copyLocalizationInfos(a0_0, element);
 }
 }
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1795]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1850]);
 }
 
 a1 = '::' {
@@ -7483,12 +7561,12 @@ element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createStaticOperation
 startIncompleteElement(element);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_2, null, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_2, null, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1796]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1851]);
 }
 
 (
@@ -7520,7 +7598,7 @@ element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.
 completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_4, proxy, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_4, proxy, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, element);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, proxy);
 }
@@ -7528,7 +7606,7 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, proxy);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1797]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1852]);
 }
 
 a3 = '(' {
@@ -7537,40 +7615,39 @@ element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createStaticOperation
 startIncompleteElement(element);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_6, null, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_6, null, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1798]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1799]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1800]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1801]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1802]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1803]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1804]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1805]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1806]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1807]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1808]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1809]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1810]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1811]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1812]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1813]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1814]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1815]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1816]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1817]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1818]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1819]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1820]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1821]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1822]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1823]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1824]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1825]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1826]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1853]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1854]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1855]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1856]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1857]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1858]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1859]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1860]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1861]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1862]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1863]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1864]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1865]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1866]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1867]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1868]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1869]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1870]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1871]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1872]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1873]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1874]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1875]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1876]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1877]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1878]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1879]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1880]);
 }
 
 (
@@ -7591,15 +7668,15 @@ addObjectToList(element, org.dresdenocl.language.ocl.OclPackage.STATIC_OPERATION
 completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_7_0_0_1, a4_0, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_7_0_0_1, a4_0, true);
 copyLocalizationInfos(a4_0, element);
 }
 }
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1827]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1828]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1881]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1882]);
 }
 
 (
@@ -7610,39 +7687,38 @@ element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createStaticOperation
 startIncompleteElement(element);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_7_0_0_2_0_0_0, null, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_7_0_0_2_0_0_0, null, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a5, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1829]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1830]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1831]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1832]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1833]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1834]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1835]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1836]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1837]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1838]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1839]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1840]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1841]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1842]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1843]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1844]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1845]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1846]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1847]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1848]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1849]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1850]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1851]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1852]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1853]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1854]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1855]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1856]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1883]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1884]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1885]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1886]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1887]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1888]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1889]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1890]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1891]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1892]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1893]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1894]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1895]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1896]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1897]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1898]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1899]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1900]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1901]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1902]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1903]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1904]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1905]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1906]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1907]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1908]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1909]);
 }
 
 (
@@ -7661,30 +7737,30 @@ if (a6_0 != null) {
 	completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_7_0_0_2_0_0_1, a6_0, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_7_0_0_2_0_0_1, a6_0, true);
 copyLocalizationInfos(a6_0, element);
 }
 }
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1857]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1858]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1910]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1911]);
 }
 
 )
 
 )*{
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1859]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1860]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1912]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1913]);
 }
 
 )
 
 )?{
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1861]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1914]);
 }
 
 a7 = ')' {
@@ -7693,159 +7769,23 @@ element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createStaticOperation
 startIncompleteElement(element);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_9, null, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_9, null, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a7, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1862]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1863]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1864]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1865]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1866]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1867]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1868]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1869]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1870]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1871]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1872]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1873]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1874]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1875]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1876]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1877]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1878]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1879]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1880]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1881]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1882]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1883]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1884]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1885]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1886]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1887]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1888]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1889]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1890]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1891]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1892]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1893]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1894]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1895]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1896]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1897]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1898]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1899]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1900]);
-}
-
-;
-
-parse_org_dresdenocl_language_ocl_EnumLiteralOrStaticPropertyExpCS returns [org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS element = null]
-@init{
-}
-:
-(
-a0_0 = parse_org_dresdenocl_language_ocl_TypePathNameCS{
-if (terminateParsing) {
-throw new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTerminateParsingException();
-}
-if (element == null) {
-element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createEnumLiteralOrStaticPropertyExpCS();
-startIncompleteElement(element);
-}
-if (a0_0 != null) {
-if (a0_0 != null) {
-Object value = a0_0;
-element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS__TYPE_NAME), value);
-completedElement(value, true);
-}
-collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_45_0_0_0, a0_0, true);
-copyLocalizationInfos(a0_0, element);
-}
-}
-)
-{
-// expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1901]);
-}
-
-a1 = '::' {
-if (element == null) {
-element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createEnumLiteralOrStaticPropertyExpCS();
-startIncompleteElement(element);
-}
-collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_45_0_0_1, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
-}
-{
-// expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1902]);
-}
-
-(
-a2 = SIMPLE_NAME
-{
-if (terminateParsing) {
-throw new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTerminateParsingException();
-}
-if (element == null) {
-element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createEnumLiteralOrStaticPropertyExpCS();
-startIncompleteElement(element);
-}
-if (a2 != null) {
-org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("SIMPLE_NAME");
-tokenResolver.setOptions(getOptions());
-org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = getFreshTokenResolveResult();
-tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS__ENUM_LITERAL_OR_STATIC_PROPERTY), result);
-Object resolvedObject = result.getResolvedToken();
-if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a2).getStopIndex());
-}
-String resolved = (String) resolvedObject;
-org.dresdenocl.pivotmodel.NamedElement proxy = org.dresdenocl.pivotmodel.PivotModelFactory.eINSTANCE.createNamespace();
-collectHiddenTokens(element);
-registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS, org.dresdenocl.pivotmodel.NamedElement>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getEnumLiteralOrStaticPropertyExpCSEnumLiteralOrStaticPropertyReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS__ENUM_LITERAL_OR_STATIC_PROPERTY), resolved, proxy);
-if (proxy != null) {
-Object value = proxy;
-element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS__ENUM_LITERAL_OR_STATIC_PROPERTY), value);
-completedElement(value, false);
-}
-collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_45_0_0_2, proxy, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, element);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, proxy);
-}
-}
-)
-{
-// expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1903]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1904]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1905]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1906]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1907]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1908]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1909]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1910]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1911]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1912]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1913]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1914]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1915]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1916]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1917]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1918]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1919]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1915]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1916]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1917]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1918]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1919]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1920]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1921]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1922]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1923]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1924]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1925]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1926]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1921]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1922]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1923]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1924]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1925]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1926]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1927]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1928]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1929]);
@@ -7861,100 +7801,61 @@ addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpect
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1939]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1940]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1941]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1942]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1943]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1944]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1945]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1946]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1947]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1948]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1949]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1950]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1951]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1952]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1953]);
 }
 
 ;
 
-parse_org_dresdenocl_language_ocl_TupleLiteralExpCS returns [org.dresdenocl.language.ocl.TupleLiteralExpCS element = null]
+parse_org_dresdenocl_language_ocl_ModelElementCS returns [org.dresdenocl.language.ocl.ModelElementCS element = null]
 @init{
 }
 :
-a0 = 'Tuple' {
-if (element == null) {
-element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createTupleLiteralExpCS();
-startIncompleteElement(element);
-}
-collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_46_0_0_0, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
-}
-{
-// expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1942]);
-}
-
-a1 = '{' {
-if (element == null) {
-element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createTupleLiteralExpCS();
-startIncompleteElement(element);
-}
-collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_46_0_0_1, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
-}
-{
-// expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getTupleLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1943]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getTupleLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1944]);
-}
-
 (
-a2_0 = parse_org_dresdenocl_language_ocl_VariableDeclarationWithInitListCS{
+a0_0 = parse_org_dresdenocl_language_ocl_PathNameCS{
 if (terminateParsing) {
 throw new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTerminateParsingException();
 }
 if (element == null) {
-element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createTupleLiteralExpCS();
+element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createModelElementCS();
 startIncompleteElement(element);
 }
-if (a2_0 != null) {
-if (a2_0 != null) {
-Object value = a2_0;
-element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.TUPLE_LITERAL_EXP_CS__VARIABLE_DECLARATIONS), value);
+if (a0_0 != null) {
+if (a0_0 != null) {
+Object value = a0_0;
+element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.MODEL_ELEMENT_CS__PATH_NAME), value);
 completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_46_0_0_2, a2_0, true);
-copyLocalizationInfos(a2_0, element);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_0, a0_0, true);
+copyLocalizationInfos(a0_0, element);
 }
 }
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1945]);
-}
-
-a3 = '}' {
-if (element == null) {
-element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createTupleLiteralExpCS();
-startIncompleteElement(element);
-}
-collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_46_0_0_3, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
-}
-{
-// expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1946]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1947]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1948]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1949]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1950]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1951]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1952]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1953]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1954]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1955]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1956]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1957]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1958]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1959]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1960]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1961]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1962]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1963]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1964]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1965]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1954]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1955]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1956]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1957]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1958]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1959]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1960]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1961]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1962]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1963]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1964]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1965]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1966]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1967]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1968]);
@@ -7974,6 +7875,132 @@ addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpect
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1982]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1983]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1984]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1985]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1986]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1987]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1988]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1989]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1990]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1991]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1992]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1993]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1994]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1995]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1996]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1997]);
+}
+
+;
+
+parse_org_dresdenocl_language_ocl_TupleLiteralExpCS returns [org.dresdenocl.language.ocl.TupleLiteralExpCS element = null]
+@init{
+}
+:
+a0 = 'Tuple' {
+if (element == null) {
+element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createTupleLiteralExpCS();
+startIncompleteElement(element);
+}
+collectHiddenTokens(element);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48_0_0_0, null, true);
+copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
+}
+{
+// expected elements (follow set)
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1998]);
+}
+
+a1 = '{' {
+if (element == null) {
+element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createTupleLiteralExpCS();
+startIncompleteElement(element);
+}
+collectHiddenTokens(element);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48_0_0_1, null, true);
+copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
+}
+{
+// expected elements (follow set)
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getTupleLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1999]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getTupleLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2000]);
+}
+
+(
+a2_0 = parse_org_dresdenocl_language_ocl_VariableDeclarationWithInitListCS{
+if (terminateParsing) {
+throw new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTerminateParsingException();
+}
+if (element == null) {
+element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createTupleLiteralExpCS();
+startIncompleteElement(element);
+}
+if (a2_0 != null) {
+if (a2_0 != null) {
+Object value = a2_0;
+element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.TUPLE_LITERAL_EXP_CS__VARIABLE_DECLARATIONS), value);
+completedElement(value, true);
+}
+collectHiddenTokens(element);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48_0_0_2, a2_0, true);
+copyLocalizationInfos(a2_0, element);
+}
+}
+)
+{
+// expected elements (follow set)
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2001]);
+}
+
+a3 = '}' {
+if (element == null) {
+element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createTupleLiteralExpCS();
+startIncompleteElement(element);
+}
+collectHiddenTokens(element);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48_0_0_3, null, true);
+copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
+}
+{
+// expected elements (follow set)
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2002]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2003]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2004]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2005]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2006]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2007]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2008]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2009]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2010]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2011]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2012]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2013]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2014]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2015]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2016]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2017]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2018]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2019]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2020]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2021]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2022]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2023]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2024]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2025]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2026]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2027]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2028]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2029]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2030]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2031]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2032]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2033]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2034]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2035]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2036]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2037]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2038]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2039]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2040]);
 }
 
 ;
@@ -7988,145 +8015,13 @@ element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createIfExpCS();
 startIncompleteElement(element);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47_0_0_0, null, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_49_0_0_0, null, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1985]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1986]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1987]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1988]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1989]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1990]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1991]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1992]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1993]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1994]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1995]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1996]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1997]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1998]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[1999]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2000]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2001]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2002]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2003]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2004]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2005]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2006]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2007]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2008]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2009]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2010]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2011]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2012]);
-}
-
-(
-a1_0 = parse_org_dresdenocl_language_ocl_OclExpressionCS{
-if (terminateParsing) {
-throw new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTerminateParsingException();
-}
-if (element == null) {
-element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createIfExpCS();
-startIncompleteElement(element);
-}
-if (a1_0 != null) {
-if (a1_0 != null) {
-Object value = a1_0;
-element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IF_EXP_CS__CONDITION), value);
-completedElement(value, true);
-}
-collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47_0_0_1, a1_0, true);
-copyLocalizationInfos(a1_0, element);
-}
-}
-)
-{
-// expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2013]);
-}
-
-a2 = 'then' {
-if (element == null) {
-element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createIfExpCS();
-startIncompleteElement(element);
-}
-collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47_0_0_3, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
-}
-{
-// expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2014]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2015]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2016]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2017]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2018]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2019]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2020]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2021]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2022]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2023]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2024]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2025]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2026]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2027]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2028]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2029]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2030]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2031]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2032]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2033]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2034]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2035]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2036]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2037]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2038]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2039]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2040]);
 addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2041]);
-}
-
-(
-a3_0 = parse_org_dresdenocl_language_ocl_OclExpressionCS{
-if (terminateParsing) {
-throw new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTerminateParsingException();
-}
-if (element == null) {
-element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createIfExpCS();
-startIncompleteElement(element);
-}
-if (a3_0 != null) {
-if (a3_0 != null) {
-Object value = a3_0;
-element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IF_EXP_CS__THEN_BRANCH), value);
-completedElement(value, true);
-}
-collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47_0_0_5, a3_0, true);
-copyLocalizationInfos(a3_0, element);
-}
-}
-)
-{
-// expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2042]);
-}
-
-a4 = 'else' {
-if (element == null) {
-element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createIfExpCS();
-startIncompleteElement(element);
-}
-collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47_0_0_7, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a4, element);
-}
-{
-// expected elements (follow set)
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2042]);
 addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2043]);
 addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2044]);
 addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2045]);
@@ -8152,9 +8047,138 @@ addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS()
 addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2065]);
 addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2066]);
 addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2067]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2068]);
+}
+
+(
+a1_0 = parse_org_dresdenocl_language_ocl_OclExpressionCS{
+if (terminateParsing) {
+throw new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTerminateParsingException();
+}
+if (element == null) {
+element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createIfExpCS();
+startIncompleteElement(element);
+}
+if (a1_0 != null) {
+if (a1_0 != null) {
+Object value = a1_0;
+element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IF_EXP_CS__CONDITION), value);
+completedElement(value, true);
+}
+collectHiddenTokens(element);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_49_0_0_1, a1_0, true);
+copyLocalizationInfos(a1_0, element);
+}
+}
+)
+{
+// expected elements (follow set)
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2068]);
+}
+
+a2 = 'then' {
+if (element == null) {
+element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createIfExpCS();
+startIncompleteElement(element);
+}
+collectHiddenTokens(element);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_49_0_0_3, null, true);
+copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
+}
+{
+// expected elements (follow set)
 addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2069]);
 addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2070]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2071]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2072]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2073]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2074]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2075]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2076]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2077]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2078]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2079]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2080]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2081]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2082]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2083]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2084]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2085]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2086]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2087]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2088]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2089]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2090]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2091]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2092]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2093]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2094]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2095]);
+}
+
+(
+a3_0 = parse_org_dresdenocl_language_ocl_OclExpressionCS{
+if (terminateParsing) {
+throw new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTerminateParsingException();
+}
+if (element == null) {
+element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createIfExpCS();
+startIncompleteElement(element);
+}
+if (a3_0 != null) {
+if (a3_0 != null) {
+Object value = a3_0;
+element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IF_EXP_CS__THEN_BRANCH), value);
+completedElement(value, true);
+}
+collectHiddenTokens(element);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_49_0_0_5, a3_0, true);
+copyLocalizationInfos(a3_0, element);
+}
+}
+)
+{
+// expected elements (follow set)
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2096]);
+}
+
+a4 = 'else' {
+if (element == null) {
+element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createIfExpCS();
+startIncompleteElement(element);
+}
+collectHiddenTokens(element);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_49_0_0_7, null, true);
+copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a4, element);
+}
+{
+// expected elements (follow set)
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2097]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2098]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2099]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2100]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2101]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2102]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2103]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2104]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2105]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2106]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2107]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2108]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2109]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2110]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2111]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2112]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2113]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2114]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2115]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2116]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2117]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2118]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2119]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2120]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2121]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2122]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getIfExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2123]);
 }
 
 (
@@ -8173,14 +8197,14 @@ element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.
 completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47_0_0_9, a5_0, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_49_0_0_9, a5_0, true);
 copyLocalizationInfos(a5_0, element);
 }
 }
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2071]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2124]);
 }
 
 a6 = 'endif' {
@@ -8189,50 +8213,50 @@ element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createIfExpCS();
 startIncompleteElement(element);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47_0_0_11, null, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_49_0_0_11, null, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a6, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2072]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2073]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2074]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2075]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2076]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2077]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2078]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2079]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2080]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2081]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2082]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2083]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2084]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2085]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2086]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2087]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2088]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2089]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2090]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2091]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2092]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2093]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2094]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2095]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2096]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2097]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2098]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2099]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2100]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2101]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2102]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2103]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2104]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2105]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2106]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2107]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2108]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2109]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2110]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2125]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2126]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2127]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2128]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2129]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2130]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2131]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2132]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2133]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2134]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2135]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2136]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2137]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2138]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2139]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2140]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2141]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2142]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2143]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2144]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2145]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2146]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2147]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2148]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2149]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2150]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2151]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2152]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2153]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2154]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2155]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2156]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2157]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2158]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2159]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2160]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2161]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2162]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2163]);
 }
 
 ;
@@ -8257,14 +8281,14 @@ element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.
 completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48_0_0_0, a0_0, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_50_0_0_0, a0_0, true);
 copyLocalizationInfos(a0_0, element);
 }
 }
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2111]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2164]);
 }
 
 a1 = '{' {
@@ -8273,40 +8297,39 @@ element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createCollectionLiter
 startIncompleteElement(element);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48_0_0_1, null, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_50_0_0_1, null, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2112]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2113]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2114]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2115]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2116]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2117]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2118]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2119]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2120]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2121]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2122]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2123]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2124]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2125]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2126]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2127]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2128]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2129]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2130]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2131]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2132]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2133]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2134]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2135]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2136]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2137]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2138]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2139]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2140]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2165]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2166]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2167]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2168]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2169]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2170]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2171]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2172]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2173]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2174]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2175]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2176]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2177]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2178]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2179]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2180]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2181]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2182]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2183]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2184]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2185]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2186]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2187]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2188]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2189]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2190]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2191]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2192]);
 }
 
 (
@@ -8327,15 +8350,15 @@ addObjectToList(element, org.dresdenocl.language.ocl.OclPackage.COLLECTION_LITER
 completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48_0_0_2_0_0_0, a2_0, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_50_0_0_2_0_0_0, a2_0, true);
 copyLocalizationInfos(a2_0, element);
 }
 }
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2141]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2142]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2193]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2194]);
 }
 
 (
@@ -8346,39 +8369,38 @@ element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createCollectionLiter
 startIncompleteElement(element);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48_0_0_2_0_0_1_0_0_1, null, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_50_0_0_2_0_0_1_0_0_1, null, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2143]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2144]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2145]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2146]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2147]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2148]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2149]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2150]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2151]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2152]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2153]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2154]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2155]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2156]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2157]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2158]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2159]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2160]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2161]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2162]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2163]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2164]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2165]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2166]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2167]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2168]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2169]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2170]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2195]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2196]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2197]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2198]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2199]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2200]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2201]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2202]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2203]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2204]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2205]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2206]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2207]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2208]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2209]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2210]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2211]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2212]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2213]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2214]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2215]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2216]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2217]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2218]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2219]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2220]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionLiteralExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2221]);
 }
 
 (
@@ -8397,30 +8419,30 @@ if (a4_0 != null) {
 	completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48_0_0_2_0_0_1_0_0_2, a4_0, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_50_0_0_2_0_0_1_0_0_2, a4_0, true);
 copyLocalizationInfos(a4_0, element);
 }
 }
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2171]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2172]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2222]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2223]);
 }
 
 )
 
 )*{
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2173]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2174]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2224]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2225]);
 }
 
 )
 
 )?{
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2175]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2226]);
 }
 
 a5 = '}' {
@@ -8429,50 +8451,50 @@ element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createCollectionLiter
 startIncompleteElement(element);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48_0_0_3, null, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_50_0_0_3, null, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a5, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2176]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2177]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2178]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2179]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2180]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2181]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2182]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2183]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2184]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2185]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2186]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2187]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2188]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2189]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2190]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2191]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2192]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2193]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2194]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2195]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2196]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2197]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2198]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2199]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2200]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2201]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2202]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2203]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2204]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2205]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2206]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2207]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2208]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2209]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2210]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2211]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2212]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2213]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2214]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2227]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2228]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2229]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2230]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2231]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2232]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2233]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2234]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2235]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2236]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2237]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2238]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2239]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2240]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2241]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2242]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2243]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2244]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2245]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2246]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2247]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2248]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2249]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2250]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2251]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2252]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2253]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2254]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2255]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2256]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2257]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2258]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2259]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2260]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2261]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2262]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2263]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2264]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2265]);
 }
 
 ;
@@ -8497,52 +8519,52 @@ element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.
 completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_51_0_0_0, a0_0, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_53_0_0_0, a0_0, true);
 copyLocalizationInfos(a0_0, element);
 }
 }
 )
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2215]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2216]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2217]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2218]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2219]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2220]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2221]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2222]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2223]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2224]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2225]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2226]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2227]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2228]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2229]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2230]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2231]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2232]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2233]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2234]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2235]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2236]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2237]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2238]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2239]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2240]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2241]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2242]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2243]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2244]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2245]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2246]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2247]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2248]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2249]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2250]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2251]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2252]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2253]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2266]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2267]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2268]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2269]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2270]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2271]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2272]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2273]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2274]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2275]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2276]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2277]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2278]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2279]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2280]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2281]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2282]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2283]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2284]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2285]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2286]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2287]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2288]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2289]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2290]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2291]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2292]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2293]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2294]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2295]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2296]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2297]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2298]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2299]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2300]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2301]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2302]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2303]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2304]);
 }
 
 ;
@@ -8567,52 +8589,52 @@ element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.
 completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_52_0_0_0, a0_0, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_54_0_0_0, a0_0, true);
 copyLocalizationInfos(a0_0, element);
 }
 }
 )
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2254]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2255]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2256]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2257]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2258]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2259]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2260]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2261]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2262]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2263]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2264]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2265]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2266]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2267]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2268]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2269]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2270]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2271]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2272]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2273]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2274]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2275]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2276]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2277]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2278]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2279]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2280]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2281]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2282]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2283]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2284]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2285]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2286]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2287]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2288]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2289]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2290]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2291]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2292]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2305]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2306]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2307]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2308]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2309]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2310]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2311]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2312]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2313]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2314]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2315]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2316]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2317]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2318]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2319]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2320]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2321]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2322]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2323]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2324]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2325]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2326]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2327]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2328]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2329]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2330]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2331]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2332]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2333]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2334]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2335]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2336]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2337]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2338]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2339]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2340]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2341]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2342]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2343]);
 }
 
 ;
@@ -8650,7 +8672,7 @@ element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.
 completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_53_0_0_0, proxy, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_55_0_0_0, proxy, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, proxy);
 }
@@ -8658,7 +8680,7 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, proxy);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2293]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2344]);
 }
 
 (
@@ -8687,52 +8709,52 @@ element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.
 completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_53_0_0_2, resolved, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_55_0_0_2, resolved, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, element);
 }
 }
 )
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2294]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2295]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2296]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2297]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2298]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2299]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2300]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2301]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2302]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2303]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2304]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2305]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2306]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2307]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2308]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2309]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2310]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2311]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2312]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2313]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2314]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2315]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2316]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2317]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2318]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2319]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2320]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2321]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2322]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2323]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2324]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2325]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2326]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2327]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2328]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2329]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2330]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2331]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2332]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2345]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2346]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2347]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2348]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2349]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2350]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2351]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2352]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2353]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2354]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2355]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2356]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2357]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2358]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2359]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2360]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2361]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2362]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2363]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2364]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2365]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2366]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2367]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2368]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2369]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2370]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2371]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2372]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2373]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2374]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2375]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2376]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2377]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2378]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2379]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2380]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2381]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2382]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2383]);
 }
 
 ;
@@ -8747,13 +8769,13 @@ element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createLetExpCS();
 startIncompleteElement(element);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_54_0_0_0, null, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_56_0_0_0, null, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2333]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2334]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2384]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2385]);
 }
 
 (
@@ -8772,15 +8794,15 @@ addObjectToList(element, org.dresdenocl.language.ocl.OclPackage.LET_EXP_CS__VARI
 completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_54_0_0_1, a1_0, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_56_0_0_1, a1_0, true);
 copyLocalizationInfos(a1_0, element);
 }
 }
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2335]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2336]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2386]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2387]);
 }
 
 (
@@ -8791,13 +8813,13 @@ element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createLetExpCS();
 startIncompleteElement(element);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_54_0_0_2_0_0_1, null, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_56_0_0_2_0_0_1, null, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2337]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2338]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2388]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2389]);
 }
 
 (
@@ -8816,23 +8838,23 @@ addObjectToList(element, org.dresdenocl.language.ocl.OclPackage.LET_EXP_CS__VARI
 completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_54_0_0_2_0_0_2, a3_0, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_56_0_0_2_0_0_2, a3_0, true);
 copyLocalizationInfos(a3_0, element);
 }
 }
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2339]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2340]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2390]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2391]);
 }
 
 )
 
 )*{
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2341]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2342]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2392]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2393]);
 }
 
 a4 = 'in' {
@@ -8841,39 +8863,38 @@ element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createLetExpCS();
 startIncompleteElement(element);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_54_0_0_3, null, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_56_0_0_3, null, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a4, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2343]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2344]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2345]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2346]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2347]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2348]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2349]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2350]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2351]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2352]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2353]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2354]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2355]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2356]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2357]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2358]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2359]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2360]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2361]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2362]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2363]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2364]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2365]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2366]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2367]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2368]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2369]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2370]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2394]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2395]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2396]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2397]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2398]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2399]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2400]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2401]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2402]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2403]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2404]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2405]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2406]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2407]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2408]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2409]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2410]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2411]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2412]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2413]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2414]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2415]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2416]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2417]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2418]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2419]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getLetExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2420]);
 }
 
 (
@@ -8892,52 +8913,52 @@ element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.
 completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_54_0_0_5, a5_0, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_56_0_0_5, a5_0, true);
 copyLocalizationInfos(a5_0, element);
 }
 }
 )
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2371]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2372]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2373]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2374]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2375]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2376]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2377]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2378]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2379]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2380]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2381]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2382]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2383]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2384]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2385]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2386]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2387]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2388]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2389]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2390]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2391]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2392]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2393]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2394]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2395]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2396]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2397]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2398]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2399]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2400]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2401]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2402]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2403]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2404]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2405]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2406]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2407]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2408]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2409]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2421]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2422]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2423]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2424]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2425]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2426]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2427]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2428]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2429]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2430]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2431]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2432]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2433]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2434]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2435]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2436]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2437]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2438]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2439]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2440]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2441]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2442]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2443]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2444]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2445]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2446]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2447]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2448]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2449]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2450]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2451]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2452]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2453]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2454]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2455]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2456]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2457]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2458]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2459]);
 }
 
 ;
@@ -8972,14 +8993,14 @@ element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.
 completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_55_0_0_0, resolved, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_57_0_0_0, resolved, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
 }
 }
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2410]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2460]);
 }
 
 (
@@ -9008,15 +9029,15 @@ element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.
 completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_55_0_0_2, resolved, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_57_0_0_2, resolved, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, element);
 }
 }
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2411]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2412]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2461]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2462]);
 }
 
 (
@@ -9046,52 +9067,52 @@ element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.
 completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_55_0_0_4_0_0_0, resolved, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_57_0_0_4_0_0_0, resolved, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, element);
 }
 }
 )
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2413]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2414]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2415]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2416]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2417]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2418]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2419]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2420]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2421]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2422]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2423]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2424]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2425]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2426]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2427]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2428]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2429]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2430]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2431]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2432]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2433]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2434]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2435]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2436]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2437]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2438]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2439]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2440]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2441]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2442]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2443]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2444]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2445]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2446]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2447]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2448]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2449]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2450]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2451]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2463]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2464]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2465]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2466]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2467]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2468]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2469]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2470]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2471]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2472]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2473]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2474]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2475]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2476]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2477]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2478]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2479]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2480]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2481]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2482]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2483]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2484]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2485]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2486]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2487]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2488]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2489]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2490]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2491]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2492]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2493]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2494]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2495]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2496]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2497]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2498]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2499]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2500]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2501]);
 }
 
 
@@ -9121,80 +9142,25 @@ element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.
 completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_55_0_0_4_0_1_0, resolved, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_57_0_0_4_0_1_0, resolved, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a3, element);
 }
 }
 )
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2452]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2453]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2454]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2455]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2456]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2457]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2458]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2459]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2460]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2461]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2462]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2463]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2464]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2465]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2466]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2467]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2468]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2469]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2470]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2471]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2472]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2473]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2474]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2475]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2476]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2477]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2478]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2479]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2480]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2481]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2482]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2483]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2484]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2485]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2486]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2487]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2488]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2489]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2490]);
-}
-
-)
-{
-// expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2491]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2492]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2493]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2494]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2495]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2496]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2497]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2498]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2499]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2500]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2501]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2502]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2503]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2504]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2505]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2506]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2502]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2503]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2504]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2505]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2506]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2507]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2508]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2509]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2510]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2511]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2512]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2513]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2508]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2509]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2510]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2511]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2512]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2513]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2514]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2515]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2516]);
@@ -9211,6 +9177,61 @@ addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpect
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2527]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2528]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2529]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2530]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2531]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2532]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2533]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2534]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2535]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2536]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2537]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2538]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2539]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2540]);
+}
+
+)
+{
+// expected elements (follow set)
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2541]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2542]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2543]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2544]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2545]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2546]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2547]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2548]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2549]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2550]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2551]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2552]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2553]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2554]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2555]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2556]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2557]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2558]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2559]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2560]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2561]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2562]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2563]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2564]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2565]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2566]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2567]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2568]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2569]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2570]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2571]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2572]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2573]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2574]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2575]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2576]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2577]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2578]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2579]);
 }
 
 ;
@@ -9245,52 +9266,52 @@ element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.
 completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_56_0_0_0, resolved, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_58_0_0_0, resolved, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
 }
 }
 )
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2530]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2531]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2532]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2533]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2534]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2535]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2536]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2537]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2538]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2539]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2540]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2541]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2542]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2543]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2544]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2545]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2546]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2547]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2548]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2549]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2550]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2551]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2552]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2553]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2554]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2555]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2556]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2557]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2558]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2559]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2560]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2561]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2562]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2563]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2564]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2565]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2566]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2567]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2568]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2580]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2581]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2582]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2583]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2584]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2585]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2586]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2587]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2588]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2589]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2590]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2591]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2592]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2593]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2594]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2595]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2596]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2597]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2598]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2599]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2600]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2601]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2602]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2603]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2604]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2605]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2606]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2607]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2608]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2609]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2610]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2611]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2612]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2613]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2614]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2615]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2616]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2617]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2618]);
 }
 
 ;
@@ -9325,52 +9346,52 @@ element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.
 completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_57_0_0_0, resolved, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_59_0_0_0, resolved, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
 }
 }
 )
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2569]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2570]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2571]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2572]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2573]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2574]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2575]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2576]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2577]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2578]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2579]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2580]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2581]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2582]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2583]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2584]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2585]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2586]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2587]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2588]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2589]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2590]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2591]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2592]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2593]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2594]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2595]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2596]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2597]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2598]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2599]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2600]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2601]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2602]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2603]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2604]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2605]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2606]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2607]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2619]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2620]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2621]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2622]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2623]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2624]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2625]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2626]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2627]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2628]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2629]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2630]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2631]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2632]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2633]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2634]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2635]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2636]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2637]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2638]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2639]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2640]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2641]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2642]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2643]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2644]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2645]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2646]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2647]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2648]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2649]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2650]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2651]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2652]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2653]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2654]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2655]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2656]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2657]);
 }
 
 ;
@@ -9405,94 +9426,25 @@ element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.
 completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_58_0_0_0, resolved, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_60_0_0_0, resolved, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
 }
 }
 )
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2608]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2609]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2610]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2611]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2612]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2613]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2614]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2615]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2616]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2617]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2618]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2619]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2620]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2621]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2622]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2623]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2624]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2625]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2626]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2627]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2628]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2629]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2630]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2631]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2632]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2633]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2634]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2635]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2636]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2637]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2638]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2639]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2640]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2641]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2642]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2643]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2644]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2645]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2646]);
-}
-
-;
-
-parse_org_dresdenocl_language_ocl_InvalidLiteralExpCS returns [org.dresdenocl.language.ocl.InvalidLiteralExpCS element = null]
-@init{
-}
-:
-a0 = 'invalid' {
-if (element == null) {
-element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createInvalidLiteralExpCS();
-startIncompleteElement(element);
-}
-collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_59_0_0_0, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
-}
-{
-// expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2647]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2648]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2649]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2650]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2651]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2652]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2653]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2654]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2655]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2656]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2657]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2658]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2659]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2660]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2661]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2662]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2658]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2659]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2660]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2661]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2662]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2663]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2664]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2665]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2666]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2667]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2668]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2669]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2664]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2665]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2666]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2667]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2668]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2669]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2670]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2671]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2672]);
@@ -9509,48 +9461,48 @@ addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpect
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2683]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2684]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2685]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2686]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2687]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2688]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2689]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2690]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2691]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2692]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2693]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2694]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2695]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2696]);
 }
 
 ;
 
-parse_org_dresdenocl_language_ocl_NullLiteralExpCS returns [org.dresdenocl.language.ocl.NullLiteralExpCS element = null]
+parse_org_dresdenocl_language_ocl_InvalidLiteralExpCS returns [org.dresdenocl.language.ocl.InvalidLiteralExpCS element = null]
 @init{
 }
 :
-a0 = 'null' {
+a0 = 'invalid' {
 if (element == null) {
-element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createNullLiteralExpCS();
+element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createInvalidLiteralExpCS();
 startIncompleteElement(element);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_60_0_0_0, null, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_61_0_0_0, null, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2686]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2687]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2688]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2689]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2690]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2691]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2692]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2693]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2694]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2695]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2696]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2697]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2698]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2699]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2700]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2701]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2697]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2698]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2699]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2700]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2701]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2702]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2703]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2704]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2705]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2706]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2707]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2708]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2703]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2704]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2705]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2706]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2707]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2708]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2709]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2710]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2711]);
@@ -9567,74 +9519,48 @@ addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpect
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2722]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2723]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2724]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2725]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2726]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2727]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2728]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2729]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2730]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2731]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2732]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2733]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2734]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2735]);
 }
 
 ;
 
-parse_org_dresdenocl_language_ocl_NamedLiteralExpCS returns [org.dresdenocl.language.ocl.NamedLiteralExpCS element = null]
+parse_org_dresdenocl_language_ocl_NullLiteralExpCS returns [org.dresdenocl.language.ocl.NullLiteralExpCS element = null]
 @init{
 }
 :
-(
-a0 = SIMPLE_NAME
-{
-if (terminateParsing) {
-throw new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTerminateParsingException();
-}
+a0 = 'null' {
 if (element == null) {
-element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createNamedLiteralExpCS();
+element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createNullLiteralExpCS();
 startIncompleteElement(element);
 }
-if (a0 != null) {
-org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("SIMPLE_NAME");
-tokenResolver.setOptions(getOptions());
-org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = getFreshTokenResolveResult();
-tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.NAMED_LITERAL_EXP_CS__NAMED_ELEMENT), result);
-Object resolvedObject = result.getResolvedToken();
-if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
-}
-String resolved = (String) resolvedObject;
-org.dresdenocl.pivotmodel.NamedElement proxy = org.dresdenocl.pivotmodel.PivotModelFactory.eINSTANCE.createNamespace();
 collectHiddenTokens(element);
-registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.NamedLiteralExpCS, org.dresdenocl.pivotmodel.NamedElement>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getNamedLiteralExpCSNamedElementReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.NAMED_LITERAL_EXP_CS__NAMED_ELEMENT), resolved, proxy);
-if (proxy != null) {
-Object value = proxy;
-element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.NAMED_LITERAL_EXP_CS__NAMED_ELEMENT), value);
-completedElement(value, false);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_62_0_0_0, null, true);
+copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
 }
-collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_61_0_0_0, proxy, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, proxy);
-}
-}
-)
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2725]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2726]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2727]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2728]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2729]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2730]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2731]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2732]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2733]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2734]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2735]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2736]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2737]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2738]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2739]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2740]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2736]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2737]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2738]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2739]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2740]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2741]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2742]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2743]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2744]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2745]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2746]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2747]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2742]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2743]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2744]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2745]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2746]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2747]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2748]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2749]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2750]);
@@ -9651,6 +9577,17 @@ addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpect
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2761]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2762]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2763]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2764]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2765]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2766]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2767]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2768]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2769]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2770]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2771]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2772]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2773]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2774]);
 }
 
 ;
@@ -9665,22 +9602,11 @@ element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createBracketExpCS();
 startIncompleteElement(element);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_62_0_0_0, null, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_63_0_0_0, null, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBracketExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2764]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBracketExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2765]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBracketExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2766]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBracketExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2767]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBracketExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2768]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBracketExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2769]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBracketExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2770]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBracketExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2771]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBracketExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2772]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBracketExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2773]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBracketExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2774]);
 addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBracketExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2775]);
 addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBracketExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2776]);
 addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBracketExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2777]);
@@ -9698,6 +9624,16 @@ addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBracketEx
 addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBracketExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2789]);
 addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBracketExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2790]);
 addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBracketExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2791]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBracketExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2792]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBracketExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2793]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBracketExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2794]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBracketExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2795]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBracketExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2796]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBracketExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2797]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBracketExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2798]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBracketExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2799]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBracketExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2800]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getBracketExpCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2801]);
 }
 
 (
@@ -9716,14 +9652,14 @@ element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.
 completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_62_0_0_2, a1_0, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_63_0_0_2, a1_0, true);
 copyLocalizationInfos(a1_0, element);
 }
 }
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2792]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2802]);
 }
 
 a2 = ')' {
@@ -9732,33 +9668,23 @@ element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createBracketExpCS();
 startIncompleteElement(element);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_62_0_0_4, null, true);
+retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_63_0_0_4, null, true);
 copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2793]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2794]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2795]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2796]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2797]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2798]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2799]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2800]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2801]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2802]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2803]);
-addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2804]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2805]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2806]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2807]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2803]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2804]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2805]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2806]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2807]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2808]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2809]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2810]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2811]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2812]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2813]);
-addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2814]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2809]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2810]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2811]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2812]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2813]);
+addExpectedElement(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(), org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2814]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2815]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2816]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2817]);
@@ -9776,6 +9702,16 @@ addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpect
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2829]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2830]);
 addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2831]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2832]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2833]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2834]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2835]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2836]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2837]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2838]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2839]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2840]);
+addExpectedElement(null, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectationConstants.EXPECTATIONS[2841]);
 }
 
 ;
@@ -9796,19 +9732,11 @@ c0 = parse_org_dresdenocl_language_ocl_PreConditionDeclarationCS{ element = c0; 
 
 ;
 
-parse_org_dresdenocl_language_ocl_TypePathNameCS returns [org.dresdenocl.language.ocl.TypePathNameCS element = null]
-:
-c0 = parse_org_dresdenocl_language_ocl_TypePathNameSimpleCS{ element = c0; /* this is a subclass or primitive expression choice */ }
-|c1 = parse_org_dresdenocl_language_ocl_TypePathNameNestedCS{ element = c1; /* this is a subclass or primitive expression choice */ }
-
-;
-
 parse_org_dresdenocl_language_ocl_TypeCS returns [org.dresdenocl.language.ocl.TypeCS element = null]
 :
-c0 = parse_org_dresdenocl_language_ocl_TypePathNameSimpleCS{ element = c0; /* this is a subclass or primitive expression choice */ }
-|c1 = parse_org_dresdenocl_language_ocl_TypePathNameNestedCS{ element = c1; /* this is a subclass or primitive expression choice */ }
-|c2 = parse_org_dresdenocl_language_ocl_TupleTypeCS{ element = c2; /* this is a subclass or primitive expression choice */ }
-|c3 = parse_org_dresdenocl_language_ocl_CollectionTypeIdentifierCS{ element = c3; /* this is a subclass or primitive expression choice */ }
+c0 = parse_org_dresdenocl_language_ocl_TupleTypeCS{ element = c0; /* this is a subclass or primitive expression choice */ }
+|c1 = parse_org_dresdenocl_language_ocl_CollectionTypeIdentifierCS{ element = c1; /* this is a subclass or primitive expression choice */ }
+|c2 = parse_org_dresdenocl_language_ocl_TypeModelElementCS{ element = c2; /* this is a subclass or primitive expression choice */ }
 
 ;
 
@@ -9839,12 +9767,25 @@ c0 = parse_org_dresdenocl_language_ocl_DefinitionExpPropertyCS{ element = c0; /*
 
 ;
 
+parse_org_dresdenocl_language_ocl_UnreservedSimpleNameCS returns [org.dresdenocl.language.ocl.UnreservedSimpleNameCS element = null]
+:
+c0 = parse_org_dresdenocl_language_ocl_NamedElementCS{ element = c0; /* this is a subclass or primitive expression choice */ }
+
+;
+
 parse_org_dresdenocl_language_ocl_ImplicitFeatureCallCS returns [org.dresdenocl.language.ocl.ImplicitFeatureCallCS element = null]
 :
 c0 = parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS{ element = c0; /* this is a subclass or primitive expression choice */ }
 |c1 = parse_org_dresdenocl_language_ocl_ImplicitPropertyCallCS{ element = c1; /* this is a subclass or primitive expression choice */ }
 |c2 = parse_org_dresdenocl_language_ocl_IteratorExpCS{ element = c2; /* this is a subclass or primitive expression choice */ }
 |c3 = parse_org_dresdenocl_language_ocl_IterateExpCS{ element = c3; /* this is a subclass or primitive expression choice */ }
+
+;
+
+parse_org_dresdenocl_language_ocl_PathNameCS returns [org.dresdenocl.language.ocl.PathNameCS element = null]
+:
+c0 = parse_org_dresdenocl_language_ocl_PathNameSimpleCS{ element = c0; /* this is a subclass or primitive expression choice */ }
+|c1 = parse_org_dresdenocl_language_ocl_PathNamePathCS{ element = c1; /* this is a subclass or primitive expression choice */ }
 
 ;
 

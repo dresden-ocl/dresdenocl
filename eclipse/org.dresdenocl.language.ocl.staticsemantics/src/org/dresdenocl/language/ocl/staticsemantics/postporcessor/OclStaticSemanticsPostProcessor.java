@@ -2,9 +2,6 @@ package org.dresdenocl.language.ocl.staticsemantics.postporcessor;
 
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
-
 import org.dresdenocl.essentialocl.expressions.ExpressionInOcl;
 import org.dresdenocl.essentialocl.expressions.OclExpression;
 import org.dresdenocl.language.ocl.resource.ocl.IOclResourcePostProcessor;
@@ -12,6 +9,8 @@ import org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource;
 import org.dresdenocl.language.ocl.staticsemantics.OclStaticSemanticsException;
 import org.dresdenocl.modelbus.ModelBusPlugin;
 import org.dresdenocl.pivotmodel.Constraint;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 
 public class OclStaticSemanticsPostProcessor implements
 		IOclResourcePostProcessor {

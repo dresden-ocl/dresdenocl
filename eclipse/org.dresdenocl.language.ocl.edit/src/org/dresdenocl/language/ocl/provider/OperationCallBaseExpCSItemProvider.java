@@ -9,6 +9,9 @@ package org.dresdenocl.language.ocl.provider;
 import java.util.Collection;
 import java.util.List;
 
+import org.dresdenocl.language.ocl.OclFactory;
+import org.dresdenocl.language.ocl.OclPackage;
+import org.dresdenocl.language.ocl.OperationCallBaseExpCS;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
@@ -23,10 +26,6 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
-import org.dresdenocl.language.ocl.OclFactory;
-import org.dresdenocl.language.ocl.OclPackage;
-import org.dresdenocl.language.ocl.OperationCallBaseExpCS;
 
 /**
  * This is the item provider adapter for a {@link org.dresdenocl.language.ocl.OperationCallBaseExpCS} object.
@@ -201,7 +200,7 @@ public class OperationCallBaseExpCSItemProvider extends ItemProviderAdapter
 		newChildDescriptors.add
 			(createChildParameter
 				(OclPackage.Literals.OPERATION_CALL_BASE_EXP_CS__ARGUMENTS,
-				 OclFactory.eINSTANCE.createNamedLiteralExpCS()));
+				 OclFactory.eINSTANCE.createModelElementCS()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -212,11 +211,6 @@ public class OperationCallBaseExpCSItemProvider extends ItemProviderAdapter
 			(createChildParameter
 				(OclPackage.Literals.OPERATION_CALL_BASE_EXP_CS__ARGUMENTS,
 				 OclFactory.eINSTANCE.createTupleTypeLiteralExpCS()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OclPackage.Literals.OPERATION_CALL_BASE_EXP_CS__ARGUMENTS,
-				 OclFactory.eINSTANCE.createEnumLiteralOrStaticPropertyExpCS()));
 
 		newChildDescriptors.add
 			(createChildParameter

@@ -46,6 +46,37 @@ trait OclLookUpFunctions { selfType: OclStaticSemantics =>
       }
     }
   }
+  
+  protected def lookupPathName(names : List[String], namespace: Namespace, container: AttributableEObject) : Box[List[NamedElement]] = {
+    lookupLibraryType(names.last) match {
+        case Some(oclLibraryType) => Full(List(oclLibraryType))
+        case None => {
+              var element = namespace.lookupPathName(names).toList
+              
+              if (element.size == 0 && names.size == 1) {
+                element = List(model.findType(names))
+                if (element.size == 1 && element.first == null) {
+                   lookupVariable(names.last,container) match {
+                   	case Full(variable) => Full(List(variable))
+                   	case Empty => {
+                   			(sourceExpression(container)).flatMap({sourceExpression =>
+                   			  lookupProperty(sourceExpression, container, names.last, false).flatMap { p =>
+                   		     Full(List(p))                   		  
+                   			  }})
+                   }
+                   }
+                } else {
+                 !!(element) ?~
+        		("Cannot find element " + names.head + " in namespace " + namespace.getName)
+                }
+              } else {
+                !!(element) ?~
+        		("Cannot find element " + names.head + " in namespace " + namespace.getName)
+              }
+          
+        }
+    }
+  }
 
   private def lookupLocal(name: String, namespace: Namespace): Box[Type] = {
     !!(namespace.lookupType(name)) or !!(model.findType(List(name))) ?~

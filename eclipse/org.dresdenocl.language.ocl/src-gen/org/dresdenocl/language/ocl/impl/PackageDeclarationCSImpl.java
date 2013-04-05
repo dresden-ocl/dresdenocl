@@ -8,6 +8,9 @@ package org.dresdenocl.language.ocl.impl;
 
 import java.util.Collection;
 
+import org.dresdenocl.language.ocl.ContextDeclarationCS;
+import org.dresdenocl.language.ocl.OclPackage;
+import org.dresdenocl.language.ocl.PackageDeclarationCS;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -16,11 +19,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.emftext.commons.layout.LayoutInformation;
-import org.dresdenocl.language.ocl.ContextDeclarationCS;
-import org.dresdenocl.language.ocl.OclPackage;
-import org.dresdenocl.language.ocl.PackageDeclarationCS;
 
 /**
  * <!-- begin-user-doc -->

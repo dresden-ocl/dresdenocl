@@ -9,6 +9,9 @@ package org.dresdenocl.language.ocl.provider;
 import java.util.Collection;
 import java.util.List;
 
+import org.dresdenocl.language.ocl.OclFactory;
+import org.dresdenocl.language.ocl.OclPackage;
+import org.dresdenocl.language.ocl.PropertyCallExplicitPathExpCS;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -21,10 +24,6 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
-import org.dresdenocl.language.ocl.OclFactory;
-import org.dresdenocl.language.ocl.OclPackage;
-import org.dresdenocl.language.ocl.PropertyCallExplicitPathExpCS;
 
 /**
  * This is the item provider adapter for a {@link org.dresdenocl.language.ocl.PropertyCallExplicitPathExpCS} object.
@@ -189,7 +188,7 @@ public class PropertyCallExplicitPathExpCSItemProvider extends
 		newChildDescriptors.add
 			(createChildParameter
 				(OclPackage.Literals.PROPERTY_CALL_EXPLICIT_PATH_EXP_CS__SOURCE,
-				 OclFactory.eINSTANCE.createNamedLiteralExpCS()));
+				 OclFactory.eINSTANCE.createModelElementCS()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -200,11 +199,6 @@ public class PropertyCallExplicitPathExpCSItemProvider extends
 			(createChildParameter
 				(OclPackage.Literals.PROPERTY_CALL_EXPLICIT_PATH_EXP_CS__SOURCE,
 				 OclFactory.eINSTANCE.createTupleTypeLiteralExpCS()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OclPackage.Literals.PROPERTY_CALL_EXPLICIT_PATH_EXP_CS__SOURCE,
-				 OclFactory.eINSTANCE.createEnumLiteralOrStaticPropertyExpCS()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -354,7 +348,12 @@ public class PropertyCallExplicitPathExpCSItemProvider extends
 		newChildDescriptors.add
 			(createChildParameter
 				(OclPackage.Literals.PROPERTY_CALL_EXPLICIT_PATH_EXP_CS__PROPERTY_PATH,
-				 OclFactory.eINSTANCE.createPathNameCS()));
+				 OclFactory.eINSTANCE.createPathNameSimpleCS()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.PROPERTY_CALL_EXPLICIT_PATH_EXP_CS__PROPERTY_PATH,
+				 OclFactory.eINSTANCE.createPathNamePathCS()));
 
 		newChildDescriptors.add
 			(createChildParameter

@@ -14,24 +14,17 @@ public class OclReferenceResolverSwitch implements org.dresdenocl.language.ocl.r
 	private java.util.Map<Object, Object> options;
 	
 	protected org.dresdenocl.language.ocl.resource.ocl.analysis.PackageDeclarationNestedNamespaceCSNamespaceReferenceResolver packageDeclarationNestedNamespaceCSNamespaceReferenceResolver = new org.dresdenocl.language.ocl.resource.ocl.analysis.PackageDeclarationNestedNamespaceCSNamespaceReferenceResolver();
-	protected org.dresdenocl.language.ocl.resource.ocl.analysis.AttributeContextDeclarationCSPropertyReferenceResolver attributeContextDeclarationCSPropertyReferenceResolver = new org.dresdenocl.language.ocl.resource.ocl.analysis.AttributeContextDeclarationCSPropertyReferenceResolver();
 	protected org.dresdenocl.language.ocl.resource.ocl.analysis.OperationDefinitionCSOperationReferenceResolver operationDefinitionCSOperationReferenceResolver = new org.dresdenocl.language.ocl.resource.ocl.analysis.OperationDefinitionCSOperationReferenceResolver();
 	protected org.dresdenocl.language.ocl.resource.ocl.analysis.ParameterCSParameterReferenceResolver parameterCSParameterReferenceResolver = new org.dresdenocl.language.ocl.resource.ocl.analysis.ParameterCSParameterReferenceResolver();
 	protected org.dresdenocl.language.ocl.resource.ocl.analysis.OperationCallBaseExpCSOperationNameReferenceResolver operationCallBaseExpCSOperationNameReferenceResolver = new org.dresdenocl.language.ocl.resource.ocl.analysis.OperationCallBaseExpCSOperationNameReferenceResolver();
 	protected org.dresdenocl.language.ocl.resource.ocl.analysis.PropertyCallBaseExpCSPropertyReferenceResolver propertyCallBaseExpCSPropertyReferenceResolver = new org.dresdenocl.language.ocl.resource.ocl.analysis.PropertyCallBaseExpCSPropertyReferenceResolver();
-	protected org.dresdenocl.language.ocl.resource.ocl.analysis.TypePathNameSimpleCSTypeNameReferenceResolver typePathNameSimpleCSTypeNameReferenceResolver = new org.dresdenocl.language.ocl.resource.ocl.analysis.TypePathNameSimpleCSTypeNameReferenceResolver();
-	protected org.dresdenocl.language.ocl.resource.ocl.analysis.TypePathNameNestedCSNamespaceReferenceResolver typePathNameNestedCSNamespaceReferenceResolver = new org.dresdenocl.language.ocl.resource.ocl.analysis.TypePathNameNestedCSNamespaceReferenceResolver();
 	protected org.dresdenocl.language.ocl.resource.ocl.analysis.CollectionTypeIdentifierCSTypeNameReferenceResolver collectionTypeIdentifierCSTypeNameReferenceResolver = new org.dresdenocl.language.ocl.resource.ocl.analysis.CollectionTypeIdentifierCSTypeNameReferenceResolver();
 	protected org.dresdenocl.language.ocl.resource.ocl.analysis.StaticOperationCallExpCSOperationNameReferenceResolver staticOperationCallExpCSOperationNameReferenceResolver = new org.dresdenocl.language.ocl.resource.ocl.analysis.StaticOperationCallExpCSOperationNameReferenceResolver();
-	protected org.dresdenocl.language.ocl.resource.ocl.analysis.EnumLiteralOrStaticPropertyExpCSEnumLiteralOrStaticPropertyReferenceResolver enumLiteralOrStaticPropertyExpCSEnumLiteralOrStaticPropertyReferenceResolver = new org.dresdenocl.language.ocl.resource.ocl.analysis.EnumLiteralOrStaticPropertyExpCSEnumLiteralOrStaticPropertyReferenceResolver();
-	protected org.dresdenocl.language.ocl.resource.ocl.analysis.NamedLiteralExpCSNamedElementReferenceResolver namedLiteralExpCSNamedElementReferenceResolver = new org.dresdenocl.language.ocl.resource.ocl.analysis.NamedLiteralExpCSNamedElementReferenceResolver();
+	protected org.dresdenocl.language.ocl.resource.ocl.analysis.PathNameSimpleCSNamedElementReferenceResolver pathNameSimpleCSNamedElementReferenceResolver = new org.dresdenocl.language.ocl.resource.ocl.analysis.PathNameSimpleCSNamedElementReferenceResolver();
+	protected org.dresdenocl.language.ocl.resource.ocl.analysis.NamedElementCSNamedElementReferenceResolver namedElementCSNamedElementReferenceResolver = new org.dresdenocl.language.ocl.resource.ocl.analysis.NamedElementCSNamedElementReferenceResolver();
 	
 	public org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolver<org.dresdenocl.language.ocl.PackageDeclarationNestedNamespaceCS, org.dresdenocl.pivotmodel.Namespace> getPackageDeclarationNestedNamespaceCSNamespaceReferenceResolver() {
 		return getResolverChain(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationNestedNamespaceCS_Namespace(), packageDeclarationNestedNamespaceCSNamespaceReferenceResolver);
-	}
-	
-	public org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolver<org.dresdenocl.language.ocl.AttributeContextDeclarationCS, org.dresdenocl.pivotmodel.Property> getAttributeContextDeclarationCSPropertyReferenceResolver() {
-		return getResolverChain(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS_Property(), attributeContextDeclarationCSPropertyReferenceResolver);
 	}
 	
 	public org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolver<org.dresdenocl.language.ocl.OperationDefinitionCS, org.dresdenocl.pivotmodel.Operation> getOperationDefinitionCSOperationReferenceResolver() {
@@ -50,14 +43,6 @@ public class OclReferenceResolverSwitch implements org.dresdenocl.language.ocl.r
 		return getResolverChain(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPropertyCallBaseExpCS_Property(), propertyCallBaseExpCSPropertyReferenceResolver);
 	}
 	
-	public org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolver<org.dresdenocl.language.ocl.TypePathNameSimpleCS, org.dresdenocl.pivotmodel.Type> getTypePathNameSimpleCSTypeNameReferenceResolver() {
-		return getResolverChain(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getTypePathNameSimpleCS_TypeName(), typePathNameSimpleCSTypeNameReferenceResolver);
-	}
-	
-	public org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolver<org.dresdenocl.language.ocl.TypePathNameNestedCS, org.dresdenocl.pivotmodel.Namespace> getTypePathNameNestedCSNamespaceReferenceResolver() {
-		return getResolverChain(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getTypePathNameNestedCS_Namespace(), typePathNameNestedCSNamespaceReferenceResolver);
-	}
-	
 	public org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolver<org.dresdenocl.language.ocl.CollectionTypeIdentifierCS, org.dresdenocl.pivotmodel.Type> getCollectionTypeIdentifierCSTypeNameReferenceResolver() {
 		return getResolverChain(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionTypeIdentifierCS_TypeName(), collectionTypeIdentifierCSTypeNameReferenceResolver);
 	}
@@ -66,12 +51,12 @@ public class OclReferenceResolverSwitch implements org.dresdenocl.language.ocl.r
 		return getResolverChain(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS_OperationName(), staticOperationCallExpCSOperationNameReferenceResolver);
 	}
 	
-	public org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolver<org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS, org.dresdenocl.pivotmodel.NamedElement> getEnumLiteralOrStaticPropertyExpCSEnumLiteralOrStaticPropertyReferenceResolver() {
-		return getResolverChain(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEnumLiteralOrStaticPropertyExpCS_EnumLiteralOrStaticProperty(), enumLiteralOrStaticPropertyExpCSEnumLiteralOrStaticPropertyReferenceResolver);
+	public org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolver<org.dresdenocl.language.ocl.PathNameSimpleCS, org.dresdenocl.pivotmodel.NamedElement> getPathNameSimpleCSNamedElementReferenceResolver() {
+		return getResolverChain(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPathNameSimpleCS_NamedElement(), pathNameSimpleCSNamedElementReferenceResolver);
 	}
 	
-	public org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolver<org.dresdenocl.language.ocl.NamedLiteralExpCS, org.dresdenocl.pivotmodel.NamedElement> getNamedLiteralExpCSNamedElementReferenceResolver() {
-		return getResolverChain(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNamedLiteralExpCS_NamedElement(), namedLiteralExpCSNamedElementReferenceResolver);
+	public org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolver<org.dresdenocl.language.ocl.NamedElementCS, org.dresdenocl.pivotmodel.NamedElement> getNamedElementCSNamedElementReferenceResolver() {
+		return getResolverChain(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNamedElementCS_NamedElement(), namedElementCSNamedElementReferenceResolver);
 	}
 	
 	public void setOptions(java.util.Map<?, ?> options) {
@@ -80,17 +65,14 @@ public class OclReferenceResolverSwitch implements org.dresdenocl.language.ocl.r
 			this.options.putAll(options);
 		}
 		packageDeclarationNestedNamespaceCSNamespaceReferenceResolver.setOptions(options);
-		attributeContextDeclarationCSPropertyReferenceResolver.setOptions(options);
 		operationDefinitionCSOperationReferenceResolver.setOptions(options);
 		parameterCSParameterReferenceResolver.setOptions(options);
 		operationCallBaseExpCSOperationNameReferenceResolver.setOptions(options);
 		propertyCallBaseExpCSPropertyReferenceResolver.setOptions(options);
-		typePathNameSimpleCSTypeNameReferenceResolver.setOptions(options);
-		typePathNameNestedCSNamespaceReferenceResolver.setOptions(options);
 		collectionTypeIdentifierCSTypeNameReferenceResolver.setOptions(options);
 		staticOperationCallExpCSOperationNameReferenceResolver.setOptions(options);
-		enumLiteralOrStaticPropertyExpCSEnumLiteralOrStaticPropertyReferenceResolver.setOptions(options);
-		namedLiteralExpCSNamedElementReferenceResolver.setOptions(options);
+		pathNameSimpleCSNamedElementReferenceResolver.setOptions(options);
+		namedElementCSNamedElementReferenceResolver.setOptions(options);
 	}
 	
 	public void resolveFuzzy(String identifier, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference, int position, org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<org.eclipse.emf.ecore.EObject> result) {
@@ -103,14 +85,6 @@ public class OclReferenceResolverSwitch implements org.dresdenocl.language.ocl.r
 			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
 			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("namespace")) {
 				packageDeclarationNestedNamespaceCSNamespaceReferenceResolver.resolve(identifier, (org.dresdenocl.language.ocl.PackageDeclarationNestedNamespaceCS) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
-			}
-		}
-		if (org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS().isInstance(container)) {
-			OclFuzzyResolveResult<org.dresdenocl.pivotmodel.Property> frr = new OclFuzzyResolveResult<org.dresdenocl.pivotmodel.Property>(result);
-			String referenceName = reference.getName();
-			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
-			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("property")) {
-				attributeContextDeclarationCSPropertyReferenceResolver.resolve(identifier, (org.dresdenocl.language.ocl.AttributeContextDeclarationCS) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
 			}
 		}
 		if (org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationDefinitionCS().isInstance(container)) {
@@ -145,22 +119,6 @@ public class OclReferenceResolverSwitch implements org.dresdenocl.language.ocl.r
 				propertyCallBaseExpCSPropertyReferenceResolver.resolve(identifier, (org.dresdenocl.language.ocl.PropertyCallBaseExpCS) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
 			}
 		}
-		if (org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getTypePathNameSimpleCS().isInstance(container)) {
-			OclFuzzyResolveResult<org.dresdenocl.pivotmodel.Type> frr = new OclFuzzyResolveResult<org.dresdenocl.pivotmodel.Type>(result);
-			String referenceName = reference.getName();
-			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
-			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("typeName")) {
-				typePathNameSimpleCSTypeNameReferenceResolver.resolve(identifier, (org.dresdenocl.language.ocl.TypePathNameSimpleCS) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
-			}
-		}
-		if (org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getTypePathNameNestedCS().isInstance(container)) {
-			OclFuzzyResolveResult<org.dresdenocl.pivotmodel.Namespace> frr = new OclFuzzyResolveResult<org.dresdenocl.pivotmodel.Namespace>(result);
-			String referenceName = reference.getName();
-			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
-			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("namespace")) {
-				typePathNameNestedCSNamespaceReferenceResolver.resolve(identifier, (org.dresdenocl.language.ocl.TypePathNameNestedCS) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
-			}
-		}
 		if (org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionTypeIdentifierCS().isInstance(container)) {
 			OclFuzzyResolveResult<org.dresdenocl.pivotmodel.Type> frr = new OclFuzzyResolveResult<org.dresdenocl.pivotmodel.Type>(result);
 			String referenceName = reference.getName();
@@ -177,20 +135,20 @@ public class OclReferenceResolverSwitch implements org.dresdenocl.language.ocl.r
 				staticOperationCallExpCSOperationNameReferenceResolver.resolve(identifier, (org.dresdenocl.language.ocl.StaticOperationCallExpCS) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
 			}
 		}
-		if (org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEnumLiteralOrStaticPropertyExpCS().isInstance(container)) {
-			OclFuzzyResolveResult<org.dresdenocl.pivotmodel.NamedElement> frr = new OclFuzzyResolveResult<org.dresdenocl.pivotmodel.NamedElement>(result);
-			String referenceName = reference.getName();
-			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
-			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("enumLiteralOrStaticProperty")) {
-				enumLiteralOrStaticPropertyExpCSEnumLiteralOrStaticPropertyReferenceResolver.resolve(identifier, (org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
-			}
-		}
-		if (org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNamedLiteralExpCS().isInstance(container)) {
+		if (org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPathNameSimpleCS().isInstance(container)) {
 			OclFuzzyResolveResult<org.dresdenocl.pivotmodel.NamedElement> frr = new OclFuzzyResolveResult<org.dresdenocl.pivotmodel.NamedElement>(result);
 			String referenceName = reference.getName();
 			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
 			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("namedElement")) {
-				namedLiteralExpCSNamedElementReferenceResolver.resolve(identifier, (org.dresdenocl.language.ocl.NamedLiteralExpCS) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
+				pathNameSimpleCSNamedElementReferenceResolver.resolve(identifier, (org.dresdenocl.language.ocl.PathNameSimpleCS) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
+			}
+		}
+		if (org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNamedElementCS().isInstance(container)) {
+			OclFuzzyResolveResult<org.dresdenocl.pivotmodel.NamedElement> frr = new OclFuzzyResolveResult<org.dresdenocl.pivotmodel.NamedElement>(result);
+			String referenceName = reference.getName();
+			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
+			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("namedElement")) {
+				namedElementCSNamedElementReferenceResolver.resolve(identifier, (org.dresdenocl.language.ocl.NamedElementCS) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
 			}
 		}
 	}
@@ -198,9 +156,6 @@ public class OclReferenceResolverSwitch implements org.dresdenocl.language.ocl.r
 	public org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolver<? extends org.eclipse.emf.ecore.EObject, ? extends org.eclipse.emf.ecore.EObject> getResolver(org.eclipse.emf.ecore.EStructuralFeature reference) {
 		if (reference == org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationNestedNamespaceCS_Namespace()) {
 			return getResolverChain(reference, packageDeclarationNestedNamespaceCSNamespaceReferenceResolver);
-		}
-		if (reference == org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS_Property()) {
-			return getResolverChain(reference, attributeContextDeclarationCSPropertyReferenceResolver);
 		}
 		if (reference == org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationDefinitionCS_Operation()) {
 			return getResolverChain(reference, operationDefinitionCSOperationReferenceResolver);
@@ -214,23 +169,17 @@ public class OclReferenceResolverSwitch implements org.dresdenocl.language.ocl.r
 		if (reference == org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPropertyCallBaseExpCS_Property()) {
 			return getResolverChain(reference, propertyCallBaseExpCSPropertyReferenceResolver);
 		}
-		if (reference == org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getTypePathNameSimpleCS_TypeName()) {
-			return getResolverChain(reference, typePathNameSimpleCSTypeNameReferenceResolver);
-		}
-		if (reference == org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getTypePathNameNestedCS_Namespace()) {
-			return getResolverChain(reference, typePathNameNestedCSNamespaceReferenceResolver);
-		}
 		if (reference == org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionTypeIdentifierCS_TypeName()) {
 			return getResolverChain(reference, collectionTypeIdentifierCSTypeNameReferenceResolver);
 		}
 		if (reference == org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS_OperationName()) {
 			return getResolverChain(reference, staticOperationCallExpCSOperationNameReferenceResolver);
 		}
-		if (reference == org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getEnumLiteralOrStaticPropertyExpCS_EnumLiteralOrStaticProperty()) {
-			return getResolverChain(reference, enumLiteralOrStaticPropertyExpCSEnumLiteralOrStaticPropertyReferenceResolver);
+		if (reference == org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPathNameSimpleCS_NamedElement()) {
+			return getResolverChain(reference, pathNameSimpleCSNamedElementReferenceResolver);
 		}
-		if (reference == org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNamedLiteralExpCS_NamedElement()) {
-			return getResolverChain(reference, namedLiteralExpCSNamedElementReferenceResolver);
+		if (reference == org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNamedElementCS_NamedElement()) {
+			return getResolverChain(reference, namedElementCSNamedElementReferenceResolver);
 		}
 		return null;
 	}

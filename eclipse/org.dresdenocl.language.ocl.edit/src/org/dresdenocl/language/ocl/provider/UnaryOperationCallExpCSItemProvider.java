@@ -10,6 +10,9 @@ package org.dresdenocl.language.ocl.provider;
 import java.util.Collection;
 import java.util.List;
 
+import org.dresdenocl.language.ocl.OclFactory;
+import org.dresdenocl.language.ocl.OclPackage;
+import org.dresdenocl.language.ocl.UnaryOperationCallExpCS;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -20,10 +23,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
-import org.dresdenocl.language.ocl.OclFactory;
-import org.dresdenocl.language.ocl.OclPackage;
-import org.dresdenocl.language.ocl.UnaryOperationCallExpCS;
 
 /**
  * This is the item provider adapter for a {@link org.dresdenocl.language.ocl.UnaryOperationCallExpCS} object.
@@ -166,7 +165,7 @@ public class UnaryOperationCallExpCSItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(OclPackage.Literals.UNARY_OPERATION_CALL_EXP_CS__TARGET,
-				 OclFactory.eINSTANCE.createNamedLiteralExpCS()));
+				 OclFactory.eINSTANCE.createModelElementCS()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -177,11 +176,6 @@ public class UnaryOperationCallExpCSItemProvider
 			(createChildParameter
 				(OclPackage.Literals.UNARY_OPERATION_CALL_EXP_CS__TARGET,
 				 OclFactory.eINSTANCE.createTupleTypeLiteralExpCS()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OclPackage.Literals.UNARY_OPERATION_CALL_EXP_CS__TARGET,
-				 OclFactory.eINSTANCE.createEnumLiteralOrStaticPropertyExpCS()));
 
 		newChildDescriptors.add
 			(createChildParameter

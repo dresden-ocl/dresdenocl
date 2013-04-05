@@ -332,116 +332,120 @@ public class OclPrinter2 implements org.dresdenocl.language.ocl.resource.ocl.IOc
 			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_34, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.dresdenocl.language.ocl.TypePathNameSimpleCS) {
+		if (element instanceof org.dresdenocl.language.ocl.TupleTypeCS) {
 			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_35, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.dresdenocl.language.ocl.TypePathNameNestedCS) {
+		if (element instanceof org.dresdenocl.language.ocl.CollectionTypeIdentifierCS) {
 			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_36, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.dresdenocl.language.ocl.TupleTypeCS) {
+		if (element instanceof org.dresdenocl.language.ocl.TypeModelElementCS) {
 			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_37, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.dresdenocl.language.ocl.CollectionTypeIdentifierCS) {
+		if (element instanceof org.dresdenocl.language.ocl.VariableDeclarationWithoutInitCS) {
 			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_38, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.dresdenocl.language.ocl.VariableDeclarationWithoutInitCS) {
+		if (element instanceof org.dresdenocl.language.ocl.VariableDeclarationWithoutInitListCS) {
 			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_39, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.dresdenocl.language.ocl.VariableDeclarationWithoutInitListCS) {
+		if (element instanceof org.dresdenocl.language.ocl.VariableDeclarationWithInitCS) {
 			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_40, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.dresdenocl.language.ocl.VariableDeclarationWithInitCS) {
+		if (element instanceof org.dresdenocl.language.ocl.VariableDeclarationWithInitListCS) {
 			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_41, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.dresdenocl.language.ocl.VariableDeclarationWithInitListCS) {
+		if (element instanceof org.dresdenocl.language.ocl.OperationCallOnSelfExpCS) {
 			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.dresdenocl.language.ocl.OperationCallOnSelfExpCS) {
+		if (element instanceof org.dresdenocl.language.ocl.StaticOperationCallExpCS) {
 			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.dresdenocl.language.ocl.StaticOperationCallExpCS) {
+		if (element instanceof org.dresdenocl.language.ocl.ModelElementCS) {
 			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS) {
+		if (element instanceof org.dresdenocl.language.ocl.PathNameSimpleCS) {
 			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_45, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.dresdenocl.language.ocl.TupleLiteralExpCS) {
+		if (element instanceof org.dresdenocl.language.ocl.PathNamePathCS) {
 			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_46, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.dresdenocl.language.ocl.IfExpCS) {
+		if (element instanceof org.dresdenocl.language.ocl.NamedElementCS) {
 			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.dresdenocl.language.ocl.CollectionLiteralExpCS) {
+		if (element instanceof org.dresdenocl.language.ocl.TupleLiteralExpCS) {
 			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.dresdenocl.language.ocl.CollectionRangeCS) {
+		if (element instanceof org.dresdenocl.language.ocl.IfExpCS) {
 			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_49, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.dresdenocl.language.ocl.CollectionLiteralPartsOclExpCS) {
+		if (element instanceof org.dresdenocl.language.ocl.CollectionLiteralExpCS) {
 			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_50, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.dresdenocl.language.ocl.CollectionTypeLiteralExpCS) {
+		if (element instanceof org.dresdenocl.language.ocl.CollectionRangeCS) {
 			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_51, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.dresdenocl.language.ocl.TupleTypeLiteralExpCS) {
+		if (element instanceof org.dresdenocl.language.ocl.CollectionLiteralPartsOclExpCS) {
 			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_52, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.dresdenocl.language.ocl.PropertyCallOnSelfExpCS) {
+		if (element instanceof org.dresdenocl.language.ocl.CollectionTypeLiteralExpCS) {
 			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_53, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.dresdenocl.language.ocl.LetExpCS) {
+		if (element instanceof org.dresdenocl.language.ocl.TupleTypeLiteralExpCS) {
 			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_54, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.dresdenocl.language.ocl.RealLiteralExpCS) {
+		if (element instanceof org.dresdenocl.language.ocl.PropertyCallOnSelfExpCS) {
 			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_55, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.dresdenocl.language.ocl.IntegerLiteralExpCS) {
+		if (element instanceof org.dresdenocl.language.ocl.LetExpCS) {
 			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_56, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.dresdenocl.language.ocl.BooleanLiteralExpCS) {
+		if (element instanceof org.dresdenocl.language.ocl.RealLiteralExpCS) {
 			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_57, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.dresdenocl.language.ocl.StringLiteralExpCS) {
+		if (element instanceof org.dresdenocl.language.ocl.IntegerLiteralExpCS) {
 			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_58, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.dresdenocl.language.ocl.InvalidLiteralExpCS) {
+		if (element instanceof org.dresdenocl.language.ocl.BooleanLiteralExpCS) {
 			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_59, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.dresdenocl.language.ocl.NullLiteralExpCS) {
+		if (element instanceof org.dresdenocl.language.ocl.StringLiteralExpCS) {
 			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_60, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.dresdenocl.language.ocl.NamedLiteralExpCS) {
+		if (element instanceof org.dresdenocl.language.ocl.InvalidLiteralExpCS) {
 			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_61, foundFormattingElements);
 			return;
 		}
-		if (element instanceof org.dresdenocl.language.ocl.BracketExpCS) {
+		if (element instanceof org.dresdenocl.language.ocl.NullLiteralExpCS) {
 			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_62, foundFormattingElements);
+			return;
+		}
+		if (element instanceof org.dresdenocl.language.ocl.BracketExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_63, foundFormattingElements);
 			return;
 		}
 		

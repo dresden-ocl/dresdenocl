@@ -10,6 +10,9 @@ package org.dresdenocl.language.ocl.provider;
 import java.util.Collection;
 import java.util.List;
 
+import org.dresdenocl.language.ocl.IfExpCS;
+import org.dresdenocl.language.ocl.OclFactory;
+import org.dresdenocl.language.ocl.OclPackage;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -20,10 +23,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
-import org.dresdenocl.language.ocl.IfExpCS;
-import org.dresdenocl.language.ocl.OclFactory;
-import org.dresdenocl.language.ocl.OclPackage;
 
 /**
  * This is the item provider adapter for a {@link org.dresdenocl.language.ocl.IfExpCS} object.
@@ -158,7 +157,7 @@ public class IfExpCSItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(OclPackage.Literals.IF_EXP_CS__CONDITION,
-				 OclFactory.eINSTANCE.createNamedLiteralExpCS()));
+				 OclFactory.eINSTANCE.createModelElementCS()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -169,11 +168,6 @@ public class IfExpCSItemProvider
 			(createChildParameter
 				(OclPackage.Literals.IF_EXP_CS__CONDITION,
 				 OclFactory.eINSTANCE.createTupleTypeLiteralExpCS()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OclPackage.Literals.IF_EXP_CS__CONDITION,
-				 OclFactory.eINSTANCE.createEnumLiteralOrStaticPropertyExpCS()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -328,7 +322,7 @@ public class IfExpCSItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(OclPackage.Literals.IF_EXP_CS__THEN_BRANCH,
-				 OclFactory.eINSTANCE.createNamedLiteralExpCS()));
+				 OclFactory.eINSTANCE.createModelElementCS()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -339,11 +333,6 @@ public class IfExpCSItemProvider
 			(createChildParameter
 				(OclPackage.Literals.IF_EXP_CS__THEN_BRANCH,
 				 OclFactory.eINSTANCE.createTupleTypeLiteralExpCS()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OclPackage.Literals.IF_EXP_CS__THEN_BRANCH,
-				 OclFactory.eINSTANCE.createEnumLiteralOrStaticPropertyExpCS()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -498,7 +487,7 @@ public class IfExpCSItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(OclPackage.Literals.IF_EXP_CS__ELSE_BRANCH,
-				 OclFactory.eINSTANCE.createNamedLiteralExpCS()));
+				 OclFactory.eINSTANCE.createModelElementCS()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -509,11 +498,6 @@ public class IfExpCSItemProvider
 			(createChildParameter
 				(OclPackage.Literals.IF_EXP_CS__ELSE_BRANCH,
 				 OclFactory.eINSTANCE.createTupleTypeLiteralExpCS()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OclPackage.Literals.IF_EXP_CS__ELSE_BRANCH,
-				 OclFactory.eINSTANCE.createEnumLiteralOrStaticPropertyExpCS()));
 
 		newChildDescriptors.add
 			(createChildParameter

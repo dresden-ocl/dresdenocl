@@ -10,6 +10,9 @@ package org.dresdenocl.language.ocl.provider;
 import java.util.Collection;
 import java.util.List;
 
+import org.dresdenocl.language.ocl.ClassifierContextDeclarationCS;
+import org.dresdenocl.language.ocl.OclFactory;
+import org.dresdenocl.language.ocl.OclPackage;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -20,10 +23,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
-import org.dresdenocl.language.ocl.ClassifierContextDeclarationCS;
-import org.dresdenocl.language.ocl.OclFactory;
-import org.dresdenocl.language.ocl.OclPackage;
 
 /**
  * This is the item provider adapter for a {@link org.dresdenocl.language.ocl.ClassifierContextDeclarationCS} object.
@@ -151,22 +150,7 @@ public class ClassifierContextDeclarationCSItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(OclPackage.Literals.CLASSIFIER_CONTEXT_DECLARATION_CS__TYPE_NAME,
-				 OclFactory.eINSTANCE.createTypePathNameSimpleCS()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OclPackage.Literals.CLASSIFIER_CONTEXT_DECLARATION_CS__TYPE_NAME,
-				 OclFactory.eINSTANCE.createTypePathNameNestedCS()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OclPackage.Literals.CLASSIFIER_CONTEXT_DECLARATION_CS__TYPE_NAME,
-				 OclFactory.eINSTANCE.createTupleTypeCS()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OclPackage.Literals.CLASSIFIER_CONTEXT_DECLARATION_CS__TYPE_NAME,
-				 OclFactory.eINSTANCE.createCollectionTypeIdentifierCS()));
+				 OclFactory.eINSTANCE.createModelElementCS()));
 
 		newChildDescriptors.add
 			(createChildParameter

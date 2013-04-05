@@ -192,20 +192,16 @@ public class OclPrinter implements org.dresdenocl.language.ocl.resource.ocl.IOcl
 			print_org_dresdenocl_language_ocl_IteratorExpVariableCS((org.dresdenocl.language.ocl.IteratorExpVariableCS) element, globaltab, out);
 			return;
 		}
-		if (element instanceof org.dresdenocl.language.ocl.TypePathNameSimpleCS) {
-			print_org_dresdenocl_language_ocl_TypePathNameSimpleCS((org.dresdenocl.language.ocl.TypePathNameSimpleCS) element, globaltab, out);
-			return;
-		}
-		if (element instanceof org.dresdenocl.language.ocl.TypePathNameNestedCS) {
-			print_org_dresdenocl_language_ocl_TypePathNameNestedCS((org.dresdenocl.language.ocl.TypePathNameNestedCS) element, globaltab, out);
-			return;
-		}
 		if (element instanceof org.dresdenocl.language.ocl.TupleTypeCS) {
 			print_org_dresdenocl_language_ocl_TupleTypeCS((org.dresdenocl.language.ocl.TupleTypeCS) element, globaltab, out);
 			return;
 		}
 		if (element instanceof org.dresdenocl.language.ocl.CollectionTypeIdentifierCS) {
 			print_org_dresdenocl_language_ocl_CollectionTypeIdentifierCS((org.dresdenocl.language.ocl.CollectionTypeIdentifierCS) element, globaltab, out);
+			return;
+		}
+		if (element instanceof org.dresdenocl.language.ocl.TypeModelElementCS) {
+			print_org_dresdenocl_language_ocl_TypeModelElementCS((org.dresdenocl.language.ocl.TypeModelElementCS) element, globaltab, out);
 			return;
 		}
 		if (element instanceof org.dresdenocl.language.ocl.VariableDeclarationWithoutInitCS) {
@@ -232,8 +228,20 @@ public class OclPrinter implements org.dresdenocl.language.ocl.resource.ocl.IOcl
 			print_org_dresdenocl_language_ocl_StaticOperationCallExpCS((org.dresdenocl.language.ocl.StaticOperationCallExpCS) element, globaltab, out);
 			return;
 		}
-		if (element instanceof org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS) {
-			print_org_dresdenocl_language_ocl_EnumLiteralOrStaticPropertyExpCS((org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS) element, globaltab, out);
+		if (element instanceof org.dresdenocl.language.ocl.ModelElementCS) {
+			print_org_dresdenocl_language_ocl_ModelElementCS((org.dresdenocl.language.ocl.ModelElementCS) element, globaltab, out);
+			return;
+		}
+		if (element instanceof org.dresdenocl.language.ocl.PathNameSimpleCS) {
+			print_org_dresdenocl_language_ocl_PathNameSimpleCS((org.dresdenocl.language.ocl.PathNameSimpleCS) element, globaltab, out);
+			return;
+		}
+		if (element instanceof org.dresdenocl.language.ocl.PathNamePathCS) {
+			print_org_dresdenocl_language_ocl_PathNamePathCS((org.dresdenocl.language.ocl.PathNamePathCS) element, globaltab, out);
+			return;
+		}
+		if (element instanceof org.dresdenocl.language.ocl.NamedElementCS) {
+			print_org_dresdenocl_language_ocl_NamedElementCS((org.dresdenocl.language.ocl.NamedElementCS) element, globaltab, out);
 			return;
 		}
 		if (element instanceof org.dresdenocl.language.ocl.TupleLiteralExpCS) {
@@ -294,10 +302,6 @@ public class OclPrinter implements org.dresdenocl.language.ocl.resource.ocl.IOcl
 		}
 		if (element instanceof org.dresdenocl.language.ocl.NullLiteralExpCS) {
 			print_org_dresdenocl_language_ocl_NullLiteralExpCS((org.dresdenocl.language.ocl.NullLiteralExpCS) element, globaltab, out);
-			return;
-		}
-		if (element instanceof org.dresdenocl.language.ocl.NamedLiteralExpCS) {
-			print_org_dresdenocl_language_ocl_NamedLiteralExpCS((org.dresdenocl.language.ocl.NamedLiteralExpCS) element, globaltab, out);
 			return;
 		}
 		if (element instanceof org.dresdenocl.language.ocl.BracketExpCS) {
@@ -643,12 +647,10 @@ public class OclPrinter implements org.dresdenocl.language.ocl.resource.ocl.IOcl
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(4);
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(3);
 		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__TYPE_NAME));
 		printCountingMap.put("typeName", temp == null ? 0 : 1);
-		temp = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__PROPERTY));
-		printCountingMap.put("property", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__TYPE));
 		printCountingMap.put("type", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__INIT_OR_DERIVE_VALUE));
@@ -669,21 +671,6 @@ public class OclPrinter implements org.dresdenocl.language.ocl.resource.ocl.IOcl
 				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
 			}
 			printCountingMap.put("typeName", count - 1);
-		}
-		// DEFINITION PART BEGINS (CsString)
-		out.print("::");
-		out.print(" ");
-		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
-		count = printCountingMap.get("property");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__PROPERTY));
-			if (o != null) {
-				org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("SIMPLE_NAME");
-				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getAttributeContextDeclarationCSPropertyReferenceResolver().deResolve((org.dresdenocl.pivotmodel.Property) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__PROPERTY)), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__PROPERTY), element));
-				out.print(" ");
-			}
-			printCountingMap.put("property", count - 1);
 		}
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
@@ -2869,75 +2856,6 @@ public class OclPrinter implements org.dresdenocl.language.ocl.resource.ocl.IOcl
 	}
 	
 	
-	public void print_org_dresdenocl_language_ocl_TypePathNameSimpleCS(org.dresdenocl.language.ocl.TypePathNameSimpleCS element, String outertab, java.io.PrintWriter out) {
-		// The printCountingMap contains a mapping from feature names to the number of
-		// remaining elements that still need to be printed. The map is initialized with
-		// the number of elements stored in each structural feature. For lists this is the
-		// list size. For non-multiple features it is either 1 (if the feature is set) or
-		// 0 (if the feature is null).
-		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
-		Object temp;
-		temp = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.TYPE_PATH_NAME_SIMPLE_CS__TYPE_NAME));
-		printCountingMap.put("typeName", temp == null ? 0 : 1);
-		// print collected hidden tokens
-		int count;
-		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
-		count = printCountingMap.get("typeName");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.TYPE_PATH_NAME_SIMPLE_CS__TYPE_NAME));
-			if (o != null) {
-				org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("SIMPLE_NAME");
-				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getTypePathNameSimpleCSTypeNameReferenceResolver().deResolve((org.dresdenocl.pivotmodel.Type) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.TYPE_PATH_NAME_SIMPLE_CS__TYPE_NAME)), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.TYPE_PATH_NAME_SIMPLE_CS__TYPE_NAME), element));
-				out.print(" ");
-			}
-			printCountingMap.put("typeName", count - 1);
-		}
-	}
-	
-	
-	public void print_org_dresdenocl_language_ocl_TypePathNameNestedCS(org.dresdenocl.language.ocl.TypePathNameNestedCS element, String outertab, java.io.PrintWriter out) {
-		String localtab = outertab;
-		// The printCountingMap contains a mapping from feature names to the number of
-		// remaining elements that still need to be printed. The map is initialized with
-		// the number of elements stored in each structural feature. For lists this is the
-		// list size. For non-multiple features it is either 1 (if the feature is set) or
-		// 0 (if the feature is null).
-		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
-		Object temp;
-		temp = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.TYPE_PATH_NAME_NESTED_CS__NAMESPACE));
-		printCountingMap.put("namespace", temp == null ? 0 : 1);
-		temp = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME));
-		printCountingMap.put("typePathName", temp == null ? 0 : 1);
-		// print collected hidden tokens
-		int count;
-		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
-		count = printCountingMap.get("namespace");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.TYPE_PATH_NAME_NESTED_CS__NAMESPACE));
-			if (o != null) {
-				org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("SIMPLE_NAME");
-				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getTypePathNameNestedCSNamespaceReferenceResolver().deResolve((org.dresdenocl.pivotmodel.Namespace) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.TYPE_PATH_NAME_NESTED_CS__NAMESPACE)), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.TYPE_PATH_NAME_NESTED_CS__NAMESPACE), element));
-			}
-			printCountingMap.put("namespace", count - 1);
-		}
-		// DEFINITION PART BEGINS (WhiteSpaces)
-		// DEFINITION PART BEGINS (CsString)
-		out.print("::");
-		// DEFINITION PART BEGINS (WhiteSpaces)
-		// DEFINITION PART BEGINS (Containment)
-		count = printCountingMap.get("typePathName");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME));
-			if (o != null) {
-				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
-			}
-			printCountingMap.put("typePathName", count - 1);
-		}
-	}
-	
-	
 	public void print_org_dresdenocl_language_ocl_TupleTypeCS(org.dresdenocl.language.ocl.TupleTypeCS element, String outertab, java.io.PrintWriter out) {
 		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
@@ -3038,6 +2956,31 @@ public class OclPrinter implements org.dresdenocl.language.ocl.resource.ocl.IOcl
 		// DEFINITION PART BEGINS (CsString)
 		out.print(")");
 		out.print(" ");
+	}
+	
+	
+	public void print_org_dresdenocl_language_ocl_TypeModelElementCS(org.dresdenocl.language.ocl.TypeModelElementCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
+		// The printCountingMap contains a mapping from feature names to the number of
+		// remaining elements that still need to be printed. The map is initialized with
+		// the number of elements stored in each structural feature. For lists this is the
+		// list size. For non-multiple features it is either 1 (if the feature is set) or
+		// 0 (if the feature is null).
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
+		Object temp;
+		temp = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.TYPE_MODEL_ELEMENT_CS__MODEL_ELEMENT));
+		printCountingMap.put("modelElement", temp == null ? 0 : 1);
+		// print collected hidden tokens
+		int count;
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("modelElement");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.TYPE_MODEL_ELEMENT_CS__MODEL_ELEMENT));
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("modelElement", count - 1);
+		}
 	}
 	
 	
@@ -3759,44 +3702,160 @@ public class OclPrinter implements org.dresdenocl.language.ocl.resource.ocl.IOcl
 	}
 	
 	
-	public void print_org_dresdenocl_language_ocl_EnumLiteralOrStaticPropertyExpCS(org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS element, String outertab, java.io.PrintWriter out) {
+	public void print_org_dresdenocl_language_ocl_ModelElementCS(org.dresdenocl.language.ocl.ModelElementCS element, String outertab, java.io.PrintWriter out) {
 		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
 		Object temp;
-		temp = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS__TYPE_NAME));
-		printCountingMap.put("typeName", temp == null ? 0 : 1);
-		temp = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS__ENUM_LITERAL_OR_STATIC_PROPERTY));
-		printCountingMap.put("enumLiteralOrStaticProperty", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.MODEL_ELEMENT_CS__PATH_NAME));
+		printCountingMap.put("pathName", temp == null ? 0 : 1);
 		// print collected hidden tokens
 		int count;
 		// DEFINITION PART BEGINS (Containment)
-		count = printCountingMap.get("typeName");
+		count = printCountingMap.get("pathName");
 		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS__TYPE_NAME));
+			Object o = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.MODEL_ELEMENT_CS__PATH_NAME));
 			if (o != null) {
 				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
 			}
-			printCountingMap.put("typeName", count - 1);
+			printCountingMap.put("pathName", count - 1);
 		}
-		// DEFINITION PART BEGINS (CsString)
-		out.print("::");
-		out.print(" ");
+	}
+	
+	
+	public void print_org_dresdenocl_language_ocl_PathNameSimpleCS(org.dresdenocl.language.ocl.PathNameSimpleCS element, String outertab, java.io.PrintWriter out) {
+		// The printCountingMap contains a mapping from feature names to the number of
+		// remaining elements that still need to be printed. The map is initialized with
+		// the number of elements stored in each structural feature. For lists this is the
+		// list size. For non-multiple features it is either 1 (if the feature is set) or
+		// 0 (if the feature is null).
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
+		Object temp;
+		temp = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.PATH_NAME_SIMPLE_CS__NAMED_ELEMENT));
+		printCountingMap.put("namedElement", temp == null ? 0 : 1);
+		// print collected hidden tokens
+		int count;
 		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
-		count = printCountingMap.get("enumLiteralOrStaticProperty");
+		count = printCountingMap.get("namedElement");
 		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS__ENUM_LITERAL_OR_STATIC_PROPERTY));
+			Object o = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.PATH_NAME_SIMPLE_CS__NAMED_ELEMENT));
 			if (o != null) {
 				org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("SIMPLE_NAME");
 				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getEnumLiteralOrStaticPropertyExpCSEnumLiteralOrStaticPropertyReferenceResolver().deResolve((org.dresdenocl.pivotmodel.NamedElement) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS__ENUM_LITERAL_OR_STATIC_PROPERTY)), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS__ENUM_LITERAL_OR_STATIC_PROPERTY), element));
+				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getPathNameSimpleCSNamedElementReferenceResolver().deResolve((org.dresdenocl.pivotmodel.NamedElement) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.PATH_NAME_SIMPLE_CS__NAMED_ELEMENT)), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.PATH_NAME_SIMPLE_CS__NAMED_ELEMENT), element));
 				out.print(" ");
 			}
-			printCountingMap.put("enumLiteralOrStaticProperty", count - 1);
+			printCountingMap.put("namedElement", count - 1);
+		}
+	}
+	
+	
+	public void print_org_dresdenocl_language_ocl_PathNamePathCS(org.dresdenocl.language.ocl.PathNamePathCS element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
+		// The printCountingMap contains a mapping from feature names to the number of
+		// remaining elements that still need to be printed. The map is initialized with
+		// the number of elements stored in each structural feature. For lists this is the
+		// list size. For non-multiple features it is either 1 (if the feature is set) or
+		// 0 (if the feature is null).
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
+		Object temp;
+		temp = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.PATH_NAME_PATH_CS__PATH_NAME));
+		printCountingMap.put("pathName", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		// print collected hidden tokens
+		int count;
+		boolean iterate = true;
+		java.io.StringWriter sWriter = null;
+		java.io.PrintWriter out1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		print_org_dresdenocl_language_ocl_PathNamePathCS_0(element, localtab, out, printCountingMap);
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+			print_org_dresdenocl_language_ocl_PathNamePathCS_0(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
+		}
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("pathName");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.PATH_NAME_PATH_CS__PATH_NAME));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("pathName", count - 1);
+		}
+	}
+	
+	public void print_org_dresdenocl_language_ocl_PathNamePathCS_0(org.dresdenocl.language.ocl.PathNamePathCS element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		String localtab = outertab;
+		int count;
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("pathName");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.PATH_NAME_PATH_CS__PATH_NAME));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("pathName", count - 1);
+		}
+		// DEFINITION PART BEGINS (WhiteSpaces)
+		// DEFINITION PART BEGINS (CsString)
+		out.print("::");
+		// DEFINITION PART BEGINS (WhiteSpaces)
+	}
+	
+	
+	public void print_org_dresdenocl_language_ocl_NamedElementCS(org.dresdenocl.language.ocl.NamedElementCS element, String outertab, java.io.PrintWriter out) {
+		// The printCountingMap contains a mapping from feature names to the number of
+		// remaining elements that still need to be printed. The map is initialized with
+		// the number of elements stored in each structural feature. For lists this is the
+		// list size. For non-multiple features it is either 1 (if the feature is set) or
+		// 0 (if the feature is null).
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
+		Object temp;
+		temp = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.NAMED_ELEMENT_CS__NAMED_ELEMENT));
+		printCountingMap.put("namedElement", temp == null ? 0 : 1);
+		// print collected hidden tokens
+		int count;
+		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
+		count = printCountingMap.get("namedElement");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.NAMED_ELEMENT_CS__NAMED_ELEMENT));
+			if (o != null) {
+				org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("SIMPLE_NAME");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getNamedElementCSNamedElementReferenceResolver().deResolve((org.dresdenocl.pivotmodel.NamedElement) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.NAMED_ELEMENT_CS__NAMED_ELEMENT)), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.NAMED_ELEMENT_CS__NAMED_ELEMENT), element));
+				out.print(" ");
+			}
+			printCountingMap.put("namedElement", count - 1);
 		}
 	}
 	
@@ -4477,33 +4536,6 @@ public class OclPrinter implements org.dresdenocl.language.ocl.resource.ocl.IOcl
 		// DEFINITION PART BEGINS (CsString)
 		out.print("null");
 		out.print(" ");
-	}
-	
-	
-	public void print_org_dresdenocl_language_ocl_NamedLiteralExpCS(org.dresdenocl.language.ocl.NamedLiteralExpCS element, String outertab, java.io.PrintWriter out) {
-		// The printCountingMap contains a mapping from feature names to the number of
-		// remaining elements that still need to be printed. The map is initialized with
-		// the number of elements stored in each structural feature. For lists this is the
-		// list size. For non-multiple features it is either 1 (if the feature is set) or
-		// 0 (if the feature is null).
-		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
-		Object temp;
-		temp = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.NAMED_LITERAL_EXP_CS__NAMED_ELEMENT));
-		printCountingMap.put("namedElement", temp == null ? 0 : 1);
-		// print collected hidden tokens
-		int count;
-		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
-		count = printCountingMap.get("namedElement");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.NAMED_LITERAL_EXP_CS__NAMED_ELEMENT));
-			if (o != null) {
-				org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("SIMPLE_NAME");
-				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getNamedLiteralExpCSNamedElementReferenceResolver().deResolve((org.dresdenocl.pivotmodel.NamedElement) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.NAMED_LITERAL_EXP_CS__NAMED_ELEMENT)), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.NAMED_LITERAL_EXP_CS__NAMED_ELEMENT), element));
-				out.print(" ");
-			}
-			printCountingMap.put("namedElement", count - 1);
-		}
 	}
 	
 	

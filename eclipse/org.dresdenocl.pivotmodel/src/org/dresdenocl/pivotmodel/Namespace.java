@@ -33,6 +33,7 @@
 package org.dresdenocl.pivotmodel;
 
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -272,6 +273,14 @@ public interface Namespace extends NamedElement, GenericElement {
 	 * @generated
 	 */
 	boolean removeOwnedAndNestedRules(List<Constraint> constraints);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model namesDataType="tudresden.ocl20.pivot.datatypes.String" namesMany="true"
+	 * @generated NOT
+	 */
+	LinkedList<NamedElement> lookupPathName(List<String> names);
 
 	/**
 	 * Redefines {@link NamedElement#clone()} with a covariant return type.

@@ -6,12 +6,6 @@
  */
 package org.dresdenocl.language.ocl.impl;
 
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.impl.EFactoryImpl;
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
 import org.dresdenocl.language.ocl.*;
 import org.dresdenocl.language.ocl.AdditiveOperationCallExpCS;
 import org.dresdenocl.language.ocl.AttributeContextDeclarationCS;
@@ -28,7 +22,6 @@ import org.dresdenocl.language.ocl.DefinitionExpCS;
 import org.dresdenocl.language.ocl.DefinitionExpOperationCS;
 import org.dresdenocl.language.ocl.DefinitionExpPropertyCS;
 import org.dresdenocl.language.ocl.DeriveValueCS;
-import org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS;
 import org.dresdenocl.language.ocl.EqualityOperationCallExpCS;
 import org.dresdenocl.language.ocl.IfExpCS;
 import org.dresdenocl.language.ocl.ImplicitOperationCallCS;
@@ -46,8 +39,9 @@ import org.dresdenocl.language.ocl.LogicalImpliesOperationCallExpCS;
 import org.dresdenocl.language.ocl.LogicalNotOperationCallExpCS;
 import org.dresdenocl.language.ocl.LogicalOrOperationCallExpCS;
 import org.dresdenocl.language.ocl.LogicalXorOperationCallExpCS;
+import org.dresdenocl.language.ocl.ModelElementCS;
 import org.dresdenocl.language.ocl.MultOperationCallExpCS;
-import org.dresdenocl.language.ocl.NamedLiteralExpCS;
+import org.dresdenocl.language.ocl.NamedElementCS;
 import org.dresdenocl.language.ocl.NavigationCallExp;
 import org.dresdenocl.language.ocl.NullLiteralExpCS;
 import org.dresdenocl.language.ocl.OclFactory;
@@ -63,7 +57,8 @@ import org.dresdenocl.language.ocl.PackageDeclarationNestedNamespaceCS;
 import org.dresdenocl.language.ocl.PackageDeclarationWithNamespaceCS;
 import org.dresdenocl.language.ocl.PackageDeclarationWithoutNamespaceCS;
 import org.dresdenocl.language.ocl.ParameterCS;
-import org.dresdenocl.language.ocl.PathNameCS;
+import org.dresdenocl.language.ocl.PathNamePathCS;
+import org.dresdenocl.language.ocl.PathNameSimpleCS;
 import org.dresdenocl.language.ocl.PostConditionDeclarationCS;
 import org.dresdenocl.language.ocl.PreConditionDeclarationCS;
 import org.dresdenocl.language.ocl.PropertyCallBaseExpCS;
@@ -77,13 +72,17 @@ import org.dresdenocl.language.ocl.StringLiteralExpCS;
 import org.dresdenocl.language.ocl.TupleLiteralExpCS;
 import org.dresdenocl.language.ocl.TupleTypeCS;
 import org.dresdenocl.language.ocl.TupleTypeLiteralExpCS;
-import org.dresdenocl.language.ocl.TypePathNameNestedCS;
-import org.dresdenocl.language.ocl.TypePathNameSimpleCS;
+import org.dresdenocl.language.ocl.TypeModelElementCS;
 import org.dresdenocl.language.ocl.UnaryOperationCallExpCS;
 import org.dresdenocl.language.ocl.VariableDeclarationWithInitCS;
 import org.dresdenocl.language.ocl.VariableDeclarationWithInitListCS;
 import org.dresdenocl.language.ocl.VariableDeclarationWithoutInitCS;
 import org.dresdenocl.language.ocl.VariableDeclarationWithoutInitListCS;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.impl.EFactoryImpl;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 /**
  * <!-- begin-user-doc -->
@@ -134,11 +133,12 @@ public class OclFactoryImpl extends EFactoryImpl implements OclFactory {
     switch (eClass.getClassifierID())
     {
       case OclPackage.BRACKET_EXP_CS: return createBracketExpCS();
-      case OclPackage.NAMED_LITERAL_EXP_CS: return createNamedLiteralExpCS();
-      case OclPackage.PATH_NAME_CS: return createPathNameCS();
+      case OclPackage.MODEL_ELEMENT_CS: return createModelElementCS();
+      case OclPackage.PATH_NAME_SIMPLE_CS: return createPathNameSimpleCS();
+      case OclPackage.PATH_NAME_PATH_CS: return createPathNamePathCS();
+      case OclPackage.NAMED_ELEMENT_CS: return createNamedElementCS();
       case OclPackage.SIMPLE_NAME_CS: return createSimpleNameCS();
-      case OclPackage.TYPE_PATH_NAME_SIMPLE_CS: return createTypePathNameSimpleCS();
-      case OclPackage.TYPE_PATH_NAME_NESTED_CS: return createTypePathNameNestedCS();
+      case OclPackage.TYPE_MODEL_ELEMENT_CS: return createTypeModelElementCS();
       case OclPackage.TUPLE_TYPE_CS: return createTupleTypeCS();
       case OclPackage.COLLECTION_TYPE_LITERAL_EXP_CS: return createCollectionTypeLiteralExpCS();
       case OclPackage.TUPLE_TYPE_LITERAL_EXP_CS: return createTupleTypeLiteralExpCS();
@@ -146,7 +146,6 @@ public class OclFactoryImpl extends EFactoryImpl implements OclFactory {
       case OclPackage.VARIABLE_DECLARATION_WITHOUT_INIT_CS: return createVariableDeclarationWithoutInitCS();
       case OclPackage.VARIABLE_DECLARATION_WITH_INIT_LIST_CS: return createVariableDeclarationWithInitListCS();
       case OclPackage.VARIABLE_DECLARATION_WITHOUT_INIT_LIST_CS: return createVariableDeclarationWithoutInitListCS();
-      case OclPackage.ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS: return createEnumLiteralOrStaticPropertyExpCS();
       case OclPackage.COLLECTION_LITERAL_EXP_CS: return createCollectionLiteralExpCS();
       case OclPackage.COLLECTION_TYPE_IDENTIFIER_CS: return createCollectionTypeIdentifierCS();
       case OclPackage.COLLECTION_LITERAL_PARTS_OCL_EXP_CS: return createCollectionLiteralPartsOclExpCS();
@@ -222,9 +221,9 @@ public class OclFactoryImpl extends EFactoryImpl implements OclFactory {
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public NamedLiteralExpCS createNamedLiteralExpCS() {
-    NamedLiteralExpCSImpl namedLiteralExpCS = new NamedLiteralExpCSImpl();
-    return namedLiteralExpCS;
+	public ModelElementCS createModelElementCS() {
+    ModelElementCSImpl modelElementCS = new ModelElementCSImpl();
+    return modelElementCS;
   }
 
 	/**
@@ -232,9 +231,29 @@ public class OclFactoryImpl extends EFactoryImpl implements OclFactory {
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public PathNameCS createPathNameCS() {
-    PathNameCSImpl pathNameCS = new PathNameCSImpl();
-    return pathNameCS;
+	public PathNameSimpleCS createPathNameSimpleCS() {
+    PathNameSimpleCSImpl pathNameSimpleCS = new PathNameSimpleCSImpl();
+    return pathNameSimpleCS;
+  }
+
+	/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
+	public PathNamePathCS createPathNamePathCS() {
+    PathNamePathCSImpl pathNamePathCS = new PathNamePathCSImpl();
+    return pathNamePathCS;
+  }
+
+	/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
+	public NamedElementCS createNamedElementCS() {
+    NamedElementCSImpl namedElementCS = new NamedElementCSImpl();
+    return namedElementCS;
   }
 
 	/**
@@ -252,19 +271,9 @@ public class OclFactoryImpl extends EFactoryImpl implements OclFactory {
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public TypePathNameSimpleCS createTypePathNameSimpleCS() {
-    TypePathNameSimpleCSImpl typePathNameSimpleCS = new TypePathNameSimpleCSImpl();
-    return typePathNameSimpleCS;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public TypePathNameNestedCS createTypePathNameNestedCS() {
-    TypePathNameNestedCSImpl typePathNameNestedCS = new TypePathNameNestedCSImpl();
-    return typePathNameNestedCS;
+	public TypeModelElementCS createTypeModelElementCS() {
+    TypeModelElementCSImpl typeModelElementCS = new TypeModelElementCSImpl();
+    return typeModelElementCS;
   }
 
 	/**
@@ -335,16 +344,6 @@ public class OclFactoryImpl extends EFactoryImpl implements OclFactory {
 	public VariableDeclarationWithoutInitListCS createVariableDeclarationWithoutInitListCS() {
     VariableDeclarationWithoutInitListCSImpl variableDeclarationWithoutInitListCS = new VariableDeclarationWithoutInitListCSImpl();
     return variableDeclarationWithoutInitListCS;
-  }
-
-	/**
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	public EnumLiteralOrStaticPropertyExpCS createEnumLiteralOrStaticPropertyExpCS() {
-    EnumLiteralOrStaticPropertyExpCSImpl enumLiteralOrStaticPropertyExpCS = new EnumLiteralOrStaticPropertyExpCSImpl();
-    return enumLiteralOrStaticPropertyExpCS;
   }
 
 	/**

@@ -38,12 +38,12 @@ public interface StaticOperationCallExpCS extends OperationCallExpCS {
 	 * </p>
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Type Name</em>' containment reference.
-   * @see #setTypeName(TypePathNameCS)
+   * @see #setTypeName(ModelElementCS)
    * @see org.dresdenocl.language.ocl.OclPackage#getStaticOperationCallExpCS_TypeName()
    * @model containment="true" required="true"
    * @generated
    */
-	TypePathNameCS getTypeName();
+	ModelElementCS getTypeName();
 
 	/**
    * Sets the value of the '{@link org.dresdenocl.language.ocl.StaticOperationCallExpCS#getTypeName <em>Type Name</em>}' containment reference.
@@ -53,7 +53,7 @@ public interface StaticOperationCallExpCS extends OperationCallExpCS {
    * @see #getTypeName()
    * @generated
    */
-	void setTypeName(TypePathNameCS value);
+	void setTypeName(ModelElementCS value);
 
 	/**
    * Returns the value of the '<em><b>Operation Name</b></em>' reference.

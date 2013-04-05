@@ -8,6 +8,10 @@ package org.dresdenocl.language.ocl.impl;
 
 import java.util.Collection;
 
+import org.dresdenocl.language.ocl.OclExpressionCS;
+import org.dresdenocl.language.ocl.OclPackage;
+import org.dresdenocl.language.ocl.OperationCallBaseExpCS;
+import org.dresdenocl.pivotmodel.Operation;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -17,11 +21,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
-import org.dresdenocl.language.ocl.OclExpressionCS;
-import org.dresdenocl.language.ocl.OclPackage;
-import org.dresdenocl.language.ocl.OperationCallBaseExpCS;
-import org.dresdenocl.pivotmodel.Operation;
 
 /**
  * <!-- begin-user-doc -->

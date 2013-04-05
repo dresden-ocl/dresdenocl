@@ -6,10 +6,9 @@
  */
 package org.dresdenocl.language.ocl.impl;
 
-import org.eclipse.emf.ecore.EClass;
-
 import org.dresdenocl.language.ocl.InitValueCS;
 import org.dresdenocl.language.ocl.OclPackage;
+import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->

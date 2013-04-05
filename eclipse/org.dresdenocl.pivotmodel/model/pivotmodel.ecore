@@ -145,6 +145,9 @@
       </eAnnotations>
       <eParameters name="constraints" upperBound="-1" eType="#//Constraint"/>
     </eOperations>
+    <eOperations name="lookupPathName" upperBound="-1" eType="#//NamedElement">
+      <eParameters name="names" upperBound="-1" eType="ecore:EDataType datatypes.ecore#//String"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedType" upperBound="-1"
         eType="#//Type" containment="true" eOpposite="#//Type/namespace">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

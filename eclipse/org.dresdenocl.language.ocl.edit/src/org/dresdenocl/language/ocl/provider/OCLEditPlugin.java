@@ -6,11 +6,10 @@
  */
 package org.dresdenocl.language.ocl.provider;
 
+import org.dresdenocl.pivotmodel.provider.PivotModelEditPlugin;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.emftext.commons.layout.provider.LayoutEditPlugin;
-import org.dresdenocl.pivotmodel.provider.PivotModelEditPlugin;
 
 /**
  * This is the central singleton for the OCL edit plugin.

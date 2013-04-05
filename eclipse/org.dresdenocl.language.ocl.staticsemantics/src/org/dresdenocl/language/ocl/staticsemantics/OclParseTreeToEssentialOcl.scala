@@ -312,64 +312,6 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
         }
       }
 
-      case v : NamedLiteralExpCS => {
-        val namedElement = v.getNamedElement
-        if (namedElement.eIsProxy)
-          Empty
-        else {
-          namedElement match {
-            case v : Variable => Full(factory.createVariableExp(v))
-            case p : Property => {
-              if (p.isStatic) {
-                Full(factory.createPropertyCallExp(
-                  factory.createTypeLiteralExp(p.getOwningType.getQualifiedNameList), p))
-              }
-              else {
-                (variables(v)).flatMap {
-                  case (implicitVariables, _) =>
-                    val propertyOwner = if (p.getOwningType != null) p.getOwningType else definedPropertysType.get(p)
-                    implicitVariables.flatMap { iv =>
-                      if (iv.getType.conformsTo(propertyOwner))
-                        Full(iv)
-                      else
-                        Empty
-                    }.firstOption.flatMap { iv =>
-                      val sourceExpression = factory.createVariableExp(iv)
-                      // TODO: put this into the EssentialOclFactory
-                      val pce = ExpressionsFactory.INSTANCE.createPropertyCallExp
-                      pce.setReferredProperty(p)
-                      pce.setSourceType(sourceExpression.getType)
-                      // make sure, the source is not already contained by another element
-                      // This can only happen if the sourceExpression is a VariableExp!
-                      val cleanSourceExpression =
-                        if (sourceExpression.eContainer != null) {
-                          sourceExpression match {
-                            case v : VariableExp =>
-                              factory.createVariableExp(
-                                factory.createVariable(v.getReferredVariable.getName,
-                                  v.getReferredVariable.getType,
-                                  v.getReferredVariable.getInitExpression))
-                          }
-                        }
-                        else
-                          sourceExpression
-                      pce.setSource(cleanSourceExpression)
-                      pce.setOclLibrary(oclLibrary)
-                      Full(pce)
-                    }
-                }
-              }
-            }
-            case t : Type => {
-              val tle = ExpressionsFactory.INSTANCE.createTypeLiteralExp
-              tle.setReferredType(t)
-              tle.setOclLibrary(oclLibrary)
-              Full(tle)
-            }
-          }
-        }
-      }
-
       case n : NavigationCallExp => {
         computeOclExpression(n.getFeatureCalls.last)
       }
@@ -666,13 +608,14 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
       case b : BracketExpCS => {
         computeOclExpression(b.getOclExpression)
       }
-
-      case e : EnumLiteralOrStaticPropertyExpCS => {
-        val enumLitOrProp = e.getEnumLiteralOrStaticProperty
-        if (enumLitOrProp.eIsProxy)
+           
+      case e : ModelElementCS => {
+        val refElement = e.getNamedElement
+        if (refElement.eIsProxy)
           Empty
         else {
-          enumLitOrProp match {
+          refElement match {
+            case v : Variable => Full(factory.createVariableExp(v))
             case e : EnumerationLiteral => {
               // TODO: move to EssentialOclFactory
               val exp = ExpressionsFactory.INSTANCE.createEnumLiteralExp
@@ -688,6 +631,22 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
               pce.setSource(factory.createTypeLiteralExp(p.getOwningType.getQualifiedNameList))
               pce.setOclLibrary(oclLibrary)
               Full(pce)
+            }
+            case t : Type => {
+              // TODO: move to EssentialOclFactory
+              val tle = ExpressionsFactory.INSTANCE.createTypeLiteralExp
+              tle.setReferredType(t)
+              tle.setOclLibrary(oclLibrary)
+              Full(tle)
+            }
+            case o : Operation => {
+              // TODO: move to EssentialOclFactory
+              val oce = ExpressionsFactory.INSTANCE.createOperationCallExp
+              oce.setSourceType(o.getOwningType)
+              oce.setSource(factory.createTypeLiteralExp(o.getOwningType.getQualifiedNameList))
+              oce.setReferredOperation(o)
+              oce.setOclLibrary(oclLibrary)
+              Full(oce)
             }
           }
         }
@@ -779,31 +738,27 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
       // check for self containment in the assignment
       v.getInitialization match {
         // a = b
-        case n : NamedLiteralExpCS => {
-          if (n.getNamedElement.getName.equals(v.getVariableName.getSimpleName)) {
-            Full(true)
-          }
-          else None
-        }
         // a = a = true
         case eq : EqualityOperationCallExpCS => {
-          eq.getSource match {
-            case n : NamedLiteralExpCS =>
-              if (n.getNamedElement.getName.equals(v.getVariableName.getSimpleName)) {
-                Full(true)
-              }
-              else None
-          }
+        	Full(true)
+//          eq.getSource match {
+//            case n : NamedLiteralExpCS =>
+//              if (n.getNamedElement.getName.equals(v.getVariableName.getSimpleName)) {
+//                Full(true)
+//              }
+//              else None
+//          }
         }
         // a = not a
         case lno : LogicalNotOperationCallExpCS => {
-          lno.getTarget match {
-            case n : NamedLiteralExpCS =>
-              if (n.getNamedElement.getName.equals(v.getVariableName.getSimpleName)) {
-                Full(true)
-              }
-              else None
-          }
+          Full(true)
+//          lno.getTarget match {
+//            case n : NamedLiteralExpCS =>
+//              if (n.getNamedElement.getName.equals(v.getVariableName.getSimpleName)) {
+//                Full(true)
+//              }
+//              else None
+//          }
         }
         case _ => None
       }

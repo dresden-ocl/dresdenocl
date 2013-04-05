@@ -6,17 +6,16 @@
  */
 package org.dresdenocl.language.ocl.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.dresdenocl.language.ocl.IterateExpCS;
 import org.dresdenocl.language.ocl.IteratorExpVariableCS;
 import org.dresdenocl.language.ocl.OclExpressionCS;
 import org.dresdenocl.language.ocl.OclPackage;
 import org.dresdenocl.language.ocl.VariableDeclarationWithInitCS;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->

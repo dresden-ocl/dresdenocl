@@ -34,12 +34,12 @@ public interface OperationDefinitionInContextCS extends OperationDefinitionCS {
 	 * </p>
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Type Name</em>' containment reference.
-   * @see #setTypeName(TypePathNameCS)
+   * @see #setTypeName(ModelElementCS)
    * @see org.dresdenocl.language.ocl.OclPackage#getOperationDefinitionInContextCS_TypeName()
    * @model containment="true" required="true"
    * @generated
    */
-	TypePathNameCS getTypeName();
+	ModelElementCS getTypeName();
 
 	/**
    * Sets the value of the '{@link org.dresdenocl.language.ocl.OperationDefinitionInContextCS#getTypeName <em>Type Name</em>}' containment reference.
@@ -49,6 +49,6 @@ public interface OperationDefinitionInContextCS extends OperationDefinitionCS {
    * @see #getTypeName()
    * @generated
    */
-	void setTypeName(TypePathNameCS value);
+	void setTypeName(ModelElementCS value);
 
 } // OperationDefinitionInContextCS
