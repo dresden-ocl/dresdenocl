@@ -754,19 +754,20 @@ public class TestType {
 	 */
 	@Test
 	public void testGetSuperType1() {
+		if (!MetaModelTestServices.supportsNoInheritances) {
+			String msg;
+	
+			msg = "The adaptation of Type.getSuperType() seems to be wrong.";
+	
+			/*
+			 * The type must not have super types (but general super types like
+			 * java.lang.Object are possible.
+			 */
+			assertTrue(msg, 0 <= class1.getSuperType().size());
 
-		String msg;
-
-		msg = "The adaptation of Type.getSuperType() seems to be wrong.";
-
-		/*
-		 * The type must not have super types (but general super types like
-		 * java.lang.Object are possible.
-		 */
-		assertTrue(msg, 0 <= class1.getSuperType().size());
-
-		/* The type must not have this type as super type. */
-		assertFalse(msg, class1.getSuperType().contains(class2));
+			/* The type must not have this type as super type. */
+			assertFalse(msg, class1.getSuperType().contains(class2));
+		}
 	}
 
 	/**
@@ -776,16 +777,18 @@ public class TestType {
 	 */
 	@Test
 	public void testGetSuperType2() {
+		
+		if (!MetaModelTestServices.supportsNoInheritances) {
+			String msg;
 
-		String msg;
+			msg = "The adaptation of Type.getSuperType() seems to be wrong.";
 
-		msg = "The adaptation of Type.getSuperType() seems to be wrong.";
+			/* The type must not have at least one super type. */
+			assertTrue(msg, 1 <= class2.getSuperType().size());
 
-		/* The type must not have at least one super type. */
-		assertTrue(msg, 1 <= class2.getSuperType().size());
-
-		/* The type must have the this type as super type. */
-		assertTrue(msg, class2.getSuperType().contains(class1));
+			/* The type must have the this type as super type. */
+			assertTrue(msg, class2.getSuperType().contains(class1));
+		}
 	}
 
 	/**

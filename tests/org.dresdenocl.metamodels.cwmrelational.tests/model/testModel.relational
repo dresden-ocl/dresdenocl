@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orgomg.cwm.resource.relational:Catalog xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:orgomg.cwm.resource.relational="http:///orgomg/cwm/resource/relational.ecore">
+  <ownedElement xsi:type="orgomg.cwm.resource.relational:Schema" name="package1">
+    <ownedElement xsi:type="orgomg.cwm.resource.relational:Table" name="TestTypeClass1">
+      <ownedElement xsi:type="orgomg.cwm.resource.relational:Column" name="property1" type="//@ownedElement.0/@ownedElement.6" uniqueKey="//@ownedElement.0/@ownedElement.0/@ownedElement.1"/>
+      <ownedElement xsi:type="orgomg.cwm.resource.relational:PrimaryKey" name="PK_TestTypeClass1" feature="//@ownedElement.0/@ownedElement.0/@ownedElement.0" keyRelationship="//@ownedElement.0/@ownedElement.3/@ownedElement.4"/>
+    </ownedElement>
+    <ownedElement xsi:type="orgomg.cwm.resource.relational:Table" name="TestTypeClass2">
+      <ownedElement xsi:type="orgomg.cwm.resource.relational:Column" name="property2" type="//@ownedElement.0/@ownedElement.4"/>
+    </ownedElement>
+    <ownedElement xsi:type="orgomg.cwm.resource.relational:Table" name="TestPrimitiveTypeClass">
+      <ownedElement xsi:type="orgomg.cwm.resource.relational:Column" name="aBooleanBoolean" type="//@ownedElement.0/@ownedElement.4"/>
+      <ownedElement xsi:type="orgomg.cwm.resource.relational:Column" name="aINTEGERINTEGER" type="//@ownedElement.0/@ownedElement.5"/>
+      <ownedElement xsi:type="orgomg.cwm.resource.relational:Column" name="aINTEGERINT" type="//@ownedElement.0/@ownedElement.6"/>
+      <ownedElement xsi:type="orgomg.cwm.resource.relational:Column" name="aFLOATREAL" type="//@ownedElement.0/@ownedElement.7"/>
+      <ownedElement xsi:type="orgomg.cwm.resource.relational:Column" name="aFLOATFLOAT" type="//@ownedElement.0/@ownedElement.8"/>
+      <ownedElement xsi:type="orgomg.cwm.resource.relational:Column" name="aStringCHAR" type="//@ownedElement.0/@ownedElement.9"/>
+      <ownedElement xsi:type="orgomg.cwm.resource.relational:Column" name="aStringCHARACTER" type="//@ownedElement.0/@ownedElement.11"/>
+      <ownedElement xsi:type="orgomg.cwm.resource.relational:Column" name="aStringVARCHAR" type="//@ownedElement.0/@ownedElement.10"/>
+    </ownedElement>
+    <ownedElement xsi:type="orgomg.cwm.resource.relational:Table" name="TestPropertyClass">
+      <ownedElement xsi:type="orgomg.cwm.resource.relational:Column" name="nonmultiplePropertyColumn" type="//@ownedElement.0/@ownedElement.6" keyRelationship="//@ownedElement.0/@ownedElement.3/@ownedElement.4"/>
+      <ownedElement xsi:type="orgomg.cwm.resource.relational:Column" name="nonidentifierProperty" type="//@ownedElement.0/@ownedElement.9" characterSetName=""/>
+      <ownedElement xsi:type="orgomg.cwm.resource.relational:Column" name="identifierProperty" type="//@ownedElement.0/@ownedElement.5" uniqueKey="//@ownedElement.0/@ownedElement.3/@ownedElement.3" characterSetName=""/>
+      <ownedElement xsi:type="orgomg.cwm.resource.relational:PrimaryKey" name="PKidentifierProperty" feature="//@ownedElement.0/@ownedElement.3/@ownedElement.2"/>
+      <ownedElement xsi:type="orgomg.cwm.resource.relational:ForeignKey" name="nonmultipleProperty" feature="//@ownedElement.0/@ownedElement.3/@ownedElement.0" uniqueKey="//@ownedElement.0/@ownedElement.0/@ownedElement.1"/>
+    </ownedElement>
+    <ownedElement xsi:type="orgomg.cwm.resource.relational:SQLSimpleType" name="BOOLEAN" structuralFeature="//@ownedElement.0/@ownedElement.1/@ownedElement.0 //@ownedElement.0/@ownedElement.2/@ownedElement.0"/>
+    <ownedElement xsi:type="orgomg.cwm.resource.relational:SQLSimpleType" name="INTEGER" structuralFeature="//@ownedElement.0/@ownedElement.2/@ownedElement.1 //@ownedElement.0/@ownedElement.3/@ownedElement.2"/>
+    <ownedElement xsi:type="orgomg.cwm.resource.relational:SQLSimpleType" name="INT" structuralFeature="//@ownedElement.0/@ownedElement.2/@ownedElement.2 //@ownedElement.0/@ownedElement.0/@ownedElement.0 //@ownedElement.0/@ownedElement.3/@ownedElement.0"/>
+    <ownedElement xsi:type="orgomg.cwm.resource.relational:SQLSimpleType" name="REAL" structuralFeature="//@ownedElement.0/@ownedElement.2/@ownedElement.3"/>
+    <ownedElement xsi:type="orgomg.cwm.resource.relational:SQLSimpleType" name="FLOAT" structuralFeature="//@ownedElement.0/@ownedElement.2/@ownedElement.4"/>
+    <ownedElement xsi:type="orgomg.cwm.resource.relational:SQLSimpleType" name="CHAR" structuralFeature="//@ownedElement.0/@ownedElement.2/@ownedElement.5 //@ownedElement.0/@ownedElement.3/@ownedElement.1"/>
+    <ownedElement xsi:type="orgomg.cwm.resource.relational:SQLSimpleType" name="VARCHAR" structuralFeature="//@ownedElement.0/@ownedElement.2/@ownedElement.7"/>
+    <ownedElement xsi:type="orgomg.cwm.resource.relational:SQLSimpleType" name="CHARACTER" structuralFeature="//@ownedElement.0/@ownedElement.2/@ownedElement.6"/>
+  </ownedElement>
+</orgomg.cwm.resource.relational:Catalog>

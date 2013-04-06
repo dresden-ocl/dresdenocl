@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.3"?>
+<plugin>
+    <extension
+    		point="org.dresdenocl.modelbus.metamodels">
+      <metamodel
+            icon="icons/cwm.gif"
+            id="org.dresdenocl.metamodels.cwmrelational"
+            modelProvider="org.dresdenocl.metamodels.cwmrelational.internal.provider.CWMModelProvider"
+            name="CWMrelational Model">
+      </metamodel>
+   </extension>
+</plugin>

@@ -335,6 +335,11 @@ public final class MetaModelTestServices {
 	 * Indicates whether or not an adapted metamodel supports operations.
 	 */
 	public static boolean supportsNoOperations = false;
+	
+	/**
+	 * Indicates whether or not an adapted metamodel supports inheritance.
+	 */
+	public static boolean supportsNoInheritances = false;
 
 	/** The only instance of {@link MetaModelTestServices}. */
 	private static MetaModelTestServices myInstance;

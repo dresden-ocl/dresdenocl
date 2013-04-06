@@ -388,20 +388,22 @@ public class TestProperty {
 	 */
 	@Test
 	public void testGetType03() {
-
-		String msg;
-
-		msg = "The adaptation of Property.getType() seems to be wrong.";
-
-		/* The property must be multiple. */
-		assertTrue(
-				msg,
-				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-						.getSequenceType(class1)
-						.equals(orderedMultipleProperty.getType())
-						|| EssentialOclPlugin.getOclLibraryProvider()
-								.getOclLibrary().getOrderedSetType(class1)
-								.equals(orderedMultipleProperty.getType()));
+		
+		if (orderedMultipleProperty != null) {
+			String msg;
+	
+			msg = "The adaptation of Property.getType() seems to be wrong.";
+	
+			/* The property must be multiple. */
+			assertTrue(
+					msg,
+					EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+							.getSequenceType(class1)
+							.equals(orderedMultipleProperty.getType())
+							|| EssentialOclPlugin.getOclLibraryProvider()
+									.getOclLibrary().getOrderedSetType(class1)
+									.equals(orderedMultipleProperty.getType()));
+			}
 	}
 
 	/**
@@ -487,19 +489,22 @@ public class TestProperty {
 	@Test
 	public void testGetType07() {
 
-		String msg;
-
-		msg = "The adaptation of Property.getType() seems to be wrong.";
-
-		/* The property must be multiple. */
-		assertTrue(
-				msg,
-				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-						.getSetType(class1)
-						.equals(uniqueMultipleProperty.getType())
-						|| EssentialOclPlugin.getOclLibraryProvider()
-								.getOclLibrary().getOrderedSetType(class1)
-								.equals(uniqueMultipleProperty.getType()));
+		if (uniqueMultipleProperty != null) {
+		
+			String msg;
+	
+			msg = "The adaptation of Property.getType() seems to be wrong.";
+	
+			/* The property must be multiple. */
+			assertTrue(
+					msg,
+					EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+							.getSetType(class1)
+							.equals(uniqueMultipleProperty.getType())
+							|| EssentialOclPlugin.getOclLibraryProvider()
+									.getOclLibrary().getOrderedSetType(class1)
+									.equals(uniqueMultipleProperty.getType()));
+		}
 	}
 
 	/**

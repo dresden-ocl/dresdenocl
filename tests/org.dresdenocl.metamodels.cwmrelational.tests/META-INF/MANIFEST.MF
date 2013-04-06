@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: CWMrelational Meta-Model Test Plug-in
+Bundle-SymbolicName: org.dresdenocl.metamodels.cwmrelational.test;singleton:=true
+Bundle-Version: 3.2.0.qualifier
+Bundle-Activator: org.dresdenocl.metamodels.cwmrelational.test.CWMrelationalMetaModelTestPlugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.junit4;bundle-version="4.0.0",
+ org.dresdenocl.metamodels.test,
+ org.dresdenocl.facade,
+ org.dresdenocl.metamodels.cwmrelational;bundle-version="3.1.0"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Vendor: TU Dresden, Software Technology Group
+Export-Package: org.dresdenocl.metamodels.cwmrelational.test.tests
