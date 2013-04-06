@@ -28,15 +28,16 @@
 package org.dresdenocl.tools.transformation.pivot2sql.test;
 
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-
 import org.dresdenocl.tools.transformation.pivot2sql.test.tests.CWM2DdlTest;
+import org.dresdenocl.tools.transformation.pivot2sql.test.tests.Pivot2CWMtwoSchemaTest;
 import org.dresdenocl.tools.transformation.pivot2sql.test.tests.Pivot2CWMtypedTest;
 import org.dresdenocl.tools.transformation.pivot2sql.test.tests.Pivot2CWMverticalTest;
-import org.dresdenocl.tools.transformation.pivot2sql.test.tests.Pivot2DdlAndMappedModelTest;
+import org.dresdenocl.tools.transformation.pivot2sql.test.tests.Pivot2DdlAndMappedModelEcoreTest;
+import org.dresdenocl.tools.transformation.pivot2sql.test.tests.Pivot2DdlAndMappedModelUMLTest;
 import org.dresdenocl.tools.transformation.pivot2sql.test.tests.Pivot2DdlTest;
 import org.dresdenocl.tools.transformation.pivot2sql.test.tests.Pivot2MappedModelTest;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
 /**
  * This TestSuite runs all Tests testing the package
@@ -48,8 +49,8 @@ import org.dresdenocl.tools.transformation.pivot2sql.test.tests.Pivot2MappedMode
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ Pivot2MappedModelTest.class, Pivot2CWMtypedTest.class,
-		Pivot2CWMverticalTest.class, CWM2DdlTest.class, Pivot2DdlTest.class,
-		Pivot2DdlAndMappedModelTest.class })
+	Pivot2CWMtwoSchemaTest.class, Pivot2CWMverticalTest.class, CWM2DdlTest.class, Pivot2DdlTest.class,
+		Pivot2DdlAndMappedModelUMLTest.class ,Pivot2DdlAndMappedModelEcoreTest.class })
 public class AllTestsPivot2Sql extends AbstractDresdenOclTest {
 	// this class remains completely empty,
 	// being used only as a holder for the above annotations

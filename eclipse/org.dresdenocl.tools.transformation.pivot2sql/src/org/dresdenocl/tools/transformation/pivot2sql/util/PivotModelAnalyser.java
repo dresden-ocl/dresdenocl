@@ -7,9 +7,11 @@ package org.dresdenocl.tools.transformation.pivot2sql.util;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.dresdenocl.essentialocl.types.AnyType;
@@ -34,6 +36,16 @@ public class PivotModelAnalyser extends
 		ModelAnalyser<Namespace, NamedElement, Type> {
 
 	private Set<Type> globalAllTypes = null;
+	
+	/**
+	 * Contains more Primitive Types as the standard in Dresden OCL.
+	 */
+	public final static Map<String,String> extraPrimitives = new HashMap<String,String>();
+	
+	static {
+		extraPrimitives.put("Date", "Date");
+		extraPrimitives.put("EDate", "Date");
+	}
 
 	public PivotModelAnalyser(Namespace model) {
 
@@ -148,14 +160,12 @@ public class PivotModelAnalyser extends
 	}
 
 	public boolean isPrimitive(Type type) {
-
-		List<String> primitives = new ArrayList<String>();
-		primitives.add("Date");
+		if (type == null) return false;
 		boolean retValue = type instanceof PrimitiveType;
 		if (!retValue) {
 			if (type.getOwnedProperty().size() == 0) {
 				if (type.getOwnedOperation().size() == 0) {
-					retValue = primitives.contains(type.getName());
+					retValue = extraPrimitives.containsKey(type.getName());
 				}
 			}
 		}

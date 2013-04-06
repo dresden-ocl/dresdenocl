@@ -1,8 +1,10 @@
 package org.dresdenocl.tools.transformation.pivot2sql.test.tests.util;
 
-import java.io.File;
 import static org.junit.Assert.fail;
 
+import java.io.File;
+
+import org.dresdenocl.metamodels.ecore.EcoreMetamodelPlugin;
 import org.dresdenocl.metamodels.uml2.UML2MetamodelPlugin;
 import org.dresdenocl.model.IModel;
 import org.dresdenocl.model.ModelAccessException;
@@ -31,6 +33,14 @@ public class TestPerformer {
 
 		return ModelBusPlugin.getMetamodelRegistry()
 				.getMetamodel(UML2MetamodelPlugin.ID).getModelProvider().getModel(file);
+	}
+	
+	
+	public static IModel addEcoreModel(File file) throws IllegalArgumentException,
+	ModelAccessException {
+
+		return ModelBusPlugin.getMetamodelRegistry()
+		.getMetamodel(EcoreMetamodelPlugin.ID).getModelProvider().getModel(file);
 	}
 
 	public static boolean removeUMLModel(IModel model) {

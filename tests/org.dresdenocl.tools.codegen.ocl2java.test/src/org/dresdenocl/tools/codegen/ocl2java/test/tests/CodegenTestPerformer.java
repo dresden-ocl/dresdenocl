@@ -190,13 +190,13 @@ public final class CodegenTestPerformer {
 
 			allConstraints = this.getAllConstraints();
 
-			this.myCodeGeneratorSettings.setSaveCode(true);
+			this.myCodeGeneratorSettings.setSaveCode(1);
 			IOcl2Java ocl2Java =
 					Ocl2JavaFactory.getInstance().createJavaCodeGenerator();
 			ocl2Java.resetEnvironment();
 			ocl2Java.setSettings(myCodeGeneratorSettings);
 			ocl2Java.transformInstrumentationCode(allConstraints);
-			this.myCodeGeneratorSettings.setSaveCode(false);
+			this.myCodeGeneratorSettings.setSaveCode(0);
 		}
 
 		catch (Ocl2CodeException e) {

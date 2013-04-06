@@ -2,10 +2,6 @@ package org.dresdenocl.tools.transformation.pivot2sql.test.tests;
 
 import static org.junit.Assert.fail;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
 import org.dresdenocl.model.IModel;
 import org.dresdenocl.model.ModelAccessException;
 import org.dresdenocl.pivotmodel.Namespace;
@@ -14,23 +10,19 @@ import org.dresdenocl.tools.codegen.declarativ.mapping.IMappedModel;
 import org.dresdenocl.tools.transformation.ITransformation;
 import org.dresdenocl.tools.transformation.TransformationFactory;
 import org.dresdenocl.tools.transformation.impl.Tuple;
+import org.dresdenocl.tools.transformation.pivot2sql.impl.SchemaStringMap;
 import org.dresdenocl.tools.transformation.pivot2sql.test.tests.util.ModelChecker;
 import org.dresdenocl.tools.transformation.pivot2sql.test.tests.util.TestPerformer;
-import org.dresdenocl.tools.transformation.pivot2sql.test.tests.util.TransformationTest;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
-public class Pivot2DdlAndMappedModelTest {
+public abstract class Pivot2DdlAndMappedModelTest {
 
-	private IModel model = null;
+	protected IModel model = null;
 
 	@Before
-	public void setUp() {
-
-		try {
-			model = TestPerformer.addUMLModel(TransformationTest.TEST_COMPLEX);
-		} catch (Exception e) {
-			fail("Can't initialize model");
-		}
-	}
+	public abstract void setUp();
 
 	@After
 	public void tear_down() {
@@ -59,9 +51,9 @@ public class Pivot2DdlAndMappedModelTest {
 		oclSettings.setModus(modus);
 
 		// run Pivot2Ddl:
-		ITransformation<Namespace, IOcl2DeclSettings, Tuple<String, IMappedModel>> p2dmm =
+		ITransformation<Namespace, IOcl2DeclSettings, Tuple<SchemaStringMap, IMappedModel>> p2dmm =
 				TransformationFactory.getInstance().getParallelTransformation(
-						"Pivot2DdlAndMappedModel", Namespace.class, String.class,
+						"Pivot2DdlAndMappedModel", Namespace.class, SchemaStringMap.class,
 						IMappedModel.class, IOcl2DeclSettings.class, "pivot",
 						"ddl&mappedmodel");
 		p2dmm.setSettings(oclSettings);
@@ -78,9 +70,9 @@ public class Pivot2DdlAndMappedModelTest {
 		}
 
 		// run Pivot2CWM & CWM2Ddl
-		ITransformation<Namespace, IOcl2DeclSettings, String> p2d =
+		ITransformation<Namespace, IOcl2DeclSettings, SchemaStringMap> p2d =
 				TransformationFactory.getInstance().getTransformation("Pivot2Ddl",
-						Namespace.class, String.class, IOcl2DeclSettings.class, "pivot",
+						Namespace.class, SchemaStringMap.class, IOcl2DeclSettings.class, "pivot",
 						"ddl");
 		p2d.setSettings(oclSettings);
 		try {
@@ -111,7 +103,7 @@ public class Pivot2DdlAndMappedModelTest {
 			fail("Can't transformation cwm");
 		}
 
-		ModelChecker.sameDdl(p2dmm.getResult().getElem1(), p2d.getResult());
+		ModelChecker.sameDdl(p2dmm.getResult().getElem1().toFullString(), p2d.getResult().toFullString());
 		ModelChecker
 				.sameMappedModel(p2dmm.getResult().getElem2(), p2mm.getResult());
 	}

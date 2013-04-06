@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="org" nsURI="org" nsPrefix="">
+  <eSubpackages name="dresdenocl" nsURI="org.dresdenocl">
+    <eSubpackages name="examples" nsURI="org.dresdenocl.examples">
+      <eSubpackages name="university_complex" nsURI="org.dresdenocl.examples.university_complex">
+        <eClassifiers xsi:type="ecore:EClass" name="Grade">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Person">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="firstName" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastName" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isMarried" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="birthDate" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="age" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="salaries" lowerBound="1"
+              upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="supervised" ordered="false"
+              lowerBound="1" upperBound="-1" eType="#//dresdenocl/examples/university_complex/Person"
+              eOpposite="#//dresdenocl/examples/university_complex/Person/supervisor"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="supervisor" eType="#//dresdenocl/examples/university_complex/Person"
+              eOpposite="#//dresdenocl/examples/university_complex/Person/supervised"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="grade" lowerBound="1"
+              eType="#//dresdenocl/examples/university_complex/Grade"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="currentPaper" lowerBound="1"
+              eType="#//dresdenocl/examples/university_complex/Paper"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="papers" ordered="false"
+              lowerBound="1" upperBound="-1" eType="#//dresdenocl/examples/university_complex/Paper"
+              eOpposite="#//dresdenocl/examples/university_complex/Paper/author"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="owner" ordered="false"
+              lowerBound="1" upperBound="-1" eType="#//dresdenocl/examples/university_complex/Facility"
+              eOpposite="#//dresdenocl/examples/university_complex/Facility/member"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="theFacility" eType="#//dresdenocl/examples/university_complex/Facility"
+              eOpposite="#//dresdenocl/examples/university_complex/Facility/headOfFacility"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Student" eSuperTypes="#//dresdenocl/examples/university_complex/Person">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="matNr" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="matDate" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Employee" eSuperTypes="#//dresdenocl/examples/university_complex/Person">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="soSecNr" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="taxClass" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="wage" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="PhDStudent" eSuperTypes="#//dresdenocl/examples/university_complex/Employee">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="dissSubject" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Paper">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="edition" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="purpose" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="category" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="inProgress" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="author" ordered="false"
+              lowerBound="1" upperBound="-1" eType="#//dresdenocl/examples/university_complex/Person"
+              eOpposite="#//dresdenocl/examples/university_complex/Person/papers"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Facility">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="superFacility" lowerBound="1"
+              eType="#//dresdenocl/examples/university_complex/Facility" eOpposite="#//dresdenocl/examples/university_complex/Facility/subFacility"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="subFacility" ordered="false"
+              upperBound="-1" eType="#//dresdenocl/examples/university_complex/Facility"
+              eOpposite="#//dresdenocl/examples/university_complex/Facility/superFacility"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="member" ordered="false"
+              lowerBound="1" upperBound="-1" eType="#//dresdenocl/examples/university_complex/Person"
+              eOpposite="#//dresdenocl/examples/university_complex/Person/owner"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="headOfFacility" eType="#//dresdenocl/examples/university_complex/Person"
+              eOpposite="#//dresdenocl/examples/university_complex/Person/theFacility"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Chair" eSuperTypes="#//dresdenocl/examples/university_complex/Facility"/>
+        <eClassifiers xsi:type="ecore:EClass" name="Faculty" eSuperTypes="#//dresdenocl/examples/university_complex/Facility"/>
+        <eClassifiers xsi:type="ecore:EClass" name="Institute" eSuperTypes="#//dresdenocl/examples/university_complex/Facility"/>
+      </eSubpackages>
+    </eSubpackages>
+  </eSubpackages>
+</ecore:EPackage>

@@ -4,11 +4,13 @@
  */
 package org.dresdenocl.tools.transformation.pivot2sql.impl;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-
 import org.dresdenocl.essentialocl.types.CollectionType;
 import org.dresdenocl.model.ModelAccessException;
 import org.dresdenocl.pivotmodel.AssociationProperty;
@@ -19,7 +21,7 @@ import org.dresdenocl.tools.codegen.declarativ.IOcl2DeclSettings;
 import org.dresdenocl.tools.codegen.declarativ.mapping.Guide;
 import org.dresdenocl.tools.codegen.declarativ.mapping.IMappedModel;
 import org.dresdenocl.tools.transformation.ITransformation;
-import org.dresdenocl.tools.transformation.M2XTransformation;
+import org.dresdenocl.tools.transformation.Transformation;
 import org.dresdenocl.tools.transformation.exception.InvalidModelException;
 import org.dresdenocl.tools.transformation.exception.TransformationException;
 import org.dresdenocl.tools.transformation.pivot2sql.Pivot2SqlPlugin;
@@ -36,7 +38,7 @@ import org.dresdenocl.tools.transformation.pivot2sql.util.PivotModelAnalyser;
  * 
  */
 public class Pivot2MappedModelImpl extends
-		M2XTransformation<Namespace, IOcl2DeclSettings, IMappedModel> implements
+		Transformation<Namespace, IOcl2DeclSettings, IMappedModel> implements
 		ITransformation<Namespace, IOcl2DeclSettings, IMappedModel> {
 
 	private Logger LOGGER = Pivot2SqlPlugin
@@ -68,6 +70,11 @@ public class Pivot2MappedModelImpl extends
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.tools.transformation.Transformation#invoke()
+	 */
+	@Override
 	public void invoke() throws InvalidModelException, TransformationException {
 
 		if (LOGGER.isDebugEnabled()) {
@@ -102,7 +109,7 @@ public class Pivot2MappedModelImpl extends
 					this);
 		}
 
-		pivotModelAnalyser = new PivotModelAnalyser(model_in);
+		pivotModelAnalyser = new PivotModelAnalyser(in);
 
 		settings.setMappedModel(new MappedModelImpl());
 
@@ -136,6 +143,14 @@ public class Pivot2MappedModelImpl extends
 
 	}
 
+	/**
+	 * Create a mapped class for the  {@link Type}.
+	 * 
+	 * @param type
+	 * 			the type for generating the class
+	 * @throws InvalidModelException
+	 * 			
+	 */
 	private void map_Type2MappedClass(Type type) throws InvalidModelException {
 
 		if (LOGGER.isDebugEnabled()) {
@@ -151,6 +166,13 @@ public class Pivot2MappedModelImpl extends
 		}
 	}
 
+	/**
+	 * Generate the guide for the access the property
+	 * 
+	 * @param property
+	 * 			the property which create the guide
+	 * @throws InvalidModelException
+	 */
 	private void map_property2Guide(Property property)
 			throws InvalidModelException {
 
@@ -166,7 +188,7 @@ public class Pivot2MappedModelImpl extends
 		else {
 			Type type = property.getOwningType();
 
-			String pkname = query_pkNameForType(type);
+			List<String> pkname = query_pkNameForType(type);
 			Set<Type> subtypes = query_subtypesForType(type);
 
 			create_PropertyGuide(property, type, pkname);
@@ -177,13 +199,20 @@ public class Pivot2MappedModelImpl extends
 		}
 	}
 
-	private void create_PropertyGuide(Property property, Type type, String pkname)
+	/**
+	 * 
+	 * @param property
+	 * @param type
+	 * @param pkname
+	 * @throws InvalidModelException
+	 */
+	private void create_PropertyGuide(Property property, Type type, List<String> pkname)
 			throws InvalidModelException {
 
 		MappedClassImpl mc = accessMappedClass(type);
 		String ovname = this.settings.getObjectViewPrefix() + type.getName();
 		Guide guide = new Guide(false);
-		guide.add(property.getName(), ovname, pkname);
+		guide.add(Arrays.asList(property.getName()), ovname, pkname);
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Creating Attribute Guide for Attribute: "
@@ -194,8 +223,25 @@ public class Pivot2MappedModelImpl extends
 		mc.addAttributeGuide(property.getName(), guide);
 	}
 
-	private Guide create_AssociationGuide(String name, Type type, String pkname,
-			String fkname, String ovname) throws InvalidModelException {
+	/**
+	 * Create an association guide.
+	 * 
+	 * @param name
+	 * 			the name of the guide
+	 * @param type
+	 * 			the owning type of the association
+	 * @param pkname
+	 * 			the primary keys of this association
+	 * @param fkname
+	 * 			the foreign keys of this association
+	 * @param ovname
+	 * 			the name of the object view
+	 * @return
+	 * 			the generated guide
+	 * @throws InvalidModelException
+	 */
+	private Guide create_AssociationGuide(String name, Type type, List<String> pkname,
+			List<String> fkname, String ovname) throws InvalidModelException {
 
 		MappedClassImpl mc = accessMappedClass(type);
 
@@ -210,7 +256,8 @@ public class Pivot2MappedModelImpl extends
 		return guide;
 	}
 
-	private void addToGuide(Guide guide, String select, String from, String where) {
+	
+	private void addToGuide(Guide guide, List<String> select, String from, List<String> where) {
 
 		guide.add(select, from, where);
 	}
@@ -232,7 +279,7 @@ public class Pivot2MappedModelImpl extends
 		String name = property.getName();
 		if (type instanceof CollectionType) {
 			map_MtoN_Association2Guide(((CollectionType) type).getElementType(),
-					((CollectionType) type).getElementType().getName(), owningType,
+					property.getName(), owningType,
 					owningType.getName(),
 					settings.getUniqueAssociationTableName(property));
 		}
@@ -259,7 +306,7 @@ public class Pivot2MappedModelImpl extends
 			throws InvalidModelException {
 
 		String typename = type.getName();
-		String pkname = query_pkNameForType(type);
+		List<String> pkname = query_pkNameForType(type);
 		String ovname = this.settings.getObjectViewPrefix() + typename;
 
 		MappedClassImpl mc;
@@ -303,12 +350,12 @@ public class Pivot2MappedModelImpl extends
 
 		if (nameA == null || nameA.equals("")) {
 			throw new InvalidModelException(ASS_ROLE + "[" + assTableName + ", "
-					+ tA.getName() + "]", this.model_in, this);
+					+ tA.getName() + "]", this.in, this);
 		}
 
 		if (nameB == null || nameB.equals("")) {
 			throw new InvalidModelException(ASS_ROLE + "[" + assTableName + ", "
-					+ tB.getName() + "]", this.model_in, this);
+					+ tB.getName() + "]", this.in, this);
 		}
 
 		if (pivotModelAnalyser.isMultiple(property)) {
@@ -318,7 +365,7 @@ public class Pivot2MappedModelImpl extends
 		Type typeA = null;
 		if (!(pivotModelAnalyser.instanceIsOfType(tA, Type.class))) {
 			throw new InvalidModelException(PART_CLASS + "[" + assTableName + ", "
-					+ tA.getName() + "]", this.model_in, this);
+					+ tA.getName() + "]", this.in, this);
 		}
 		else {
 			typeA = (Type) tA;
@@ -330,7 +377,7 @@ public class Pivot2MappedModelImpl extends
 		Type typeB = null;
 		if (!(pivotModelAnalyser.instanceIsOfType(tB, Type.class))) {
 			throw new InvalidModelException(PART_CLASS + "[" + assTableName + ", "
-					+ tB.getName() + "]", this.model_in, this);
+					+ tB.getName() + "]", this.in, this);
 		}
 		else {
 			typeB = (Type) tB;
@@ -359,12 +406,12 @@ public class Pivot2MappedModelImpl extends
 	private void map_1to1_Association2Guide(Type typeA, String nameA, Type typeB,
 			String nameB) throws InvalidModelException {
 
-		String pknameA = query_pkNameForType(typeA);
-		String pknameB = query_pkNameForType(typeB);
+		List<String> pknameA = query_pkNameForType(typeA);
+		List<String> pknameB = query_pkNameForType(typeB);
 		String ovnameA = this.settings.getObjectViewPrefix() + typeA.getName();
 		String ovnameB = this.settings.getObjectViewPrefix() + typeB.getName();
-		String fknameA = this.settings.getForeignKeyPrefix() + nameA;
-		String fknameB = this.settings.getForeignKeyPrefix() + nameB;
+		List<String> fknameA = query_fkNameForType(typeB,nameA);
+		List<String> fknameB = query_fkNameForType(typeA,nameB);
 		Set<Type> subtypesA = query_subtypesForType(typeA);
 		Set<Type> subtypesB = query_subtypesForType(typeB);
 
@@ -383,9 +430,9 @@ public class Pivot2MappedModelImpl extends
 	private void map_1toN_Association2Guide(Type typeB, String nameB, Type typeA,
 			String nameA) throws InvalidModelException {
 
-		String pknameA = query_pkNameForType(typeA);
+		List<String> pknameA = query_pkNameForType(typeA);
 		String ovnameA = this.settings.getObjectViewPrefix() + typeA.getName();
-		String fknameB = this.settings.getForeignKeyPrefix() + nameB;
+		List<String> fknameB = query_fkNameForType(typeA,nameB);
 
 		Set<Type> subtypesA = query_subtypesForType(typeA);
 		Set<Type> subtypesB = query_subtypesForType(typeB);
@@ -417,12 +464,12 @@ public class Pivot2MappedModelImpl extends
 
 		boolean savePaths = Boolean.valueOf(this.settings.getTemplateGroup().getTemplate("check_database_references").toString()).booleanValue();
 		
-		String pknameA = this.settings.getPrimaryKeyPrefix() + typeA.getName();
-		String pknameB = this.settings.getPrimaryKeyPrefix() + typeB.getName();
+		List<String> pknameA = query_pkNameForType(typeA);
+		List<String> pknameB = query_pkNameForType(typeB);
 		String ovnameA = this.settings.getObjectViewPrefix() + typeA.getName();
 		String ovnameB = this.settings.getObjectViewPrefix() + typeB.getName();
-		String fknameA = this.settings.getForeignKeyPrefix() + nameA;
-		String fknameB = this.settings.getForeignKeyPrefix() + nameB;
+		List<String> fknameA = query_fkNameForType(typeB,nameA);
+		List<String> fknameB = query_fkNameForType(typeA,nameB);
 		Set<Type> subtypesA = query_subtypesForType(typeA);
 		Set<Type> subtypesB = query_subtypesForType(typeB);
 
@@ -491,11 +538,29 @@ public class Pivot2MappedModelImpl extends
 		return pivotModelAnalyser.getInstancesOfType(AssociationProperty.class);
 	}
 
-	private String query_pkNameForType(Type type) throws InvalidModelException {
-
-		String pkname =
-				this.settings.getPrimaryKeyPrefix() + query_nameOfGenroot(type);
-		return pkname;
+	private List<String> query_pkNameForType(Type type) throws InvalidModelException {
+		List<String> primaryKeys = new ArrayList<String>();
+		List<Type> types = pivotModelAnalyser.query_supertypesForType(type, true);
+		for (Type t : types) {
+			for (Property prop : t.getOwnedProperty()) {
+				if (prop.isIdentifier()) primaryKeys.add(prop.getName());
+			}
+		}
+		if (primaryKeys.size() == 0) primaryKeys.add(settings.getPrimaryKeyPrefix() + query_nameOfGenroot(type));
+		return primaryKeys;
+	}
+	
+	private List<String> query_fkNameForType(Type type,String name) throws InvalidModelException {
+		List<String> primaryKeys = query_pkNameForType(type);
+		List<String> foreignKeys = new ArrayList<String>();
+		if (primaryKeys.size() == 1 && primaryKeys.get(0).equals(settings.getPrimaryKeyPrefix() + query_nameOfGenroot(type))) 
+			foreignKeys.add(settings.getForeignKeyPrefix()+name);
+		else {
+			for (String value : primaryKeys) {
+				foreignKeys.add(settings.getForeignKeyPrefix()+name+"_"+value);
+			}
+		}
+		return foreignKeys;
 	}
 
 	private String query_nameOfGenroot(Type type) throws InvalidModelException {
@@ -507,7 +572,7 @@ public class Pivot2MappedModelImpl extends
 		try {
 			return pivotModelAnalyser.query_nameOfGenroot(type);
 		} catch (InvalidModelException ime) {
-			throw new InvalidModelException(ime.getMessage(), model_in, this);
+			throw new InvalidModelException(ime.getMessage(), in, this);
 		}
 
 	}

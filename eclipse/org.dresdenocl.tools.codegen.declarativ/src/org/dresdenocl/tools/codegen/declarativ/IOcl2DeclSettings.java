@@ -123,6 +123,21 @@ public interface IOcl2DeclSettings extends IOcl2CodeSettings {
 	public String getForeignKeyPrefix();
 
 	/**
+	 * Set a schema using.
+	 * 
+	 * @param schemaUsing
+	 *          the prefix
+	 */
+	public void setSchemaUsing(boolean schemaUsing);
+
+	/**
+	 * Returns the schema using
+	 * 
+	 * @return the schemaUsing
+	 */
+	public boolean isSchemaUsing();	
+	
+	/**
 	 * Set a new view prefix
 	 * 
 	 * @param objectViewPrefix

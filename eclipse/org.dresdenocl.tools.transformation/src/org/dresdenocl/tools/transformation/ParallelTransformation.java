@@ -4,11 +4,10 @@
  */
 package org.dresdenocl.tools.transformation;
 
-import org.eclipse.emf.ecore.EObject;
-
 import org.dresdenocl.tools.transformation.exception.InvalidModelException;
 import org.dresdenocl.tools.transformation.exception.TransformationException;
 import org.dresdenocl.tools.transformation.impl.Tuple;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * ParallelTransformation is an abstract implementation of a parallel
@@ -23,7 +22,7 @@ import org.dresdenocl.tools.transformation.impl.Tuple;
  * 
  */
 public abstract class ParallelTransformation<IN extends EObject, SETTINGS, A, B>
-		extends M2XTransformation<IN, SETTINGS, Tuple<A, B>> {
+		extends Transformation<IN, SETTINGS, Tuple<A, B>> {
 
 	private ITransformation<IN, SETTINGS, A> trans1;
 	private ITransformation<IN, SETTINGS, B> trans2;

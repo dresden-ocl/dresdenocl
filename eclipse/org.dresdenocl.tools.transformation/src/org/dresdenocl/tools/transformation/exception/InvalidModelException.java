@@ -4,9 +4,8 @@
  */
 package org.dresdenocl.tools.transformation.exception;
 
-import org.eclipse.emf.ecore.EObject;
-
 import org.dresdenocl.tools.transformation.ITransformation;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * The InvalidModelException is thrown, when a given model has features that are

@@ -1,4 +1,5 @@
 group oracle;
+delimiters "$","$"
 
 typeMap ::= [
         "Integer":"INT",
@@ -14,28 +15,32 @@ typeMap ::= [
 ]
 
 createType(type) ::= <<
-<typeMap.(type)>
+$typeMap.(type)$
 >>
 
 selectStmt(columns, tables, where) ::= <<
-SELECT <columns>
-FROM <tables>
-<if(where)>
-WHERE <where>
-<endif>
+SELECT $columns; separator=", "$
+FROM $tables$
+$if(where)$
+WHERE $where$
+$endif$
 >>
 
 createView(viewname, body) ::= <<
-CREATE VIEW <viewname>
-AS ( <body> );
+CREATE VIEW $viewname$
+AS ( $body$ );
 >>
 
-createColumn(name, type, primaryKey, foreignKey) ::= <<
-<name> <type><if(primaryKey)> PRIMARY KEY<endif>
+createColumn(name, type) ::= <<
+$name$ $type$
 >>
 
 createTable(tablename, columns) ::= <<
-CREATE TABLE <tablename> (
-<columns>
+CREATE TABLE $tablename$ (
+$columns; separator=", "$
 );
+>>
+
+check_database_array() ::= <<
+false
 >>

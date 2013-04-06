@@ -11,8 +11,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import org.dresdenocl.tools.codegen.declarativ.mapping.Guide;
+import org.dresdenocl.tools.codegen.declarativ.mapping.IMappedClass;
+import org.dresdenocl.tools.codegen.declarativ.mapping.IMappedModel;
+import org.dresdenocl.tools.transformation.impl.Tuple;
+import orgomg.cwm.objectmodel.core.Classifier;
+import orgomg.cwm.objectmodel.core.Feature;
 import orgomg.cwm.objectmodel.core.ModelElement;
 import orgomg.cwm.objectmodel.core.Namespace;
+import orgomg.cwm.resource.relational.Catalog;
 import orgomg.cwm.resource.relational.Column;
 import orgomg.cwm.resource.relational.ForeignKey;
 import orgomg.cwm.resource.relational.PrimaryKey;
@@ -20,37 +27,33 @@ import orgomg.cwm.resource.relational.Schema;
 import orgomg.cwm.resource.relational.Table;
 import orgomg.cwm.resource.relational.View;
 
-import org.dresdenocl.tools.codegen.declarativ.mapping.Guide;
-import org.dresdenocl.tools.codegen.declarativ.mapping.IMappedClass;
-import org.dresdenocl.tools.codegen.declarativ.mapping.IMappedModel;
-import org.dresdenocl.tools.transformation.impl.Tuple;
-
 public class ModelChecker {
 
-	public static void checkCWM(Schema schema, List<String> tables,
+	public static void checkCWM(Catalog catalog, List<String> tables,
 			List<String> views,
 			Map<String, List<Tuple<String, String>>> table2properties,
 			Map<String, String> table2PrimaryKey,
 			Map<String, List<String>> table2ForeignKey,
 			Map<String, String> view2queryexpression) {
 
-		checkSchema1(schema, tables, views, table2properties, table2PrimaryKey,
+		checkSchema1(catalog, tables, views, table2properties, table2PrimaryKey,
 				table2ForeignKey, view2queryexpression);
-		checkSchema2(schema, tables, views, table2properties, table2PrimaryKey,
+		checkSchema2(catalog, tables, views, table2properties, table2PrimaryKey,
 				table2ForeignKey, view2queryexpression);
 	}
 
 	/**
 	 * Check is no extra element generated.
 	 */
-	private static void checkSchema1(Schema schema, List<String> tables,
+	private static void checkSchema1(Catalog catalog, List<String> tables,
 			List<String> views,
 			Map<String, List<Tuple<String, String>>> table2properties,
 			Map<String, String> table2PrimaryKey,
 			Map<String, List<String>> table2ForeignKey,
 			Map<String, String> view2queryexpression) {
 
-		for (ModelElement me : schema.getOwnedElement()) {
+		for (ModelElement schema : catalog.getOwnedElement()) {
+		for (ModelElement me : ((Schema) schema).getOwnedElement()) {
 			if (me instanceof Table) {
 				if (tables.contains(me.getName())) {
 					Table table = (Table) me;
@@ -129,7 +132,7 @@ public class ModelChecker {
 				fail("the model element isn't table or view");
 			}
 		}
-
+		}
 	}
 
 	private static List<ModelElement> findModelElement(Namespace namespace,
@@ -137,6 +140,20 @@ public class ModelChecker {
 
 		List<ModelElement> mes = new ArrayList<ModelElement>();
 		for (ModelElement me : namespace.getOwnedElement()) {
+			if (me.getName().equals(name)) {
+				mes.add(me);
+			} else if (me instanceof Namespace) {
+				mes.addAll(findModelElement((Namespace) me,name));
+			}
+		}
+		return mes;
+	}
+	
+	private static List<ModelElement> findFeature(Classifier classifier,
+			String name) {
+
+		List<ModelElement> mes = new ArrayList<ModelElement>();
+		for (Feature me : classifier.getFeature()) {
 			if (me.getName().equals(name)) {
 				mes.add(me);
 			}
@@ -147,7 +164,7 @@ public class ModelChecker {
 	/**
 	 * Check is all elements generated.
 	 */
-	private static void checkSchema2(Schema schema, List<String> tables,
+	private static void checkSchema2(Catalog catalog, List<String> tables,
 			List<String> views,
 			Map<String, List<Tuple<String, String>>> table2properties,
 			Map<String, String> table2PrimaryKey,
@@ -155,7 +172,7 @@ public class ModelChecker {
 			Map<String, String> view2queryexpression) {
 
 		for (String table : tables) {
-			List<ModelElement> mes = findModelElement(schema, table);
+			List<ModelElement> mes = findModelElement(catalog, table);
 			assertTrue("No distinct table " + table + " found", mes.size() == 1);
 			assertTrue("No table " + table + " found", (mes.get(0) instanceof Table));
 			Table t = (Table) mes.get(0);
@@ -163,8 +180,7 @@ public class ModelChecker {
 				mes = findModelElement(t, table2PrimaryKey.get(table));
 				if (mes.size() == 1) {
 					assertTrue("No primary key " + table2PrimaryKey.get(table)
-							+ " in table " + table + " found",
-							(mes.get(0) instanceof PrimaryKey));
+							+ " in table " + table + " found",mes.get(0) instanceof PrimaryKey);
 				}
 				else if (mes.size() == 2) {
 					ModelElement me1 = mes.get(0);
@@ -198,7 +214,7 @@ public class ModelChecker {
 						ModelElement me2 = mes.get(1);
 						assertTrue("foreign key and primary key not same name", me1
 								.getName().equals(me2.getName()));
-						if (me2 instanceof PrimaryKey) {
+						if (me2 instanceof PrimaryKey || me2 instanceof Column) {
 							assertTrue("No foreign key " + foreignKey + " in table " + table
 									+ " found", (me1 instanceof ForeignKey));
 						}
@@ -215,12 +231,27 @@ public class ModelChecker {
 			}
 			if (table2properties.containsKey(table)) {
 				for (Tuple<String, String> property : table2properties.get(table)) {
-					mes = findModelElement(t, property.getElem1());
-					assertTrue("No distinct column " + property.getElem1() + " in table "
-							+ table + " found", mes.size() == 1);
-					assertTrue("No column " + property.getElem1() + " in table " + table
-							+ " found", (mes.get(0) instanceof Column));
-					String datatype = ((Column) mes.get(0)).getType().getName();
+					mes = findFeature(t, property.getElem1());
+					String datatype = null; 
+					if (mes.size() == 1) {
+						assertTrue("No column " + property.getElem1() + " in table " + table
+								+ " found", (mes.get(0) instanceof Column));
+						datatype = ((Column) mes.get(0)).getType().getName();
+					} else if (mes.size() == 2) {
+						ModelElement me1 = mes.get(0);
+						ModelElement me2 = mes.get(1);
+						if (me1 instanceof Column) {
+							assertTrue("No distinct column " + property.getElem1() + " in table " + table
+									+ " found", !(me2 instanceof Column));
+							datatype = ((Column) mes.get(0)).getType().getName();
+						} else if (me2 instanceof Column) {
+							assertTrue("No distinct column " + property.getElem1() + " in table " + table
+									+ " found", !(me1 instanceof Column));
+							datatype = ((Column) mes.get(1)).getType().getName();
+						}
+					}
+							
+					 
 					assertTrue("No corrrect datatype of " + property.getElem1()
 							+ " in table " + table + " found expected:" + property.getElem2()
 							+ ",actual:" + datatype, datatype.equals(property.getElem2()));
@@ -228,7 +259,7 @@ public class ModelChecker {
 			}
 		}
 		for (String view : views) {
-			List<ModelElement> mes = findModelElement(schema, view);
+			List<ModelElement> mes = findModelElement(catalog, view);
 			assertTrue("No distinct view " + view + " found", mes.size() == 1);
 			assertTrue("No view " + view + " found", (mes.get(0) instanceof View));
 			View v = (View) mes.get(0);

@@ -17,5 +17,6 @@ Require-Bundle: org.eclipse.emf.ecore,
 Bundle-ActivationPolicy: lazy
 Export-Package: org.dresdenocl.tools.transformation.pivot2sql,
  org.dresdenocl.tools.transformation.pivot2sql.impl,
- org.dresdenocl.tools.transformation.pivot2sql.mapping
+ org.dresdenocl.tools.transformation.pivot2sql.mapping,
+ org.dresdenocl.tools.transformation.pivot2sql.util
 Bundle-Vendor: TU Dresden, Software Technology Group

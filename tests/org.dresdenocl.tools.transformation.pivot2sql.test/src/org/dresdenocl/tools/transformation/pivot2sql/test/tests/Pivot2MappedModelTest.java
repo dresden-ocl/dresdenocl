@@ -35,8 +35,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Before;
-
 import org.dresdenocl.model.IModel;
 import org.dresdenocl.model.ModelAccessException;
 import org.dresdenocl.pivotmodel.Namespace;
@@ -49,6 +47,7 @@ import org.dresdenocl.tools.transformation.exception.TransformationException;
 import org.dresdenocl.tools.transformation.pivot2sql.test.tests.util.ModelChecker;
 import org.dresdenocl.tools.transformation.pivot2sql.test.tests.util.TestPerformer;
 import org.dresdenocl.tools.transformation.pivot2sql.test.tests.util.TransformationTest;
+import org.junit.Before;
 
 /**
  * <p>
@@ -89,6 +88,31 @@ public class Pivot2MappedModelTest extends TransformationTest {
 		IMappedModel mm = null;
 		try {
 			mm = generateMappedModel(TEST_CLASS);
+		} catch (Exception e) {
+			fail("The mapped model can't generate");
+		}
+
+		classes.add("Person");
+
+		ModelChecker.checkMappedModel(mm, classes, class2attributes, class2assEnds);
+
+	}
+	
+	
+	/**
+	 * <p>
+	 * Tests a mapped Model.
+	 * </p>
+	 * 
+	 * <p>
+	 * Checks if a multipleSchema mapped correctly.
+	 * </p>
+	 */
+	public void testMultipleSchema() {
+
+		IMappedModel mm = null;
+		try {
+			mm = generateMappedModel(TEST_SCHEMA);
 		} catch (Exception e) {
 			fail("The mapped model can't generate");
 		}
@@ -405,7 +429,9 @@ public class Pivot2MappedModelTest extends TransformationTest {
 						"Pivot2MappedModelImpl", Namespace.class, IMappedModel.class,
 						IOcl2DeclSettings.class, "pivot", "mappedmodel");
 		p2mmi.setParameterIN(model.getRootNamespace());
-		p2mmi.setSettings(TestPerformer.getSettings());
+		IOcl2DeclSettings settings = TestPerformer.getSettings();
+		settings.setSchemaUsing(true);
+		p2mmi.setSettings(settings);
 		p2mmi.invoke();
 		TestPerformer.removeUMLModel(model);
 		return p2mmi.getResult();

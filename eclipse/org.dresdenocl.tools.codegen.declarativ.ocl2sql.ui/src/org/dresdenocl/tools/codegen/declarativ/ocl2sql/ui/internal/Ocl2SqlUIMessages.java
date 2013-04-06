@@ -68,6 +68,8 @@ public class Ocl2SqlUIMessages extends NLS {
 	public static String SettingsPage_GenerateDDL_Both;
 
 	public static String SettingsPage_GenerateDDL_Integrity;
+	
+	public static String SettingsPage_GenerateView_Integrity;
 
 	static {
 		/* Initialize resource bundle. */

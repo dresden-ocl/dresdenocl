@@ -13,19 +13,18 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
-import org.eclipse.emf.common.util.URI;
-import org.junit.Test;
-
 import org.dresdenocl.language.ocl.resource.ocl.Ocl22Parser;
 import org.dresdenocl.model.IModel;
 import org.dresdenocl.model.ModelAccessException;
 import org.dresdenocl.parser.ParseException;
 import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.dresdenocl.tools.codegen.declarativ.IOcl2DeclSettings;
 import org.dresdenocl.tools.codegen.declarativ.Ocl2DeclCodeFactory;
 import org.dresdenocl.tools.codegen.declarativ.ocl2sql.test.Ocl2SqlTestPlugin;
 import org.dresdenocl.tools.codegen.exception.Ocl2CodeException;
+import org.eclipse.emf.common.util.URI;
+import org.junit.Test;
 
 public abstract class SingleOcl2SqlTest {
 
@@ -71,7 +70,7 @@ public abstract class SingleOcl2SqlTest {
 
 		IOcl2DeclSettings settings = Ocl2DeclCodeFactory.getInstance()
 				.createOcl2DeclCodeSettings();
-		settings.setSaveCode(false);
+		settings.setSaveCode(0);
 		settings.setModus(IOcl2DeclSettings.MODUS_TYPED);
 		settings.setSourceDirectory(sourcePath);
 		List<String> result = null;

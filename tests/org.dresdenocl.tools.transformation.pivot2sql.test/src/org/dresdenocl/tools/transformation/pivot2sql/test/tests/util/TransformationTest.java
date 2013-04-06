@@ -4,9 +4,8 @@ import java.io.File;
 import java.io.IOException;
 
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
-import org.junit.Test;
-
 import org.dresdenocl.tools.transformation.pivot2sql.test.Pivot2SqlTestPlugin;
+import org.junit.Test;
 
 public abstract class TransformationTest {
 
@@ -23,9 +22,13 @@ public abstract class TransformationTest {
 	protected static File TEST_RELATION_NTO1 = getFile("model/university_relation_Nto1.uml");
 
 	protected static File TEST_RELATION_MTON = getFile("model/university_relation_MtoN.uml");
+	
+	protected static File TEST_SCHEMA = getFile("model/schema.uml");
 
 	public static File TEST_COMPLEX = getFile("model/university_complex.uml");
 
+	public static File TEST_COMPLEX_ECORE = getFile("model/university_complex.ecore");
+	
 	/**
 	 * <p>
 	 * Checks if a class mapped correctly.
@@ -34,6 +37,14 @@ public abstract class TransformationTest {
 	@Test
 	public abstract void testClass();
 
+	/**
+	 * <p>
+	 * Checks if schema generation correctly.
+	 * </p>
+	 */
+	@Test
+	public abstract void testMultipleSchema();	
+	
 	/**
 	 * <p>
 	 * Checks if a property mapped correctly.

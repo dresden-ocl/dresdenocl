@@ -5,11 +5,10 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.dresdenocl.tools.transformation.util.ModelAnalyser;
 import orgomg.cwm.objectmodel.core.ModelElement;
 import orgomg.cwm.objectmodel.core.Namespace;
 import orgomg.cwm.objectmodel.core.Package;
-
-import org.dresdenocl.tools.transformation.util.ModelAnalyser;
 
 public class CwmModelAnalyser extends
 		ModelAnalyser<Package, ModelElement, ModelElement> {
@@ -25,8 +24,8 @@ public class CwmModelAnalyser extends
 
 		Set<ModelElement> modelElements = new HashSet<ModelElement>();
 		modelElements.addAll(pkg.getOwnedElement());
-		for (Package subPackage : pkg.getImporter()) {
-			modelElements.addAll(query_AllModelElements(subPackage));
+		for (ModelElement subPackage : pkg.getOwnedElement()) {
+			if (subPackage instanceof Package) modelElements.addAll(query_AllModelElements((Package) subPackage));
 		}
 		return modelElements;
 	}

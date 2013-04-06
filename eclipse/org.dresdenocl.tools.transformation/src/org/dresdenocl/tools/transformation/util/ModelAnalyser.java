@@ -78,10 +78,7 @@ public abstract class ModelAnalyser<K extends EObject, C, V> {
 
 		List<Class<?>> interfaces =
 				Arrays.asList(instance.getClass().getInterfaces());
-		if (interfaces.contains(type)) {
-			return true;
-		}
-		return false;
+		return interfaces.contains(type);
 	}
 
 	protected abstract <T extends C> Comparator<T> createComparator();

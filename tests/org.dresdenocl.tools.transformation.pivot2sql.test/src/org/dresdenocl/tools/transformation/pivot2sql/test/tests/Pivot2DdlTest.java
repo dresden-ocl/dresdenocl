@@ -2,20 +2,20 @@ package org.dresdenocl.tools.transformation.pivot2sql.test.tests;
 
 import static org.junit.Assert.fail;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import orgomg.cwm.resource.relational.Schema;
-
 import org.dresdenocl.model.IModel;
 import org.dresdenocl.model.ModelAccessException;
 import org.dresdenocl.pivotmodel.Namespace;
 import org.dresdenocl.tools.codegen.declarativ.IOcl2DeclSettings;
 import org.dresdenocl.tools.transformation.ITransformation;
 import org.dresdenocl.tools.transformation.TransformationFactory;
+import org.dresdenocl.tools.transformation.pivot2sql.impl.SchemaStringMap;
 import org.dresdenocl.tools.transformation.pivot2sql.test.tests.util.ModelChecker;
 import org.dresdenocl.tools.transformation.pivot2sql.test.tests.util.TestPerformer;
 import org.dresdenocl.tools.transformation.pivot2sql.test.tests.util.TransformationTest;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import orgomg.cwm.resource.relational.Catalog;
 
 public class Pivot2DdlTest {
 
@@ -58,9 +58,9 @@ public class Pivot2DdlTest {
 		oclSettings.setModus(modus);
 
 		// run Pivot2Ddl:
-		ITransformation<Namespace, IOcl2DeclSettings, String> p2di =
+		ITransformation<Namespace, IOcl2DeclSettings, SchemaStringMap> p2di =
 				TransformationFactory.getInstance().getTransformation("Pivot2Ddl",
-						Namespace.class, String.class, IOcl2DeclSettings.class, "pivot",
+						Namespace.class, SchemaStringMap.class, IOcl2DeclSettings.class, "pivot",
 						"ddl");
 		p2di.setSettings(oclSettings);
 		try {
@@ -76,9 +76,9 @@ public class Pivot2DdlTest {
 		}
 
 		// run Pivot2CWM & CWM2Ddl
-		ITransformation<Namespace, IOcl2DeclSettings, Schema> p2ci =
+		ITransformation<Namespace, IOcl2DeclSettings, Catalog> p2ci =
 				TransformationFactory.getInstance().getTransformation("Pivot2CwmImpl",
-						Namespace.class, Schema.class, IOcl2DeclSettings.class, "pivot",
+						Namespace.class, Catalog.class, IOcl2DeclSettings.class, "pivot",
 						"cwm");
 		p2ci.setSettings(oclSettings);
 		try {
@@ -92,9 +92,9 @@ public class Pivot2DdlTest {
 		} catch (Exception e) {
 			fail("Can't transformation namespace in Pivot2Cwm");
 		}
-		ITransformation<Schema, IOcl2DeclSettings, String> c2di =
+		ITransformation<Catalog, IOcl2DeclSettings, SchemaStringMap> c2di =
 				TransformationFactory.getInstance().getTransformation("Cwm2DdlImpl",
-						Schema.class, String.class, IOcl2DeclSettings.class, "cwm", "ddl");
+						Catalog.class, SchemaStringMap.class, IOcl2DeclSettings.class, "cwm", "ddl");
 		c2di.setSettings(oclSettings);
 		c2di.setParameterIN(p2ci.getResult());
 		try {
@@ -103,7 +103,7 @@ public class Pivot2DdlTest {
 			fail("Can't transformation cwm");
 		}
 
-		ModelChecker.sameDdl(p2di.getResult(), c2di.getResult());
+		ModelChecker.sameDdl(p2di.getResult().toFullString(), c2di.getResult().toFullString());
 	}
 
 }

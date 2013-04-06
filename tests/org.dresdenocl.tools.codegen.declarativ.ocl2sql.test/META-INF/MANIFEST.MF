@@ -15,6 +15,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.dresdenocl.parser,
  org.dresdenocl.tools.transformation,
  org.dresdenocl.language.ocl.staticsemantics,
- org.dresdenocl.testsuite.abstract
+ org.dresdenocl.testsuite.abstract,
+ org.dresdenocl.metamodels.ecore
 Bundle-ActivationPolicy: lazy
 Export-Package: org.dresdenocl.tools.codegen.declarativ.ocl2sql.test

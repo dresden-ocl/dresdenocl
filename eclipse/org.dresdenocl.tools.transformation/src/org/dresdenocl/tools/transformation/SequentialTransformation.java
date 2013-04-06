@@ -1,9 +1,8 @@
 package org.dresdenocl.tools.transformation;
 
-import org.eclipse.emf.ecore.EObject;
-
 import org.dresdenocl.tools.transformation.exception.InvalidModelException;
 import org.dresdenocl.tools.transformation.exception.TransformationException;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * SequentialTransformations is a abstract implementation of a sequential
@@ -15,8 +14,8 @@ import org.dresdenocl.tools.transformation.exception.TransformationException;
  * @param <IN>
  * @param <OUT>
  */
-public abstract class SequentialTransformation<IN extends EObject, SETTINGS, BET, OUT>
-		extends M2XTransformation<IN, SETTINGS, OUT> {
+public abstract class SequentialTransformation<IN, SETTINGS, BET, OUT>
+		extends Transformation<IN, SETTINGS, OUT> {
 
 	private ITransformation<IN, SETTINGS, BET> trans1;
 	private ITransformation<BET, SETTINGS, OUT> trans2;

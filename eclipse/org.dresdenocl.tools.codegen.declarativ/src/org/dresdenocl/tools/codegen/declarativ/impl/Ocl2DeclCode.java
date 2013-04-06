@@ -129,7 +129,6 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 	 */
 	private Map<String, Guide> variableMap;
 	
-	@Deprecated
 	private int uniqueAlias;
 
 	/**
@@ -283,20 +282,19 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 
 		reset();
 		// Check of generated Constraint Types:
-		if (aConstraint.getKind() != ConstraintKind.INVARIANT) {
-			return null;
-		}
-
 		ITemplate template = null;
 		if (aConstraint.getKind() == ConstraintKind.INVARIANT) {
 			template =
 					mySettings.getTemplateGroup().getTemplate("constraint_invariant");
 			constraintName = aConstraint.getName();
+		} else if (aConstraint.getKind() == ConstraintKind.DEFINITION && aConstraint.getDefinedFeature() instanceof Property) {
+			template =
+					mySettings.getTemplateGroup().getTemplate("constraint_definition");
+			template.setAttribute("def_name", aConstraint.getDefinedFeature().getName());
+		} else {
+			return null;
 		}
 
-		if (constraintName == null || constraintName.equals("")) {
-			constraintName = getUniqueConstraintName();
-		}
 
 		ICode bodyExpression;
 		Expression anExpression;
@@ -306,12 +304,23 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 
 		Guide classGuide = variableMap.values().iterator().next();
 		classGuide.reset();
+		
+		if (aConstraint.getKind() == ConstraintKind.DEFINITION) {
+			template.setAttribute("attribute", classGuide.getSelect());
+			constraintName = classGuide.getFrom()+"_"+aConstraint.getDefinedFeature().getName();
+		}
+		
+		if (constraintName == null || constraintName.equals("")) {
+			constraintName = getUniqueConstraintName();
+		}
 
 		template.setAttribute("constraint_name", constraintName);
 		template.setAttribute("context", classGuide.getFrom());
 		template.setAttribute("context_alias", classGuide.getAlias());
 		template.setAttribute("expression", bodyExpression.getResult());
 
+
+		
 		if (commonTableExpressions.size() > 0) {
 			template.setAttribute("common_table", commonTableExpressions.get(0)
 					.getResult());
@@ -361,13 +370,11 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 
 		if (aBooleanLiteralExp.isBooleanSymbol()) {
 			template =
-					new Code(mySettings.getTemplateGroup().getTemplate(
-							"literal_boolean_true"));
+					new Code("literal_boolean_true",mySettings);
 		}
 		else {
 			template =
-					new Code(mySettings.getTemplateGroup().getTemplate(
-							"literal_boolean_false"));
+					new Code("literal_boolean_false",mySettings);
 		}
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("caseBooleanLiteralExp(BooleanLiteralExp)"
@@ -407,7 +414,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 
 		// get template for items in the collection
 		template =
-				new Code(mySettings.getTemplateGroup().getTemplate(templateName));
+				new Code(templateName,mySettings);
 
 		// parameterize the template engine
 		for (CollectionLiteralPart clp : parts) {
@@ -434,7 +441,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 		IComplexCode template;
 
 		template =
-				new Code(mySettings.getTemplateGroup().getTemplate("literal_enum"));
+				new Code("literal_enum",mySettings);
 
 		template.addCode("value", new CodeString(anEnumLiteralExp
 				.getReferredEnumLiteral().getName()));
@@ -517,7 +524,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 
 		/* Transform ifExp. */
 		template =
-				new Code(mySettings.getTemplateGroup().getTemplate("if_expression"));
+				new Code("if_expression",mySettings);
 		template.addCode("if_branch", ifCode);
 		template.addCode("then_branch", thenCode);
 		template.addCode("else_branch", elseCode);
@@ -546,9 +553,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 
 		IComplexCode template;
 
-		template =
-				new Code(mySettings.getTemplateGroup()
-						.getTemplate("literal_integer"));
+		template =	new Code("literal_integer",mySettings);
 
 		template.addCode(
 				"value",
@@ -739,11 +744,10 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 		IComplexCode template;
 
 		template =
-				new Code(mySettings.getTemplateGroup().getTemplate("literal_real"));
-
+				new Code("literal_real",mySettings);
 		// parameterize the template engine
 		template.addCode("value",
-				new CodeString(new Double(aRealLiteralExp.getRealSymbol()).toString()));
+				new CodeString(new Float(aRealLiteralExp.getRealSymbol()).toString()));
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("caseRealLiteralExp(RealLiteralExp)"
@@ -768,7 +772,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 		// no else.
 
 		IComplexCode template =
-				new Code(mySettings.getTemplateGroup().getTemplate("literal_string"));
+				new Code("literal_string",mySettings);
 
 		// parameterize the template engine
 		template.addCode("value",
@@ -810,8 +814,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 		// no else.
 
 		IComplexCode template =
-				new Code(mySettings.getTemplateGroup().getTemplate(
-						"literal_variable"));
+				new Code("literal_variable",mySettings);
 
 		template.addCode("value", createObjectValue(variableMap.get(aVariableExp
 				.getReferredVariable().getName())));
@@ -1128,16 +1131,14 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 					|| "feature_call_size".equals(tempName)) {
 				sourceCode.changeCode("groupby", null);
 				IComplexCode code =
-						new Code(mySettings.getTemplateGroup().getTemplate(
-								tempName + "_select"));
+						new Code(tempName + "_select",mySettings);
 				code.addCode("select",
 						sourceCode.getComplexCode("select").getCode("select"));
 				sourceCode.changeCode("select", code);
 			}
 		}
 		IComplexCode sqlCode =
-				new Code(mySettings.getTemplateGroup().getTemplate(
-						"feature_call_count"));
+				new Code("feature_call_count",mySettings);
 		sqlCode.addCode("select", sourceCode.getCode("select"));
 
 		ICode where1 =
@@ -1162,8 +1163,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 	protected ICode handleCollExcludes(ICode sourceCode, ICode firstArg) {
 
 		IComplexCode template =
-				new Code(mySettings.getTemplateGroup().getTemplate(
-						"feature_call_excludes"));
+				new Code("feature_call_excludes",mySettings);
 
 		template.addCode("operand1", sourceCode);
 		template.changeCode("operand2", firstArg);
@@ -1206,35 +1206,29 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 
 		assert (collType != null) : "including() collType may not be null";
 
-		ITemplate template = null;
+		String template = null;
 
 		if (collType instanceof BagType) {
-			template =
-					mySettings.getTemplateGroup().getTemplate(
-							"feature_call_excluding_bag");
+			template = "bag";
 		}
 		else if (collType instanceof SequenceType) {
-			template =
-					mySettings.getTemplateGroup().getTemplate(
-							"feature_call_excluding_sequence");
+			template = "sequence";
 		}
 		else if (collType instanceof SetType) {
-			template =
-					mySettings.getTemplateGroup().getTemplate(
-							"feature_call_excluding_set");
+			template = "set";
 		}
 		else {
 			throw new IllegalStateException(
 					"Unhandled collection type for excluding operation!");
 		}
 
-		IComplexCode returnValue = new Code(template);
+		IComplexCode returnValue = new Code("feature_call_excluding_"+template,mySettings);
 		Guide guide =
 				mySettings.getMappedModel()
 						.getClass(collType.getElementType().getName()).getClassGuide();
 		guide.reset();
 		returnValue.addCode("operand2", firstArg);
-		returnValue.addCode("element", new CodeString(guide.getSelect()));
+		returnValue.addCode("element", new CodeString(guide.getSelect().get(0)));
 		returnValue.addCode("operand1", sourceCode);
 
 		return returnValue;
@@ -1253,8 +1247,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 	protected ICode handleCollIncludes(ICode sourceCode, ICode firstArg) {
 
 		IComplexCode template =
-				new Code(mySettings.getTemplateGroup().getTemplate(
-						"feature_call_includes"));
+				new Code("feature_call_includes",mySettings);
 
 		template.addCode("operand1", sourceCode);
 		template.addCode("operand2", firstArg);
@@ -1297,29 +1290,23 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 
 		assert (collType != null) : "including() collType may not be null";
 
-		ITemplate template = null;
+		String template = null;
 
 		if (collType instanceof BagType) {
-			template =
-					mySettings.getTemplateGroup().getTemplate(
-							"feature_call_including_bag");
+			template ="bag";
 		}
 		else if (collType instanceof SequenceType) {
-			template =
-					mySettings.getTemplateGroup().getTemplate(
-							"feature_call_including_sequence");
+			template ="sequence";
 		}
 		else if (collType instanceof SetType) {
-			template =
-					mySettings.getTemplateGroup().getTemplate(
-							"feature_call_including_set");
+			template ="set";
 		}
 		else {
 			throw new IllegalStateException(
 					"Unhandled collection type for including operation!");
 		}
 
-		IComplexCode result = new Code(template);
+		IComplexCode result = new Code("feature_call_including_"+template,mySettings);
 
 		result.addCode("operand2", firstArg);
 		result.addCode("operand1", sourceCode);
@@ -1409,8 +1396,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 							|| "feature_call_sum".equals(tempName) || "feature_call_size"
 							.equals(tempName))) {
 				IComplexCode code =
-						new Code(mySettings.getTemplateGroup().getTemplate(
-								tempName + "_select"));
+						new Code(tempName + "_select",mySettings);
 				code.addCode("select",
 						sourceCode.getComplexCode("select").getCode("select"));
 				sourceCode.changeCode("select", code);
@@ -1425,8 +1411,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 		}
 		else {
 			IComplexCode code =
-					new Code(mySettings.getTemplateGroup().getTemplate(
-							"feature_call_" + name));
+					new Code(	"feature_call_" + name,mySettings);
 			code.addCode("select", sourceCode);
 			return code;
 		}
@@ -1658,8 +1643,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 
 		closure = true;
 		IComplexCode code =
-				new Code(mySettings.getTemplateGroup().getTemplate(
-						"common_table_expression"));
+				new Code("common_table_expression",mySettings);
 		commonTableExpressions.add(code);
 		ICode cteName = new CodeString(constraintName + "_" + cteNumber++);
 		Guide closureGuide =
@@ -1757,11 +1741,11 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 		guide.reset();
 
 		IComplexCode template =
-				new Code(mySettings.getTemplateGroup().getTemplate(
-						"feature_call_oclistypeof"));
+				new Code("feature_call_oclistypeof",mySettings);
 
 		template.addCode("from", new CodeString(guide.getFrom()));
-		template.addCode("select", new CodeString(guide.getSelect()));
+
+		template.addCode("select", new CodeString(guide.getSelect().get(0)));
 		template.addCode("object2", sourceCode);
 		template.addCode("alias", new CodeString(guide.getAlias()));
 
@@ -1784,11 +1768,10 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 			supertypeGuide.reset();
 
 		IComplexCode template =
-				new Code(mySettings.getTemplateGroup().getTemplate(
-						"feature_call_ocliskindof"));
+				new Code("feature_call_ocliskindof",mySettings);
 
 		template.addCode("from", new CodeString(typeGuide.getFrom()));
-		template.addCode("select", new CodeString(typeGuide.getSelect()));
+		template.addCode("select", new CodeString(typeGuide.getSelect().get(0)));;
 		template.addCode("alias", new CodeString(typeGuide.getAlias()));
 		template.addCode("from2", (supertypeGuide != null) ? new CodeString(
 				supertypeGuide.getFrom()) : null);
@@ -1839,22 +1822,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 		}
 
 		if (attrType instanceof PrimitiveType) {
-			if (((PrimitiveType) attrType).getKind() == PrimitiveTypeKind.BOOLEAN) {
-				templateName.append("boolean");
-			}
-			else if (((PrimitiveType) attrType).getKind() == PrimitiveTypeKind.INTEGER) {
-				templateName.append("integer");
-			}
-			else if (((PrimitiveType) attrType).getKind() == PrimitiveTypeKind.REAL) {
-				templateName.append("real");
-			}
-			else if (((PrimitiveType) attrType).getKind() == PrimitiveTypeKind.STRING) {
-				templateName.append("string");
-			}
-			else {
-				throw new IllegalStateException(
-						"Unhandled primitive type for relational expression!");
-			}
+			templateName.append(((PrimitiveType) attrType).getKind().getName().toLowerCase());
 		}
 		/*
 		 * No different between CollectionTypes and any else if (attrType instanceof
@@ -2010,11 +1978,10 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 
 			// special case for Boolean attributes: e.g. expand 'attribute' to
 			// 'attribute = 1' in SQL
-			if (property.getType().getName().equals("Boolean")) {
+			if (property.getType() instanceof PrimitiveType && ((PrimitiveType) property.getType()).getKind() == PrimitiveTypeKind.BOOLEAN) {
 				ICode attr = template;
 				template =
-						new Code(mySettings.getTemplateGroup().getTemplate(
-								"feature_call_attribute_boolean"));
+						new Code("feature_call_attribute_boolean",mySettings);
 				template.addCode("attribute", attr);
 			}
 
@@ -2133,14 +2100,30 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 	 * @return the where statement
 	 */
 	protected ICode createWhereStatement(Guide guide1, Guide guide2) {
+		IComplexCode where = null;
+		if (guide2.getWhere().size()== 1 && guide1.getSelect().size() == 1) {
+		 where =new Code("feature_call_navigation_where",mySettings);
+			where.addCode("alias", new CodeString(guide2.getAlias()));
+			where.addCode("alias2", new CodeString(guide1.getAlias()));
+		
+			where.addCode("where", new CodeString(guide2.getWhere().get(0)));
+			where.addCode("select", new CodeString(guide1.getSelect().get(0)));
+		} else {
+			for (String s : guide2.getWhere()) {
+				if (guide1.getSelect().contains(s)) {
+					IComplexCode where2 =
+							new Code("feature_call_navigation_where",mySettings);
+					where2.addCode("alias", new CodeString(guide2.getAlias()));
+					where2.addCode("alias2", new CodeString(guide1.getAlias()));
+				
+					where2.addCode("where", new CodeString(s));
+					where2.addCode("select", new CodeString(s));
+					if (where == null) where = where2;
+					else combinedWhereStatement(where,where2);
+				}
+			}
+		}
 
-		IComplexCode where =
-				new Code(mySettings.getTemplateGroup().getTemplate(
-						"feature_call_navigation_where"));
-		where.addCode("alias", new CodeString(guide2.getAlias()));
-		where.addCode("where", new CodeString(guide2.getWhere()));
-		where.addCode("alias2", new CodeString(guide1.getAlias()));
-		where.addCode("select", new CodeString(guide1.getSelect()));
 		return where;
 	}
 
@@ -2175,15 +2158,13 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 	protected IComplexCode createJoinStatement(Guide from, Guide where) {
 
 		IComplexCode template =
-				new Code(mySettings.getTemplateGroup().getTemplate(
-						"feature_call_navigation_join"));
+				new Code("feature_call_navigation_join",mySettings);
 		IComplexCode fromCode =
-				new Code(mySettings.getTemplateGroup().getTemplate(
-						"feature_call_navigation_from"));
+				new Code("feature_call_navigation_from",mySettings);
 		fromCode.addCode("from", new CodeString(from.getFrom()));
-		fromCode.addCode("select", new CodeString(from.getSelect()));
+		fromCode.addCode("select", new CodeString(from.getSelect().get(0)));
 		if (!from.getWhere().equals(from.getSelect())) {
-			fromCode.addCode("where", new CodeString(from.getWhere()));
+			fromCode.addCode("where", new CodeString(from.getWhere().get(0)));
 		}
 		template.addCode("alias", new CodeString(from.getAlias()));
 		template.addCode("from", fromCode);
@@ -2224,10 +2205,9 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 
 		guide.reset();
 		IComplexCode select =
-				new Code(mySettings.getTemplateGroup().getTemplate(
-						"feature_call_attribute_context"));
+				new Code("feature_call_attribute_context",mySettings);
 		select.addCode("alias", new CodeString(guide.getAlias()));
-		select.addCode("attribute", new CodeString(guide.getSelect()));
+		select.addCode("attribute", new CodeString(guide.getSelect().get(0)));
 		return select;
 	}
 
@@ -2245,7 +2225,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 		guide1.reset();
 		IComplexCode select = createObjectValue(guide2);
 		select.addCode("alias2", new CodeString(guide1.getAlias()));
-		select.addCode("attribute2", new CodeString(guide1.getSelect()));
+		select.addCode("attribute2", new CodeString(guide1.getSelect().get(0)));
 		return select;
 	}
 
@@ -2298,8 +2278,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 		if (!closure)
 			joinGuides.removeLast();
 		template =
-				new Code(mySettings.getTemplateGroup().getTemplate(
-						"feature_call_navigation_select"));
+				new Code("feature_call_navigation_select",mySettings);
 		template.addCode("select", createObjectValue(guide));
 		template.addCode("alias", new CodeString(guide.getAlias()));
 		template.addCode("join", createJoinStatements(joinGuides));
@@ -2425,9 +2404,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 	private IComplexCode createTwoOperandOperation(String templateName,
 			ICode operand1, ICode operand2) {
 
-		ITemplate template =
-				mySettings.getTemplateGroup().getTemplate(templateName);
-		IComplexCode code = new Code(template);
+		IComplexCode code = new Code(templateName,mySettings);
 		code.addCode("operand1", operand1);
 		if (operand2 != null) {
 			code.addCode("operand2", operand2);
@@ -2446,9 +2423,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 	 */
 	private IComplexCode createOperandOperation(String templateName, ICode operand) {
 
-		ITemplate template =
-				mySettings.getTemplateGroup().getTemplate(templateName);
-		IComplexCode code = new Code(template);
+		IComplexCode code = new Code(templateName,mySettings);
 		code.addCode("operand", operand);
 		return code;
 	}
@@ -2545,7 +2520,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 		IComplexCode sqlCode;
 		if (templateName != null) {
 			sqlCode =
-					new Code(mySettings.getTemplateGroup().getTemplate(templateName));
+					new Code(templateName,mySettings);
 			sqlCode.addCode("select", code.getCode("select"));
 		}
 		else {
@@ -2589,7 +2564,6 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 	 * 
 	 * @return unique alias which may be used in the declarative target language
 	 */
-	@Deprecated
 	public String getUniqueAlias() {
 		
 		uniqueAlias++;

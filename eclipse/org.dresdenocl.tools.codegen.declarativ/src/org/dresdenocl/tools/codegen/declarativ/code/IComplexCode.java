@@ -18,9 +18,9 @@ public interface IComplexCode extends ICode {
 	
 	public ICode getAlias();
 	
-	public ICode getWhere();
+	public List<ICode> getWhere();
 	
-	public ICode getSelect();
+	public List<ICode> getSelect();
 	
 	public ICode getFrom();
 

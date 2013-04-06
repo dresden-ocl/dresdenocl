@@ -624,13 +624,45 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
               Full(exp)
             }
             case p : Property => {
-              // TODO: move to EssentialOclFactory
-              val pce = ExpressionsFactory.INSTANCE.createPropertyCallExp
-              pce.setReferredProperty(p)
-              pce.setSourceType(p.getOwningType)
-              pce.setSource(factory.createTypeLiteralExp(p.getOwningType.getQualifiedNameList))
-              pce.setOclLibrary(oclLibrary)
-              Full(pce)
+              if (p.isStatic) {
+                Full(factory.createPropertyCallExp(
+                  factory.createTypeLiteralExp(p.getOwningType.getQualifiedNameList), p))
+              }
+              else {
+                (variables(e)).flatMap {
+                  case (implicitVariables, _) =>
+                    val propertyOwner = if (p.getOwningType != null) p.getOwningType else definedPropertysType.get(p)
+                    implicitVariables.flatMap { iv =>
+                      if (iv.getType.conformsTo(propertyOwner))
+                        Full(iv)
+                      else
+                        Empty
+                    }.firstOption.flatMap { iv =>
+                      val sourceExpression = factory.createVariableExp(iv)
+                      // TODO: put this into the EssentialOclFactory
+                      val pce = ExpressionsFactory.INSTANCE.createPropertyCallExp
+                      pce.setReferredProperty(p)
+                      pce.setSourceType(sourceExpression.getType)
+                      // make sure, the source is not already contained by another element
+                      // This can only happen if the sourceExpression is a VariableExp!
+                      val cleanSourceExpression =
+                        if (sourceExpression.eContainer != null) {
+                          sourceExpression match {
+                            case v : VariableExp =>
+                              factory.createVariableExp(
+                                factory.createVariable(v.getReferredVariable.getName,
+                                  v.getReferredVariable.getType,
+                                  v.getReferredVariable.getInitExpression))
+                          }
+                        }
+                        else
+                          sourceExpression
+                      pce.setSource(cleanSourceExpression)
+                      pce.setOclLibrary(oclLibrary)
+                      Full(pce)
+                    }
+                }
+              }
             }
             case t : Type => {
               // TODO: move to EssentialOclFactory

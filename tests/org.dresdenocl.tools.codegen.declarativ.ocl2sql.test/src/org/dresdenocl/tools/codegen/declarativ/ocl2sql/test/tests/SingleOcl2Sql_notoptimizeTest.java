@@ -6,15 +6,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-
 import org.dresdenocl.metamodels.uml2.UML2MetamodelPlugin;
 import org.dresdenocl.model.ModelAccessException;
 import org.dresdenocl.modelbus.ModelBusPlugin;
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.dresdenocl.tools.codegen.declarativ.IOcl2DeclSettings;
 import org.dresdenocl.tools.codegen.declarativ.ocl2sql.IOcl2Sql;
 import org.dresdenocl.tools.codegen.declarativ.ocl2sql.Ocl2SQLFactory;
@@ -23,6 +18,10 @@ import org.dresdenocl.tools.codegen.exception.Ocl2CodeException;
 import org.dresdenocl.tools.template.ITemplateGroup;
 import org.dresdenocl.tools.template.TemplatePlugin;
 import org.dresdenocl.tools.template.exception.TemplateException;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 
 public class SingleOcl2Sql_notoptimizeTest extends SingleOcl2SqlTest {
 

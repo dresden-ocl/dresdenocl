@@ -4,8 +4,6 @@
  */
 package org.dresdenocl.tools.transformation.pivot2sql.impl;
 
-import orgomg.cwm.resource.relational.Schema;
-
 import org.dresdenocl.model.ModelAccessException;
 import org.dresdenocl.pivotmodel.Namespace;
 import org.dresdenocl.tools.codegen.declarativ.IOcl2DeclSettings;
@@ -13,6 +11,7 @@ import org.dresdenocl.tools.codegen.declarativ.mapping.IMappedModel;
 import org.dresdenocl.tools.transformation.ITransformation;
 import org.dresdenocl.tools.transformation.ParallelTransformation;
 import org.dresdenocl.tools.transformation.impl.Tuple;
+import orgomg.cwm.resource.relational.Catalog;
 
 /**
  * The class Pivot2CwmAndMappedModel represents the parallel composition of a
@@ -24,9 +23,9 @@ import org.dresdenocl.tools.transformation.impl.Tuple;
  * 
  */
 public class Pivot2CwmAndMappedModel extends
-		ParallelTransformation<Namespace, IOcl2DeclSettings, Schema, IMappedModel>
+		ParallelTransformation<Namespace, IOcl2DeclSettings, Catalog, IMappedModel>
 		implements
-		ITransformation<Namespace, IOcl2DeclSettings, Tuple<Schema, IMappedModel>> {
+		ITransformation<Namespace, IOcl2DeclSettings, Tuple<Catalog, IMappedModel>> {
 
 	/**
 	 * The Standard constructor for a Uml2CwmAndMappedModel transformation.
@@ -41,7 +40,7 @@ public class Pivot2CwmAndMappedModel extends
 
 		super(modelInName, outName, Pivot2CwmImpl.class.getSimpleName(),
 				Pivot2MappedModelImpl.class.getSimpleName(), Namespace.class,
-				Schema.class, IMappedModel.class, IOcl2DeclSettings.class);
+				Catalog.class, IMappedModel.class, IOcl2DeclSettings.class);
 	}
 
 }

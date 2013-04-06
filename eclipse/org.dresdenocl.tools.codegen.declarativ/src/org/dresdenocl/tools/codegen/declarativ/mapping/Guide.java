@@ -28,6 +28,7 @@
 package org.dresdenocl.tools.codegen.declarativ.mapping;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -43,10 +44,10 @@ public class Guide {
 	private class Step {
 
 		String from;
-		String select;
-		String where;
+		List<String> select;
+		List<String> where;
 
-		Step(String select, String from, String where) {
+		Step(List<String> select, String from, List<String> where) {
 
 			this.select = select;
 			this.from = from;
@@ -117,6 +118,25 @@ public class Guide {
 		this.contextAlias = contextAlias;
 
 	}
+	
+	/**
+	 * Add a select-from-where clause. The steps must be added in the order they
+	 * are going to be queried.
+	 * 
+	 * @param select
+	 *          the select part
+	 * @param from
+	 *          the from part
+	 * @param where
+	 *          the where part
+	 * @exception NullPointerException
+	 *              if one of the parameters is null
+	 */
+	@Deprecated
+	public void add(String select, String from, String where)
+			throws NullPointerException {
+		add(Arrays.asList(select),from,Arrays.asList(where));
+	}
 
 	/**
 	 * Add a select-from-where clause. The steps must be added in the order they
@@ -131,7 +151,7 @@ public class Guide {
 	 * @exception NullPointerException
 	 *              if one of the parameters is null
 	 */
-	public void add(String select, String from, String where)
+	public void add(List<String> select, String from, List<String> where)
 			throws NullPointerException {
 
 		if ((select == null) || (from == null) && (where == null)) {
@@ -189,7 +209,7 @@ public class Guide {
 	 *              if the client failed to call next() after reset() or object
 	 *              creation
 	 */
-	public String getSelect() throws IllegalStateException {
+	public List<String> getSelect() throws IllegalStateException {
 
 		if (pointer < 0) {
 			throw new IllegalStateException();
@@ -207,7 +227,7 @@ public class Guide {
 	 *              if the client failed to call next() after reset() or object
 	 *              creation
 	 */
-	public String getWhere() throws IllegalStateException {
+	public List<String> getWhere() throws IllegalStateException {
 
 		if (pointer < 0) {
 			throw new IllegalStateException();

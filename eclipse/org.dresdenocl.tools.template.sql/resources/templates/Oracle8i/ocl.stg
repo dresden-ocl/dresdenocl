@@ -7,6 +7,11 @@ CREATE OR REPLACE VIEW $constraint_name$ AS
 (SELECT * FROM $context$ $context_alias$
 WHERE NOT ($expression$));
 >>
+// --- OCL DEFINITION --- 
+constraint_definition(common_table,constraint_name,context,context_alias,expression,attribute,def_name) ::= <<
+CREATE OR REPLACE VIEW $constraint_name$ AS
+(SELECT $context_alias$.$attribute$, ($expression$) AS $def_name$ FROM $context$ $context_alias$);
+>>
 
 // ---  COLLECTIONS - BAG (QUERY) --- 
 literal_collection_bag(items) ::= <<

@@ -1,11 +1,10 @@
 package org.dresdenocl.tools.transformation.pivot2sql.impl;
 
-import orgomg.cwm.resource.relational.Schema;
-
 import org.dresdenocl.pivotmodel.Namespace;
 import org.dresdenocl.tools.codegen.declarativ.IOcl2DeclSettings;
 import org.dresdenocl.tools.transformation.ITransformation;
 import org.dresdenocl.tools.transformation.SequentialTransformation;
+import orgomg.cwm.resource.relational.Catalog;
 
 /**
  * The Pivot2Ddl transformation implements the serial composition of the
@@ -17,8 +16,8 @@ import org.dresdenocl.tools.transformation.SequentialTransformation;
  * 
  */
 public class Pivot2Ddl extends
-		SequentialTransformation<Namespace, IOcl2DeclSettings, Schema, String>
-		implements ITransformation<Namespace, IOcl2DeclSettings, String> {
+		SequentialTransformation<Namespace, IOcl2DeclSettings, Catalog, SchemaStringMap>
+		implements ITransformation<Namespace, IOcl2DeclSettings, SchemaStringMap> {
 
 	/**
 	 * The constructor for a Uml2Ddl transformation.
@@ -32,8 +31,8 @@ public class Pivot2Ddl extends
 	public Pivot2Ddl(String modelInName, String outName) {
 
 		super(modelInName, outName, Pivot2CwmImpl.class.getSimpleName(),
-				Cwm2DdlImpl.class.getSimpleName(), Namespace.class, String.class,
-				Schema.class, IOcl2DeclSettings.class);
+				Cwm2DdlImpl.class.getSimpleName(), Namespace.class, SchemaStringMap.class,
+				Catalog.class, IOcl2DeclSettings.class);
 
 	}
 

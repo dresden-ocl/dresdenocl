@@ -27,8 +27,8 @@ $typeMap.(type)$
 >>
 
 selectStmt(columns, tables, where) ::= <<
-SELECT $columns$
-FROM $tables$
+SELECT $columns; separator=","$
+FROM $tables; separator=","$
 $if(where)$
 WHERE $where$$endif$
 >>
@@ -38,21 +38,38 @@ CREATE VIEW $viewname$
 AS ( $body$ );
 >>
 
-createColumn(name, type, primaryKey, foreignKey) ::= <<
-$name$ $type$$if(primaryKey)$ PRIMARY KEY$endif$
+createColumn(name, type) ::= <<
+$name$ $type$
+>>
+
+createName(schema,name) ::= <<
+$if(schema)$$schema$.$endif$$name$
 >>
 
 createTable(tablename, columns) ::= <<
 CREATE TABLE $tablename$ (
-$columns$
+$columns; separator=",\n"$
 );
 >>
 
+createPrimaryKeyConstraint(tablename, columnname,pkname) ::= <<
+ALTER TABLE $tablename$ ADD CONSTRAINT $pkname$
+PRIMARY KEY ($columnname; separator=", "$);
+>>
+
 createForeignKeyConstraint(tablename, columnname, pktablename,pkname) ::= <<
-ALTER TABLE $tablename$ ADD CONSTRAINT CON$tablename$$columnname$
-FOREIGN KEY ($columnname$) REFERENCES $pktablename$($pkname$);
+ALTER TABLE $tablename$ ADD CONSTRAINT CON$tablename$$columnname; separator="_"$
+FOREIGN KEY ($columnname; separator=", "$) REFERENCES $pktablename$($pkname; separator=", "$);
 >>
 
 createProperty(tablename,columnname,asname) ::= <<
 $if(tablename)$$tablename$.$endif$$columnname$$if(asname)$ AS $columnname$$endif$
+>>
+
+check_database_array() ::= <<
+true
+>>
+
+check_database_array_field() ::= <<
+ ARRAY
 >>

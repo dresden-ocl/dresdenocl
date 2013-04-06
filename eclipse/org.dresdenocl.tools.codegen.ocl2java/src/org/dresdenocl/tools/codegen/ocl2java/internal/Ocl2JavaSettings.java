@@ -105,7 +105,7 @@ public class Ocl2JavaSettings implements IOcl2JavaSettings {
 	/**
 	 * Specifies whether or not the transformed Code shall be saved in files.
 	 */
-	protected boolean saveCode;
+	protected int saveCode;
 
 	/** The location where the transformed Code shall be saved. */
 	protected String sourceDirectory;
@@ -127,7 +127,7 @@ public class Ocl2JavaSettings implements IOcl2JavaSettings {
 
 		this.constraintFolder = "constraints";
 
-		this.saveCode = false;
+		this.saveCode = 0;
 
 		this.createGettersForDefinedAttributes = false;
 
@@ -324,11 +324,22 @@ public class Ocl2JavaSettings implements IOcl2JavaSettings {
 	 * 
 	 * @see org.dresdenocl.ocl2java.IOcl2CodeSettings#isSaveCode()
 	 */
-	public boolean isSaveCode() {
+	public int getSaveCode() {
 
 		return this.saveCode;
 	}
 
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.dresdenocl.tools.codegen.ocl2java.IOcl2JavaSettings#isSaveCode()
+	 */
+	public boolean isSaveCode() {
+
+		return getSaveCode() > 0;
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -435,9 +446,9 @@ public class Ocl2JavaSettings implements IOcl2JavaSettings {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.dresdenocl.ocl2java.IOcl2CodeSettings#setSaveCode(boolean)
+	 * org.dresdenocl.ocl2java.IOcl2CodeSettings#setSaveCode(int)
 	 */
-	public void setSaveCode(boolean saveCode) {
+	public void setSaveCode(int saveCode) {
 
 		this.saveCode = saveCode;
 	}

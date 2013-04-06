@@ -288,7 +288,7 @@ public abstract class AbstractDiffTest extends AbstractDresdenOclTest {
 		String sourceDirectory = getFile("src/", targetBundleId).getAbsolutePath();
 
 		settings.setSourceDirectory(sourceDirectory);
-		settings.setSaveCode(true);
+		settings.setSaveCode(1);
 		settings.setGettersForDefinedAttributesEnabled(true);
 
 		List<Constraint> parsedConstraints;

@@ -115,9 +115,7 @@ trait OclAttributesImpl extends OclAttributes {selfType : OclStaticSemantics =>
         }
         
         case a : AttributeContextDeclarationCS if child != a.getTypeName => {
-          oclType(a.getTypeName).flatMap{tipe =>
-            Full(factory.createVariable("self", tipe, null))
-          }
+          Full(factory.createVariable("self", a.getTypeName.getNamedElement.getOwner.asInstanceOf[Type], null))
         }
 
         case _ => super.__self(child)

@@ -27,11 +27,10 @@
 
 package org.dresdenocl.tools.transformation.test;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-
 import org.dresdenocl.tools.transformation.test.tests.TestTransformationFactory;
 import org.dresdenocl.tools.transformation.test.tests.TestTransformationRegistry;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
 /**
  * This TestSuite runs all Tests testing the package

@@ -143,8 +143,6 @@ public abstract class TransformCodeWizard extends Wizard implements INewWizard {
 
 		myCodeGenerator.getSettings().setConstraintDirectory(constraintDirectory);
 
-		myCodeGenerator.getSettings().setSaveCode(true);
-
 		/* Do the transformation. */
 		CodegenJob transformationJob;
 		transformationJob = getCodegenJob(constraints);

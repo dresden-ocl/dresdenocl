@@ -1,10 +1,9 @@
 package org.dresdenocl.tools.transformation.pivot2sql;
 
 import org.apache.log4j.Logger;
+import org.dresdenocl.logging.LoggingPlugin;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
-
-import org.dresdenocl.logging.LoggingPlugin;
 
 /**
  * <p>

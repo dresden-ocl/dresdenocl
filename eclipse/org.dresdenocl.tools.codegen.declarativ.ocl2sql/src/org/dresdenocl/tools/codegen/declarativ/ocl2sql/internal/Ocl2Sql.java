@@ -34,9 +34,9 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
-
 import org.dresdenocl.model.IModel;
 import org.dresdenocl.model.ModelAccessException;
 import org.dresdenocl.pivotmodel.Constraint;
@@ -54,6 +54,9 @@ import org.dresdenocl.tools.transformation.TransformationFactory;
 import org.dresdenocl.tools.transformation.exception.InvalidModelException;
 import org.dresdenocl.tools.transformation.exception.TransformationException;
 import org.dresdenocl.tools.transformation.impl.Tuple;
+import org.dresdenocl.tools.transformation.pivot2sql.impl.SchemaStringMap;
+
+import orgomg.cwm.resource.relational.Schema;
 
 /**
  * OCL2SQL-Compiler
@@ -120,20 +123,22 @@ public class Ocl2Sql implements IOcl2Sql {
 		this.codeGenerator =
 				Ocl2DeclCodeFactory.getInstance().createOcl2DeclCodeGenerator();
 		this.codeGenerator.setSettings(this.getSettings());
-		if (this.getSettings().isSaveCode()) {
+		if (this.getSettings().getSaveCode() > 0) {
 			try {
-				ITransformation<Namespace, IOcl2DeclSettings, Tuple<String, IMappedModel>> pdamm;
+				ITransformation<Namespace, IOcl2DeclSettings, Tuple<SchemaStringMap, IMappedModel>> pdamm;
 				pdamm =
 						TransformationFactory.getInstance().getParallelTransformation(
-								"Pivot2DdlAndMappedModel", Namespace.class, String.class,
+								"Pivot2DdlAndMappedModel", Namespace.class, SchemaStringMap.class,
 								IMappedModel.class, IOcl2DeclSettings.class, dateString,
 								dateString + "_generated");
 				pdamm.setSettings(ocl2DeclSettings);
 				pdamm.setParameterIN(model.getRootNamespace());
 				pdamm.invoke();
-				Tuple<String, IMappedModel> tupleDdlMM = pdamm.getResult();
-				saveToFile(sqlCommentar + tupleDdlMM.getElem1(),
-						dateString.concat("_schema") + ".sql");
+				Tuple<SchemaStringMap, IMappedModel> tupleDdlMM = pdamm.getResult();
+				for (Entry<Schema, StringBuilder> entry : tupleDdlMM.getElem1().entrySet())  {
+					saveToFile(sqlCommentar + entry.getValue(),
+							dateString.concat("_"+ (tupleDdlMM.getElem1().size() > 1 ? entry.getKey().getName() : "schema")) + ".sql");
+				}
 			} catch (ModelAccessException e) {
 				throw new Ocl2CodeException("Get not a namespace of active model", e);
 			} catch (TransformationException e) {

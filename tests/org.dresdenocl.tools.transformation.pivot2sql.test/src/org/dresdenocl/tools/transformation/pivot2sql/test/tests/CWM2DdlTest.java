@@ -2,9 +2,19 @@ package org.dresdenocl.tools.transformation.pivot2sql.test.tests;
 
 import static org.junit.Assert.fail;
 
+import org.dresdenocl.tools.codegen.declarativ.IOcl2DeclSettings;
+import org.dresdenocl.tools.transformation.ITransformation;
+import org.dresdenocl.tools.transformation.TransformationFactory;
+import org.dresdenocl.tools.transformation.exception.InvalidModelException;
+import org.dresdenocl.tools.transformation.exception.ModelAccessException;
+import org.dresdenocl.tools.transformation.exception.TransformationException;
+import org.dresdenocl.tools.transformation.pivot2sql.impl.SchemaStringMap;
+import org.dresdenocl.tools.transformation.pivot2sql.test.tests.util.ModelChecker;
+import org.dresdenocl.tools.transformation.pivot2sql.test.tests.util.TestPerformer;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import orgomg.cwm.resource.relational.Catalog;
 import orgomg.cwm.resource.relational.Column;
 import orgomg.cwm.resource.relational.PrimaryKey;
 import orgomg.cwm.resource.relational.RelationalPackage;
@@ -13,20 +23,13 @@ import orgomg.cwm.resource.relational.Schema;
 import orgomg.cwm.resource.relational.Table;
 import orgomg.cwm.resource.relational.impl.RelationalPackageImpl;
 
-import org.dresdenocl.tools.codegen.declarativ.IOcl2DeclSettings;
-import org.dresdenocl.tools.transformation.ITransformation;
-import org.dresdenocl.tools.transformation.TransformationFactory;
-import org.dresdenocl.tools.transformation.exception.InvalidModelException;
-import org.dresdenocl.tools.transformation.exception.ModelAccessException;
-import org.dresdenocl.tools.transformation.exception.TransformationException;
-import org.dresdenocl.tools.transformation.pivot2sql.test.tests.util.ModelChecker;
-import org.dresdenocl.tools.transformation.pivot2sql.test.tests.util.TestPerformer;
-
 public class CWM2DdlTest {
 
 	private static RelationalPackage rp;
 
 	private Schema schema;
+	
+	private Catalog catalog;
 
 	@BeforeClass
 	public static void setUp_class() {
@@ -36,15 +39,22 @@ public class CWM2DdlTest {
 
 	@Before
 	public void setUp() {
-
+		catalog = (Catalog) rp.getEFactoryInstance().create(rp.getCatalog());
+		createSchema("test");
+		
+	}
+	
+	private void createSchema(String schemaname) {
 		schema = (Schema) rp.getEFactoryInstance().create(rp.getSchema());
+		schema.setName(schemaname);
+		schema.setNamespace(catalog);
 	}
 
 	private Table createTable(String tablename) {
 
 		Table table = (Table) rp.getEFactoryInstance().create(rp.getTable());
 		table.setName(tablename);
-		schema.getOwnedElement().add(table);
+		table.setNamespace(schema);
 		return table;
 	}
 
@@ -53,8 +63,9 @@ public class CWM2DdlTest {
 		PrimaryKey pk =
 				(PrimaryKey) rp.getEFactoryInstance().create(rp.getPrimaryKey());
 		pk.setName(pkname);
-		table.getOwnedElement().add(pk);
-		pk.getFeature().add(create_Column(pkname));
+		pk.setNamespace(table);
+		Column c = create_Column(pkname,table,"VARCHAR(255)");
+		pk.getFeature().add(c);
 		return pk;
 	}
 
@@ -76,7 +87,7 @@ public class CWM2DdlTest {
 	private Column create_Column(String columnName, Table table, String type) {
 
 		Column column = create_Column(columnName);
-		table.getOwnedElement().add(column);
+		column.setOwner(table);
 		column.setType(create_SQLSimpleType(type));
 		return column;
 	}
@@ -93,8 +104,8 @@ public class CWM2DdlTest {
 		String sql;
 		Table table = createTable("T_Person");
 		createPrimaryKey("PK_Person", table);
-		sql = "CREATE TABLE T_Person (\nPK_Person VARCHAR(255) PRIMARY KEY\n);";
-		ModelChecker.sameDdl(sql, exceptionCWMDdl(schema).substring(2));
+		sql = "CREATE TABLE T_Person (\nPK_Person VARCHAR(255)\n);\n\nALTER TABLE T_Person ADD CONSTRAINT PK_Person\nPRIMARY KEY (PK_Person);";
+		ModelChecker.sameDdl(sql, exceptionCWMDdl(catalog).substring(2));
 	}
 
 	private void testProperty(String cwm, String ddl) {
@@ -103,7 +114,7 @@ public class CWM2DdlTest {
 		Table table = createTable("T_Person");
 		create_Column("prop", table, cwm);
 		sql = "CREATE TABLE T_Person (\nprop " + ddl + "\n);";
-		ModelChecker.sameDdl(sql, exceptionCWMDdl(schema).substring(2));
+		ModelChecker.sameDdl(sql, exceptionCWMDdl(catalog).substring(2));
 	}
 
 	@Test
@@ -167,40 +178,42 @@ public class CWM2DdlTest {
 	}
 
 	@Test
-	public void testRelation1to1() {
+	public void testMultipleSchema() {
 
-		// TODO Auto-generated method stub
+		String sql;
+		Table table = createTable("T_Person");
+		createPrimaryKey("PK_Person", table);
+		createSchema("test2");
+		table = createTable("T_Person1");
+		createPrimaryKey("PK_Person1", table);
+		sql = "CREATE TABLE test.T_Person (\nPK_Person VARCHAR(255)\n);\n\nALTER TABLE test.T_Person ADD CONSTRAINT PK_Person\nPRIMARY KEY (PK_Person);";
+		sql += "\n\nCREATE TABLE test2.T_Person1 (\nPK_Person1 VARCHAR(255)\n);\n\nALTER TABLE test2.T_Person1 ADD CONSTRAINT PK_Person1\nPRIMARY KEY (PK_Person1);";
+		ModelChecker.sameDdl(sql, exceptionCWMDdl(catalog).substring(2));
 
 	}
-
-	@Test
-	public void testRelation1toN() {
-
-		// TODO Auto-generated method stub
-
-	}
-
-	protected String exceptionCWMDdl(Schema schema) {
+	
+	protected String exceptionCWMDdl(Catalog catalog) {
 
 		try {
-			return generateCWMDdl(schema);
+			return generateCWMDdl(catalog);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail("The ddl can't generate");
+			return "";
 		}
-		return "";
 	}
 
-	protected String generateCWMDdl(Schema schema) throws ModelAccessException,
+	protected String generateCWMDdl(Catalog catalog) throws ModelAccessException,
 			InvalidModelException, TransformationException {
 
-		ITransformation<Schema, IOcl2DeclSettings, String> cwm2Ddl =
+		ITransformation<Catalog, IOcl2DeclSettings, SchemaStringMap> cwm2Ddl =
 				TransformationFactory.getInstance().getTransformation("Cwm2DdlImpl",
-						Schema.class, String.class, IOcl2DeclSettings.class, "CWM", "DDL");
-		cwm2Ddl.setParameterIN(schema);
+						Catalog.class, SchemaStringMap.class, IOcl2DeclSettings.class, "CWM", "DDL");
+		cwm2Ddl.setParameterIN(catalog);
 		IOcl2DeclSettings oclSettings = TestPerformer.getSettings();
 		cwm2Ddl.setSettings(oclSettings);
+		oclSettings.setSchemaUsing(true);
 		cwm2Ddl.invoke();
-		return cwm2Ddl.getResult();
+		return cwm2Ddl.getResult().toFullString();
 	}
 }

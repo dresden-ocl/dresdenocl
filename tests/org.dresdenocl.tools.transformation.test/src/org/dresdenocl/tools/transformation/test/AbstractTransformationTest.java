@@ -1,13 +1,12 @@
 package org.dresdenocl.tools.transformation.test;
 
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-
 import org.dresdenocl.tools.transformation.TransformationPlugin;
 import org.dresdenocl.tools.transformation.test.util.TestFalseTrans;
 import org.dresdenocl.tools.transformation.test.util.TestParallelTrans;
 import org.dresdenocl.tools.transformation.test.util.TestTrans;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 
 /**
  * Abstract test class for transformation tests.

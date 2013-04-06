@@ -21,9 +21,9 @@ import org.dresdenocl.tools.transformation.impl.Tuple;
  * 
  */
 public class Pivot2DdlAndMappedModel extends
-		ParallelTransformation<Namespace, IOcl2DeclSettings, String, IMappedModel>
+		ParallelTransformation<Namespace, IOcl2DeclSettings, SchemaStringMap, IMappedModel>
 		implements
-		ITransformation<Namespace, IOcl2DeclSettings, Tuple<String, IMappedModel>> {
+		ITransformation<Namespace, IOcl2DeclSettings, Tuple<SchemaStringMap, IMappedModel>> {
 
 	/**
 	 * The Standard constructor for a Uml2CwmAndMappedModel transformation.
@@ -38,7 +38,7 @@ public class Pivot2DdlAndMappedModel extends
 
 		super(modelInName, outName, Pivot2Ddl.class.getSimpleName(),
 				Pivot2MappedModelImpl.class.getSimpleName(), Namespace.class,
-				String.class, IMappedModel.class, IOcl2DeclSettings.class);
+				SchemaStringMap.class, IMappedModel.class, IOcl2DeclSettings.class);
 	}
 
 }

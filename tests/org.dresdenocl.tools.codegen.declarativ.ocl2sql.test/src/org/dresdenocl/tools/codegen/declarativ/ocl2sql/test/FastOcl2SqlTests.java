@@ -20,12 +20,12 @@ with Dresden OCL for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package org.dresdenocl.tools.codegen.declarativ.ocl2sql.test;
 
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-
 import org.dresdenocl.tools.codegen.declarativ.ocl2sql.Ocl2SqlPlugin;
 import org.dresdenocl.tools.codegen.declarativ.ocl2sql.test.tests.fast.CarOcl2SqlTest;
-import org.dresdenocl.tools.codegen.declarativ.ocl2sql.test.tests.fast.Ocl2SqlTest;
+import org.dresdenocl.tools.codegen.declarativ.ocl2sql.test.tests.fast.Ocl2SqlEcoreTest;
+import org.dresdenocl.tools.codegen.declarativ.ocl2sql.test.tests.fast.Ocl2SqlUMLTest;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
 /**
  * <p>
@@ -37,7 +37,7 @@ import org.dresdenocl.tools.codegen.declarativ.ocl2sql.test.tests.fast.Ocl2SqlTe
  * 
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ Ocl2SqlTest.class, CarOcl2SqlTest.class })
+@Suite.SuiteClasses({ Ocl2SqlUMLTest.class,Ocl2SqlEcoreTest.class, CarOcl2SqlTest.class })
 public class FastOcl2SqlTests extends AbstractDresdenOclTest {
 	/*
 	 * This class remains completely empty, being used only as a holder for the

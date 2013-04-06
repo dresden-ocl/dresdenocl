@@ -46,35 +46,61 @@ trait OclLookUpFunctions { selfType: OclStaticSemantics =>
       }
     }
   }
-  
-  protected def lookupPathName(names : List[String], namespace: Namespace, container: AttributableEObject) : Box[List[NamedElement]] = {
+
+  protected def lookupPathName(names: List[String], namespace: Namespace, container: AttributableEObject): Box[List[NamedElement]] = {
     lookupLibraryType(names.last) match {
-        case Some(oclLibraryType) => Full(List(oclLibraryType))
-        case None => {
-              var element = namespace.lookupPathName(names).toList
-              
-              if (element.size == 0 && names.size == 1) {
-                element = List(model.findType(names))
-                if (element.size == 1 && element.first == null) {
-                   lookupVariable(names.last,container) match {
-                   	case Full(variable) => Full(List(variable))
-                   	case Empty => {
-                   			(sourceExpression(container)).flatMap({sourceExpression =>
-                   			  lookupProperty(sourceExpression, container, names.last, false).flatMap { p =>
-                   		     Full(List(p))                   		  
-                   			  }})
-                   }
-                   }
-                } else {
-                 !!(element) ?~
-        		("Cannot find element " + names.head + " in namespace " + namespace.getName)
-                }
-              } else {
-                !!(element) ?~
-        		("Cannot find element " + names.head + " in namespace " + namespace.getName)
+      case Some(oclLibraryType) => Full(List(oclLibraryType))
+      case None => {
+        var element = namespace.lookupPathName(names).toList
+        if (element.size == 0 && names.size == 2) {
+          element = List(model.findType(List(names.first)))
+          if (element.size != 0) {
+            element = element :+ (element.first match {
+              case e: Enumeration => {
+                e.lookupLiteral(names.last)
               }
-          
+              case t: Type => {
+                t.lookupProperty(names.last)
+              }
+            })
+          }
         }
+        if (element.size == 0 && names.size == 1) {
+          element = List(model.findType(names))
+          if (element.size == 1 && element.first == null) {
+            (sourceExpression(container)).flatMap { sourceExpression =>
+              (variables(container)).flatMap {
+                case (implicitVariables, explicitVariables) =>
+                  val sourceType = sourceExpression.getType
+                  sourceExpression match {
+                    // if the sourceExpression is an implicit variable (e.g., self or an iterator variable),
+                    // the named element can be a variable, a property on the implicit variable or a type
+                    case ve: VariableExp if !implicitVariables.filter(_ == ve.getReferredVariable).isEmpty => {
+                      lookupVariable(names.last, container) match {
+                        case Full(variable) => Full(List(variable))
+                        case Empty | Failure(_, _, _) => {
+                          val allProperties = implicitVariables.map { iv =>
+                            lookupPropertyOnType(iv.getType, names.last, false)
+                          }.filter(p => p.isDefined)
+                          if (!allProperties.isEmpty)
+                            Full(List(allProperties.first.open_!))
+                          else Empty
+                        }
+                      }
+                    }
+                  }
+              }
+            }
+          } else {
+            !!(element) ?~
+              ("Cannot find element " + names.head + " in namespace " + namespace.getName)
+          }
+        } else {
+          !!(element) ?~
+            ("Cannot find element " + names.head + " in namespace " + namespace.getName)
+        }
+
+      }
     }
   }
 

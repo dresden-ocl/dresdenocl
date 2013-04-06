@@ -8,9 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Before;
-import orgomg.cwm.resource.relational.Schema;
-
 import org.dresdenocl.model.IModel;
 import org.dresdenocl.model.ModelAccessException;
 import org.dresdenocl.pivotmodel.Namespace;
@@ -20,14 +17,18 @@ import org.dresdenocl.tools.transformation.TransformationFactory;
 import org.dresdenocl.tools.transformation.exception.InvalidModelException;
 import org.dresdenocl.tools.transformation.exception.TransformationException;
 import org.dresdenocl.tools.transformation.impl.Tuple;
+import org.junit.Before;
+import orgomg.cwm.resource.relational.Catalog;
 
 public abstract class CWMTest extends TransformationTest {
 
-	protected static int MODUS_TYPED = IOcl2DeclSettings.MODUS_TYPED;
+	protected static final int MODUS_TYPED = IOcl2DeclSettings.MODUS_TYPED;
 
-	protected static int MODUS_VERTICAL = IOcl2DeclSettings.MODUS_VERTICAL;
+	protected static final int MODUS_VERTICAL = IOcl2DeclSettings.MODUS_VERTICAL;
 
 	protected static int modus;
+	
+	protected static boolean schema = false;
 
 	protected List<String> tables = new ArrayList<String>();
 	protected List<String> views = new ArrayList<String>();
@@ -40,7 +41,7 @@ public abstract class CWMTest extends TransformationTest {
 	protected Map<String, String> table2PrimaryKey =
 			new HashMap<String, String>();
 
-	protected Schema schema;
+	protected Catalog catalog;
 
 	@Before
 	public void setUp() {
@@ -51,21 +52,23 @@ public abstract class CWMTest extends TransformationTest {
 		view2queryexpression.clear();
 		table2ForeignKey.clear();
 		table2PrimaryKey.clear();
-		schema = null;
+		catalog = null;
+		schema = false;
 	}
 
-	protected Schema generateCWMModel(File file, int modus)
+	protected Catalog generateCWMModel(File file, int modus)
 			throws ModelAccessException, InvalidModelException,
 			TransformationException {
 
 		IModel model = TestPerformer.addUMLModel(file);
-		ITransformation<Namespace, IOcl2DeclSettings, Schema> p2cwm =
+		ITransformation<Namespace, IOcl2DeclSettings, Catalog> p2cwm =
 				TransformationFactory.getInstance().getTransformation("Pivot2CwmImpl",
-						Namespace.class, Schema.class, IOcl2DeclSettings.class, "pivot",
+						Namespace.class, Catalog.class, IOcl2DeclSettings.class, "pivot",
 						"cwm");
 		p2cwm.setParameterIN(model.getRootNamespace());
 		IOcl2DeclSettings oclSettings = TestPerformer.getSettings();
 		oclSettings.setModus(modus);
+		oclSettings.setSchemaUsing(schema);
 		p2cwm.setSettings(oclSettings);
 		p2cwm.invoke();
 		TestPerformer.removeUMLModel(model);
@@ -74,14 +77,14 @@ public abstract class CWMTest extends TransformationTest {
 
 	protected void checkCWM() {
 
-		ModelChecker.checkCWM(schema, tables, views, table2properties,
+		ModelChecker.checkCWM(catalog, tables, views, table2properties,
 				table2PrimaryKey, table2ForeignKey, view2queryexpression);
 	}
 
 	private void exceptionCWMModel(File file) {
 
 		try {
-			schema = generateCWMModel(file, modus);
+			catalog = generateCWMModel(file, modus);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail("The cwm model can't generate");
@@ -156,6 +159,16 @@ public abstract class CWMTest extends TransformationTest {
 		exceptionCWMModel(TEST_RELATION_MTON);
 	}
 
+	
+	/**
+	 * <p>
+	 * Checks if schema generation correctly.
+	 * </p>
+	 */
+	public void testMultipleSchema() {
+		exceptionCWMModel(TEST_SCHEMA);
+	}
+	
 	/**
 	 * <p>
 	 * Checks if a complex university example mapped correctly.

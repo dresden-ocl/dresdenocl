@@ -10,7 +10,9 @@ public class ModelElementComparator implements Comparator<ModelElement> {
 
 		String s1 = o1.getName() + "@" + Integer.toHexString(o1.hashCode());
 		String s2 = o2.getName() + "@" + Integer.toHexString(o2.hashCode());
-		return s1.compareTo(s2);
+		int compareValue = s1.compareTo(s2);
+		if (compareValue != 0) compareValue = 1;
+		return compareValue;
 	}
 
 }

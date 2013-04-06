@@ -1,11 +1,10 @@
 package org.dresdenocl.tools.transformation.test.util;
 
-import org.eclipse.emf.ecore.EObject;
-
 import org.dresdenocl.tools.codegen.IOcl2CodeSettings;
 import org.dresdenocl.tools.transformation.ITransformation;
 import org.dresdenocl.tools.transformation.ParallelTransformation;
 import org.dresdenocl.tools.transformation.impl.Tuple;
+import org.eclipse.emf.ecore.EObject;
 
 public class TestParallelTrans extends
 		ParallelTransformation<EObject, IOcl2CodeSettings, String, EObject>

@@ -197,4 +197,9 @@ public interface IOcl2JavaSettings extends IOcl2CodeSettings {
 	 */
 	public void setViolationMacro(ITransformedCode aMacro,
 			Constraint aConstraint);
+	
+	/**
+	 * @return Whether or not the transformed code shall be saved into files. 
+	 */
+	public boolean isSaveCode();
 }

@@ -34,18 +34,17 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
+import org.dresdenocl.tools.codegen.IOcl2CodeSettings;
+import org.dresdenocl.tools.transformation.ITransformation;
+import org.dresdenocl.tools.transformation.TransformationFactory;
+import org.dresdenocl.tools.transformation.TransformationPlugin;
+import org.dresdenocl.tools.transformation.test.AbstractTransformationTest;
 import org.eclipse.emf.ecore.EObject;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import org.dresdenocl.tools.codegen.IOcl2CodeSettings;
-import org.dresdenocl.tools.transformation.ITransformation;
-import org.dresdenocl.tools.transformation.TransformationFactory;
-import org.dresdenocl.tools.transformation.TransformationPlugin;
-import org.dresdenocl.tools.transformation.test.AbstractTransformationTest;
 
 /**
  * This test will test the class ITransformationRegistry.java of the package

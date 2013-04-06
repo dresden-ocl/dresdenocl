@@ -36,15 +36,15 @@ public interface IOcl2CodeSettings {
 	public void setSourceDirectory(String path);
 
 	/**
-	 * @return Whether or not the transformed code shall be saved into files.
+	 * @return Whether or not the transformed code shall be saved into files. 
 	 */
-	public boolean isSaveCode();
+	public int getSaveCode();
 
 	/**
 	 * <p>
 	 * Enables whether or not the transformed code shall be saved into files.
 	 * </p>
 	 */
-	public void setSaveCode(boolean saveCode);
+	public void setSaveCode(int saveCode);
 
 }

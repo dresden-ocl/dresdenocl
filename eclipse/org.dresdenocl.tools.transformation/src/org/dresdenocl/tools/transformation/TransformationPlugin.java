@@ -19,11 +19,11 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package org.dresdenocl.tools.transformation;
 
 import org.apache.log4j.Logger;
+import org.dresdenocl.logging.LoggingPlugin;
+import org.dresdenocl.tools.template.TemplatePlugin;
+import org.dresdenocl.tools.transformation.internal.TransformationRegistry;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
-
-import org.dresdenocl.logging.LoggingPlugin;
-import org.dresdenocl.tools.transformation.internal.TransformationRegistry;
 
 /**
  * <p>

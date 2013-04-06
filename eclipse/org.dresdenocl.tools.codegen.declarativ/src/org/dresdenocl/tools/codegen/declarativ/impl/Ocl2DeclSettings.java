@@ -28,16 +28,20 @@ public class Ocl2DeclSettings implements IOcl2DeclSettings {
 
 	protected Map<String, String> prefix;
 
-	protected boolean saveCode;
+	protected int saveCode;
 
+	protected boolean schemaUsing;
+	
 	protected Map<Property, String> associationTableName;
 
 	public Ocl2DeclSettings() {
 
 		this.constraintFolder = "constraint";
 		this.sourceDirectory = "";
+		this.saveCode = 1;
 		this.templateGroup = null;
 		this.mappedModel = null;
+		this.schemaUsing = false;
 		this.prefix = new HashMap<String, String>();
 		this.associationTableName = new HashMap<Property, String>();
 		setDefaultPrefix();
@@ -84,12 +88,12 @@ public class Ocl2DeclSettings implements IOcl2DeclSettings {
 		this.mappedModel = mappedModel;
 	}
 
-	public boolean isSaveCode() {
+	public int getSaveCode() {
 
 		return this.saveCode;
 	}
 
-	public void setSaveCode(boolean saveCode) {
+	public void setSaveCode(int saveCode) {
 
 		this.saveCode = saveCode;
 	}
@@ -218,6 +222,23 @@ public class Ocl2DeclSettings implements IOcl2DeclSettings {
 	private boolean checkAssociationTableName(String assName) {
 
 		return associationTableName.containsValue(assName);
+	}
+
+	/* (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings#setSchemaUsing(boolean)
+	 */
+	@Override
+	public void setSchemaUsing(boolean schemaUsing) {
+		this.schemaUsing = schemaUsing;
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings#isSchemaUsing()
+	 */
+	@Override
+	public boolean isSchemaUsing() {
+		return schemaUsing;
 	}
 
 }

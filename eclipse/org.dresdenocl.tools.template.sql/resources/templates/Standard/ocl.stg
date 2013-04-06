@@ -9,6 +9,13 @@ $endif$SELECT * FROM $context$ AS $context_alias$
 WHERE NOT ($expression$));
 >>
 
+// --- OCL DEFINITION --- 
+constraint_definition(common_table,constraint_name,context,context_alias,expression,attribute,def_name) ::= <<
+CREATE OR REPLACE VIEW $constraint_name$ AS
+($if(common_table)$$common_table$
+$endif$SELECT $context_alias$.$attribute$, ($expression$) AS $def_name$ FROM $context$ AS $context_alias$);
+>>
+
 constraint_comment(context,expression) ::= <<
 -- Context: $context$
 -- Expression: $expression$

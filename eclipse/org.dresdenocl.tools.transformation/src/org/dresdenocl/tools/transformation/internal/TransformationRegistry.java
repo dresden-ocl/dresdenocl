@@ -9,6 +9,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.dresdenocl.tools.template.ITemplate;
+import org.dresdenocl.tools.transformation.ITransformation;
+import org.dresdenocl.tools.transformation.ITransformationRegistry;
+import org.dresdenocl.tools.transformation.ParallelTransformation;
+import org.dresdenocl.tools.transformation.TransformationPlugin;
+import org.dresdenocl.tools.transformation.event.ITransformationRegistryListener;
+import org.dresdenocl.tools.transformation.event.TransformationRegistryEvent;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtension;
@@ -17,13 +24,6 @@ import org.eclipse.core.runtime.IRegistryEventListener;
 import org.eclipse.core.runtime.InvalidRegistryObjectException;
 import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.core.runtime.Platform;
-
-import org.dresdenocl.tools.transformation.ITransformation;
-import org.dresdenocl.tools.transformation.ITransformationRegistry;
-import org.dresdenocl.tools.transformation.ParallelTransformation;
-import org.dresdenocl.tools.transformation.TransformationPlugin;
-import org.dresdenocl.tools.transformation.event.ITransformationRegistryListener;
-import org.dresdenocl.tools.transformation.event.TransformationRegistryEvent;
 
 /**
  * Default implementation of the {@link ITransformationRegistr}

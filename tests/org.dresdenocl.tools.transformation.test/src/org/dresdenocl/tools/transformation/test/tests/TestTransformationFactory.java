@@ -5,15 +5,14 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertNull;
 
-import org.eclipse.emf.ecore.EObject;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import org.dresdenocl.tools.codegen.IOcl2CodeSettings;
 import org.dresdenocl.tools.transformation.ITransformation;
 import org.dresdenocl.tools.transformation.TransformationFactory;
 import org.dresdenocl.tools.transformation.impl.Tuple;
 import org.dresdenocl.tools.transformation.test.AbstractTransformationTest;
+import org.eclipse.emf.ecore.EObject;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 /**
  * This test will test the class TestTransformationFactory.java of the package

@@ -13,14 +13,6 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
-import org.eclipse.emf.common.util.URI;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import org.dresdenocl.language.ocl.resource.ocl.Ocl22Parser;
 import org.dresdenocl.metamodels.uml2.UML2MetamodelPlugin;
 import org.dresdenocl.model.IModel;
@@ -28,6 +20,7 @@ import org.dresdenocl.model.ModelAccessException;
 import org.dresdenocl.modelbus.ModelBusPlugin;
 import org.dresdenocl.parser.ParseException;
 import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.dresdenocl.tools.codegen.declarativ.IOcl2DeclSettings;
 import org.dresdenocl.tools.codegen.declarativ.Ocl2DeclCodeFactory;
 import org.dresdenocl.tools.codegen.declarativ.ocl2sql.IOcl2Sql;
@@ -37,6 +30,12 @@ import org.dresdenocl.tools.codegen.exception.Ocl2CodeException;
 import org.dresdenocl.tools.template.ITemplateGroup;
 import org.dresdenocl.tools.template.TemplatePlugin;
 import org.dresdenocl.tools.template.exception.TemplateException;
+import org.eclipse.emf.common.util.URI;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class CarOcl2SqlTest {
 
@@ -239,7 +238,7 @@ public class CarOcl2SqlTest {
 
 		IOcl2DeclSettings settings = Ocl2DeclCodeFactory.getInstance()
 				.createOcl2DeclCodeSettings();
-		settings.setSaveCode(false);
+		settings.setSaveCode(1);
 		settings.setModus(IOcl2DeclSettings.MODUS_TYPED);
 		List<String> result = null;
 		try {

@@ -138,7 +138,7 @@ public class GenerateModelicaCode extends AbstractDiffTest {
 		settings = Ocl2JavaFactory.getInstance()
 				.createJavaCodeGeneratorSettings();
 		settings.setSourceDirectory(sourceDirectory);
-		settings.setSaveCode(true);
+		settings.setSaveCode(1);
 		settings.setDefaultInvariantCheckMode(IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 		settings.setGettersForDefinedAttributesEnabled(true);
 		settings.setDefaultInheritanceDisabled(false);

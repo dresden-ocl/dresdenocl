@@ -1,5 +1,6 @@
 package org.dresdenocl.tools.codegen.declarativ.code.impl;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -45,15 +46,6 @@ public class Code implements IComplexCode {
 	
 	public Code (String templateName, IOcl2DeclSettings mySettings) {
 		ITemplate template = mySettings.getTemplateGroup().getTemplate(templateName);
-		if (template == null)
-			throw new NullPointerException();
-		setTemplate(template);
-		attributes = new TreeMap<String, List<ICode>>();
-		guide = null;
-	}
-	
-	@Deprecated
-	public Code(ITemplate template) {
 		if (template == null)
 			throw new NullPointerException();
 		setTemplate(template);
@@ -175,16 +167,22 @@ public class Code implements IComplexCode {
 		return getCode("alias");
 	}
 
-	public ICode getWhere() {
+	public List<ICode> getWhere() {
 		if (guide != null) {
-			return new CodeString(guide.getWhere());
+			List<ICode> returnValue = new ArrayList<ICode>();
+			for (String where : guide.getWhere()) {
+				returnValue.add(new CodeString(where));
+			}
 		}
 		return null;
 	}
 
-	public ICode getSelect() {
+	public List<ICode> getSelect() {
 		if (guide != null) {
-			return new CodeString(guide.getSelect());
+			List<ICode> returnValue = new ArrayList<ICode>();
+			for (String select : guide.getSelect()) {
+				returnValue.add(new CodeString(select));
+			}
 		}
 		return null;
 	}

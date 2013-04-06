@@ -1,7 +1,7 @@
 group mysql;
-
+delimiters "$","$"
 createTable(tablename, columns) ::= <<
-CREATE TABLE `<tablename>` (
-<columns>
+CREATE TABLE `$tablename$` (
+$columns; separator=", "$
 ) ENGINE = InnoDB;
 >>

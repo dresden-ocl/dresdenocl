@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_6pUsMMHhEd2UNuYhQ_ApoA" name="org">
+  <packagedElement xmi:type="uml:Package" xmi:id="_BlraUMHiEd2UNuYhQ_ApoA" name="dresdenocl">
+    <packagedElement xmi:type="uml:Package" xmi:id="_Cff-QMHiEd2UNuYhQ_ApoA" name="examples">
+      <packagedElement xmi:type="uml:Package" xmi:id="_DmIPIMHiEd2UNuYhQ_ApoA" name="university_complex">
+        <packagedElement xmi:type="uml:Class" xmi:id="_J0lVcMHiEd2UNuYhQ_ApoA" name="Person"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_tKqBUEFtEeKaqI7llYBfEg" name="test">
+        <packagedElement xmi:type="uml:Class" xmi:id="_2MMTQEFtEeKaqI7llYBfEg" name="Person2"/>
+        <packagedElement xmi:type="uml:Package" xmi:id="_H_4-YEFuEeKaqI7llYBfEg" name="test2">
+          <packagedElement xmi:type="uml:Class" xmi:id="_JvGSMEFuEeKaqI7llYBfEg" name="Person3"/>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+  </packagedElement>
+</uml:Package>

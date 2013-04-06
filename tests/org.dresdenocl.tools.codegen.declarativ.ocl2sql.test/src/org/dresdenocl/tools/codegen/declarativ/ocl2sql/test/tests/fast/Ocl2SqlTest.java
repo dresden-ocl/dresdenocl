@@ -13,20 +13,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
-import org.eclipse.emf.common.util.URI;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import org.dresdenocl.language.ocl.resource.ocl.Ocl22Parser;
-import org.dresdenocl.metamodels.uml2.UML2MetamodelPlugin;
 import org.dresdenocl.model.IModel;
 import org.dresdenocl.model.ModelAccessException;
 import org.dresdenocl.modelbus.ModelBusPlugin;
 import org.dresdenocl.parser.ParseException;
 import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.dresdenocl.tools.codegen.declarativ.IOcl2DeclSettings;
 import org.dresdenocl.tools.codegen.declarativ.Ocl2DeclCodeFactory;
 import org.dresdenocl.tools.codegen.declarativ.ocl2sql.IOcl2Sql;
@@ -36,8 +29,13 @@ import org.dresdenocl.tools.codegen.exception.Ocl2CodeException;
 import org.dresdenocl.tools.template.TemplatePlugin;
 import org.dresdenocl.tools.template.exception.TemplateException;
 import org.dresdenocl.tools.transformation.exception.TransformationException;
+import org.eclipse.emf.common.util.URI;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-public class Ocl2SqlTest {
+public abstract class Ocl2SqlTest {
 
 	private String sourcePath = System.getProperty("java.io.tmpdir")
 			+ "/ocl2sqltest";
@@ -70,18 +68,24 @@ public class Ocl2SqlTest {
 		return dir.delete();
 	}
 
+	protected abstract IModel getModel() throws ModelAccessException, IOException;
+	
+	protected IModel getModel(String modelFile,String metamodelID) throws ModelAccessException, IOException {
+		return ModelBusPlugin
+				.getMetamodelRegistry()
+				.getMetamodel(metamodelID)
+				.getModelProvider()
+				.getModel(
+						AbstractDresdenOclTest.getFile(
+								modelFile,
+								Ocl2SqlTestPlugin.PLUGIN_ID));
+	}
+	
 	@Before
 	public void setUp() {
 
 		try {
-			model = ModelBusPlugin
-					.getMetamodelRegistry()
-					.getMetamodel(UML2MetamodelPlugin.ID)
-					.getModelProvider()
-					.getModel(
-							AbstractDresdenOclTest.getFile(
-									"model/university_complex.uml",
-									Ocl2SqlTestPlugin.PLUGIN_ID));
+			model = getModel();
 		} catch (IllegalArgumentException e) {
 			fail("Wrong parameter");
 		} catch (ModelAccessException e) {
@@ -192,7 +196,7 @@ public class Ocl2SqlTest {
 		} catch (Ocl2CodeException e1) {
 			fail("A execption throw!");
 		}
-		settings.setSaveCode(true);
+		settings.setSaveCode(1);
 		settings.setModus(0);
 		IOcl2Sql ocl2Sql = Ocl2SQLFactory.getInstance().createSQLCodeGenerator(
 				settings);
@@ -249,7 +253,7 @@ public class Ocl2SqlTest {
 
 		IOcl2DeclSettings settings = Ocl2DeclCodeFactory.getInstance()
 				.createOcl2DeclCodeSettings();
-		settings.setSaveCode(false);
+		settings.setSaveCode(0);
 		settings.setModus(IOcl2DeclSettings.MODUS_TYPED);
 		List<String> result = null;
 		try {
@@ -277,7 +281,7 @@ public class Ocl2SqlTest {
 
 		IOcl2DeclSettings settings = Ocl2DeclCodeFactory.getInstance()
 				.createOcl2DeclCodeSettings();
-		settings.setSaveCode(true);
+		settings.setSaveCode(1);
 		List<String> result = null;
 		try {
 			result = runCodeGenerator(settings);
@@ -303,7 +307,7 @@ public class Ocl2SqlTest {
 
 		IOcl2DeclSettings settings = Ocl2DeclCodeFactory.getInstance()
 				.createOcl2DeclCodeSettings();
-		settings.setSaveCode(true);
+		settings.setSaveCode(1);
 		settings.setTablePrefix("TB_");
 		settings.setObjectViewPrefix("O_");
 		settings.setAssociationTablePrefix("AS_");

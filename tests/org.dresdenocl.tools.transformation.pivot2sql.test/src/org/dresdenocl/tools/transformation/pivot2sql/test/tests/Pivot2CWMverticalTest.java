@@ -1,12 +1,12 @@
 package org.dresdenocl.tools.transformation.pivot2sql.test.tests;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-
-import org.junit.BeforeClass;
 
 import org.dresdenocl.tools.transformation.impl.Tuple;
 import org.dresdenocl.tools.transformation.pivot2sql.test.tests.util.CWMTest;
+import org.junit.BeforeClass;
 
 public class Pivot2CWMverticalTest extends CWMTest {
 
@@ -22,18 +22,44 @@ public class Pivot2CWMverticalTest extends CWMTest {
 	 * Checks if a class mapped correctly.
 	 * </p>
 	 */
+	@SuppressWarnings("unchecked")
 	public void testClass() {
 
 		super.testClass();
 		String view;
+		
 		tables.add("T_Person");
 		views.add("OV_Person");
 		view = "SELECT T_Person.PK_Person\nFROM T_Person\n";
 		table2PrimaryKey.put(tables.get(0), "PK_Person");
+		table2properties.put(tables.get(0), Arrays.asList(new Tuple<String, String>("PK_Person", "String")));
 		view2queryexpression.put(views.get(0), view);
 		checkCWM();
 	}
 
+	@SuppressWarnings("unchecked")
+	public void testMultipleSchema() {
+
+		super.testMultipleSchema();		
+		tables.add("T_Person");
+		tables.add("T_Person2");
+		tables.add("T_Person3");
+		views.add("OV_Person");
+		view2queryexpression.put(views.get(0), "SELECT T_Person.PK_Person\nFROM T_Person\n");
+		views.add("OV_Person2");
+		view2queryexpression.put(views.get(1), "SELECT T_Person2.PK_Person2\nFROM T_Person2\n");
+		views.add("OV_Person3");
+		view2queryexpression.put(views.get(2), "SELECT T_Person3.PK_Person3\nFROM T_Person3\n");
+		table2PrimaryKey.put(tables.get(0), "PK_Person");
+		table2PrimaryKey.put(tables.get(1), "PK_Person2");
+		table2PrimaryKey.put(tables.get(2), "PK_Person3");
+		table2properties.put(tables.get(0), Arrays.asList(new Tuple<String, String>("PK_Person", "String")));
+		table2properties.put(tables.get(1), Arrays.asList(new Tuple<String, String>("PK_Person2", "String")));
+		table2properties.put(tables.get(2), Arrays.asList(new Tuple<String, String>("PK_Person3", "String")));
+
+		checkCWM();
+	}
+	
 	/**
 	 * <p>
 	 * Checks if a property mapped correctly.
@@ -48,12 +74,13 @@ public class Pivot2CWMverticalTest extends CWMTest {
 		tables.add("T_Person");
 		views.add("OV_Person");
 		table2PrimaryKey.put(tables.get(0), "PK_Person");
+		attributes.add(new Tuple<String, String>("PK_Person", "String"));
 		attributes.add(new Tuple<String, String>("firstName", "String"));
 		attributes.add(new Tuple<String, String>("lastName", "String"));
 		attributes.add(new Tuple<String, String>("birthDate", "Integer"));
 		attributes.add(new Tuple<String, String>("age", "Integer"));
 		attributes.add(new Tuple<String, String>("isMarried", "Boolean"));
-		attributes.add(new Tuple<String, String>("salaries", "String"));
+		attributes.add(new Tuple<String, String>("salaries", "Integer ARRAY"));
 		view = "SELECT T_Person.PK_Person,T_Person.age AS age,";
 		view += "T_Person.birthDate AS birthDate,T_Person.firstName AS firstName,";
 		view += "T_Person.isMarried AS isMarried,T_Person.lastName AS lastName,";
@@ -79,6 +106,7 @@ public class Pivot2CWMverticalTest extends CWMTest {
 		views.add("OV_Person");
 		table2PrimaryKey.put(tables.get(0), "PK_Person");
 		attributes.add(new Tuple<String, String>("lastName", "String"));
+		attributes.add(new Tuple<String, String>("PK_Person", "String"));
 		view = "SELECT T_Person.PK_Person,T_Person.lastName AS lastName";
 		view += "\nFROM T_Person\n";
 		table2properties.put(tables.get(0), attributes);
@@ -88,11 +116,11 @@ public class Pivot2CWMverticalTest extends CWMTest {
 		tables.add("T_Student");
 		views.add("OV_Student");
 		table2PrimaryKey.put(tables.get(1), "PK_Person");
-		foreignKeys.add("PK_Person");
+		foreignKeys.add("FK_PK_Person");
 		attributes.add(new Tuple<String, String>("matNr", "Integer"));
-		view = "SELECT T_Student.PK_Person,T_Person.lastName AS lastName,";
-		view += "T_Student.matNr AS matNr";
-		view += "\nFROM T_Person,T_Student\n";
+		attributes.add(new Tuple<String, String>("PK_Person", "String"));
+		view = "SELECT T_Student.PK_Person,T_Student.matNr AS matNr,T_Person.lastName AS lastName";
+		view += "\nFROM T_Student,T_Person\n";
 		view += "WHERE T_Student.PK_Person=T_Person.PK_Person";
 		table2properties.put(tables.get(1), attributes);
 		table2ForeignKey.put(tables.get(1), foreignKeys);
@@ -106,6 +134,7 @@ public class Pivot2CWMverticalTest extends CWMTest {
 	 * Checks if a 1to1 relation mapped correctly.
 	 * </p>
 	 */
+	@SuppressWarnings("unchecked")
 	public void testRelation1to1() {
 
 		super.testRelation1to1();
@@ -119,6 +148,8 @@ public class Pivot2CWMverticalTest extends CWMTest {
 		view += "\nFROM T_Person\n";
 		table2PrimaryKey.put(tables.get(0), "PK_Person");
 		table2ForeignKey.put(tables.get(0), foreignKeys1);
+		table2properties.put(tables.get(0), Arrays.asList(new Tuple<String, String>("PK_Person", "String"),new Tuple<String, String>("FK_currentPaper", "String")));
+		
 		view2queryexpression.put(views.get(0), view);
 		tables.add("T_Paper");
 		views.add("OV_Paper");
@@ -126,6 +157,7 @@ public class Pivot2CWMverticalTest extends CWMTest {
 		view += "\nFROM T_Paper\n";
 		table2PrimaryKey.put(tables.get(1), "PK_Paper");
 		view2queryexpression.put(views.get(1), view);
+		table2properties.put(tables.get(1), Arrays.asList(new Tuple<String, String>("PK_Paper", "String")));
 		checkCWM();
 	}
 
@@ -135,6 +167,7 @@ public class Pivot2CWMverticalTest extends CWMTest {
 	 * Checks if a 1toN relation mapped correctly.
 	 * </p>
 	 */
+	@SuppressWarnings("unchecked")
 	public void testRelation1toN() {
 
 		super.testRelation1toN();
@@ -149,6 +182,7 @@ public class Pivot2CWMverticalTest extends CWMTest {
 		table2PrimaryKey.put(tables.get(0), "PK_Facility");
 		view2queryexpression.put(views.get(0), view);
 		table2ForeignKey.put(tables.get(0), foreignKeys);
+		table2properties.put(tables.get(0), Arrays.asList(new Tuple<String, String>("PK_Facility", "String"),new Tuple<String, String>("FK_superFacility", "String")));
 		checkCWM();
 	}
 
@@ -158,6 +192,7 @@ public class Pivot2CWMverticalTest extends CWMTest {
 	 * Checks if a Nto1 relation mapped correctly.
 	 * </p>
 	 */
+	@SuppressWarnings("unchecked")
 	public void testRelationNto1() {
 
 		super.testRelationNto1();
@@ -172,6 +207,7 @@ public class Pivot2CWMverticalTest extends CWMTest {
 		table2PrimaryKey.put(tables.get(0), "PK_Facility");
 		table2ForeignKey.put(tables.get(0), foreignKeys);
 		view2queryexpression.put(views.get(0), view);
+		table2properties.put(tables.get(0), Arrays.asList(new Tuple<String, String>("PK_Facility", "String"),new Tuple<String, String>("FK_superFacility", "String")));
 		checkCWM();
 	}
 
@@ -181,6 +217,7 @@ public class Pivot2CWMverticalTest extends CWMTest {
 	 * Checks if a MtoN relation mapped correctly.
 	 * </p>
 	 */
+	@SuppressWarnings("unchecked")
 	public void testRelationMtoN() {
 
 		super.testRelationMtoN();
@@ -190,16 +227,19 @@ public class Pivot2CWMverticalTest extends CWMTest {
 		views.add("OV_Person");
 		view = "SELECT T_Person.PK_Person\nFROM T_Person\n";
 		table2PrimaryKey.put(tables.get(0), "PK_Person");
+		table2properties.put(tables.get(0), Arrays.asList(new Tuple<String, String>("PK_Person", "String")));
 		view2queryexpression.put(views.get(0), view);
 		tables.add("T_Paper");
 		views.add("OV_Paper");
 		view = "SELECT T_Paper.PK_Paper\nFROM T_Paper\n";
 		table2PrimaryKey.put(tables.get(1), "PK_Paper");
+		table2properties.put(tables.get(1), Arrays.asList(new Tuple<String, String>("PK_Paper", "String")));
 		view2queryexpression.put(views.get(1), view);
 		tables.add("ASS_author_papers");
 		foreignKeys.add("FK_papers");
 		foreignKeys.add("FK_author");
 		table2ForeignKey.put(tables.get(2), foreignKeys);
+		table2properties.put(tables.get(2), Arrays.asList(new Tuple<String, String>("FK_papers", "String"),new Tuple<String, String>("FK_author", "String")));
 		checkCWM();
 	}
 
@@ -208,6 +248,7 @@ public class Pivot2CWMverticalTest extends CWMTest {
 	 * Checks if a complex university example mapped correctly.
 	 * </p>
 	 */
+	@SuppressWarnings("unchecked")
 	public void testComplexUniversity() {
 
 		super.testComplexUniversity();
@@ -218,24 +259,28 @@ public class Pivot2CWMverticalTest extends CWMTest {
 		// Create Person:
 		tables.add("T_Person");
 		views.add("OV_Person");
+		attributes.add(new Tuple<String, String>("PK_Person", "String"));
 		attributes.add(new Tuple<String, String>("firstName", "String"));
 		attributes.add(new Tuple<String, String>("lastName", "String"));
 		attributes.add(new Tuple<String, String>("birthDate", "Date"));
 		attributes.add(new Tuple<String, String>("age", "Integer"));
 		attributes.add(new Tuple<String, String>("isMarried", "Boolean"));
-		attributes.add(new Tuple<String, String>("salaries", "String"));
+		attributes.add(new Tuple<String, String>("salaries", "Integer ARRAY"));
+		attributes.add(new Tuple<String, String>("FK_supervisor", "String"));
+		attributes.add(new Tuple<String, String>("FK_currentPaper", "String"));
+		attributes.add(new Tuple<String, String>("FK_grade", "String"));
+		attributes.add(new Tuple<String, String>("FK_theFacility", "String"));
 		foreignKeys.add("FK_supervisor");
 		foreignKeys.add("FK_currentPaper");
 		foreignKeys.add("FK_grade");
 		foreignKeys.add("FK_theFacility");
 		view = "SELECT T_Person.PK_Person,T_Person.age AS age,";
-		view += "T_Person.birthDate AS birthDate,T_Person.firstName AS firstName,";
-		view += "T_Person.isMarried AS isMarried,T_Person.lastName AS lastName,";
+		view += "T_Person.birthDate AS birthDate,T_Person.FK_currentPaper AS FK_currentPaper,T_Person.firstName AS firstName,";
+		view += "T_Person.FK_grade AS FK_grade,T_Person.isMarried AS isMarried,T_Person.lastName AS lastName,";
 		view +=
-				"T_Person.salaries AS salaries,T_Person.FK_currentPaper AS FK_currentPaper,";
+				"T_Person.salaries AS salaries,T_Person.FK_theFacility AS FK_theFacility,";
 		view +=
-				"T_Person.FK_grade AS FK_grade,T_Person.FK_supervisor AS FK_supervisor,";
-		view += "T_Person.FK_theFacility AS FK_theFacility";
+				"T_Person.FK_supervisor AS FK_supervisor";
 		view += "\nFROM T_Person\n";
 		table2properties.put(tables.get(0), attributes);
 		table2ForeignKey.put(tables.get(0), foreignKeys);
@@ -244,23 +289,22 @@ public class Pivot2CWMverticalTest extends CWMTest {
 
 		attributes = new ArrayList<Tuple<String, String>>();
 		foreignKeys = new ArrayList<String>();
-		foreignKeys.add("PK_Person");
+		foreignKeys.add("FK_PK_Person");
 
 		// Create Student
 		tables.add("T_Student");
 		views.add("OV_Student");
+		attributes.add(new Tuple<String, String>("PK_Person", "String"));
 		attributes.add(new Tuple<String, String>("matNr", "Integer"));
 		attributes.add(new Tuple<String, String>("matDate", "Date"));
 		view =
-				"SELECT T_Student.PK_Person,T_Person.age AS age,T_Person.birthDate AS birthDate,";
-		view += "T_Person.firstName AS firstName,T_Person.isMarried AS isMarried,";
+				"SELECT T_Student.PK_Person,T_Student.matDate AS matDate,T_Student.matNr AS matNr,";
+		view += "T_Person.age AS age,T_Person.birthDate AS birthDate,T_Person.FK_currentPaper AS FK_currentPaper,";
+		view += "T_Person.firstName AS firstName,T_Person.FK_grade AS FK_grade,T_Person.isMarried AS isMarried,";
 		view += "T_Person.lastName AS lastName,T_Person.salaries AS salaries,";
-		view += "T_Student.matDate AS matDate,T_Student.matNr AS matNr,";
 		view +=
-				"T_Person.FK_currentPaper AS FK_currentPaper,T_Person.FK_grade AS FK_grade,";
-		view +=
-				"T_Person.FK_supervisor AS FK_supervisor,T_Person.FK_theFacility AS FK_theFacility";
-		view += "\nFROM T_Person,T_Student\n";
+				"T_Person.FK_theFacility AS FK_theFacility,T_Person.FK_supervisor AS FK_supervisor";
+		view += "\nFROM T_Student,T_Person\n";
 		view += "WHERE T_Student.PK_Person=T_Person.PK_Person";
 		table2properties.put(tables.get(1), attributes);
 		table2ForeignKey.put(tables.get(1), foreignKeys);
@@ -272,18 +316,17 @@ public class Pivot2CWMverticalTest extends CWMTest {
 		// Create Employee
 		tables.add("T_Employee");
 		views.add("OV_Employee");
+		attributes.add(new Tuple<String, String>("PK_Person", "String"));
 		attributes.add(new Tuple<String, String>("soSecNr", "String"));
 		attributes.add(new Tuple<String, String>("taxClass", "String"));
 		attributes.add(new Tuple<String, String>("wage", "Integer"));
 		view = "SELECT T_Employee.PK_Person,T_Employee.soSecNr AS soSecNr,";
 		view += "T_Employee.taxClass AS taxClass,T_Employee.wage AS wage,";
-		view += "T_Person.age AS age,T_Person.birthDate AS birthDate,";
-		view += "T_Person.firstName AS firstName,T_Person.isMarried AS isMarried,";
+		view += "T_Person.age AS age,T_Person.birthDate AS birthDate,T_Person.FK_currentPaper AS FK_currentPaper,";
+		view += "T_Person.firstName AS firstName,T_Person.FK_grade AS FK_grade,T_Person.isMarried AS isMarried,";
 		view += "T_Person.lastName AS lastName,T_Person.salaries AS salaries,";
-		view += "T_Person.FK_currentPaper AS FK_currentPaper,";
 		view +=
-				"T_Person.FK_grade AS FK_grade,T_Person.FK_supervisor AS FK_supervisor,";
-		view += "T_Person.FK_theFacility AS FK_theFacility";
+				"T_Person.FK_theFacility AS FK_theFacility,T_Person.FK_supervisor AS FK_supervisor";
 		view += "\nFROM T_Employee,T_Person\n";
 		view += "WHERE T_Employee.PK_Person=T_Person.PK_Person";
 		table2properties.put(tables.get(2), attributes);
@@ -296,18 +339,16 @@ public class Pivot2CWMverticalTest extends CWMTest {
 		// Create PhDStudent
 		tables.add("T_PhDStudent");
 		views.add("OV_PhDStudent");
+		attributes.add(new Tuple<String, String>("PK_Person", "String"));
 		attributes.add(new Tuple<String, String>("dissSubject", "String"));
-		view = "SELECT T_PhDStudent.PK_Person,T_Employee.soSecNr AS soSecNr,";
+		view = "SELECT T_PhDStudent.PK_Person,T_PhDStudent.dissSubject AS dissSubject,T_Employee.soSecNr AS soSecNr,";
 		view += "T_Employee.taxClass AS taxClass,T_Employee.wage AS wage,";
-		view += "T_Person.age AS age,T_Person.birthDate AS birthDate,";
-		view += "T_Person.firstName AS firstName,T_Person.isMarried AS isMarried,";
+		view += "T_Person.age AS age,T_Person.birthDate AS birthDate,T_Person.FK_currentPaper AS FK_currentPaper,";
+		view += "T_Person.firstName AS firstName,T_Person.FK_grade AS FK_grade,T_Person.isMarried AS isMarried,";
 		view += "T_Person.lastName AS lastName,T_Person.salaries AS salaries,";
-		view += "T_PhDStudent.dissSubject AS dissSubject,";
-		view += "T_Person.FK_currentPaper AS FK_currentPaper,";
 		view +=
-				"T_Person.FK_grade AS FK_grade,T_Person.FK_supervisor AS FK_supervisor,";
-		view += "T_Person.FK_theFacility AS FK_theFacility";
-		view += "\nFROM T_Employee,T_Person,T_PhDStudent\n";
+				"T_Person.FK_theFacility AS FK_theFacility,T_Person.FK_supervisor AS FK_supervisor";;
+		view += "\nFROM T_PhDStudent,T_Employee,T_Person\n";
 		view +=
 				"WHERE T_PhDStudent.PK_Person=T_Employee.PK_Person AND T_Employee.PK_Person=T_Person.PK_Person";
 		table2properties.put(tables.get(3), attributes);
@@ -321,6 +362,7 @@ public class Pivot2CWMverticalTest extends CWMTest {
 		// Create Grade:
 		tables.add("T_Grade");
 		views.add("OV_Grade");
+		attributes.add(new Tuple<String, String>("PK_Grade", "String"));
 		attributes.add(new Tuple<String, String>("name", "String"));
 		attributes.add(new Tuple<String, String>("value", "Integer"));
 		view =
@@ -337,6 +379,7 @@ public class Pivot2CWMverticalTest extends CWMTest {
 		// Create Paper
 		tables.add("T_Paper");
 		views.add("OV_Paper");
+		attributes.add(new Tuple<String, String>("PK_Paper", "String"));
 		attributes.add(new Tuple<String, String>("title", "String"));
 		attributes.add(new Tuple<String, String>("edition", "String"));
 		attributes.add(new Tuple<String, String>("purpose", "String"));
@@ -359,7 +402,10 @@ public class Pivot2CWMverticalTest extends CWMTest {
 		views.add("OV_Facility");
 		foreignKeys.add("FK_headOfFacility");
 		foreignKeys.add("FK_superFacility");
+		attributes.add(new Tuple<String, String>("PK_Facility", "String"));
 		attributes.add(new Tuple<String, String>("name", "String"));
+		attributes.add(new Tuple<String, String>("FK_headOfFacility", "String"));
+		attributes.add(new Tuple<String, String>("FK_superFacility", "String"));
 		view = "SELECT T_Facility.PK_Facility,T_Facility.name AS name,";
 		view += "T_Facility.FK_headOfFacility AS FK_headOfFacility,";
 		view += "T_Facility.FK_superFacility AS FK_superFacility";
@@ -370,7 +416,7 @@ public class Pivot2CWMverticalTest extends CWMTest {
 		table2PrimaryKey.put(tables.get(6), "PK_Facility");
 
 		foreignKeys = new ArrayList<String>();
-		foreignKeys.add("PK_Facility");
+		foreignKeys.add("FK_PK_Facility");
 
 		// Create Faculty
 		tables.add("T_Faculty");
@@ -378,11 +424,12 @@ public class Pivot2CWMverticalTest extends CWMTest {
 		view = "SELECT T_Faculty.PK_Facility,T_Facility.name AS name,";
 		view += "T_Facility.FK_headOfFacility AS FK_headOfFacility,";
 		view += "T_Facility.FK_superFacility AS FK_superFacility";
-		view += "\nFROM T_Facility,T_Faculty\n";
+		view += "\nFROM T_Faculty,T_Facility\n";
 		view += "WHERE T_Faculty.PK_Facility=T_Facility.PK_Facility";
 		view2queryexpression.put(views.get(7), view);
 		table2ForeignKey.put(tables.get(7), foreignKeys);
 		table2PrimaryKey.put(tables.get(7), "PK_Facility");
+		table2properties.put(tables.get(7), Arrays.asList(new Tuple<String,String>("PK_Facility","String")));
 
 		// Create Chair
 		tables.add("T_Chair");
@@ -395,6 +442,7 @@ public class Pivot2CWMverticalTest extends CWMTest {
 		view2queryexpression.put(views.get(8), view);
 		table2ForeignKey.put(tables.get(8), foreignKeys);
 		table2PrimaryKey.put(tables.get(8), "PK_Facility");
+		table2properties.put(tables.get(8), Arrays.asList(new Tuple<String,String>("PK_Facility","String")));
 
 		// Create Institute
 		tables.add("T_Institute");
@@ -402,12 +450,13 @@ public class Pivot2CWMverticalTest extends CWMTest {
 		view = "SELECT T_Institute.PK_Facility,T_Facility.name AS name,";
 		view += "T_Facility.FK_headOfFacility AS FK_headOfFacility,";
 		view += "T_Facility.FK_superFacility AS FK_superFacility";
-		view += "\nFROM T_Facility,T_Institute\n";
+		view += "\nFROM T_Institute,T_Facility\n";
 		view += "WHERE T_Institute.PK_Facility=T_Facility.PK_Facility";
 		view2queryexpression.put(views.get(9), view);
 		table2ForeignKey.put(tables.get(9), foreignKeys);
 		table2PrimaryKey.put(tables.get(9), "PK_Facility");
-
+		table2properties.put(tables.get(9), Arrays.asList(new Tuple<String,String>("PK_Facility","String")));
+		
 		foreignKeys = new ArrayList<String>();
 
 		// Create Association person - paper
@@ -415,7 +464,8 @@ public class Pivot2CWMverticalTest extends CWMTest {
 		foreignKeys.add("FK_author");
 		foreignKeys.add("FK_papers");
 		table2ForeignKey.put(tables.get(10), foreignKeys);
-
+		table2properties.put(tables.get(10), Arrays.asList(new Tuple<String, String>("FK_papers", "String"),new Tuple<String, String>("FK_author", "String")));
+		
 		foreignKeys = new ArrayList<String>();
 
 		// Create Association member - owner
@@ -423,7 +473,8 @@ public class Pivot2CWMverticalTest extends CWMTest {
 		foreignKeys.add("FK_member");
 		foreignKeys.add("FK_owner");
 		table2ForeignKey.put(tables.get(11), foreignKeys);
-
+		table2properties.put(tables.get(11), Arrays.asList(new Tuple<String, String>("FK_member", "String"),new Tuple<String, String>("FK_owner", "String")));
+		
 		checkCWM();
 	}
 

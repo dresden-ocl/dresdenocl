@@ -20,14 +20,15 @@ with Dresden OCL for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package org.dresdenocl.tools.codegen.declarativ.ocl2sql.test;
 
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-
+import org.dresdenocl.tools.codegen.declarativ.ocl2sql.Ocl2SqlPlugin;
 import org.dresdenocl.tools.codegen.declarativ.ocl2sql.test.tests.CarOcl2SqlTest;
 import org.dresdenocl.tools.codegen.declarativ.ocl2sql.test.tests.CarOcl2Sql_optimizeTest;
 import org.dresdenocl.tools.codegen.declarativ.ocl2sql.test.tests.SingleOcl2Sql_notoptimizeTest;
 import org.dresdenocl.tools.codegen.declarativ.ocl2sql.test.tests.SingleOcl2Sql_optimizeTest;
-import org.dresdenocl.tools.codegen.declarativ.ocl2sql.test.tests.fast.Ocl2SqlTest;
+import org.dresdenocl.tools.codegen.declarativ.ocl2sql.test.tests.fast.Ocl2SqlEcoreTest;
+import org.dresdenocl.tools.codegen.declarativ.ocl2sql.test.tests.fast.Ocl2SqlUMLTest;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
 /**
  * <p>
@@ -40,7 +41,7 @@ import org.dresdenocl.tools.codegen.declarativ.ocl2sql.test.tests.fast.Ocl2SqlTe
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ SingleOcl2Sql_notoptimizeTest.class,
-		SingleOcl2Sql_optimizeTest.class, Ocl2SqlTest.class,
+		SingleOcl2Sql_optimizeTest.class, Ocl2SqlUMLTest.class,Ocl2SqlEcoreTest.class,
 		CarOcl2SqlTest.class, CarOcl2Sql_optimizeTest.class })
 public class SingleOcl2SqlTests extends AbstractDresdenOclTest {
 	/*
