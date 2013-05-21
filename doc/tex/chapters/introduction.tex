@@ -12,7 +12,7 @@ Chapter~\ref{chapter:architecture}. Further information about Dresden OCL is
 available at the project's website~\cite{WWW:toolkit}.
 
 This chapter explains the installation of Dresden OCL and how to load a 
-model, an instance of such a model, and \acs{OCL} constraints defined on such a 
+model, an instance of such a model, and OCL constraints defined on such a 
 model into Dresden OCL. Besides the Eclipse distribution, Dresden OCL can 
 also be used as a stand-alone Java library. If you plan to use the stand-alone 
 distribution you can skip this chapter and continue with 
@@ -33,8 +33,8 @@ Eclipse.
 	  Client}.
 	\item You may install Dresden using the update site available
 	  at~\cite{WWW:toolkitUpdatesite},
-	\item You may checkout and run the source code distribution from the \acs{SVN}
-	  available at~\cite{WWW:toolkitSVN}.
+	\item You may checkout and run the source code distribution from the GIT
+	  repository available at~\cite{WWW:toolkitGIT}.
 \end{enumerate}
 
 This section will explain all three possibilities.
@@ -91,11 +91,9 @@ In the new opened window you can additionally enter a name for the update site
 
 Now you can select the features of Dresden OCL which you want to install. 
 Select them and click the \eclipse{Next >} button (cf. 
-Fig.~\ref{pic:intro:updateSite03}). An overview on all features of 
-Dresden OCL can be found in Table~\ref{tab:plugins} in the appendix of 
-this manual. Follow the wizard and agree with the user license. Then Dresden OCL
-will be installed. Afterwards, you should restart your Eclipse application to 
-finish the installation.
+Fig.~\ref{pic:intro:updateSite03}). Follow the wizard and agree with the user
+license. Then Dresden OCL will be installed. Afterwards, you should restart
+your Eclipse application to finish the installation.
 
 \begin{figure}[t]
 	\centering
@@ -105,39 +103,18 @@ finish the installation.
 \end{figure}
 	
 	
-\subsection{Importing Dresden OCL from the SVN}
+\subsection{Fetching Dresden OCL from the GIT Repository}
 
-To use Dresden OCL by checking out the source code from the \acs{SVN} you
-need to install an \acs{SVN} client. In the following the 
-\keyword{Eclipse Subversive} plug-in is used.
+To use Dresden OCL by checking out the source code from the GIT repository you
+can use the \keyword{eGIT} distribution shipped with \keyword{Eclipse} or you
+can use any other existing GIT client.
 
-After installing Eclipse Subversive, a new \keyword{Eclispe Perspective} 
-providing access to \acs{SVN} should exist. The perspective can be opened via 
-the menu \eclipse{Window > Open Perpective > Other... > SVN Repository
-Exploring}. In the view \eclipse{\acs{SVN} Repositories} you can add a new 
-repository using the \acs{URL} 
-\url{http://svn-st.inf.tu-dresden.de/svn/dresdenocl/} (cf. 
-Fig.~\ref{pic:intro:svn01}).
+The GIT repository of Dresden OCL is located at
+\url{https://github.com/dresden-ocl/dresdenocl.git}.
 
-\begin{figure}[!b]
-	\centering
-	\includegraphics[width=0.4\linewidth]{figures/introduction/svn01}
-	\caption{Adding an SVN repository.}
-	\label{pic:intro:svn01}
-\end{figure}
-
-After clicking the \eclipse{Finish} button, the \acs{SVN} repository root should 
-be visible in the \eclipse{\acs{SVN} Repositories} view. To checkout the
-plug-ins, you have to select them in the repository directory 
-\reference{trunk/ocl20\-for\-Eclipse/eclipse} and use the \eclipse{Checkout...} 
-function in the context menu (cf. Fig.~\ref{pic:intro:svn02}).
-	
-\begin{figure}[!t]
-	\centering
-	\includegraphics[width=0.4\linewidth]{figures/introduction/svn02}
-	\caption{Checkout of Dresden OCL's plug-in projects.}
-	\label{pic:intro:svn02}
-\end{figure}
+After fetching the code you have to import the Eclipse Plugin projects located
+in the \code{eclipse} subdirectory of the repository into your Eclipse
+workspace.
 
 
 \subsection{Problems While Installing Dresden OCL}
@@ -186,8 +163,9 @@ same window to select a \acs{JDK} instead.
 If you want to make changes to the static semantics evaluation of the parser you
 should consider installing the \emph{Scala IDE} from 
 \url{http://www.scala-lang.org/scala-eclipse-plugin}. Be aware that the Scala
-code is version 2.7.7 which is not compatible with Scala 2.8 and therefore you
-cannot use the current \emph{Scala IDE} which supports only Scala 2.8. 
+code is version 2.7.7 which is not compatible with Scala~2.8 and later
+versions of Scala. Therefore, you cannot use the current \emph{Scala IDE}
+which does not support Scala~2.7.7 anymore.
 
 In order to use the Scala compiler of the IDE, you have to go to the
 \eclipse{Properties} of each Scala plug-in, select the tab \eclipse{Builders},
