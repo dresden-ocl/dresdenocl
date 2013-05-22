@@ -5,11 +5,11 @@
 \textit{Chapter written by Claas Wilke and Lars Sch\"{u}tze}
 \end{flushright}
 
-This chapter describes how the \acs{OCL} Interpreter provided with Dresden OCL 
-can be used and how to trace such interpretations. How to install and run Dresden OCL and how 
-to load models and OCL constraints was explained in 
-Chapter~\ref{chapter:introduction}. If you are not familiar with such basic uses
-of Dresden OCL, read Chapter~\ref{chapter:introduction} first.
+This chapter describes how the OCL Interpreter provided with Dresden OCL can be
+used and how to trace such interpretations. How to install and run Dresden OCL
+and how to load models and OCL constraints was explained in
+Chapter~\ref{chapter:introduction}. If you are not familiar with such basic
+uses of Dresden OCL, read Chapter~\ref{chapter:introduction} first.
 
 
 
@@ -76,9 +76,8 @@ interpret (located at
 Listing~\ref{lst:interpret:allConstraints} shows the constraints defined in the
 constraint file.
 
-First, the constraint file defines three simple invariants that ensure that 
-the \model{age} of every \model{Person} must always be zero or greater than
-zero.
+First, the constraint file defines three simple invariants that ensure that the
+\model{age} of every \model{Person} must always be zero or greater than zero.
 Furthermore, the \model{age} of every \model{Student} must be greater than
 \model{16} and the \model{age} of every \model{Professor} does not have to be
 less than \model{30}.
@@ -96,8 +95,8 @@ postcondition which checks, whether or not the result of the operation
 
 To prepare the interpretation we have to import the model 
 \model{model/simple.uml} for which we want to interpret constraints into the
-\eclipse{Model Browser}. We use the model import wizard of Dresden OCL to import
-the model. This procedure is explained in Section~\ref{intro:loadModel}. 
+\eclipse{Model Browser}. We use the model import wizard of Dresden OCL to
+import the model. This procedure is explained in Section~\ref{intro:loadModel}.
 Furthermore, we have to import a model instance for which the constraints shall 
 be interpreted into the \eclipse{Model Instance Browser}. We use another import 
 wizard to import the model instance 
@@ -123,10 +122,10 @@ Figure~\ref{pic:interpret:prepare02}.
 	\label{pic:interpret:prepare02}
 \end{figure}
 
-The opened model instance contains three instances of the classes defined in the
-Simple Example model. One instance of \model{Person}, one instance of 
-\model{Student} and one instance of \model{Professor}. For these three instances
-we now want to interpret the imported constraints.
+The opened model instance contains three instances of the classes defined in
+the Simple Example model. One instance of \model{Person}, one instance of 
+\model{Student} and one instance of \model{Professor}. For these three
+instances we now want to interpret the imported constraints.
 
 
 
@@ -138,8 +137,8 @@ the menu option \eclipse{Dresden OCL2 > Open OCL2 Interpreter}. The
 Fig.~\ref{pic:interpret:interpret01}).
 
 By now, the \eclipse{OCL Interpreter View} does not contain any result. Besides
-the results table, the view provides four buttons to control the \acs{OCL} 
-Interpreter. The buttons are shown in Figure~\ref{pic:interpret:interpret02}. 
+the results table, the view provides four buttons to control the OCL
+Interpreter. The buttons are shown in Figure~\ref{pic:interpret:interpret02}.
 With the first button (from left to right) constraints can be prepared for 
 interpretation. The second button can be used to add variables to the 
 \keyword{Interpreter's Environment}. The third button provides the core 
@@ -184,14 +183,14 @@ To interpret constraints, we simply select them in the \eclipse{Model Browser}
 and push the button to interpret constraints (the third button from the left). 
 First, we want to interpret the three invariants defining the range of the 
 \model{age} of \model{Persons}, \model{Students} and \model{Professors}. We 
-select them in the \eclipse{Model Browser} and push the \eclipse{Interpret} button.
-The result of the interpretation is now shown in the \eclipse{\acs{OCL}
+select them in the \eclipse{Model Browser} and push the \eclipse{Interpret}
+button. The result of the interpretation is now shown in the \eclipse{OCL
 Interpreter View} (cf. Figure~\ref{pic:interpret:interpret04}).
 
-The invariant \model{age >= 0} has been interpreted for all three model objects.
-The results for the \model{Person} and the \model{Student} instances are 
-\model{true} because their \model{age} is greater than zero. The result for the
-\model{Professor} instance is \model{false} because its \model{age} is 
+The invariant \model{age >= 0} has been interpreted for all three model
+objects. The results for the \model{Person} and the \model{Student} instances
+are \model{true} because their \model{age} is greater than zero. The result for
+the \model{Professor} instance is \model{false} because its \model{age} is
 \model{-42}.
 
 The two other invariants were only interpreted for the \model{Student} or the 
@@ -200,18 +199,18 @@ The two other invariants were only interpreted for the \model{Student} or the
 respectively. Again, the \model{Student's} result is \model{true} and the 
 \model{Professor's} result is \model{false}.
 
-Besides invariants, \acs{OCL} allows to use \acs{OCL} expressions to
-define new attributes and methods or to initialize attributes and methods. Such
-\model{def}, \model{init} and \model{body} constraints cannot be interpreted to
-\model{true} or \model{false}, because their result type has not to be 
-\model{Boolean}. Furthermore, they can be used to alter the results of other 
-constraints that shall be interpreted. The \model{allConstraints.ocl} file 
-contains a definition constraint, which defines the method \model{getAge()} for 
-the class \model{Person}. Now, we want to interpret this definition constraint. 
-We select the constraint in the \eclipse{Model Browser} and click the
-\eclipse{Interpret} button. The result of the interpretation is shown in 
+Besides invariants, OCL allows to use OCL expressions to define new attributes
+and methods or to initialize attributes and methods. Such \model{def},
+\model{init} and \model{body} constraints cannot be interpreted to \model{true}
+or \model{false}, because their result type has not to be \model{Boolean}.
+Furthermore, they can be used to alter the results of other constraints that
+shall be interpreted. The \model{allConstraints.ocl} file contains a definition
+constraint, which defines the method \model{getAge()} for the class
+\model{Person}. Now, we want to interpret this definition constraint. We select
+the constraint in the \eclipse{Model Browser} and click the \eclipse{Interpret}
+button. The result of the interpretation is shown in
 Figure~\ref{pic:interpret:interpret07}. The interpretation finishes for all
-three instances successfully because the attribute \model{age} has been set for 
+three instances successfully because the attribute \model{age} has been set for
 all three instances.
 
 
@@ -220,12 +219,12 @@ all three instances.
 When interpreting OCL constraints from the GUI, we have to add further context 
 information to interpret some pre- and postconditions. For example, the 
 postcondition contained in the constraint file compares the result of the 
-method \model{getAge()} with the attribute \model{age} of the referenced 
-\model{Person} instance. Therefore, \acs{OCL} provides the special variable 
-\model{result} in postconditions which contains the result of the constrained 
-method's execution. Using the \eclipse{\acs{OCL} Interpreter View} we cannot 
-execute the method \model{getAge()} and store the result in the \model{result} 
-variable. We can interpret the postcondition in a specific context which has to 
+method \model{getAge()} with the attribute \model{age} of the referenced
+\model{Person} instance. Therefore, OCL provides the special variable
+\model{result} in postconditions which contains the result of the constrained
+method's execution. Using the \eclipse{OCL Interpreter View} we cannot execute
+the method \model{getAge()} and store the result in the \model{result}
+variable. We can interpret the postcondition in a specific context which has to
 be prepared by hand only. We have to set the \texttt{result} variable manually.
 
 If we interpret the postcondition constraint (the sixth and last constraint in 
@@ -236,8 +235,8 @@ constraint results in a \model{undefined} result for all three model instances
 To prepare the variable, we push the button to add new variables to the 
 Interpreter Environment (the second button from the left) and a dialog to
 specify new variables opens. We enter the name \model{result}, select the
-variable type \model{Integer} and enter the value \model{25}. Then, we click the
-\eclipse{OK} button (cf. Fig.~\ref{pic:interpret:interpret09}). The
+variable type \model{Integer} and enter the value \model{25}. Then, we click
+the \eclipse{OK} button (cf. Fig.~\ref{pic:interpret:interpret09}). The
 \texttt{result} variable has now been added to the Interpreter's Environment.
 
 \begin{figure}[!p]
@@ -293,8 +292,8 @@ interpretation manually as shown for the \code{result} variable.
 
 The interpretation of some postconditions requires a preparation of the 
 Interpreter's environment before the operation defined in the context of the 
-postcondition is invoked. Listing~\ref{lst:interpret:postcondition} shows such a
-postcondition. The postcondition is defined on an operation 
+postcondition is invoked. Listing~\ref{lst:interpret:postcondition} shows such
+a postcondition. The postcondition is defined on an operation 
 \code{birthdayHappens()} that increments the \code{age} of a \code{Person}. The 
 postcondition checks, whether the \code{age} was incremented or not. Thus, the 
 Interpreter has to store the value of \code{age} before the operation 
@@ -317,14 +316,14 @@ post: age = age@pre + 1
 \end{figure}
 
 The preparation of postconditions is not that useful when interpreting 
-constraints from the GUI of Dresden OCL because you cannot invoke your 
-operations to alter your model instance's state. Nevertheless, like the 
-possibility to add variables to the Interpreter's environment you can prepare 
-postconditions from the GUI. These operations are much more useful when using 
-Dresden OCL via its API and using the \acs{OCL} Interpreter to check \acs{OCL} 
-constraints during the runtime of other software. Then you can prepare
-constraints before methods are invoked and check postconditions afterwards, 
-e.g., by using \emph{\acf{AOP}}.
+constraints from the GUI of Dresden OCL because you cannot invoke your
+operations to alter your model instance's state. Nevertheless, like the
+possibility to add variables to the Interpreter's environment you can prepare
+postconditions from the GUI. These operations are much more useful when using
+Dresden OCL via its API and using the OCL Interpreter to check OCL constraints
+during the runtime of other software. Then you can prepare constraints before
+methods are invoked and check postconditions afterwards, e.g., by using
+\emph{\acf{AOP}}.
 
 \begin{figure}[h]
 	\centering
@@ -343,32 +342,33 @@ e.g., by using \emph{\acf{AOP}}.
 \subsection{Tracing}
 
 Tracing is applied for logging and visualizing the execution path of the
-interpretation of an \acs{OCL} expression. Tracing allows to investigate
-parts of interpreted \acs{OCL} expressions in a tree based manner (e.g., if
-an expression comparing to values using the \code{=} operation results in
-\code{false}, you can investigate the left- and right-hand arguments of the
-\code{=} expression resulting in \code{false}. To receive interim results
-during interpretation of \acs{OCL} expressions, open the Dresden \acs{OCL}
-Tracer from the menu option \eclipse{Dresden OCL > Open Dresden OCL Tracer}
-before you start the interpretation. Once opened, the execution path of an
-\acs{OCL} expression will be logged and shown in the \acs{OCL} \eclipse{Tracer
-View} (cf. Figure \ref{pic:interpret:tracer01}).
+interpretation of an OCL expression. Tracing allows to investigate parts of
+interpreted OCL expressions in a tree based manner (e.g., if an expression
+comparing to values using the \code{=} operation results in \code{false}, you
+can investigate the left- and right-hand arguments of the \code{=} expression
+resulting in \code{false}. To receive interim results during interpretation of
+OCL expressions, open the Dresden OCL Tracer from the menu option
+\eclipse{Dresden OCL > Open Dresden OCL Tracer} before you start the
+interpretation. Once opened, the execution path of an OCL expression will be
+logged and shown in the OCL \eclipse{Tracer View} (cf.
+Figure~\ref{pic:interpret:tracer01}).
 
 When debugging OCL expressions users typically intend to find failures. Thus,
-the \acs{OCL} \eclipse{Tracer View} also provides a menu to filter for special
-criteria, e.g. all \model{true} or \model{false} results (cf. Figure
-\ref{pic:interpret:tracer02}). Feel free to explore the tracer view based on
-interpretation results from the \acs{OCL} constraint examples explained above.
+the OCL \eclipse{Tracer View} also provides a menu to filter for special
+criteria, e.g. all \model{true} or \model{false} results (cf.
+Figure~\ref{pic:interpret:tracer02}). Feel free to explore the tracer view
+based on interpretation results from the OCL constraint examples explained
+above.
 
 
 \section{Summary}
   
-This chapter described how \acs{OCL} constraints can be interpreted using the 
-\acs{OCL} Interpreter of Dresden OCL. The preparation and interpretation of 
-constraints has been explained, the addition of new variables to the 
-Interpreter Environment has been shown. The tracing of expressions has been
-demonstrated. Besides the use of the Interpreter via 
-Dresden OCL's GUI, you can also invoke the Interpreter via Dresden OCL's 
-\acs{API}. The easiest way to connect to Dresden OCL is via its \emph{Facade} 
-providing interfaces for all services of Dresden OCL. How to use Dresden OCL's 
-facade is documented in Chapter~\ref{chapter:integration}.
+This chapter described how OCL constraints can be interpreted using the OCL
+Interpreter of Dresden OCL. The preparation and interpretation of constraints
+has been explained, the addition of new variables to the Interpreter
+Environment has been shown. The tracing of expressions has been demonstrated.
+Besides the use of the Interpreter via Dresden OCL's GUI, you can also invoke
+the Interpreter via Dresden OCL's \acs{API}. The easiest way to connect to
+Dresden OCL is via its \emph{Facade} providing interfaces for all services of
+Dresden OCL. How to use Dresden OCL's facade is documented in
+Chapter~\ref{chapter:integration}.
