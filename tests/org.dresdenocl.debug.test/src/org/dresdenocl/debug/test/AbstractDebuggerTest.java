@@ -1,13 +1,14 @@
 package org.dresdenocl.debug.test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -184,14 +185,24 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 		return -1;
 	}
 
-	protected static OclDebugger generateDebugger() throws Exception {
+	/**
+	 * Helper method creating an {@link OclDebugger} for a given OCL resource.
+	 * 
+	 * @param oclResource
+	 *            Path leading to the OCL file used for this {@link OclDebugger}
+	 *            relative to the root directory of this test plugin.
+	 * @return The created {@link OclDebugger}
+	 * @throws Exception
+	 */
+	protected static OclDebugger generateDebugger(String oclResource)
+			throws Exception {
 
 		final OclDebugger debugger;
 		final String[] modelObjects = { "TestClass" };
 		final List<Constraint> constraints;
 		final Set<IModelInstanceObject> imio;
 
-		constraints = getConstraints(MODEL_PATH, RESOURCE01_PATH);
+		constraints = getConstraints(MODEL_PATH, oclResource);
 
 		imio = getModelInstanceObjects(MODEL_INSTANCE_PATH, modelObjects);
 
@@ -211,11 +222,61 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 			}
 
 		}).start();
-		
-		//Thread.sleep(1000);
+
+		// Thread.sleep(1000);
 
 		Socket socket = new Socket("localhost", eventPort);
 		socket.close();
 		return debugger;
+	}
+
+	/**
+	 * Helper method asserting that the {@link OclDebugger} is at the right
+	 * line.
+	 * 
+	 * @param currentLine
+	 *            The line to be asserted.
+	 * @param debugger
+	 *            The {@link OclDebugger}.
+	 */
+	protected static void assertCurrentLine(int currentLine,
+			OclDebugger debugger) {
+		assertEquals("The OclDebugger should bet at line " + currentLine + ".",
+				currentLine, debugger.getCurrentLine());
+	}
+
+	/**
+	 * Helper method asserting that the last entry of the call stack has the
+	 * right name.
+	 * 
+	 * @param name
+	 *            The name to be asserted.
+	 * @param debugger
+	 *            The {@link OclDebugger}.
+	 */
+	protected static void assertStackName(String name, OclDebugger debugger) {
+		assertNotNull("The call stack should not be empty.",
+				debugger.getStack());
+		assertFalse("The call stack should not be empty.",
+				debugger.getStack().length == 0);
+
+		String callStackName = debugger.getStack()[debugger.getStack().length - 1];
+		assertEquals(
+				"The name of the last entry on the call stack should start with '"
+						+ name + "'", name,
+				callStackName.substring(0, callStackName.indexOf(",")));
+	}
+
+	/**
+	 * Helper method asserting the size of the call stack.
+	 * 
+	 * @param stackSize
+	 *            The size of the stack.
+	 * @param debugger
+	 *            The {@link OclDebugger}.
+	 */
+	protected static void assertStackSize(int stackSize, OclDebugger debugger) {
+		assertEquals("The Stack should have the size " + stackSize + ".",
+				stackSize, debugger.getStack().length);
 	}
 }

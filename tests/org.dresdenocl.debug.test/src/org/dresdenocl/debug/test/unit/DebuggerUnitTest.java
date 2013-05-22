@@ -29,20 +29,21 @@ public class DebuggerUnitTest extends AbstractDebuggerTest {
 	@Test
 	public void testStartUp01() throws Exception {
 
-		OclDebugger debugger = generateDebugger();
+		OclDebugger debugger = generateDebugger(RESOURCE01_PATH);
 
 		assertTrue("Debugger is not in debug mode", debugger.isDebugMode());
 		Thread.sleep(1000);
 		assertTrue("Debugger is not suspended", debugger.isSuspended());
 		debugger.resume();
-		assertFalse("Debugger is suspended but should be not", debugger.isSuspended());
+		assertFalse("Debugger is suspended but should be not",
+				debugger.isSuspended());
 		debugger.terminate();
 	}
 
 	@Test
 	public void testBreakpointSet01() throws Exception {
 
-		OclDebugger debugger = generateDebugger();
+		OclDebugger debugger = generateDebugger(RESOURCE01_PATH);
 		File resourceFile = getFile(MODEL_INSTANCE_PATH,
 				DebugTestPlugin.PLUGIN_ID);
 
@@ -51,6 +52,7 @@ public class DebuggerUnitTest extends AbstractDebuggerTest {
 		debugger.resume();
 		Thread.sleep(1000);
 		System.out.println(debugger.getCurrentLine());
-		assertTrue("Debugger is not in the right line", debugger.getCurrentLine() == 3);
+		assertTrue("Debugger is not in the right line",
+				debugger.getCurrentLine() == 3);
 	}
 }
