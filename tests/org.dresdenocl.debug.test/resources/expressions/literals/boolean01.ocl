@@ -1,0 +1,7 @@
+package resource::package01
+
+context TestClass
+inv: 
+	true
+
+endpackage
