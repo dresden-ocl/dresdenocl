@@ -37,13 +37,12 @@ workspace. Afterwards, the workspace should contain two projects named
 	\label{pic:example:simple03}
 \end{figure}
 
-The first project 
-provides a model file which contains the simple class diagram which has been 
-explained in Section~\ref{intro:simpleExample} (the model file is located at 
-\model{model/simple.uml}) and the constraint file we want to generate code for 
-(the constraint file is located at \model{constraints/invariants.ocl}). 
-Listing~\ref{lst:codegen:simpleInvariant} shows one invariant that is contained
-in the constraint file. The invariant 
+The first project provides a model file which contains the simple class diagram
+which has been explained in Section~\ref{intro:simpleExample} (the model file
+is located at \model{model/simple.uml}) and the constraint file we want to
+generate code for (the constraint file is located at
+\model{constraints/invariants.ocl}). Listing~\ref{lst:codegen:simpleInvariant}
+shows one invariant that is contained in the constraint file. The invariant 
 declares that the \model{age} of any \model{Person} must be greater or equal 
 to zero at any time during the life cycle of the \model{Person}.
 
@@ -75,12 +74,12 @@ inv: age >= 0
 
 The second project provides the test class 
 \model{src/org.dresdenocl.examples.simple.\linebreak[0]con\-straints.\linebreak[0]InvTest.java}
-which contains a JUnit test case that checks, whether or not the mentioned 
-constraint is enforced during run-time. The test case creates two 
-\model{Persons} and tries to set their \model{age}. The \model{age} of the 
-second \model{Person} is set to \model{-3} and thus, the constraint is violated. 
-The test case expects that a run-time exception is thrown, if the constraint is 
-violated.
+which contains a JUnit test case that checks, whether or not the mentioned
+constraint is enforced during run-time. The test case creates two
+\model{Persons} and tries to set their \model{age}. The \model{age} of the
+second \model{Person} is set to \model{-3} and thus, the constraint is
+violated. The test case expects that a run-time exception is thrown, if the
+constraint is violated.
 
 The code for the mentioned constraint has not been generated, yet and thus, the 
 exception will not be thrown. We run the test case by opening the context menu 
@@ -156,7 +155,7 @@ generated! The code generator creates or uses contained package directories
 depending on the package structure of the selected constraint. Additionally we
 can specify a subfolder into that the constraint code shall be generated 
 relatively to the package of the constrained class. By default this is a sub 
-directory called \model{constraints}. We don't want to change this setting and
+directory called \model{constraints}. We do not want to change this setting and
 click the \eclipse{Next} button.
 	
 \begin{figure}[!b]
@@ -208,13 +207,14 @@ should be valid before data transmission only, he should use the strategy
 \keyword{Transactional Verification}.
 
 Finally, we can specify a \keyword{Violation Macro} which specifies the code, 
-which will be executed when a constraint is violated during runtime. By default,
-the violation macro throws a run-time exception containing a message saying
-which constraint was violated by which runtime object. Whithin such messages,
-some specific keywords can be used to declare information such as the violated
-constraint's name or body. Table~\ref{tab:codegen:patterns} gives an overview
-over the allowed keywords and their meaning. We also want to have a run-time exception thrown
-when our constraint is violated. Thus, we do not change the violation macro and continue with the \eclipse{Next} button.
+which will be executed when a constraint is violated during runtime. By
+default, the violation macro throws a run-time exception containing a message
+saying which constraint was violated by which runtime object. Whithin such
+messages, some specific keywords can be used to declare information such as the
+violated constraint's name or body. Table~\ref{tab:codegen:patterns} gives an
+overview over the allowed keywords and their meaning. We also want to have a
+run-time exception thrown when our constraint is violated. Thus, we do not
+change the violation macro and continue with the \eclipse{Next} button.
 
 \begin{table}[h]
 \begin{tabular}{|p{7cm}|p{7cm}|}
@@ -245,7 +245,7 @@ when our constraint is violated. Thus, we do not change the violation macro and 
 \subsection{Constraint-Specific Settings}
 
 The last page of the code generation wizard provides the possibility to
-configure some of the code generation settings constraint-specific by selecting 
+configure some of the code generation settings constraint-specific by selecting
 a constraint and adapting it's settings (cf.
 Fig.~\ref{pic:codegen:codegen05}). We don't want to adapt the settings, thus 
 we can finish the wizard and start the code generation by clicking the 
@@ -294,11 +294,11 @@ exception is thrown (cf. Fig.~\ref{pic:codegen:junit02}).
 	
 \section{Summary}
   
-This chapter described how to generate AspectJ code using the 
-\keyword{OCL22Java} code generator of Dresden OCL. A more detailed 
+This chapter described how to generate AspectJ code using the
+\keyword{OCL22Java} code generator of Dresden OCL. A more detailed
 documentation of the OCL22Java code generator can be found in the Minor Thesis
 (Groﬂer Beleg) of Claas Wilke \cite{GB:Wilke}. Besides the use of OCL22Java via
-Dresden OCL's GUI, you can also invoke OCL22Java via Dresden OCL's \acs{API}. The 
-easiest way to connect to Dresden OCL is via its \emph{Facade} providing 
-interfaces for all services of Dresden OCL. How to use Dresden OCL's facade is 
+Dresden OCL's GUI, you can also invoke OCL22Java via Dresden OCL's \acs{API}.
+The easiest way to connect to Dresden OCL is via its \emph{Facade} providing
+interfaces for all services of Dresden OCL. How to use Dresden OCL's facade is
 documented in Chapter~\ref{chapter:integration}.
