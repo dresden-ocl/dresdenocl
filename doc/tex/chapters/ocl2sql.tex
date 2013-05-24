@@ -11,6 +11,7 @@ provided in Chapter~\ref{chapter:introduction}.
 
 The SQL Code Generator is able to generate code of the following SQL
 dialects (target languages):
+
 \begin{itemize}
    \item Standard SQL 2008
   \item PostgreSQL 9
@@ -21,21 +22,21 @@ dialects (target languages):
 
 \section{Code Generator Preparation}
 
-In the following, the \keyword{University Example} is used
-(cf. Figure~\ref{pic:example:university01}) to explain SQL code generation with
-Dresden OCL. To import the University Example into the Eclipse workspace we have
-to use the wizard \emph{File -> New -> Other\ldots -> Dresden OCL Examples ->
-University Example (UML)}. Afterwards, the project
+In the following, the \keyword{University Example} is used (cf.
+Figure~\ref{pic:example:university01}) to explain SQL code generation with
+Dresden OCL. To import the University Example into the Eclipse workspace we
+have to use the wizard \emph{File -> New -> Other\ldots -> Dresden OCL Examples
+-> University Example (UML)}. Afterwards, the project
 \model{org.dresdenocl.\linebreak[0]examp\-les.\linebreak[0]university}
 should be available within the workspace.
 
 
-The project 
-provides a model file which contains the university class diagram (the model file is located at 
-\model{model/university.uml}) and the constraint file (located at
-\model{con\-straints/\linebreak[0]uni\-ver\-si\-ty\linebreak[0].ocl}) we want to generate code for. One
-invariant is shown in Listing~\ref{lst:codegen:universityInvariant}. It is contained in the
-constraint file we want to generate code for. The invariant declares, that the
+The project  provides a model file which contains the university class diagram
+(the model file is located at \model{model/university.uml}) and the constraint
+file (located at
+\model{con\-straints/\linebreak[0]uni\-ver\-si\-ty\linebreak[0].ocl}) we want
+to generate code for. One invariant of this constraint file is shown in
+Listing~\ref{lst:codegen:universityInvariant}. The invariant declares, that the
 \model{grade} of any \model{Person}'s superviser must be greater thant its own
 \model{grade}.
 
@@ -60,10 +61,10 @@ inv tudOclInv1: self.supervisor.grade.value > self.grade.value
 \section{Code Generation}
 To prepare the code generation we have to import the model 
 \model{model/university.uml} into the \eclipse{Model Browser}. We use the model
-import wizard of Dresden OCL to import the model. This procedure is explained in
-Chapter~\ref{chapter:introduction}. Afterwards, we have to open the constraint
-file \model{con\-straints/\linebreak[0]university.ocl}. The imported model
-should look within the \eclipse{Model Browser} as illustrated in
+import wizard of Dresden OCL to import the model. This procedure is explained
+in Chapter~\ref{chapter:introduction}. Afterwards, we have to open the
+constraint file \model{con\-straints/\linebreak[0]university.ocl}. The imported
+model should look within the \eclipse{Model Browser} as illustrated in
 Figure~\ref{pic:codegen:modelBrowserSQL}. Now we can start the code generation.
 By selecting the item \eclipse{Generate SQL Code} of the menu \eclipse{Dresden
 OCL} the SQL code generation can be started.
@@ -96,10 +97,10 @@ model and click the \eclipse{Next} button.
 
 
 \subsection{Selecting Constraints}
-As a second step we have to select the constraints we want to
-generate code for. We only select the constraints \model{inv: oclInv1} and
-\model{inv: oclInv2}. After the selection of the constraints we click on the
-\eclipse{Next} button (cf. Fig.~\ref{pic:codegen:codegen02SQL}).
+As a second step we have to select the constraints we want to generate code for.
+We select the constraints \model{inv: oclInv1} and \model{inv: oclInv2} only.
+After this selection we click on the \eclipse{Next} button (cf.
+Fig.~\ref{pic:codegen:codegen02SQL}).
 
 \begin{figure}[!p]
 	\centering
@@ -127,29 +128,30 @@ button.
 \subsection{General settings}
 
 On the following page of the wizard we can specify general settings for the code
-generation (cf. Fig.~\ref{pic:codegen:codegen04SQL}). We can choose a SQL 
+generation (cf. Fig.~\ref{pic:codegen:codegen04SQL}). We can choose a SQL
 dialect for the generated code. The modus of SQL generation decides how
-inheritance relationships are mapped to the SQL schema. In the typed
-modus all subclass properties will be written to one table of the super class
-(often called generalization table).
-Any class has its own table with the own properties in the vertical modus. If
-you wish only to generate the code for invariant you must choose \emph{Only
-Integrity View}. Otherwise, the table schema will be generated as well. The
-other parameter will set the prefix for the different parts of the SQL schema. We can
-finish the settings and start the code generation with the \eclipse{Finish} button.
+inheritance relationships are mapped to the SQL schema. In the typed modus all
+subclass properties will be written to one table of the super class (often
+called generalization table). Any class has its own table with the own
+properties in the vertical modus. If you wish only to generate the code for
+invariant you must choose \emph{Only Integrity View}. Otherwise, the table
+schema will be generated as well. The other parameter will set the prefix for
+the different parts of the SQL schema. We can finish the settings and start the
+code generation with the \eclipse{Finish} button.
  
 \section{The Generated Code}
 After finishing the wizard, the code for the selected constraints will be 
-generated. To review the results it can be necessary to refresh the
-project (F5). Our project contains two new SQL files in the folder \texttt{sql}
-(cf. Fig.~\ref{pic:codegen:projectExplorerSQL}). The file 
-\texttt{2010-09-29-09-34\_schema.sql} contains the table and view definitions (called object views) of the
-model. Every class of the model has its own view. Via this view the
-data(objects) of the class can be accesssed. The other file
-\texttt{2010-09-29-09-34\_view.sql} contains the SQL code for the invariants (cf.
-Fig.~\ref{pic:codegen:generateSQL}), that is one view definition (called integrity view) for each invariant. 
-The semantics of such an integrity view is that after evaluation of an invariant the corresponding integrity view contains all objects that
-violate the invariant (cf. Listing~\ref{lst:codegen:sqlInvariant}).
+generated. To review the results it can be necessary to refresh the project
+(F5). Our project contains two new SQL files in the folder \texttt{sql} (cf.
+Fig.~\ref{pic:codegen:projectExplorerSQL}). The file
+\texttt{2010-09-29-09-34\_schema.sql} contains the table and view definitions
+(called object views) of the model. Every class of the model has its own view.
+Via this view the data(objects) of the class can be accesssed. The other file
+\texttt{2010-09-29-09-34\_view.sql} contains the SQL code for the invariants
+(cf. Fig.~\ref{pic:codegen:generateSQL}), that is one view definition (called
+integrity view) for each invariant. The semantics of such an integrity view is
+that after evaluation of an invariant the corresponding integrity view contains
+all objects that violate the invariant (cf. Listing~\ref{lst:codegen:sqlInvariant}).
  
 \begin{figure}[!p]
 	\centering
@@ -184,10 +186,10 @@ WHERE NOT (((SELECT value FROM OV_Grade
 \section{Summary}
  
   
-This chapter describes the translation of OCL invariants to SQL integrity views by the 
-\keyword{OCL2SQL} code generator of Dresden OCL.
-Besides the use of \keyword{OCL2SQL} via Dresden OCL's GUI, you can also invoke
-OCL2SQL via Dresden OCL's \acs{API}. The easiest way to connect to Dresden OCL
-is via its \emph{Facade} providing interfaces for all services of Dresden OCL. 
-How to use Dresden OCL's facade is documented in Chapter~\ref{chapter:integration}.
+This chapter described the translation of OCL invariants to SQL integrity views
+by the \keyword{OCL2SQL} code generator of Dresden OCL. Besides the use of
+\keyword{OCL2SQL} via Dresden OCL's GUI, you can also invoke OCL2SQL via
+Dresden OCL's \acs{API}. The easiest way to connect to Dresden OCL is via its
+\emph{Facade} providing interfaces for all services of Dresden OCL. How to use
+Dresden OCL's facade is documented in Chapter~\ref{chapter:integration}.
  
