@@ -32,46 +32,41 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 	public void testBooleanLiteralStepInto01() throws Exception {
 
 		OclDebugger debugger = generateDebugger("resources/expressions/literals/boolean01.ocl");
-		
+
 		File resourceFile = getFile(MODEL_INSTANCE_PATH,
 				DebugTestPlugin.PLUGIN_ID);
 
 		/* Start debugging. */
 		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
-		/* TODO Shouldn't we wait for the debugger in a more intelligent way? */
-		Thread.sleep(2000);
+		waitForEvent(DEBUG_EVENT_SUSPENDED);
+
 		debugger.resume();
-		/* TODO Shouldn't we wait for the debugger in a more intelligent way? */
-		Thread.sleep(1000);
+		lastReceivedLine = null;
+		waitForEvent(DEBUG_EVENT_SUSPENDED);
 
 		/* Debugger at boolean literal 'true'. */
+		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.BOOLEAN_LITERAL, debugger);
-		/* TODO How to check the stack frame variables accordingly? */
-		/* Self should be on the stack. */
-		// assertNull("The Stack variables should be empty.",
-		// debugger.getFrameVariables(debugger.getStack()[0]));
-		assertCurrentLine(5, debugger);
+		assertVariableNumber(1, debugger);
+		assertVariableExist("self", debugger);
 
 		debugger.stepInto();
-		/* TODO Shouldn't we wait for the debugger in a more intelligent way? */
-		Thread.sleep(1000);
+		waitForEvent(DEBUG_EVENT_SUSPENDED);
 
 		/* Debugger after boolean literal 'true'. */
+		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.BOOLEAN_LITERAL, debugger);
-		/* TODO How to check the stack frame variables accordingly? */
-		/* Self should be on the stack. */
-		/* 'result' should be on the stack?. */
-		// assertNull("The Stack variables should be empty.",
-		// debugger.getFrameVariables(debugger.getStack()[0]));
-		assertCurrentLine(5, debugger);
+		/* TODO 'result' should be on the stack?. */
+		assertVariableNumber(2, debugger);
+		assertVariableExist("self", debugger);
+		assertVariableExist("result", debugger);
 
-		/* TODO Continue test case. */
 		debugger.stepInto();
-		/* TODO Shouldn't we wait for the debugger in a more intelligent way? */
-		Thread.sleep(1000);
+		waitForEvent(DEBUG_EVENT_SUSPENDED);
 
+		/* Debugging terminated. */
 		/* TODO How to determine whether or not the debugger terminated?. */
 	}
 }
