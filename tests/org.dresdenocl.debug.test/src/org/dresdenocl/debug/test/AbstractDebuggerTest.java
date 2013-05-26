@@ -44,7 +44,7 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 	private static Map<String, IModelInstance> modelInstanceCache;
 	private static Map<String, List<Constraint>> constraintCache;
 	/** The last line received as an event from the {@link OclDebugger}. */
-	protected static String lastReceivedLine;
+	protected static volatile String lastReceivedLine;
 	protected static IModel modelUnderTest;
 	protected static IModelInstance modelInstanceUnderTest;
 
