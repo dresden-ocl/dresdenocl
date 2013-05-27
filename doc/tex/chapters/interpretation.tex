@@ -360,6 +360,97 @@ criteria, e.g. all \model{true} or \model{false} results (cf. Figure
 \ref{pic:interpret:tracer02}). Feel free to explore the tracer view based on
 interpretation results from the \acs{OCL} constraint examples explained above.
 
+\subsection{Debugging}
+
+Figure~\ref{pic:interpret:debug01} shows the context menu entry to start a debug
+session. Eclipse will ask whether to switch to the \emph{Debug Perspective} if it
+is not already the active perspective.
+The \emph{Debug Perspective} is shown in Figure~\ref{pic:interpreter:debug05}.
+Since the debugger is embedded in the \emph{Eclipse Debug Framework} the standard shortcuts
+(F5-F8) may be used in order to work with the debugger (i.e. to issue the execution control commands).
+
+After switching to the \emph{Debug Perspective} the debugging process starts automatically.
+Thus, either the suspend command is issued from the UI on the process or thread
+(depends on the selection in the \emph{Stack Frames View}, see
+Figure~\ref{pic:interpret:debug06}) or the debugger has to hit an active breakpoint in
+order to suspend; or it finishes interpretation and terminates. On suspending,
+the last stack frame is selected and the current variables are shown
+in the \emph{Variables View}. On breakpoint hit, it is possible to either step into (F5), step over (F6),
+step return (F7) or to resume (F8) until all constraints are interpreted on all \emph{Model Instance Elements}.
+Then, the debugger terminates.
+
+\begin{figure}[tbp]
+	\centering
+	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{figures/interpreter/debug01}
+  \caption{The context menu entry for \emph{Debug as ...}}
+  \label{pic:interpret:debug01}
+\end{figure}
+
+\subsection{The Dresden~OCL Debug Perspective}
+
+The \emph{Debug Perspective} of Dresden~OCL consists of the \emph{Launch Configuration Dialog},
+the \emph{Variables View}, the \emph{Breakpoints View} and at last the \emph{Stack Frame View}.
+
+\subsubsection{The Dresden~OCL Launch Configuration Dialog}
+
+The Dresden~OCL \emph{Launch Configuration Dialog} shown in Figure~\ref{pic:interpret:debug03} allows
+to configure options for the debugging process. Currently, the resource URL can
+be changed.
+
+\subsubsection{The Dresden~OCL Breakpoints View}
+
+The \emph{Breakpoints View} shows all breakpoints defined.
+The colored dot before the breakpoint entry shows, whether the breakpoint is active or not.
+If the dot is filled blue, it is active. Is it a blue circle with white body it is inactive.
+Figure~\ref{pic:interpret:debug04} shows a breakpoint view with active breakpoints.
+
+\subsubsection{The Dresden~OCL Variables View}
+
+The \emph{Variables View} (see Figure~\ref{pic:interpret:debug02})
+allows to see the variables in the current selected stack frame.
+Switch the stack frame selection in order to see the variables of the other stack frames.
+While debugging, the latest stack frame get selected automatically and the
+latest variable values are presented.
+
+\subsubsection{The Dresden~OCL Stack Frame View}
+The \emph{Stack Frame View} shows each thread being executed in the current debugging process
+and the call stack for every single thread. Figure~\ref{pic:interpret:debug06} shows a stack
+frame while debugging. The call stack of each thread can be collapsed using the arrow before the thread entry.
+
+\begin{figure}[tbp]
+	\centering
+	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{figures/interpreter/debug02}
+  \caption{The Variables view showing the variables of a selected stackframe}
+  \label{pic:interpret:debug02}
+\end{figure}
+
+\begin{figure}[tbp]
+	\centering
+	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{figures/interpreter/debug03}
+  \caption{The Launch View for launching the Dresden OCL Debugger} 
+  \label{pic:interpret:debug03}
+\end{figure}
+
+\begin{figure}[tbp]
+	\centering
+	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{figures/interpreter/debug04}
+  \caption{The Breakpoints view showing the currently declared breakpoints and their files}
+  \label{pic:interpret:debug04} 
+\end{figure}
+
+\begin{figure}[tbp]
+	\centering
+	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{figures/interpreter/debug05}
+  \caption{The debug perspective of Dresden OCL Debugger}
+  \label{pic:interpreter:debug05}
+\end{figure}
+
+\begin{figure}[tbp]
+	\centering
+	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{figures/interpreter/debug06}
+  \caption{The Variables view showing the variables of a selected stackframe}
+  \label{pic:interpret:debug06}
+\end{figure}
 
 \section{Summary}
   
@@ -367,8 +458,8 @@ This chapter described how \acs{OCL} constraints can be interpreted using the
 \acs{OCL} Interpreter of Dresden OCL. The preparation and interpretation of 
 constraints has been explained, the addition of new variables to the 
 Interpreter Environment has been shown. The tracing of expressions has been
-demonstrated. Besides the use of the Interpreter via 
-Dresden OCL's GUI, you can also invoke the Interpreter via Dresden OCL's 
+demonstrated and it has been shown how to debug \acs{OCL} constraints. Besides
+the use of the Interpreter via Dresden OCL's GUI, you can also invoke the Interpreter via Dresden OCL's 
 \acs{API}. The easiest way to connect to Dresden OCL is via its \emph{Facade} 
 providing interfaces for all services of Dresden OCL. How to use Dresden OCL's 
 facade is documented in Chapter~\ref{chapter:integration}.
