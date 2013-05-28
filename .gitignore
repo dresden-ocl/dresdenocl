@@ -1,5 +1,6 @@
 bin/
 .DS_Store
+Thumbs.db
 pdf/
 *.aux
 *.lo*
