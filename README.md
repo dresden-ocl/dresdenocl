@@ -1,9 +1,7 @@
-Instructions for Dresden OCL
-============================
+#Instructions for Dresden OCL
 Dresden OCL is organized as a group of Eclipse Plug-ins.
 
-How to run Dresden OCL
-======================
+##How to run Dresden OCL
 Dresden OCL2 for Eclipse is distributed as source code and binary jar archives. 
 How to run the toolkit in both situation is explained below.
 
@@ -20,7 +18,7 @@ If you got a binary distribution, copy the jars located in the directory 'eclips
 For further details look into the tutorials provided in the directory 'doc'.
 
 More information about the Dresden OCL is also available at the
-[Toolkit Website](http://dresden-ocl.sourceforge.net/).
+[Toolkit Website](http://dresden-ocl.org/).
 
 Detailed steps for running the source code distribution
 =======================================================
