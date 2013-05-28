@@ -24,7 +24,7 @@ More information about the Dresden OCL is also available at the
 
 Detailed steps for running the source code distribution
 =======================================================
-For this guide, Eclipse 3.7 has been used.
+For this guide, Eclipse 3.7 and Java6 has been used.
 
 __Prerequisites__:
 
@@ -67,9 +67,7 @@ Bugs and known issues
 =====================
 Please be aware, that the Dresden OCL is still under construction and 
 contains some bugs and issues already known by the development team. 
-Bugs already found are listed on the
-[SourceForge project page of the Dresden OCL](https://sourceforge.net/projects/dresden-ocl).
-Please feel free to contribute.
+Bugs already found are listed on the issue tracker. **Please feel free to contribute**.
 
 Code Contribution
 =================
