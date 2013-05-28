@@ -13,6 +13,7 @@
          point="org.eclipse.debug.ui.launchShortcuts">
       <shortcut
             class="org.dresdenocl.debug.ui.launch.OclLaunchShortcut"
+            icon="icons/dresdenocl.gif"
             id="org.dresdenocl.debug.ui.launch.OclLaunchShortcut"
             label="OCL"
             modes="run, debug">
