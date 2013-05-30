@@ -2,16 +2,12 @@ package org.dresdenocl.debug.model;
 
 public enum EOclDebugMessageType {
 	// An enumeration of all commands that can be sent to the debug server from
-	// debug
-	// clients (i.e., interpreters or other processes).
-	STARTED, RESUMED, TERMINATED,
-	SUSPENDED,
+	// debug clients (i.e., interpreters or other processes).
+	STARTED, RESUMED, TERMINATED, SUSPENDED, FINISHED_CONSTRAINT, 
 
 	// An enumeration of all commands that can be sent by the debug server to
-	// debug
-	// clients (i.e., interpreters or other processes).
-	GET_FRAME_VARIABLES, GET_VARIABLES, GET_STACK, STEP_RETURN, STEP_INTO,
-	STEP_OVER, RESUME, EXIT,
+	// debug clients (i.e., interpreters or other processes).
+	GET_FRAME_VARIABLES, GET_VARIABLES, GET_STACK, STEP_RETURN, STEP_INTO, STEP_OVER, RESUME, EXIT,
 
 	ADD_LINE_BREAKPOINT, REMOVE_LINE_BREAKPOINT,
 

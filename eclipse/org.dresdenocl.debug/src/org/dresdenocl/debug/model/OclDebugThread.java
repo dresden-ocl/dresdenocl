@@ -189,6 +189,9 @@ public class OclDebugThread extends OclDebugElement implements IThread,
 		else if (message.hasType(EOclDebugMessageType.TERMINATED)) {
 			// ignore this event
 		}
+		else if (message.hasType(EOclDebugMessageType.FINISHED_CONSTRAINT)) {
+			// ignore this event
+		}
 		else {
 			System.out.println("ERROR " + this.getClass().getName()
 					+ ".handleMessage(" + message + ") unknown event");

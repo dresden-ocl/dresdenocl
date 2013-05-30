@@ -342,6 +342,9 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget,
 			else if (message.hasType(EOclDebugMessageType.RESUMED)) {
 				// this event is handled by the debug thread
 			}
+			else if (message.hasType(EOclDebugMessageType.FINISHED_CONSTRAINT)) {
+				// this event is handled in test code only
+			}
 			else {
 				System.out.println("ERROR in " + this.getClass().getName()
 						+ ".handleMessage(): unknown event: " + message);

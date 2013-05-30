@@ -153,6 +153,9 @@ public class OclDebuggerListener implements Runnable {
 								varStrings.toArray(new String[0]));
 				m_communicationHelper.sendEvent(message, output);
 			}
+			else if (command.hasType(EOclDebugMessageType.FINISHED_CONSTRAINT)) {
+				// ignore this event
+			}
 			else {
 				System.out.println("ERROR: Unrecognized command (" + command + ")!");
 				output.append("Unrecognized command!");
