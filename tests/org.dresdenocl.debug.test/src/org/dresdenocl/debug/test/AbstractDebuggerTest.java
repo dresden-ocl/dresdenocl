@@ -35,6 +35,7 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 
 	/** Event {@link String} indicating that the {@link OclDebugger} suspended. */
 	protected static final String DEBUG_EVENT_SUSPENDED = "SUSPENDED:";
+	protected static final String DEBUG_EVENT_CONSTRAINT_INTERPRETED = "CONSTRAINT_INTERPRETED:";
 
 	protected static final String MODEL_PATH = "bin/resource/package01/TestModel.class";
 	protected static final String MODEL_INSTANCE_PATH = "bin/resource/package01/TestModelInstance.class";

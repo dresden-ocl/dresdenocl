@@ -68,5 +68,6 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 
 		/* Debugging terminated. */
 		/* TODO How to determine whether or not the debugger terminated?. */
+		// waitForEvent(DEBUG_EVENT_CONSTRAINT_INTERPRETED);
 	}
 }
