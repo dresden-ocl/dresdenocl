@@ -3,7 +3,7 @@ package org.dresdenocl.debug.model;
 public enum EOclDebugMessageType {
 	// An enumeration of all commands that can be sent to the debug server from
 	// debug clients (i.e., interpreters or other processes).
-	STARTED, RESUMED, TERMINATED, SUSPENDED, FINISHED_CONSTRAINT, 
+	STARTED, RESUMED, TERMINATED, SUSPENDED, CONSTRAINT_INTERPRETED, 
 
 	// An enumeration of all commands that can be sent by the debug server to
 	// debug clients (i.e., interpreters or other processes).

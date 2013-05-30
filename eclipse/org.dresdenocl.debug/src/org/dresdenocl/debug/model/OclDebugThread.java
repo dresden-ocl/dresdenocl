@@ -189,7 +189,7 @@ public class OclDebugThread extends OclDebugElement implements IThread,
 		else if (message.hasType(EOclDebugMessageType.TERMINATED)) {
 			// ignore this event
 		}
-		else if (message.hasType(EOclDebugMessageType.FINISHED_CONSTRAINT)) {
+		else if (message.hasType(EOclDebugMessageType.CONSTRAINT_INTERPRETED)) {
 			// ignore this event
 		}
 		else {

@@ -91,8 +91,7 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		IInterpretationResult result = super.interpretConstraint(constraint,
 				modelInstanceElement);
 
-		sendEvent(EOclDebugMessageType.FINISHED_CONSTRAINT, true, constraint
-				.getSpecification().getBody(), modelInstanceElement.getName());
+		sendEvent(EOclDebugMessageType.CONSTRAINT_INTERPRETED, true);
 
 		return result;
 	}

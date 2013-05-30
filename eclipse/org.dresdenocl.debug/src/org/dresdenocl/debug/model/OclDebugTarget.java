@@ -342,7 +342,7 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget,
 			else if (message.hasType(EOclDebugMessageType.RESUMED)) {
 				// this event is handled by the debug thread
 			}
-			else if (message.hasType(EOclDebugMessageType.FINISHED_CONSTRAINT)) {
+			else if (message.hasType(EOclDebugMessageType.CONSTRAINT_INTERPRETED)) {
 				// this event is handled in test code only
 			}
 			else {

@@ -153,7 +153,7 @@ public class OclDebuggerListener implements Runnable {
 								varStrings.toArray(new String[0]));
 				m_communicationHelper.sendEvent(message, output);
 			}
-			else if (command.hasType(EOclDebugMessageType.FINISHED_CONSTRAINT)) {
+			else if (command.hasType(EOclDebugMessageType.CONSTRAINT_INTERPRETED)) {
 				// ignore this event
 			}
 			else {
