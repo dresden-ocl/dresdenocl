@@ -686,14 +686,14 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		data[4] = "1";
 		data[5] = "2";
 
-		OclResource resource = (OclResource) m_currentMappings.get(parameter)
-				.eResource();
+		EObject astParameter = m_currentMappings.get(parameter);
+		OclResource resource = (OclResource) astParameter.eResource();
 		if (resource != null) {
 			data[2] = resource.getURI().toString();
 			data[4] = Integer.toString(resource.getLocationMap().getCharStart(
-					m_currentMappings.get(parameter)));
+					astParameter));
 			data[5] = Integer.toString(resource.getLocationMap().getCharEnd(
-					m_currentMappings.get(parameter)) + 1);
+					astParameter) + 1);
 		}
 		// no else
 
