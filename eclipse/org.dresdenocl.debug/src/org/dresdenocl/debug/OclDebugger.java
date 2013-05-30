@@ -681,8 +681,7 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		data[0] = functionName + " ( " + parameter.getClass().getSimpleName()
 				+ " )";
 		data[1] = getNextStackId();
-		data[2] = m_currentMappings.get(parameter).eResource().getURI()
-				.toString();
+		data[2] = "dummy Resource (FIXME)";
 		data[3] = Integer.toString(line);
 		data[4] = "1";
 		data[5] = "2";
@@ -690,6 +689,7 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		OclResource resource = (OclResource) m_currentMappings.get(parameter)
 				.eResource();
 		if (resource != null) {
+			data[2] = resource.getURI().toString();
 			data[4] = Integer.toString(resource.getLocationMap().getCharStart(
 					m_currentMappings.get(parameter)));
 			data[5] = Integer.toString(resource.getLocationMap().getCharEnd(
