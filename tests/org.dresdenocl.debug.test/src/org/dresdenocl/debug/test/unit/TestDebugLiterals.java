@@ -38,11 +38,9 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 
 		/* Start debugging. */
 		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
-		waitForEvent(DEBUG_EVENT_SUSPENDED);
+		waitForEvent(DebugEvent.SUSPENDED);
 
-		debugger.resume();
-		lastReceivedLine = null;
-		waitForEvent(DEBUG_EVENT_SUSPENDED);
+		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
 
 		/* Debugger at boolean literal 'true'. */
 		assertCurrentLine(5, debugger);
@@ -51,23 +49,90 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		assertVariableNumber(1, debugger);
 		assertVariableExist("self", debugger);
 
-		debugger.stepInto();
-		waitForEvent(DEBUG_EVENT_SUSPENDED);
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
 
 		/* Debugger after boolean literal 'true'. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.BOOLEAN_LITERAL, debugger);
-		/* TODO 'result' should be on the stack?. */
+		/* 'result' should be on the stack. */
 		assertVariableNumber(2, debugger);
 		assertVariableExist("self", debugger);
 		assertVariableExist("result", debugger);
 
-		debugger.stepInto();
-		waitForEvent(DEBUG_EVENT_SUSPENDED);
+		debugStepAndWaitFor(DebugStep.STEP_INTO,
+				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
+	}
 
-		/* Debugging terminated. */
-		/* TODO How to determine whether or not the debugger terminated?. */
-		// waitForEvent(DEBUG_EVENT_CONSTRAINT_INTERPRETED);
+	@Test
+	public void testBooleanLiteralStepOver01() throws Exception {
+	
+		OclDebugger debugger = generateDebugger("resources/expressions/literals/boolean01.ocl");
+	
+		File resourceFile = getFile(MODEL_INSTANCE_PATH,
+				DebugTestPlugin.PLUGIN_ID);
+	
+		/* Start debugging. */
+		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
+		waitForEvent(DebugEvent.SUSPENDED);
+	
+		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
+	
+		/* Debugger at boolean literal 'true'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(1, debugger);
+		assertStackName(CallStackConstants.BOOLEAN_LITERAL, debugger);
+		assertVariableNumber(1, debugger);
+		assertVariableExist("self", debugger);
+	
+		debugStepAndWaitFor(DebugStep.STEP_OVER, DebugEvent.SUSPENDED, debugger);
+	
+		/* Debugger after boolean literal 'true'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(1, debugger);
+		assertStackName(CallStackConstants.BOOLEAN_LITERAL, debugger);
+		/* 'result' should be on the stack. */
+		assertVariableNumber(2, debugger);
+		assertVariableExist("self", debugger);
+		assertVariableExist("result", debugger);
+	
+		debugStepAndWaitFor(DebugStep.STEP_OVER,
+				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
+	}
+
+	@Test
+	public void testBooleanLiteralStepReturn01() throws Exception {
+	
+		OclDebugger debugger = generateDebugger("resources/expressions/literals/boolean01.ocl");
+	
+		File resourceFile = getFile(MODEL_INSTANCE_PATH,
+				DebugTestPlugin.PLUGIN_ID);
+	
+		/* Start debugging. */
+		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
+		waitForEvent(DebugEvent.SUSPENDED);
+	
+		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
+	
+		/* Debugger at boolean literal 'true'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(1, debugger);
+		assertStackName(CallStackConstants.BOOLEAN_LITERAL, debugger);
+		assertVariableNumber(1, debugger);
+		assertVariableExist("self", debugger);
+	
+		debugStepAndWaitFor(DebugStep.STEP_RETURN, DebugEvent.SUSPENDED, debugger);
+	
+		/* Debugger after boolean literal 'true'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(1, debugger);
+		assertStackName(CallStackConstants.BOOLEAN_LITERAL, debugger);
+		/* 'result' should be on the stack. */
+		assertVariableNumber(2, debugger);
+		assertVariableExist("self", debugger);
+		assertVariableExist("result", debugger);
+	
+		debugStepAndWaitFor(DebugStep.STEP_RETURN,
+				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
 	}
 }
