@@ -33,9 +33,15 @@ import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 
 public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 
-	/** Event {@link String} indicating that the {@link OclDebugger} suspended. */
-	protected static final String DEBUG_EVENT_SUSPENDED = "SUSPENDED:";
-	protected static final String DEBUG_EVENT_CONSTRAINT_INTERPRETED = "CONSTRAINT_INTERPRETED:";
+	/** Declares possible events to be happened during debugging. */
+	protected enum DebugEvent {
+		CONSTRAINT_INTERPRETED, SUSPENDED
+	}
+
+	/** Declared possible debug steps to be executed by the debugger. */
+	protected enum DebugStep {
+		RESUME, STEP_INTO, STEP_OVER, STEP_RETURN
+	}
 
 	protected static final String MODEL_PATH = "bin/resource/package01/TestModel.class";
 	protected static final String MODEL_INSTANCE_PATH = "bin/resource/package01/TestModelInstance.class";
@@ -295,6 +301,70 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 	}
 
 	/**
+	 * Helper method executing a given {@link DebugStep} and waiting for a given
+	 * {@link DebugEvent} afterwards. Fails, if the {@link DebugEvent} will not
+	 * happen within 10 seconds.
+	 * 
+	 * @param step
+	 *            The {@link DebugStep} to be executed.
+	 * @param event
+	 *            The {@link DebugEvent} to be wait for.
+	 * @param debugger
+	 *            The {@link OclDebugger}.
+	 */
+	protected void debugStepAndWaitFor(DebugStep step, DebugEvent event,
+			OclDebugger debugger) {
+		debugStepAndWaitFor(step, event, debugger, 10000);
+	}
+
+	/**
+	 * Helper method executing a given {@link DebugStep} and waiting for a given
+	 * {@link DebugEvent} afterwards. Fails, if the {@link DebugEvent} will not
+	 * happen within the specified timeout.
+	 * 
+	 * @param step
+	 *            The {@link DebugStep} to be executed.
+	 * @param event
+	 *            The {@link DebugEvent} to be wait for.
+	 * @param debugger
+	 *            The {@link OclDebugger}.
+	 * @param timeout
+	 *            The timeout.
+	 */
+	protected void debugStepAndWaitFor(DebugStep step, DebugEvent event,
+			OclDebugger debugger, long timeout) {
+
+		lastReceivedLine = null;
+
+		switch (step) {
+		case RESUME:
+			debugger.resume();
+			break;
+		case STEP_INTO:
+			debugger.stepInto();
+			break;
+		case STEP_OVER:
+			debugger.stepOver();
+			break;
+		case STEP_RETURN:
+			debugger.stepReturn();
+			break;
+		default:
+			Assert.fail("Unknown debugstep: " + step.name());
+		}
+
+		try {
+			Thread.sleep(100);
+		}
+
+		catch (InterruptedException e) {
+			/* Not important. */
+		}
+
+		waitForEvent(event, timeout);
+	}
+
+	/**
 	 * Helper method creating an {@link OclDebugger} for a given OCL resource.
 	 * 
 	 * Besides, a {@link SocketListener} will be created and started that puts
@@ -369,15 +439,36 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 
 	/**
 	 * Helper method that waits till a given event will be sent by the
+	 * {@link OclDebugger} with a timeout of 10 seconds.
+	 * 
+	 * @param event
+	 *            The {@link DebugEvent} to be waited for.
+	 */
+	protected void waitForEvent(DebugEvent event) {
+		waitForEvent(event, 10000);
+	}
+
+	/**
+	 * Helper method that waits till a given event will be sent by the
 	 * {@link OclDebugger}.
 	 * 
 	 * @param event
-	 *            The event as a {@link String}.
+	 *            The {@link DebugEvent} to be waited for.
+	 * @param timeout
+	 *            The maximum amount of time to wait for the {@link DebugEvent}
+	 *            . Fails otherwise.
 	 */
-	protected void waitForEvent(String event) {
-		while (null == lastReceivedLine || !lastReceivedLine.equals(event)) {
+	protected void waitForEvent(DebugEvent event, long timeout) {
+
+		long currentMillis = System.currentTimeMillis();
+		while (null == lastReceivedLine
+				|| !lastReceivedLine.equals(event.name() + ":")) {
 			try {
 				Thread.sleep(100);
+				if (currentMillis + timeout < System.currentTimeMillis())
+					Assert.fail("Expected DebugEvent " + event.name()
+							+ " did not happen within specified timeout.");
+				// no else.
 			} catch (InterruptedException e) {
 				/* Not that important. */
 			}
