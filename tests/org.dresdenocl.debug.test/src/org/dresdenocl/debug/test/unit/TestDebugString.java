@@ -26,12 +26,6 @@ public class TestDebugString extends AbstractDebuggerTest {
 		AbstractDebuggerTest.setUp();
 	}
 
-	@AfterClass
-	public static void tearDown() {
-
-		AbstractDebuggerTest.tearDown();
-	}
-
 	@Test
 	public void testGreaterThanStepInto01() throws Exception {
 

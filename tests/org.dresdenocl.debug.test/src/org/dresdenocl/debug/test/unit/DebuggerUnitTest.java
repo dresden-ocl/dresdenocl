@@ -8,7 +8,6 @@ import java.io.File;
 import org.dresdenocl.debug.OclDebugger;
 import org.dresdenocl.debug.test.AbstractDebuggerTest;
 import org.dresdenocl.debug.test.DebugTestPlugin;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -20,17 +19,11 @@ public class DebuggerUnitTest extends AbstractDebuggerTest {
 		AbstractDebuggerTest.setUp();
 	}
 
-	@AfterClass
-	public static void tearDown() {
-
-		AbstractDebuggerTest.tearDown();
-	}
-
 	@Test
 	public void testStartUp01() throws Exception {
 
 		OclDebugger debugger = generateDebugger(RESOURCE01_PATH);
-
+		Thread.sleep(1000);
 		assertTrue("Debugger is not in debug mode", debugger.isDebugMode());
 		Thread.sleep(1000);
 		assertTrue("Debugger is not suspended", debugger.isSuspended());

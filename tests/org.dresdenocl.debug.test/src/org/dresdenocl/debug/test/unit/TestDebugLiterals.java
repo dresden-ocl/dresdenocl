@@ -23,11 +23,6 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		AbstractDebuggerTest.setUp();
 	}
 
-	@AfterClass
-	public static void tearDown() {
-		AbstractDebuggerTest.tearDown();
-	}
-
 	@Test
 	public void testBooleanLiteralStepInto01() throws Exception {
 
