@@ -45,10 +45,8 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 		RESUME, STEP_INTO, STEP_OVER, STEP_RETURN
 	}
 
-	protected static final String MODEL_PATH =
-			"bin/resource/package01/TestModel.class";
-	protected static final String MODEL_INSTANCE_PATH =
-			"bin/resource/package01/TestModelInstance.class";
+	protected static final String MODEL_PATH = "bin/resource/package01/TestModel.class";
+	protected static final String MODEL_INSTANCE_PATH = "bin/resource/package01/TestModelInstance.class";
 	protected static final String RESOURCE01_PATH = "resources/resource01.ocl";
 
 	/** The last line received as an event from the {@link OclDebugger}. */
@@ -108,16 +106,15 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 		IModel result;
 		File modelFile;
 		try {
-			modelFile =
-					AbstractDebuggerTest.getFile(modelPath, DebugTestPlugin.PLUGIN_ID);
+			modelFile = AbstractDebuggerTest.getFile(modelPath,
+					DebugTestPlugin.PLUGIN_ID);
 		} catch (IOException e) {
 			throw new ModelAccessException(e.getMessage(), e);
 		}
 		assertNotNull(modelFile);
 
-		result =
-				Ocl2ForEclipseFacade.getModel(modelFile,
-						Ocl2ForEclipseFacade.JAVA_META_MODEL);
+		result = Ocl2ForEclipseFacade.getModel(modelFile,
+				Ocl2ForEclipseFacade.JAVA_META_MODEL);
 
 		return result;
 	}
@@ -128,17 +125,15 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 		IModelInstance result;
 		File modelInstanceFile;
 		try {
-			modelInstanceFile =
-					AbstractDebuggerTest.getFile(modelInstancePath,
-							DebugTestPlugin.PLUGIN_ID);
+			modelInstanceFile = AbstractDebuggerTest.getFile(modelInstancePath,
+					DebugTestPlugin.PLUGIN_ID);
 		} catch (IOException e) {
 			throw new ModelAccessException(e.getMessage(), e);
 		}
 		assertNotNull(modelInstanceFile);
 
-		result =
-				Ocl2ForEclipseFacade.getModelInstance(modelInstanceFile,
-						modelUnderTest, Ocl2ForEclipseFacade.JAVA_MODEL_INSTANCE_TYPE);
+		result = Ocl2ForEclipseFacade.getModelInstance(modelInstanceFile,
+				modelUnderTest, Ocl2ForEclipseFacade.JAVA_MODEL_INSTANCE_TYPE);
 
 		return result;
 	}
@@ -163,8 +158,8 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 		assertNotNull("cannot find type", objectType);
 
 		// find the objects
-		Set<IModelInstanceObject> result =
-				modelInstanceUnderTest.getAllInstances(objectType);
+		Set<IModelInstanceObject> result = modelInstanceUnderTest
+				.getAllInstances(objectType);
 		assertNotNull("could not get all instances", result);
 
 		return result;
@@ -182,8 +177,8 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 		List<Constraint> result;
 		File resourceFile;
 		try {
-			resourceFile =
-					AbstractDebuggerTest.getFile(resourcePath, DebugTestPlugin.PLUGIN_ID);
+			resourceFile = AbstractDebuggerTest.getFile(resourcePath,
+					DebugTestPlugin.PLUGIN_ID);
 		} catch (IOException e) {
 			throw new ModelAccessException(e.getMessage(), e);
 		}
@@ -191,9 +186,8 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 		assertNotNull("resource file is null", resourceFile);
 		assertTrue("Cannot read the resource file", resourceFile.canRead());
 
-		result =
-				Ocl2ForEclipseFacade.parseConstraints(resourceFile, modelUnderTest,
-						true);
+		result = Ocl2ForEclipseFacade.parseConstraints(resourceFile,
+				modelUnderTest, true);
 
 		assertNotNull("parse result is null", result);
 		assertTrue("parse result is empty", result.size() >= 1);
@@ -220,12 +214,13 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 	}
 
 	/**
-	 * Helper method asserting that the {@link OclDebugger} is at the right line.
+	 * Helper method asserting that the {@link OclDebugger} is at the right
+	 * line.
 	 * 
 	 * @param currentLine
-	 *          The line to be asserted.
+	 *            The line to be asserted.
 	 * @param debugger
-	 *          The {@link OclDebugger}.
+	 *            The {@link OclDebugger}.
 	 */
 	protected void assertCurrentLine(int currentLine, OclDebugger debugger) {
 
@@ -234,17 +229,18 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 	}
 
 	/**
-	 * Helper method asserting that the last entry of the call stack has the right
-	 * name.
+	 * Helper method asserting that the last entry of the call stack has the
+	 * right name.
 	 * 
 	 * @param name
-	 *          The name to be asserted.
+	 *            The name to be asserted.
 	 * @param debugger
-	 *          The {@link OclDebugger}.
+	 *            The {@link OclDebugger}.
 	 */
 	protected void assertStackName(String name, OclDebugger debugger) {
 
-		assertNotNull("The call stack should not be empty.", debugger.getStack());
+		assertNotNull("The call stack should not be empty.",
+				debugger.getStack());
 		assertFalse("The call stack should not be empty.",
 				debugger.getStack().length == 0);
 
@@ -259,9 +255,9 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 	 * Helper method asserting the size of the call stack.
 	 * 
 	 * @param stackSize
-	 *          The size of the stack.
+	 *            The size of the stack.
 	 * @param debugger
-	 *          The {@link OclDebugger}.
+	 *            The {@link OclDebugger}.
 	 */
 	protected void assertStackSize(int stackSize, OclDebugger debugger) {
 
@@ -270,13 +266,13 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 	}
 
 	/**
-	 * Helper method asserting that a variable with a given name is visible in the
-	 * current stack frame.
+	 * Helper method asserting that a variable with a given name is visible in
+	 * the current stack frame.
 	 * 
 	 * @param name
-	 *          The name of the variable expected to be visible.
+	 *            The name of the variable expected to be visible.
 	 * @param debugger
-	 *          The {@link OclDebugger} to assert.
+	 *            The {@link OclDebugger} to assert.
 	 */
 	protected void assertVariableExist(String name, OclDebugger debugger) {
 
@@ -286,13 +282,13 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 	}
 
 	/**
-	 * Helper method asserting the count of variables visible in the current stack
-	 * frame.
+	 * Helper method asserting the count of variables visible in the current
+	 * stack frame.
 	 * 
 	 * @param count
-	 *          The expected count of variables.
+	 *            The expected count of variables.
 	 * @param debugger
-	 *          The {@link OclDebugger} to assert.
+	 *            The {@link OclDebugger} to assert.
 	 */
 	protected void assertVariableNumber(int count, OclDebugger debugger) {
 
@@ -307,11 +303,11 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 	 * happen within 10 seconds.
 	 * 
 	 * @param step
-	 *          The {@link DebugStep} to be executed.
+	 *            The {@link DebugStep} to be executed.
 	 * @param event
-	 *          The {@link DebugEvent} to be wait for.
+	 *            The {@link DebugEvent} to be wait for.
 	 * @param debugger
-	 *          The {@link OclDebugger}.
+	 *            The {@link OclDebugger}.
 	 */
 	protected void debugStepAndWaitFor(DebugStep step, DebugEvent event,
 			OclDebugger debugger) {
@@ -325,13 +321,13 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 	 * happen within the specified timeout.
 	 * 
 	 * @param step
-	 *          The {@link DebugStep} to be executed.
+	 *            The {@link DebugStep} to be executed.
 	 * @param event
-	 *          The {@link DebugEvent} to be wait for.
+	 *            The {@link DebugEvent} to be wait for.
 	 * @param debugger
-	 *          The {@link OclDebugger}.
+	 *            The {@link OclDebugger}.
 	 * @param timeout
-	 *          The timeout.
+	 *            The timeout.
 	 */
 	protected void debugStepAndWaitFor(DebugStep step, DebugEvent event,
 			OclDebugger debugger, long timeout) {
@@ -367,12 +363,12 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 	/**
 	 * Helper method creating an {@link OclDebugger} for a given OCL resource.
 	 * 
-	 * Besides, a {@link SocketListener} will be created and started that puts the
-	 * last received event into the lastReceivedLine field.
+	 * Besides, a {@link SocketListener} will be created and started that puts
+	 * the last received event into the lastReceivedLine field.
 	 * 
 	 * @param oclResource
-	 *          Path leading to the OCL file used for this {@link OclDebugger}
-	 *          relative to the root directory of this test plugin.
+	 *            Path leading to the OCL file used for this {@link OclDebugger}
+	 *            relative to the root directory of this test plugin.
 	 * @return The created {@link OclDebugger}
 	 * @throws Exception
 	 */
@@ -386,7 +382,7 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 
 		constraints = getConstraints(MODEL_PATH, oclResource);
 		imio = getModelInstanceObjects(MODEL_INSTANCE_PATH, modelObjects);
-		
+
 		debugger = new OclDebugger(modelInstanceUnderTest);
 		debugger.setDebugMode(true);
 
@@ -395,7 +391,8 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 			@Override
 			public void run() {
 				debugger.setEventPort(eventPort);
-				debugger.interpretConstraint(constraints.get(0), imio.iterator().next());
+				debugger.interpretConstraint(constraints.get(0), imio
+						.iterator().next());
 			}
 
 		}).start();
@@ -414,18 +411,20 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 	 * Helper method returning all variables for the last stack frame as a Map.
 	 * 
 	 * @param debugger
-	 *          The {@link OclDebugger} for which the variables shall be returned.
+	 *            The {@link OclDebugger} for which the variables shall be
+	 *            returned.
 	 * @return The variables as a {@link Map} (keys are names as {@link String}
 	 *         s).
 	 */
-	protected Map<String, Object> getVariablesFromStackFrame(OclDebugger debugger) {
+	protected Map<String, Object> getVariablesFromStackFrame(
+			OclDebugger debugger) {
 
 		int frameId = debugger.getStack().length;
 
 		if (frameId > 0) {
 			frameId = frameId - 1;
-			return debugger
-					.getFrameVariables(debugger.getStack()[frameId].split(",")[1]);
+			return debugger.getFrameVariables(debugger.getStack()[frameId]
+					.split(",")[1]);
 		}
 
 		else
@@ -437,7 +436,7 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 	 * {@link OclDebugger} with a timeout of 10 seconds.
 	 * 
 	 * @param event
-	 *          The {@link DebugEvent} to be waited for.
+	 *            The {@link DebugEvent} to be waited for.
 	 */
 	protected void waitForEvent(DebugEvent event) {
 
@@ -449,10 +448,10 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 	 * {@link OclDebugger}.
 	 * 
 	 * @param event
-	 *          The {@link DebugEvent} to be waited for.
+	 *            The {@link DebugEvent} to be waited for.
 	 * @param timeout
-	 *          The maximum amount of time to wait for the {@link DebugEvent} .
-	 *          Fails otherwise.
+	 *            The maximum amount of time to wait for the {@link DebugEvent}
+	 *            . Fails otherwise.
 	 */
 	protected void waitForEvent(DebugEvent event, long timeout) {
 
@@ -485,8 +484,16 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 		 */
 		public boolean terminate = false;
 
+		/**
+		 * Creates a new {@link SocketListener}.
+		 */
+		public SocketListener() {
+			lastReceivedLine = null;
+		}
+
 		/*
 		 * (non-Javadoc)
+		 * 
 		 * @see java.lang.Thread#run()
 		 */
 		@Override
@@ -494,7 +501,8 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 
 			BufferedReader in;
 			try {
-				in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+				in = new BufferedReader(new InputStreamReader(
+						socket.getInputStream()));
 				String inputLine;
 
 				while (!terminate && (inputLine = in.readLine()) != null) {
