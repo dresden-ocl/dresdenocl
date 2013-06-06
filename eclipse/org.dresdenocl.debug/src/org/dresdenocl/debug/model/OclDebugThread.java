@@ -40,7 +40,7 @@ public class OclDebugThread extends OclDebugElement implements IThread,
 	@Override
 	public void resume() throws DebugException {
 
-		System.out.println("OclDebugThread resume()");
+//		System.out.println("OclDebugThread resume()");
 		m_debugTarget.getDebugProxy().resume();
 		m_suspended = false;
 	}
@@ -173,7 +173,7 @@ public class OclDebugThread extends OclDebugElement implements IThread,
 	@Override
 	public void handleMessage(OclDebugMessage message) {
 
-		System.out.println("OclDebugThread handleMessage( " + message + " )");
+//		System.out.println("OclDebugThread handleMessage( " + message + " )");
 		if (message.hasType(EOclDebugMessageType.STARTED)) {
 			fireCreationEvent();
 		}

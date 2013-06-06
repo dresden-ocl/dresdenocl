@@ -73,7 +73,7 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget,
 
 		private void notifyListeners(OclDebugMessage message) {
 
-			System.out.println("EventDispatch notifyListeners ( " + message + " )");
+//			System.out.println("EventDispatch notifyListeners ( " + message + " )");
 			Object[] listeners = m_eventListener.toArray();
 			for (Object obj : listeners) {
 				((IOclDebugEventListener) obj).handleMessage(message);
