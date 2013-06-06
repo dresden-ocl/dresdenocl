@@ -11,8 +11,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -37,7 +39,7 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 
 	/** Declares possible events to be happened during debugging. */
 	protected enum DebugEvent {
-		CONSTRAINT_INTERPRETED, SUSPENDED, RESUMED
+		CONSTRAINT_INTERPRETED, STARTED, SUSPENDED, RESUMED
 	}
 
 	/** Declared possible debug steps to be executed by the debugger. */
@@ -49,8 +51,9 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 	protected static final String MODEL_INSTANCE_PATH = "bin/resource/package01/TestModelInstance.class";
 	protected static final String RESOURCE01_PATH = "resources/resource01.ocl";
 
-	/** The last line received as an event from the {@link OclDebugger}. */
-	protected static volatile String lastReceivedLine;
+	/** The last lines received as an event from the {@link OclDebugger}. */
+	protected static volatile List<String> lastReceivedLines = new LinkedList<String>();
+
 	protected static IModel modelUnderTest;
 	protected static IModelInstance modelInstanceUnderTest;
 
@@ -332,7 +335,7 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 	protected void debugStepAndWaitFor(DebugStep step, DebugEvent event,
 			OclDebugger debugger, long timeout) {
 
-		lastReceivedLine = null;
+		lastReceivedLines.clear();
 
 		switch (step) {
 		case RESUME:
@@ -456,8 +459,7 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 	protected void waitForEvent(DebugEvent event, long timeout) {
 
 		long currentMillis = System.currentTimeMillis();
-		while (null == lastReceivedLine
-				|| !lastReceivedLine.equals(event.name() + ":")) {
+		while (!lastReceivedLines.contains(event.name() + ":")) {
 			try {
 				Thread.sleep(100);
 				if (currentMillis + timeout < System.currentTimeMillis())
@@ -488,7 +490,7 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 		 * Creates a new {@link SocketListener}.
 		 */
 		public SocketListener() {
-			lastReceivedLine = null;
+			lastReceivedLines.clear();
 		}
 
 		/*
@@ -506,7 +508,7 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 				String inputLine;
 
 				while (!terminate && (inputLine = in.readLine()) != null) {
-					lastReceivedLine = inputLine;
+					lastReceivedLines.add(inputLine);
 				}
 			} catch (IOException e) {
 				if (!terminate)
