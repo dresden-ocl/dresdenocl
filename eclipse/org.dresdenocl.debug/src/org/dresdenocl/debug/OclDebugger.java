@@ -47,7 +47,6 @@ import org.dresdenocl.essentialocl.standardlibrary.OclIterator;
 import org.dresdenocl.interpreter.IInterpretationResult;
 import org.dresdenocl.interpreter.internal.OclInterpreter;
 import org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource;
-import org.dresdenocl.model.IModel;
 import org.dresdenocl.modelbus.ModelBusPlugin;
 import org.dresdenocl.modelinstance.IModelInstance;
 import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
@@ -76,6 +75,13 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	private Set<Integer> m_invalidBreakpoints = new HashSet<Integer>();
 	private EStepMode m_stepMode = EStepMode.NORMAL;
 	private EObject m_curAsmElement;
+	private Integer m_currentLine = 0;
+
+	public void shutdown() throws Exception {
+
+		// TODO Lars
+		throw new Exception("The debugger is shutting down!");
+	}
 
 	public OclDebugger(IModelInstance aModelInstance) {
 
@@ -91,7 +97,7 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		// m_stackframes.clear();
 		m_invalidBreakpoints.clear();
 		m_lastPassedBreakpoint = Integer.valueOf(-1);
-		m_curAsmElement = null;
+		// m_curAsmElement = null;
 
 		IInterpretationResult result =
 				super.interpretConstraint(constraint, modelInstanceElement);
@@ -108,8 +114,8 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 
 		List<IInterpretationResult> result =
 				super.interpretConstraints(constraints, modelInstanceElement);
-
-		terminate();
+		// Lars TODO
+		// terminate();
 		return result;
 	}
 
@@ -148,24 +154,30 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	 */
 	protected int getLine(EObject element) {
 
-		if (element == null)
-			return -1;
-		
+		if (element == null) {
+
+			RuntimeException e = new RuntimeException("element is null in getLine()");
+			e.printStackTrace();
+			throw e;
+			// return -1;
+		}
 		EObject e = m_currentMappings.get(element);
 		if (e == null)
-			System.out.println("getLine NULL BEI " + element);
+			safePrintln("getLine NULL BEI " + element);
 		OclResource resource = (OclResource) e.eResource();
 		int line;
 		do {
 			line = resource.getLocationMap().getLine(e);
 			e = e.eContainer();
 		} while (line == -1 && e != null);
+		m_currentLine = line;
 		return line;
 	}
 
 	public int getCurrentLine() {
 
-		return getLine(m_curAsmElement);
+		// return getLine(m_curAsmElement);
+		return m_currentLine;
 	}
 
 	public boolean isLineBreakPointElement(EObject element) {
@@ -191,6 +203,8 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 			return result;
 		}
 		else if (m_stepMode.equals(EStepMode.STEP_INTO)) {
+			// to set m_currentLine
+			getLine(element);
 			return true;
 		}
 		// no else
@@ -209,7 +223,7 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 
 	public void startupAndWait() {
 
-		System.out.println("startupAndWait()");
+		safePrintln("startupAndWait()");
 		if (isDebugMode()) {
 			if (!alreadySentStartEvent) {
 				alreadySentStartEvent = true;
@@ -218,7 +232,8 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 				waitIfSuspended();
 			}
 		}
-		m_currentMappings = ModelBusPlugin.getModelRegistry().getActiveModel().getAllMappings();
+		m_currentMappings =
+				ModelBusPlugin.getModelRegistry().getActiveModel().getAllMappings();
 	}
 
 	public boolean isSuspended() {
@@ -228,15 +243,17 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 
 	public void setSuspend(boolean suspend) {
 
-		System.out.println("setSuspend ( " + suspend + " )");
+		safePrintln("setSuspend ( " + suspend + " )");
 		m_suspended = suspend;
-		sendEvent(EOclDebugMessageType.SUSPENDED, true);
+		if (m_suspended) {
+			sendEvent(EOclDebugMessageType.SUSPENDED, true);
+		}
 	}
 
 	public void sendEvent(EOclDebugMessageType command,
 			boolean sendOnlyInDebugMode, String... arguments) {
 
-		System.out.println("OclInterpreter sendEvent " + command);
+		safePrintln("OclInterpreter sendEvent " + command);
 		if (isDebugMode() || !sendOnlyInDebugMode) {
 			OclDebugMessage message = new OclDebugMessage(command, arguments);
 			m_communicationHelper.sendEvent(message, m_outputStream);
@@ -250,13 +267,13 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 
 	public boolean isDebugMode() {
 
-		System.out.println("isDebugMode = " + m_debugMode);
+		// System.out.println("isDebugMode = " + m_debugMode);
 		return m_debugMode;
 	}
 
 	public void startEventSocket(final int eventPort) {
 
-		System.out.println("OclInterpreter startEventSocket");
+		// System.out.println("OclInterpreter startEventSocket");
 		try {
 			m_server = new ServerSocket(eventPort);
 			Socket accept = m_server.accept();
@@ -264,7 +281,7 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 			 * try { Thread.sleep(100); } catch (InterruptedException e) {
 			 * e.printStackTrace(); }
 			 */
-			System.out.println("OclInterpreter accepted client");
+			// System.out.println("OclInterpreter accepted client");
 			m_outputStream = new PrintStream(accept.getOutputStream());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -307,7 +324,7 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	@Override
 	public void terminate() {
 
-		System.out.println("OclInterpreter terminate()");
+		safePrintln("OclInterpreter terminate()");
 		setTerminate(true);
 		sendEvent(EOclDebugMessageType.TERMINATED, false);
 		stopEventSocket();
@@ -316,7 +333,7 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	@Override
 	public synchronized void resume() {
 
-		System.out.println("OclInterpreter resume()");
+		safePrintln("OclInterpreter resume()");
 		m_invalidBreakpoints.add(m_lastPassedBreakpoint);
 		m_stepMode = EStepMode.NORMAL;
 		setSuspend(false);
@@ -339,9 +356,13 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		// and stop at the next line
 		m_invalidBreakpoints.add(m_lastPassedBreakpoint);
 		m_stepMode = EStepMode.STEP_INTO;
-		System.out.println("OclInterpreter stepInto()");
-		setSuspend(false);
-		sendEvent(EOclDebugMessageType.RESUMED, true);
+		safePrintln("OclInterpreter stepInto()");
+		if (isSuspended()) {
+			setSuspend(false);
+		}
+		else {
+			sendEvent(EOclDebugMessageType.RESUMED, true);
+		}
 	}
 
 	@Override
@@ -371,15 +392,19 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	@Override
 	public String[] getStack() {
 
-		List<String> reverseStack = new ArrayList<String>(m_stackframes);
-		Collections.reverse(reverseStack);
-		return reverseStack.toArray(new String[0]);
+		synchronized (m_stackframes) {
+			List<String> reverseStack = new ArrayList<String>(m_stackframes);
+			Collections.reverse(reverseStack);
+			return reverseStack.toArray(new String[0]);
+		}
 	}
 
 	@Override
 	public Map<String, Object> getFrameVariables(String stackFrame) {
 
-		return m_stackVariables.get(stackFrame);
+		synchronized (m_stackVariables) {
+			return m_stackVariables.get(stackFrame);
+		}
 	}
 
 	private String getNextStackId() {
@@ -688,44 +713,54 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 
 	protected void pushStackFrame(String functionName, EObject parameter) {
 
-		int line = getLine(parameter);
-		String[] data = new String[6];
-		data[0] =
-				functionName + " ( " + parameter.getClass().getSimpleName() + " )";
-		data[1] = getNextStackId();
-		data[2] = "dummy Resource (FIXME)";
-		data[3] = Integer.toString(line);
-		data[4] = "1";
-		data[5] = "2";
+		synchronized (m_stackframes) {
 
-		EObject astParameter = m_currentMappings.get(parameter);
-		OclResource resource = (OclResource) astParameter.eResource();
-		if (resource != null) {
-			data[2] = resource.getURI().toString();
-			data[4] =
-					Integer
-							.toString(resource.getLocationMap().getCharStart(astParameter));
-			data[5] =
-					Integer
-							.toString(resource.getLocationMap().getCharEnd(astParameter) + 1);
+			int line = getLine(parameter);
+			String[] data = new String[6];
+			data[0] =
+					functionName + " ( " + parameter.getClass().getSimpleName() + " )";
+			data[1] = getNextStackId();
+			data[2] = "dummy Resource (FIXME)";
+			data[3] = Integer.toString(line);
+			data[4] = "1";
+			data[5] = "2";
+
+			EObject astParameter = m_currentMappings.get(parameter);
+			OclResource resource = (OclResource) astParameter.eResource();
+			if (resource != null) {
+				data[2] = resource.getURI().toString();
+				data[4] =
+						Integer.toString(resource.getLocationMap().getCharStart(
+								astParameter));
+				data[5] =
+						Integer
+								.toString(resource.getLocationMap().getCharEnd(astParameter) + 1);
+			}
+			// no else
+
+			String stackFrame = OclStringUtil.encode(',', data);
+			m_stackframes.push(stackFrame);
+			// store the mapping from current stackframe to variables
+			Map<String, Object> map =
+					new HashMap<String, Object>(myEnvironment.getVariableValues());
+			// map.put(parameter.getClass().getSimpleName(), parameter.toString());
+			/*
+			 * if (!myEnvironmentStack.isEmpty()) {
+			 * map.putAll(myEnvironmentStack.peek().getStoredVariableMappings()); }
+			 */
+			m_stackVariables.put(data[1], map);
 		}
-		// no else
-
-		String stackFrame = OclStringUtil.encode(',', data);
-		m_stackframes.push(stackFrame);
-		// store the mapping from current stackframe to variables
-		Map<String, Object> map =
-				new HashMap<String, Object>(myEnvironment.getVariableValues());
-		// map.put(parameter.getClass().getSimpleName(), parameter.toString());
-		/*
-		 * if (!myEnvironmentStack.isEmpty()) {
-		 * map.putAll(myEnvironmentStack.peek().getStoredVariableMappings()); }
-		 */
-		m_stackVariables.put(data[1], map);
 	}
 
 	protected String popStackFrame() {
 
 		return m_stackframes.pop();
+	}
+
+	private void safePrintln(String s) {
+
+		synchronized (System.out) {
+			System.out.println(s);
+		}
 	}
 }

@@ -8,7 +8,6 @@ import org.dresdenocl.debug.OclDebugger;
 import org.dresdenocl.debug.test.AbstractDebuggerTest;
 import org.dresdenocl.debug.test.CallStackConstants;
 import org.dresdenocl.debug.test.DebugTestPlugin;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -45,7 +44,7 @@ public class TestDebugString extends AbstractDebuggerTest {
 		assertStackName(CallStackConstants.NON_STATIC_OPERATION, debugger);
 		assertNull("The Stack variables should be empty.",
 				debugger.getFrameVariables(debugger.getStack()[0]));
-		assertCurrentLine(6, debugger);
+		assertCurrentLine(5, debugger);
 
 		debugger.stepInto();
 		/* TODO Shouldn't we wait for the debugger in a more intelligent way? */
