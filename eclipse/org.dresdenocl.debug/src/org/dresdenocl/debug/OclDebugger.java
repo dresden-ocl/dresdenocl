@@ -479,7 +479,8 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 
 	@Override
 	public OclAny caseIntegerLiteralExp(IntegerLiteralExp integerLiteralExp) {
-
+		stopOnBreakpoint("caseIntegerLiteralExp", integerLiteralExp);
+		popStackFrame();
 		OclAny result = super.caseIntegerLiteralExp(integerLiteralExp);
 		stopOnBreakpoint("caseIntegerLiteralExp", integerLiteralExp);
 		popStackFrame();
