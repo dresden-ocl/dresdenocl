@@ -745,10 +745,10 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
           Empty
         else {
           enumLitOrProp match {
-            case e : EnumerationLiteral => {
+            case el : EnumerationLiteral => {
               // TODO: move to EssentialOclFactory
               val exp = ExpressionsFactory.INSTANCE.createEnumLiteralExp
-              exp.setReferredEnumLiteral(e)
+              exp.setReferredEnumLiteral(el)
               exp.setOclLibrary(oclLibrary)
               allMappings.put(exp, e)
               Full(exp)
