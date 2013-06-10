@@ -307,7 +307,7 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			sendEvent(EOclDebugMessageType.RESUMED, true);
+			//sendEvent(EOclDebugMessageType.RESUMED, true);
 		}
 	}
 
