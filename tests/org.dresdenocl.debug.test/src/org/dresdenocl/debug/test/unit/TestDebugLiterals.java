@@ -55,8 +55,8 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		assertVariableExist("self", debugger);
 		assertVariableExist("result", debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.CONSTRAINT_INTERPRETED,
-				debugger);
+		debugStepAndWaitFor(DebugStep.STEP_INTO,
+				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
 	}
 
 	@Ignore
@@ -91,23 +91,22 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		assertVariableExist("self", debugger);
 		assertVariableExist("result", debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_OVER, DebugEvent.CONSTRAINT_INTERPRETED,
-				debugger);
+		debugStepAndWaitFor(DebugStep.STEP_OVER,
+				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
 	}
 
 	@Ignore
 	@Test
 	public void testBooleanLiteralStepReturn01() throws Exception {
 
-		OclDebugger debugger =
-				generateDebugger("resources/expressions/literals/boolean01.ocl");
-
-		File resourceFile = getFile(MODEL_INSTANCE_PATH, DebugTestPlugin.PLUGIN_ID);
-
-		/* Start debugging. */
-		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
+		String oclResource = "resources/expressions/literals/boolean01.ocl";
+		OclDebugger debugger = generateDebugger(oclResource);
+		waitForEvent(DebugEvent.STARTED);
 		waitForEvent(DebugEvent.SUSPENDED);
 
+		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
+		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
 		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
 
 		/* Debugger at boolean literal 'true'. */
@@ -117,7 +116,8 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		assertVariableNumber(1, debugger);
 		assertVariableExist("self", debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_RETURN, DebugEvent.SUSPENDED, debugger);
+		debugStepAndWaitFor(DebugStep.STEP_RETURN, DebugEvent.SUSPENDED,
+				debugger);
 
 		/* Debugger after boolean literal 'true'. */
 		assertCurrentLine(5, debugger);
@@ -133,6 +133,41 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 	}
 
 	@Test
+	public void testEnumerationLiteralStepInto01() throws Exception {
+	
+		String oclResource = "resources/expressions/literals/enumeration01.ocl";
+		OclDebugger debugger = generateDebugger(oclResource);
+		waitForEvent(DebugEvent.STARTED);
+		waitForEvent(DebugEvent.SUSPENDED);
+	
+		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
+		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
+		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
+	
+		/* Debugger at integer literal '42'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(1, debugger);
+		assertStackName(CallStackConstants.INTEGER_LITERAL, debugger);
+		assertVariableNumber(1, debugger);
+		assertVariableExist("self", debugger);
+	
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+	
+		/* Debugger after integer literal '42'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(1, debugger);
+		assertStackName(CallStackConstants.INTEGER_LITERAL, debugger);
+		/* 'result' should be on the stack. */
+		assertVariableNumber(2, debugger);
+		assertVariableExist("self", debugger);
+		assertVariableExist("result", debugger);
+	
+		debugStepAndWaitFor(DebugStep.STEP_INTO,
+				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
+	}
+
+	@Test
 	public void testIntegerLiteralStepInto01() throws Exception {
 
 		String oclResource = "resources/expressions/literals/integer01.ocl";
@@ -140,12 +175,12 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		waitForEvent(DebugEvent.STARTED);
 		waitForEvent(DebugEvent.SUSPENDED);
 
-		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
 		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
 		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
 		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
 
-		/* Debugger at boolean literal 'true'. */
+		/* Debugger at integer literal '42'. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.INTEGER_LITERAL, debugger);
@@ -154,7 +189,7 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 
 		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
 
-		/* Debugger after boolean literal 'true'. */
+		/* Debugger after integer literal '42'. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.INTEGER_LITERAL, debugger);
@@ -163,26 +198,25 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		assertVariableExist("self", debugger);
 		assertVariableExist("result", debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.CONSTRAINT_INTERPRETED,
-				debugger);
+		debugStepAndWaitFor(DebugStep.STEP_INTO,
+				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
 	}
 
 	@Test
 	@Ignore
 	public void testIntegerLiteralStepOver01() throws Exception {
 
-		OclDebugger debugger =
-				generateDebugger("resources/expressions/literals/integer01.ocl");
-
-		File resourceFile = getFile(MODEL_INSTANCE_PATH, DebugTestPlugin.PLUGIN_ID);
-
-		/* Start debugging. */
-		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
+		String oclResource = "resources/expressions/literals/integer01.ocl";
+		OclDebugger debugger = generateDebugger(oclResource);
+		waitForEvent(DebugEvent.STARTED);
 		waitForEvent(DebugEvent.SUSPENDED);
 
+		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
+		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
 		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
 
-		/* Debugger at boolean literal 'true'. */
+		/* Debugger at integer literal '42'. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.INTEGER_LITERAL, debugger);
@@ -191,7 +225,7 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 
 		debugStepAndWaitFor(DebugStep.STEP_OVER, DebugEvent.SUSPENDED, debugger);
 
-		/* Debugger after boolean literal 'true'. */
+		/* Debugger after integer literal '42'. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.INTEGER_LITERAL, debugger);
@@ -200,35 +234,35 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		assertVariableExist("self", debugger);
 		assertVariableExist("result", debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_OVER, DebugEvent.CONSTRAINT_INTERPRETED,
-				debugger);
+		debugStepAndWaitFor(DebugStep.STEP_OVER,
+				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
 	}
 
 	@Test
 	@Ignore
 	public void testIntegerLiteralStepReturn01() throws Exception {
 
-		OclDebugger debugger =
-				generateDebugger("resources/expressions/literals/integer01.ocl");
-
-		File resourceFile = getFile(MODEL_INSTANCE_PATH, DebugTestPlugin.PLUGIN_ID);
-
-		/* Start debugging. */
-		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
+		String oclResource = "resources/expressions/literals/integer01.ocl";
+		OclDebugger debugger = generateDebugger(oclResource);
+		waitForEvent(DebugEvent.STARTED);
 		waitForEvent(DebugEvent.SUSPENDED);
 
+		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
+		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
 		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
 
-		/* Debugger at boolean literal 'true'. */
+		/* Debugger at integer literal '42'. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.INTEGER_LITERAL, debugger);
 		assertVariableNumber(1, debugger);
 		assertVariableExist("self", debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_RETURN, DebugEvent.SUSPENDED, debugger);
+		debugStepAndWaitFor(DebugStep.STEP_RETURN, DebugEvent.SUSPENDED,
+				debugger);
 
-		/* Debugger after boolean literal 'true'. */
+		/* Debugger after integer literal '42'. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.INTEGER_LITERAL, debugger);
@@ -249,12 +283,12 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		waitForEvent(DebugEvent.STARTED);
 		waitForEvent(DebugEvent.SUSPENDED);
 
-		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
 		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
 		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
 		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
 
-		/* Debugger at boolean literal 'true'. */
+		/* Debugger at invalid literal. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.INVALID_LITERAL, debugger);
@@ -263,7 +297,7 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 
 		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
 
-		/* Debugger after boolean literal 'true'. */
+		/* Debugger after invalid literal. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.INVALID_LITERAL, debugger);
@@ -272,26 +306,25 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		assertVariableExist("self", debugger);
 		assertVariableExist("result", debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.CONSTRAINT_INTERPRETED,
-				debugger);
+		debugStepAndWaitFor(DebugStep.STEP_INTO,
+				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
 	}
 
 	@Test
 	@Ignore
 	public void testInvalidLiteralStepOver01() throws Exception {
 
-		OclDebugger debugger =
-				generateDebugger("resources/expressions/literals/invalid01.ocl");
-
-		File resourceFile = getFile(MODEL_INSTANCE_PATH, DebugTestPlugin.PLUGIN_ID);
-
-		/* Start debugging. */
-		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
+		String oclResource = "resources/expressions/literals/invalid01.ocl";
+		OclDebugger debugger = generateDebugger(oclResource);
+		waitForEvent(DebugEvent.STARTED);
 		waitForEvent(DebugEvent.SUSPENDED);
 
+		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
+		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
 		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
 
-		/* Debugger at boolean literal 'true'. */
+		/* Debugger at invalid literal. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.INVALID_LITERAL, debugger);
@@ -300,7 +333,7 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 
 		debugStepAndWaitFor(DebugStep.STEP_OVER, DebugEvent.SUSPENDED, debugger);
 
-		/* Debugger after boolean literal 'true'. */
+		/* Debugger after invalid literal. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.INVALID_LITERAL, debugger);
@@ -309,35 +342,35 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		assertVariableExist("self", debugger);
 		assertVariableExist("result", debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_OVER, DebugEvent.CONSTRAINT_INTERPRETED,
-				debugger);
+		debugStepAndWaitFor(DebugStep.STEP_OVER,
+				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
 	}
 
 	@Test
 	@Ignore
 	public void testInvalidLiteralStepReturn01() throws Exception {
 
-		OclDebugger debugger =
-				generateDebugger("resources/expressions/literals/invalid01.ocl");
-
-		File resourceFile = getFile(MODEL_INSTANCE_PATH, DebugTestPlugin.PLUGIN_ID);
-
-		/* Start debugging. */
-		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
+		String oclResource = "resources/expressions/literals/invalid01.ocl";
+		OclDebugger debugger = generateDebugger(oclResource);
+		waitForEvent(DebugEvent.STARTED);
 		waitForEvent(DebugEvent.SUSPENDED);
 
+		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
+		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
 		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
 
-		/* Debugger at boolean literal 'true'. */
+		/* Debugger at invalid literal. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.INVALID_LITERAL, debugger);
 		assertVariableNumber(1, debugger);
 		assertVariableExist("self", debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_RETURN, DebugEvent.SUSPENDED, debugger);
+		debugStepAndWaitFor(DebugStep.STEP_RETURN, DebugEvent.SUSPENDED,
+				debugger);
 
-		/* Debugger after boolean literal 'true'. */
+		/* Debugger after invalid literal. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.INVALID_LITERAL, debugger);
@@ -346,8 +379,8 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		assertVariableExist("self", debugger);
 		assertVariableExist("result", debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.CONSTRAINT_INTERPRETED,
-				debugger);
+		debugStepAndWaitFor(DebugStep.STEP_INTO,
+				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
 	}
 
 	@Test
@@ -358,12 +391,12 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		waitForEvent(DebugEvent.STARTED);
 		waitForEvent(DebugEvent.SUSPENDED);
 
-		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
 		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
 		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
 		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
 
-		/* Debugger at boolean literal 'true'. */
+		/* Debugger at real literal '42.7'. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.REAL_LITERAL, debugger);
@@ -372,7 +405,7 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 
 		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
 
-		/* Debugger after boolean literal 'true'. */
+		/* Debugger after real literal '42.7'. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.REAL_LITERAL, debugger);
@@ -389,18 +422,17 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 	@Ignore
 	public void testRealLiteralStepOver01() throws Exception {
 
-		OclDebugger debugger =
-				generateDebugger("resources/expressions/literals/real01.ocl");
-
-		File resourceFile = getFile(MODEL_INSTANCE_PATH, DebugTestPlugin.PLUGIN_ID);
-
-		/* Start debugging. */
-		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
+		String oclResource = "resources/expressions/literals/real01.ocl";
+		OclDebugger debugger = generateDebugger(oclResource);
+		waitForEvent(DebugEvent.STARTED);
 		waitForEvent(DebugEvent.SUSPENDED);
 
+		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
+		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
 		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
 
-		/* Debugger at boolean literal 'true'. */
+		/* Debugger at real literal '42.7'. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.REAL_LITERAL, debugger);
@@ -409,7 +441,7 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 
 		debugStepAndWaitFor(DebugStep.STEP_OVER, DebugEvent.SUSPENDED, debugger);
 
-		/* Debugger after boolean literal 'true'. */
+		/* Debugger after real literal '42.7'. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.REAL_LITERAL, debugger);
@@ -418,36 +450,35 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		assertVariableExist("self", debugger);
 		assertVariableExist("result", debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_OVER, DebugEvent.CONSTRAINT_INTERPRETED,
-				debugger);
+		debugStepAndWaitFor(DebugStep.STEP_OVER,
+				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
 	}
 
 	@Test
 	@Ignore
 	public void testRealLiteralStepReturn01() throws Exception {
 
-		OclDebugger debugger =
-				generateDebugger("resources/expressions/literals/real01.ocl");
-
-		File resourceFile = getFile(MODEL_INSTANCE_PATH, DebugTestPlugin.PLUGIN_ID);
-
-		/* Start debugging. */
-		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
+		String oclResource = "resources/expressions/literals/real01.ocl";
+		OclDebugger debugger = generateDebugger(oclResource);
 		waitForEvent(DebugEvent.STARTED);
 		waitForEvent(DebugEvent.SUSPENDED);
 
+		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
+		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
 		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
 
-		/* Debugger at boolean literal 'true'. */
+		/* Debugger at real literal '42.7'. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.REAL_LITERAL, debugger);
 		assertVariableNumber(1, debugger);
 		assertVariableExist("self", debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_RETURN, DebugEvent.SUSPENDED, debugger);
+		debugStepAndWaitFor(DebugStep.STEP_RETURN, DebugEvent.SUSPENDED,
+				debugger);
 
-		/* Debugger after boolean literal 'true'. */
+		/* Debugger after real literal '42.7'. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.REAL_LITERAL, debugger);
@@ -468,12 +499,12 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		waitForEvent(DebugEvent.STARTED);
 		waitForEvent(DebugEvent.SUSPENDED);
 
-		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
 		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
 		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
 		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
 
-		/* Debugger at boolean literal 'true'. */
+		/* Debugger at string literal 'some'. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.STRING_LITERAL, debugger);
@@ -482,7 +513,7 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 
 		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
 
-		/* Debugger after boolean literal 'true'. */
+		/* Debugger after string literal 'some'. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.STRING_LITERAL, debugger);
@@ -491,26 +522,25 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		assertVariableExist("self", debugger);
 		assertVariableExist("result", debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.CONSTRAINT_INTERPRETED,
-				debugger);
+		debugStepAndWaitFor(DebugStep.STEP_INTO,
+				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
 	}
 
 	@Test
 	@Ignore
 	public void testStringLiteralStepOver01() throws Exception {
 
-		OclDebugger debugger =
-				generateDebugger("resources/expressions/literals/string01.ocl");
-
-		File resourceFile = getFile(MODEL_INSTANCE_PATH, DebugTestPlugin.PLUGIN_ID);
-
-		/* Start debugging. */
-		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
+		String oclResource = "resources/expressions/literals/string01.ocl";
+		OclDebugger debugger = generateDebugger(oclResource);
+		waitForEvent(DebugEvent.STARTED);
 		waitForEvent(DebugEvent.SUSPENDED);
 
+		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
+		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
 		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
 
-		/* Debugger at boolean literal 'true'. */
+		/* Debugger at string literal 'some'. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.STRING_LITERAL, debugger);
@@ -519,7 +549,7 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 
 		debugStepAndWaitFor(DebugStep.STEP_OVER, DebugEvent.SUSPENDED, debugger);
 
-		/* Debugger after boolean literal 'true'. */
+		/* Debugger after string literal 'some'. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.STRING_LITERAL, debugger);
@@ -528,35 +558,35 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		assertVariableExist("self", debugger);
 		assertVariableExist("result", debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_OVER, DebugEvent.CONSTRAINT_INTERPRETED,
-				debugger);
+		debugStepAndWaitFor(DebugStep.STEP_OVER,
+				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
 	}
 
 	@Test
 	@Ignore
 	public void testStringLiteralStepReturn01() throws Exception {
 
-		OclDebugger debugger =
-				generateDebugger("resources/expressions/literals/string01.ocl");
-
-		File resourceFile = getFile(MODEL_INSTANCE_PATH, DebugTestPlugin.PLUGIN_ID);
-
-		/* Start debugging. */
-		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
+		String oclResource = "resources/expressions/literals/string01.ocl";
+		OclDebugger debugger = generateDebugger(oclResource);
+		waitForEvent(DebugEvent.STARTED);
 		waitForEvent(DebugEvent.SUSPENDED);
 
+		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
+		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
 		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
 
-		/* Debugger at boolean literal 'true'. */
+		/* Debugger at string literal 'some'. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.STRING_LITERAL, debugger);
 		assertVariableNumber(1, debugger);
 		assertVariableExist("self", debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_RETURN, DebugEvent.SUSPENDED, debugger);
+		debugStepAndWaitFor(DebugStep.STEP_RETURN, DebugEvent.SUSPENDED,
+				debugger);
 
-		/* Debugger after boolean literal 'true'. */
+		/* Debugger after string literal 'some'. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.STRING_LITERAL, debugger);
@@ -573,17 +603,16 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 	public void testUndefinedLiteralStepInto01() throws Exception {
 
 		String oclResource = "resources/expressions/literals/undefined01.ocl";
-		OclDebugger debugger =
- generateDebugger(oclResource);
+		OclDebugger debugger = generateDebugger(oclResource);
 		waitForEvent(DebugEvent.STARTED);
 		waitForEvent(DebugEvent.SUSPENDED);
-		
-		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
+
 		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
 		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
 		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
 
-		/* Debugger at boolean literal 'true'. */
+		/* Debugger at undefined literal. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.UNDEFINED_LITERAL, debugger);
@@ -592,7 +621,7 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 
 		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
 
-		/* Debugger after boolean literal 'true'. */
+		/* Debugger after undefined literal. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.UNDEFINED_LITERAL, debugger);
@@ -601,26 +630,25 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		assertVariableExist("self", debugger);
 		assertVariableExist("result", debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.CONSTRAINT_INTERPRETED,
-				debugger);
+		debugStepAndWaitFor(DebugStep.STEP_INTO,
+				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
 	}
 
 	@Ignore
 	@Test
 	public void testUndefinedLiteralStepOver01() throws Exception {
 
-		OclDebugger debugger =
-				generateDebugger("resources/expressions/literals/undefined01.ocl");
-
-		File resourceFile = getFile(MODEL_INSTANCE_PATH, DebugTestPlugin.PLUGIN_ID);
-
-		/* Start debugging. */
-		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
+		String oclResource = "resources/expressions/literals/undefined01.ocl";
+		OclDebugger debugger = generateDebugger(oclResource);
+		waitForEvent(DebugEvent.STARTED);
 		waitForEvent(DebugEvent.SUSPENDED);
 
+		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
+		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
 		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
 
-		/* Debugger at boolean literal 'true'. */
+		/* Debugger at undefined literal. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.UNDEFINED_LITERAL, debugger);
@@ -629,7 +657,7 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 
 		debugStepAndWaitFor(DebugStep.STEP_OVER, DebugEvent.SUSPENDED, debugger);
 
-		/* Debugger after boolean literal 'true'. */
+		/* Debugger after undefined literal. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.UNDEFINED_LITERAL, debugger);
@@ -638,35 +666,35 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		assertVariableExist("self", debugger);
 		assertVariableExist("result", debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_OVER, DebugEvent.CONSTRAINT_INTERPRETED,
-				debugger);
+		debugStepAndWaitFor(DebugStep.STEP_OVER,
+				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
 	}
 
 	@Ignore
 	@Test
 	public void testUndefinedLiteralStepReturn01() throws Exception {
 
-		OclDebugger debugger =
-				generateDebugger("resources/expressions/literals/undefined01.ocl");
-
-		File resourceFile = getFile(MODEL_INSTANCE_PATH, DebugTestPlugin.PLUGIN_ID);
-
-		/* Start debugging. */
-		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
+		String oclResource = "resources/expressions/literals/undefined01.ocl";
+		OclDebugger debugger = generateDebugger(oclResource);
+		waitForEvent(DebugEvent.STARTED);
 		waitForEvent(DebugEvent.SUSPENDED);
 
+		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
+		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
 		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
 
-		/* Debugger at boolean literal 'true'. */
+		/* Debugger at undefined literal. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.UNDEFINED_LITERAL, debugger);
 		assertVariableNumber(1, debugger);
 		assertVariableExist("self", debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_RETURN, DebugEvent.SUSPENDED, debugger);
+		debugStepAndWaitFor(DebugStep.STEP_RETURN, DebugEvent.SUSPENDED,
+				debugger);
 
-		/* Debugger after boolean literal 'true'. */
+		/* Debugger after undefined literal. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.UNDEFINED_LITERAL, debugger);
