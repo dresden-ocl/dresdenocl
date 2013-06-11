@@ -688,7 +688,7 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		/* Debugger at tuple literal. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
-		assertStackName(CallStackConstants.TYPE_LITERAL, debugger);
+		assertStackName(CallStackConstants.TUPLE_LITERAL, debugger);
 		assertVariableNumber(1, debugger);
 		assertVariableExist("self", debugger);
 
@@ -697,7 +697,7 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		/* Debugger after string literal 'some'. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(1, debugger);
-		assertStackName(CallStackConstants.TYPE_LITERAL, debugger);
+		assertStackName(CallStackConstants.TUPLE_LITERAL, debugger);
 		/* 'result' should be on the stack. */
 		assertVariableNumber(2, debugger);
 		assertVariableExist("self", debugger);

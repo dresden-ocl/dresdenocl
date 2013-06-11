@@ -18,6 +18,7 @@ public interface CallStackConstants {
 	public static final String REAL_LITERAL = "caseRealLiteralExp ( RealLiteralExpImpl )";
 	public static final String STRING_LITERAL = "caseStringLiteralExp ( StringLiteralExpImpl )";
 	public static final String TYPE_LITERAL = "caseTypeLiteralExp ( TypeLiteralExpImpl )";
+	public static final String TUPLE_LITERAL = "caseTupleLiteralExp ( TupleLiteralExpImpl )";
 	public static final String UNDEFINED_LITERAL = "caseUndefinedLiteralExp ( UndefinedLiteralExpImpl )";
 
 }
