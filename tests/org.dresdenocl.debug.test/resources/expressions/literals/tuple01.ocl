@@ -1,0 +1,7 @@
+package resource::package01
+
+context TestClass
+def: testTupleLiteral01 =
+Tuple { a : Integer = 42, b : String = 'some'}
+
+endpackage
