@@ -282,12 +282,12 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
               val tupleLiteralPart = ExpressionsFactory.INSTANCE.createTupleLiteralPart
               tupleLiteralPart.setProperty(property.asInstanceOf[Property])
               tupleLiteralPart.setValue(initExpression)
-              allMappings.put(tupleLiteralPart, initExpression)
+              allMappings.put(tupleLiteralPart, t)
               tupleLiteralPart
           }
           val tLit = factory.createTupleLiteralExp(tupleLiteralParts.toArray : _*)
           //TODO Lars: How to map tLit to a CS element? Needed?
-          //allMappings.put(tLit, properties.map. 
+          allMappings.put(tLit, t)
           Full(tLit)
         }
       }
