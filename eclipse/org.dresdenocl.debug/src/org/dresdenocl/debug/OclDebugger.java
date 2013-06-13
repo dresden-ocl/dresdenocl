@@ -69,12 +69,15 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	private boolean alreadySentStartEvent = false;
 	private ServerSocket m_server;
 	private PrintStream m_outputStream;
-	private OclDebugCommunicationHelper m_communicationHelper = new OclDebugCommunicationHelper();
+	private OclDebugCommunicationHelper m_communicationHelper =
+			new OclDebugCommunicationHelper();
 	private Set<Integer> m_lineBreakpointPositions = new HashSet<Integer>();
 	private LinkedList<String> m_stackframes = new LinkedList<String>();
 	private int m_nextId = 0;
-	private Map<EObject, EObject> m_currentMappings = new IdentityHashMap<EObject, EObject>();
-	private Map<String, Map<String, Object>> m_stackVariables = new LinkedHashMap<String, Map<String, Object>>();
+	private Map<EObject, EObject> m_currentMappings =
+			new IdentityHashMap<EObject, EObject>();
+	private Map<String, Map<String, Object>> m_stackVariables =
+			new LinkedHashMap<String, Map<String, Object>>();
 	private Integer m_lastPassedBreakpoint = Integer.valueOf(-1);
 	private Set<Integer> m_invalidBreakpoints = new HashSet<Integer>();
 	private EStepMode m_stepMode = EStepMode.NORMAL;
@@ -103,8 +106,8 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		m_lastPassedBreakpoint = Integer.valueOf(-1);
 		// m_curAsmElement = null;
 
-		IInterpretationResult result = super.interpretConstraint(constraint,
-				modelInstanceElement);
+		IInterpretationResult result =
+				super.interpretConstraint(constraint, modelInstanceElement);
 
 		sendEvent(EOclDebugMessageType.CONSTRAINT_INTERPRETED, true);
 
@@ -116,8 +119,8 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 			Collection<Constraint> constraints,
 			IModelInstanceElement modelInstanceElement) {
 
-		List<IInterpretationResult> result = super.interpretConstraints(
-				constraints, modelInstanceElement);
+		List<IInterpretationResult> result =
+				super.interpretConstraints(constraints, modelInstanceElement);
 		// Lars TODO
 		// terminate();
 		return result;
@@ -136,11 +139,13 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 						startEventSocket(eventPort);
 					}
 					// no else. already listening to the port
-				} else {
+				}
+				else {
 					// already closed, so create new one
 					startEventSocket(eventPort);
 				}
-			} else {
+			}
+			else {
 				// still null
 				startEventSocket(eventPort);
 			}
@@ -151,15 +156,14 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	 * Computes the line of the EObject in the containing resource.
 	 * 
 	 * @param element
-	 *            the EObject element
+	 *          the EObject element
 	 * @return the line element was defined in the resource
 	 */
 	protected int getLine(EObject element) {
 
 		if (element == null) {
 
-			RuntimeException e = new RuntimeException(
-					"element is null in getLine()");
+			RuntimeException e = new RuntimeException("element is null in getLine()");
 			e.printStackTrace();
 			throw e;
 			// return -1;
@@ -198,12 +202,14 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 			boolean result = false;
 
 			if (line != null && line.intValue() != -1) {
-				result = m_lineBreakpointPositions.contains(line)
-						&& !m_invalidBreakpoints.contains(line);
+				result =
+						m_lineBreakpointPositions.contains(line)
+								&& !m_invalidBreakpoints.contains(line);
 			}
 			// no else
 			return result;
-		} else if (m_stepMode.equals(EStepMode.STEP_INTO)) {
+		}
+		else if (m_stepMode.equals(EStepMode.STEP_INTO)) {
 			// to set m_currentLine
 			getLine(element);
 			return true;
@@ -233,8 +239,8 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 				waitIfSuspended();
 			}
 		}
-		m_currentMappings = ModelBusPlugin.getModelRegistry().getActiveModel()
-				.getAllMappings();
+		m_currentMappings =
+				ModelBusPlugin.getModelRegistry().getActiveModel().getAllMappings();
 	}
 
 	public boolean isSuspended() {
@@ -360,7 +366,8 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		safePrintln("OclInterpreter stepInto()");
 		if (isSuspended()) {
 			setSuspend(false);
-		} else {
+		}
+		else {
 			sendEvent(EOclDebugMessageType.RESUMED, true);
 		}
 	}
@@ -414,7 +421,6 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * org.dresdenocl.interpreter.internal.OclInterpreter#caseBooleanLiteralExp
 	 * (org.dresdenocl.essentialocl.expressions.BooleanLiteralExp)
@@ -423,9 +429,8 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	public OclAny caseBooleanLiteralExp(BooleanLiteralExp booleanLiteralExp) {
 
 		stopOnBreakpoint(
-				"BooleanLiteralExpression ("
-						+ booleanLiteralExp.isBooleanSymbol() + ")",
-				booleanLiteralExp);
+				"BooleanLiteralExpression (" + booleanLiteralExp.isBooleanSymbol()
+						+ ")", booleanLiteralExp);
 		OclAny result = super.caseBooleanLiteralExp(booleanLiteralExp);
 		popStackFrame();
 		/* Do not stop after literals. */
@@ -457,18 +462,15 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.dresdenocl.interpreter.internal.OclInterpreter#caseEnumLiteralExp
+	 * @see org.dresdenocl.interpreter.internal.OclInterpreter#caseEnumLiteralExp
 	 * (org.dresdenocl.essentialocl.expressions.EnumLiteralExp)
 	 */
 	@Override
 	public OclAny caseEnumLiteralExp(EnumLiteralExp enumLiteralExp) {
 
 		stopOnBreakpoint("EnumerationLiteralExpression ("
-				+ enumLiteralExp.getReferredEnumLiteral().getEnumeration()
-						.getName() + "::"
-				+ enumLiteralExp.getReferredEnumLiteral().getName() + ")",
+				+ enumLiteralExp.getReferredEnumLiteral().getEnumeration().getName()
+				+ "::" + enumLiteralExp.getReferredEnumLiteral().getName() + ")",
 				enumLiteralExp);
 		OclAny result = super.caseEnumLiteralExp(enumLiteralExp);
 		popStackFrame();
@@ -478,22 +480,21 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.dresdenocl.interpreter.internal.OclInterpreter#caseExpressionInOcl
+	 * @see org.dresdenocl.interpreter.internal.OclInterpreter#caseExpressionInOcl
 	 * (org.dresdenocl.essentialocl.expressions.ExpressionInOcl)
 	 */
 	@Override
 	public OclAny caseExpressionInOcl(ExpressionInOcl expressionInOcl) {
+		
+		pushStackFrame("ExpressionInOcl", expressionInOcl);
 
-		stopOnBreakpoint("ExpressionInOcl", expressionInOcl);
 		OclAny result = super.caseExpressionInOcl(expressionInOcl);
-		popStackFrame();
 
 		/* The result of a constraint's interpretation. */
 		myEnvironment.setVariableValue(OCL_RESULT_VATRIABLE_NAME, result);
+		popStackFrame();
 		stopOnBreakpoint("ExpressionInOcl", expressionInOcl);
-
+		popStackFrame();
 		return result;
 	}
 
@@ -502,8 +503,8 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	 * expressionInOcl) { stopOnBreakpoint("caseExpressionInOcl",
 	 * expressionInOcl); OclAny result =
 	 * super.caseExpressionInOcl(expressionInOcl); popStackFrame();
-	 * stopOnBreakpoint("caseExpressionInOcl", expressionInOcl);
-	 * popStackFrame(); return result; }
+	 * stopOnBreakpoint("caseExpressionInOcl", expressionInOcl); popStackFrame();
+	 * return result; }
 	 */
 
 	@Override
@@ -519,26 +520,24 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * org.dresdenocl.interpreter.internal.OclInterpreter#caseIntegerLiteralExp
 	 * (org.dresdenocl.essentialocl.expressions.IntegerLiteralExp)
 	 */
 	@Override
 	public OclAny caseIntegerLiteralExp(IntegerLiteralExp integerLiteralExp) {
+
 		stopOnBreakpoint(
-				"IntegerLiteralExpression ("
-						+ integerLiteralExp.getIntegerSymbol() + ")",
-				integerLiteralExp);
-		popStackFrame();
+				"IntegerLiteralExpression (" + integerLiteralExp.getIntegerSymbol()
+						+ ")", integerLiteralExp);
 		OclAny result = super.caseIntegerLiteralExp(integerLiteralExp);
+		popStackFrame();
 		/* Do not stop after literals. */
 		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * org.dresdenocl.interpreter.internal.OclInterpreter#caseInvalidLiteralExp
 	 * (org.dresdenocl.essentialocl.expressions.InvalidLiteralExp)
@@ -615,17 +614,14 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.dresdenocl.interpreter.internal.OclInterpreter#caseRealLiteralExp
+	 * @see org.dresdenocl.interpreter.internal.OclInterpreter#caseRealLiteralExp
 	 * (org.dresdenocl.essentialocl.expressions.RealLiteralExp)
 	 */
 	@Override
 	public OclAny caseRealLiteralExp(RealLiteralExp realLiteralExp) {
 
-		stopOnBreakpoint(
-				"RealLiteralExpression (" + realLiteralExp.getRealSymbol()
-						+ ")", realLiteralExp);
+		stopOnBreakpoint("RealLiteralExpression (" + realLiteralExp.getRealSymbol()
+				+ ")", realLiteralExp);
 		OclAny result = super.caseRealLiteralExp(realLiteralExp);
 		popStackFrame();
 		/* Do not stop after literals. */
@@ -634,7 +630,6 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * org.dresdenocl.interpreter.internal.OclInterpreter#caseStringLiteralExp
 	 * (org.dresdenocl.essentialocl.expressions.StringLiteralExp)
@@ -643,100 +638,48 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	public OclAny caseStringLiteralExp(StringLiteralExp stringLiteralExp) {
 
 		stopOnBreakpoint(
-				"StringLiteralExpression ('"
-						+ stringLiteralExp.getStringSymbol() + "')",
-				stringLiteralExp);
+				"StringLiteralExpression ('" + stringLiteralExp.getStringSymbol()
+						+ "')", stringLiteralExp);
 		OclAny result = super.caseStringLiteralExp(stringLiteralExp);
 		popStackFrame();
 		/* Do not stop after literals. */
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.dresdenocl.interpreter.internal.OclInterpreter#caseTupleLiteralExp
-	 * (org.dresdenocl.essentialocl.expressions.TupleLiteralExp)
-	 */
 	@Override
 	public OclAny caseTupleLiteralExp(TupleLiteralExp tupleLiteralExp) {
 
-		/* Add new environment for evaluated TupleLiteralParts. */
-		pushLocalEnvironment();
-
-		stopOnBreakpoint("TupleLiteralExpression", tupleLiteralExp);
+		stopOnBreakpoint("caseTupleLiteralExp", tupleLiteralExp);
 		OclAny result = super.caseTupleLiteralExp(tupleLiteralExp);
 		popStackFrame();
-		/* Do not stop after literals. */
-
-		/* Pop new environment. */
-		popEnvironment();
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.dresdenocl.interpreter.internal.OclInterpreter#evaluateTupleLiteralPart
-	 * (org.dresdenocl.essentialocl.expressions.TupleLiteralPart,
-	 * org.dresdenocl.essentialocl.expressions.TupleLiteralExp)
-	 */
-	@Override
-	protected OclAny evaluateTupleLiteralPart(
-			TupleLiteralPart tupleLiteralPart, TupleLiteralExp tupleLiteralExp) {
-		// TODO Auto-generated method stub
-		OclAny result = super.evaluateTupleLiteralPart(tupleLiteralPart,
-				tupleLiteralExp);
-
-		/* Add the value of the variable to the tuple literal's stack frame. */
+		stopOnBreakpoint("caseTupleLiteralExp", tupleLiteralExp);
 		popStackFrame();
-		myEnvironment.setVariableValue(
-				tupleLiteralPart.getProperty().getName(), result);
-		stopOnBreakpoint("TupleLiteralExpression", tupleLiteralExp);
-
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.dresdenocl.interpreter.internal.OclInterpreter#caseTupleLiteralPart
-	 * (org.dresdenocl.essentialocl.expressions.TupleLiteralPart)
-	 */
 	@Override
 	public OclAny caseTupleLiteralPart(TupleLiteralPart tupleLiteralPart) {
 
-		stopOnBreakpoint("TupleLiteralPart ("
-				+ tupleLiteralPart.getProperty().getName() + ")",
-				tupleLiteralPart);
+		stopOnBreakpoint("caseTupleLiteralPart", tupleLiteralPart);
 		OclAny result = super.caseTupleLiteralPart(tupleLiteralPart);
 		popStackFrame();
-
-		/*
-		 * Do not stop after tuple literal parts (at least not at their stack
-		 * frame).
-		 */
-
+		stopOnBreakpoint("caseTupleLiteralPart", tupleLiteralPart);
+		popStackFrame();
 		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.dresdenocl.interpreter.internal.OclInterpreter#caseTypeLiteralExp
+	 * @see org.dresdenocl.interpreter.internal.OclInterpreter#caseTypeLiteralExp
 	 * (org.dresdenocl.essentialocl.expressions.TypeLiteralExp)
 	 */
 	@Override
 	public OclAny caseTypeLiteralExp(TypeLiteralExp typeLiteralExp) {
 
-		stopOnBreakpoint("TypeLiteralExpression ("
-				+ typeLiteralExp.getReferredType().getQualifiedName()
-						.substring("root::".length()) + ")", typeLiteralExp);
+		stopOnBreakpoint(
+				"TypeLiteralExpression ("
+						+ typeLiteralExp.getReferredType().getQualifiedName()
+								.substring("root::".length()) + ")", typeLiteralExp);
 		OclAny result = super.caseTypeLiteralExp(typeLiteralExp);
 		popStackFrame();
 		/* Do not stop after literals. */
@@ -745,14 +688,12 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * org.dresdenocl.interpreter.internal.OclInterpreter#caseUndefinedLiteralExp
 	 * (org.dresdenocl.essentialocl.expressions.UndefinedLiteralExp)
 	 */
 	@Override
-	public OclAny caseUndefinedLiteralExp(
-			UndefinedLiteralExp undefinedLiteralExp) {
+	public OclAny caseUndefinedLiteralExp(UndefinedLiteralExp undefinedLiteralExp) {
 
 		stopOnBreakpoint("UndefinedLiteralExpression", undefinedLiteralExp);
 		OclAny result = super.caseUndefinedLiteralExp(undefinedLiteralExp);
@@ -765,8 +706,8 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	 * @Override public OclAny caseVariable(Variable variable) {
 	 * stopOnBreakpoint("caseVariable", variable); OclAny result =
 	 * super.caseVariable(variable); popStackFrame();
-	 * stopOnBreakpoint("caseVariable", variable); popStackFrame(); return
-	 * result; }
+	 * stopOnBreakpoint("caseVariable", variable); popStackFrame(); return result;
+	 * }
 	 */
 	/*
 	 * @Override public OclAny caseVariableExp(VariableExp variableExp) {
@@ -777,17 +718,14 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	 */
 
 	@Override
-	protected OclAny evaluateNonStaticOperation(
-			OperationCallExp operationCallExp) {
+	protected OclAny evaluateNonStaticOperation(OperationCallExp operationCallExp) {
 
 		stopOnBreakpoint("evaluateNonStaticOperation "
-				+ operationCallExp.getReferredOperation().getName(),
-				operationCallExp);
+				+ operationCallExp.getReferredOperation().getName(), operationCallExp);
 		OclAny result = super.evaluateNonStaticOperation(operationCallExp);
 		popStackFrame();
 		stopOnBreakpoint("evaluateNonStaticOperation "
-				+ operationCallExp.getReferredOperation().getName(),
-				operationCallExp);
+				+ operationCallExp.getReferredOperation().getName(), operationCallExp);
 		popStackFrame();
 		return result;
 	}
@@ -808,8 +746,8 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 			OperationCallExp anOperationCallExp, Constraint oclDefinedOperation) {
 
 		stopOnBreakpoint("computeParameters", anOperationCallExp);
-		LinkedHashMap<String, OclAny> result = super.computeParameters(
-				anOperationCallExp, oclDefinedOperation);
+		LinkedHashMap<String, OclAny> result =
+				super.computeParameters(anOperationCallExp, oclDefinedOperation);
 		popStackFrame();
 		int i = 0;
 		for (String paramKey : result.keySet()) {
@@ -832,8 +770,9 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		m.put("source", source);
 		m.put("iterator", iterator);
 
-		OclAny result = super.evaluateIterate(bodyExpression, source,
-				iteratorVariables, iterator, resultVariable);
+		OclAny result =
+				super.evaluateIterate(bodyExpression, source, iteratorVariables,
+						iterator, resultVariable);
 
 		return result;
 	}
@@ -841,11 +780,13 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	protected OclResource getOclResource(URI uri) {
 
 		String platformString = uri.toPlatformString(true);
-		org.eclipse.core.resources.IResource member = org.eclipse.core.resources.ResourcesPlugin
-				.getWorkspace().getRoot().findMember(platformString);
+		org.eclipse.core.resources.IResource member =
+				org.eclipse.core.resources.ResourcesPlugin.getWorkspace().getRoot()
+						.findMember(platformString);
 		if (member instanceof OclResource) {
 			return (OclResource) member;
-		} else
+		}
+		else
 			return null;
 	}
 
@@ -868,23 +809,24 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 			OclResource resource = (OclResource) astParameter.eResource();
 			if (resource != null) {
 				data[2] = resource.getURI().toString();
-				data[4] = Integer.toString(resource.getLocationMap()
-						.getCharStart(astParameter));
-				data[5] = Integer.toString(resource.getLocationMap()
-						.getCharEnd(astParameter) + 1);
+				data[4] =
+						Integer.toString(resource.getLocationMap().getCharStart(
+								astParameter));
+				data[5] =
+						Integer
+								.toString(resource.getLocationMap().getCharEnd(astParameter) + 1);
 			}
 			// no else
 
 			String stackFrame = OclStringUtil.encode(',', data);
 			m_stackframes.push(stackFrame);
 			// store the mapping from current stackframe to variables
-			Map<String, Object> map = new HashMap<String, Object>(
-					myEnvironment.getVariableValues());
+			Map<String, Object> map =
+					new HashMap<String, Object>(myEnvironment.getVariableValues());
 			// map.put(parameter.getClass().getSimpleName(),
 			// parameter.toString());
 			/*
-			 * if (!myEnvironmentStack.isEmpty()) {
-			 * map.putAll(myEnvironmentStack
+			 * if (!myEnvironmentStack.isEmpty()) { map.putAll(myEnvironmentStack
 			 * .peek().getStoredVariableMappings()); }
 			 */
 			m_stackVariables.put(data[1], map);

@@ -171,8 +171,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	public IInterpretationResult interpretConstraint(Constraint constraint,
 			IModelInstanceElement modelInstanceElement) {
 
-		System.out.println("OclInterpreter interpretConstraint()");
-
 		if (constraint == null)
 			throw new IllegalArgumentException(
 					"Parameter 'constraint' must not be null.");

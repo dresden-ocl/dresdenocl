@@ -84,7 +84,7 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(null, ModelBusPlugin.getModelRegistry().getActiveModel());
+//		assertEquals(null, ModelBusPlugin.getModelRegistry().getActiveModel());
 	}
 
 	@After
