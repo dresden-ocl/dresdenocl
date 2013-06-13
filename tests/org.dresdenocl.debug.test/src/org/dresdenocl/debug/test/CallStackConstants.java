@@ -20,6 +20,7 @@ public interface CallStackConstants {
 	public static final String STRING_LITERAL = "StringLiteralExpression";
 	public static final String TYPE_LITERAL = "TypeLiteralExpression";
 	public static final String TUPLE_LITERAL = "TupleLiteralExpression";
+	public static final String TUPLE_LITERAL_PART = "TupleLiteralPart";
 	public static final String UNDEFINED_LITERAL = "UndefinedLiteralExpression";
 
 }

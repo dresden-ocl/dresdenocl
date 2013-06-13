@@ -486,11 +486,12 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	@Override
 	public OclAny caseExpressionInOcl(ExpressionInOcl expressionInOcl) {
 
+		stopOnBreakpoint("ExpressionInOcl", expressionInOcl);
 		OclAny result = super.caseExpressionInOcl(expressionInOcl);
+		popStackFrame();
 
 		/* The result of a constraint's interpretation. */
 		myEnvironment.setVariableValue(OCL_RESULT_VATRIABLE_NAME, result);
-
 		stopOnBreakpoint("ExpressionInOcl", expressionInOcl);
 
 		return result;
@@ -651,25 +652,75 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.dresdenocl.interpreter.internal.OclInterpreter#caseTupleLiteralExp
+	 * (org.dresdenocl.essentialocl.expressions.TupleLiteralExp)
+	 */
 	@Override
 	public OclAny caseTupleLiteralExp(TupleLiteralExp tupleLiteralExp) {
 
-		stopOnBreakpoint("caseTupleLiteralExp", tupleLiteralExp);
+		/* Add new environment for evaluated TupleLiteralParts. */
+		pushLocalEnvironment();
+
+		stopOnBreakpoint("TupleLiteralExpression", tupleLiteralExp);
 		OclAny result = super.caseTupleLiteralExp(tupleLiteralExp);
 		popStackFrame();
-		stopOnBreakpoint("caseTupleLiteralExp", tupleLiteralExp);
-		popStackFrame();
+		/* Do not stop after literals. */
+
+		/* Pop new environment. */
+		popEnvironment();
+
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.dresdenocl.interpreter.internal.OclInterpreter#evaluateTupleLiteralPart
+	 * (org.dresdenocl.essentialocl.expressions.TupleLiteralPart,
+	 * org.dresdenocl.essentialocl.expressions.TupleLiteralExp)
+	 */
+	@Override
+	protected OclAny evaluateTupleLiteralPart(
+			TupleLiteralPart tupleLiteralPart, TupleLiteralExp tupleLiteralExp) {
+		// TODO Auto-generated method stub
+		OclAny result = super.evaluateTupleLiteralPart(tupleLiteralPart,
+				tupleLiteralExp);
+
+		/* Add the value of the variable to the tuple literal's stack frame. */
+		popStackFrame();
+		myEnvironment.setVariableValue(
+				tupleLiteralPart.getProperty().getName(), result);
+		stopOnBreakpoint("TupleLiteralExpression", tupleLiteralExp);
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.dresdenocl.interpreter.internal.OclInterpreter#caseTupleLiteralPart
+	 * (org.dresdenocl.essentialocl.expressions.TupleLiteralPart)
+	 */
 	@Override
 	public OclAny caseTupleLiteralPart(TupleLiteralPart tupleLiteralPart) {
 
-		stopOnBreakpoint("caseTupleLiteralPart", tupleLiteralPart);
+		stopOnBreakpoint("TupleLiteralPart ("
+				+ tupleLiteralPart.getProperty().getName() + ")",
+				tupleLiteralPart);
 		OclAny result = super.caseTupleLiteralPart(tupleLiteralPart);
 		popStackFrame();
-		stopOnBreakpoint("caseTupleLiteralPart", tupleLiteralPart);
-		popStackFrame();
+
+		/*
+		 * Do not stop after tuple literal parts (at least not at their stack
+		 * frame).
+		 */
+
 		return result;
 	}
 
