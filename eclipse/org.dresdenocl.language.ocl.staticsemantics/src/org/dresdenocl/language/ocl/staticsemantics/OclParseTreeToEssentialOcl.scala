@@ -149,6 +149,7 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
           constraintName = name.getSimpleName
         val constraint = factory.createConstraint(
           constraintName, constraintKind, expression, null, context)
+        allMappings.put(expression, oclExpression)
         allMappings.put(constraint, element.eObject)
         constraint
       }
