@@ -6,3 +6,4 @@ pdf/
 *.lo*
 *.toc
 *.out
+*.pmd
