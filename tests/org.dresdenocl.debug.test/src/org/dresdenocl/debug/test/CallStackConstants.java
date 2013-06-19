@@ -11,6 +11,8 @@ import org.dresdenocl.pivotmodel.Expression;
 public interface CallStackConstants {
 
 	public static final String BOOLEAN_LITERAL = "BooleanLiteralExpression";
+	public static final String COLLECTION_ITEM = "CollectionItem";
+	public static final String COLLECTION_LITERAL = "CollectionLiteralExpression";
 	public static final String ENUMERATION_LITERAL = "EnumerationLiteralExpression";
 	public static final String EXPRESSION_IN_OCL = "ExpressionInOcl";
 	public static final String INTEGER_LITERAL = "IntegerLiteralExpression";

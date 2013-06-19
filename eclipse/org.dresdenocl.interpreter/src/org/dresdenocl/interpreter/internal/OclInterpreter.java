@@ -863,7 +863,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 			/* Check if the part is a collection item. */
 			if (part instanceof CollectionItem) {
-				resultList.add(doSwitch((EObject) part));
+				OclAny elem = evaluateCollectionItem((CollectionItem) part,
+						collectionLiteralExp);
+				resultList.add(elem);
 			}
 
 			/* Else the part must be a collection range. */
@@ -964,6 +966,23 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 
 		return result;
+	}
+
+	/**
+	 * Helper method evaluating a given {@link CollectionItem}. Required to
+	 * allow a debugger to hook in before and after the interpretation of
+	 * individual {@link CollectionItem}s.
+	 * 
+	 * @param collectionItem
+	 *            The {@link CollectionItem}.
+	 * @param collectionLiteralExp
+	 *            The {@link CollectionLiteralExp} the given
+	 *            {@link CollectionItem} belongs to.
+	 * @return The {@link OclAny} result of the given {@link TupleLiteralPart}
+	 */
+	protected OclAny evaluateCollectionItem(CollectionItem collectionItem,
+			CollectionLiteralExp collectionLiteralExp) {
+		return caseCollectionItem(collectionItem);
 	}
 
 	/*
