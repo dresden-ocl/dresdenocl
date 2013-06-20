@@ -26,6 +26,7 @@ import org.dresdenocl.essentialocl.expressions.BooleanLiteralExp;
 import org.dresdenocl.essentialocl.expressions.CollectionItem;
 import org.dresdenocl.essentialocl.expressions.CollectionKind;
 import org.dresdenocl.essentialocl.expressions.CollectionLiteralExp;
+import org.dresdenocl.essentialocl.expressions.CollectionRange;
 import org.dresdenocl.essentialocl.expressions.EnumLiteralExp;
 import org.dresdenocl.essentialocl.expressions.ExpressionInOcl;
 import org.dresdenocl.essentialocl.expressions.IfExp;
@@ -525,6 +526,69 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 			@SuppressWarnings("unchecked")
 			OclCollection<OclAny> oclCollection = (OclCollection<OclAny>) oclVar;
 			oclCollection = oclCollection.asBag().including(result);
+
+			switch (collectionLiteralExp.getKind()) {
+
+			case ORDERED_SET:
+				oclCollection = oclCollection.asOrderedSet();
+				break;
+
+			case SEQUENCE:
+				oclCollection = oclCollection.asSequence();
+				break;
+
+			case SET:
+				oclCollection = oclCollection.asSet();
+				break;
+
+			/* no default (use a Bag otherwise). */
+			}
+
+			myEnvironment.setVariableValue(
+					OCL_COLLECTION_RESULT_VATRIABLE_NAME, oclCollection);
+		}
+		// no else.
+
+		popStackFrame();
+		stopOnBreakpoint("CollectionLiteralExpression ("
+				+ collectionLiteralExp.getKind().getName() + ")",
+				collectionLiteralExp);
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.dresdenocl.interpreter.internal.OclInterpreter#evaluateCollectionRange
+	 * (org.dresdenocl.essentialocl.expressions.CollectionRange, java.util.List,
+	 * org.dresdenocl.essentialocl.expressions.CollectionLiteralExp)
+	 */
+	@SuppressWarnings("incomplete-switch")
+	@Override
+	protected List<OclAny> evaluateCollectionRange(
+			CollectionRange collectionRange, List<OclAny> resultList,
+			CollectionLiteralExp collectionLiteralExp) {
+
+		pushStackFrame("CollectionRange", collectionRange);
+		List<OclAny> result = super.evaluateCollectionRange(collectionRange,
+				resultList, collectionLiteralExp);
+		popStackFrame();
+
+		/*
+		 * Add the value of the variable to the collection literal's stack
+		 * frame.
+		 */
+		OclAny oclVar = myEnvironment
+				.getVariableValue(OCL_COLLECTION_RESULT_VATRIABLE_NAME);
+		if (oclVar instanceof OclCollection<?>) {
+			@SuppressWarnings("unchecked")
+			OclCollection<OclAny> oclCollection = (OclCollection<OclAny>) oclVar;
+			oclCollection = oclCollection.asBag().union(
+					myStandardLibraryFactory.createOclBag(result,
+							((CollectionType) collectionLiteralExp.getType())
+									.getElementType()));
 
 			switch (collectionLiteralExp.getKind()) {
 

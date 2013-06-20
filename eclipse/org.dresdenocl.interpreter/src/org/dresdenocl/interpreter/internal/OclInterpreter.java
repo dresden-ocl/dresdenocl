@@ -871,24 +871,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			/* Else the part must be a collection range. */
 			else if (part instanceof CollectionRange) {
 
-				OclInteger currentElement;
-				OclInteger lastElement;
-
-				/*
-				 * Get the first and the last element of the collection range.
-				 */
-				currentElement = (OclInteger) doSwitch((EObject) ((CollectionRange) part)
-						.getFirst());
-				lastElement = (OclInteger) doSwitch((EObject) ((CollectionRange) part)
-						.getLast());
-
-				while (currentElement.isLessEqual(lastElement).isTrue()) {
-					resultList.add(currentElement);
-					currentElement = currentElement
-							.add(myStandardLibraryFactory.createOclInteger(Long
-									.valueOf(1l)));
-				}
-				// end while.
+				resultList = evaluateCollectionRange((CollectionRange) part,
+						resultList, collectionLiteralExp);
 			}
 		}
 		// end for.
@@ -983,6 +967,40 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	protected OclAny evaluateCollectionItem(CollectionItem collectionItem,
 			CollectionLiteralExp collectionLiteralExp) {
 		return caseCollectionItem(collectionItem);
+	}
+
+	/**
+	 * Helper method evaluating a given {@link CollectionRange}. Required to
+	 * allow a debugger to hook in before and after the interpretation of
+	 * individual {@link CollectionItem}s.
+	 * 
+	 * @param collectionRange
+	 *            The {@link CollectionRange}.
+	 * @param resultList
+	 *            A {@link List} of {@link OclAny} used to create the result of
+	 *            the corresponding {@link CollectionLiteralExp}.
+	 * @param collectionLiteralExp
+	 *            The corresponding {@link CollectionLiteralExp}.
+	 * @return The {@link List} of {@link OclAny} used to create the result of
+	 *         the corresponding {@link CollectionLiteralExp}.
+	 */
+	protected List<OclAny> evaluateCollectionRange(
+			CollectionRange collectionRange, List<OclAny> resultList,
+			CollectionLiteralExp collectionLiteralExp) {
+
+		OclInteger currentElement = (OclInteger) caseIntegerLiteralExp((IntegerLiteralExp) collectionRange
+				.getFirst());
+		OclInteger lastElement = (OclInteger) caseIntegerLiteralExp((IntegerLiteralExp) collectionRange
+				.getLast());
+
+		while (currentElement.isLessEqual(lastElement).isTrue()) {
+			resultList.add(currentElement);
+			currentElement = currentElement.add(myStandardLibraryFactory
+					.createOclInteger(Long.valueOf(1l)));
+		}
+		// end while.
+
+		return resultList;
 	}
 
 	/*

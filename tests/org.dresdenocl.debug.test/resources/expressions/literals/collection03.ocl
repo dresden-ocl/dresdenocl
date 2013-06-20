@@ -1,0 +1,7 @@
+package resource::package01
+
+context TestClass
+def: testCollectionLiteral03: 
+  Bag(Integer) = Bag { 0 .. 42 }
+
+endpackage
