@@ -34,7 +34,12 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
   protected val computeConstraint : Attributable ==> Box[Constraint] = {
     attr {
       case i : InvariantExpCS => {
-        computeBooleanConstraint(i, i.getName, i.getOclExpression, ConstraintKind.INVARIANT, null)
+        for (
+          inv <- computeBooleanConstraint(i, i.getName, i.getOclExpression, ConstraintKind.INVARIANT, null) 
+        ) yield {
+          allMappings.put(inv, i)
+          inv
+        }      
       }
 
       case d : DefinitionExpCS => {
@@ -149,7 +154,7 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
           constraintName = name.getSimpleName
         val constraint = factory.createConstraint(
           constraintName, constraintKind, expression, null, context)
-        allMappings.put(expression, oclExpression)
+        allMappings.put(expression, element.eObject)
         allMappings.put(constraint, element.eObject)
         constraint
       }
