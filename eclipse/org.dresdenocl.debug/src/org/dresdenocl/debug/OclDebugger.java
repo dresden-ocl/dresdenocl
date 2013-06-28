@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.text.CollationKey;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -24,7 +23,6 @@ import org.dresdenocl.debug.util.EStepMode;
 import org.dresdenocl.debug.util.OclStringUtil;
 import org.dresdenocl.essentialocl.expressions.BooleanLiteralExp;
 import org.dresdenocl.essentialocl.expressions.CollectionItem;
-import org.dresdenocl.essentialocl.expressions.CollectionKind;
 import org.dresdenocl.essentialocl.expressions.CollectionLiteralExp;
 import org.dresdenocl.essentialocl.expressions.CollectionRange;
 import org.dresdenocl.essentialocl.expressions.EnumLiteralExp;
@@ -46,14 +44,9 @@ import org.dresdenocl.essentialocl.expressions.TypeLiteralExp;
 import org.dresdenocl.essentialocl.expressions.UndefinedLiteralExp;
 import org.dresdenocl.essentialocl.expressions.Variable;
 import org.dresdenocl.essentialocl.standardlibrary.OclAny;
-import org.dresdenocl.essentialocl.standardlibrary.OclBag;
 import org.dresdenocl.essentialocl.standardlibrary.OclCollection;
 import org.dresdenocl.essentialocl.standardlibrary.OclIterator;
-import org.dresdenocl.essentialocl.types.BagType;
 import org.dresdenocl.essentialocl.types.CollectionType;
-import org.dresdenocl.essentialocl.types.OrderedSetType;
-import org.dresdenocl.essentialocl.types.SequenceType;
-import org.dresdenocl.essentialocl.types.SetType;
 import org.dresdenocl.interpreter.IInterpretationResult;
 import org.dresdenocl.interpreter.internal.OclInterpreter;
 import org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource;
@@ -61,7 +54,6 @@ import org.dresdenocl.modelbus.ModelBusPlugin;
 import org.dresdenocl.modelinstance.IModelInstance;
 import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
 import org.dresdenocl.pivotmodel.Constraint;
-import org.dresdenocl.pivotmodel.Type;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 
@@ -79,6 +71,12 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	 */
 	public static final String OCL_COLLECTION_RESULT_VATRIABLE_NAME = "oclCollection";
 
+	/**
+	 * Stores the stack size at the last position being suspended (used for step
+	 * over and return to decide where to suspend.
+	 */
+	private int m_lastStackSize = 0;
+
 	private boolean m_debugMode;
 	private boolean m_suspended;
 	private boolean m_terminated;
@@ -94,7 +92,6 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	private Integer m_lastPassedBreakpoint = Integer.valueOf(-1);
 	private Set<Integer> m_invalidBreakpoints = new HashSet<Integer>();
 	private EStepMode m_stepMode = EStepMode.NORMAL;
-	private EObject m_curAsmElement;
 	private Integer m_currentLine = 0;
 
 	public void shutdown() throws Exception {
@@ -199,16 +196,23 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		return m_currentLine;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.dresdenocl.debug.IOclDebuggable#isLineBreakPointElement(org.eclipse
+	 * .emf.ecore.EObject)
+	 */
 	public boolean isLineBreakPointElement(EObject element) {
 
 		if (!isDebugMode()) {
 			return false;
 		}
 
-		m_curAsmElement = element;
+		switch (m_stepMode) {
 
 		// If normal mode : check if we have a breakpoint
-		if (m_stepMode.equals(EStepMode.NORMAL)) {
+		case NORMAL: {
 			Integer line = Integer.valueOf(getLine(element));
 			// check if the element is found in the map
 			boolean result = false;
@@ -219,13 +223,38 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 			}
 			// no else
 			return result;
-		} else if (m_stepMode.equals(EStepMode.STEP_INTO)) {
+		}
+
+		case STEP_INTO: {
 			// to set m_currentLine
 			getLine(element);
 			return true;
 		}
-		// no else
-		return false;
+
+		case STEP_OVER: {
+			/* Stop if stack is smaller or same size than on last suspend. */
+			if (m_lastStackSize >= getStack().length) {
+				// to set m_currentLine
+				getLine(element);
+				return true;
+			} else
+				return false;
+		}
+
+		case STEP_RETURN: {
+			/* Stop if stack is smaller than on last suspend. */
+			if (m_lastStackSize > getStack().length) {
+				// to set m_currentLine
+				getLine(element);
+				return true;
+			} else
+				return false;
+		}
+
+		default:
+			return false;
+		}
+		// end switch.
 	}
 
 	private void stopOnBreakpoint(String methodName, EObject parameter) {
@@ -333,7 +362,7 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		m_terminated = terminate;
 	}
 
-	private boolean isTerminated() {
+	public boolean isTerminated() {
 
 		return m_terminated;
 	}
@@ -347,6 +376,11 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		stopEventSocket();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.dresdenocl.debug.IOclDebuggable#resume()
+	 */
 	@Override
 	public synchronized void resume() {
 
@@ -357,20 +391,17 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		sendEvent(EOclDebugMessageType.RESUMED, true);
 	}
 
-	@Override
-	public synchronized void stepOver() {
-
-		// TODO Auto-generated method stub
-
-	}
-
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.dresdenocl.debug.IOclDebuggable#stepInto()
+	 */
 	@Override
 	public synchronized void stepInto() {
 
 		// make the last passed breakpoint (the one we've been suspending,
-		// thought)
-		// invalid vor this model instance element
-		// and stop at the next line
+		// thought) invalid for this model instance element and stop at the next
+		// line
 		m_invalidBreakpoints.add(m_lastPassedBreakpoint);
 		m_stepMode = EStepMode.STEP_INTO;
 		safePrintln("OclInterpreter stepInto()");
@@ -381,11 +412,47 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.dresdenocl.debug.IOclDebuggable#stepOver()
+	 */
+	@Override
+	public synchronized void stepOver() {
+
+		// make the last passed breakpoint (the one we've been suspending,
+		// thought) invalid for this model instance element and stop at the next
+		// line
+		m_invalidBreakpoints.add(m_lastPassedBreakpoint);
+		m_lastStackSize = getStack().length;
+		m_stepMode = EStepMode.STEP_OVER;
+		safePrintln("OclInterpreter stepOver()");
+		if (isSuspended()) {
+			setSuspend(false);
+		} else {
+			sendEvent(EOclDebugMessageType.RESUMED, true);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.dresdenocl.debug.IOclDebuggable#stepReturn()
+	 */
 	@Override
 	public synchronized void stepReturn() {
-
-		// TODO Auto-generated method stub
-
+		// make the last passed breakpoint (the one we've been suspending,
+		// thought) invalid for this model instance element and stop at the next
+		// line
+		m_invalidBreakpoints.add(m_lastPassedBreakpoint);
+		m_lastStackSize = getStack().length;
+		m_stepMode = EStepMode.STEP_OVER;
+		safePrintln("OclInterpreter stepReturn()");
+		if (isSuspended()) {
+			setSuspend(false);
+		} else {
+			sendEvent(EOclDebugMessageType.RESUMED, true);
+		}
 	}
 
 	@Override
