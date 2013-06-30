@@ -766,8 +766,10 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
               val pce = ExpressionsFactory.INSTANCE.createPropertyCallExp
               pce.setReferredProperty(p)
               pce.setSourceType(p.getOwningType)
-              pce.setSource(factory.createTypeLiteralExp(p.getOwningType.getQualifiedNameList))
+              val tle = factory.createTypeLiteralExp(p.getOwningType.getQualifiedNameList)
+              pce.setSource(tle)
               pce.setOclLibrary(oclLibrary)
+              allMappings.put(tle, e)
               allMappings.put(pce, e)
               Full(pce)
             }
@@ -787,10 +789,12 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
             (oclType(s.getTypeName)).flatMap { tipe =>
               val oce = ExpressionsFactory.INSTANCE.createOperationCallExp
               oce.setSourceType(operation.getOwningType)
-              oce.setSource(factory.createTypeLiteralExp(operation.getOwningType.getQualifiedNameList))
+              val tle = factory.createTypeLiteralExp(operation.getOwningType.getQualifiedNameList)
+              oce.setSource(tle)
               oce.setReferredOperation(operation)
               oce.getArgument.addAll(argumentsEOcl)
               oce.setOclLibrary(oclLibrary)
+              allMappings.put(tle, s)
               allMappings.put(oce, s)
               Full(oce)
             }
