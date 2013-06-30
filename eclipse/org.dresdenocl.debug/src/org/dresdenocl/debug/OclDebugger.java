@@ -725,7 +725,8 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		/* The result of a constraint's interpretation. */
 		myEnvironment.setVariableValue(OCL_RESULT_VATRIABLE_NAME, result);
 		stopOnBreakpoint("ExpressionInOcl", expressionInOcl);
-
+		popStackFrame();
+		
 		return result;
 	}
 
