@@ -118,6 +118,7 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
                     case _ : InitValueCS   => ConstraintKind.INITIAL
                     case _ : DeriveValueCS => ConstraintKind.DERIVED
                   }, expression, property, context)
+                allMappings.put(expression, i)
                 allMappings.put(constraint, i)
                 Full(constraint)
               }
