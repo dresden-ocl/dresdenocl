@@ -244,7 +244,7 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
 
       case r : RealLiteralExpCS => {
         import java.lang.Math._
-        if (r.getNavigationOperator == "()")
+        if (r.getNavigationOperator == "->")
           yieldFailure("Cannot use '->' in a real expression.", r)
         else {
           val realValueInt = Integer.parseInt(r.getRealValue)
