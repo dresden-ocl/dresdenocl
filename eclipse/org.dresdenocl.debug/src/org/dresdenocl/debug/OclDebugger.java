@@ -726,7 +726,7 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		myEnvironment.setVariableValue(OCL_RESULT_VATRIABLE_NAME, result);
 		stopOnBreakpoint("ExpressionInOcl", expressionInOcl);
 		popStackFrame();
-		
+
 		return result;
 	}
 
@@ -1056,11 +1056,13 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		return result;
 	}
 
+	@Override
 	protected OclAny evaluateIterate(OclExpression bodyExpression,
 			OclCollection<OclAny> source, List<Variable> iteratorVariables,
 			OclIterator<OclAny> iterator, Variable resultVariable) {
 
-		Map<String, Object> m = m_stackVariables.get(m_stackframes.getLast());
+		Map<String, Object> m = m_stackVariables
+				.get(Integer.toString(m_nextId));
 		m.put("source", source);
 		m.put("iterator", iterator);
 
