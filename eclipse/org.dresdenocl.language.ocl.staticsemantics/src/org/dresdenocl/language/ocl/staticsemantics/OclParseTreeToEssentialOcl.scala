@@ -245,7 +245,7 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
       case r : RealLiteralExpCS => {
         import java.lang.Math._
         if (r.getNavigationOperator == "()")
-          yieldFailure("Cannot use '()' in a real expression.", r)
+          yieldFailure("Cannot use '->' in a real expression.", r)
         else {
           val realValueInt = Integer.parseInt(r.getRealValue)
           val rFloat = factory.createRealLiteralExp(r.getIntValue + (realValueInt / pow(10, r.getRealValue.length)).toFloat)
@@ -267,8 +267,8 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
       }
 
       case i : InvalidLiteralExpCS => {
-		val iLit = factory.createInvalidLiteralExp
-		allMappings.put(iLit, i) 
+    		val iLit = factory.createInvalidLiteralExp
+    		allMappings.put(iLit, i) 
         Full(iLit)
       }
 
