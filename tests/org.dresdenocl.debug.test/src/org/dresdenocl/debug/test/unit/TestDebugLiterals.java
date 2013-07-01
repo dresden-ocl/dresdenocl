@@ -7,7 +7,6 @@ import org.dresdenocl.debug.test.AbstractDebuggerTest;
 import org.dresdenocl.debug.test.CallStackConstants;
 import org.dresdenocl.debug.test.DebugTestPlugin;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -196,18 +195,7 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		assertVariableExist(OclDebugger.OCL_COLLECTION_RESULT_VATRIABLE_NAME,
 				debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
-
-		/* Debugger at integer literal '42'. */
-		assertCurrentLine(5, debugger);
-		assertStackSize(3, debugger);
-		assertStackName(CallStackConstants.INTEGER_LITERAL + " (42)", debugger);
-		assertVariableNumber(2, debugger);
-		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
-		assertVariableExist(OclDebugger.OCL_COLLECTION_RESULT_VATRIABLE_NAME,
-				debugger);
-
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+		debugStepAndWaitFor(DebugStep.STEP_OVER, DebugEvent.SUSPENDED, debugger);
 
 		/* Debugger after collection item. */
 		assertCurrentLine(5, debugger);
@@ -219,7 +207,7 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		assertVariableExist(OclDebugger.OCL_COLLECTION_RESULT_VATRIABLE_NAME,
 				debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+		debugStepAndWaitFor(DebugStep.STEP_OVER, DebugEvent.SUSPENDED, debugger);
 
 		/* Debugger after collection literal. */
 		assertStackName(CallStackConstants.EXPRESSION_IN_OCL, debugger);
@@ -230,7 +218,7 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 		assertVariableExist(OclDebugger.OCL_RESULT_VATRIABLE_NAME, debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_INTO,
+		debugStepAndWaitFor(DebugStep.STEP_OVER,
 				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
 	}
 
@@ -308,7 +296,6 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 	}
 
 	@Test
-	@Ignore
 	public void testCollectionLiteralStepOver01() throws Exception {
 
 		String oclResource = "resources/expressions/literals/collection01.ocl";
@@ -326,10 +313,13 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		assertStackSize(2, debugger);
 		assertStackName(CallStackConstants.COLLECTION_LITERAL + " (Bag)",
 				debugger);
-		assertVariableNumber(1, debugger);
+		/* The oclCollection variable should be on the stack. */
+		assertVariableNumber(2, debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_COLLECTION_RESULT_VATRIABLE_NAME,
+				debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+		debugStepAndWaitFor(DebugStep.STEP_OVER, DebugEvent.SUSPENDED, debugger);
 
 		/* Debugger after collection literal. */
 		assertCurrentLine(4, debugger);
@@ -340,12 +330,11 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 		assertVariableExist(OclDebugger.OCL_RESULT_VATRIABLE_NAME, debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_INTO,
+		debugStepAndWaitFor(DebugStep.STEP_OVER,
 				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
 	}
 
 	@Test
-	@Ignore
 	public void testCollectionLiteralStepOver02() throws Exception {
 
 		String oclResource = "resources/expressions/literals/collection02.ocl";
@@ -408,7 +397,6 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 	}
 
 	@Test
-	@Ignore
 	public void testCollectionLiteralStepOver03() throws Exception {
 
 		String oclResource = "resources/expressions/literals/collection03.ocl";
@@ -432,41 +420,8 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		assertVariableExist(OclDebugger.OCL_COLLECTION_RESULT_VATRIABLE_NAME,
 				debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
-
-		/* Debugger at integer literal '0'. */
-		assertCurrentLine(5, debugger);
-		assertStackSize(4, debugger);
-		assertStackName(CallStackConstants.INTEGER_LITERAL + " (0)", debugger);
-		assertVariableNumber(2, debugger);
-		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
-		assertVariableExist(OclDebugger.OCL_COLLECTION_RESULT_VATRIABLE_NAME,
+		debugStepAndWaitFor(DebugStep.STEP_RETURN, DebugEvent.SUSPENDED,
 				debugger);
-
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
-
-		/* Debugger at integer literal '0'. */
-		assertCurrentLine(5, debugger);
-		assertStackSize(4, debugger);
-		assertStackName(CallStackConstants.INTEGER_LITERAL + " (42)", debugger);
-		assertVariableNumber(2, debugger);
-		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
-		assertVariableExist(OclDebugger.OCL_COLLECTION_RESULT_VATRIABLE_NAME,
-				debugger);
-
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
-
-		/* Debugger after collection range. */
-		assertCurrentLine(5, debugger);
-		assertStackName(CallStackConstants.COLLECTION_LITERAL + " (Bag)",
-				debugger);
-		assertStackSize(2, debugger);
-		assertVariableNumber(2, debugger);
-		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
-		assertVariableExist(OclDebugger.OCL_COLLECTION_RESULT_VATRIABLE_NAME,
-				debugger);
-
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
 
 		/* Debugger after collection literal. */
 		assertStackName(CallStackConstants.EXPRESSION_IN_OCL, debugger);
@@ -477,12 +432,11 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 		assertVariableExist(OclDebugger.OCL_RESULT_VATRIABLE_NAME, debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_INTO,
+		debugStepAndWaitFor(DebugStep.STEP_RETURN,
 				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
 	}
 
 	@Test
-	@Ignore
 	public void testCollectionLiteralStepReturn01() throws Exception {
 
 		String oclResource = "resources/expressions/literals/collection01.ocl";
@@ -500,10 +454,14 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		assertStackSize(2, debugger);
 		assertStackName(CallStackConstants.COLLECTION_LITERAL + " (Bag)",
 				debugger);
-		assertVariableNumber(1, debugger);
+		/* The oclCollection variable should be on the stack. */
+		assertVariableNumber(2, debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_COLLECTION_RESULT_VATRIABLE_NAME,
+				debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+		debugStepAndWaitFor(DebugStep.STEP_RETURN, DebugEvent.SUSPENDED,
+				debugger);
 
 		/* Debugger after collection literal. */
 		assertCurrentLine(4, debugger);
@@ -514,12 +472,11 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 		assertVariableExist(OclDebugger.OCL_RESULT_VATRIABLE_NAME, debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_INTO,
+		debugStepAndWaitFor(DebugStep.STEP_RETURN,
 				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
 	}
 
 	@Test
-	@Ignore
 	public void testCollectionLiteralStepReturn02() throws Exception {
 
 		String oclResource = "resources/expressions/literals/collection02.ocl";
@@ -543,30 +500,8 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		assertVariableExist(OclDebugger.OCL_COLLECTION_RESULT_VATRIABLE_NAME,
 				debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
-
-		/* Debugger at integer literal '42'. */
-		assertCurrentLine(5, debugger);
-		assertStackSize(3, debugger);
-		assertStackName(CallStackConstants.INTEGER_LITERAL + " (42)", debugger);
-		assertVariableNumber(2, debugger);
-		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
-		assertVariableExist(OclDebugger.OCL_COLLECTION_RESULT_VATRIABLE_NAME,
+		debugStepAndWaitFor(DebugStep.STEP_RETURN, DebugEvent.SUSPENDED,
 				debugger);
-
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
-
-		/* Debugger after collection item. */
-		assertCurrentLine(5, debugger);
-		assertStackName(CallStackConstants.COLLECTION_LITERAL + " (Bag)",
-				debugger);
-		assertStackSize(2, debugger);
-		assertVariableNumber(2, debugger);
-		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
-		assertVariableExist(OclDebugger.OCL_COLLECTION_RESULT_VATRIABLE_NAME,
-				debugger);
-
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
 
 		/* Debugger after collection literal. */
 		assertStackName(CallStackConstants.EXPRESSION_IN_OCL, debugger);
@@ -577,12 +512,11 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 		assertVariableExist(OclDebugger.OCL_RESULT_VATRIABLE_NAME, debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_INTO,
+		debugStepAndWaitFor(DebugStep.STEP_RETURN,
 				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
 	}
 
 	@Test
-	@Ignore
 	public void testCollectionLiteralStepReturn03() throws Exception {
 
 		String oclResource = "resources/expressions/literals/collection03.ocl";
@@ -606,41 +540,8 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		assertVariableExist(OclDebugger.OCL_COLLECTION_RESULT_VATRIABLE_NAME,
 				debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
-
-		/* Debugger at integer literal '0'. */
-		assertCurrentLine(5, debugger);
-		assertStackSize(4, debugger);
-		assertStackName(CallStackConstants.INTEGER_LITERAL + " (0)", debugger);
-		assertVariableNumber(2, debugger);
-		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
-		assertVariableExist(OclDebugger.OCL_COLLECTION_RESULT_VATRIABLE_NAME,
+		debugStepAndWaitFor(DebugStep.STEP_RETURN, DebugEvent.SUSPENDED,
 				debugger);
-
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
-
-		/* Debugger at integer literal '0'. */
-		assertCurrentLine(5, debugger);
-		assertStackSize(4, debugger);
-		assertStackName(CallStackConstants.INTEGER_LITERAL + " (42)", debugger);
-		assertVariableNumber(2, debugger);
-		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
-		assertVariableExist(OclDebugger.OCL_COLLECTION_RESULT_VATRIABLE_NAME,
-				debugger);
-
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
-
-		/* Debugger after collection range. */
-		assertCurrentLine(5, debugger);
-		assertStackName(CallStackConstants.COLLECTION_LITERAL + " (Bag)",
-				debugger);
-		assertStackSize(2, debugger);
-		assertVariableNumber(2, debugger);
-		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
-		assertVariableExist(OclDebugger.OCL_COLLECTION_RESULT_VATRIABLE_NAME,
-				debugger);
-
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
 
 		/* Debugger after collection literal. */
 		assertStackName(CallStackConstants.EXPRESSION_IN_OCL, debugger);
@@ -651,7 +552,7 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 		assertVariableExist(OclDebugger.OCL_RESULT_VATRIABLE_NAME, debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_INTO,
+		debugStepAndWaitFor(DebugStep.STEP_RETURN,
 				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
 	}
 
@@ -1293,7 +1194,6 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 	}
 
 	@Test
-	@Ignore
 	public void testTupleLiteralStepOver01() throws Exception {
 
 		String oclResource = "resources/expressions/literals/tuple01.ocl";
@@ -1313,26 +1213,7 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		assertVariableNumber(1, debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
-
-		/* Debugger at tuple literal part 'a = 42'. */
-		assertCurrentLine(5, debugger);
-		assertStackSize(3, debugger);
-		assertStackName(CallStackConstants.TUPLE_LITERAL_PART + " (a)",
-				debugger);
-		assertVariableNumber(1, debugger);
-		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
-
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
-
-		/* Debugger at integer literal '42'. */
-		assertCurrentLine(5, debugger);
-		assertStackSize(4, debugger);
-		assertStackName(CallStackConstants.INTEGER_LITERAL + " (42)", debugger);
-		assertVariableNumber(1, debugger);
-		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
-
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+		debugStepAndWaitFor(DebugStep.STEP_OVER, DebugEvent.SUSPENDED, debugger);
 
 		/* Debugger at tuple literal. */
 		assertCurrentLine(5, debugger);
@@ -1343,31 +1224,7 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 		assertVariableExist("a", debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
-
-		/* Debugger at tuple literal part 'b = 'some''. */
-		assertCurrentLine(5, debugger);
-		assertStackName(CallStackConstants.TUPLE_LITERAL_PART + " (b)",
-				debugger);
-		assertStackSize(3, debugger);
-		assertVariableNumber(2, debugger);
-		/* Part a should be a variable. */
-		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
-		assertVariableExist("a", debugger);
-
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
-
-		/* Debugger at string literal 'some'. */
-		assertCurrentLine(5, debugger);
-		assertStackSize(4, debugger);
-		assertStackName(CallStackConstants.STRING_LITERAL + " ('some')",
-				debugger);
-		assertVariableNumber(2, debugger);
-		/* Part a should be a variable. */
-		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
-		assertVariableExist("a", debugger);
-
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+		debugStepAndWaitFor(DebugStep.STEP_OVER, DebugEvent.SUSPENDED, debugger);
 
 		/* Debugger at tuple literal. */
 		assertCurrentLine(5, debugger);
@@ -1379,7 +1236,7 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		assertVariableExist("a", debugger);
 		assertVariableExist("b", debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+		debugStepAndWaitFor(DebugStep.STEP_OVER, DebugEvent.SUSPENDED, debugger);
 
 		/* Debugger after tuple literal. */
 		assertCurrentLine(4, debugger);
@@ -1390,12 +1247,11 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 		assertVariableExist(OclDebugger.OCL_RESULT_VATRIABLE_NAME, debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_INTO,
+		debugStepAndWaitFor(DebugStep.STEP_OVER,
 				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
 	}
 
 	@Test
-	@Ignore
 	public void testTupleLiteralStepReturn01() throws Exception {
 
 		String oclResource = "resources/expressions/literals/tuple01.ocl";
@@ -1415,78 +1271,13 @@ public class TestDebugLiterals extends AbstractDebuggerTest {
 		assertVariableNumber(1, debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
-
-		/* Debugger at tuple literal part 'a = 42'. */
-		assertCurrentLine(5, debugger);
-		assertStackSize(3, debugger);
-		assertStackName(CallStackConstants.TUPLE_LITERAL_PART + " (a)",
+		debugStepAndWaitFor(DebugStep.STEP_RETURN, DebugEvent.SUSPENDED,
 				debugger);
-		assertVariableNumber(1, debugger);
-		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
-
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
-
-		/* Debugger at integer literal '42'. */
-		assertCurrentLine(5, debugger);
-		assertStackSize(4, debugger);
-		assertStackName(CallStackConstants.INTEGER_LITERAL + " (42)", debugger);
-		assertVariableNumber(1, debugger);
-		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
-
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
-
-		/* Debugger at tuple literal. */
-		assertCurrentLine(5, debugger);
-		assertStackSize(2, debugger);
-		assertStackName(CallStackConstants.TUPLE_LITERAL, debugger);
-		assertVariableNumber(2, debugger);
-		/* Part a should be a variable. */
-		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
-		assertVariableExist("a", debugger);
-
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
-
-		/* Debugger at tuple literal part 'b = 'some''. */
-		assertCurrentLine(5, debugger);
-		assertStackName(CallStackConstants.TUPLE_LITERAL_PART + " (b)",
-				debugger);
-		assertStackSize(3, debugger);
-		assertVariableNumber(2, debugger);
-		/* Part a should be a variable. */
-		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
-		assertVariableExist("a", debugger);
-
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
-
-		/* Debugger at string literal 'some'. */
-		assertCurrentLine(5, debugger);
-		assertStackSize(4, debugger);
-		assertStackName(CallStackConstants.STRING_LITERAL + " ('some')",
-				debugger);
-		assertVariableNumber(2, debugger);
-		/* Part a should be a variable. */
-		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
-		assertVariableExist("a", debugger);
-
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
-
-		/* Debugger at tuple literal. */
-		assertCurrentLine(5, debugger);
-		assertStackSize(2, debugger);
-		assertStackName(CallStackConstants.TUPLE_LITERAL, debugger);
-		assertVariableNumber(3, debugger);
-		/* Part b should be a variable. */
-		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
-		assertVariableExist("a", debugger);
-		assertVariableExist("b", debugger);
-
-		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
 
 		/* Debugger after tuple literal. */
+		assertStackName(CallStackConstants.EXPRESSION_IN_OCL, debugger);
 		assertCurrentLine(4, debugger);
 		assertStackSize(1, debugger);
-		assertStackName(CallStackConstants.EXPRESSION_IN_OCL, debugger);
 		/* 'result' should be on the stack. */
 		assertVariableNumber(2, debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);

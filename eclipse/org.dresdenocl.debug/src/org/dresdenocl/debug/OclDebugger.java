@@ -446,7 +446,7 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		// line
 		m_invalidBreakpoints.add(m_lastPassedBreakpoint);
 		m_lastStackSize = getStack().length;
-		m_stepMode = EStepMode.STEP_OVER;
+		m_stepMode = EStepMode.STEP_RETURN;
 		safePrintln("OclInterpreter stepReturn()");
 		if (isSuspended()) {
 			setSuspend(false);
