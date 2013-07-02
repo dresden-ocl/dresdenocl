@@ -43,6 +43,7 @@ import org.dresdenocl.essentialocl.expressions.TupleLiteralPart;
 import org.dresdenocl.essentialocl.expressions.TypeLiteralExp;
 import org.dresdenocl.essentialocl.expressions.UndefinedLiteralExp;
 import org.dresdenocl.essentialocl.expressions.Variable;
+import org.dresdenocl.essentialocl.expressions.VariableExp;
 import org.dresdenocl.essentialocl.standardlibrary.OclAny;
 import org.dresdenocl.essentialocl.standardlibrary.OclCollection;
 import org.dresdenocl.essentialocl.standardlibrary.OclIterator;
@@ -808,17 +809,23 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.dresdenocl.interpreter.internal.OclInterpreter#caseLetExp(org.dresdenocl
+	 * .essentialocl.expressions.LetExp)
+	 */
 	@Override
 	public OclAny caseLetExp(LetExp letExp) {
 
-		stopOnBreakpoint("caseLetExp", letExp);
-		// Map<String, Object> m =
-		// m_stackVariables.get(m_stackframes.getLast());
-		// m.put(letExp.getVariable().getName(), letExp.getVariable());
+		stopOnBreakpoint("LetExpression (" + letExp.getVariable().getName()
+				+ ")", letExp);
+
 		OclAny result = super.caseLetExp(letExp);
 		popStackFrame();
-		stopOnBreakpoint("caseLetExp", letExp);
-		popStackFrame();
+		/* Do not stop after let expressions. */
+
 		return result;
 	}
 
@@ -990,6 +997,27 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		OclAny result = super.caseUndefinedLiteralExp(undefinedLiteralExp);
 		popStackFrame();
 		/* Do not stop after literals. */
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.dresdenocl.interpreter.internal.OclInterpreter#caseVariableExp(org
+	 * .dresdenocl.essentialocl.expressions.VariableExp)
+	 */
+	@Override
+	public OclAny caseVariableExp(VariableExp variableExp) {
+		stopOnBreakpoint("VariableExpression ("
+				+ variableExp.getReferredVariable().getName() + ")",
+				variableExp);
+		OclAny result = super.caseVariableExp(variableExp);
+		popStackFrame();
+		stopOnBreakpoint("VariableExpression ("
+				+ variableExp.getReferredVariable().getName() + ")",
+				variableExp);
+		popStackFrame();
 		return result;
 	}
 

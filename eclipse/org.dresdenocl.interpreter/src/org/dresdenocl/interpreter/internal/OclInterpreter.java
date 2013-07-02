@@ -110,6 +110,8 @@ import org.eclipse.emf.ecore.EObject;
 public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		IOclInterpreter {
 
+	private static final String VARIABLE_NOT_INTIALIZED_YET = "Variable not intialized, yet.";
+
 	/**
 	 * Logger for this class
 	 */
@@ -2870,6 +2872,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		 * be different? Is that a problem?
 		 */
 		this.pushLocalEnvironment();
+		myEnvironment.setVariableValue(letExp.getVariable().getName(),
+				myStandardLibraryFactory.createOclUndefined(letExp.getType(),
+						VARIABLE_NOT_INTIALIZED_YET));
+
 		result = doSwitch((EObject) letExp.getIn());
 		this.popEnvironment();
 
@@ -4015,7 +4021,12 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		 * 'result' or the variable represents a parameter value from the
 		 * constraint's context.
 		 */
-		if (myEnvironment.getVariableValue(variable.getName()) != null) {
+		result = myEnvironment.getVariableValue(variable.getName());
+
+		if (null != result
+				&& !(result.oclIsUndefined().isTrue() && result
+						.getUndefinedReason().equals(
+								VARIABLE_NOT_INTIALIZED_YET))) {
 			result = myEnvironment.getVariableValue(variable.getName());
 		}
 
