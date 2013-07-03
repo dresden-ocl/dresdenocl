@@ -73,6 +73,12 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	public static final String OCL_COLLECTION_RESULT_VATRIABLE_NAME = "oclCollection";
 
 	/**
+	 * Name of the variable containing a {@link CollectionLiteralExp}'s result
+	 * during debugging.
+	 */
+	public static final String OCL_CALL_SOURCE_VATRIABLE_NAME = "oclSource";
+
+	/**
 	 * Stores the stack size at the last position being suspended (used for step
 	 * over and return to decide where to suspend.
 	 */
@@ -829,16 +835,42 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.dresdenocl.interpreter.internal.OclInterpreter#caseOperationCallExp
+	 * (org.dresdenocl.essentialocl.expressions.OperationCallExp)
+	 */
 	@Override
 	public OclAny caseOperationCallExp(OperationCallExp operationCallExp) {
+
+		/* Additional environment for source and parameter values. */
+		pushLocalEnvironment();
 
 		OclAny result = super.caseOperationCallExp(operationCallExp);
 		myEnvironment.setVariableValue("result of "
 				+ operationCallExp.getReferredOperation().getName(), result);
-		stopOnBreakpoint("caseOperationCallExp", operationCallExp);
+		stopOnBreakpoint("OperationCallExpression ("
+				+ operationCallExp.getReferredOperation().getName() + ")", operationCallExp);
 		popStackFrame();
-		myEnvironment.deleteVariableValue("result of "
-				+ operationCallExp.getReferredOperation().getName());
+
+		popEnvironment();
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.dresdenocl.interpreter.internal.OclInterpreter#evaluateSource(org
+	 * .dresdenocl.essentialocl.expressions.OperationCallExp)
+	 */
+	@Override
+	protected OclAny evaluateSource(OperationCallExp operationCallExp) {
+		OclAny result = super.evaluateSource(operationCallExp);
+		myEnvironment.setVariableValue(OCL_CALL_SOURCE_VATRIABLE_NAME, result);
 		return result;
 	}
 
@@ -1040,15 +1072,12 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	protected OclAny evaluateNonStaticOperation(
 			OperationCallExp operationCallExp) {
 
-		stopOnBreakpoint("evaluateNonStaticOperation "
-				+ operationCallExp.getReferredOperation().getName(),
+		stopOnBreakpoint("OperationCallExpression ("
+				+ operationCallExp.getReferredOperation().getName() + ")",
 				operationCallExp);
 		OclAny result = super.evaluateNonStaticOperation(operationCallExp);
 		popStackFrame();
-		stopOnBreakpoint("evaluateNonStaticOperation "
-				+ operationCallExp.getReferredOperation().getName(),
-				operationCallExp);
-		popStackFrame();
+		/* Do not stop after evaluation (stop in caseOperationCallExp). */
 		return result;
 	}
 
@@ -1067,20 +1096,25 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	protected LinkedHashMap<String, OclAny> computeParameters(
 			OperationCallExp anOperationCallExp, Constraint oclDefinedOperation) {
 
-		stopOnBreakpoint("computeParameters", anOperationCallExp);
+		/* Do not stop before computing parameters. */
+		// stopOnBreakpoint("computeParameters", anOperationCallExp);
 		LinkedHashMap<String, OclAny> result = super.computeParameters(
 				anOperationCallExp, oclDefinedOperation);
-		popStackFrame();
+		// popStackFrame();
 		int i = 0;
 		for (String paramKey : result.keySet()) {
 			myEnvironment.setVariableValue("param" + ++i, result.get(paramKey));
 		}
-		stopOnBreakpoint("computeParameters", anOperationCallExp);
+
+		/*
+		 * Stop after parameter computation but on the operation call stack
+		 * level
+		 */
 		popStackFrame();
-		i = 0;
-		while (i < result.keySet().size()) {
-			myEnvironment.deleteVariableValue("param" + ++i);
-		}
+		stopOnBreakpoint("OperationCallExpression ("
+				+ anOperationCallExp.getReferredOperation().getName() + ")",
+				anOperationCallExp);
+
 		return result;
 	}
 

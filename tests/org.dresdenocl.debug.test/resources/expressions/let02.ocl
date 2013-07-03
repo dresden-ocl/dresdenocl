@@ -1,0 +1,8 @@
+package resource::package01
+
+context TestClass
+def: testLetExp02: Collection(String) =
+let col : Collection(String) = Set { 'first' }
+in col
+
+endpackage

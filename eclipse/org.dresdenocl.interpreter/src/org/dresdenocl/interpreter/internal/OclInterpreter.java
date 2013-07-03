@@ -85,6 +85,7 @@ import org.dresdenocl.modelinstancetype.types.base.BasisJavaModelInstanceFactory
 import org.dresdenocl.pivotmodel.ConstrainableElement;
 import org.dresdenocl.pivotmodel.Constraint;
 import org.dresdenocl.pivotmodel.ConstraintKind;
+import org.dresdenocl.pivotmodel.Expression;
 import org.dresdenocl.pivotmodel.Feature;
 import org.dresdenocl.pivotmodel.Operation;
 import org.dresdenocl.pivotmodel.Parameter;
@@ -2963,6 +2964,17 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	}
 
 	/**
+	 * Helper method evaluating the source of a given {@link OperationCallExp}.
+	 * 
+	 * @param operationCallExp
+	 *            The {@link OperationCallExp} whose source shall be evaluated.
+	 * @return The evaluated source {@link Expression} as an {@link OclAny}.
+	 */
+	protected OclAny evaluateSource(OperationCallExp operationCallExp) {
+		return doSwitch((EObject) operationCallExp.getSource());
+	}
+
+	/**
 	 * <p>
 	 * Evaluates the {@link OclAny} result of an {@link OperationCallExp}
 	 * representing a non-static {@link Operation}.
@@ -2984,8 +2996,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
-		OclAny source = doSwitch((EObject) operationCallExp.getSource());
-		myEnvironment.setVariableValue("source", source);
+		OclAny source = evaluateSource(operationCallExp);
 		/*
 		 * Probably get the result from a special operation like @pre or
 		 * oclIsNew.
@@ -3096,7 +3107,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(this.logOffset + "Evaluate Source ...");
 		}
 
-		OclAny source = doSwitch((EObject) operationCallExp.getSource());
+		OclAny source = evaluateSource(operationCallExp);
 
 		if (source instanceof OclType<?>) {
 
