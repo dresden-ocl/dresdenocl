@@ -1111,7 +1111,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
-		OclAny condition = doSwitch((EObject) ifExp.getCondition());
+		OclAny condition = evaluateIfCondition(ifExp);
 
 		if (condition instanceof OclBoolean) {
 			OclBoolean booleanCondition = (OclBoolean) condition;
@@ -1166,6 +1166,17 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		decreaseTracerTreeDepth(ifExp, result, guid);
 
 		return result;
+	}
+
+	/**
+	 * Helper method to evaluate the condition of a given {@link IfExp}.
+	 * 
+	 * @param ifExp
+	 *            The {@link IfExp} whose condition shall be evaluated.
+	 * @return The result as an {@link OclAny}.
+	 */
+	protected OclAny evaluateIfCondition(IfExp ifExp) {
+		return doSwitch((EObject) ifExp.getCondition());
 	}
 
 	/*

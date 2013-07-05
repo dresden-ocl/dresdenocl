@@ -15,6 +15,7 @@ public interface CallStackConstants {
 	public static final String COLLECTION_LITERAL = "CollectionLiteralExpression";
 	public static final String ENUMERATION_LITERAL = "EnumerationLiteralExpression";
 	public static final String EXPRESSION_IN_OCL = "ExpressionInOcl";
+	public static final String IF_EXPRESSION = "IfExpression";
 	public static final String INTEGER_LITERAL = "IntegerLiteralExpression";
 	public static final String INVALID_LITERAL = "InvalidLiteralExpression";
 	public static final String LET_EXPRESSION = "LetExpression";

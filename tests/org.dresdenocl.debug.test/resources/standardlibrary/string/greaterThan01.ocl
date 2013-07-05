@@ -1,9 +1,0 @@
-package resource::package01
-
-context TestClass
-inv testGreaterThan01: 
-	'b' 
-	> 
-	'a'
-
-endpackage

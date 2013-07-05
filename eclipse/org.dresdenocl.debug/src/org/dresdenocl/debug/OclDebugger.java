@@ -79,6 +79,12 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	public static final String OCL_CALL_SOURCE_VATRIABLE_NAME = "oclSource";
 
 	/**
+	 * Name of the variable containing a {@link CollectionLiteralExp}'s result
+	 * during debugging.
+	 */
+	public static final String OCL_IF_CONDITION_RESULT_VATRIABLE_NAME = "oclCondition";
+
+	/**
 	 * Stores the stack size at the last position being suspended (used for step
 	 * over and return to decide where to suspend.
 	 */
@@ -738,22 +744,38 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	}
 
 	/*
-	 * @Override public OclAny caseExpressionInOcl(ExpressionInOcl
-	 * expressionInOcl) { stopOnBreakpoint("caseExpressionInOcl",
-	 * expressionInOcl); OclAny result =
-	 * super.caseExpressionInOcl(expressionInOcl); popStackFrame();
-	 * stopOnBreakpoint("caseExpressionInOcl", expressionInOcl);
-	 * popStackFrame(); return result; }
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.dresdenocl.interpreter.internal.OclInterpreter#caseIfExp(org.dresdenocl
+	 * .essentialocl.expressions.IfExp)
 	 */
-
 	@Override
 	public OclAny caseIfExp(IfExp ifExp) {
 
-		stopOnBreakpoint("caseIfExp", ifExp);
+		/* Additional environment for condition result. */
+		pushLocalEnvironment();
+		stopOnBreakpoint("IfExpression", ifExp);
 		OclAny result = super.caseIfExp(ifExp);
+		/* Do not stop after if expressions. */
 		popStackFrame();
-		stopOnBreakpoint("caseIfExp", ifExp);
-		popStackFrame();
+		popEnvironment();
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.dresdenocl.interpreter.internal.OclInterpreter#evaluateIfCondition
+	 * (org.dresdenocl.essentialocl.expressions.IfExp)
+	 */
+	@Override
+	protected OclAny evaluateIfCondition(IfExp ifExp) {
+		OclAny result = super.evaluateIfCondition(ifExp);
+		/* Add the result of the condition to the visible variables. */
+		myEnvironment.setVariableValue(OCL_IF_CONDITION_RESULT_VATRIABLE_NAME,
+				result);
 		return result;
 	}
 
@@ -852,7 +874,8 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		myEnvironment.setVariableValue("result of "
 				+ operationCallExp.getReferredOperation().getName(), result);
 		stopOnBreakpoint("OperationCallExpression ("
-				+ operationCallExp.getReferredOperation().getName() + ")", operationCallExp);
+				+ operationCallExp.getReferredOperation().getName() + ")",
+				operationCallExp);
 		popStackFrame();
 
 		popEnvironment();

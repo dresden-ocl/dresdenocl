@@ -1,0 +1,10 @@
+package resource::package01
+
+context TestClass
+def: testIfExp01: Integer =
+if (true)
+  then 1
+  else -1
+endif
+
+endpackage

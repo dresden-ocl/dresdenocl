@@ -7,8 +7,8 @@ import org.junit.runners.Suite;
 import org.dresdenocl.debug.test.unit.DebuggerUnitTest;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ DebuggerUnitTest.class, TestDebugLetExpressions.class,
-		TestDebugLiterals.class, TestDebugString.class })
+@Suite.SuiteClasses({ DebuggerUnitTest.class, TestDebugIfExpressions.class,
+		TestDebugLetExpressions.class, TestDebugLiterals.class })
 public class AllUnitTests extends AbstractDresdenOclTest {
 	// remains emtpy
 }
