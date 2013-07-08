@@ -1,0 +1,7 @@
+package resource::package01
+
+context TestClass
+def: testPropertyCallExp02: Integer =
+TestClass::staticInteger
+
+endpackage

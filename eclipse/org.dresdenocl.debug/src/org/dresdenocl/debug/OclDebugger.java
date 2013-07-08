@@ -85,6 +85,12 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	public static final String OCL_IF_CONDITION_RESULT_VATRIABLE_NAME = "oclCondition";
 
 	/**
+	 * Name of the variable containing a {@link CollectionLiteralExp}'s result
+	 * during debugging.
+	 */
+	public static final String OCL_PROPERTY_CALL_RESULT = "oclPropertyValue";
+
+	/**
 	 * Stores the stack size at the last position being suspended (used for step
 	 * over and return to decide where to suspend.
 	 */
@@ -897,14 +903,37 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.dresdenocl.interpreter.internal.OclInterpreter#casePropertyCallExp
+	 * (org.dresdenocl.essentialocl.expressions.PropertyCallExp)
+	 */
 	@Override
 	public OclAny casePropertyCallExp(PropertyCallExp propertyCallExp) {
 
-		stopOnBreakpoint("casePropertyCallExp", propertyCallExp);
+		/* Push additional environment for property call result. */
+		pushLocalEnvironment();
+
+		stopOnBreakpoint("PropertyCallExpression ("
+				+ propertyCallExp.getReferredProperty().getName() + ")",
+				propertyCallExp);
+
 		OclAny result = super.casePropertyCallExp(propertyCallExp);
 		popStackFrame();
-		stopOnBreakpoint("casePropertyCallExp", propertyCallExp);
+
+		/* Set the property call result. */
+		myEnvironment.setVariableValue(OCL_PROPERTY_CALL_RESULT, result);
+
+		stopOnBreakpoint("PropertyCallExpression ("
+				+ propertyCallExp.getReferredProperty().getName() + ")",
+				propertyCallExp);
 		popStackFrame();
+
+		/* Pop additional environment for property call result. */
+		popEnvironment();
+
 		return result;
 	}
 
