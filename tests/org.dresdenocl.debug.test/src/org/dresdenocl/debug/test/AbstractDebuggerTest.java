@@ -402,6 +402,7 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 		
 		synchronized (System.out) {
 			System.out.println("== generateDebugger ==");
+			System.out.println(oclResource);
 		}
 
 		final String[] modelObjects = { "TestClass" };

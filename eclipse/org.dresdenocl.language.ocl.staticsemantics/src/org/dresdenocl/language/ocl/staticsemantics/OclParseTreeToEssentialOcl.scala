@@ -400,6 +400,7 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
                         }
                         else
                           sourceExpression
+                      allMappings.put(cleanSourceExpression, v)
                       pce.setSource(cleanSourceExpression)
                       pce.setOclLibrary(oclLibrary)
                       allMappings.put(pce, v)
