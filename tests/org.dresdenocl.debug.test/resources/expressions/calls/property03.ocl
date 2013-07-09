@@ -1,0 +1,7 @@
+package resource::package01
+-- Test of implicit self variable call
+context TestClass
+def: testVariableCallExp01: Integer =
+integer
+
+endpackage

@@ -835,10 +835,12 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	@Override
 	public OclAny caseIteratorExp(IteratorExp iteratorExp) {
 
-		stopOnBreakpoint("caseIteratorExp", iteratorExp);
+		stopOnBreakpoint("IteratorExpression (" + iteratorExp.getName() + ")",
+				iteratorExp);
 		OclAny result = super.caseIteratorExp(iteratorExp);
 		popStackFrame();
-		stopOnBreakpoint("caseIteratorExp", iteratorExp);
+		stopOnBreakpoint("IteratorExpression (" + iteratorExp.getName() + ")",
+				iteratorExp);
 		popStackFrame();
 		return result;
 	}
@@ -1098,10 +1100,17 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 				variableExp);
 		OclAny result = super.caseVariableExp(variableExp);
 		popStackFrame();
-		stopOnBreakpoint("VariableExpression ("
-				+ variableExp.getReferredVariable().getName() + ")",
-				variableExp);
-		popStackFrame();
+
+		/* Do not stop after evaluation of self variable. */
+		if (!variableExp.getReferredVariable().getName()
+				.equals(SELF_VARIABLE_NAME)) {
+			stopOnBreakpoint("VariableExpression ("
+					+ variableExp.getReferredVariable().getName() + ")",
+					variableExp);
+			popStackFrame();
+		}
+		// no else.
+
 		return result;
 	}
 
