@@ -35,6 +35,7 @@ import java.util.UUID;
 import org.apache.log4j.Logger;
 import org.dresdenocl.essentialocl.EssentialOclPlugin;
 import org.dresdenocl.essentialocl.expressions.BooleanLiteralExp;
+import org.dresdenocl.essentialocl.expressions.CallExp;
 import org.dresdenocl.essentialocl.expressions.CollectionItem;
 import org.dresdenocl.essentialocl.expressions.CollectionLiteralExp;
 import org.dresdenocl.essentialocl.expressions.CollectionLiteralPart;
@@ -2975,14 +2976,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	}
 
 	/**
-	 * Helper method evaluating the source of a given {@link OperationCallExp}.
+	 * Helper method evaluating the source of a given {@link CallExp}.
 	 * 
-	 * @param operationCallExp
+	 * @param callExp
 	 *            The {@link OperationCallExp} whose source shall be evaluated.
 	 * @return The evaluated source {@link Expression} as an {@link OclAny}.
 	 */
-	protected OclAny evaluateSource(OperationCallExp operationCallExp) {
-		return doSwitch((EObject) operationCallExp.getSource());
+	protected OclAny evaluateSource(CallExp callExp) {
+		return doSwitch((EObject) callExp.getSource());
 	}
 
 	/**
@@ -3585,7 +3586,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
-		OclAny source = doSwitch((EObject) propertyCallExp.getSource());
+		OclAny source = evaluateSource(propertyCallExp);
 
 		/* Check if the source is a tuple. */
 		if (source instanceof OclTuple) {
@@ -3687,7 +3688,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
-		OclAny source = this.doSwitch((EObject) propertyCallExp.getSource());
+		OclAny source = evaluateSource(propertyCallExp);
 
 		/* Check if the source is an OclType. */
 		if (source instanceof OclType<?>) {

@@ -22,6 +22,7 @@ import org.dresdenocl.debug.model.OclDebugMessage;
 import org.dresdenocl.debug.util.EStepMode;
 import org.dresdenocl.debug.util.OclStringUtil;
 import org.dresdenocl.essentialocl.expressions.BooleanLiteralExp;
+import org.dresdenocl.essentialocl.expressions.CallExp;
 import org.dresdenocl.essentialocl.expressions.CollectionItem;
 import org.dresdenocl.essentialocl.expressions.CollectionLiteralExp;
 import org.dresdenocl.essentialocl.expressions.CollectionRange;
@@ -85,8 +86,14 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	public static final String OCL_IF_CONDITION_RESULT_VATRIABLE_NAME = "oclCondition";
 
 	/**
-	 * Name of the variable containing a {@link CollectionLiteralExp}'s result
+	 * Name of the variable containing a {@link OperationCallExp}'s result
 	 * during debugging.
+	 */
+	public static final String OCL_OPERATION_CALL_RESULT = "oclOperationValue";
+
+	/**
+	 * Name of the variable containing a {@link PropertyCallExp}'s result during
+	 * debugging.
 	 */
 	public static final String OCL_PROPERTY_CALL_RESULT = "oclPropertyValue";
 
@@ -879,8 +886,8 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		pushLocalEnvironment();
 
 		OclAny result = super.caseOperationCallExp(operationCallExp);
-		myEnvironment.setVariableValue("result of "
-				+ operationCallExp.getReferredOperation().getName(), result);
+		myEnvironment.setVariableValue(OclDebugger.OCL_OPERATION_CALL_RESULT,
+				result);
 		stopOnBreakpoint("OperationCallExpression ("
 				+ operationCallExp.getReferredOperation().getName() + ")",
 				operationCallExp);
@@ -896,11 +903,11 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	 * 
 	 * @see
 	 * org.dresdenocl.interpreter.internal.OclInterpreter#evaluateSource(org
-	 * .dresdenocl.essentialocl.expressions.OperationCallExp)
+	 * .dresdenocl.essentialocl.expressions.CallExp)
 	 */
 	@Override
-	protected OclAny evaluateSource(OperationCallExp operationCallExp) {
-		OclAny result = super.evaluateSource(operationCallExp);
+	protected OclAny evaluateSource(CallExp callExp) {
+		OclAny result = super.evaluateSource(callExp);
 		myEnvironment.setVariableValue(OCL_CALL_SOURCE_VATRIABLE_NAME, result);
 		return result;
 	}
@@ -1171,10 +1178,14 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		 * Stop after parameter computation but on the operation call stack
 		 * level
 		 */
-		popStackFrame();
-		stopOnBreakpoint("OperationCallExpression ("
-				+ anOperationCallExp.getReferredOperation().getName() + ")",
-				anOperationCallExp);
+		if (result.size() > 0) {
+			popStackFrame();
+			stopOnBreakpoint(
+					"OperationCallExpression ("
+							+ anOperationCallExp.getReferredOperation()
+									.getName() + ")", anOperationCallExp);
+		}
+		// no else.
 
 		return result;
 	}

@@ -19,7 +19,7 @@ public interface CallStackConstants {
 	public static final String INTEGER_LITERAL = "IntegerLiteralExpression";
 	public static final String INVALID_LITERAL = "InvalidLiteralExpression";
 	public static final String LET_EXPRESSION = "LetExpression";
-	public static final String NON_STATIC_OPERATION = "OperationCallExpression";
+	public static final String OPERATION_CALL = "OperationCallExpression";
 	public static final String PROPERTY_CALL = "PropertyCallExpression";
 	public static final String REAL_LITERAL = "RealLiteralExpression";
 	public static final String STRING_LITERAL = "StringLiteralExpression";

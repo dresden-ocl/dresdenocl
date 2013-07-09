@@ -60,8 +60,11 @@ public class TestDebugPropertyCallExpressions extends AbstractDebuggerTest {
 		assertStackSize(2, debugger);
 		assertStackName(CallStackConstants.PROPERTY_CALL + " (integer)",
 				debugger);
+		/* The source of the property call should be on the stack. */
 		/* The result of the property call should be on the stack. */
-		assertVariableNumber(2, debugger);
+		assertVariableNumber(3, debugger);
+		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME,
+				debugger);
 		assertVariableExist(OclDebugger.OCL_PROPERTY_CALL_RESULT, debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 
@@ -118,8 +121,11 @@ public class TestDebugPropertyCallExpressions extends AbstractDebuggerTest {
 		assertStackSize(2, debugger);
 		assertStackName(CallStackConstants.PROPERTY_CALL + " (staticInteger)",
 				debugger);
+		/* The source of the property call should be on the stack. */
 		/* The result of the property call should be on the stack. */
-		assertVariableNumber(2, debugger);
+		assertVariableNumber(3, debugger);
+		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME,
+				debugger);
 		assertVariableExist(OclDebugger.OCL_PROPERTY_CALL_RESULT, debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 
@@ -175,8 +181,11 @@ public class TestDebugPropertyCallExpressions extends AbstractDebuggerTest {
 		assertStackSize(2, debugger);
 		assertStackName(CallStackConstants.PROPERTY_CALL + " (integer)",
 				debugger);
+		/* The source of the property call should be on the stack. */
 		/* The result of the property call should be on the stack. */
-		assertVariableNumber(2, debugger);
+		assertVariableNumber(3, debugger);
+		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME,
+				debugger);
 		assertVariableExist(OclDebugger.OCL_PROPERTY_CALL_RESULT, debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 
@@ -223,8 +232,11 @@ public class TestDebugPropertyCallExpressions extends AbstractDebuggerTest {
 		assertStackSize(2, debugger);
 		assertStackName(CallStackConstants.PROPERTY_CALL + " (integer)",
 				debugger);
+		/* The source of the property call should be on the stack. */
 		/* The result of the property call should be on the stack. */
-		assertVariableNumber(2, debugger);
+		assertVariableNumber(3, debugger);
+		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME,
+				debugger);
 		assertVariableExist(OclDebugger.OCL_PROPERTY_CALL_RESULT, debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 
@@ -271,8 +283,11 @@ public class TestDebugPropertyCallExpressions extends AbstractDebuggerTest {
 		assertStackSize(2, debugger);
 		assertStackName(CallStackConstants.PROPERTY_CALL + " (staticInteger)",
 				debugger);
+		/* The source of the property call should be on the stack. */
 		/* The result of the property call should be on the stack. */
-		assertVariableNumber(2, debugger);
+		assertVariableNumber(3, debugger);
+		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME,
+				debugger);
 		assertVariableExist(OclDebugger.OCL_PROPERTY_CALL_RESULT, debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 
@@ -319,8 +334,11 @@ public class TestDebugPropertyCallExpressions extends AbstractDebuggerTest {
 		assertStackSize(2, debugger);
 		assertStackName(CallStackConstants.PROPERTY_CALL + " (integer)",
 				debugger);
+		/* The source of the property call should be on the stack. */
 		/* The result of the property call should be on the stack. */
-		assertVariableNumber(2, debugger);
+		assertVariableNumber(3, debugger);
+		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME,
+				debugger);
 		assertVariableExist(OclDebugger.OCL_PROPERTY_CALL_RESULT, debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 
