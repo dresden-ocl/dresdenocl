@@ -234,8 +234,7 @@ public class TestDebugLetExpressions extends AbstractDebuggerTest {
 		/* Debugger at operation call expression '+'. */
 		assertCurrentLine(6, debugger);
 		assertStackSize(4, debugger);
-		assertStackName(CallStackConstants.OPERATION_CALL + " (+)",
-				debugger);
+		assertStackName(CallStackConstants.OPERATION_CALL + " (+)", debugger);
 		/* 'outer' should be on the stack. */
 		/* 'inner' should be on the stack. */
 		assertVariableNumber(3, debugger);
@@ -337,8 +336,7 @@ public class TestDebugLetExpressions extends AbstractDebuggerTest {
 		/* Debugger at operation call expression '+'. */
 		assertCurrentLine(6, debugger);
 		assertStackSize(4, debugger);
-		assertStackName(CallStackConstants.OPERATION_CALL + " (+)",
-				debugger);
+		assertStackName(CallStackConstants.OPERATION_CALL + " (+)", debugger);
 		/* 'outer' should be on the stack. */
 		/* 'inner' should be on the stack. */
 		/* 'oclSource' should be on the stack. */
@@ -346,7 +344,8 @@ public class TestDebugLetExpressions extends AbstractDebuggerTest {
 		assertVariableNumber(5, debugger);
 		assertVariableExist("outer", debugger);
 		assertVariableExist("inner", debugger);
-		assertVariableExist("param1", debugger);
+		assertVariableExist(OclDebugger.OCL_PARAMETER_VALUE_VARIBALE + "1",
+				debugger);
 		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME,
 				debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
@@ -356,17 +355,13 @@ public class TestDebugLetExpressions extends AbstractDebuggerTest {
 		/* Debugger after operation call expression '+'. */
 		assertCurrentLine(6, debugger);
 		assertStackSize(4, debugger);
-		assertStackName(CallStackConstants.OPERATION_CALL + " (+)",
-				debugger);
+		assertStackName(CallStackConstants.OPERATION_CALL + " (+)", debugger);
 		/* 'outer' should be on the stack. */
 		/* 'inner' should be on the stack. */
-		/* 'oclSource' should be on the stack. */
 		/* 'oclOperationResult' should be on the stack. */
-		assertVariableNumber(5, debugger);
+		assertVariableNumber(4, debugger);
 		assertVariableExist("outer", debugger);
 		assertVariableExist("inner", debugger);
-		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME,
-				debugger);
 		assertVariableExist(OclDebugger.OCL_OPERATION_CALL_RESULT, debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 
@@ -683,7 +678,8 @@ public class TestDebugLetExpressions extends AbstractDebuggerTest {
 		assertVariableExist("outer", debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 
-		debugStepAndWaitFor(DebugStep.STEP_RETURN, DebugEvent.SUSPENDED, debugger);
+		debugStepAndWaitFor(DebugStep.STEP_RETURN, DebugEvent.SUSPENDED,
+				debugger);
 
 		/* Debugger after let expression. */
 		assertCurrentLine(4, debugger);
