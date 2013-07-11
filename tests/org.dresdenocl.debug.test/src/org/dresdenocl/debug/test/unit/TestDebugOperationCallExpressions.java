@@ -221,6 +221,193 @@ public class TestDebugOperationCallExpressions extends AbstractDebuggerTest {
 	}
 
 	@Test
+	public void testOperationCallExpressionStepInto04() throws Exception {
+
+		String oclResource = "resources/expressions/calls/operation04.ocl";
+		OclDebugger debugger = generateDebugger(oclResource);
+		waitForEvent(DebugEvent.STARTED);
+		waitForEvent(DebugEvent.SUSPENDED);
+
+		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
+		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
+		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger at operation call 'isInteger'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(2, debugger);
+		assertStackName(CallStackConstants.OPERATION_CALL + " (isInteger)",
+				debugger);
+		assertVariableNumber(1, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger at self variable. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(3, debugger);
+		assertStackName(CallStackConstants.VARIABLE_CALL + " (self)", debugger);
+		assertVariableNumber(1, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger at integer literal '42'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(3, debugger);
+		assertStackName(CallStackConstants.INTEGER_LITERAL + " (42)", debugger);
+		/* oclSource should be on the stack. */
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME,
+				debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger after operation call 'isInteger'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(2, debugger);
+		assertStackName(CallStackConstants.OPERATION_CALL + " (isInteger)",
+				debugger);
+		/* oclSource should be on the stack. */
+		/* oclParam1 should be on the stack. */
+		assertVariableNumber(3, debugger);
+		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME,
+				debugger);
+		assertVariableExist(OclDebugger.OCL_PARAMETER_VALUE_VARIBALE + "1",
+				debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger after operation call 'isInteger'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(2, debugger);
+		assertStackName(CallStackConstants.OPERATION_CALL + " (isInteger)",
+				debugger);
+		/* The result of the operation call should be on the stack. */
+		/* oclParam1 should be on the stack. */
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.OCL_OPERATION_CALL_RESULT, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger after operation call expression. */
+		assertCurrentLine(4, debugger);
+		assertStackSize(1, debugger);
+		assertStackName(CallStackConstants.EXPRESSION_IN_OCL, debugger);
+		/* 'result' should be on the stack. */
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_RESULT_VATRIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO,
+				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
+	}
+
+	@Test
+	public void testOperationCallExpressionStepInto05() throws Exception {
+
+		String oclResource = "resources/expressions/calls/operation05.ocl";
+		OclDebugger debugger = generateDebugger(oclResource);
+		waitForEvent(DebugEvent.STARTED);
+		waitForEvent(DebugEvent.SUSPENDED);
+
+		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
+		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
+		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger at operation call 'isIntegerBetween'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(2, debugger);
+		assertStackName(CallStackConstants.OPERATION_CALL
+				+ " (isIntegerBetween)", debugger);
+		assertVariableNumber(1, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger at self variable. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(3, debugger);
+		assertStackName(CallStackConstants.VARIABLE_CALL + " (self)", debugger);
+		assertVariableNumber(1, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger at integer literal '0'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(3, debugger);
+		assertStackName(CallStackConstants.INTEGER_LITERAL + " (0)", debugger);
+		/* oclSource should be on the stack. */
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME,
+				debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger at integer literal '42'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(3, debugger);
+		assertStackName(CallStackConstants.INTEGER_LITERAL + " (42)", debugger);
+		/* oclSource should be on the stack. */
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME,
+				debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger after operation call 'isIntegerBetween'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(2, debugger);
+		assertStackName(CallStackConstants.OPERATION_CALL
+				+ " (isIntegerBetween)", debugger);
+		/* oclSource should be on the stack. */
+		/* oclParam1 should be on the stack. */
+		/* oclParam2 should be on the stack. */
+		assertVariableNumber(4, debugger);
+		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME,
+				debugger);
+		assertVariableExist(OclDebugger.OCL_PARAMETER_VALUE_VARIBALE + "1",
+				debugger);
+		assertVariableExist(OclDebugger.OCL_PARAMETER_VALUE_VARIBALE + "2",
+				debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger after operation call 'isIntegerBetween'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(2, debugger);
+		assertStackName(CallStackConstants.OPERATION_CALL
+				+ " (isIntegerBetween)", debugger);
+		/* The result of the operation call should be on the stack. */
+		/* oclParam1 should be on the stack. */
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.OCL_OPERATION_CALL_RESULT, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger after operation call expression. */
+		assertCurrentLine(4, debugger);
+		assertStackSize(1, debugger);
+		assertStackName(CallStackConstants.EXPRESSION_IN_OCL, debugger);
+		/* 'result' should be on the stack. */
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_RESULT_VATRIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO,
+				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
+	}
+
+	@Test
 	public void testOperationCallExpressionStepOver01() throws Exception {
 
 		String oclResource = "resources/expressions/calls/operation01.ocl";
@@ -363,6 +550,103 @@ public class TestDebugOperationCallExpressions extends AbstractDebuggerTest {
 	}
 
 	@Test
+	public void testOperationCallExpressionStepOver04() throws Exception {
+
+		String oclResource = "resources/expressions/calls/operation04.ocl";
+		OclDebugger debugger = generateDebugger(oclResource);
+		waitForEvent(DebugEvent.STARTED);
+		waitForEvent(DebugEvent.SUSPENDED);
+
+		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
+		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
+		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger at operation call 'isInteger'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(2, debugger);
+		assertStackName(CallStackConstants.OPERATION_CALL + " (isInteger)",
+				debugger);
+		assertVariableNumber(1, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_OVER, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger after operation call 'isInteger'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(2, debugger);
+		assertStackName(CallStackConstants.OPERATION_CALL + " (isInteger)",
+				debugger);
+		/* The result of the operation call should be on the stack. */
+		/* oclParam1 should be on the stack. */
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.OCL_OPERATION_CALL_RESULT, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_OVER, DebugEvent.SUSPENDED, debugger);
+		/* Debugger after operation call expression. */
+		assertCurrentLine(4, debugger);
+		assertStackSize(1, debugger);
+		assertStackName(CallStackConstants.EXPRESSION_IN_OCL, debugger);
+		/* 'result' should be on the stack. */
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_RESULT_VATRIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_OVER,
+				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
+	}
+
+	@Test
+	public void testOperationCallExpressionStepOver05() throws Exception {
+	
+		String oclResource = "resources/expressions/calls/operation05.ocl";
+		OclDebugger debugger = generateDebugger(oclResource);
+		waitForEvent(DebugEvent.STARTED);
+		waitForEvent(DebugEvent.SUSPENDED);
+	
+		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
+		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
+		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
+	
+		/* Debugger at operation call 'isIntegerBetween'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(2, debugger);
+		assertStackName(CallStackConstants.OPERATION_CALL
+				+ " (isIntegerBetween)", debugger);
+		assertVariableNumber(1, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+	
+		debugStepAndWaitFor(DebugStep.STEP_OVER, DebugEvent.SUSPENDED, debugger);
+	
+		/* Debugger after operation call 'isIntegerBetween'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(2, debugger);
+		assertStackName(CallStackConstants.OPERATION_CALL
+				+ " (isIntegerBetween)", debugger);
+		/* The result of the operation call should be on the stack. */
+		/* oclParam1 should be on the stack. */
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.OCL_OPERATION_CALL_RESULT, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+	
+		debugStepAndWaitFor(DebugStep.STEP_OVER, DebugEvent.SUSPENDED, debugger);
+	
+		/* Debugger after operation call expression. */
+		assertCurrentLine(4, debugger);
+		assertStackSize(1, debugger);
+		assertStackName(CallStackConstants.EXPRESSION_IN_OCL, debugger);
+		/* 'result' should be on the stack. */
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_RESULT_VATRIABLE_NAME, debugger);
+	
+		debugStepAndWaitFor(DebugStep.STEP_OVER,
+				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
+	}
+
+	@Test
 	public void testOperationCallExpressionStepReturn01() throws Exception {
 
 		String oclResource = "resources/expressions/calls/operation01.ocl";
@@ -468,6 +752,79 @@ public class TestDebugOperationCallExpressions extends AbstractDebuggerTest {
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 		assertVariableExist(OclDebugger.OCL_RESULT_VATRIABLE_NAME, debugger);
 
+		debugStepAndWaitFor(DebugStep.STEP_RETURN,
+				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
+	}
+
+	@Test
+	public void testOperationCallExpressionStepReturn04() throws Exception {
+
+		String oclResource = "resources/expressions/calls/operation04.ocl";
+		OclDebugger debugger = generateDebugger(oclResource);
+		waitForEvent(DebugEvent.STARTED);
+		waitForEvent(DebugEvent.SUSPENDED);
+
+		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
+		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
+		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger at operation call 'isInteger'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(2, debugger);
+		assertStackName(CallStackConstants.OPERATION_CALL + " (isInteger)",
+				debugger);
+		assertVariableNumber(1, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_RETURN, DebugEvent.SUSPENDED,
+				debugger);
+
+		/* Debugger after operation call expression. */
+		assertCurrentLine(4, debugger);
+		assertStackSize(1, debugger);
+		assertStackName(CallStackConstants.EXPRESSION_IN_OCL, debugger);
+		/* 'result' should be on the stack. */
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_RESULT_VATRIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_RETURN,
+				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
+	}
+
+	@Test
+	public void testOperationCallExpressionStepReturn05() throws Exception {
+	
+		String oclResource = "resources/expressions/calls/operation05.ocl";
+		OclDebugger debugger = generateDebugger(oclResource);
+		waitForEvent(DebugEvent.STARTED);
+		waitForEvent(DebugEvent.SUSPENDED);
+	
+		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
+		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
+		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
+	
+		/* Debugger at operation call 'isIntegerBetween'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(2, debugger);
+		assertStackName(CallStackConstants.OPERATION_CALL
+				+ " (isIntegerBetween)", debugger);
+		assertVariableNumber(1, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+	
+		debugStepAndWaitFor(DebugStep.STEP_RETURN, DebugEvent.SUSPENDED, debugger);
+	
+		/* Debugger after operation call expression. */
+		assertCurrentLine(4, debugger);
+		assertStackSize(1, debugger);
+		assertStackName(CallStackConstants.EXPRESSION_IN_OCL, debugger);
+		/* 'result' should be on the stack. */
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_RESULT_VATRIABLE_NAME, debugger);
+	
 		debugStepAndWaitFor(DebugStep.STEP_RETURN,
 				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
 	}

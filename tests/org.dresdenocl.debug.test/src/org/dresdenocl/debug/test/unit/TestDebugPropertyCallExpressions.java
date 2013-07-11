@@ -467,4 +467,131 @@ public class TestDebugPropertyCallExpressions extends AbstractDebuggerTest {
 		debugStepAndWaitFor(DebugStep.STEP_RETURN,
 				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
 	}
+
+	@Test
+	public void testRecursivePropertyCallExpressionStepInto01()
+			throws Exception {
+
+		String oclResource = "resources/expressions/calls/recProperty01.ocl";
+		OclDebugger debugger = generateDebugger(oclResource);
+		waitForEvent(DebugEvent.STARTED);
+		waitForEvent(DebugEvent.SUSPENDED);
+
+		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
+
+		/* Breakpoints on then and else expressions. */
+		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 6);
+		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 7);
+		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger at operation call '+'. */
+		assertCurrentLine(7, debugger);
+		assertStackSize(3, debugger);
+		assertStackName(CallStackConstants.OPERATION_CALL + " (+)", debugger);
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.OCL_IF_CONDITION_RESULT_VATRIABLE_NAME,
+				debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger at property call 'numberOfParents'. */
+		assertCurrentLine(7, debugger);
+		assertStackSize(4, debugger);
+		assertStackName(
+				CallStackConstants.PROPERTY_CALL + " (numberOfParents)",
+				debugger);
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.OCL_IF_CONDITION_RESULT_VATRIABLE_NAME,
+				debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger at property call 'parent'. */
+		assertCurrentLine(7, debugger);
+		assertStackSize(5, debugger);
+		assertStackName(CallStackConstants.PROPERTY_CALL + " (parent)",
+				debugger);
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.OCL_IF_CONDITION_RESULT_VATRIABLE_NAME,
+				debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger at variable call 'self'. */
+		assertCurrentLine(7, debugger);
+		assertStackSize(6, debugger);
+		assertStackName(CallStackConstants.VARIABLE_CALL + " (self)", debugger);
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.OCL_IF_CONDITION_RESULT_VATRIABLE_NAME,
+				debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger after property call 'parent'. */
+		assertCurrentLine(7, debugger);
+		assertStackSize(5, debugger);
+		assertStackName(CallStackConstants.PROPERTY_CALL + " (parent)",
+				debugger);
+		/* The source of the property call should be on the stack. */
+		/* The result of the property call should be on the stack. */
+		assertVariableNumber(4, debugger);
+		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME,
+				debugger);
+		assertVariableExist(OclDebugger.OCL_PROPERTY_CALL_RESULT, debugger);
+		assertVariableExist(OclDebugger.OCL_IF_CONDITION_RESULT_VATRIABLE_NAME,
+				debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger at expression in OCL. */
+		assertCurrentLine(4, debugger);
+		assertStackSize(5, debugger);
+		assertStackName(CallStackConstants.EXPRESSION_IN_OCL, debugger);
+		/* Only self should be on the stack. */
+		assertVariableNumber(1, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger at if expression. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(6, debugger);
+		assertStackName(CallStackConstants.IF_EXPRESSION, debugger);
+		assertVariableNumber(1, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* TODO self.parent.oclIsUndefined() */
+		
+		
+		/* Debugger at integer literal '0'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(7, debugger);
+		assertStackName(CallStackConstants.INTEGER_LITERAL + " (0)", debugger);
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.OCL_IF_CONDITION_RESULT_VATRIABLE_NAME,
+				debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger after property call expression. */
+		assertCurrentLine(4, debugger);
+		assertStackSize(1, debugger);
+		assertStackName(CallStackConstants.EXPRESSION_IN_OCL, debugger);
+		/* 'result' should be on the stack. */
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_RESULT_VATRIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO,
+				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
+	}
 }

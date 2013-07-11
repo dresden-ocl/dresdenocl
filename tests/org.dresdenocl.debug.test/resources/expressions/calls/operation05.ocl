@@ -1,0 +1,7 @@
+package resource::package01
+
+context TestClass
+def: testOperationCallExp04: Boolean =
+self.isIntegerBetween(0, 42)
+
+endpackage
