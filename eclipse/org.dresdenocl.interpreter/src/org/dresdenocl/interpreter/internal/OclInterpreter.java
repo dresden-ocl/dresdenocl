@@ -3023,10 +3023,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			Constraint operationSemanticInOcl = this
 					.getFeatureSemanticInOcl(referredOperation);
 
-			pushLocalEnvironment();
+			// pushLocalEnvironment();
 			LinkedHashMap<String, OclAny> oclAnyParameters = computeParameters(
 					operationCallExp, operationSemanticInOcl);
-			popEnvironment();
+			// popEnvironment();
 			/*
 			 * Probably interpret the result of a definition, derive or body
 			 * constraint.

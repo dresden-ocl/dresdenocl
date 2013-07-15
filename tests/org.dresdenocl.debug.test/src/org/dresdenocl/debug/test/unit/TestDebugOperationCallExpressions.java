@@ -61,7 +61,8 @@ public class TestDebugOperationCallExpressions extends AbstractDebuggerTest {
 		assertStackName(CallStackConstants.OPERATION_CALL + " (getInteger)",
 				debugger);
 		/* The result of the operation call should be on the stack. */
-		assertVariableNumber(2, debugger);
+		assertVariableNumber(3, debugger);
+		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME, debugger);
 		assertVariableExist(OclDebugger.OCL_OPERATION_CALL_RESULT, debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 
@@ -119,7 +120,8 @@ public class TestDebugOperationCallExpressions extends AbstractDebuggerTest {
 		assertStackName(CallStackConstants.OPERATION_CALL
 				+ " (getStaticInteger)", debugger);
 		/* The result of the operation call should be on the stack. */
-		assertVariableNumber(2, debugger);
+		assertVariableNumber(3, debugger);
+		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME, debugger);
 		assertVariableExist(OclDebugger.OCL_OPERATION_CALL_RESULT, debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 
@@ -201,7 +203,9 @@ public class TestDebugOperationCallExpressions extends AbstractDebuggerTest {
 		assertStackSize(2, debugger);
 		assertStackName(CallStackConstants.OPERATION_CALL + " (+)", debugger);
 		/* The result of the operation call should be on the stack. */
-		assertVariableNumber(2, debugger);
+		assertVariableNumber(4, debugger);
+		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_PARAMETER_VALUE_VARIBALE + 1, debugger);
 		assertVariableExist(OclDebugger.OCL_OPERATION_CALL_RESULT, debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 
@@ -287,7 +291,9 @@ public class TestDebugOperationCallExpressions extends AbstractDebuggerTest {
 				debugger);
 		/* The result of the operation call should be on the stack. */
 		/* oclParam1 should be on the stack. */
-		assertVariableNumber(2, debugger);
+		assertVariableNumber(4, debugger);
+		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_PARAMETER_VALUE_VARIBALE + 1, debugger);
 		assertVariableExist(OclDebugger.OCL_OPERATION_CALL_RESULT, debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 
@@ -388,7 +394,10 @@ public class TestDebugOperationCallExpressions extends AbstractDebuggerTest {
 				+ " (isIntegerBetween)", debugger);
 		/* The result of the operation call should be on the stack. */
 		/* oclParam1 should be on the stack. */
-		assertVariableNumber(2, debugger);
+		assertVariableNumber(5, debugger);
+		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_PARAMETER_VALUE_VARIBALE + 1, debugger);
+		assertVariableExist(OclDebugger.OCL_PARAMETER_VALUE_VARIBALE + 2, debugger);
 		assertVariableExist(OclDebugger.OCL_OPERATION_CALL_RESULT, debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 
@@ -436,7 +445,8 @@ public class TestDebugOperationCallExpressions extends AbstractDebuggerTest {
 		assertStackName(CallStackConstants.OPERATION_CALL + " (getInteger)",
 				debugger);
 		/* The result of the operation call should be on the stack. */
-		assertVariableNumber(2, debugger);
+		assertVariableNumber(3, debugger);
+		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME, debugger);
 		assertVariableExist(OclDebugger.OCL_OPERATION_CALL_RESULT, debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 
@@ -484,7 +494,8 @@ public class TestDebugOperationCallExpressions extends AbstractDebuggerTest {
 		assertStackName(CallStackConstants.OPERATION_CALL
 				+ " (getStaticInteger)", debugger);
 		/* The result of the operation call should be on the stack. */
-		assertVariableNumber(2, debugger);
+		assertVariableNumber(3, debugger);
+		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME, debugger);
 		assertVariableExist(OclDebugger.OCL_OPERATION_CALL_RESULT, debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 
@@ -530,7 +541,9 @@ public class TestDebugOperationCallExpressions extends AbstractDebuggerTest {
 		assertStackSize(2, debugger);
 		assertStackName(CallStackConstants.OPERATION_CALL + " (+)", debugger);
 		/* The result of the operation call should be on the stack. */
-		assertVariableNumber(2, debugger);
+		assertVariableNumber(4, debugger);
+		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_PARAMETER_VALUE_VARIBALE + 1, debugger);
 		assertVariableExist(OclDebugger.OCL_OPERATION_CALL_RESULT, debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 
@@ -579,7 +592,9 @@ public class TestDebugOperationCallExpressions extends AbstractDebuggerTest {
 				debugger);
 		/* The result of the operation call should be on the stack. */
 		/* oclParam1 should be on the stack. */
-		assertVariableNumber(2, debugger);
+		assertVariableNumber(4, debugger);
+		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_PARAMETER_VALUE_VARIBALE + 1, debugger);
 		assertVariableExist(OclDebugger.OCL_OPERATION_CALL_RESULT, debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 
@@ -627,7 +642,10 @@ public class TestDebugOperationCallExpressions extends AbstractDebuggerTest {
 				+ " (isIntegerBetween)", debugger);
 		/* The result of the operation call should be on the stack. */
 		/* oclParam1 should be on the stack. */
-		assertVariableNumber(2, debugger);
+		assertVariableNumber(5, debugger);
+		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_PARAMETER_VALUE_VARIBALE + 1, debugger);
+		assertVariableExist(OclDebugger.OCL_PARAMETER_VALUE_VARIBALE + 2, debugger);
 		assertVariableExist(OclDebugger.OCL_OPERATION_CALL_RESULT, debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 	

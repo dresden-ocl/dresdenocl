@@ -891,10 +891,7 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		/* Additional environment for source and parameter values. */
 		pushLocalEnvironment();
 		OclAny result = super.caseOperationCallExp(operationCallExp);
-		popEnvironment();
 
-		/* Additional environment for operation call result. */
-		pushLocalEnvironment();
 		myEnvironment.setVariableValue(OclDebugger.OCL_OPERATION_CALL_RESULT,
 				result);
 		stopOnBreakpoint("OperationCallExpression ("
@@ -1313,8 +1310,8 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 
 	private void safePrintln(String s) {
 
-		synchronized (System.out) {
-			System.out.println(s);
-		}
+		// TODO synchronized (System.out) {
+		// System.out.println(s);
+		// }
 	}
 }

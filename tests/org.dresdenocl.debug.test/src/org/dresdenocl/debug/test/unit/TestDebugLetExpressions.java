@@ -359,9 +359,11 @@ public class TestDebugLetExpressions extends AbstractDebuggerTest {
 		/* 'outer' should be on the stack. */
 		/* 'inner' should be on the stack. */
 		/* 'oclOperationResult' should be on the stack. */
-		assertVariableNumber(4, debugger);
+		assertVariableNumber(6, debugger);
 		assertVariableExist("outer", debugger);
 		assertVariableExist("inner", debugger);
+		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_PARAMETER_VALUE_VARIBALE + 1, debugger);
 		assertVariableExist(OclDebugger.OCL_OPERATION_CALL_RESULT, debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 
