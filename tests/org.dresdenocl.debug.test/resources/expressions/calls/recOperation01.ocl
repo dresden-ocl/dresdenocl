@@ -1,0 +1,10 @@
+package resource::package01
+-- Count of parents of this Class1
+context TestClass
+def: numberOfParents() : Integer =
+  if self.parent.oclIsUndefined() 
+    then 0 
+    else self.parent.numberOfParents() + 1
+  endif
+
+endpackage

@@ -3,7 +3,6 @@ package resource.package01;
 public class TestClass {
 
 	/** Used to test recursion. */
-	@SuppressWarnings("unused")
 	public TestClass parent;
 
 	private int integer = 10;
