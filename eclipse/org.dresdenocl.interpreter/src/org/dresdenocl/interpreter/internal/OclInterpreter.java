@@ -1447,7 +1447,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		// no else.
 
 		/* Compute source and cast or convert to collection. */
-		OclAny source = doSwitch((EObject) iteratorExp.getSource());
+		OclAny source = evaluateSource(iteratorExp);
 		OclCollection<OclAny> sourceCollection;
 
 		if (source instanceof OclCollection) {
@@ -1712,6 +1712,17 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		decreaseTracerTreeDepth(iteratorExp, result, guid);
 
 		return result;
+	}
+
+	/**
+	 * Helper method evaluating the source of a given {@link IteratorExp}.
+	 * 
+	 * @param iteratorExp
+	 *            The {@link IteratorExp} whose source shall be evaluated.
+	 * @return The evaluated source {@link Expression} as an {@link OclAny}.
+	 */
+	protected OclAny evaluateSource(IteratorExp iteratorExp) {
+		return doSwitch((EObject) iteratorExp.getSource());
 	}
 
 	/**

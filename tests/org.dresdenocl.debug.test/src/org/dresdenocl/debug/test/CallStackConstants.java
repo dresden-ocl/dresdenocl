@@ -18,6 +18,7 @@ public interface CallStackConstants {
 	public static final String IF_EXPRESSION = "IfExpression";
 	public static final String INTEGER_LITERAL = "IntegerLiteralExpression";
 	public static final String INVALID_LITERAL = "InvalidLiteralExpression";
+	public static final String ITERATOR_EXPRESSION = "IteratorExpression";
 	public static final String LET_EXPRESSION = "LetExpression";
 	public static final String OPERATION_CALL = "OperationCallExpression";
 	public static final String PROPERTY_CALL = "PropertyCallExpression";

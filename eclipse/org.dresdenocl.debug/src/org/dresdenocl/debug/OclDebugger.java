@@ -56,6 +56,8 @@ import org.dresdenocl.modelbus.ModelBusPlugin;
 import org.dresdenocl.modelinstance.IModelInstance;
 import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
 import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.pivotmodel.NamedElement;
+import org.dresdenocl.pivotmodel.Type;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 
@@ -84,6 +86,12 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	 * during debugging.
 	 */
 	public static final String OCL_IF_CONDITION_RESULT_VATRIABLE_NAME = "oclCondition";
+
+	/**
+	 * Name of the variable containing a {@link OperationCallExp}'s result
+	 * during debugging.
+	 */
+	public static final String OCL_ITERATOR_EXPRESSION_RESULT = "oclIteratorResult";
 
 	/**
 	 * Name of the variable containing a {@link OperationCallExp}'s result
@@ -834,6 +842,13 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.dresdenocl.interpreter.internal.OclInterpreter#caseIterateExp(org
+	 * .dresdenocl.essentialocl.expressions.IterateExp)
+	 */
 	@Override
 	public OclAny caseIterateExp(IterateExp iterateExp) {
 
@@ -845,17 +860,70 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.dresdenocl.interpreter.internal.OclInterpreter#caseIteratorExp(org
+	 * .dresdenocl.essentialocl.expressions.IteratorExp)
+	 */
 	@Override
 	public OclAny caseIteratorExp(IteratorExp iteratorExp) {
 
+		/* Additional local enviroment for it source and result variables. */
+		pushLocalEnvironment();
 		stopOnBreakpoint("IteratorExpression (" + iteratorExp.getName() + ")",
 				iteratorExp);
 		OclAny result = super.caseIteratorExp(iteratorExp);
 		popStackFrame();
+		myEnvironment.setVariableValue(OCL_ITERATOR_EXPRESSION_RESULT, result);
 		stopOnBreakpoint("IteratorExpression (" + iteratorExp.getName() + ")",
 				iteratorExp);
 		popStackFrame();
+		popEnvironment();
 		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.dresdenocl.interpreter.internal.OclInterpreter#evaluateSource(org
+	 * .dresdenocl.essentialocl.expressions.IteratorExp)
+	 */
+	@Override
+	protected OclAny evaluateSource(IteratorExp iteratorExp) {
+		OclAny result = super.evaluateSource(iteratorExp);
+		myEnvironment.setVariableValue(OCL_CALL_SOURCE_VATRIABLE_NAME, result);
+		/*
+		 * Do not stop here. Stop in front of iterator evaluation in the
+		 * respective evaluate method.
+		 */
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.dresdenocl.interpreter.internal.OclInterpreter#evaluateAny(org.dresdenocl
+	 * .essentialocl.expressions.OclExpression,
+	 * org.dresdenocl.essentialocl.standardlibrary.OclCollection,
+	 * org.dresdenocl.essentialocl.expressions.Variable,
+	 * org.dresdenocl.pivotmodel.Type)
+	 */
+	@Override
+	protected OclAny evaluateAny(OclExpression body,
+			OclCollection<OclAny> source, Variable iterator, Type resultType) {
+		popStackFrame();
+		myEnvironment.setVariableValue(OCL_ITERATOR_EXPRESSION_RESULT,
+				myStandardLibraryFactory.createOclUndefined(resultType,
+						"No element matching to the body expression yet."));
+		stopOnBreakpoint(
+				"IteratorExpression ("
+						+ ((NamedElement) body.eContainer()).getName() + ")",
+				body.eContainer());
+		return super.evaluateAny(body, source, iterator, resultType);
 	}
 
 	/*
@@ -1206,9 +1274,14 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		OclAny result = super.caseVariableExp(variableExp);
 		popStackFrame();
 
-		/* Do not stop after evaluation of self variable. */
+		/*
+		 * Do not stop after evaluation of self variable or variables having not
+		 * init expression (e.g., iterator variables).
+		 */
 		if (!variableExp.getReferredVariable().getName()
-				.equals(SELF_VARIABLE_NAME)) {
+				.equals(SELF_VARIABLE_NAME)
+				&& null != variableExp.getReferredVariable()
+						.getInitExpression()) {
 			stopOnBreakpoint("VariableExpression ("
 					+ variableExp.getReferredVariable().getName() + ")",
 					variableExp);
