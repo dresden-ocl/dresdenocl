@@ -6,10 +6,8 @@ Bundle-Version: 3.2.0.qualifier
 Bundle-Activator: org.dresdenocl.attributegrammar.integration.kiama.KiamaIntegrationPlugin
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
- org.kiama.attribution;visibility:=reexport,
  org.dresdenocl.language.ocl,
  org.dresdenocl.pivotmodel,
- scala.library;bundle-version="2.9.1",
  org.dresdenocl.essentialocl
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

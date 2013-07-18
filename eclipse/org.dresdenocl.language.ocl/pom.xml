@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<relativePath>../org.dresdenocl.build.master/pom.xml</relativePath>
+		<groupId>org.dresdenocl</groupId>
+		<artifactId>parent</artifactId>
+		<version>3.2.0.qualifier</version>
+	</parent>
+
+	<artifactId>org.dresdenocl.language.ocl</artifactId>
+	<packaging>eclipse-plugin</packaging>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.emftext.commons</groupId>
+			<artifactId>org.emftext.commons.layout</artifactId>
+			<version>1.4.2-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+</project> 
