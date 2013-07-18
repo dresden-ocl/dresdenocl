@@ -2458,8 +2458,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 					validElements++;
 
-					/* If alreadyFoundAnElement, break and return false. */
-					if (validElements > 1) {
+					/* If alreadyFoundAnElement, break and return true. */
+					if (validElements >= 1) {
 						break;
 					}
 					// no else.
@@ -2513,7 +2513,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				/* Else check the found elements fulfilling the condition. */
 				else {
 					result = myStandardLibraryFactory
-							.createOclBoolean(validElements == 1);
+							.createOclBoolean(validElements >= 1);
 				}
 				// end else.
 			}
