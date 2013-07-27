@@ -78,18 +78,18 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-		
+
 
 		<repository>
-            <id>p2.emftext.org</id>
-            <layout>p2</layout>
-            <url>http://emftext.org/update</url>
-        </repository>
- 
-        <repository>        
-            <id>mvn.emftext.org</id>
-            <url>http://emftext.org/maven-repository/</url>
-        </repository>
+			<id>p2.emftext.org</id>
+			<layout>p2</layout>
+			<url>http://emftext.org/update</url>
+		</repository>
+
+		<repository>
+			<id>mvn.emftext.org</id>
+			<url>http://emftext.org/maven-repository/</url>
+		</repository>
 	</repositories>
 
 	<pluginRepositories>
@@ -119,6 +119,35 @@
 
 	<build>
 		<plugins>
+
+			<plugin>
+				<groupId>org.eclipse.tycho.extras</groupId>
+				<artifactId>tycho-eclipserun-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<configuration>
+					<repositories>
+						<repository>
+							<id></id>
+							<url></url>
+							<releases>
+								<enabled>true</enabled>
+							</releases>
+							<snapshots>
+								<enabled>false</enabled>
+							</snapshots>
+						</repository>
+					</repositories>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>eclipse-run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-maven-plugin</artifactId>
@@ -131,27 +160,10 @@
 				<artifactId>target-platform-configuration</artifactId>
 				<configuration>
 					<environments>
-<!--					<environment>
-							<os>linux</os>
-							<ws>gtk</ws>
-							<arch>x86</arch>
-						</environment>
-						<environment>
-							<os>linux</os>
-							<ws>gtk</ws>
-							<arch>x86_64</arch>
-						</environment>
-						<environment>
-							<os>win32</os>
-							<ws>win32</ws>
-							<arch>x86</arch>
-						</environment>
-						<environment>
-							<os>macosx</os>
-							<ws>cocoa</ws>
-							<arch>x86_64</arch>
-						</environment>
--->
+						<!-- <environment> <os>linux</os> <ws>gtk</ws> <arch>x86</arch> </environment> 
+							<environment> <os>linux</os> <ws>gtk</ws> <arch>x86_64</arch> </environment> 
+							<environment> <os>win32</os> <ws>win32</ws> <arch>x86</arch> </environment> 
+							<environment> <os>macosx</os> <ws>cocoa</ws> <arch>x86_64</arch> </environment> -->
 						<environment>
 							<os>win32</os>
 							<ws>win32</ws>
@@ -180,23 +192,21 @@
 
 				<executions>
 					<execution>
-						<id>compile</id>
+						<id>scala-compile-first</id>
+						<phase>process-resources</phase>
 						<goals>
+							<goal>add-source</goal>
 							<goal>compile</goal>
 						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<executions>
+					<execution>
 						<phase>compile</phase>
-					</execution>
-
-					<execution>
-						<id>test-compile</id>
-						<goals>
-							<goal>testCompile</goal>
-						</goals>
-						<phase>test-compile</phase>
-					</execution>
-
-					<execution>
-						<phase>process-resources</phase>
 						<goals>
 							<goal>compile</goal>
 						</goals>
@@ -207,6 +217,11 @@
 
 		<pluginManagement>
 			<plugins>
+				<plugin>
+					<groupId>org.scala-tools</groupId>
+					<artifactId>maven-scala-plugin</artifactId>
+				</plugin>
+
 				<plugin>
 					<groupId>org.eclipse.tycho</groupId>
 					<artifactId>target-platform-configuration</artifactId>
@@ -315,6 +330,7 @@
 										<goals>
 											<goal>testCompile</goal>
 											<goal>compile</goal>
+											<goal>add-source</goal>
 										</goals>
 									</pluginExecutionFilter>
 									<action>
@@ -379,6 +395,25 @@
 										</versionRange>
 										<goals>
 											<goal>compile</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.eclipse.tycho.extras
+										</groupId>
+										<artifactId>
+											tycho-eclipserun-plugin
+										</artifactId>
+										<versionRange>
+											[0.18.0,)
+										</versionRange>
+										<goals>
+											<goal>eclipse-run</goal>
 										</goals>
 									</pluginExecutionFilter>
 									<action>

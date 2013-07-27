@@ -19,5 +19,11 @@
 			<artifactId>org.emftext.commons.antlr3_4_0</artifactId>
 			<version>3.4.0-SNAPSHOT</version>
 		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
 	</dependencies>
 </project> 
