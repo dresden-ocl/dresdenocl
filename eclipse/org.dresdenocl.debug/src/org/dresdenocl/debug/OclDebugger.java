@@ -915,6 +915,7 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	@Override
 	protected OclAny evaluateAny(OclExpression body,
 			OclCollection<OclAny> source, Variable iterator, Type resultType) {
+
 		myEnvironment.setVariableValue(OCL_ITERATOR_EXPRESSION_RESULT,
 				myStandardLibraryFactory.createOclUndefined(resultType,
 						"No element matching to the body expression yet."));
@@ -930,6 +931,39 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		// no else.
 
 		return super.evaluateAny(body, source, iterator, resultType);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.dresdenocl.interpreter.internal.OclInterpreter#evaluateSelectElement
+	 * (org.dresdenocl.essentialocl.expressions.OclExpression,
+	 * org.dresdenocl.essentialocl.standardlibrary.OclCollection,
+	 * org.dresdenocl.essentialocl.expressions.Variable,
+	 * org.dresdenocl.essentialocl.standardlibrary.OclIterator, java.util.List,
+	 * org.dresdenocl.pivotmodel.Type)
+	 */
+	@Override
+	protected OclAny evaluateSelectElement(OclExpression body,
+			OclCollection<OclAny> source, Variable iterator,
+			OclIterator<OclAny> it, List<OclAny> resultList, Type resultType) {
+
+		myEnvironment.setVariableValue(OCL_ITERATOR_EXPRESSION_RESULT,
+				this.adaptResultListAsCollection(resultList, resultType));
+
+		/* Do not stop here during step over. */
+		if (!m_stepMode.equals(EStepMode.STEP_OVER)) {
+			popStackFrame();
+			stopOnBreakpoint(
+					"IteratorExpression ("
+							+ ((NamedElement) body.eContainer()).getName()
+							+ ")", body.eContainer());
+		}
+		// no else.
+
+		return super.evaluateSelectElement(body, source, iterator, it,
+				resultList, resultType);
 	}
 
 	/*
