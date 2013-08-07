@@ -1546,11 +1546,10 @@ public class TestDebugItators extends AbstractDebuggerTest {
 	
 		/* Iteration over second element (2) */
 	
-		/* Debugger at iterator expression 'select'. */
+		/* Debugger at operation call '='. */
 		assertCurrentLine(5, debugger);
-		assertStackSize(2, debugger);
-		assertStackName(CallStackConstants.ITERATOR_EXPRESSION + " (select)",
-				debugger);
+		assertStackSize(3, debugger);
+		assertStackName(CallStackConstants.OPERATION_CALL + " (=)", debugger);
 		assertVariableNumber(4, debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME,
@@ -1561,6 +1560,69 @@ public class TestDebugItators extends AbstractDebuggerTest {
 	
 		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
 	
+		/* Debugger at variable call 'i'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(4, debugger);
+		assertStackName(CallStackConstants.VARIABLE_CALL + " (i)", debugger);
+		assertVariableNumber(4, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME,
+				debugger);
+		assertVariableExist("i", debugger);
+		assertVariableExist(OclDebugger.OCL_ITERATOR_EXPRESSION_RESULT,
+				debugger);
+	
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+	
+		/* Debugger at integer literal '2'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(4, debugger);
+		assertStackName(CallStackConstants.INTEGER_LITERAL + " (2)", debugger);
+		assertVariableNumber(4, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME,
+				debugger);
+		assertVariableExist("i", debugger);
+		assertVariableExist(OclDebugger.OCL_ITERATOR_EXPRESSION_RESULT,
+				debugger);
+	
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+	
+		/* Debugger at operation call '='. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(3, debugger);
+		assertStackName(CallStackConstants.OPERATION_CALL + " (=)", debugger);
+		assertVariableNumber(5, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME,
+				debugger);
+		assertVariableExist(OclDebugger.OCL_PARAMETER_VALUE_VARIBALE + 1,
+				debugger);
+		assertVariableExist("i", debugger);
+		assertVariableExist(OclDebugger.OCL_ITERATOR_EXPRESSION_RESULT,
+				debugger);
+	
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+	
+		/* Debugger at operation call '='. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(3, debugger);
+		assertStackName(CallStackConstants.OPERATION_CALL + " (=)", debugger);
+		assertVariableNumber(6, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME,
+				debugger);
+		assertVariableExist(OclDebugger.OCL_PARAMETER_VALUE_VARIBALE + 1,
+				debugger);
+		assertVariableExist(OclDebugger.OCL_OPERATION_CALL_RESULT, debugger);
+		assertVariableExist("i", debugger);
+		assertVariableExist(OclDebugger.OCL_ITERATOR_EXPRESSION_RESULT,
+				debugger);
+	
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+	
+		/* Iteration over third element (3). */
+		
 		/* Debugger at operation call '='. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(3, debugger);
@@ -1641,16 +1703,17 @@ public class TestDebugItators extends AbstractDebuggerTest {
 		assertStackSize(2, debugger);
 		assertStackName(CallStackConstants.ITERATOR_EXPRESSION + " (select)",
 				debugger);
-		assertVariableNumber(3, debugger);
+		assertVariableNumber(4, debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME,
 				debugger);
+		assertVariableExist("i", debugger);
 		assertVariableExist(OclDebugger.OCL_ITERATOR_EXPRESSION_RESULT,
 				debugger);
 	
 		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
 	
-		/* Debugger after iterator exp 'any'. */
+		/* Debugger after iterator exp 'select'. */
 		assertCurrentLine(4, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.EXPRESSION_IN_OCL, debugger);

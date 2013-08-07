@@ -937,6 +937,36 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	 * (non-Javadoc)
 	 * 
 	 * @see
+	 * org.dresdenocl.interpreter.internal.OclInterpreter#evaluateSelect(org
+	 * .dresdenocl.essentialocl.expressions.OclExpression,
+	 * org.dresdenocl.essentialocl.standardlibrary.OclCollection,
+	 * org.dresdenocl.essentialocl.expressions.Variable,
+	 * org.dresdenocl.pivotmodel.Type)
+	 */
+	@Override
+	protected OclAny evaluateSelect(OclExpression body,
+			OclCollection<OclAny> source, Variable iterator, Type resultType) {
+		myEnvironment.setVariableValue(OCL_ITERATOR_EXPRESSION_RESULT,
+				myStandardLibraryFactory.createOclUndefined(resultType,
+						"Iterator interpretation not started yet."));
+
+		/* Do not stop here during step over. */
+		if (!m_stepMode.equals(EStepMode.STEP_OVER)) {
+			popStackFrame();
+			stopOnBreakpoint(
+					"IteratorExpression ("
+							+ ((NamedElement) body.eContainer()).getName()
+							+ ")", body.eContainer());
+		}
+		// no else.
+
+		return super.evaluateSelect(body, source, iterator, resultType);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
 	 * org.dresdenocl.interpreter.internal.OclInterpreter#evaluateSelectElement
 	 * (org.dresdenocl.essentialocl.expressions.OclExpression,
 	 * org.dresdenocl.essentialocl.standardlibrary.OclCollection,
@@ -949,21 +979,14 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 			OclCollection<OclAny> source, Variable iterator,
 			OclIterator<OclAny> it, List<OclAny> resultList, Type resultType) {
 
+		OclAny result = super.evaluateSelectElement(body, source, iterator, it,
+				resultList, resultType);
+
+		/* Update result variable. */
 		myEnvironment.setVariableValue(OCL_ITERATOR_EXPRESSION_RESULT,
 				this.adaptResultListAsCollection(resultList, resultType));
 
-		/* Do not stop here during step over. */
-		if (!m_stepMode.equals(EStepMode.STEP_OVER)) {
-			popStackFrame();
-			stopOnBreakpoint(
-					"IteratorExpression ("
-							+ ((NamedElement) body.eContainer()).getName()
-							+ ")", body.eContainer());
-		}
-		// no else.
-
-		return super.evaluateSelectElement(body, source, iterator, it,
-				resultList, resultType);
+		return result;
 	}
 
 	/*
