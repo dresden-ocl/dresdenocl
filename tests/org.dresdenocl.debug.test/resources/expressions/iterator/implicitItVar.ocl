@@ -1,0 +1,7 @@
+package resource::package01
+
+context TestClass
+def: testImplicitItVarExp01 : Integer =
+Set{1, 2, 3}->any(true)
+
+endpackage
