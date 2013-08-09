@@ -962,6 +962,31 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 
 		return super.evaluateSelect(body, source, iterator, resultType);
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.dresdenocl.interpreter.internal.OclInterpreter#evaluateExists(org.dresdenocl.essentialocl.expressions.OclExpression, org.dresdenocl.essentialocl.standardlibrary.OclCollection, java.util.List, org.dresdenocl.essentialocl.standardlibrary.OclIterator)
+	 */
+	@Override
+	protected OclAny evaluateExists(OclExpression body,
+			OclCollection<OclAny> source, List<Variable> iterators,
+			OclIterator<OclAny> it) {
+
+		myEnvironment.setVariableValue(OCL_ITERATOR_EXPRESSION_RESULT,
+				myStandardLibraryFactory.createOclBoolean(false));
+
+		/* Do not stop here during step over. */
+		if (!m_stepMode.equals(EStepMode.STEP_OVER)) {
+			popStackFrame();
+			stopOnBreakpoint(
+					"IteratorExpression ("
+							+ ((NamedElement) body.eContainer()).getName()
+							+ ")", body.eContainer());
+		}
+		// no else.
+
+		return super.evaluateExists(body, source, iterators, it);
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -978,6 +1003,10 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	protected OclAny evaluateSelectElement(OclExpression body,
 			OclCollection<OclAny> source, Variable iterator,
 			OclIterator<OclAny> it, List<OclAny> resultList, Type resultType) {
+
+		/* Update result variable (necessary in front of the first element. */
+		myEnvironment.setVariableValue(OCL_ITERATOR_EXPRESSION_RESULT,
+				this.adaptResultListAsCollection(resultList, resultType));
 
 		OclAny result = super.evaluateSelectElement(body, source, iterator, it,
 				resultList, resultType);
