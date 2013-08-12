@@ -977,6 +977,7 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 
 		/* Do not stop here during step over. */
 		if (!m_stepMode.equals(EStepMode.STEP_OVER)) {
+			/* Push additional environment to make it variables visible. */
 			popStackFrame();
 			stopOnBreakpoint(
 					"IteratorExpression ("
