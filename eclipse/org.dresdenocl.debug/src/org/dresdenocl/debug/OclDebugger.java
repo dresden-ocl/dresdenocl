@@ -962,10 +962,15 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 
 		return super.evaluateSelect(body, source, iterator, resultType);
 	}
-	
+
 	/*
 	 * (non-Javadoc)
-	 * @see org.dresdenocl.interpreter.internal.OclInterpreter#evaluateExists(org.dresdenocl.essentialocl.expressions.OclExpression, org.dresdenocl.essentialocl.standardlibrary.OclCollection, java.util.List, org.dresdenocl.essentialocl.standardlibrary.OclIterator)
+	 * 
+	 * @see
+	 * org.dresdenocl.interpreter.internal.OclInterpreter#evaluateExists(org
+	 * .dresdenocl.essentialocl.expressions.OclExpression,
+	 * org.dresdenocl.essentialocl.standardlibrary.OclCollection,
+	 * java.util.List, org.dresdenocl.essentialocl.standardlibrary.OclIterator)
 	 */
 	@Override
 	protected OclAny evaluateExists(OclExpression body,
@@ -987,6 +992,36 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		// no else.
 
 		return super.evaluateExists(body, source, iterators, it);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.dresdenocl.interpreter.internal.OclInterpreter#evaluateForAll(org
+	 * .dresdenocl.essentialocl.expressions.OclExpression,
+	 * org.dresdenocl.essentialocl.standardlibrary.OclCollection,
+	 * java.util.List, org.dresdenocl.essentialocl.standardlibrary.OclIterator)
+	 */
+	@Override
+	protected OclAny evaluateForAll(OclExpression body,
+			OclCollection<OclAny> source, List<Variable> iterators,
+			OclIterator<OclAny> it) {
+
+		myEnvironment.setVariableValue(OCL_ITERATOR_EXPRESSION_RESULT,
+				myStandardLibraryFactory.createOclBoolean(true));
+	
+		/* Do not stop here during step over. */
+		if (!m_stepMode.equals(EStepMode.STEP_OVER)) {
+			popStackFrame();
+			stopOnBreakpoint(
+					"IteratorExpression ("
+							+ ((NamedElement) body.eContainer()).getName()
+							+ ")", body.eContainer());
+		}
+		// no else.
+		
+		return super.evaluateForAll(body, source, iterators, it);
 	}
 
 	/*
