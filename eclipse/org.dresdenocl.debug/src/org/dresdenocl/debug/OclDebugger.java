@@ -1010,7 +1010,7 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 
 		myEnvironment.setVariableValue(OCL_ITERATOR_EXPRESSION_RESULT,
 				myStandardLibraryFactory.createOclBoolean(true));
-	
+
 		/* Do not stop here during step over. */
 		if (!m_stepMode.equals(EStepMode.STEP_OVER)) {
 			popStackFrame();
@@ -1020,8 +1020,37 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 							+ ")", body.eContainer());
 		}
 		// no else.
-		
+
 		return super.evaluateForAll(body, source, iterators, it);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.dresdenocl.interpreter.internal.OclInterpreter#evaluateIsUnique(org
+	 * .dresdenocl.essentialocl.expressions.OclExpression,
+	 * org.dresdenocl.essentialocl.standardlibrary.OclCollection,
+	 * org.dresdenocl.essentialocl.expressions.Variable)
+	 */
+	@Override
+	protected OclAny evaluateIsUnique(OclExpression body,
+			OclCollection<OclAny> source, Variable iterator) {
+
+		myEnvironment.setVariableValue(OCL_ITERATOR_EXPRESSION_RESULT,
+				myStandardLibraryFactory.createOclBoolean(true));
+
+		/* Do not stop here during step over. */
+		if (!m_stepMode.equals(EStepMode.STEP_OVER)) {
+			popStackFrame();
+			stopOnBreakpoint(
+					"IteratorExpression ("
+							+ ((NamedElement) body.eContainer()).getName()
+							+ ")", body.eContainer());
+		}
+		// no else.
+
+		return super.evaluateIsUnique(body, source, iterator);
 	}
 
 	/*
