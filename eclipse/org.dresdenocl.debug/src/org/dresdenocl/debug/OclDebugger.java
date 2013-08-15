@@ -937,36 +937,6 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.dresdenocl.interpreter.internal.OclInterpreter#evaluateSelect(org
-	 * .dresdenocl.essentialocl.expressions.OclExpression,
-	 * org.dresdenocl.essentialocl.standardlibrary.OclCollection,
-	 * org.dresdenocl.essentialocl.expressions.Variable,
-	 * org.dresdenocl.pivotmodel.Type)
-	 */
-	@Override
-	protected OclAny evaluateSelect(OclExpression body,
-			OclCollection<OclAny> source, Variable iterator, Type resultType) {
-		myEnvironment.setVariableValue(OCL_ITERATOR_EXPRESSION_RESULT,
-				myStandardLibraryFactory.createOclUndefined(resultType,
-						"Iterator interpretation not started yet."));
-
-		/* Do not stop here during step over. */
-		if (!m_stepMode.equals(EStepMode.STEP_OVER)) {
-			popStackFrame();
-			stopOnBreakpoint(
-					"IteratorExpression ("
-							+ ((NamedElement) body.eContainer()).getName()
-							+ ")", body.eContainer());
-		}
-		// no else.
-
-		return super.evaluateSelect(body, source, iterator, resultType);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
 	 * org.dresdenocl.interpreter.internal.OclInterpreter#evaluateExists(org
 	 * .dresdenocl.essentialocl.expressions.OclExpression,
 	 * org.dresdenocl.essentialocl.standardlibrary.OclCollection,
@@ -1051,6 +1021,97 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		// no else.
 
 		return super.evaluateIsUnique(body, source, iterator);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.dresdenocl.interpreter.internal.OclInterpreter#evaluateReject(org
+	 * .dresdenocl.essentialocl.expressions.OclExpression,
+	 * org.dresdenocl.essentialocl.standardlibrary.OclCollection,
+	 * org.dresdenocl.essentialocl.expressions.Variable,
+	 * org.dresdenocl.pivotmodel.Type)
+	 */
+	@Override
+	protected OclAny evaluateReject(OclExpression body,
+			OclCollection<OclAny> source, Variable iterator, Type resultType) {
+
+		myEnvironment.setVariableValue(OCL_ITERATOR_EXPRESSION_RESULT,
+				myStandardLibraryFactory.createOclUndefined(resultType,
+						"Iterator interpretation not started yet."));
+
+		/* Do not stop here during step over. */
+		if (!m_stepMode.equals(EStepMode.STEP_OVER)) {
+			popStackFrame();
+			stopOnBreakpoint(
+					"IteratorExpression ("
+							+ ((NamedElement) body.eContainer()).getName()
+							+ ")", body.eContainer());
+		}
+		// no else.
+
+		return super.evaluateReject(body, source, iterator, resultType);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.dresdenocl.interpreter.internal.OclInterpreter#evaluateRejectElement
+	 * (org.dresdenocl.essentialocl.expressions.OclExpression,
+	 * org.dresdenocl.essentialocl.standardlibrary.OclCollection,
+	 * org.dresdenocl.essentialocl.expressions.Variable,
+	 * org.dresdenocl.essentialocl.standardlibrary.OclIterator, java.util.List,
+	 * org.dresdenocl.pivotmodel.Type)
+	 */
+	@Override
+	protected OclAny evaluateRejectElement(OclExpression body,
+			OclCollection<OclAny> source, Variable iterator,
+			OclIterator<OclAny> it, List<OclAny> resultList, Type resultType) {
+
+		/* Update result variable (necessary in front of the first element. */
+		myEnvironment.setVariableValue(OCL_ITERATOR_EXPRESSION_RESULT,
+				this.adaptResultListAsCollection(resultList, resultType));
+
+		OclAny result = super.evaluateRejectElement(body, source, iterator, it,
+				resultList, resultType);
+
+		/* Update result variable. */
+		myEnvironment.setVariableValue(OCL_ITERATOR_EXPRESSION_RESULT,
+				this.adaptResultListAsCollection(resultList, resultType));
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.dresdenocl.interpreter.internal.OclInterpreter#evaluateSelect(org
+	 * .dresdenocl.essentialocl.expressions.OclExpression,
+	 * org.dresdenocl.essentialocl.standardlibrary.OclCollection,
+	 * org.dresdenocl.essentialocl.expressions.Variable,
+	 * org.dresdenocl.pivotmodel.Type)
+	 */
+	@Override
+	protected OclAny evaluateSelect(OclExpression body,
+			OclCollection<OclAny> source, Variable iterator, Type resultType) {
+		myEnvironment.setVariableValue(OCL_ITERATOR_EXPRESSION_RESULT,
+				myStandardLibraryFactory.createOclUndefined(resultType,
+						"Iterator interpretation not started yet."));
+
+		/* Do not stop here during step over. */
+		if (!m_stepMode.equals(EStepMode.STEP_OVER)) {
+			popStackFrame();
+			stopOnBreakpoint(
+					"IteratorExpression ("
+							+ ((NamedElement) body.eContainer()).getName()
+							+ ")", body.eContainer());
+		}
+		// no else.
+
+		return super.evaluateSelect(body, source, iterator, resultType);
 	}
 
 	/*
