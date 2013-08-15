@@ -55,6 +55,7 @@ import org.dresdenocl.modelinstancetype.types.base.BasisJavaModelInstanceFactory
 import org.dresdenocl.parser.ParseException;
 import org.dresdenocl.pivotmodel.Constraint;
 import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 
 /**
  * <p>
@@ -64,7 +65,7 @@ import org.dresdenocl.pivotmodel.Operation;
  * 
  * @author Claas Wilke
  */
-public class TestInterpretation {
+public class TestInterpretation extends AbstractDresdenOclTest {
 
 	/**
 	 * The {@link TestPerformer} used for all test cases of this class.

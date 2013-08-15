@@ -2460,8 +2460,12 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 					validElements++;
 
-					/* If alreadyFoundAnElement, break and return true. */
-					if (validElements >= 1) {
+					/*
+					 * If already found two elements, break and return true (one
+					 * element is not sufficient, as the one iterator checks if
+					 * there is exactly one element!).
+					 */
+					if (validElements > 1) {
 						break;
 					}
 					// no else.
@@ -2560,50 +2564,18 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		/* Else compute the result. */
 		else {
-			/*
-			 * Iterate over the collection and add all elements to the result
-			 * list which do not fulfill the body condition.
-			 */
+			/* Iterate over the collection. */
 			while (it.hasNext().isTrue()) {
 
-				OclAny anElement;
-				OclBoolean bodyResult;
-
-				/* Add the actual element to the environment. */
-				anElement = it.next();
-				myEnvironment.setVariableValue(iterator.getQualifiedName(),
-						anElement);
-
-				/* Compute the body expression. */
-				bodyResult = (OclBoolean) doSwitch((EObject) body);
-
-				/* Probably result in invalid. */
-				if (bodyResult.oclIsInvalid().isTrue()) {
-					result = this.myStandardLibraryFactory
-							.createOclInvalid(
-									source.getGenericType(),
-									new IllegalArgumentException(
-											"During reject() iteration, body expression was invalid for at least one element.",
-											bodyResult.getInvalidReason()));
-					break;
-				}
-
-				else if (bodyResult.oclIsUndefined().isTrue()) {
-					result = this.myStandardLibraryFactory
-							.createOclInvalid(
-									source.getGenericType(),
-									new IllegalArgumentException(
-											"During reject() iteration, body expression was undefined for at least one element."));
-					break;
-				}
+				result = evaluateRejectElement(body, source, iterator, it,
+						resultList, resultType);
 
 				/*
-				 * Else add the element to the result list if the body result is
-				 * not true.
+				 * If result contains a valid, result is invalid or undefined.
+				 * Else resultList contains the result's elements.
 				 */
-				else if (!bodyResult.isTrue()) {
-					resultList.add(anElement);
-				}
+				if (null != result)
+					break;
 				// no else.
 			}
 			// end while.
@@ -2617,6 +2589,70 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// end else.
 
+		return result;
+	}
+
+	/**
+	 * Helper method evaluating the body {@link Expression} of an reject
+	 * iterator for one element of the respective collection.
+	 * 
+	 * @param body
+	 *            The body {@link Expression}
+	 * @param source
+	 *            The source of the {@link IteratorExp}.
+	 * @param iterator
+	 *            The iterator {@link Variable}.
+	 * @param it
+	 *            The {@link OclIterator}.
+	 * @param resultList
+	 *            The {@link List} containing all {@link OclAny} elements yet
+	 *            belonging to the result. <strong>This is the real result of
+	 *            this method call!</strong>
+	 * @param resultType
+	 *            the result type (set, sequence, bag, orderedSet)
+	 * @return <code>null</code> if everything went ok. Else an
+	 *         {@link OclInvalid} or {@link OclVoid} instance.
+	 */
+	protected OclAny evaluateRejectElement(OclExpression body,
+			OclCollection<OclAny> source, Variable iterator,
+			OclIterator<OclAny> it, List<OclAny> resultList, Type resultType) {
+
+		OclAny anElement;
+		OclBoolean bodyResult;
+		OclAny result = null;
+
+		/* Add an element to the environment. */
+		anElement = it.next();
+		myEnvironment.setVariableValue(iterator.getQualifiedName(), anElement);
+
+		/* Compute the body expression for an element. */
+		bodyResult = (OclBoolean) doSwitch((EObject) body);
+
+		/* Probably result in invalid. */
+		if (bodyResult.oclIsInvalid().isTrue()) {
+			result = this.myStandardLibraryFactory
+					.createOclInvalid(
+							source.getGenericType(),
+							new IllegalArgumentException(
+									"During reject() iteration, body expression was invalid for at least one element.",
+									bodyResult.getInvalidReason()));
+		}
+
+		else if (bodyResult.oclIsUndefined().isTrue()) {
+			result = this.myStandardLibraryFactory
+					.createOclInvalid(
+							source.getGenericType(),
+							new IllegalArgumentException(
+									"During reject() iteration, body expression was undefined for at least one element."));
+		}
+
+		/*
+		 * Else add the element to the result list if the body result is true.
+		 */
+		else if (!bodyResult.isTrue()) {
+			resultList.add(anElement);
+		}
+		// no else.
 		return result;
 	}
 
