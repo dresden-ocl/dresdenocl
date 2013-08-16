@@ -61,6 +61,7 @@ import org.dresdenocl.essentialocl.expressions.Variable;
 import org.dresdenocl.essentialocl.expressions.VariableExp;
 import org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch;
 import org.dresdenocl.essentialocl.standardlibrary.OclAny;
+import org.dresdenocl.essentialocl.standardlibrary.OclBag;
 import org.dresdenocl.essentialocl.standardlibrary.OclBoolean;
 import org.dresdenocl.essentialocl.standardlibrary.OclCollection;
 import org.dresdenocl.essentialocl.standardlibrary.OclComparable;
@@ -68,6 +69,7 @@ import org.dresdenocl.essentialocl.standardlibrary.OclInteger;
 import org.dresdenocl.essentialocl.standardlibrary.OclInvalid;
 import org.dresdenocl.essentialocl.standardlibrary.OclIterator;
 import org.dresdenocl.essentialocl.standardlibrary.OclModelInstanceObject;
+import org.dresdenocl.essentialocl.standardlibrary.OclSequence;
 import org.dresdenocl.essentialocl.standardlibrary.OclTuple;
 import org.dresdenocl.essentialocl.standardlibrary.OclType;
 import org.dresdenocl.essentialocl.standardlibrary.OclVoid;
@@ -2028,57 +2030,105 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		/* Else compute the result. */
 		else {
+			result = null;
 
-			/*
-			 * Iterate over the source and collect the body expression for all
-			 * elements.
-			 */
+			/* Iterate over the collection. */
 			while (sourceIt.hasNext().isTrue()) {
-
-				OclAny anElement;
-				OclAny bodyResult;
-
-				/* Get the next element and add it to the environment. */
-				anElement = sourceIt.next();
-				myEnvironment.setVariableValue(iterator.getQualifiedName(),
-						anElement);
-
-				/* Compute the body expression for an element. */
-				bodyResult = doSwitch((EObject) body);
-
-				resultList.add(bodyResult);
+				resultList = evaluateCollectNestedElement(body, source,
+						iterator, sourceIt, resultList, resultType);
 			}
 			// end while.
 
-			/* Compute the result type depending on the given result type. */
-			if (resultType instanceof BagType) {
-				result = myStandardLibraryFactory.createOclBag(resultList,
-						((BagType) resultType).getElementType());
+			/* Probably adapt the result list. */
+			if (result == null) {
+				result = adaptCollectNestedResult(resultType, resultList);
 			}
-
-			else if (resultType instanceof SequenceType) {
-				result = myStandardLibraryFactory.createOclSequence(resultList,
-						((SequenceType) resultType).getElementType());
-			}
-
-			else {
-				String msg;
-				msg = "The ResultType of a collectNested Iterator should by a Sequence or Bag.";
-				msg += " But was " + resultType.getQualifiedName();
-
-				if (LOGGER.isInfoEnabled()) {
-					LOGGER.warn(msg);
-				}
-				// no else.
-
-				result = myStandardLibraryFactory.createOclInvalid(resultType,
-						new IllegalArgumentException(msg));
-			}
-			// end else.
+			// no else.
 		}
 		// end else.
 
 		return result;
+	}
+
+	/**
+	 * Helper method adapting a given result list of {@link OclAny}s to the
+	 * {@link OclAny} of the collect or collectNested iteration.
+	 * 
+	 * @param resultType
+	 *            The required result {@link Type} of the respective iteration.
+	 * @param resultList
+	 *            The {@link List} of {@link OclAny}s to be adapted.
+	 * @return The adapted result as a {@link OclBag} or {@link OclSequence}.
+	 */
+	protected OclAny adaptCollectNestedResult(Type resultType,
+			List<OclAny> resultList) {
+		OclAny result;
+		/* Compute the result type depending on the given result type. */
+		if (resultType instanceof BagType) {
+			result = myStandardLibraryFactory.createOclBag(resultList,
+					((BagType) resultType).getElementType());
+		}
+
+		else if (resultType instanceof SequenceType) {
+			result = myStandardLibraryFactory.createOclSequence(resultList,
+					((SequenceType) resultType).getElementType());
+		}
+
+		else {
+			String msg;
+			msg = "The ResultType of a collectNested Iterator should by a Sequence or Bag.";
+			msg += " But was " + resultType.getQualifiedName();
+
+			if (LOGGER.isInfoEnabled()) {
+				LOGGER.warn(msg);
+			}
+			// no else.
+
+			result = myStandardLibraryFactory.createOclInvalid(resultType,
+					new IllegalArgumentException(msg));
+		}
+		// end else.
+		return result;
+	}
+
+	/**
+	 * Helper method evaluating the body {@link Expression} of an collect
+	 * (nested) iterator for one element of the respective collection.
+	 * 
+	 * @param body
+	 *            The body {@link Expression}
+	 * @param source
+	 *            The source of the {@link IteratorExp}.
+	 * @param iterator
+	 *            The iterator {@link Variable}.
+	 * @param it
+	 *            The {@link OclIterator}.
+	 * @param resultList
+	 *            The {@link List} containing all {@link OclAny} elements yet
+	 *            belonging to the result. <strong>This is the real result of
+	 *            this method call!</strong>
+	 * @param resultType
+	 *            the result type (set, sequence, bag, orderedSet)
+	 * @return <code>null</code> if everything went ok. Else an
+	 *         {@link OclInvalid} or {@link OclVoid} instance.
+	 */
+	protected List<OclAny> evaluateCollectNestedElement(OclExpression body,
+			OclCollection<OclAny> source, Variable iterator,
+			OclIterator<OclAny> it, List<OclAny> resultList, Type resultType) {
+
+		OclAny anElement;
+		OclAny bodyResult;
+
+		/* Get the next element and add it to the environment. */
+		anElement = it.next();
+		myEnvironment.setVariableValue(iterator.getQualifiedName(), anElement);
+
+		/* Compute the body expression for an element. */
+		bodyResult = doSwitch((EObject) body);
+
+		resultList.add(bodyResult);
+
+		return resultList;
 	}
 
 	/**

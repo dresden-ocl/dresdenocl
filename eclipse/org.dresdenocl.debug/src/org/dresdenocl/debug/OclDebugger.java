@@ -937,6 +937,67 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	 * (non-Javadoc)
 	 * 
 	 * @see
+	 * org.dresdenocl.interpreter.internal.OclInterpreter#evaluateCollectNested
+	 * (org.dresdenocl.essentialocl.expressions.OclExpression,
+	 * org.dresdenocl.essentialocl.standardlibrary.OclCollection,
+	 * org.dresdenocl.essentialocl.expressions.Variable,
+	 * org.dresdenocl.pivotmodel.Type)
+	 */
+	@Override
+	protected OclAny evaluateCollectNested(OclExpression body,
+			OclCollection<OclAny> source, Variable iterator, Type resultType) {
+
+		myEnvironment.setVariableValue(OCL_ITERATOR_EXPRESSION_RESULT,
+				myStandardLibraryFactory.createOclUndefined(resultType,
+						"Iterator interpretation not started yet."));
+
+		/* Do not stop here during step over. */
+		if (!m_stepMode.equals(EStepMode.STEP_OVER)) {
+			popStackFrame();
+			stopOnBreakpoint(
+					"IteratorExpression ("
+							+ ((NamedElement) body.eContainer()).getName()
+							+ ")", body.eContainer());
+		}
+		// no else.
+
+		return super.evaluateCollectNested(body, source, iterator, resultType);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.dresdenocl.interpreter.internal.OclInterpreter#
+	 * evaluateCollectNestedElement
+	 * (org.dresdenocl.essentialocl.expressions.OclExpression,
+	 * org.dresdenocl.essentialocl.standardlibrary.OclCollection,
+	 * org.dresdenocl.essentialocl.expressions.Variable,
+	 * org.dresdenocl.essentialocl.standardlibrary.OclIterator, java.util.List,
+	 * org.dresdenocl.pivotmodel.Type)
+	 */
+	@Override
+	protected List<OclAny> evaluateCollectNestedElement(OclExpression body,
+			OclCollection<OclAny> source, Variable iterator,
+			OclIterator<OclAny> it, List<OclAny> resultList, Type resultType) {
+
+		/* Update result variable (necessary in front of the first element. */
+		myEnvironment.setVariableValue(OCL_ITERATOR_EXPRESSION_RESULT,
+				this.adaptCollectNestedResult(resultType, resultList));
+
+		resultList = super.evaluateCollectNestedElement(body, source, iterator,
+				it, resultList, resultType);
+
+		/* Update result variable. */
+		myEnvironment.setVariableValue(OCL_ITERATOR_EXPRESSION_RESULT,
+				this.adaptCollectNestedResult(resultType, resultList));
+
+		return resultList;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
 	 * org.dresdenocl.interpreter.internal.OclInterpreter#evaluateExists(org
 	 * .dresdenocl.essentialocl.expressions.OclExpression,
 	 * org.dresdenocl.essentialocl.standardlibrary.OclCollection,
