@@ -47,6 +47,7 @@ import org.dresdenocl.essentialocl.expressions.Variable;
 import org.dresdenocl.essentialocl.expressions.VariableExp;
 import org.dresdenocl.essentialocl.standardlibrary.OclAny;
 import org.dresdenocl.essentialocl.standardlibrary.OclCollection;
+import org.dresdenocl.essentialocl.standardlibrary.OclComparable;
 import org.dresdenocl.essentialocl.standardlibrary.OclIterator;
 import org.dresdenocl.essentialocl.types.CollectionType;
 import org.dresdenocl.interpreter.IInterpretationResult;
@@ -110,6 +111,18 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	 * debugging.
 	 */
 	public static final String OCL_PROPERTY_CALL_RESULT = "oclPropertyValue";
+
+	/**
+	 * Name of the variable containing the elements of an {@link OclCollection}
+	 * that is ordered during iteration.
+	 */
+	public static final String OCL_SORTED_BY_ELEMENTS = "oclSortedByElements";
+
+	/**
+	 * Name of the variable containing the values an {@link OclCollection} is
+	 * ordered by during iteration.
+	 */
+	public static final String OCL_SORTED_BY_VALUES = "oclSortedByValues";
 
 	/**
 	 * Stores the stack size at the last position being suspended (used for step
@@ -1201,6 +1214,100 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		/* Update result variable. */
 		myEnvironment.setVariableValue(OCL_ITERATOR_EXPRESSION_RESULT,
 				this.adaptResultListAsCollection(resultList, resultType));
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.dresdenocl.interpreter.internal.OclInterpreter#evaluateSortedBy(org
+	 * .dresdenocl.essentialocl.expressions.OclExpression,
+	 * org.dresdenocl.essentialocl.standardlibrary.OclCollection,
+	 * org.dresdenocl.essentialocl.expressions.Variable,
+	 * org.dresdenocl.pivotmodel.Type)
+	 */
+	@Override
+	protected OclAny evaluateSortedBy(OclExpression body,
+			OclCollection<OclAny> source, Variable iterator, Type resultType) {
+
+		myEnvironment
+				.setVariableValue(
+						OCL_ITERATOR_EXPRESSION_RESULT,
+						myStandardLibraryFactory
+								.createOclUndefined(resultType,
+										"Interpretation of sortedBy iterator not finished yet."));
+
+		/* Do not stop here during step over. */
+		if (!m_stepMode.equals(EStepMode.STEP_OVER)) {
+			popStackFrame();
+			stopOnBreakpoint(
+					"IteratorExpression ("
+							+ ((NamedElement) body.eContainer()).getName()
+							+ ")", body.eContainer());
+		}
+		// no else.
+
+		OclAny result = super.evaluateSortedBy(body, source, iterator,
+				resultType);
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.dresdenocl.interpreter.internal.OclInterpreter#evaluateSortedByElement
+	 * (org.dresdenocl.essentialocl.expressions.OclExpression,
+	 * org.dresdenocl.essentialocl.standardlibrary.OclCollection,
+	 * org.dresdenocl.essentialocl.standardlibrary.OclAny,
+	 * org.dresdenocl.pivotmodel.Type, java.util.Map)
+	 */
+	@Override
+	protected OclAny evaluateSortedByElement(OclExpression body,
+			OclCollection<OclAny> source, OclAny currentElement,
+			Type resultType, Map<OclComparable, OclAny> results) {
+
+		/* Set variables for current status of sorting. */
+		List<OclAny> keys = new ArrayList<OclAny>(results.size());
+		List<OclAny> values = new ArrayList<OclAny>(results.size());
+		for (OclComparable value : results.keySet()) {
+			values.add(value);
+			keys.add(results.get(value));
+		}
+		// end for.
+
+		myEnvironment.setVariableValue(OCL_SORTED_BY_ELEMENTS,
+				myStandardLibraryFactory.createOclBag(keys,
+						((CollectionType) resultType).getElementType()));
+		myEnvironment.setVariableValue(OCL_SORTED_BY_VALUES,
+				myStandardLibraryFactory.createOclBag(values, body.getType()));
+
+		OclAny result = super.evaluateSortedByElement(body, source,
+				currentElement, resultType, results);
+
+		/* Probably update sort variables again (if after last element). */
+		if (source.getModelInstanceCollection().getCollection().size() == results
+				.size()) {
+			/* Set variables for current status of sorting. */
+			keys = new ArrayList<OclAny>(results.size());
+			values = new ArrayList<OclAny>(results.size());
+			for (OclComparable value : results.keySet()) {
+				values.add(value);
+				keys.add(results.get(value));
+			}
+			// end for.
+
+			myEnvironment.setVariableValue(OCL_SORTED_BY_ELEMENTS,
+					myStandardLibraryFactory.createOclBag(keys,
+							((CollectionType) resultType).getElementType()));
+			myEnvironment.setVariableValue(
+					OCL_SORTED_BY_VALUES,
+					myStandardLibraryFactory.createOclBag(values,
+							body.getType()));
+		}
+		// no else.
 
 		return result;
 	}

@@ -7884,6 +7884,220 @@ public class TestDebugItators extends AbstractDebuggerTest {
 	}
 
 	@Test
+	public void testSortedByIteratorStepInto01() throws Exception {
+
+		String oclResource = "resources/expressions/iterator/sortedBy01.ocl";
+		OclDebugger debugger = generateDebugger(oclResource);
+		waitForEvent(DebugEvent.STARTED);
+		waitForEvent(DebugEvent.SUSPENDED);
+
+		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
+		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
+		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger at iterator expression 'sortedBy'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(2, debugger);
+		assertStackName(CallStackConstants.ITERATOR_EXPRESSION + " (sortedBy)",
+				debugger);
+		assertVariableNumber(1, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger at collection literal 'OrderedSet'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(3, debugger);
+		assertStackName(
+				CallStackConstants.COLLECTION_LITERAL + " (OrderedSet)",
+				debugger);
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.OCL_COLLECTION_RESULT_VATRIABLE_NAME,
+				debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger at integer literal '3'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(4, debugger);
+		assertStackName(CallStackConstants.INTEGER_LITERAL + " (3)", debugger);
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.OCL_COLLECTION_RESULT_VATRIABLE_NAME,
+				debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger at collection literal 'OrderedSet'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(3, debugger);
+		assertStackName(
+				CallStackConstants.COLLECTION_LITERAL + " (OrderedSet)",
+				debugger);
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.OCL_COLLECTION_RESULT_VATRIABLE_NAME,
+				debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger at integer literal '2'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(4, debugger);
+		assertStackName(CallStackConstants.INTEGER_LITERAL + " (2)", debugger);
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.OCL_COLLECTION_RESULT_VATRIABLE_NAME,
+				debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger at collection literal 'OrderedSet'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(3, debugger);
+		assertStackName(
+				CallStackConstants.COLLECTION_LITERAL + " (OrderedSet)",
+				debugger);
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.OCL_COLLECTION_RESULT_VATRIABLE_NAME,
+				debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger at integer literal '1'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(4, debugger);
+		assertStackName(CallStackConstants.INTEGER_LITERAL + " (1)", debugger);
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.OCL_COLLECTION_RESULT_VATRIABLE_NAME,
+				debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger at collection literal 'OrderedSet'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(3, debugger);
+		assertStackName(
+				CallStackConstants.COLLECTION_LITERAL + " (OrderedSet)",
+				debugger);
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.OCL_COLLECTION_RESULT_VATRIABLE_NAME,
+				debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* Iteration over first element (3) */
+
+		/* Debugger at iterator expression 'sortedBy'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(2, debugger);
+		assertStackName(CallStackConstants.ITERATOR_EXPRESSION + " (sortedBy)",
+				debugger);
+		assertVariableNumber(3, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME,
+				debugger);
+		assertVariableExist(OclDebugger.OCL_ITERATOR_EXPRESSION_RESULT,
+				debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger at variable call 'i'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(3, debugger);
+		assertStackName(CallStackConstants.VARIABLE_CALL + " (i)", debugger);
+		assertVariableNumber(6, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME,
+				debugger);
+		assertVariableExist("i", debugger);
+		assertVariableExist(OclDebugger.OCL_ITERATOR_EXPRESSION_RESULT,
+				debugger);
+		assertVariableExist(OclDebugger.OCL_SORTED_BY_ELEMENTS,
+				debugger);
+		assertVariableExist(OclDebugger.OCL_SORTED_BY_VALUES,
+				debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* Iteration over second element (2) */
+
+		/* Debugger at variable call 'i'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(3, debugger);
+		assertStackName(CallStackConstants.VARIABLE_CALL + " (i)", debugger);
+		assertVariableNumber(6, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME,
+				debugger);
+		assertVariableExist("i", debugger);
+		assertVariableExist(OclDebugger.OCL_ITERATOR_EXPRESSION_RESULT,
+				debugger);
+		assertVariableExist(OclDebugger.OCL_SORTED_BY_ELEMENTS,
+				debugger);
+		assertVariableExist(OclDebugger.OCL_SORTED_BY_VALUES,
+				debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* Iteration over third element (3). */
+
+		/* Debugger at variable call 'i'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(3, debugger);
+		assertStackName(CallStackConstants.VARIABLE_CALL + " (i)", debugger);
+		assertVariableNumber(6, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME,
+				debugger);
+		assertVariableExist("i", debugger);
+		assertVariableExist(OclDebugger.OCL_ITERATOR_EXPRESSION_RESULT,
+				debugger);
+		assertVariableExist(OclDebugger.OCL_SORTED_BY_ELEMENTS,
+				debugger);
+		assertVariableExist(OclDebugger.OCL_SORTED_BY_VALUES,
+				debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger after iterator exp 'sortedBy'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(2, debugger);
+		assertStackName(CallStackConstants.ITERATOR_EXPRESSION + " (sortedBy)",
+				debugger);
+		assertVariableNumber(6, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_CALL_SOURCE_VATRIABLE_NAME,
+				debugger);
+		assertVariableExist("i", debugger);
+		assertVariableExist(OclDebugger.OCL_ITERATOR_EXPRESSION_RESULT,
+				debugger);
+		assertVariableExist(OclDebugger.OCL_SORTED_BY_ELEMENTS,
+				debugger);
+		assertVariableExist(OclDebugger.OCL_SORTED_BY_VALUES,
+				debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger after iterator exp 'sortedBy'. */
+		assertCurrentLine(4, debugger);
+		assertStackSize(1, debugger);
+		assertStackName(CallStackConstants.EXPRESSION_IN_OCL, debugger);
+		/* 'result' should be on the stack. */
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_RESULT_VATRIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO,
+				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
+	}
+
+	@Test
 	public void testImplicitIteratorVariable01() throws Exception {
 
 		String oclResource = "resources/expressions/iterator/implicitItVar01.ocl";

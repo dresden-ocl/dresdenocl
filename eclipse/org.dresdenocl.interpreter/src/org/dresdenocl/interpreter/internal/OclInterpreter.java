@@ -2900,54 +2900,26 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			/* Iterate over the collection. */
 			while (collectionIt.hasNext().isTrue()) {
 
-				OclAny activeElement;
-				OclAny bodyResult;
-
 				/* Add the active element to the environment. */
-				activeElement = collectionIt.next();
+				OclAny activeElement = collectionIt.next();
 				myEnvironment.setVariableValue(iterator.getQualifiedName(),
 						activeElement);
 
-				/* Compute the body for the actual set element. */
-				bodyResult = doSwitch((EObject) body);
+				result = evaluateSortedByElement(body, source, activeElement,
+						resultType, results);
 
-				/* Probably fail. */
-				if (bodyResult.oclIsInvalid().isTrue()) {
-					result = this.myStandardLibraryFactory
-							.createOclInvalid(
-									resultType,
-									new IllegalStateException(
-											"Body expression was invalid for at least one element during interpretation of iterator sortedBy().",
-											bodyResult.getInvalidReason()));
+				/*
+				 * If one element's evaluation lead to invalid or undefined,
+				 * break.
+				 */
+				if (null != result)
 					break;
-				}
-
-				else if (bodyResult.oclIsUndefined().isTrue()) {
-					result = this.myStandardLibraryFactory
-							.createOclInvalid(
-									resultType,
-									new IllegalStateException(
-											"Body expression was undefined for at least one element during interpretation of iterator sortedBy()."));
-					break;
-				}
-
-				if (bodyResult instanceof OclComparable) {
-					results.put((OclComparable) bodyResult, activeElement);
-				}
-
-				else {
-					result = myStandardLibraryFactory
-							.createOclInvalid(
-									resultType,
-									new IllegalStateException(
-											"Body expression was not comparable for at least one element during interpretation of iterator sortedBy()."));
-				}
-				// end else.
+				// no else.
 			}
 			// end while.
 
 			/* Probably adapt the result. */
-			if (result == null) {
+			if (null == result) {
 				resultList = new LinkedList<OclAny>(results.values());
 
 				/* Check which type of collection the result shall have. */
@@ -2978,6 +2950,71 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		// end else.
 
 		return result;
+	}
+
+	/**
+	 * Helper method evaluating the result for one {@link OclAny} element of an
+	 * {@link OclCollection} during the interpretation of a sortedBy iterator.
+	 * 
+	 * @param body
+	 *            The body {@link Expression} to be evaluated.
+	 * @param source
+	 *            The {@link OclCollection} being iterated.
+	 * @param currentElement
+	 *            The current element of the {@link OclCollection} as an
+	 *            {@link OclAny}.
+	 * @param resultType
+	 *            The {@link Type} of the expected result.
+	 * @param results
+	 *            The results map storing all elements iterated yet and their
+	 *            result.
+	 * @return The {@link OclAny} result of the evaluation if it resulted in
+	 *         {@link OclVoid} or {@link OclInvalid}. <code>null</code> else.
+	 */
+	protected OclAny evaluateSortedByElement(OclExpression body,
+			OclCollection<OclAny> source, OclAny currentElement,
+			Type resultType, Map<OclComparable, OclAny> results) {
+
+		OclAny result;
+		OclAny bodyResult;
+
+		/* Compute the body for the actual set element. */
+		bodyResult = doSwitch((EObject) body);
+
+		/* Probably fail. */
+		if (bodyResult.oclIsInvalid().isTrue()) {
+			result = this.myStandardLibraryFactory
+					.createOclInvalid(
+							resultType,
+							new IllegalStateException(
+									"Body expression was invalid for at least one element during interpretation of iterator sortedBy().",
+									bodyResult.getInvalidReason()));
+			return result;
+		}
+
+		else if (bodyResult.oclIsUndefined().isTrue()) {
+			result = this.myStandardLibraryFactory
+					.createOclInvalid(
+							resultType,
+							new IllegalStateException(
+									"Body expression was undefined for at least one element during interpretation of iterator sortedBy()."));
+			return result;
+		}
+
+		if (bodyResult instanceof OclComparable) {
+			results.put((OclComparable) bodyResult, currentElement);
+			return null;
+		}
+
+		else {
+			result = myStandardLibraryFactory
+					.createOclInvalid(
+							resultType,
+							new IllegalStateException(
+									"Body expression was not comparable for at least one element during interpretation of iterator sortedBy()."));
+			return result;
+		}
+		// end else.
 	}
 
 	/*
