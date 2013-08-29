@@ -92,6 +92,12 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	 * Name of the variable containing a {@link OperationCallExp}'s result
 	 * during debugging.
 	 */
+	public static final String OCL_ITERATE_EXPRESSION_RESULT = "oclIterateResult";
+
+	/**
+	 * Name of the variable containing a {@link OperationCallExp}'s result
+	 * during debugging.
+	 */
 	public static final String OCL_ITERATOR_EXPRESSION_RESULT = "oclIteratorResult";
 
 	/**
@@ -865,11 +871,51 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	@Override
 	public OclAny caseIterateExp(IterateExp iterateExp) {
 
-		stopOnBreakpoint("caseIterateExp", iterateExp);
+		/* Additional local environment for it source and result variables. */
+		pushLocalEnvironment();
+
+		stopOnBreakpoint("IterateExpression", iterateExp);
+
 		OclAny result = super.caseIterateExp(iterateExp);
 		popStackFrame();
-		stopOnBreakpoint("caseIterateExp", iterateExp);
+
+		myEnvironment.setVariableValue(OCL_ITERATE_EXPRESSION_RESULT, result);
+
+		stopOnBreakpoint("IterateExpression", iterateExp);
 		popStackFrame();
+
+		popEnvironment();
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.dresdenocl.interpreter.internal.OclInterpreter#evaluateIterate(org
+	 * .dresdenocl.essentialocl.expressions.OclExpression,
+	 * org.dresdenocl.essentialocl.standardlibrary.OclCollection,
+	 * java.util.List, org.dresdenocl.essentialocl.standardlibrary.OclIterator,
+	 * org.dresdenocl.essentialocl.expressions.Variable)
+	 */
+	@Override
+	protected OclAny evaluateIterate(OclExpression bodyExpression,
+			OclCollection<OclAny> source, List<Variable> iteratorVariables,
+			OclIterator<OclAny> iterator, Variable resultVariable) {
+
+		/* Add evaluated source expression to iterator. */
+		myEnvironment.setVariableValue(OCL_CALL_SOURCE_VATRIABLE_NAME, source);
+
+		/* Do not stop here during step over. */
+		if (!m_stepMode.equals(EStepMode.STEP_OVER)) {
+			popStackFrame();
+			stopOnBreakpoint("IterateExpression", bodyExpression.eContainer());
+		}
+		// no else.
+
+		OclAny result = super.evaluateIterate(bodyExpression, source,
+				iteratorVariables, iterator, resultVariable);
+
 		return result;
 	}
 
@@ -883,7 +929,7 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	@Override
 	public OclAny caseIteratorExp(IteratorExp iteratorExp) {
 
-		/* Additional local enviroment for it source and result variables. */
+		/* Additional local environment for it source and result variables. */
 		pushLocalEnvironment();
 		stopOnBreakpoint("IteratorExpression (" + iteratorExp.getName() + ")",
 				iteratorExp);
@@ -1721,22 +1767,6 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	 * stopOnBreakpoint("caseVariableExp", variableExp); popStackFrame(); return
 	 * result; }
 	 */
-
-	@Override
-	protected OclAny evaluateIterate(OclExpression bodyExpression,
-			OclCollection<OclAny> source, List<Variable> iteratorVariables,
-			OclIterator<OclAny> iterator, Variable resultVariable) {
-
-		Map<String, Object> m = m_stackVariables
-				.get(Integer.toString(m_nextId));
-		m.put("source", source);
-		m.put("iterator", iterator);
-
-		OclAny result = super.evaluateIterate(bodyExpression, source,
-				iteratorVariables, iterator, resultVariable);
-
-		return result;
-	}
 
 	protected OclResource getOclResource(URI uri) {
 
