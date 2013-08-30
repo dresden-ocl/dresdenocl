@@ -1,0 +1,7 @@
+package resource::package01
+
+context TestClass
+def: testClosureIteratorExp01 : Set(TestClass) =
+self->closure(parent)
+
+endpackage
