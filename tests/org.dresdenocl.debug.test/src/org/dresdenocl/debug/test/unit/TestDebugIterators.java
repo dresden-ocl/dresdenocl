@@ -15,7 +15,7 @@ import org.junit.Test;
  * 
  * @author Claas Wilke
  */
-public class TestDebugItators extends AbstractDebuggerTest {
+public class TestDebugIterators extends AbstractDebuggerTest {
 
 	@BeforeClass
 	public static void setUp() throws Exception {

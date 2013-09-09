@@ -12,9 +12,10 @@ import org.dresdenocl.debug.test.unit.DebuggerUnitTest;
  * @author Claas Wilke
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ DebuggerUnitTest.class, TestDebugIfExpressions.class,
-		TestDebugItators.class, TestDebugLetExpressions.class,
-		TestDebugLiterals.class, TestDebugOperationCallExpressions.class,
+@Suite.SuiteClasses({ DebuggerUnitTest.class, TestDebugConstraintKinds.class,
+		TestDebugIfExpressions.class, TestDebugIterators.class,
+		TestDebugLetExpressions.class, TestDebugLiterals.class,
+		TestDebugOperationCallExpressions.class,
 		TestDebugPropertyCallExpressions.class })
 public class AllUnitTests extends AbstractDresdenOclTest {
 	/* remains emtpy. */
