@@ -1,0 +1,10 @@
+package resource::package01
+
+context TestClass
+inv: 
+  definedProperty2
+
+def: definedProperty2 = 
+  true
+
+endpackage
