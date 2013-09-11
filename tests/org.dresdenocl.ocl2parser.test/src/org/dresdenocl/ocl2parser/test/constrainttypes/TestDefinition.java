@@ -23,11 +23,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.Test;
-
 import org.dresdenocl.essentialocl.EssentialOclPlugin;
 import org.dresdenocl.essentialocl.expressions.ExpressionInOcl;
 import org.dresdenocl.essentialocl.expressions.OclExpression;
@@ -36,7 +36,9 @@ import org.dresdenocl.ocl2parser.test.TestPerformer;
 import org.dresdenocl.parser.ParseException;
 import org.dresdenocl.parser.SemanticException;
 import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.pivotmodel.Operation;
 import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>
@@ -126,7 +128,28 @@ public class TestDefinition extends AbstractDresdenOclTest {
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
-		testPerformer.parseFile(oclFileName);
+		testPerformer.parseFile(oclFileName, true);
+
+		/* Check that the defined property is a static one. */
+		Type type1 = testPerformer.getCurrentModel()
+				.findType(
+						Arrays.asList(new String[] { "package1", "package2",
+								"Type1" }));
+		assertNotNull("Constrained Type not found.", type1);
+
+		Property theProperty = null;
+		for (Property aProperty : type1.getOwnedProperty()) {
+			if (null != aProperty.getName()
+					&& aProperty.getName().equals("globalInteger")) {
+				theProperty = aProperty;
+				break;
+			}
+			// no else.
+		}
+
+		assertNotNull("Defined Property not found", theProperty);
+		assertTrue("The defined Property should be static.",
+				theProperty.isStatic());
 	}
 
 	/**
@@ -153,7 +176,28 @@ public class TestDefinition extends AbstractDresdenOclTest {
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
-		testPerformer.parseFile(oclFileName);
+		testPerformer.parseFile(oclFileName, true);
+
+		/* Check that the defined operation is a static one. */
+		Type type1 = testPerformer.getCurrentModel()
+				.findType(
+						Arrays.asList(new String[] { "package1", "package2",
+								"Type1" }));
+		assertNotNull("Constrained Type not found.", type1);
+
+		Operation theOperation = null;
+		for (Operation aOperation : type1.getOwnedOperation()) {
+			if (null != aOperation.getName()
+					&& aOperation.getName().equals("getGlobalInteger")) {
+				theOperation = aOperation;
+				break;
+			}
+			// no else.
+		}
+
+		assertNotNull("Defined Operation not found", theOperation);
+		assertTrue("The defined Operation should be static.",
+				theOperation.isStatic());
 	}
 
 	/**
@@ -207,7 +251,8 @@ public class TestDefinition extends AbstractDresdenOclTest {
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
-		List<Constraint> constraints = testPerformer.parseFile(oclFileName, true);
+		List<Constraint> constraints = testPerformer.parseFile(oclFileName,
+				true);
 
 		assertNotNull(constraints);
 		assertEquals(1, constraints.size());

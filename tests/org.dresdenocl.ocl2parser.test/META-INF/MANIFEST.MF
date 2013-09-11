@@ -5,7 +5,7 @@ Bundle-SymbolicName: org.dresdenocl.ocl2parser.test;singleton:=true
 Bundle-Version: 3.2.0.qualifier
 Bundle-Activator: org.dresdenocl.ocl2parser.test.Activator
 Require-Bundle: org.eclipse.core.runtime,
- org.junit4;bundle-version="4.0.0",
+ org.junit;bundle-version="4.0.0",
  org.dresdenocl.facade,
  org.dresdenocl.language.ocl.staticsemantics,
  org.dresdenocl.language.ocl.resource.ocl,
