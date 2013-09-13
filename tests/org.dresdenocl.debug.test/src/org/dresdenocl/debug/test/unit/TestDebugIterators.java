@@ -689,6 +689,8 @@ public class TestDebugIterators extends AbstractDebuggerTest {
 	@Test
 	public void testClosureIteratorStepInto01() throws Exception {
 	
+		/* TODO Fix after bug fix. */
+		
 		String oclResource = "resources/expressions/iterator/closure01.ocl";
 		OclDebugger debugger = generateDebugger(oclResource);
 		waitForEvent(DebugEvent.STARTED);
@@ -9600,6 +9602,8 @@ public class TestDebugIterators extends AbstractDebuggerTest {
 	@Test
 	public void testImplicitIteratorVariable01() throws Exception {
 
+		/* TODO Fix after bug fix. */
+		
 		String oclResource = "resources/expressions/iterator/implicitItVar01.ocl";
 		OclDebugger debugger = generateDebugger(oclResource);
 		waitForEvent(DebugEvent.STARTED);

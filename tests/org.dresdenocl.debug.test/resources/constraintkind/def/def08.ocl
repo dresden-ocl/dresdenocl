@@ -1,0 +1,10 @@
+package resource::package01
+
+context TestClass
+inv: 
+  TestClass::staticDefinedOperation2()
+
+static def: staticDefinedOperation2() = 
+  true
+
+endpackage
