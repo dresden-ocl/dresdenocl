@@ -516,6 +516,42 @@ public class TestDebugConstraintKinds extends AbstractDebuggerTest {
 	}
 
 	@Test
+	public void testInvariantStepInto01() throws Exception {
+
+		String oclResource = "resources/constraintkind/inv/inv01.ocl";
+		OclDebugger debugger = generateDebugger(oclResource);
+		waitForEvent(DebugEvent.STARTED);
+		waitForEvent(DebugEvent.SUSPENDED);
+
+		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
+		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
+		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger at boolean expression 'true'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(2, debugger);
+		assertStackName(CallStackConstants.BOOLEAN_LITERAL + " (true)",
+				debugger);
+		assertVariableNumber(1, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger after boolean expression 'true'. */
+		assertCurrentLine(4, debugger);
+		assertStackSize(1, debugger);
+		assertStackName(CallStackConstants.EXPRESSION_IN_OCL, debugger);
+		/* 'result' should be on the stack. */
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_RESULT_VATRIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO,
+				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
+	}
+
+	@Test
 	public void testDefinitionStepOver01() throws Exception {
 
 		String oclResource = "resources/constraintkind/def/def01.ocl";
@@ -754,6 +790,42 @@ public class TestDebugConstraintKinds extends AbstractDebuggerTest {
 	}
 
 	@Test
+	public void testInvariantStepOver01() throws Exception {
+
+		String oclResource = "resources/constraintkind/inv/inv01.ocl";
+		OclDebugger debugger = generateDebugger(oclResource);
+		waitForEvent(DebugEvent.STARTED);
+		waitForEvent(DebugEvent.SUSPENDED);
+
+		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
+		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
+		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger at boolean expression 'true'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(2, debugger);
+		assertStackName(CallStackConstants.BOOLEAN_LITERAL + " (true)",
+				debugger);
+		assertVariableNumber(1, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_OVER, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger after boolean expression 'true'. */
+		assertCurrentLine(4, debugger);
+		assertStackSize(1, debugger);
+		assertStackName(CallStackConstants.EXPRESSION_IN_OCL, debugger);
+		/* 'result' should be on the stack. */
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_RESULT_VATRIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_OVER,
+				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
+	}
+
+	@Test
 	public void testDefinitionStepReturn01() throws Exception {
 
 		String oclResource = "resources/constraintkind/def/def01.ocl";
@@ -971,5 +1043,40 @@ public class TestDebugConstraintKinds extends AbstractDebuggerTest {
 				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
 	}
 
-	// TODO Test calls of definitions from other constraints.
+	@Test
+	public void testInvariantStepReturn01() throws Exception {
+
+		String oclResource = "resources/constraintkind/inv/inv01.ocl";
+		OclDebugger debugger = generateDebugger(oclResource);
+		waitForEvent(DebugEvent.STARTED);
+		waitForEvent(DebugEvent.SUSPENDED);
+
+		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
+		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
+		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger at boolean expression 'true'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(2, debugger);
+		assertStackName(CallStackConstants.BOOLEAN_LITERAL + " (true)",
+				debugger);
+		assertVariableNumber(1, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_RETURN, DebugEvent.SUSPENDED,
+				debugger);
+
+		/* Debugger after boolean expression 'true'. */
+		assertCurrentLine(4, debugger);
+		assertStackSize(1, debugger);
+		assertStackName(CallStackConstants.EXPRESSION_IN_OCL, debugger);
+		/* 'result' should be on the stack. */
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_RESULT_VATRIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_RETURN,
+				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
+	}
 }
