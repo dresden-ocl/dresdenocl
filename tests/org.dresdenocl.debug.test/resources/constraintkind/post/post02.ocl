@@ -1,0 +1,7 @@
+package resource::package01
+
+context TestClass::isInteger(anInt : Integer)
+post: 
+  result = true
+  
+endpackage
