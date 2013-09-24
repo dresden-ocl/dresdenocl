@@ -61,26 +61,26 @@ public class TestDebugConstraintKinds extends AbstractDebuggerTest {
 
 	@Test
 	public void testBodyStepInto02() throws Exception {
-	
+
 		String oclResource = "resources/constraintkind/body/body02.ocl";
 		OclDebugger debugger = generateDebugger(oclResource);
 		waitForEvent(DebugEvent.STARTED);
 		waitForEvent(DebugEvent.SUSPENDED);
-	
+
 		/* Start debugging. */
 		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
 		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
 		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
-	
+
 		/* Debugger at integer expression '42'. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(2, debugger);
 		assertStackName(CallStackConstants.INTEGER_LITERAL + " (42)", debugger);
 		assertVariableNumber(1, debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
-	
+
 		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
-	
+
 		/* Debugger after integer exp '42'. */
 		assertCurrentLine(4, debugger);
 		assertStackSize(1, debugger);
@@ -89,33 +89,33 @@ public class TestDebugConstraintKinds extends AbstractDebuggerTest {
 		assertVariableNumber(2, debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 		assertVariableExist(OclDebugger.OCL_RESULT_VATRIABLE_NAME, debugger);
-	
+
 		debugStepAndWaitFor(DebugStep.STEP_INTO,
 				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
 	}
 
 	@Test
 	public void testBodyStepOver01() throws Exception {
-	
+
 		String oclResource = "resources/constraintkind/body/body01.ocl";
 		OclDebugger debugger = generateDebugger(oclResource);
 		waitForEvent(DebugEvent.STARTED);
 		waitForEvent(DebugEvent.SUSPENDED);
-	
+
 		/* Start debugging. */
 		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
 		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
 		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
-	
+
 		/* Debugger at integer expression '42'. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(2, debugger);
 		assertStackName(CallStackConstants.INTEGER_LITERAL + " (42)", debugger);
 		assertVariableNumber(1, debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
-	
+
 		debugStepAndWaitFor(DebugStep.STEP_OVER, DebugEvent.SUSPENDED, debugger);
-	
+
 		/* Debugger after integer exp '42'. */
 		assertCurrentLine(4, debugger);
 		assertStackSize(1, debugger);
@@ -124,33 +124,33 @@ public class TestDebugConstraintKinds extends AbstractDebuggerTest {
 		assertVariableNumber(2, debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 		assertVariableExist(OclDebugger.OCL_RESULT_VATRIABLE_NAME, debugger);
-	
+
 		debugStepAndWaitFor(DebugStep.STEP_OVER,
 				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
 	}
 
 	@Test
 	public void testBodyStepOver02() throws Exception {
-	
+
 		String oclResource = "resources/constraintkind/body/body02.ocl";
 		OclDebugger debugger = generateDebugger(oclResource);
 		waitForEvent(DebugEvent.STARTED);
 		waitForEvent(DebugEvent.SUSPENDED);
-	
+
 		/* Start debugging. */
 		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
 		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
 		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
-	
+
 		/* Debugger at integer expression '42'. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(2, debugger);
 		assertStackName(CallStackConstants.INTEGER_LITERAL + " (42)", debugger);
 		assertVariableNumber(1, debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
-	
+
 		debugStepAndWaitFor(DebugStep.STEP_OVER, DebugEvent.SUSPENDED, debugger);
-	
+
 		/* Debugger after integer exp '42'. */
 		assertCurrentLine(4, debugger);
 		assertStackSize(1, debugger);
@@ -159,34 +159,34 @@ public class TestDebugConstraintKinds extends AbstractDebuggerTest {
 		assertVariableNumber(2, debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 		assertVariableExist(OclDebugger.OCL_RESULT_VATRIABLE_NAME, debugger);
-	
+
 		debugStepAndWaitFor(DebugStep.STEP_OVER,
 				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
 	}
 
 	@Test
 	public void testBodyStepReturn01() throws Exception {
-	
+
 		String oclResource = "resources/constraintkind/body/body01.ocl";
 		OclDebugger debugger = generateDebugger(oclResource);
 		waitForEvent(DebugEvent.STARTED);
 		waitForEvent(DebugEvent.SUSPENDED);
-	
+
 		/* Start debugging. */
 		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
 		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
 		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
-	
+
 		/* Debugger at integer expression '42'. */
 		assertCurrentLine(5, debugger);
 		assertStackSize(2, debugger);
 		assertStackName(CallStackConstants.INTEGER_LITERAL + " (42)", debugger);
 		assertVariableNumber(1, debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
-	
+
 		debugStepAndWaitFor(DebugStep.STEP_RETURN, DebugEvent.SUSPENDED,
 				debugger);
-	
+
 		/* Debugger after integer exp '42'. */
 		assertCurrentLine(4, debugger);
 		assertStackSize(1, debugger);
@@ -195,7 +195,7 @@ public class TestDebugConstraintKinds extends AbstractDebuggerTest {
 		assertVariableNumber(2, debugger);
 		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
 		assertVariableExist(OclDebugger.OCL_RESULT_VATRIABLE_NAME, debugger);
-	
+
 		debugStepAndWaitFor(DebugStep.STEP_RETURN,
 				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
 	}
@@ -1172,6 +1172,218 @@ public class TestDebugConstraintKinds extends AbstractDebuggerTest {
 				debugger);
 
 		/* Debugger after operation call expression 'definedOperation2'. */
+		assertCurrentLine(4, debugger);
+		assertStackSize(1, debugger);
+		assertStackName(CallStackConstants.EXPRESSION_IN_OCL, debugger);
+		/* 'result' should be on the stack. */
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_RESULT_VATRIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_RETURN,
+				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
+	}
+
+	@Test
+	public void testDeriveStepInto01() throws Exception {
+
+		String oclResource = "resources/constraintkind/derive/derive01.ocl";
+		OclDebugger debugger = generateDebugger(oclResource);
+		waitForEvent(DebugEvent.STARTED);
+		waitForEvent(DebugEvent.SUSPENDED);
+
+		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
+		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
+		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger at iterator expression 'any'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(2, debugger);
+		assertStackName(CallStackConstants.INTEGER_LITERAL + " (42)", debugger);
+		assertVariableNumber(1, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger after integer exp '42'. */
+		assertCurrentLine(4, debugger);
+		assertStackSize(1, debugger);
+		assertStackName(CallStackConstants.EXPRESSION_IN_OCL, debugger);
+		/* 'result' should be on the stack. */
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_RESULT_VATRIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_INTO,
+				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
+	}
+
+	@Test
+	public void testDeriveStepInto02() throws Exception {
+	
+		String oclResource = "resources/constraintkind/derive/derive02.ocl";
+		OclDebugger debugger = generateDebugger(oclResource);
+		waitForEvent(DebugEvent.STARTED);
+		waitForEvent(DebugEvent.SUSPENDED);
+	
+		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
+		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
+		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
+	
+		/* Debugger at iterator expression 'any'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(2, debugger);
+		assertStackName(CallStackConstants.INTEGER_LITERAL + " (42)", debugger);
+		assertVariableNumber(1, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+	
+		debugStepAndWaitFor(DebugStep.STEP_INTO, DebugEvent.SUSPENDED, debugger);
+	
+		/* Debugger after integer exp '42'. */
+		assertCurrentLine(4, debugger);
+		assertStackSize(1, debugger);
+		assertStackName(CallStackConstants.EXPRESSION_IN_OCL, debugger);
+		/* 'result' should be on the stack. */
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_RESULT_VATRIABLE_NAME, debugger);
+	
+		debugStepAndWaitFor(DebugStep.STEP_INTO,
+				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
+	}
+
+	@Test
+	public void testDeriveStepOver01() throws Exception {
+	
+		String oclResource = "resources/constraintkind/derive/derive01.ocl";
+		OclDebugger debugger = generateDebugger(oclResource);
+		waitForEvent(DebugEvent.STARTED);
+		waitForEvent(DebugEvent.SUSPENDED);
+	
+		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
+		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
+		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
+	
+		/* Debugger at integer expression '42'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(2, debugger);
+		assertStackName(CallStackConstants.INTEGER_LITERAL + " (42)", debugger);
+		assertVariableNumber(1, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+	
+		debugStepAndWaitFor(DebugStep.STEP_OVER, DebugEvent.SUSPENDED, debugger);
+	
+		/* Debugger after integer exp '42'. */
+		assertCurrentLine(4, debugger);
+		assertStackSize(1, debugger);
+		assertStackName(CallStackConstants.EXPRESSION_IN_OCL, debugger);
+		/* 'result' should be on the stack. */
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_RESULT_VATRIABLE_NAME, debugger);
+	
+		debugStepAndWaitFor(DebugStep.STEP_OVER,
+				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
+	}
+
+	@Test
+	public void testDeriveStepOver02() throws Exception {
+	
+		String oclResource = "resources/constraintkind/derive/derive02.ocl";
+		OclDebugger debugger = generateDebugger(oclResource);
+		waitForEvent(DebugEvent.STARTED);
+		waitForEvent(DebugEvent.SUSPENDED);
+	
+		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
+		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
+		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
+	
+		/* Debugger at integer expression '42'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(2, debugger);
+		assertStackName(CallStackConstants.INTEGER_LITERAL + " (42)", debugger);
+		assertVariableNumber(1, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+	
+		debugStepAndWaitFor(DebugStep.STEP_OVER, DebugEvent.SUSPENDED, debugger);
+	
+		/* Debugger after integer exp '42'. */
+		assertCurrentLine(4, debugger);
+		assertStackSize(1, debugger);
+		assertStackName(CallStackConstants.EXPRESSION_IN_OCL, debugger);
+		/* 'result' should be on the stack. */
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_RESULT_VATRIABLE_NAME, debugger);
+	
+		debugStepAndWaitFor(DebugStep.STEP_OVER,
+				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
+	}
+
+	@Test
+	public void testDeriveStepReturn01() throws Exception {
+	
+		String oclResource = "resources/constraintkind/derive/derive01.ocl";
+		OclDebugger debugger = generateDebugger(oclResource);
+		waitForEvent(DebugEvent.STARTED);
+		waitForEvent(DebugEvent.SUSPENDED);
+	
+		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
+		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
+		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
+	
+		/* Debugger at integer expression '42'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(2, debugger);
+		assertStackName(CallStackConstants.INTEGER_LITERAL + " (42)", debugger);
+		assertVariableNumber(1, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+	
+		debugStepAndWaitFor(DebugStep.STEP_RETURN, DebugEvent.SUSPENDED,
+				debugger);
+	
+		/* Debugger after integer exp '42'. */
+		assertCurrentLine(4, debugger);
+		assertStackSize(1, debugger);
+		assertStackName(CallStackConstants.EXPRESSION_IN_OCL, debugger);
+		/* 'result' should be on the stack. */
+		assertVariableNumber(2, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+		assertVariableExist(OclDebugger.OCL_RESULT_VATRIABLE_NAME, debugger);
+	
+		debugStepAndWaitFor(DebugStep.STEP_RETURN,
+				DebugEvent.CONSTRAINT_INTERPRETED, debugger);
+	}
+
+	@Test
+	public void testDeriveStepReturn02() throws Exception {
+
+		String oclResource = "resources/constraintkind/derive/derive02.ocl";
+		OclDebugger debugger = generateDebugger(oclResource);
+		waitForEvent(DebugEvent.STARTED);
+		waitForEvent(DebugEvent.SUSPENDED);
+
+		/* Start debugging. */
+		File resourceFile = getFile(oclResource, DebugTestPlugin.PLUGIN_ID);
+		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 5);
+		debugStepAndWaitFor(DebugStep.RESUME, DebugEvent.SUSPENDED, debugger);
+
+		/* Debugger at integer expression '42'. */
+		assertCurrentLine(5, debugger);
+		assertStackSize(2, debugger);
+		assertStackName(CallStackConstants.INTEGER_LITERAL + " (42)", debugger);
+		assertVariableNumber(1, debugger);
+		assertVariableExist(OclDebugger.SELF_VARIABLE_NAME, debugger);
+
+		debugStepAndWaitFor(DebugStep.STEP_RETURN, DebugEvent.SUSPENDED,
+				debugger);
+
+		/* Debugger after integer exp '42'. */
 		assertCurrentLine(4, debugger);
 		assertStackSize(1, debugger);
 		assertStackName(CallStackConstants.EXPRESSION_IN_OCL, debugger);

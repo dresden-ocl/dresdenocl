@@ -1,0 +1,7 @@
+package resource::package01
+
+context TestClass::staticInteger
+derive: 
+  42
+
+endpackage
