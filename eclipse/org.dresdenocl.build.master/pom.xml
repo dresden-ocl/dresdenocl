@@ -51,8 +51,8 @@
 	</modules>
 
 	<properties>
-		<tycho.version>0.18.0</tycho.version>
-		<tycho-extras.version>0.18.0</tycho-extras.version>
+		<tycho.version>0.19.0</tycho.version>
+		<tycho-extras.version>0.19.0</tycho-extras.version>
 
 		<eclipse-repo.url>http://download.eclipse.org/releases/kepler</eclipse-repo.url>
 		<tycho-repo.url>https://oss.sonatype.org/content/groups/public/</tycho-repo.url>
