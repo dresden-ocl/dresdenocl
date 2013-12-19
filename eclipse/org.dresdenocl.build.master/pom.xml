@@ -53,18 +53,44 @@
 		<module>
 			../org.dresdenocl.attributegrammar.integration.kiama
 		</module>
-		<module>../org.dresdenocl.p2updatesite</module>
 		<module>../org.emftext.commons.antlr3_4_0</module>
+		<module>../scala.library</module>
+		<module>../org.kiama.attribution</module>
+		<module>../org.apache.commons.lang</module>
+		
+		<module>../org.dresdenocl.tools.codegen</module>
+		<module>../org.dresdenocl.tools.codegen.declarativ</module>
+		<module>../org.dresdenocl.tools.codegen.declarativ.ocl2sql</module>
+		<module>../org.dresdenocl.tools.codegen.declarativ.ocl2sql.ui</module>
+		<module>../org.dresdenocl.tools.codegen.ocl2java</module>
+		<module>../org.dresdenocl.tools.codegen.ocl2java.types</module>
+		<module>../org.dresdenocl.tools.codegen.ocl2java.ui</module>
+		<module>../org.dresdenocl.tools.codegen.ui</module>
+		<module>../org.dresdenocl.tools.template</module>
+		<module>../org.dresdenocl.tools.template.sql</module>
+		<module>../org.dresdenocl.tools.transformation</module>
+		<module>../org.dresdenocl.tools.transformation.pivot2sql</module>
+		<module>../org.dresdenocl.tools.CWM</module>
+
+		<module>../../updatesite/org.dresdenocl.feature.codegen</module>
+		<module>../../updatesite/org.dresdenocl.feature.core</module>
+		<module>../../updatesite/org.dresdenocl.feature.interpreter</module>
+		<module>../../updatesite/org.dresdenocl.feature.metamodels</module>
+		<module>../../updatesite/org.dresdenocl.feature.metrics</module>
+		<module>../../updatesite/org.dresdenocl.feature.modelinstances</module>
+		<module>../../updatesite/org.dresdenocl.feature.ocl2java</module>
+		<module>../../updatesite/org.dresdenocl.feature.ocl2sql</module>
+		<module>../../updatesite/org.dresdenocl.feature.parser</module>
+		
+		<module>../../updatesite/org.dresdenocl.feature.all</module>
+		<module>../org.dresdenocl.p2updatesite</module>
+
 	</modules>
 
 	<properties>
 		<tycho.version>0.19.0</tycho.version>
-		<tycho-extras.version>0.19.0</tycho-extras.version>
-
 		<eclipse-repo.url>http://download.eclipse.org/releases/kepler</eclipse-repo.url>
-		<tycho-repo.url>https://oss.sonatype.org/content/groups/public/</tycho-repo.url>
 	</properties>
-
 
 	<repositories>
 		<repository>
@@ -72,19 +98,56 @@
 			<url>${eclipse-repo.url}</url>
 			<layout>p2</layout>
 		</repository>
+
+		<repository>
+			<id>emftext</id>
+			<url>http://www.emftext.org/update</url>
+			<layout>p2</layout>
+		</repository>
 	</repositories>
 
-	<pluginRepositories>
-		<pluginRepository>
-			<id>tycho</id>
-			<url>${tycho-repo.url}</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<extensions>true</extensions>
+			</plugin>
 
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<configuration>
+					<environments>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>macosx</os>
+							<ws>cocoa</ws>
+							<arch>x86_64</arch>
+						</environment>
+					</environments>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project> 

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: OCL Static Semantics Analysis Plug-in
 Bundle-SymbolicName: org.dresdenocl.language.ocl.staticsemantics;singleton:=true
-Bundle-Version: 3.2.0.qualifier
+Bundle-Version: 3.3.0.qualifier
 Require-Bundle: org.eclipse.core.runtime,
  org.dresdenocl.language.ocl;bundle-version="3.2.0",
  org.dresdenocl.language.ocl.resource.ocl;bundle-version="3.2.0",

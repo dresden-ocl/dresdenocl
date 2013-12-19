@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Export-Package: org.apache.commons.lang,org.apache.commons.lang.builde
+ r,org.apache.commons.lang.enums,org.apache.commons.lang.exception,org
+ .apache.commons.lang.math,org.apache.commons.lang.mutable,org.apache.
+ commons.lang.text,org.apache.commons.lang.time
+Bundle-Vendor: The Apache Jakarta Project
+Eclipse-LazyStart: true
+Bundle-ClassPath: commons-lang-2.3.jar
+Bundle-Version: 3.3.0.201312181910
+Bundle-Name: Jakarta Commons Lang
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.apache.commons.lang;singleton:=true
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+

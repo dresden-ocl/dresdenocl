@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?artifactRepository version='1.1.0'?>
+<artifacts size='1'>
+  <artifact classifier='osgi.bundle' id='org.apache.commons.lang' version='3.3.0.201312181910'>
+    <properties size='5'>
+      <property name='artifact.size' value='236758'/>
+      <property name='download.size' value='236758'/>
+      <property name='maven-groupId' value='org.dresdenocl'/>
+      <property name='maven-artifactId' value='org.apache.commons.lang'/>
+      <property name='maven-version' value='3.3.0-SNAPSHOT'/>
+    </properties>
+  </artifact>
+</artifacts>

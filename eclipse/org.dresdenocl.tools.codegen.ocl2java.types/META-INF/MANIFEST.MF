@@ -2,10 +2,10 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: OCL22Java Test Plug-in
 Bundle-SymbolicName: org.dresdenocl.tools.codegen.ocl2java.types
-Bundle-Version: 3.2.0.qualifier
+Bundle-Version: 3.3.0.qualifier
 Export-Package: org.dresdenocl.tools.codegen.ocl2java.types,
  org.dresdenocl.tools.codegen.ocl2java.types.util
-Require-Bundle: org.junit4;bundle-version="4.0.0"
+Require-Bundle: org.junit4
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Vendor: TU Dresden, Software Technology Group

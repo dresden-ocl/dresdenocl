@@ -1,0 +1,29 @@
+Manifest-Version: 1.0
+Export-Package: scala,scala.actors,scala.actors.remote,scala.actors.sc
+ heduler,scala.actors.threadpool,scala.actors.threadpool.helpers,scala
+ .actors.threadpool.locks,scala.annotation,scala.annotation.target,sca
+ la.annotation.unchecked,scala.collection,scala.collection.generic,sca
+ la.collection.immutable,scala.collection.interfaces,scala.collection.
+ mutable,scala.collection.parallel,scala.collection.parallel.immutable
+ ,scala.collection.parallel.mutable,scala.collection.script,scala.comp
+ at,scala.concurrent,scala.concurrent.forkjoin,scala.io,scala.math,sca
+ la.parallel,scala.ref,scala.reflect,scala.reflect.generic,scala.runti
+ me,scala.sys,scala.sys.process,scala.testing,scala.text,scala.util,sc
+ ala.util.automata,scala.util.continuations,scala.util.control,scala.u
+ til.grammar,scala.util.logging,scala.util.matching,scala.util.parsing
+ .ast,scala.util.parsing.combinator,scala.util.parsing.combinator.lexi
+ cal,scala.util.parsing.combinator.syntactical,scala.util.parsing.comb
+ inator.testing,scala.util.parsing.combinator.token,scala.util.parsing
+ .input,scala.util.parsing.json,scala.util.parsing.syntax,scala.util.r
+ egexp,scala.xml,scala.xml.dtd,scala.xml.factory,scala.xml.include,sca
+ la.xml.include.sax,scala.xml.parsing,scala.xml.persistent,scala.xml.p
+ ull,scala.xml.transform
+Ant-Version: Apache Ant 1.7.0
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: lib/scala-library.jar,lib/scala-compiler.jar
+Bundle-Version: 3.3.0.201312181910
+Bundle-Name: Scala Library
+Created-By: 1.5.0_16-b02 (Sun Microsystems Inc.)
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: scala.library;singleton:=true
+

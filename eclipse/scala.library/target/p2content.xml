@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<units size='1'>
+  <unit id='scala.library' version='3.3.0.201312181910'>
+    <update id='scala.library' range='[0.0.0,3.3.0.201312181910)' severity='0'/>
+    <properties size='4'>
+      <property name='org.eclipse.equinox.p2.name' value='Scala Library'/>
+      <property name='maven-groupId' value='org.dresdenocl'/>
+      <property name='maven-artifactId' value='scala.library'/>
+      <property name='maven-version' value='3.3.0-SNAPSHOT'/>
+    </properties>
+    <provides size='62'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='scala.library' version='3.3.0.201312181910'/>
+      <provided namespace='osgi.bundle' name='scala.library' version='3.3.0.201312181910'/>
+      <provided namespace='java.package' name='scala' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.actors' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.actors.remote' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.actors.scheduler' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.actors.threadpool' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.actors.threadpool.helpers' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.actors.threadpool.locks' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.annotation' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.annotation.target' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.annotation.unchecked' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.collection' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.collection.generic' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.collection.immutable' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.collection.interfaces' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.collection.mutable' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.collection.parallel' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.collection.parallel.immutable' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.collection.parallel.mutable' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.collection.script' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.compat' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.concurrent' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.concurrent.forkjoin' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.io' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.math' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.parallel' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.ref' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.reflect' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.reflect.generic' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.runtime' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.sys' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.sys.process' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.testing' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.text' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.util' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.util.automata' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.util.continuations' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.util.control' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.util.grammar' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.util.logging' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.util.matching' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.util.parsing.ast' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.util.parsing.combinator' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.util.parsing.combinator.lexical' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.util.parsing.combinator.syntactical' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.util.parsing.combinator.testing' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.util.parsing.combinator.token' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.util.parsing.input' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.util.parsing.json' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.util.parsing.syntax' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.util.regexp' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.xml' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.xml.dtd' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.xml.factory' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.xml.include' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.xml.include.sax' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.xml.parsing' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.xml.persistent' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.xml.pull' version='0.0.0'/>
+      <provided namespace='java.package' name='scala.xml.transform' version='0.0.0'/>
+      <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+    </provides>
+    <artifacts size='1'>
+      <artifact classifier='osgi.bundle' id='scala.library' version='3.3.0.201312181910'/>
+    </artifacts>
+    <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+    <touchpointData size='1'>
+      <instructions size='1'>
+        <instruction key='manifest'>
+          Bundle-SymbolicName: scala.library;singleton:=true&#xA;Bundle-Version: 3.3.0.201312181910&#xA;
+        </instruction>
+      </instructions>
+    </touchpointData>
+  </unit>
+</units>
