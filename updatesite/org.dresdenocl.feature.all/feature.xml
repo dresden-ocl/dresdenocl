@@ -217,4 +217,8 @@ Library.
          id="org.dresdenocl.feature.metrics"
          version="0.0.0"/>
 
+   <includes
+         id="org.dresdenocl.feature.examples"
+         version="0.0.0"/>
+
 </feature>
