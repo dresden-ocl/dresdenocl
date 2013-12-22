@@ -7,7 +7,7 @@ Bundle-Vendor: TU Dresden, Software Technology Group
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
- scala.library;bundle-version="2.9.1"
+ scala.library
 Bundle-ClassPath: lib/kiama_2.9.0-1.1.0.jar
 Export-Package: org.kiama,
  org.kiama.attribution,

@@ -15,7 +15,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.dresdenocl.examples.living,
  org.dresdenocl.examples.pain,
  org.dresdenocl.examples.pml,
- org.dresdenocl.examples.royalandloyal;bundle-version="3.1.0",
  org.dresdenocl.examples.university
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
