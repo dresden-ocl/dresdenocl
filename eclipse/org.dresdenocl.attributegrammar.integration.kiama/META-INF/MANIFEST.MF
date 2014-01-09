@@ -2,15 +2,15 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Kiama Integration
 Bundle-SymbolicName: org.dresdenocl.attributegrammar.integration.kiama;singleton:=true
-Bundle-Version: 3.2.0.qualifier
+Bundle-Version: 3.3.0.qualifier
 Bundle-Activator: org.dresdenocl.attributegrammar.integration.kiama.KiamaIntegrationPlugin
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
- org.kiama.attribution;visibility:=reexport,
  org.dresdenocl.language.ocl,
  org.dresdenocl.pivotmodel,
- scala.library;bundle-version="2.9.1",
- org.dresdenocl.essentialocl
+ org.dresdenocl.essentialocl,
+ scala.library;bundle-version="3.3.0",
+ org.kiama.attribution;bundle-version="3.3.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.dresdenocl.attributegrammar.integration.kiama

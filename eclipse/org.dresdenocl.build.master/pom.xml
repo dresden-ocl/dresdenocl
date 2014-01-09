@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<organization>
+		<name>Dresden OCL</name>
+		<url>http://www.dresden-ocl.org</url>
+	</organization>
+
+	<groupId>org.dresdenocl</groupId>
+	<artifactId>parent</artifactId>
+	<version>3.3.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>../org.dresdenocl.codegen.adapter</module>
+		<module>../org.dresdenocl.debug</module>
+		<module>../org.dresdenocl.debug.ui</module>
+		<module>../org.dresdenocl.essentialocl</module>
+		<module>../org.dresdenocl.essentialocl.edit</module>
+		<module>../org.dresdenocl.essentialocl.editor</module>
+		<module>../org.dresdenocl.essentialocl.standardlibrary</module>
+		<module>../org.dresdenocl.facade</module>
+		<module>../org.dresdenocl.interpreter</module>
+		<module>../org.dresdenocl.interpreter.ui</module>
+		<module>../org.dresdenocl.language.ocl</module>
+		<module>../org.dresdenocl.language.ocl.edit</module>
+		<module>../org.dresdenocl.language.ocl.resource.ocl</module>
+		<module>../org.dresdenocl.language.ocl.resource.ocl.ui</module>
+		<module>../org.dresdenocl.language.ocl.staticsemantics</module>
+		<module>../org.dresdenocl.logging</module>
+		<module>../org.dresdenocl.metamodels.ecore</module>
+		<module>../org.dresdenocl.metamodels.java</module>
+		<module>../org.dresdenocl.metamodels.uml2</module>
+		<module>../org.dresdenocl.metamodels.xsd</module>
+		<module>../org.dresdenocl.metrics</module>
+		<module>../org.dresdenocl.metrics.ui</module>
+		<module>../org.dresdenocl.model</module>
+		<module>../org.dresdenocl.modelbus</module>
+		<module>../org.dresdenocl.modelbus.ui</module>
+		<module>../org.dresdenocl.modelinstance</module>
+		<module>../org.dresdenocl.modelinstancetype</module>
+		<module>../org.dresdenocl.modelinstancetype.ecore</module>
+		<module>../org.dresdenocl.modelinstancetype.java</module>
+		<module>../org.dresdenocl.modelinstancetype.xml</module>
+		<module>../org.dresdenocl.parser</module>
+		<module>../org.dresdenocl.pivotmodel</module>
+		<module>../org.dresdenocl.pivotmodel.edit</module>
+		<module>../org.dresdenocl.standardlibrary.java</module>
+		<module>../org.dresdenocl.tracer</module>
+		<module>../org.dresdenocl.tracer.ui</module>
+		<module>
+			../org.dresdenocl.attributegrammar.integration.kiama
+		</module>
+		<module>../org.emftext.commons.antlr3_4_0</module>
+		<module>../scala.library</module>
+		<module>../org.kiama.attribution</module>
+		<module>../org.apache.commons.lang</module>
+
+		<module>../org.dresdenocl.tools.codegen</module>
+		<module>../org.dresdenocl.tools.codegen.declarativ</module>
+		<module>../org.dresdenocl.tools.codegen.declarativ.ocl2sql</module>
+		<module>../org.dresdenocl.tools.codegen.declarativ.ocl2sql.ui</module>
+		<module>../org.dresdenocl.tools.codegen.ocl2java</module>
+		<module>../org.dresdenocl.tools.codegen.ocl2java.types</module>
+		<module>../org.dresdenocl.tools.codegen.ocl2java.ui</module>
+		<module>../org.dresdenocl.tools.codegen.ui</module>
+		<module>../org.dresdenocl.tools.template</module>
+		<module>../org.dresdenocl.tools.template.sql</module>
+		<module>../org.dresdenocl.tools.transformation</module>
+		<module>../org.dresdenocl.tools.transformation.pivot2sql</module>
+		<module>../org.dresdenocl.tools.CWM</module>
+
+		<module>../../updatesite/org.dresdenocl.feature.codegen</module>
+		<module>../../updatesite/org.dresdenocl.feature.core</module>
+		<module>../../updatesite/org.dresdenocl.feature.interpreter</module>
+		<module>../../updatesite/org.dresdenocl.feature.metamodels</module>
+		<module>../../updatesite/org.dresdenocl.feature.metrics</module>
+		<module>../../updatesite/org.dresdenocl.feature.modelinstances</module>
+		<module>../../updatesite/org.dresdenocl.feature.ocl2java</module>
+		<module>../../updatesite/org.dresdenocl.feature.ocl2sql</module>
+		<module>../../updatesite/org.dresdenocl.feature.parser</module>
+		<module>../../updatesite/org.dresdenocl.feature.examples</module>
+
+		<module>../../updatesite/org.dresdenocl.feature.all</module>
+		<module>../org.dresdenocl.p2updatesite</module>
+
+		<module>../org.dresdenocl.examples.living</module>
+		<module>../org.dresdenocl.examples.pain</module>
+		<module>../org.dresdenocl.examples.pml</module>
+		<module>../org.dresdenocl.examples.simple</module>
+		<module>../org.dresdenocl.examples.ui</module>
+		<module>../org.dresdenocl.examples.uml</module>
+		<module>../org.dresdenocl.examples.university</module>
+	</modules>
+
+	<properties>
+		<tycho.version>0.19.0</tycho.version>
+		<scala.version>2.9.1</scala.version>
+		<maven.compiler.source>1.6</maven.compiler.source>
+		<maven.compiler.target>1.6</maven.compiler.target>
+		<eclipse-repo.url>http://download.eclipse.org/releases/kepler</eclipse-repo.url>
+		<project.build.sourceEncoding>CP1252</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-library</artifactId>
+			<version>${scala.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<extensions>true</extensions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-compiler-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<configuration>
+					<excludeResources>
+						<excludeResource>**/*.scala</excludeResource>
+					</excludeResources>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<configuration>
+					<environments>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>macosx</os>
+							<ws>cocoa</ws>
+							<arch>x86_64</arch>
+						</environment>
+					</environments>
+
+					<filters>
+						<filter>
+							<type>eclipse-plugin</type>
+							<id>org.eclipse.jdt.core</id>
+							<restrictTo>
+								<!-- this is the version for Kepler SR1, have to adapt for other 
+									release trains/service releases -->
+								<version>3.9.1.v20130905-0837</version>
+							</restrictTo>
+						</filter>
+					</filters>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.scala-tools</groupId>
+				<artifactId>maven-scala-plugin</artifactId>
+				<version>2.15.0</version>
+				<configuration>
+					<args>
+						<arg>-encoding</arg>
+						<arg>Cp1252</arg>
+					</args>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>add-source</goal>
+							<goal>compile</goal>
+							<!-- <goal>testCompile</goal> -->
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<repositories>
+		<repository>
+			<id>kepler</id>
+			<url>${eclipse-repo.url}</url>
+			<layout>p2</layout>
+		</repository>
+
+		<repository>
+			<id>emftext</id>
+			<url>http://www.emftext.org/update</url>
+			<layout>p2</layout>
+		</repository>
+
+		<repository>
+			<id>scala-tools.org</id>
+			<name>Scala-tools Maven2 Repository</name>
+			<url>http://scala-tools.org/repo-releases</url>
+		</repository>
+
+		<repository>
+			<id>eclipse-scala-ide</id>
+			<layout>p2</layout>
+			<url>http://download.scala-ide.org/releases-29/milestone/site</url>
+		</repository>
+
+		<repository>
+			<id>typesafe</id>
+			<name>Typesafe Repository</name>
+			<url>http://repo.typesafe.com/typesafe/releases/</url>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>scala-tools.org</id>
+			<name>Scala-tools Maven2 Repository</name>
+			<url>http://scala-tools.org/repo-releases</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+</project> 

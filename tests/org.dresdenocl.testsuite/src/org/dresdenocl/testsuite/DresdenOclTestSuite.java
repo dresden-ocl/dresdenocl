@@ -12,7 +12,6 @@
  */
 package org.dresdenocl.testsuite;
 
-import org.dresdenocl.debug.test.AllDebuggerTests;
 import org.dresdenocl.essentialocl.types.tests.EssentialOCLAllTests;
 import org.dresdenocl.examples.pain.test.AllPainTests;
 import org.dresdenocl.examples.royalsandloyals.ocl22javacode.test.AllRoyalAndLoyalAspectJTests;
@@ -81,10 +80,7 @@ AllEcoreMetaModelTests.class, TestJavaMetaModel.class,
 		FastOcl2SqlTests.class,
 		
 		/* Tracer tests: */
-		AllTracerTests.class,
-		
-		/* Debugger tests;*/
-		AllDebuggerTests.class})
+		AllTracerTests.class})
 public class DresdenOclTestSuite {
 	/*
 	 * This class remains completely empty, being used only as a holder for the

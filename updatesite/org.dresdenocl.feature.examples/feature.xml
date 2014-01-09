@@ -2,7 +2,7 @@
 <feature
       id="org.dresdenocl.feature.examples"
       label="Dresden OCL Examples"
-      version="3.2.0.qualifier"
+      version="3.3.0.qualifier"
       provider-name="TU Dresden, Software Technology Group">
    <install-handler library="" handler=""/>
 
@@ -184,50 +184,16 @@ Library.
 
    <requires>
       <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="org.junit4" version="4.0.0" match="greaterOrEqual"/>
-      <import plugin="org.dresdenocl.facade" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.dresdenocl.facade" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.runtime" version="3.5.0" match="greaterOrEqual"/>
       <import plugin="org.dresdenocl.metamodels.xsd" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="org.dresdenocl.modelinstancetype.xml" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.dresdenocl.modelinstancetype.xml" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.ui"/>
       <import plugin="org.eclipse.emf.common"/>
       <import plugin="org.eclipse.emf.common.ui"/>
       <import plugin="org.dresdenocl.logging"/>
-      <import plugin="org.dresdenocl.examples.royalandloyal" version="3.1.0" match="greaterOrEqual"/>
-      <import plugin="org.junit" version="4.0.0" match="greaterOrEqual"/>
-      <import plugin="org.dresdenocl.modelbus"/>
-      <import plugin="org.dresdenocl.metamodels.ecore"/>
-      <import plugin="org.dresdenocl.metamodels.java"/>
-      <import plugin="org.dresdenocl.metamodels.uml2"/>
-      <import plugin="org.eclipse.emf.ecore.xmi"/>
-      <import plugin="org.eclipse.uml2.uml"/>
-      <import plugin="org.dresdenocl.modelinstancetype.java"/>
-      <import plugin="org.dresdenocl.language.ocl"/>
-      <import plugin="org.dresdenocl.language.ocl.resource.ocl"/>
-      <import plugin="org.dresdenocl.language.ocl.staticsemantics"/>
-      <import plugin="org.dresdenocl.modelinstancetype.ecore"/>
-      <import plugin="org.eclipse.xsd"/>
-      <import plugin="org.dresdenocl.tools.template"/>
-      <import plugin="org.dresdenocl.tools.template.sql"/>
-      <import plugin="org.dresdenocl.tools.transformation"/>
-      <import plugin="org.dresdenocl.tools.transformation.pivot2sql"/>
-      <import plugin="org.dresdenocl.modelinstancetype.ecore.testmodel"/>
    </requires>
-
-   <plugin
-         id="org.dresdenocl.examples.simple"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.dresdenocl.examples.pml"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
 
    <plugin
          id="org.dresdenocl.examples.living"
@@ -244,7 +210,14 @@ Library.
          unpack="false"/>
 
    <plugin
-         id="org.dresdenocl.examples.university"
+         id="org.dresdenocl.examples.pml"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.dresdenocl.examples.simple"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -258,7 +231,14 @@ Library.
          unpack="false"/>
 
    <plugin
-         id="org.dresdenocl.testsuite.abstract"
+         id="org.dresdenocl.examples.uml"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.dresdenocl.examples.university"
          download-size="0"
          install-size="0"
          version="0.0.0"

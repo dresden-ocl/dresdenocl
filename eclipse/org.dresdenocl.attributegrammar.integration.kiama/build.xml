@@ -1,54 +1,54 @@
 <project>
-	<import file="./../scala.library/build.xml"/>
-	
-	<property name="integrationPlugin" value="org.dresdenocl.attributegrammar.integration.kiama"/>
-	
-	<condition property="attributableEObjectBin" value="${workspacePath}/${integrationPlugin}/bin" else="./../${integrationPlugin}/bin">
-		<isset property="headless"/>
-	</condition>
-	
-	<condition property="attributableEObjectSrc" value="${workspacePath}/${integrationPlugin}/src" else="./../${integrationPlugin}/src">
-		<isset property="headless"/>
-	</condition>
-		
-	<target name="Clean org.dresdenocl.attributegrammar.integration.kiama" >
-		<mkdir dir="${attributableEObjectBin}"/>
-		<delete>
-			<fileset dir="${attributableEObjectBin}">
-				<include name="**/*.class"/>
-			</fileset>
-		</delete>
-		<antcall target="Compile org.dresdenocl.attributegrammar.integration.kiama" />
-	</target>
-	
-	<target name="Compile org.dresdenocl.attributegrammar.integration.kiama" depends="Scala Compiler Init">		
+        <import file="./../scala.library/build.xml"/>
+        
+        <property name="integrationPlugin" value="org.dresdenocl.attributegrammar.integration.kiama"/>
+        
+        <condition property="attributableEObjectBin" value="${workspacePath}/${integrationPlugin}/bin" else="./../${integrationPlugin}/bin">
+                <isset property="headless"/>
+        </condition>
+        
+        <condition property="attributableEObjectSrc" value="${workspacePath}/${integrationPlugin}/src" else="./../${integrationPlugin}/src">
+                <isset property="headless"/>
+        </condition>
+                
+        <target name="Clean org.dresdenocl.attributegrammar.integration.kiama" >
+                <mkdir dir="${attributableEObjectBin}"/>
+                <delete>
+                        <fileset dir="${attributableEObjectBin}">
+                                <include name="**/*.class"/>
+                        </fileset>
+                </delete>
+                <antcall target="Compile org.dresdenocl.attributegrammar.integration.kiama" />
+        </target>
+        
+        <target name="Compile org.dresdenocl.attributegrammar.integration.kiama" depends="Scala Compiler Init">                
 
-		<mkdir dir="${attributableEObjectBin}"/>
-		<echo message="Compile Scala Code" />
-		<echo> src: ${attributableEObjectSrc} </echo>
-		<echo> bin: ${attributableEObjectBin} </echo>
-		<scalac
-				srcdir="${attributableEObjectSrc}"
-				destdir="${attributableEObjectBin}"
-				classpathref="build.classpath"
-				includes="**/*.scala">
-		</scalac>
-		
-		<echo message="Compile Java Code" />
-		<javac
-			target="1.6"
-			srcdir="${attributableEObjectSrc}"
-			destdir="${attributableEObjectBin}"
-			classpathref="build.classpath"
-			debug="on"
-			includes="**/*.java">
-			<compilerarg compiler="org.eclipse.jdt.core.JDTCompilerAdapter" line="-1.6 -g -warn:+boxing"/>
-		</javac>
-		
-		<!-- delete scala source files in output folder -->
-		<echo message="Delete .scala files from bin folder" />
-		<delete>
-			<fileset dir="${attributableEObjectBin}" includes="**/*.scala" />
-		</delete>
-	</target>
+                <mkdir dir="${attributableEObjectBin}"/>
+                <echo message="Compile Scala Code" />
+                <echo> src: ${attributableEObjectSrc} </echo>
+                <echo> bin: ${attributableEObjectBin} </echo>
+                <scalac
+                                srcdir="${attributableEObjectSrc}"
+                                destdir="${attributableEObjectBin}"
+                                classpathref="build.classpath"
+                                includes="**/*.scala">
+                </scalac>
+                
+                <echo message="Compile Java Code" />
+                <javac
+                        target="1.6"
+                        srcdir="${attributableEObjectSrc}"
+                        destdir="${attributableEObjectBin}"
+                        classpathref="build.classpath"
+                        debug="on"
+                        includes="**/*.java">
+                        <compilerarg compiler="org.eclipse.jdt.core.JDTCompilerAdapter" line="-1.6 -g -warn:+boxing"/>
+                </javac>
+                
+                <!-- delete scala source files in output folder -->
+                <echo message="Delete .scala files from bin folder" />
+                <delete>
+                        <fileset dir="${attributableEObjectBin}" includes="**/*.scala" />
+                </delete>
+        </target>
 </project>
