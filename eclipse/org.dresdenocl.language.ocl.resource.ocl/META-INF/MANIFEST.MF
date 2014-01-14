@@ -7,7 +7,7 @@ Bundle-Vendor: Software Technology Group - TU Dresden Germany
 Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.9.0",
  org.eclipse.emf.ecore.change,
  org.emftext.access,
- org.emftext.commons.antlr3_4_0;bundle-version="3.4.0",
+ org.emftext.commons.antlr3_4_0;bundle-version="3.3.0",
  org.dresdenocl.language.ocl;bundle-version="3.2.0",
  org.dresdenocl.pivotmodel;bundle-version="3.2.0",
  org.dresdenocl.model;bundle-version="3.2.0",

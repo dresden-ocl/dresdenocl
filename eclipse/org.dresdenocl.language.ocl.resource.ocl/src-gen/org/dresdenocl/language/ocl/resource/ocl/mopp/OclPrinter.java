@@ -6,10 +6,6 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
-import java.io.PrintWriter;
-
-import org.eclipse.emf.ecore.EObject;
-
 public class OclPrinter implements org.dresdenocl.language.ocl.resource.ocl.IOclTextPrinter {
 	
 	protected org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolverFactory tokenResolverFactory = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTokenResolverFactory();
@@ -475,12 +471,14 @@ public class OclPrinter implements org.dresdenocl.language.ocl.resource.ocl.IOcl
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(3);
 		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NAMESPACE));
 		printCountingMap.put("namespace", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE));
 		printCountingMap.put("nestedNamespace", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__LAYOUT_INFORMATION));
+		printCountingMap.put("layoutInformation", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
 		// print collected hidden tokens
 		int count;
 		java.io.StringWriter sWriter = null;

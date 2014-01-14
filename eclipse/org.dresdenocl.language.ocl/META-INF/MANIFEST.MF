@@ -4,7 +4,8 @@ Bundle-Name: OCL Abstract Syntax Model
 Bundle-SymbolicName: org.dresdenocl.language.ocl;singleton:=true
 Bundle-Version: 3.3.0.qualifier
 Bundle-ClassPath: .
-Bundle-Vendor: TU Dresden, Software Technology Group
+Bundle-Vendor: TU Dresden,
+ Software Technology Group
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.core.runtime,

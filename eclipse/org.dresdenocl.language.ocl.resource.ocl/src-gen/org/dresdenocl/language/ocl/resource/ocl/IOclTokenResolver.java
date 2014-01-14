@@ -12,8 +12,7 @@ package org.dresdenocl.language.ocl.resource.ocl;
  * instance of OclDefaultTokenResolver which performs a standard conversion based
  * on the EMF type conversion. This includes conversion of registered EDataTypes.
  * 
- * @see
- * org.dresdenocl.language.ocl.resource.ocl.analysis.OclDefaultTokenResolver
+ * @see org.dresdenocl.language.ocl.resource.ocl.analysis.OclDefaultTokenResolver
  */
 public interface IOclTokenResolver extends org.dresdenocl.language.ocl.resource.ocl.IOclConfigurable {
 	

@@ -83,8 +83,8 @@
 		<module>../../updatesite/org.dresdenocl.feature.ocl2sql</module>
 		<module>../../updatesite/org.dresdenocl.feature.parser</module>
 		<module>../../updatesite/org.dresdenocl.feature.examples</module>
-
 		<module>../../updatesite/org.dresdenocl.feature.all</module>
+		<module>../../updatesite/org.dresdenocl.feature.facade</module>
 		<module>../org.dresdenocl.p2updatesite</module>
 
 		<module>../org.dresdenocl.examples.living</module>

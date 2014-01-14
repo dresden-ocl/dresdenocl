@@ -64,4 +64,12 @@
 		<type name="org.dresdenocl.language.ocl.resource.ocl.ui.occurences.declaration" super="org.dresdenocl.language.ocl.resource.ocl.ui.occurences">
 		</type>
 	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.dresdenocl.language.ocl.resource.ocl.ui.occurences" label="Occurrences (in .ocl files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="ocl.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="ocl.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="ocl.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="ocl.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="ocl.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="ocl.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="ocl.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="ocl.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="ocl.occurrenceTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+		<specification annotationType="org.dresdenocl.language.ocl.resource.ocl.ui.occurences.declaration" label="Declarations (in .ocl files)" textPreferenceKey="ocl.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="ocl.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="ocl.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="ocl.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="ocl.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="ocl.declarationTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
 </plugin>

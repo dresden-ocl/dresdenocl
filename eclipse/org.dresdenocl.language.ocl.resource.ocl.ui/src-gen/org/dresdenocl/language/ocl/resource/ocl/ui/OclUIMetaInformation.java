@@ -22,9 +22,8 @@ public class OclUIMetaInformation extends org.dresdenocl.language.ocl.resource.o
 	
 	/**
 	 * @deprecated this method is only provided to preserve API compatibility. Use
-	 * createTokenScanner(org.dresdenocl.language.ocl.resource.ocl.IOclTextResou
-	 * rce, org.dresdenocl.language.ocl.resource.ocl.ui.OclColorManager)
-	 * instead.
+	 * createTokenScanner(org.dresdenocl.language.ocl.resource.ocl.IOclTextResource,
+	 * org.dresdenocl.language.ocl.resource.ocl.ui.OclColorManager) instead.
 	 */
 	public org.dresdenocl.language.ocl.resource.ocl.ui.OclTokenScanner createTokenScanner(org.dresdenocl.language.ocl.resource.ocl.ui.OclColorManager colorManager) {
 		return createTokenScanner(null, colorManager);

@@ -15,9 +15,8 @@ package org.dresdenocl.language.ocl.resource.ocl.util;
 public class OclTextResourceUtil {
 	
 	/**
-	 * Use
-	 * org.dresdenocl.language.ocl.resource.ocl.util.OclResourceUtil.getResource
-	 * () instead.
+	 * Use org.dresdenocl.language.ocl.resource.ocl.util.OclResourceUtil.getResource()
+	 * instead.
 	 */
 	@Deprecated	
 	public static org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource getResource(org.eclipse.core.resources.IFile file) {
@@ -25,9 +24,8 @@ public class OclTextResourceUtil {
 	}
 	
 	/**
-	 * Use
-	 * org.dresdenocl.language.ocl.resource.ocl.util.OclResourceUtil.getResource
-	 * () instead.
+	 * Use org.dresdenocl.language.ocl.resource.ocl.util.OclResourceUtil.getResource()
+	 * instead.
 	 */
 	@Deprecated	
 	public static org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource getResource(java.io.File file, java.util.Map<?,?> options) {
@@ -35,9 +33,8 @@ public class OclTextResourceUtil {
 	}
 	
 	/**
-	 * Use
-	 * org.dresdenocl.language.ocl.resource.ocl.util.OclResourceUtil.getResource
-	 * () instead.
+	 * Use org.dresdenocl.language.ocl.resource.ocl.util.OclResourceUtil.getResource()
+	 * instead.
 	 */
 	@Deprecated	
 	public static org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource getResource(org.eclipse.emf.common.util.URI uri) {
@@ -45,9 +42,8 @@ public class OclTextResourceUtil {
 	}
 	
 	/**
-	 * Use
-	 * org.dresdenocl.language.ocl.resource.ocl.util.OclResourceUtil.getResource
-	 * () instead.
+	 * Use org.dresdenocl.language.ocl.resource.ocl.util.OclResourceUtil.getResource()
+	 * instead.
 	 */
 	@Deprecated	
 	public static org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource getResource(org.eclipse.emf.common.util.URI uri, java.util.Map<?,?> options) {

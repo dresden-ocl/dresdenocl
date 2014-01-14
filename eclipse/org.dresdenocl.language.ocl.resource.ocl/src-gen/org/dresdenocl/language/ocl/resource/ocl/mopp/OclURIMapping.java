@@ -8,8 +8,8 @@ package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
 /**
  * A basic implementation of the
- * org.dresdenocl.language.ocl.resource.ocl.IOclURIMapping interface that
- * can map identifiers to URIs.
+ * org.dresdenocl.language.ocl.resource.ocl.IOclURIMapping interface that can map
+ * identifiers to URIs.
  * 
  * @param <ReferenceType> unused type parameter which is needed to implement
  * org.dresdenocl.language.ocl.resource.ocl.IOclURIMapping.
