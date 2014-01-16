@@ -7,4 +7,7 @@ pdf/
 *.toc
 *.out
 *.pmd
+.classpath
+.settings/
+*.prefs
 target/
