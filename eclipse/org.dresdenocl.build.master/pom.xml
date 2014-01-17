@@ -85,7 +85,7 @@
 		<module>../../updatesite/org.dresdenocl.feature.examples</module>
 		<module>../../updatesite/org.dresdenocl.feature.all</module>
 		<module>../../updatesite/org.dresdenocl.feature.facade</module>
-		<module>../org.dresdenocl.p2updatesite</module>
+		<module>../../updatesite/org.dresdenocl.p2updatesite</module>
 
 		<module>../org.dresdenocl.examples.living</module>
 		<module>../org.dresdenocl.examples.pain</module>
