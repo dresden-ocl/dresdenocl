@@ -166,6 +166,7 @@
 					</environments>
 
 					<filters>
+						<!-- This filter is due to a bug of eclipse -->
 						<filter>
 							<type>eclipse-plugin</type>
 							<id>org.eclipse.jdt.core</id>
@@ -194,7 +195,6 @@
 						<goals>
 							<goal>add-source</goal>
 							<goal>compile</goal>
-							<!-- <goal>testCompile</goal> -->
 						</goals>
 					</execution>
 				</executions>
@@ -213,6 +213,7 @@
 									<artifactId>maven-scala-plugin</artifactId>
 									<versionRange>[1.0.0,)</versionRange>
 									<goals>
+										<goal>add-source</goal>
 										<goal>compile</goal>
 									</goals>
 								</pluginExecutionFilter>
