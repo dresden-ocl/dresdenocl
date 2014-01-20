@@ -11,3 +11,4 @@ pdf/
 .settings/
 *.prefs
 target/
+bin/
