@@ -18,6 +18,7 @@
 				<include name="org.apache.**.jar" />
 			</fileset>
 			<dirset dir="${workspacePath}">
+				<include name="org.dresdenocl.**/target/classes" />
 				<include name="org.dresdenocl.**/bin" />
 				<include name="org.dresdenocl.attributegrammar.integration.kiama/bin" />
 			</dirset>
@@ -38,6 +39,7 @@
 			</fileset>
 			<dirset dir="./..">
 				<include name="org.dresdenocl.**/bin" />
+				<include name="org.dresdenocl.**/target/classes" />
 				<include name="org.dresdenocl.attributegrammar.integration.kiama/bin" />
 				<include name="org.emftext.**/bin" />
 			</dirset>

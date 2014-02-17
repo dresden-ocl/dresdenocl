@@ -136,7 +136,10 @@
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho.version}</version>
 				<configuration>
+					<resolver>p2</resolver>
+					<pomDependencies>consider</pomDependencies>
 					<environments>
 						<environment>
 							<os>linux</os>
@@ -199,32 +202,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
-			<plugin>
-				<groupId>org.eclipse.m2e</groupId>
-				<artifactId>lifecycle-mapping</artifactId>
-				<!-- <version>1.0.0</version> -->
-				<configuration>
-					<lifecycleMappingMetadata>
-						<pluginExecutions>
-							<pluginExecution>
-								<pluginExecutionFilter>
-									<groupId>org.scala-tools</groupId>
-									<artifactId>maven-scala-plugin</artifactId>
-									<versionRange>[1.0.0,)</versionRange>
-									<goals>
-										<goal>add-source</goal>
-										<goal>compile</goal>
-									</goals>
-								</pluginExecutionFilter>
-								<action>
-									<ignore />
-								</action>
-							</pluginExecution>
-						</pluginExecutions>
-					</lifecycleMappingMetadata>
-				</configuration>
-			</plugin>
 		</plugins>
 
 		<pluginManagement>
@@ -275,7 +252,7 @@
 		<repository>
 			<id>scala-tools.org</id>
 			<name>Scala-tools Maven2 Repository</name>
-			<url>http://scala-tools.org/repo-releases</url>
+			<url>https://oss.sonatype.org/content/groups/scala-tools/</url>
 		</repository>
 
 		<repository>
@@ -295,7 +272,7 @@
 		<pluginRepository>
 			<id>scala-tools.org</id>
 			<name>Scala-tools Maven2 Repository</name>
-			<url>http://scala-tools.org/repo-releases</url>
+			<url>https://oss.sonatype.org/content/groups/scala-tools/</url>
 		</pluginRepository>
 	</pluginRepositories>
 

@@ -4,7 +4,7 @@
         
         <property name="staticSemanticsPlugin" value="org.dresdenocl.language.ocl.staticsemantics"/>
         
-        <condition property="oclStaticSemanticsBin" value="${workspacePath}/${staticSemanticsPlugin}/bin" else="./../${staticSemanticsPlugin}/bin">
+        <condition property="oclStaticSemanticsBin" value="${workspacePath}/${staticSemanticsPlugin}/target/classes" else="./../${staticSemanticsPlugin}/target/classes">
                 <isset property="headless"/>
         </condition>
         

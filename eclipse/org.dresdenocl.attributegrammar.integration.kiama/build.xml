@@ -27,6 +27,7 @@
                 <echo message="Compile Scala Code" />
                 <echo> src: ${attributableEObjectSrc} </echo>
                 <echo> bin: ${attributableEObjectBin} </echo>
+        	
                 <scalac
                                 srcdir="${attributableEObjectSrc}"
                                 destdir="${attributableEObjectBin}"
