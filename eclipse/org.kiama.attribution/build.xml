@@ -1,7 +1,7 @@
 <project>
 	<import file="./../scala.library/build.xml"/>
 	
-	<property name="attributableEObjectBin" value="./../org.dresdenocl.attributegrammar.integration.kiama/bin"/>
+	<property name="attributableEObjectBin" value="./../org.dresdenocl.attributegrammar.integration.kiama/target/classes"/>
 	<property name="attributableEObjectSrc" value="./../org.dresdenocl.attributegrammar.integration.kiama/src"/>
 	
 	<target name="Clean org.dresdenocl.attributegrammar.integration.kiama" >

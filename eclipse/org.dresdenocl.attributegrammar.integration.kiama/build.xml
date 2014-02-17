@@ -3,7 +3,7 @@
         
         <property name="integrationPlugin" value="org.dresdenocl.attributegrammar.integration.kiama"/>
         
-        <condition property="attributableEObjectBin" value="${workspacePath}/${integrationPlugin}/bin" else="./../${integrationPlugin}/bin">
+        <condition property="attributableEObjectBin" value="${workspacePath}/${integrationPlugin}/target/classes" else="./../${integrationPlugin}/target/classes">
                 <isset property="headless"/>
         </condition>
         
