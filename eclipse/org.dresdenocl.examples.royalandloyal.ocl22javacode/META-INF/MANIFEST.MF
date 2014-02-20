@@ -8,6 +8,6 @@ Export-Package: org.dresdenocl.examples.royalsandloyals.ocl22javacode,
  org.dresdenocl.examples.royalsandloyals.ocl22javacode.test
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.aspectj.runtime,
- org.junit4;bundle-version="4.0.0",
+ org.junit,
  org.dresdenocl.tools.codegen.ocl2java.types
 Bundle-Vendor: TU Dresden, Software Technology Group
