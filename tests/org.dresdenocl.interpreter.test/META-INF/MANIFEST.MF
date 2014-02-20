@@ -5,10 +5,10 @@ Bundle-SymbolicName: org.dresdenocl.interpreter.test;singleton:=true
 Bundle-Version: 3.3.0.qualifier
 Bundle-Activator: org.dresdenocl.interpreter.test.OclInterpreterTestPlugin
 Require-Bundle: org.eclipse.core.runtime,
- org.dresdenocl.examples.royalandloyal,
- org.junit4;bundle-version="4.0.0",
  org.dresdenocl.facade,
- org.dresdenocl.testsuite.abstract
+ org.dresdenocl.testsuite.abstract,
+ org.junit,
+ org.dresdenocl.examples.royalandloyal
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Vendor: TU Dresden, Software Technology Group

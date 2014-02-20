@@ -6,7 +6,7 @@ Bundle-Version: 3.3.0.qualifier
 Bundle-Activator: org.dresdenocl.testsuite.Activator
 Bundle-Vendor: TU Dresden, Software Technology Group
 Require-Bundle: org.eclipse.core.runtime,
- org.junit;bundle-version="4.0.0",
+ org.junit,
  org.dresdenocl.metamodels.ecore.test,
  org.dresdenocl.metamodels.java.test,
  org.dresdenocl.metamodels.uml2.test,
@@ -19,8 +19,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.dresdenocl.ocl2parser.test,
  org.dresdenocl.interpreter.test,
  org.dresdenocl.standardlibrary.java.test,
- org.dresdenocl.examples.royalandloyal.ocl22javacode,
- org.dresdenocl.tools.codegen.ocl2java.test.aspectj,
  org.dresdenocl.tools.template.test,
  org.dresdenocl.tools.codegen.ocl2java.test,
  org.dresdenocl.tools.transformation.test,
@@ -32,4 +30,3 @@ Require-Bundle: org.eclipse.core.runtime,
  org.dresdenocl.tracer.test
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Import-Package: org.dresdenocl.examples.pain.test

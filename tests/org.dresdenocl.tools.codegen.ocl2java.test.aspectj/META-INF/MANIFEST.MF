@@ -7,7 +7,7 @@ Bundle-Activator: org.dresdenocl.tools.codegen.ocl2java.test.aspectj.Ocl22JavaAs
 Bundle-Vendor: TU Dresden, Software Technology Group
 Require-Bundle: org.eclipse.core.runtime,
  org.aspectj.runtime,
- org.junit4,
+ org.junit,
  org.dresdenocl.tools.codegen.ocl2java.types
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

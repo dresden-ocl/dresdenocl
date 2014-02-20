@@ -10,7 +10,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.dresdenocl.modelinstancetype.ecore.test,
  org.dresdenocl.modelinstancetype.ecore.test.tests
 Require-Bundle: org.eclipse.core.runtime,
- org.junit4;bundle-version="4.0.0",
+ org.junit,
  org.dresdenocl.modelinstancetype.ecore,
  org.dresdenocl.modelinstancetype.test
 Bundle-ActivationPolicy: lazy

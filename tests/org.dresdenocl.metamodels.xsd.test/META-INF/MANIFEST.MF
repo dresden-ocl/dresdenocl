@@ -5,7 +5,7 @@ Bundle-SymbolicName: org.dresdenocl.metamodels.xsd.test;singleton:=true
 Bundle-Version: 3.3.0.qualifier
 Bundle-Activator: org.dresdenocl.metamodels.xsd.test.XmlSchemaMetamodelTestPlugin
 Require-Bundle: org.eclipse.core.runtime,
- org.junit4;bundle-version="4.0.0",
+ org.junit,
  org.dresdenocl.metamodels.test,
  org.dresdenocl.metamodels.xsd,
  org.dresdenocl.modelbus,

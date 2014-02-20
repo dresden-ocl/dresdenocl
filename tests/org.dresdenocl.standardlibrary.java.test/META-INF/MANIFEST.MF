@@ -6,7 +6,7 @@ Bundle-Version: 3.3.0.qualifier
 Bundle-Activator: org.dresdenocl.standardlibrary.java.test.StandardLibraryTestPlugin
 Require-Bundle: org.eclipse.core.runtime,
  org.dresdenocl.standardlibrary.java,
- org.junit4;bundle-version="4.0.0",
+ org.junit,
  org.dresdenocl.modelbus,
  org.dresdenocl.examples.royalandloyal,
  org.dresdenocl.metamodels.uml2,

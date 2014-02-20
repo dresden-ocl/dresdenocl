@@ -6,7 +6,7 @@ Bundle-Version: 3.3.0.qualifier
 Bundle-Activator: org.dresdenocl.modelinstancetype.xml.test.XmlModelInstanceTypeTestPlugin
 Bundle-Vendor: TU Dresden, Software Technology Group
 Require-Bundle: org.eclipse.core.runtime,
- org.junit4;bundle-version="4.0.0",
+ org.junit,
  org.dresdenocl.modelinstancetype.test,
  org.dresdenocl.modelinstancetype.xml,
  org.dresdenocl.facade
