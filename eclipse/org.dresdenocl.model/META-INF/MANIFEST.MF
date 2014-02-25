@@ -9,8 +9,19 @@ Require-Bundle: org.eclipse.core.runtime,
  org.dresdenocl.pivotmodel;visibility:=reexport
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Export-Package: org.dresdenocl.model,
- org.dresdenocl.model.base,
- org.dresdenocl.model.event,
- org.dresdenocl.model.metamodel,
- org.dresdenocl.model.util
+Export-Package: org.dresdenocl.model;
+  uses:="org.eclipse.emf.ecore.resource,
+   org.eclipse.core.runtime,
+   org.apache.log4j,
+   org.dresdenocl.model.metamodel,
+   org.dresdenocl.pivotmodel,
+   org.osgi.framework,
+   org.dresdenocl.model.event",
+ org.dresdenocl.model.base;
+  uses:="org.eclipse.emf.ecore.resource,
+   org.dresdenocl.pivotmodel,
+   org.dresdenocl.model.metamodel,
+   org.dresdenocl.model",
+ org.dresdenocl.model.event;uses:="org.dresdenocl.model",
+ org.dresdenocl.model.metamodel;uses:="org.dresdenocl.model",
+ org.dresdenocl.model.util;uses:="org.dresdenocl.pivotmodel,org.dresdenocl.model"

@@ -6,7 +6,7 @@ Bundle-Version: 3.3.0.qualifier
 Bundle-Vendor: The Apache Jakarta Project
 Eclipse-LazyStart: true
 Bundle-ClassPath: commons-lang-2.3.jar
-Export-Package: org.apache.commons.lang,
+Export-Package: org.apache.commons.lang;uses:="org.apache.commons.lang.exception",
  org.apache.commons.lang.builder,
  org.apache.commons.lang.enums,
  org.apache.commons.lang.exception,

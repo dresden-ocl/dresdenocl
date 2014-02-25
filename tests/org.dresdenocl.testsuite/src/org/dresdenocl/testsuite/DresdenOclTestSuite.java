@@ -33,7 +33,7 @@ import org.dresdenocl.tools.codegen.declarativ.ocl2sql.test.FastOcl2SqlTests;
 import org.dresdenocl.tools.template.test.AllTestsTemplate;
 import org.dresdenocl.tools.transformation.pivot2sql.test.AllTestsPivot2Sql;
 import org.dresdenocl.tools.transformation.test.AllTestsTransformation;
-import org.dresdenocl.tracer.test.AllTracerTests;
+//import org.dresdenocl.tracer.test.AllTracerTests;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -80,7 +80,8 @@ AllEcoreMetaModelTests.class, TestJavaMetaModel.class,
 		FastOcl2SqlTests.class,
 		
 		/* Tracer tests: */
-		AllTracerTests.class})
+//		AllTracerTests.class
+		})
 public class DresdenOclTestSuite {
 	/*
 	 * This class remains completely empty, being used only as a holder for the

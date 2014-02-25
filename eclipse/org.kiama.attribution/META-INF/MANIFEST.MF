@@ -9,9 +9,9 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
  scala.library
 Bundle-ClassPath: lib/kiama_2.9.0-1.1.0.jar
+Bundle-ActivationPolicy: lazy
 Export-Package: org.kiama,
  org.kiama.attribution,
  org.kiama.machine,
  org.kiama.rewriting,
  org.kiama.util
-Bundle-ActivationPolicy: lazy
