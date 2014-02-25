@@ -67,3 +67,4 @@ Export-Package: scala,
 Created-By: 1.5.0_16-b02 (Sun Microsystems Inc.)
 Ant-Version: Apache Ant 1.7.0
 Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

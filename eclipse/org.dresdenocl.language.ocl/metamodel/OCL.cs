@@ -17,7 +17,7 @@ OPTIONS {
 	// see documentation for more information
 	overrideEditor = "false";
 	//------------------------------
-	overrideTextResource = "false";
+	overrideTextResource = "true";
 	overrideCodeCompletionHelper = "true";
 	overrideManifest = "false";
 	overridePluginXML = "false";
