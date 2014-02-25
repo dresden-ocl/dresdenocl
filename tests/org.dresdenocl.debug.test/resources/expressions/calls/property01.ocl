@@ -1,0 +1,7 @@
+package resource::package01
+
+context TestClass
+def: testPropertyCallExp01: Integer =
+self.integer
+
+endpackage

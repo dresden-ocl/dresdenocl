@@ -2,10 +2,10 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: OCL22Java Test Plug-in
 Bundle-SymbolicName: org.dresdenocl.tools.codegen.ocl2java.test;singleton:=true
-Bundle-Version: 3.2.0.qualifier
+Bundle-Version: 3.3.0.qualifier
 Bundle-Activator: org.dresdenocl.tools.codegen.ocl2java.test.Ocl2JavaTestPlugin
 Require-Bundle: org.eclipse.core.runtime,
- org.junit4,
+ org.junit,
  org.dresdenocl.tools.codegen,
  org.dresdenocl.tools.codegen.ocl2java,
  org.dresdenocl.tools.codegen.ocl2java.types,

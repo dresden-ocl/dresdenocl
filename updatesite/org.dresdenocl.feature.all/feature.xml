@@ -2,7 +2,7 @@
 <feature
       id="org.dresdenocl.feature.all"
       label="All Dresden OCL Features"
-      version="1.0.0.qualifier"
+      version="3.3.0.qualifier"
       provider-name="TU Dresden, Software Technology  Group">
 
    <description url="http://www.example.com/description">
@@ -190,18 +190,6 @@ Library.
          version="0.0.0"/>
 
    <includes
-         id="org.dresdenocl.feature.examples"
-         version="0.0.0"/>
-
-   <includes
-         id="org.dresdenocl.feature.examples.ocl22java"
-         version="0.0.0"/>
-
-   <includes
-         id="org.dresdenocl.feature.facade"
-         version="0.0.0"/>
-
-   <includes
          id="org.dresdenocl.feature.interpreter"
          version="0.0.0"/>
 
@@ -229,12 +217,12 @@ Library.
          id="org.dresdenocl.feature.metrics"
          version="0.0.0"/>
 
-   <plugin
-         id="org.eclipse.swt.cocoa.macosx.x86_64"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         fragment="true"
-         unpack="false"/>
+   <includes
+         id="org.dresdenocl.feature.examples"
+         version="0.0.0"/>
+
+   <includes
+         id="org.dresdenocl.feature.facade"
+         version="0.0.0"/>
 
 </feature>

@@ -1,0 +1,10 @@
+package resource::package01
+
+context TestClass
+inv: 
+  TestClass::staticDefinedProperty2
+
+static def: staticDefinedProperty2 = 
+  true
+
+endpackage

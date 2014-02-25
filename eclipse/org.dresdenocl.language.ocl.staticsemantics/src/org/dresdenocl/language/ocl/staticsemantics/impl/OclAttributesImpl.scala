@@ -94,8 +94,11 @@ trait OclAttributesImpl extends OclAttributes {selfType : OclStaticSemantics =>
           oclType(c.getTypeName).flatMap{selfType =>
 	          if (selfType.eIsProxy)
 	            Empty
-	          else
-	            Full(factory.createVariable("self", selfType, null))
+	          else {
+	          	val variable = factory.createVariable("self", selfType, null)
+	          	allMappings.put(variable, c)
+	            Full(variable)
+	          }
           }
         }
         
@@ -110,7 +113,9 @@ trait OclAttributesImpl extends OclAttributes {selfType : OclStaticSemantics =>
             var owningType = op.getOwningType
             if (owningType == null)
               owningType = definedOperationsType.get(op)
-            Full(factory.createVariable("self", owningType, null))
+            val variable = factory.createVariable("self", owningType, null)
+            allMappings.put(variable, o)
+            Full(variable)
           }
         }
         

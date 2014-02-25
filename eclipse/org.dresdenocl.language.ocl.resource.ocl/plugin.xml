@@ -78,5 +78,4 @@
 	
 	<extension-point id="org.dresdenocl.language.ocl.resource.ocl.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd">
 	</extension-point>
-	
 </plugin>

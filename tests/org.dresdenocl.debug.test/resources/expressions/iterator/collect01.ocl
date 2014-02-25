@@ -1,0 +1,7 @@
+package resource::package01
+
+context TestClass
+def: testCollectIteratorExp01 : Bag(Boolean) =
+Set{1, 2, 3}->collect(i: Integer | i <> 2)
+
+endpackage

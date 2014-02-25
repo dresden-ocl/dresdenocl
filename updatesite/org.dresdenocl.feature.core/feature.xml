@@ -2,7 +2,7 @@
 <feature
       id="org.dresdenocl.feature.core"
       label="Dresden OCL Core"
-      version="3.2.0.qualifier"
+      version="3.3.0.qualifier"
       provider-name="TU Dresden, Software Technology Group">
 
    <description url="http://dresden-ocl.sourceforge.net/4eclipse_packages.html">
@@ -193,8 +193,8 @@ Library.
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.apache.commons.lang"/>
       <import plugin="org.eclipse.emf.edit"/>
-      <import plugin="org.junit4" version="4.0.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.ui" version="3.4.0" match="greaterOrEqual"/>
+      <import plugin="org.apache.commons.io"/>
+      <import plugin="org.apache.log4j"/>
    </requires>
 
    <plugin
@@ -268,13 +268,6 @@ Library.
          unpack="false"/>
 
    <plugin
-         id="org.dresdenocl.examples.royalandloyal"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.dresdenocl.model"
          download-size="0"
          install-size="0"
@@ -297,13 +290,6 @@ Library.
 
    <plugin
          id="org.dresdenocl.modelinstancetype.ecore"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.dresdenocl.modelinstancetype.ecore.testmodel"
          download-size="0"
          install-size="0"
          version="0.0.0"

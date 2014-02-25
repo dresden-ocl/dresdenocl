@@ -104,7 +104,7 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 
 		/* Probably delegate to parent environment. */
 		if (this.parentEnvironment != null) {
-			this.parentEnvironment.getAtPreValue(operationCallExp);
+			result = this.parentEnvironment.getAtPreValue(operationCallExp);
 		}
 
 		else {
@@ -137,8 +137,7 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * org.dresdenocl.interpreter.IInterpretationEnvironment#getModelInstance
+	 * @see org.dresdenocl.interpreter.IInterpretationEnvironment#getModelInstance
 	 * ()
 	 */
 	public IModelInstance getModelInstance() {
@@ -148,8 +147,7 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * org.dresdenocl.interpreter.IInterpretationEnvironment#getVariableValue
+	 * @see org.dresdenocl.interpreter.IInterpretationEnvironment#getVariableValue
 	 * (java.lang.String)
 	 */
 	public OclAny getVariableValue(String identifier) {
@@ -170,8 +168,7 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * org.dresdenocl.interpreter.IInterpretationEnvironment#isNewInstance
+	 * @see org.dresdenocl.interpreter.IInterpretationEnvironment#isNewInstance
 	 * (tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject)
 	 */
@@ -254,8 +251,7 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * org.dresdenocl.interpreter.IInterpretationEnvironment#saveOldInstances
+	 * @see org.dresdenocl.interpreter.IInterpretationEnvironment#saveOldInstances
 	 * (org.dresdenocl.pivotmodel.Type)
 	 */
 	public void saveOldInstances(Type type) {
@@ -284,8 +280,7 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * org.dresdenocl.interpreter.IInterpretationEnvironment#setModelInstance
+	 * @see org.dresdenocl.interpreter.IInterpretationEnvironment#setModelInstance
 	 * (org.dresdenocl.modelinstance.IModelInstance)
 	 */
 	public void setModelInstance(IModelInstance modelInstance) {
@@ -295,13 +290,27 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * org.dresdenocl.interpreter.IInterpretationEnvironment#setVariableValue
-	 * (java.lang.String,
-	 * org.dresdenocl.essentialocl.standardlibrary.OclAny)
+	 * @see org.dresdenocl.interpreter.IInterpretationEnvironment#setVariableValue
+	 * (java.lang.String, org.dresdenocl.essentialocl.standardlibrary.OclAny)
 	 */
 	public void setVariableValue(String identifier, OclAny oclRoot) {
 
 		this.visibleVariableValues.put(identifier, oclRoot);
+	}
+
+	public void deleteVariableValue(String identifier) {
+
+		visibleVariableValues.remove(identifier);
+	}
+
+	@Override
+	public Map<String, OclAny> getVariableValues() {
+
+		Map<String, OclAny> result = new HashMap<String, OclAny>(visibleVariableValues);
+	
+		if(parentEnvironment != null) {
+			result.putAll(parentEnvironment.getVariableValues());
+		}
+		return result;
 	}
 }

@@ -2,10 +2,10 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: UML2 Meta-Model Test Plug-in
 Bundle-SymbolicName: org.dresdenocl.metamodels.uml2.test;singleton:=true
-Bundle-Version: 3.2.0.qualifier
+Bundle-Version: 3.3.0.qualifier
 Bundle-Activator: org.dresdenocl.metamodels.uml2.test.UML2MetaModelTestPlugin
 Require-Bundle: org.eclipse.core.runtime,
- org.junit4,
+ org.junit,
  org.dresdenocl.metamodels.test,
  org.dresdenocl.metamodels.uml2,
  org.dresdenocl.facade,

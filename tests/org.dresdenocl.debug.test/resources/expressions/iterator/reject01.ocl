@@ -1,0 +1,7 @@
+package resource::package01
+
+context TestClass
+def: testRejectIteratorExp01 : Set(Integer) =
+Set{1, 2, 3}->reject(i: Integer | i = 2)
+
+endpackage

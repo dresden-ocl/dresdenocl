@@ -1,0 +1,8 @@
+package resource::package01
+
+context TestClass
+def: testLetExp03: String =
+let outer = 'outer', inner = 'inner'
+in outer + inner
+
+endpackage

@@ -6,6 +6,8 @@ import org.eclipse.emf.ecore._
 import org.eclipse.emf.common.util._
 import org.eclipse.emf.common.notify._
 
+import org.dresdenocl.essentialocl.expressions._
+
 import org.kiama.attribution._
 
 /**

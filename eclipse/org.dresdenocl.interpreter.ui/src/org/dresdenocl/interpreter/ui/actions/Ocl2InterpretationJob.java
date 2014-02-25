@@ -16,7 +16,6 @@ import org.dresdenocl.modelbus.ui.ModelBusUIUtility;
 import org.dresdenocl.modelinstance.IModelInstance;
 import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
 import org.dresdenocl.pivotmodel.Constraint;
-import org.dresdenocl.pivotmodel.Feature;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;

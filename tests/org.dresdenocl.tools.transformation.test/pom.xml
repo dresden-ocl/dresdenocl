@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <relativePath>../../eclipse/org.dresdenocl.build.master/pom.xml</relativePath>
+    <groupId>org.dresdenocl</groupId>
+    <artifactId>parent</artifactId>
+    <version>3.3.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>org.dresdenocl.tools.transformation.test</artifactId>
+  <packaging>eclipse-test-plugin</packaging>
+
+</project> 

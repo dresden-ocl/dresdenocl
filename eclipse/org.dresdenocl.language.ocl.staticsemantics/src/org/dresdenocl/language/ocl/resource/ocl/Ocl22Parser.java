@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.dresdenocl.essentialocl.expressions.Variable;
 import org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource;
@@ -35,6 +36,7 @@ public class Ocl22Parser implements IOclParser {
 	}
 
 	private static Ocl22Parser instance() {
+
 		if (instance == null)
 			instance = new Ocl22Parser();
 		return instance;
@@ -42,16 +44,16 @@ public class Ocl22Parser implements IOclParser {
 
 	public static Ocl22Parser INSTANCE = instance();
 
-	public List<Constraint> doParse(IModel model, URI uri)
-			throws ParseException {
+	public List<Constraint> doParse(IModel model, URI uri) throws ParseException {
+
 		return doParse(model, uri, true);
 	}
 
 	public List<Constraint> doParse(IModel model, URI uri, boolean addToModel)
 			throws ParseException {
+
 		try {
-			Collection<Constraint> alreadyParsedConstraints = model
-					.getConstraints();
+			Collection<Constraint> alreadyParsedConstraints = model.getConstraints();
 			try {
 				// FIXME mt: is this the right place to do this?
 				// It is wrong inside the static semantics module as the
@@ -117,22 +119,21 @@ public class Ocl22Parser implements IOclParser {
 
 	public List<Constraint> parseOclString(String oclCode, IModel model)
 			throws ParseException {
+
 		return parseOclString(oclCode, model, true);
 	}
 
 	public List<Constraint> parseOclString(String oclCode, IModel model,
 			boolean addToModel) throws ParseException {
+
 		try {
-			Collection<Constraint> alreadyParsedConstraints = model
-					.getConstraints();
+			Collection<Constraint> alreadyParsedConstraints = model.getConstraints();
 			ResourceSet rs = new ResourceSetImpl();
-			OclResource resource = new OclResource(
-					URI.createFileURI("temp.ocl"));
+			OclResource resource = new OclResource(URI.createFileURI("temp.ocl"));
 			rs.getResources().add(resource);
 			resource.setModel(model);
 			try {
-				resource.load(new ByteArrayInputStream(oclCode.getBytes()),
-						null);
+				resource.load(new ByteArrayInputStream(oclCode.getBytes()), null);
 
 				List<Constraint> result = staticSemanticsAnalysis(resource);
 
@@ -177,57 +178,61 @@ public class Ocl22Parser implements IOclParser {
 	/**
 	 * 
 	 * @param eObject
-	 *            context for which the variables are defined
+	 *          context for which the variables are defined
 	 * @return a Tuple with 2 Lists: the first List holds all implicit variables
 	 *         (i.e., self, iterator variables), while the second List contains
-	 *         all explicitly defined variables (i.e., operation parameters,
-	 *         from let expressions, iterator variables, result variable in
+	 *         all explicitly defined variables (i.e., operation parameters, from
+	 *         let expressions, iterator variables, result variable in
 	 *         postconditions).
 	 */
 	public Variables getVariables(EObject eObject) {
+
 		Resource res = eObject.eResource();
 		if (res instanceof OclResource) {
-			org.dresdenocl.language.ocl.staticsemantics.OclStaticSemantics staticSemantics = OclStaticSemanticsProvider
-					.getStaticSemantics((OclResource) res);
+			org.dresdenocl.language.ocl.staticsemantics.OclStaticSemantics staticSemantics =
+					OclStaticSemanticsProvider.getStaticSemantics((OclResource) res);
 			Variables result = new Variables();
-			Tuple2<List<Variable>, List<Variable>> variables = staticSemantics
-					.getVariables(eObject);
+			Tuple2<List<Variable>, List<Variable>> variables =
+					staticSemantics.getVariables(eObject);
 			result.setImplicitVariables(variables._1());
 			result.setExplicitVariables(variables._2());
 			return result;
-		} else
+		}
+		else
 			throw new IllegalArgumentException("Resource of EObject " + eObject
 					+ " is not of type OclResource.");
 	}
 
 	public Type getOclType(EObject eObject) {
+
 		Resource res = eObject.eResource();
 		if (res instanceof OclResource) {
-			org.dresdenocl.language.ocl.staticsemantics.OclStaticSemantics staticSemantics = OclStaticSemanticsProvider
-					.getStaticSemantics((OclResource) res);
+			org.dresdenocl.language.ocl.staticsemantics.OclStaticSemantics staticSemantics =
+					OclStaticSemanticsProvider.getStaticSemantics((OclResource) res);
 			return staticSemantics.getOclType(eObject);
-		} else
+		}
+		else
 			throw new IllegalArgumentException("Resource of EObject " + eObject
 					+ " is not of type OclResource.");
 	}
 
 	private List<Constraint> staticSemanticsAnalysis(OclResource resource)
 			throws ParseException, SemanticException {
+
 		checkForErrors(resource);
 
-		org.dresdenocl.language.ocl.staticsemantics.OclStaticSemantics staticSemantics = OclStaticSemanticsProvider
-				.getStaticSemantics(resource);
+		org.dresdenocl.language.ocl.staticsemantics.OclStaticSemantics staticSemantics =
+				OclStaticSemanticsProvider.getStaticSemantics(resource);
 		List<Constraint> constraints;
 		try {
-			constraints = new ArrayList<Constraint>(
-					staticSemantics.cs2EssentialOcl(resource.getContents().get(
-							0)));
+			constraints =
+					new ArrayList<Constraint>(staticSemantics.cs2EssentialOcl(resource
+							.getContents().get(0)));
 		} catch (OclStaticSemanticsException e) {
 			throw new SemanticException(e.getMessage(), e);
 		}
 
 		checkForErrors(resource);
-
 		return constraints;
 	}
 
@@ -242,5 +247,18 @@ public class Ocl22Parser implements IOclParser {
 			}
 			throw new SemanticException(errorMsg.toString());
 		}
+	}
+
+	public Map<EObject, EObject> getEOcl2Cs(EObject eObject) {
+
+		Resource res = eObject.eResource();
+		if (res instanceof OclResource) {
+			org.dresdenocl.language.ocl.staticsemantics.OclStaticSemantics staticSemantics =
+					OclStaticSemanticsProvider.getStaticSemantics((OclResource) res);
+			return staticSemantics.getAllEssentialOcl2CsMappings();
+		}
+		else
+			throw new IllegalArgumentException("Resource of EObject " + eObject
+					+ " is not of type OclResource.");
 	}
 }

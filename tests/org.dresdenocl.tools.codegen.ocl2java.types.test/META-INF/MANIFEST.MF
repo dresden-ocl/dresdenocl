@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Test
+Bundle-SymbolicName: org.dresdenocl.tools.codegen.ocl2java.types.test
+Bundle-Version: 3.3.0.qualifier
+Bundle-Activator: org.dresdenocl.tools.codegen.ocl2java.types.test.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.junit,
+ org.dresdenocl.tools.codegen.ocl2java.types
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

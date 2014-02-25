@@ -1,0 +1,10 @@
+package resource::package01
+
+context TestClass
+inv: 
+  definedOperation2()
+
+def: definedOperation2() =
+  true
+
+endpackage

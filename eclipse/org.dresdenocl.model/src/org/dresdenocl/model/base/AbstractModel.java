@@ -27,13 +27,14 @@ package org.dresdenocl.model.base;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.IdentityHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-
 import org.dresdenocl.model.IModel;
 import org.dresdenocl.model.IModelListener;
 import org.dresdenocl.model.ModelAccessException;
@@ -46,6 +47,7 @@ import org.dresdenocl.pivotmodel.PivotModelFactory;
 import org.dresdenocl.pivotmodel.PrimitiveType;
 import org.dresdenocl.pivotmodel.PrimitiveTypeKind;
 import org.dresdenocl.pivotmodel.Type;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <p>
@@ -75,6 +77,25 @@ public abstract class AbstractModel implements IModel {
 	/** The {@link IMetamodel} of this {@link IModel}. */
 	private IMetamodel metamodel;
 
+	private Map<EObject, EObject> m_allMappings =
+			new IdentityHashMap<EObject, EObject>();
+
+	public Map<EObject, EObject> getAllMappings() {
+
+		return m_allMappings;
+	}
+
+	public boolean addAllMappings(final Map<EObject, EObject> mappings) {
+
+		if (mappings == null) {
+			m_allMappings = new IdentityHashMap<EObject, EObject>();
+		}
+		else {
+			m_allMappings = new IdentityHashMap<EObject, EObject>(mappings);
+		}
+		return true;
+	}
+
 	/**
 	 * <p>
 	 * Constructor to be called by subclasses. The <code>displayName</code> is a
@@ -83,9 +104,9 @@ public abstract class AbstractModel implements IModel {
 	 * </p>
 	 * 
 	 * @param displayName
-	 *            A name for this {@link IModel}.
+	 *          A name for this {@link IModel}.
 	 * @param metamodel
-	 *            The {@link IMetamodel} for this {@link IModel}.
+	 *          The {@link IMetamodel} for this {@link IModel}.
 	 */
 	protected AbstractModel(String displayName, IMetamodel metamodel) {
 
@@ -103,16 +124,13 @@ public abstract class AbstractModel implements IModel {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.dresdenocl.modelbus.model.IModel#addListener(org.dresdenocl
+	 * @see org.dresdenocl.modelbus.model.IModel#addListener(org.dresdenocl
 	 * .pivot.modelbus.model.IModelListener)
 	 */
 	public boolean addListener(IModelListener listener) {
 
 		if (listener == null) {
-			throw new IllegalArgumentException(
-					"Parameter listener must not be null.");
+			throw new IllegalArgumentException("Parameter listener must not be null.");
 		}
 		// no else.
 
@@ -144,7 +162,6 @@ public abstract class AbstractModel implements IModel {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.dresdenocl.modelbus.IModel#findNamespace(java.util.List)
 	 */
 	public Namespace findNamespace(List<String> pathName)
@@ -164,8 +181,7 @@ public abstract class AbstractModel implements IModel {
 
 		/* The path name must not be null. */
 		if (pathName == null) {
-			throw new IllegalArgumentException(
-					"The path name must not be null."); //$NON-NLS-1$
+			throw new IllegalArgumentException("The path name must not be null."); //$NON-NLS-1$
 		}
 		// no else.
 
@@ -215,7 +231,6 @@ public abstract class AbstractModel implements IModel {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.dresdenocl.modelbus.IModel#findType(java.util.List)
 	 */
 	public Type findType(List<String> pathName) throws ModelAccessException {
@@ -266,7 +281,8 @@ public abstract class AbstractModel implements IModel {
 		if (foundTypes.size() > 1) {
 			String msg;
 
-			msg = "More than one type with path name " + pathName + " were found: " + foundTypes; //$NON-NLS-1$//$NON-NLS-2$
+			msg =
+					"More than one type with path name " + pathName + " were found: " + foundTypes; //$NON-NLS-1$//$NON-NLS-2$
 			LOGGER.warn(msg);
 
 			result = null;
@@ -278,7 +294,7 @@ public abstract class AbstractModel implements IModel {
 			/* If the path has only one element check for a primitive type. */
 			if (pathName.size() == 1) {
 				String primitiveName;
-				
+
 				PrimitiveType primitiveType;
 
 				primitiveName = pathName.get(0);
@@ -286,8 +302,7 @@ public abstract class AbstractModel implements IModel {
 				for (PrimitiveTypeKind aKind : PrimitiveTypeKind.VALUES) {
 
 					if (primitiveName.equals(aKind.getName())) {
-						primitiveType = PivotModelFactory.eINSTANCE
-								.createPrimitiveType();
+						primitiveType = PivotModelFactory.eINSTANCE.createPrimitiveType();
 						primitiveType.setKind(aKind);
 						primitiveType.setName(aKind.getName());
 						foundTypes.add(primitiveType);
@@ -301,7 +316,8 @@ public abstract class AbstractModel implements IModel {
 			if (foundTypes.size() == 0) {
 				String msg;
 
-				msg = "Type with path name " + pathName + " was not found: " + foundTypes; //$NON-NLS-1$//$NON-NLS-2$
+				msg =
+						"Type with path name " + pathName + " was not found: " + foundTypes; //$NON-NLS-1$//$NON-NLS-2$
 				LOGGER.warn(msg);
 
 				result = null;
@@ -329,7 +345,6 @@ public abstract class AbstractModel implements IModel {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.dresdenocl.modelbus.model.IModel#getConstraints()
 	 */
 	public Collection<Constraint> getConstraints() throws ModelAccessException {
@@ -339,7 +354,6 @@ public abstract class AbstractModel implements IModel {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.dresdenocl.modelbus.IModel#getDisplayName()
 	 */
 	public String getDisplayName() {
@@ -349,7 +363,6 @@ public abstract class AbstractModel implements IModel {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.dresdenocl.modelbus.IModel#getMetamodel()
 	 */
 	public IMetamodel getMetamodel() {
@@ -359,7 +372,6 @@ public abstract class AbstractModel implements IModel {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.dresdenocl.modelbus.model.IModel#hasChanged()
 	 */
 	public boolean hasChanged() {
@@ -389,7 +401,6 @@ public abstract class AbstractModel implements IModel {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.dresdenocl.modelbus.model.IModel#notifiyListeners()
 	 */
 	public synchronized boolean notifiyListeners() {
@@ -429,7 +440,6 @@ public abstract class AbstractModel implements IModel {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.dresdenocl.modelbus.model.IModel#removeAllConstraints()
 	 */
 	public boolean removeAllConstraints() throws IllegalArgumentException,
@@ -462,8 +472,7 @@ public abstract class AbstractModel implements IModel {
 
 		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER
-					.debug("removeAllConstraints() - exit - return value=" + result); //$NON-NLS-1$
+			LOGGER.debug("removeAllConstraints() - exit - return value=" + result); //$NON-NLS-1$
 		}
 		// no else.
 
@@ -472,9 +481,7 @@ public abstract class AbstractModel implements IModel {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.dresdenocl.modelbus.model.IModel#removeConstraints(java.util
+	 * @see org.dresdenocl.modelbus.model.IModel#removeConstraints(java.util
 	 * .Collection)
 	 */
 	public boolean removeConstraints(Collection<Constraint> constraints)
@@ -500,8 +507,9 @@ public abstract class AbstractModel implements IModel {
 
 		boolean result;
 
-		result = this.getRootNamespace().removeOwnedAndNestedRules(
-				new ArrayList<Constraint>(constraints));
+		result =
+				this.getRootNamespace().removeOwnedAndNestedRules(
+						new ArrayList<Constraint>(constraints));
 
 		if (result) {
 			this.setChanged();
@@ -519,16 +527,13 @@ public abstract class AbstractModel implements IModel {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.dresdenocl.modelbus.model.IModel#removeListener(tudresden.
+	 * @see org.dresdenocl.modelbus.model.IModel#removeListener(tudresden.
 	 * ocl20.pivot.modelbus.model.IModelListener)
 	 */
 	public boolean removeListener(IModelListener listener) {
 
 		if (listener == null) {
-			throw new IllegalArgumentException(
-					"Parameter listener must not be null.");
+			throw new IllegalArgumentException("Parameter listener must not be null.");
 		}
 		// no else.
 
@@ -560,7 +565,6 @@ public abstract class AbstractModel implements IModel {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.dresdenocl.modelbus.model.IModel#setChanged()
 	 */
 	public void setChanged() {
@@ -591,13 +595,13 @@ public abstract class AbstractModel implements IModel {
 	 * </p>
 	 * 
 	 * @param namespace
-	 *            The {@link Namespace} to start the search in.
+	 *          The {@link Namespace} to start the search in.
 	 * @param pathName
-	 *            The path name to look for.
+	 *          The path name to look for.
 	 * @param searchAllNestedNamespaces
-	 *            Indicates whether a recursive search in all nested
-	 *            {@link Namespace}s with the full path name is required (for
-	 *            non-fully-qualified path names).
+	 *          Indicates whether a recursive search in all nested
+	 *          {@link Namespace}s with the full path name is required (for
+	 *          non-fully-qualified path names).
 	 * 
 	 * @return A {@link List} containing all {@link Type}s found matching to the
 	 *         given pathName.
@@ -624,8 +628,8 @@ public abstract class AbstractModel implements IModel {
 		result = new LinkedList<Type>();
 
 		/*
-		 * Search in all nested name spaces with the given path name (in case it
-		 * was not fully qualified).
+		 * Search in all nested name spaces with the given path name (in case it was
+		 * not fully qualified).
 		 */
 		if (searchAllNestedNamespaces) {
 			for (Namespace nestedNamespace : namespace.getNestedNamespace()) {
@@ -654,8 +658,8 @@ public abstract class AbstractModel implements IModel {
 			namespace = namespace.lookupNamespace(firstPathSegment);
 
 			if (namespace != null) {
-				result.addAll(findTypeHere(namespace, pathName.subList(1,
-						pathName.size()), false));
+				result.addAll(findTypeHere(namespace,
+						pathName.subList(1, pathName.size()), false));
 			}
 		}
 

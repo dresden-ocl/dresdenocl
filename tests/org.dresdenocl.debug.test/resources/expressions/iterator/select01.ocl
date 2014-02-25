@@ -1,0 +1,7 @@
+package resource::package01
+
+context TestClass
+def: testSelectIteratorExp01 : Set(Integer) =
+Set{1, 2, 3}->select(i: Integer | i = 2)
+
+endpackage

@@ -2,11 +2,11 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: TestSuite for the OCL StandardLibrary
 Bundle-SymbolicName: org.dresdenocl.standardlibrary.java.test;singleton:=true
-Bundle-Version: 3.2.0.qualifier
+Bundle-Version: 3.3.0.qualifier
 Bundle-Activator: org.dresdenocl.standardlibrary.java.test.StandardLibraryTestPlugin
 Require-Bundle: org.eclipse.core.runtime,
  org.dresdenocl.standardlibrary.java,
- org.junit4;bundle-version="4.0.0",
+ org.junit,
  org.dresdenocl.modelbus,
  org.dresdenocl.examples.royalandloyal,
  org.dresdenocl.metamodels.uml2,

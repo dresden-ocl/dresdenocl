@@ -1,7 +1,12 @@
 bin/
 .DS_Store
+Thumbs.db
 pdf/
 *.aux
 *.lo*
 *.toc
 *.out
+*.pmd
+.settings/
+target/
+bin/

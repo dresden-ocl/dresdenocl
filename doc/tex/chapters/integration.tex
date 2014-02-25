@@ -15,18 +15,18 @@ Integration Facade} presented in Chapter~\ref{chapter:standalone} instead.
 
 \section{The Integration Facade of Dresden OCL}
 
-Since the release 2.2.0, Dresden OCL contains an \keyword{Integration Facade},
-that combines all required interfaces of Dresden OCL into one interface, also
-called a \keyword{Facade}~\cite{gamma:dp}. The facade contains self-explanatory 
-static methods that provide access to the repository (modelbus) and all tools 
-of Dresden OCL. A documentation of the complete facade's interface would be too
+Dresden OCL contains an \keyword{Integration Facade}, that combines all required
+interfaces of Dresden OCL into one interface, also called a
+\keyword{Facade}~\cite{gamma:dp}. The facade contains self-explanatory static
+methods that provide access to the repository (modelbus) and all tools of
+Dresden OCL. A documentation of the complete facade's interface would be too
 large for this documentation. Thus, please investigate the facade directly
 trough the source code or API documentation. The facade called
 \code{Ocl2ForEclipseFacade} is located in the plug-in
-\code{org.dresdenocl.facade}. Please be aware of the fact that if you
-use the facade, you will result in dependencies to all major parts of Dresden
-OCL. Thus, if you want to use one of the tools only (e.g, the \acs{OCL} Parser)
-you could access these tools directly as explained below.
+\code{org.dresdenocl.facade}. Please be aware of the fact that if you use the
+facade, you will result in dependencies to all major parts of Dresden OCL.
+Thus, if you want to use one of the tools only (e.g, the OCL Parser) you could
+access these tools directly as explained below.
 
 
 
@@ -35,13 +35,13 @@ you could access these tools directly as explained below.
 The central registry component of Dresden OCL is the \keyword{Model-Bus}
 which is implemented by the Eclipse plug-in 
 \code{org.dresdenocl.modelbus}. The main class of this plug-in 
-(\code{tudresden.\linebreak[0]ocl20.pivot.modelbus.ModelBusPlugin}) provides 
-methods, to access metamodels, models and model instances and to import new
-resources of these kinds into the toolkit (cf. 
+(\code{org.dresdenocl.\linebreak[0]modelbus.ModelBusPlugin}) provides methods,
+to access metamodels, models and model instances and to import new resources of
+these kinds into the toolkit (cf.
 Figure~\ref{pic:integration:modelBusPlugin}).
 
-The class provides four different static methods to access different registries,
-the \code{Meta\-model\-Re\-gis\-try}, the \code{ModelRegistry}, the 
+The class provides four different static methods to access different
+registries, the \code{Meta\-model\-Re\-gis\-try}, the \code{ModelRegistry}, the 
 \code{ModelInstanceTypeRegistry} and the \code{ModelInstanceRegistry}.
 
 \begin{figure}[!b]
@@ -76,12 +76,12 @@ the name of its plug-in (e.g., the \acs{UML}2 metamodel has the ID
 \subsection{How to load a Model}
 
 First, to load a model into Dresden OCL, the metamodel the model is an instance
-of has to be selected (e.g., for a \acs{UML}2 class diagram the \acs{UML}2 
-metamodel should be selected (cf. Listing~\ref{lst:integration:loadModel}).
-Each metamodel has its own \code{IModelProvider} that can be accessed by using 
-the method \code{IMetamodel.getModelProvider()}. The \code{IModelProvider} 
-provides three methods to load a model. A model can be loaded by using the 
-method \code{getModel(..)} with
+of has to be selected (e.g., for a UML2 class diagram the UML2 metamodel should
+be selected (cf. Listing~\ref{lst:integration:loadModel}). Each metamodel has
+its own \code{IModelProvider} that can be accessed by using the method
+\code{IMetamodel.getModelProvider()}. The \code{IModelProvider} provides three
+methods to load a model. A model can be loaded by using the method
+\code{getModel(..)} with
 
 \begin{enumerate}
 	\item a \code{File} object representing the model as argument,
@@ -129,8 +129,7 @@ Dresden OCL, the methods \code{getModelInstanceTypes()} and
 currently registered in the registry. The method \code{getModelInstanceType(id: 
 String)} can be used to get a model instance types by its ID (Normally, the ID 
 of a model instance type is equal to the name of its plug-in (e.g., the Java 
-model instance type has the ID 
-\code{org.dresdenocl.modelinstancetype.java})).
+model instance type has the ID \code{org.dresdenocl.modelinstancetype.java})).
 
 \begin{figure}[!b]
 	\centering
@@ -142,13 +141,13 @@ model instance type has the ID
 
 \subsection{How to load a Model Instance}
 
-First, to load a model instance into Dresden OCL, the model instance type must be
-selected of which the instance is an instance of (e.g., for a set of Java
+First, to load a model instance into Dresden OCL, the model instance type must
+be selected of which the instance is an instance of (e.g., for a set of Java
 objects the Java model instance type should be selected, cf. 
 Listing~\ref{lst:integration:loadModelInstance}). Each model instance type has
 its own \code{IModelInstance\-Pro\-vi\-der} that can be accessed by using the
-method \code{IModelInstanceType.get\-Mo\-del\-Instance\-Provider}. The 
-\code{IModelInstanceProvider} provides three methods to load a model instance. 
+method \code{IModelInstanceType.get\-Mo\-del\-Instance\-Provider}. The
+\code{IModelInstanceProvider} provides three methods to load a model instance.
 A model instance can be loaded by using the method \code{getModelInstance(..)} 
 with
 
@@ -185,26 +184,26 @@ modelInstance = miType.getModelInstanceProvider()
 \end{figure}
 
 After loading the model instance, the model instance can be added to the
-\code{Model\-Instance\-Re\-gis\-try}, that manages all model instances currently
-loaded into Dresden OCL (cf.
-Figure~\ref{pic:integration:modelInstanceRegistry}).
-The \code{ModelInstanceRegistry} can also be used to set an active model
-instance that represents the \code{IModelInstance} that is currently selected in
-the \keyword{Model Instance Browser} of Dresden OCL's GUI.
+\code{Model\-Instance\-Re\-gis\-try}, that manages all model instances
+currently loaded into Dresden OCL (cf.
+Figure~\ref{pic:integration:modelInstanceRegistry}). The
+\code{ModelInstanceRegistry} can also be used to set an active model instance
+that represents the \code{IModelInstance} that is currently selected in the
+\keyword{Model Instance Browser} of Dresden OCL's GUI.
 
 
 
 \section{How to access the OCL Parser}
-The \acs{OCL}2 Parser of \acl{DOT4Eclipse} is located in the plug-in 
-\code{org.dresdenocl.\linebreak[0]language.ocl.staticsemantics} within
-the package
-\code{org.dresdenocl.language.ocl\linebreak[0].\linebreak[0]re\-source\linebreak[0].ocl}.
-The parser provides a very simple interface and can be used as shown in Listing
-\ref{lst:integration:parserConstraints}. You have to provide an \code{IModel}
-and an \code{URI} where the \acs{OCL} file can be found. You can specify whether
-constraints and definitions should be added to the \code{IModel} by a third
-parameter named \code{addToModel}. It can be left out and is then assumed to be
-\code{true}.
+
+The OCL2 Parser of \acl{DOT4Eclipse} is located in the plug-in 
+\code{org.dresdenocl.language.\linebreak[0]ocl.staticsemantics} within the
+package \code{org.dresdenocl.language.ocl.resource.ocl}. The parser provides a
+very simple interface and can be used as shown in
+Listing~\ref{lst:integration:parserConstraints}. You have to provide an
+\code{IModel} and an \code{URI} where the OCL file can be found. You can specify
+whether constraints and definitions should be added to the \code{IModel} by a
+third parameter named \code{addToModel}. It can be left out and is then assumed
+to be \code{true}.
 
 \begin{figure}[!b]
 \begin{lstlisting}[caption={How to parse constraints.}, captionpos=b, label=lst:integration:parserConstraints]
@@ -220,12 +219,12 @@ parsedConstraints = Ocl22Parser.INSTANCE.doParse(model, uri, addToModel)
 
 \section{How to access the OCL Interpreter}
 
-To use the \acs{OCL} Interpreter, a model and a model instance must be loaded 
-into the toolkit before. Additionally, at least one constraint must be parsed 
-that shall be interpreted for the objects contained in the model instance. The 
-interpreter is located in the plug-in 
-\code{org.dresdenocl.pi\-vot.\linebreak[0]in\-ter\-pre\-ter}. It has a more 
-complex interface than the other tools and contains many different operations 
+To use the OCL Interpreter, a model and a model instance must be loaded into the
+toolkit before. Additionally, at least one constraint must be parsed that shall
+be interpreted for the objects contained in the model instance. The interpreter
+is located in the plug-in
+\code{org.dresdenocl.pi\-vot.\linebreak[0]in\-ter\-pre\-ter}. It has a more
+complex interface than the other tools and contains many different operations
 to interpret different kinds of constraints.
 
 \begin{figure}[!b]

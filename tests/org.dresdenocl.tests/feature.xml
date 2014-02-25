@@ -2,7 +2,7 @@
 <feature
       id="org.dresdenocl.tests"
       label="Tests"
-      version="3.2.0.qualifier"
+      version="3.3.0.qualifier"
       provider-name="TU Dresden, Software Technology Group">
 
    <description url="http://www.example.com/description">

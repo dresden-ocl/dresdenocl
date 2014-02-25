@@ -1,0 +1,7 @@
+package resource::package01
+
+context TestClass
+static def: staticDefinedOperation() = 
+  42
+
+endpackage

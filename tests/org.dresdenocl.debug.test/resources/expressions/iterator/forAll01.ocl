@@ -1,0 +1,7 @@
+package resource::package01
+
+context TestClass
+def: testForAllIteratorExp01 : Boolean =
+Set{1, 2, 3}->forAll(i: Integer | i > 0)
+
+endpackage

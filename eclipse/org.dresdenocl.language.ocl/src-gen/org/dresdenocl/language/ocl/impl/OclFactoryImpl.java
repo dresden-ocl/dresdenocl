@@ -100,7 +100,7 @@ public class OclFactoryImpl extends EFactoryImpl implements OclFactory {
 	public static OclFactory init() {
     try
     {
-      OclFactory theOclFactory = (OclFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.tu-dresden.de/ocl20/pivot/language/ocl"); 
+      OclFactory theOclFactory = (OclFactory)EPackage.Registry.INSTANCE.getEFactory(OclPackage.eNS_URI);
       if (theOclFactory != null)
       {
         return theOclFactory;

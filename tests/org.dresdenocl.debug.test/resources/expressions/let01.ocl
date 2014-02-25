@@ -1,0 +1,8 @@
+package resource::package01
+
+context TestClass
+def: testLetExp01: Integer =
+let senseOfLife = 42
+in senseOfLife
+
+endpackage

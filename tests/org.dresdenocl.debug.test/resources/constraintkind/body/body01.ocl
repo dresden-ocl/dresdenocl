@@ -1,0 +1,7 @@
+package resource::package01
+
+context TestClass::getInteger()
+body: 
+  42
+
+endpackage

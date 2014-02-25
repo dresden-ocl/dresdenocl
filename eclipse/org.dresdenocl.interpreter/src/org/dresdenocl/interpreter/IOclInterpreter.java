@@ -90,7 +90,7 @@ public interface IOclInterpreter {
 	 */
 	public IInterpretationResult interpretConstraint(Constraint aConstraint,
 			IModelInstanceElement aModelObject);
-
+	
 	/**
 	 * <p>
 	 * Interpret a given {@link Collection} of {@link Constraint} for the given

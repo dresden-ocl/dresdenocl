@@ -12,6 +12,11 @@ OPTIONS {
 	disableLaunchSupport = "true";
 	reloadGeneratorModel = "true";
 	tokenspace = "1";
+	// -----------------------------
+	// set this to true but check out OclEditor.setFocus() method
+	// see documentation for more information
+	overrideEditor = "false";
+	//------------------------------
 	overrideTextResource = "false";
 	overrideCodeCompletionHelper = "true";
 	overrideManifest = "false";
