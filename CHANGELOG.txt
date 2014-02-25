@@ -1,6 +1,23 @@
 Changes and Bugs fixed during the different Releases
 ====================================================
 
+Release 3.3 (February, 24th 2014)
+=================================
+* This is the first release built with maven/tycho
+
+* Introduction of new Tool: Dresden OCL Debugger
+
+* Dresden OCL supports Kepler
+
+* Dresden OCL 3.x support dropped
+
+* Bug fixes on interpreter
+  - Some minor bugs where fixed
+
+GUI
+---
+* The OCL Debugger is integrated into the Eclipse Debugger UI
+
 Release 3.2 (September, 24th 2012)
 ==================================
 * Introduction of new Tool: Dresden OCL Metrics
