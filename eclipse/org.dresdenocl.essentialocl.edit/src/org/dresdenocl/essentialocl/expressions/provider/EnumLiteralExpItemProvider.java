@@ -64,7 +64,6 @@ public class EnumLiteralExpItemProvider extends LiteralExpItemProvider
 	 * @generated
 	 */
 	public EnumLiteralExpItemProvider(AdapterFactory adapterFactory) {
-
 		super(adapterFactory);
 	}
 
@@ -76,7 +75,6 @@ public class EnumLiteralExpItemProvider extends LiteralExpItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -91,7 +89,6 @@ public class EnumLiteralExpItemProvider extends LiteralExpItemProvider
 	 * @generated
 	 */
 	protected void addReferredEnumLiteralPropertyDescriptor(Object object) {
-
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -112,7 +109,6 @@ public class EnumLiteralExpItemProvider extends LiteralExpItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-
 		return overlayImage(object,
 				getResourceLocator().getImage("full/obj16/EnumLiteralExp")); //$NON-NLS-1$
 	}
@@ -126,8 +122,8 @@ public class EnumLiteralExpItemProvider extends LiteralExpItemProvider
 	@Override
 	public String getText(Object object) {
 
-		String result =
-				((EnumLiteralExp) object).getReferredEnumLiteral().getName();
+		String result = ((EnumLiteralExp) object).getReferredEnumLiteral()
+				.getName();
 
 		return result;
 	}
@@ -141,7 +137,6 @@ public class EnumLiteralExpItemProvider extends LiteralExpItemProvider
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
-
 		updateChildren(notification);
 		super.notifyChanged(notification);
 	}
@@ -156,7 +151,6 @@ public class EnumLiteralExpItemProvider extends LiteralExpItemProvider
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
-
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

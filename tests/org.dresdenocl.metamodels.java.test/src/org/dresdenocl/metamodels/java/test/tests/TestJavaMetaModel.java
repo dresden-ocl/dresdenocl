@@ -36,7 +36,7 @@ public class TestJavaMetaModel extends MetaModelTestSuite {
 	private static final String META_MODEL_ID = JavaMetaModelPlugin.ID;
 
 	/** The path of the model which shall be tested. */
-	private static final String TEST_MODEL_PATH = "bin/org/dresdenocl/metamodels/java/test/model/ModelMainClass.class";
+	private static final String TEST_MODEL_PATH = "target/classes/org/dresdenocl/metamodels/java/test/model/ModelMainClass.class";
 
 	/**
 	 * <p>

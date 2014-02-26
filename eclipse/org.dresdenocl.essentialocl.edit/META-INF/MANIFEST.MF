@@ -1,16 +1,19 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Essential OCL Edit Plug-in
-Bundle-SymbolicName: org.dresdenocl.essentialocl.edit; singleton:=true
+Bundle-SymbolicName: org.dresdenocl.essentialocl.edit;singleton:=true
 Bundle-Version: 3.3.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.dresdenocl.essentialocl.types.provider.EssentialOCLEditPlugin$Implementation
-Bundle-Vendor: TU Dresden, Software Technology Group
+Bundle-Vendor: TU Dresden,
+ Software Technology Group
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.dresdenocl.essentialocl.expressions.provider,
  org.dresdenocl.essentialocl.types.provider
 Require-Bundle: org.dresdenocl.essentialocl;visibility:=reexport,
+ org.eclipse.emf.edit;visibility:=reexport,
+ org.dresdenocl.pivotmodel;visibility:=reexport,
  org.dresdenocl.pivotmodel.edit;visibility:=reexport,
  org.eclipse.core.runtime
 Bundle-ActivationPolicy: lazy

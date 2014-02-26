@@ -66,7 +66,6 @@ public class OperationCallExpItemProvider extends FeatureCallExpItemProvider
 	 * @generated
 	 */
 	public OperationCallExpItemProvider(AdapterFactory adapterFactory) {
-
 		super(adapterFactory);
 	}
 
@@ -78,7 +77,6 @@ public class OperationCallExpItemProvider extends FeatureCallExpItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -94,7 +92,6 @@ public class OperationCallExpItemProvider extends FeatureCallExpItemProvider
 	 * @generated
 	 */
 	protected void addReferredOperationPropertyDescriptor(Object object) {
-
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -117,7 +114,6 @@ public class OperationCallExpItemProvider extends FeatureCallExpItemProvider
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(
 			Object object) {
-
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures
@@ -132,7 +128,6 @@ public class OperationCallExpItemProvider extends FeatureCallExpItemProvider
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
-
 		// Check the type of the specified child object and return the proper feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
@@ -147,7 +142,6 @@ public class OperationCallExpItemProvider extends FeatureCallExpItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-
 		return overlayImage(object,
 				getResourceLocator().getImage("full/obj16/OperationCallExp")); //$NON-NLS-1$
 	}
@@ -161,7 +155,8 @@ public class OperationCallExpItemProvider extends FeatureCallExpItemProvider
 	@Override
 	public String getText(Object object) {
 
-		String label = ((OperationCallExp) object).getReferredOperation().getName();
+		String label = ((OperationCallExp) object).getReferredOperation()
+				.getName();
 		return label;
 	}
 
@@ -174,7 +169,6 @@ public class OperationCallExpItemProvider extends FeatureCallExpItemProvider
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
-
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(OperationCallExp.class)) {
@@ -196,7 +190,6 @@ public class OperationCallExpItemProvider extends FeatureCallExpItemProvider
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
-
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

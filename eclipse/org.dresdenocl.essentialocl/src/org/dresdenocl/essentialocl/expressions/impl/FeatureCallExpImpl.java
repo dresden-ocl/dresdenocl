@@ -71,7 +71,6 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements
 	 * @generated
 	 */
 	protected FeatureCallExpImpl() {
-
 		super();
 	}
 
@@ -114,13 +113,14 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements
 	 * @generated
 	 */
 	public Type getSourceTypeGen() {
-
 		if (sourceType != null && sourceType.eIsProxy()) {
 			InternalEObject oldSourceType = (InternalEObject) sourceType;
 			sourceType = (Type) eResolveProxy(oldSourceType);
 			if (sourceType != oldSourceType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+					eNotify(new ENotificationImpl(
+							this,
+							Notification.RESOLVE,
 							ExpressionsPackageImpl.FEATURE_CALL_EXP__SOURCE_TYPE,
 							oldSourceType, sourceType));
 			}
@@ -133,7 +133,6 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements
 	 * @generated
 	 */
 	public Type basicGetSourceType() {
-
 		return sourceType;
 	}
 
@@ -142,13 +141,12 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements
 	 * @generated
 	 */
 	public void setSourceType(Type newSourceType) {
-
 		Type oldSourceType = sourceType;
 		sourceType = newSourceType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ExpressionsPackageImpl.FEATURE_CALL_EXP__SOURCE_TYPE, oldSourceType,
-					sourceType));
+					ExpressionsPackageImpl.FEATURE_CALL_EXP__SOURCE_TYPE,
+					oldSourceType, sourceType));
 	}
 
 	/**
@@ -157,7 +155,6 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.FEATURE_CALL_EXP__SOURCE_TYPE:
 			if (resolve)
@@ -173,7 +170,6 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.FEATURE_CALL_EXP__SOURCE_TYPE:
 			setSourceType((Type) newValue);
@@ -188,7 +184,6 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.FEATURE_CALL_EXP__SOURCE_TYPE:
 			setSourceType((Type) null);
@@ -203,7 +198,6 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.FEATURE_CALL_EXP__SOURCE_TYPE:
 			return sourceType != null;
@@ -217,7 +211,6 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return ExpressionsPackageImpl.Literals.FEATURE_CALL_EXP;
 	}
 

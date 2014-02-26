@@ -66,7 +66,6 @@ public class CallExpItemProvider extends OclExpressionItemProvider implements
 	 * @generated
 	 */
 	public CallExpItemProvider(AdapterFactory adapterFactory) {
-
 		super(adapterFactory);
 	}
 
@@ -78,7 +77,6 @@ public class CallExpItemProvider extends OclExpressionItemProvider implements
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -97,10 +95,10 @@ public class CallExpItemProvider extends OclExpressionItemProvider implements
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(
 			Object object) {
-
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(ExpressionsPackageImpl.Literals.CALL_EXP__SOURCE);
+			childrenFeatures
+					.add(ExpressionsPackageImpl.Literals.CALL_EXP__SOURCE);
 		}
 		return childrenFeatures;
 	}
@@ -112,7 +110,6 @@ public class CallExpItemProvider extends OclExpressionItemProvider implements
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
-
 		// Check the type of the specified child object and return the proper feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
@@ -127,7 +124,6 @@ public class CallExpItemProvider extends OclExpressionItemProvider implements
 	 */
 	@Override
 	public String getText(Object object) {
-
 		String label = ((CallExp) object).getName();
 		return label == null || label.length() == 0 ? getString("_UI_CallExp_type") : //$NON-NLS-1$
 				getString("_UI_CallExp_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
@@ -142,7 +138,6 @@ public class CallExpItemProvider extends OclExpressionItemProvider implements
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
-
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(CallExp.class)) {
@@ -164,7 +159,6 @@ public class CallExpItemProvider extends OclExpressionItemProvider implements
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
-
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

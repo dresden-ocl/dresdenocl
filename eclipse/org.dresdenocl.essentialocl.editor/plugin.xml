@@ -65,4 +65,43 @@
     </editor>
   </extension>    
 
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated essentialocl -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="org.dresdenocl.essentialocl.types.presentation.TypesModelWizardID"
+            name="%_UI_TypesModelWizard_label"
+            class="org.dresdenocl.essentialocl.types.presentation.TypesModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/TypesModelFile.gif">
+         <description>%_UI_TypesModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated essentialocl -->
+      <editor
+            id="org.dresdenocl.essentialocl.types.presentation.TypesEditorID"
+            name="%_UI_TypesEditor_label"
+            icon="icons/full/obj16/TypesModelFile.gif"
+            extensions="types"
+            class="org.dresdenocl.essentialocl.types.presentation.TypesEditor"
+            contributorClass="org.dresdenocl.essentialocl.types.presentation.TypesActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated essentialocl -->
+      <editor
+            id="org.dresdenocl.essentialocl.expressions.presentation.ExpressionsEditorID"
+            name="%_UI_ExpressionsEditor_label"
+            icon="icons/full/obj16/ExpressionsModelFile.gif"
+            extensions="expressions"
+            class="org.dresdenocl.essentialocl.expressions.presentation.ExpressionsEditor"
+            contributorClass="org.dresdenocl.essentialocl.expressions.presentation.ExpressionsActionBarContributor">
+      </editor>
+   </extension>
 </plugin>

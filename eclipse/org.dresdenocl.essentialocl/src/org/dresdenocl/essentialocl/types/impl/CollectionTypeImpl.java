@@ -98,8 +98,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final CollectionKind KIND_EDEFAULT =
-			CollectionKind.COLLECTION;
+	protected static final CollectionKind KIND_EDEFAULT = CollectionKind.COLLECTION;
 
 	/**
 	 * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute. <!--
@@ -178,8 +177,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 		}
 
 		if (logger.isDebugEnabled()) {
-			logger
-					.debug("determineCollectionTypeName() - exit - return value=" + name); //$NON-NLS-1$
+			logger.debug("determineCollectionTypeName() - exit - return value=" + name); //$NON-NLS-1$
 		}
 
 		return name.toString();
@@ -216,7 +214,6 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	 * @generated
 	 */
 	public Type getElementType() {
-
 		return elementType;
 	}
 
@@ -255,13 +252,12 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	 * @generated
 	 */
 	public void setElementTypeGen(Type newElementType) {
-
 		Type oldElementType = elementType;
 		elementType = newElementType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					TypesPackageImpl.COLLECTION_TYPE__ELEMENT_TYPE, oldElementType,
-					elementType));
+					TypesPackageImpl.COLLECTION_TYPE__ELEMENT_TYPE,
+					oldElementType, elementType));
 	}
 
 	/**
@@ -269,7 +265,6 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	 * @generated
 	 */
 	public OclLibrary getOclLibrary() {
-
 		return oclLibrary;
 	}
 
@@ -278,13 +273,12 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	 * @generated
 	 */
 	public void setOclLibrary(OclLibrary newOclLibrary) {
-
 		OclLibrary oldOclLibrary = oclLibrary;
 		oclLibrary = newOclLibrary;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					TypesPackageImpl.COLLECTION_TYPE__OCL_LIBRARY, oldOclLibrary,
-					oclLibrary));
+					TypesPackageImpl.COLLECTION_TYPE__OCL_LIBRARY,
+					oldOclLibrary, oclLibrary));
 	}
 
 	/**
@@ -292,7 +286,6 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	 * @generated
 	 */
 	public CollectionKind getKind() {
-
 		return kind;
 	}
 
@@ -301,7 +294,6 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	 * @generated
 	 */
 	public void setKind(CollectionKind newKind) {
-
 		CollectionKind oldKind = kind;
 		kind = newKind == null ? KIND_EDEFAULT : newKind;
 		if (eNotificationRequired())
@@ -394,10 +386,9 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 				// necessary to ensure that operations with unbound collection
 				// types as parameters (e.g., Collection::product) can be looked up;
 				// unbound collection types themselves do not conform to other types
-				conformant =
-						otherElementType == null ? true
-								: (this.elementType != null ? this.elementType
-										.conformsTo(otherElementType) : false);
+				conformant = otherElementType == null ? true
+						: (this.elementType != null ? this.elementType
+								.conformsTo(otherElementType) : false);
 			}
 		}
 
@@ -449,19 +440,17 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 			CollectionType otherCollectionType = (CollectionType) other;
 
 			// find the common super type of the element types
-			Type commonElementType =
-					getElementType()
-							.commonSuperType(otherCollectionType.getElementType());
+			Type commonElementType = getElementType().commonSuperType(
+					otherCollectionType.getElementType());
 
 			if (commonElementType != null) {
-				commonSuperType =
-						getCommonCollectionType(otherCollectionType, commonElementType);
+				commonSuperType = getCommonCollectionType(otherCollectionType,
+						commonElementType);
 			}
 		}
 
 		if (logger.isDebugEnabled()) {
-			logger
-					.debug("commonSuperType() - exit - return value=" + commonSuperType); //$NON-NLS-1$
+			logger.debug("commonSuperType() - exit - return value=" + commonSuperType); //$NON-NLS-1$
 		}
 
 		return commonSuperType;
@@ -514,7 +503,8 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 			int index;
 
 			// find the TypeParameter that corresponds to the element type
-			index = ListUtil.indexOf(parameters, getOwnedTypeParameter().get(0));
+			index = ListUtil
+					.indexOf(parameters, getOwnedTypeParameter().get(0));
 
 			if (index != -1) {
 				elementType = types.get(index);
@@ -579,7 +569,6 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
 		case TypesPackageImpl.COLLECTION_TYPE__ELEMENT_TYPE:
 			return getElementType();
@@ -597,7 +586,6 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
 		case TypesPackageImpl.COLLECTION_TYPE__ELEMENT_TYPE:
 			setElementType((Type) newValue);
@@ -618,7 +606,6 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
 		case TypesPackageImpl.COLLECTION_TYPE__ELEMENT_TYPE:
 			setElementType((Type) null);
@@ -664,7 +651,6 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return TypesPackageImpl.Literals.COLLECTION_TYPE;
 	}
 
@@ -677,7 +663,8 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	public String toString() {
 
 		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-				.appendSuper(super.toString()).append("elementType", elementType) //$NON-NLS-1$
+				.appendSuper(super.toString())
+				.append("elementType", elementType) //$NON-NLS-1$
 				.append("kind", kind).toString(); //$NON-NLS-1$
 	}
 

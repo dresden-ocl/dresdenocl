@@ -60,7 +60,6 @@ public class InvalidLiteralExpImpl extends LiteralExpImpl implements
 	 * @generated
 	 */
 	protected InvalidLiteralExpImpl() {
-
 		super();
 	}
 
@@ -102,7 +101,6 @@ public class InvalidLiteralExpImpl extends LiteralExpImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return ExpressionsPackageImpl.Literals.INVALID_LITERAL_EXP;
 	}
 

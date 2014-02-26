@@ -36,6 +36,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import org.dresdenocl.essentialocl.types.TupleType;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
@@ -69,7 +70,6 @@ public class TupleTypeItemProvider extends TypeItemProvider implements
 	 * @generated
 	 */
 	public TupleTypeItemProvider(AdapterFactory adapterFactory) {
-
 		super(adapterFactory);
 	}
 
@@ -81,7 +81,6 @@ public class TupleTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -97,7 +96,6 @@ public class TupleTypeItemProvider extends TypeItemProvider implements
 	 * @generated
 	 */
 	protected void addOclLibraryPropertyDescriptor(Object object) {
-
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -106,8 +104,8 @@ public class TupleTypeItemProvider extends TypeItemProvider implements
 						getString("_UI_TupleType_oclLibrary_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_TupleType_oclLibrary_feature", "_UI_TupleType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						TypesPackageImpl.Literals.TUPLE_TYPE__OCL_LIBRARY, true, false,
-						true, null, null, null));
+						TypesPackageImpl.Literals.TUPLE_TYPE__OCL_LIBRARY,
+						true, false, true, null, null, null));
 	}
 
 	/**
@@ -117,7 +115,6 @@ public class TupleTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-
 		return overlayImage(object,
 				getResourceLocator().getImage("full/obj16/TupleType")); //$NON-NLS-1$
 	}
@@ -208,7 +205,6 @@ public class TupleTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
-
 		updateChildren(notification);
 		super.notifyChanged(notification);
 	}
@@ -223,7 +219,6 @@ public class TupleTypeItemProvider extends TypeItemProvider implements
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
-
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 
@@ -235,7 +230,6 @@ public class TupleTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
-
 		return EssentialOCLEditPlugin.INSTANCE;
 	}
 

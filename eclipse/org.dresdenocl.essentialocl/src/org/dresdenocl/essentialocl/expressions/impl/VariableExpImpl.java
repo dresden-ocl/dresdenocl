@@ -59,7 +59,8 @@ public class VariableExpImpl extends OclExpressionImpl implements VariableExp {
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger logger = Logger.getLogger(VariableExpImpl.class);
+	private static final Logger logger = Logger
+			.getLogger(VariableExpImpl.class);
 
 	/**
 	 * The cached value of the '{@link #getReferredVariable() <em>Referred Variable</em>}' reference.
@@ -75,7 +76,6 @@ public class VariableExpImpl extends OclExpressionImpl implements VariableExp {
 	 * @generated
 	 */
 	protected VariableExpImpl() {
-
 		super();
 	}
 
@@ -123,7 +123,6 @@ public class VariableExpImpl extends OclExpressionImpl implements VariableExp {
 	 * @generated
 	 */
 	public Variable getReferredVariable() {
-
 		return referredVariable;
 	}
 
@@ -132,7 +131,6 @@ public class VariableExpImpl extends OclExpressionImpl implements VariableExp {
 	 * @generated
 	 */
 	public void setReferredVariable(Variable newReferredVariable) {
-
 		Variable oldReferredVariable = referredVariable;
 		referredVariable = newReferredVariable;
 		if (eNotificationRequired())
@@ -147,7 +145,6 @@ public class VariableExpImpl extends OclExpressionImpl implements VariableExp {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.VARIABLE_EXP__REFERRED_VARIABLE:
 			return getReferredVariable();
@@ -161,7 +158,6 @@ public class VariableExpImpl extends OclExpressionImpl implements VariableExp {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.VARIABLE_EXP__REFERRED_VARIABLE:
 			setReferredVariable((Variable) newValue);
@@ -176,7 +172,6 @@ public class VariableExpImpl extends OclExpressionImpl implements VariableExp {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.VARIABLE_EXP__REFERRED_VARIABLE:
 			setReferredVariable((Variable) null);
@@ -191,7 +186,6 @@ public class VariableExpImpl extends OclExpressionImpl implements VariableExp {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.VARIABLE_EXP__REFERRED_VARIABLE:
 			return referredVariable != null;
@@ -205,7 +199,6 @@ public class VariableExpImpl extends OclExpressionImpl implements VariableExp {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return ExpressionsPackageImpl.Literals.VARIABLE_EXP;
 	}
 

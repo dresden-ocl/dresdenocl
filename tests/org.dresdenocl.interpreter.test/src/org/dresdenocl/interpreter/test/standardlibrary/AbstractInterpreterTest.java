@@ -311,7 +311,7 @@ public abstract class AbstractInterpreterTest extends AbstractDresdenOclTest {
 		/* Load the model. */
 		File modelFile;
 		try {
-			modelFile = AbstractInterpreterTest.getFile("bin/" + modelName
+			modelFile = AbstractInterpreterTest.getFile("target/classes/" + modelName
 					+ ".class");
 		} catch (IOException e) {
 			throw new ModelAccessException(e.getMessage(), e);
@@ -348,7 +348,7 @@ public abstract class AbstractInterpreterTest extends AbstractDresdenOclTest {
 		/* Load or get the instance. */
 		File instanceFile;
 		try {
-			instanceFile = AbstractInterpreterTest.getFile("bin/"
+			instanceFile = AbstractInterpreterTest.getFile("target/classes/"
 					+ instanceName + ".class");
 		} catch (IOException e) {
 			throw new ModelAccessException(e.getMessage(), e);

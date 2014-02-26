@@ -64,7 +64,6 @@ public class TypeLiteralExpItemProvider extends LiteralExpItemProvider
 	 * @generated
 	 */
 	public TypeLiteralExpItemProvider(AdapterFactory adapterFactory) {
-
 		super(adapterFactory);
 	}
 
@@ -76,7 +75,6 @@ public class TypeLiteralExpItemProvider extends LiteralExpItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -92,7 +90,6 @@ public class TypeLiteralExpItemProvider extends LiteralExpItemProvider
 	 * @generated
 	 */
 	protected void addReferredTypePropertyDescriptor(Object object) {
-
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -113,7 +110,6 @@ public class TypeLiteralExpItemProvider extends LiteralExpItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-
 		return overlayImage(object,
 				getResourceLocator().getImage("full/obj16/TypeLiteralExp")); //$NON-NLS-1$
 	}
@@ -140,7 +136,6 @@ public class TypeLiteralExpItemProvider extends LiteralExpItemProvider
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
-
 		updateChildren(notification);
 		super.notifyChanged(notification);
 	}
@@ -155,7 +150,6 @@ public class TypeLiteralExpItemProvider extends LiteralExpItemProvider
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
-
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

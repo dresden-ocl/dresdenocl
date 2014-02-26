@@ -66,7 +66,6 @@ public class CollectionLiteralPartItemProvider extends TypedElementItemProvider
 	 * @generated
 	 */
 	public CollectionLiteralPartItemProvider(AdapterFactory adapterFactory) {
-
 		super(adapterFactory);
 	}
 
@@ -78,7 +77,6 @@ public class CollectionLiteralPartItemProvider extends TypedElementItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -94,7 +92,6 @@ public class CollectionLiteralPartItemProvider extends TypedElementItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-
 		String label = ((CollectionLiteralPart) object).getName();
 		return label == null || label.length() == 0 ? getString("_UI_CollectionLiteralPart_type") : //$NON-NLS-1$
 				getString("_UI_CollectionLiteralPart_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
@@ -109,7 +106,6 @@ public class CollectionLiteralPartItemProvider extends TypedElementItemProvider
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
-
 		updateChildren(notification);
 		super.notifyChanged(notification);
 	}
@@ -124,7 +120,6 @@ public class CollectionLiteralPartItemProvider extends TypedElementItemProvider
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
-
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 
@@ -136,7 +131,6 @@ public class CollectionLiteralPartItemProvider extends TypedElementItemProvider
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
-
 		return EssentialOCLEditPlugin.INSTANCE;
 	}
 

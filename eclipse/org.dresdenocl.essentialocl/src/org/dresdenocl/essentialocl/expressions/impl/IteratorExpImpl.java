@@ -57,7 +57,6 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 	 * @generated
 	 */
 	protected IteratorExpImpl() {
-
 		super();
 	}
 
@@ -138,7 +137,8 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 		// additional rule missing in the spec
 		else if (name.equals("sortedBy")) { //$NON-NLS-1$
 
-			if (sourceType instanceof SetType || sourceType instanceof OrderedSetType) {
+			if (sourceType instanceof SetType
+					|| sourceType instanceof OrderedSetType) {
 				type = getValidOclLibrary().getOrderedSetType(elementType);
 			}
 
@@ -178,7 +178,8 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 
 			// flatten the type of the body expression
 			if (bodyType instanceof CollectionType) {
-				resultElementType = ((CollectionType) bodyType).getElementType();
+				resultElementType = ((CollectionType) bodyType)
+						.getElementType();
 			}
 
 			else {
@@ -231,8 +232,11 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 				|| name.equals("reject") || name.equals("any") || name.equals("one")) { //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 
 			if (body.getType() != oclLibrary.getOclBoolean()) {
-				throw new WellformednessException(this, "The body expression of an '" //$NON-NLS-1$
-						+ name + "' iterator expression must have the type Boolean."); //$NON-NLS-1$
+				throw new WellformednessException(
+						this,
+						"The body expression of an '" //$NON-NLS-1$
+								+ name
+								+ "' iterator expression must have the type Boolean."); //$NON-NLS-1$
 			}
 			// no else.
 		}
@@ -240,11 +244,11 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 		/* Check result type of closure iterator. */
 		if (name.equals("closure")) {
 
-			String msg =
-					"The body expression of a closure iterator expression must conform to the source expression's element type.";
+			String msg = "The body expression of a closure iterator expression must conform to the source expression's element type.";
 			Type bodyType = body.getType();
 			Type sourceType = source.getType();
-			Type sourceElementType = ((CollectionType) sourceType).getElementType();
+			Type sourceElementType = ((CollectionType) sourceType)
+					.getElementType();
 
 			if (!bodyType.conformsTo(sourceElementType)
 					&& !(bodyType instanceof CollectionType)) {
@@ -252,7 +256,8 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 			}
 
 			else if (bodyType instanceof CollectionType) {
-				Type bodyElementType = ((CollectionType) bodyType).getElementType();
+				Type bodyElementType = ((CollectionType) bodyType)
+						.getElementType();
 
 				if (!bodyElementType.conformsTo(sourceElementType)) {
 					throw new WellformednessException(this, msg);
@@ -285,7 +290,6 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return ExpressionsPackageImpl.Literals.ITERATOR_EXP;
 	}
 

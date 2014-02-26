@@ -352,6 +352,7 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
         }
       }
 
+/*
       case v : NamedLiteralExpCS => {
         val namedElement = v.getNamedElement
         if (namedElement.eIsProxy)
@@ -419,7 +420,7 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
           }
         }
       }
-
+*/
       case n : NavigationCallExp => {
         computeOclExpression(n.getFeatureCalls.last)
       }
@@ -748,20 +749,26 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
         computeOclExpression(b.getOclExpression)
       }
 
-      case e : EnumLiteralOrStaticPropertyExpCS => {
-        val enumLitOrProp = e.getEnumLiteralOrStaticProperty
-        if (enumLitOrProp.eIsProxy)
+      case e : ModelElementCS => {
+        val refElement = e.getNamedElement
+        if (refElement.eIsProxy)
           Empty
         else {
-          enumLitOrProp match {
-            case el : EnumerationLiteral => {
+          refElement match {
+          	case v : Variable => {
+          		val va = factory.createVariableExp(v)
+          		allMappings.put(va, v)
+          		Full(va)
+          	}
+            case e : EnumerationLiteral => {
               // TODO: move to EssentialOclFactory
               val exp = ExpressionsFactory.INSTANCE.createEnumLiteralExp
-              exp.setReferredEnumLiteral(el)
+              exp.setReferredEnumLiteral(e)
               exp.setOclLibrary(oclLibrary)
               allMappings.put(exp, e)
               Full(exp)
             }
+            //TODO Lars: add mapping here
             case p : Property => {
               if (p.isStatic) {
                 Full(factory.createPropertyCallExp(
@@ -805,15 +812,19 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
             }
             case t : Type => {
               // TODO: move to EssentialOclFactory
-              val pce = ExpressionsFactory.INSTANCE.createPropertyCallExp
-              pce.setReferredProperty(p)
-              pce.setSourceType(p.getOwningType)
-              val tle = factory.createTypeLiteralExp(p.getOwningType.getQualifiedNameList)
-              pce.setSource(tle)
-              pce.setOclLibrary(oclLibrary)
-              allMappings.put(tle, e)
-              allMappings.put(pce, e)
-              Full(pce)
+              val tle = ExpressionsFactory.INSTANCE.createTypeLiteralExp
+              tle.setReferredType(t)
+              tle.setOclLibrary(oclLibrary)
+              Full(tle)
+            }
+            case o : Operation => {
+              // TODO: move to EssentialOclFactory
+              val oce = ExpressionsFactory.INSTANCE.createOperationCallExp
+              oce.setSourceType(o.getOwningType)
+              oce.setSource(factory.createTypeLiteralExp(o.getOwningType.getQualifiedNameList))
+              oce.setReferredOperation(o)
+              oce.setOclLibrary(oclLibrary)
+              Full(oce)
             }
           }
         }
@@ -916,36 +927,31 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
       // check for self containment in the assignment
       v.getInitialization match {
         // a = b
-        case n : NamedLiteralExpCS => {
-          if (n.getNamedElement.getName.equals(v.getVariableName.getSimpleName)) {
-            Full(true)
-          }
-          else None
-        }
         // a = a = true
         case eq : EqualityOperationCallExpCS => {
-          eq.getSource match {
-            case n : NamedLiteralExpCS =>
-              if (n.getNamedElement.getName.equals(v.getVariableName.getSimpleName)) {
-                Full(true)
-              }
-              else None
-          }
+        	Full(true)
+//          eq.getSource match {
+//            case n : NamedLiteralExpCS =>
+//              if (n.getNamedElement.getName.equals(v.getVariableName.getSimpleName)) {
+//                Full(true)
+//              }
+//              else None
+//          }
         }
         // a = not a
         case lno : LogicalNotOperationCallExpCS => {
-          lno.getTarget match {
-            case n : NamedLiteralExpCS =>
-              if (n.getNamedElement.getName.equals(v.getVariableName.getSimpleName)) {
-                Full(true)
-              }
-              else None
-          }
+          Full(true)
+//          lno.getTarget match {
+//            case n : NamedLiteralExpCS =>
+//              if (n.getNamedElement.getName.equals(v.getVariableName.getSimpleName)) {
+//                Full(true)
+//              }
+//              else None
+//          }
         }
         case _ => None
       }
     }
   }
-
 }
 

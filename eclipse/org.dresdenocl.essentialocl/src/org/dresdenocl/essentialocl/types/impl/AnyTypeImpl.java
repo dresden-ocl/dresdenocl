@@ -52,7 +52,6 @@ public class AnyTypeImpl extends TypeImpl implements AnyType {
 	 * @generated
 	 */
 	protected AnyTypeImpl() {
-
 		super();
 	}
 
@@ -62,7 +61,6 @@ public class AnyTypeImpl extends TypeImpl implements AnyType {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return TypesPackageImpl.Literals.ANY_TYPE;
 	}
 

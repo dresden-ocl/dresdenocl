@@ -88,7 +88,7 @@ public class ModelInstanceRegistryTest {
 		IModelInstance modelInstance;
 		modelInstance =
 				ModelBusTestUtility.getJavaModelInstance(
-						"bin/package1/ModelInstance01ProviderClass.class", this.model);
+						"target/classes/package1/ModelInstance01ProviderClass.class", this.model);
 
 		modelInstanceRegistry.addModelInstance(modelInstance);
 
@@ -121,7 +121,7 @@ public class ModelInstanceRegistryTest {
 		IModelInstance modelInstance;
 		modelInstance =
 				ModelBusTestUtility.getJavaModelInstance(
-						"bin/package1/ModelInstance01ProviderClass.class", this.model);
+						"target/classes/package1/ModelInstance01ProviderClass.class", this.model);
 
 		modelInstanceRegistry.addModelInstance(modelInstance);
 
@@ -165,7 +165,7 @@ public class ModelInstanceRegistryTest {
 		IModelInstance modelInstance;
 		modelInstance =
 				ModelBusTestUtility.getJavaModelInstance(
-						"bin/package1/ModelInstance01ProviderClass.class", this.model);
+						"target/classes/package1/ModelInstance01ProviderClass.class", this.model);
 
 		modelInstanceRegistry.addModelInstance(modelInstance);
 
@@ -180,7 +180,7 @@ public class ModelInstanceRegistryTest {
 		/* Load and add the same model instance again. */
 		modelInstance =
 				ModelBusTestUtility.getJavaModelInstance(
-						"bin/package1/ModelInstance01ProviderClass.class", this.model);
+						"target/classes/package1/ModelInstance01ProviderClass.class", this.model);
 
 		modelInstanceRegistry.addModelInstance(modelInstance);
 
@@ -213,7 +213,7 @@ public class ModelInstanceRegistryTest {
 		IModelInstance modelInstance1;
 		modelInstance1 =
 				ModelBusTestUtility.getJavaModelInstance(
-						"bin/package1/ModelInstance01ProviderClass.class", this.model);
+						"target/classes/package1/ModelInstance01ProviderClass.class", this.model);
 
 		modelInstanceRegistry.addModelInstance(modelInstance1);
 
@@ -229,7 +229,7 @@ public class ModelInstanceRegistryTest {
 		IModelInstance modelInstance2;
 		modelInstance2 =
 				ModelBusTestUtility.getJavaModelInstance(
-						"bin/package1/ModelInstance02ProviderClass.class", this.model);
+						"target/classes/package1/ModelInstance02ProviderClass.class", this.model);
 
 		modelInstanceRegistry.addModelInstance(modelInstance2);
 
@@ -262,7 +262,7 @@ public class ModelInstanceRegistryTest {
 		IModelInstance modelInstance01;
 		modelInstance01 =
 				ModelBusTestUtility.getJavaModelInstance(
-						"bin/package1/ModelInstance01ProviderClass.class", this.model);
+						"target/classes/package1/ModelInstance01ProviderClass.class", this.model);
 
 		modelInstanceRegistry.addModelInstance(modelInstance01);
 
@@ -303,12 +303,12 @@ public class ModelInstanceRegistryTest {
 		IModelInstance modelInstance01;
 		modelInstance01 =
 				ModelBusTestUtility.getJavaModelInstance(
-						"bin/package1/ModelInstance01ProviderClass.class", this.model);
+						"target/classes/package1/ModelInstance01ProviderClass.class", this.model);
 
 		IModelInstance modelInstance02;
 		modelInstance02 =
 				ModelBusTestUtility.getJavaModelInstance(
-						"bin/package1/ModelInstance02ProviderClass.class", this.model);
+						"target/classes/package1/ModelInstance02ProviderClass.class", this.model);
 
 		modelInstanceRegistry.addModelInstance(modelInstance01);
 		modelInstanceRegistry.addModelInstance(modelInstance02);
@@ -352,17 +352,17 @@ public class ModelInstanceRegistryTest {
 		IModelInstance modelInstance01;
 		modelInstance01 =
 				ModelBusTestUtility.getJavaModelInstance(
-						"bin/package1/ModelInstance01ProviderClass.class", this.model);
+						"target/classes/package1/ModelInstance01ProviderClass.class", this.model);
 
 		IModelInstance modelInstance02;
 		modelInstance02 =
 				ModelBusTestUtility.getJavaModelInstance(
-						"bin/package1/ModelInstance02ProviderClass.class", this.model);
+						"target/classes/package1/ModelInstance02ProviderClass.class", this.model);
 
 		IModelInstance modelInstance03;
 		modelInstance03 =
 				ModelBusTestUtility.getJavaModelInstance(
-						"bin/package1/ModelInstance03ProviderClass.class", this.model);
+						"target/classes/package1/ModelInstance03ProviderClass.class", this.model);
 
 		modelInstanceRegistry.addModelInstance(modelInstance01);
 		modelInstanceRegistry.addModelInstance(modelInstance02);
@@ -429,7 +429,7 @@ public class ModelInstanceRegistryTest {
 		IModelInstance modelInstance01;
 		modelInstance01 =
 				ModelBusTestUtility.getJavaModelInstance(
-						"bin/package1/ModelInstance01ProviderClass.class", this.model);
+						"target/classes/package1/ModelInstance01ProviderClass.class", this.model);
 
 		assertFalse(modelInstanceRegistry.removeModelInstance(modelInstance01));
 	}
@@ -453,7 +453,7 @@ public class ModelInstanceRegistryTest {
 		IModelInstance modelInstance01;
 		modelInstance01 =
 				ModelBusTestUtility.getJavaModelInstance(
-						"bin/package1/ModelInstance01ProviderClass.class", this.model);
+						"target/classes/package1/ModelInstance01ProviderClass.class", this.model);
 
 		modelInstanceRegistry.addModelInstance(modelInstance01);
 
@@ -499,7 +499,7 @@ public class ModelInstanceRegistryTest {
 		IModelInstance modelInstance01;
 		modelInstance01 =
 				ModelBusTestUtility.getJavaModelInstance(
-						"bin/package1/ModelInstance01ProviderClass.class", this.model);
+						"target/classes/package1/ModelInstance01ProviderClass.class", this.model);
 
 		modelInstanceRegistry.addModelInstance(modelInstance01);
 
@@ -567,7 +567,7 @@ public class ModelInstanceRegistryTest {
 		IModelInstance modelInstance;
 		modelInstance =
 				ModelBusTestUtility.getJavaModelInstance(
-						"bin/package1/ModelInstance01ProviderClass.class", this.model);
+						"target/classes/package1/ModelInstance01ProviderClass.class", this.model);
 
 		modelInstanceRegistry.addModelInstance(modelInstance);
 
@@ -604,7 +604,7 @@ public class ModelInstanceRegistryTest {
 		IModelInstance modelInstance;
 		modelInstance =
 				ModelBusTestUtility.getJavaModelInstance(
-						"bin/package1/ModelInstance01ProviderClass.class", this.model);
+						"target/classes/package1/ModelInstance01ProviderClass.class", this.model);
 
 		/* Should cause an exception. */
 		modelInstanceRegistry.setActiveModelInstance(this.model, modelInstance);
@@ -630,7 +630,7 @@ public class ModelInstanceRegistryTest {
 		IModelInstance modelInstance;
 		modelInstance =
 				ModelBusTestUtility.getJavaModelInstance(
-						"bin/package1/ModelInstance01ProviderClass.class", this.model);
+						"target/classes/package1/ModelInstance01ProviderClass.class", this.model);
 
 		modelInstanceRegistry.addModelInstance(modelInstance);
 
@@ -665,7 +665,7 @@ public class ModelInstanceRegistryTest {
 		IModelInstance modelInstance1;
 		modelInstance1 =
 				ModelBusTestUtility.getJavaModelInstance(
-						"bin/package1/ModelInstance01ProviderClass.class", this.model);
+						"target/classes/package1/ModelInstance01ProviderClass.class", this.model);
 
 		modelInstanceRegistry.addModelInstance(modelInstance1);
 
@@ -681,7 +681,7 @@ public class ModelInstanceRegistryTest {
 		IModelInstance modelInstance2;
 		modelInstance2 =
 				ModelBusTestUtility.getJavaModelInstance(
-						"bin/package1/ModelInstance02ProviderClass.class", this.model);
+						"target/classes/package1/ModelInstance02ProviderClass.class", this.model);
 
 		modelInstanceRegistry.addModelInstance(modelInstance2);
 

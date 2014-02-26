@@ -99,7 +99,6 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements
 	 * @generated
 	 */
 	protected PropertyCallExpImpl() {
-
 		super();
 	}
 
@@ -160,7 +159,6 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements
 	 * @generated
 	 */
 	public Property getReferredProperty() {
-
 		return referredProperty;
 	}
 
@@ -169,11 +167,12 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements
 	 * @generated
 	 */
 	public void setReferredProperty(Property newReferredProperty) {
-
 		Property oldReferredProperty = referredProperty;
 		referredProperty = newReferredProperty;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
+			eNotify(new ENotificationImpl(
+					this,
+					Notification.SET,
 					ExpressionsPackageImpl.PROPERTY_CALL_EXP__REFERRED_PROPERTY,
 					oldReferredProperty, referredProperty));
 	}
@@ -183,11 +182,10 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements
 	 * @generated
 	 */
 	public List<OclExpression> getQualifier() {
-
 		if (qualifier == null) {
-			qualifier =
-					new EObjectContainmentEList<OclExpression>(OclExpression.class, this,
-							ExpressionsPackageImpl.PROPERTY_CALL_EXP__QUALIFIER);
+			qualifier = new EObjectContainmentEList<OclExpression>(
+					OclExpression.class, this,
+					ExpressionsPackageImpl.PROPERTY_CALL_EXP__QUALIFIER);
 		}
 		return qualifier;
 	}
@@ -199,10 +197,10 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.PROPERTY_CALL_EXP__QUALIFIER:
-			return ((InternalEList<?>) getQualifier()).basicRemove(otherEnd, msgs);
+			return ((InternalEList<?>) getQualifier()).basicRemove(otherEnd,
+					msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -213,7 +211,6 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.PROPERTY_CALL_EXP__REFERRED_PROPERTY:
 			return getReferredProperty();
@@ -230,14 +227,14 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.PROPERTY_CALL_EXP__REFERRED_PROPERTY:
 			setReferredProperty((Property) newValue);
 			return;
 		case ExpressionsPackageImpl.PROPERTY_CALL_EXP__QUALIFIER:
 			getQualifier().clear();
-			getQualifier().addAll((Collection<? extends OclExpression>) newValue);
+			getQualifier().addAll(
+					(Collection<? extends OclExpression>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -249,7 +246,6 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.PROPERTY_CALL_EXP__REFERRED_PROPERTY:
 			setReferredProperty((Property) null);
@@ -267,7 +263,6 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.PROPERTY_CALL_EXP__REFERRED_PROPERTY:
 			return referredProperty != null;
@@ -283,7 +278,6 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return ExpressionsPackageImpl.Literals.PROPERTY_CALL_EXP;
 	}
 

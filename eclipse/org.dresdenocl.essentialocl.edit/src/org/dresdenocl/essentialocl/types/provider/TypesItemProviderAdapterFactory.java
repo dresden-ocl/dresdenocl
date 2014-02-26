@@ -95,7 +95,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	 * @generated
 	 */
 	public TypesItemProviderAdapterFactory() {
-
 		supportedTypes.add(IEditingDomainItemProvider.class);
 		supportedTypes.add(IStructuredItemContentProvider.class);
 		supportedTypes.add(ITreeItemContentProvider.class);
@@ -119,7 +118,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	 */
 	@Override
 	public Adapter createBagTypeAdapter() {
-
 		if (bagTypeItemProvider == null) {
 			bagTypeItemProvider = new BagTypeItemProvider(this);
 		}
@@ -143,7 +141,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	 */
 	@Override
 	public Adapter createTupleTypeAdapter() {
-
 		if (tupleTypeItemProvider == null) {
 			tupleTypeItemProvider = new TupleTypeItemProvider(this);
 		}
@@ -167,7 +164,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	 */
 	@Override
 	public Adapter createCollectionTypeAdapter() {
-
 		if (collectionTypeItemProvider == null) {
 			collectionTypeItemProvider = new CollectionTypeItemProvider(this);
 		}
@@ -191,7 +187,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	 */
 	@Override
 	public Adapter createInvalidTypeAdapter() {
-
 		if (invalidTypeItemProvider == null) {
 			invalidTypeItemProvider = new InvalidTypeItemProvider(this);
 		}
@@ -215,7 +210,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	 */
 	@Override
 	public Adapter createOrderedSetTypeAdapter() {
-
 		if (orderedSetTypeItemProvider == null) {
 			orderedSetTypeItemProvider = new OrderedSetTypeItemProvider(this);
 		}
@@ -239,7 +233,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	 */
 	@Override
 	public Adapter createSequenceTypeAdapter() {
-
 		if (sequenceTypeItemProvider == null) {
 			sequenceTypeItemProvider = new SequenceTypeItemProvider(this);
 		}
@@ -263,7 +256,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	 */
 	@Override
 	public Adapter createSetTypeAdapter() {
-
 		if (setTypeItemProvider == null) {
 			setTypeItemProvider = new SetTypeItemProvider(this);
 		}
@@ -287,7 +279,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	 */
 	@Override
 	public Adapter createVoidTypeAdapter() {
-
 		if (voidTypeItemProvider == null) {
 			voidTypeItemProvider = new VoidTypeItemProvider(this);
 		}
@@ -311,7 +302,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	 */
 	@Override
 	public Adapter createTypeTypeAdapter() {
-
 		if (typeTypeItemProvider == null) {
 			typeTypeItemProvider = new TypeTypeItemProvider(this);
 		}
@@ -335,7 +325,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	 */
 	@Override
 	public Adapter createOclLibraryAdapter() {
-
 		if (oclLibraryItemProvider == null) {
 			oclLibraryItemProvider = new OclLibraryItemProvider(this);
 		}
@@ -359,7 +348,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	 */
 	@Override
 	public Adapter createAnyTypeAdapter() {
-
 		if (anyTypeItemProvider == null) {
 			anyTypeItemProvider = new AnyTypeItemProvider(this);
 		}
@@ -374,7 +362,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	 * @generated
 	 */
 	public ComposeableAdapterFactory getRootAdapterFactory() {
-
 		return parentAdapterFactory == null ? this : parentAdapterFactory
 				.getRootAdapterFactory();
 	}
@@ -387,7 +374,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	 */
 	public void setParentAdapterFactory(
 			ComposedAdapterFactory parentAdapterFactory) {
-
 		this.parentAdapterFactory = parentAdapterFactory;
 	}
 
@@ -398,7 +384,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	 */
 	@Override
 	public boolean isFactoryForType(Object type) {
-
 		return supportedTypes.contains(type) || super.isFactoryForType(type);
 	}
 
@@ -410,7 +395,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	 */
 	@Override
 	public Adapter adapt(Notifier notifier, Object type) {
-
 		return super.adapt(notifier, this);
 	}
 
@@ -421,7 +405,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	 */
 	@Override
 	public Object adapt(Object object, Object type) {
-
 		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
 			if (!(type instanceof Class<?>)
@@ -440,7 +423,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	 * @generated
 	 */
 	public void addListener(INotifyChangedListener notifyChangedListener) {
-
 		changeNotifier.addListener(notifyChangedListener);
 	}
 
@@ -451,7 +433,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	 * @generated
 	 */
 	public void removeListener(INotifyChangedListener notifyChangedListener) {
-
 		changeNotifier.removeListener(notifyChangedListener);
 	}
 
@@ -462,7 +443,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	 * @generated
 	 */
 	public void fireNotifyChanged(Notification notification) {
-
 		changeNotifier.fireNotifyChanged(notification);
 
 		if (parentAdapterFactory != null) {
@@ -477,7 +457,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	 * @generated
 	 */
 	public void dispose() {
-
 		if (bagTypeItemProvider != null)
 			bagTypeItemProvider.dispose();
 		if (tupleTypeItemProvider != null)

@@ -68,7 +68,6 @@ public class BooleanLiteralExpItemProvider extends
 	 * @generated
 	 */
 	public BooleanLiteralExpItemProvider(AdapterFactory adapterFactory) {
-
 		super(adapterFactory);
 	}
 
@@ -80,7 +79,6 @@ public class BooleanLiteralExpItemProvider extends
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -96,7 +94,6 @@ public class BooleanLiteralExpItemProvider extends
 	 * @generated
 	 */
 	protected void addBooleanSymbolPropertyDescriptor(Object object) {
-
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -106,8 +103,8 @@ public class BooleanLiteralExpItemProvider extends
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_BooleanLiteralExp_booleanSymbol_feature", "_UI_BooleanLiteralExp_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 						ExpressionsPackageImpl.Literals.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL,
-						true, false, false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-						null, null));
+						true, false, false,
+						ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -118,7 +115,6 @@ public class BooleanLiteralExpItemProvider extends
 	 */
 	@Override
 	public Object getImage(Object object) {
-
 		return overlayImage(object,
 				getResourceLocator().getImage("full/obj16/BooleanLiteralExp")); //$NON-NLS-1$
 	}
@@ -154,7 +150,6 @@ public class BooleanLiteralExpItemProvider extends
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
-
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(BooleanLiteralExp.class)) {
@@ -176,7 +171,6 @@ public class BooleanLiteralExpItemProvider extends
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
-
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

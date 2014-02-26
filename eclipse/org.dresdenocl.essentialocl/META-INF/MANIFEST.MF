@@ -1,63 +1,26 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Essential OCL Plug-in
-Bundle-SymbolicName: org.dresdenocl.essentialocl; singleton:=true
+Bundle-SymbolicName: org.dresdenocl.essentialocl;singleton:=true
 Bundle-Version: 3.3.0.qualifier
 Bundle-ClassPath: .,
  resources/
-Bundle-Vendor: TU Dresden, Software Technology Group
+Bundle-Vendor: TU Dresden,
+ Software Technology Group
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.dresdenocl.essentialocl;
-  uses:="org.eclipse.core.runtime,
-   org.apache.log4j,
-   org.osgi.framework,
-   org.dresdenocl.essentialocl.standardlibrary.provider",
+Export-Package: org.dresdenocl.essentialocl;uses:="org.eclipse.core.runtime,  org.apache.log4j,  org.osgi.framework,  org.dresdenocl.essentialocl.standardlibrary.provider",
  org.dresdenocl.essentialocl.expressions;uses:="org.dresdenocl.pivotmodel,org.dresdenocl.essentialocl.types",
- org.dresdenocl.essentialocl.expressions.factory;
-  uses:="org.dresdenocl.pivotmodel,
-   org.dresdenocl.essentialocl.types,
-   org.dresdenocl.model,
-   org.dresdenocl.essentialocl.expressions",
- org.dresdenocl.essentialocl.expressions.impl;
-  uses:="org.dresdenocl.pivotmodel,
-   org.eclipse.emf.ecore,
-   org.dresdenocl.essentialocl.types,
-   org.eclipse.emf.common.util,
-   org.dresdenocl.pivotmodel.impl,
-   org.eclipse.emf.common.notify,
-   org.eclipse.emf.ecore.impl,
-   org.dresdenocl.essentialocl.expressions",
- org.dresdenocl.essentialocl.expressions.util;
-  uses:="org.eclipse.emf.ecore.util,
-   org.dresdenocl.pivotmodel,
-   org.eclipse.emf.ecore,
-   org.eclipse.emf.common.notify.impl,
-   org.dresdenocl.essentialocl.expressions.impl,
-   org.eclipse.emf.common.notify,
-   org.dresdenocl.essentialocl.expressions",
+ org.dresdenocl.essentialocl.expressions.factory;uses:="org.dresdenocl.pivotmodel,  org.dresdenocl.essentialocl.types,  org.dresdenocl.model,  org.dresdenocl.essentialocl.expressions",
+ org.dresdenocl.essentialocl.expressions.impl;uses:="org.dresdenocl.pivotmodel,  org.eclipse.emf.ecore,  org.dresdenocl.essentialocl.types,  org.eclipse.emf.common.util,  org.dresdenocl.pivotmodel.impl,  org.eclipse.emf.common.notify,  org.eclipse.emf.ecore.impl,  org.dresdenocl.essentialocl.expressions",
+ org.dresdenocl.essentialocl.expressions.util;uses:="org.eclipse.emf.ecore.util,  org.dresdenocl.pivotmodel,  org.eclipse.emf.ecore,  org.eclipse.emf.common.notify.impl,  org.dresdenocl.essentialocl.expressions.impl,  org.eclipse.emf.common.notify,  org.dresdenocl.essentialocl.expressions",
  org.dresdenocl.essentialocl.standardlibrary.provider;uses:="org.dresdenocl.essentialocl.types.util,org.dresdenocl.essentialocl.types,org.eclipse.emf.common.util",
  org.dresdenocl.essentialocl.types;uses:="org.eclipse.emf.ecore,org.dresdenocl.pivotmodel,org.dresdenocl.essentialocl.expressions",
- org.dresdenocl.essentialocl.types.impl;
-  uses:="org.dresdenocl.pivotmodel,
-   org.eclipse.emf.ecore,
-   org.dresdenocl.essentialocl.types,
-   org.eclipse.emf.common.notify.impl,
-   org.eclipse.emf.common.util,
-   org.dresdenocl.pivotmodel.impl,
-   org.dresdenocl.essentialocl.expressions,
-   org.eclipse.emf.ecore.impl,
-   org.eclipse.emf.common.notify",
- org.dresdenocl.essentialocl.types.util;
-  uses:="org.eclipse.emf.ecore.util,
-   org.dresdenocl.pivotmodel,
-   org.eclipse.emf.ecore,
-   org.dresdenocl.essentialocl.types,
-   org.eclipse.emf.common.notify.impl,
-   org.dresdenocl.essentialocl.types.impl,
-   org.dresdenocl.model,
-   org.eclipse.emf.common.notify"
+ org.dresdenocl.essentialocl.types.impl;uses:="org.dresdenocl.pivotmodel,  org.eclipse.emf.ecore,  org.dresdenocl.essentialocl.types,  org.eclipse.emf.common.notify.impl,  org.eclipse.emf.common.util,  org.dresdenocl.pivotmodel.impl,  org.dresdenocl.essentialocl.expressions,  org.eclipse.emf.ecore.impl,  org.eclipse.emf.common.notify",
+ org.dresdenocl.essentialocl.types.util;uses:="org.eclipse.emf.ecore.util,  org.dresdenocl.pivotmodel,  org.eclipse.emf.ecore,  org.dresdenocl.essentialocl.types,  org.eclipse.emf.common.notify.impl,  org.dresdenocl.essentialocl.types.impl,  org.dresdenocl.model,  org.eclipse.emf.common.notify"
 Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.dresdenocl.pivotmodel;visibility:=reexport,
  org.dresdenocl.model,
  org.eclipse.emf.ecore.xmi
 Bundle-ActivationPolicy: lazy

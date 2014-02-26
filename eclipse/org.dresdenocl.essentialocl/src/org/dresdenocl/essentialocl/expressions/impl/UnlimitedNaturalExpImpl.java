@@ -88,7 +88,6 @@ public class UnlimitedNaturalExpImpl extends NumericLiteralExpImpl implements
 	 * @generated
 	 */
 	protected UnlimitedNaturalExpImpl() {
-
 		super();
 	}
 
@@ -122,7 +121,6 @@ public class UnlimitedNaturalExpImpl extends NumericLiteralExpImpl implements
 	 * @generated
 	 */
 	public long getSymbol() {
-
 		return symbol;
 	}
 
@@ -131,13 +129,12 @@ public class UnlimitedNaturalExpImpl extends NumericLiteralExpImpl implements
 	 * @generated
 	 */
 	public void setSymbol(long newSymbol) {
-
 		long oldSymbol = symbol;
 		symbol = newSymbol;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ExpressionsPackageImpl.UNLIMITED_NATURAL_EXP__SYMBOL, oldSymbol,
-					symbol));
+					ExpressionsPackageImpl.UNLIMITED_NATURAL_EXP__SYMBOL,
+					oldSymbol, symbol));
 	}
 
 	/**
@@ -146,7 +143,6 @@ public class UnlimitedNaturalExpImpl extends NumericLiteralExpImpl implements
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.UNLIMITED_NATURAL_EXP__SYMBOL:
 			return getSymbol();
@@ -160,7 +156,6 @@ public class UnlimitedNaturalExpImpl extends NumericLiteralExpImpl implements
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.UNLIMITED_NATURAL_EXP__SYMBOL:
 			setSymbol((Long) newValue);
@@ -175,7 +170,6 @@ public class UnlimitedNaturalExpImpl extends NumericLiteralExpImpl implements
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.UNLIMITED_NATURAL_EXP__SYMBOL:
 			setSymbol(SYMBOL_EDEFAULT);
@@ -190,7 +184,6 @@ public class UnlimitedNaturalExpImpl extends NumericLiteralExpImpl implements
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.UNLIMITED_NATURAL_EXP__SYMBOL:
 			return symbol != SYMBOL_EDEFAULT;
@@ -204,7 +197,6 @@ public class UnlimitedNaturalExpImpl extends NumericLiteralExpImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return ExpressionsPackageImpl.Literals.UNLIMITED_NATURAL_EXP;
 	}
 
@@ -219,7 +211,8 @@ public class UnlimitedNaturalExpImpl extends NumericLiteralExpImpl implements
 	public String toString() {
 
 		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-				.appendSuper(super.toString()).append("symbol", symbol).toString(); //$NON-NLS-1$
+				.appendSuper(super.toString())
+				.append("symbol", symbol).toString(); //$NON-NLS-1$
 	}
 
 } // UnlimitedNaturalExpImpl

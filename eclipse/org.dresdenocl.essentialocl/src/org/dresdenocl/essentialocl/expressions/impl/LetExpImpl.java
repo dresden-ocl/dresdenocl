@@ -88,7 +88,6 @@ public class LetExpImpl extends OclExpressionImpl implements LetExp {
 	 * @generated
 	 */
 	protected LetExpImpl() {
-
 		super();
 	}
 
@@ -135,7 +134,6 @@ public class LetExpImpl extends OclExpressionImpl implements LetExp {
 	 * @generated
 	 */
 	public OclExpression getIn() {
-
 		return in;
 	}
 
@@ -145,13 +143,12 @@ public class LetExpImpl extends OclExpressionImpl implements LetExp {
 	 */
 	public NotificationChain basicSetIn(OclExpression newIn,
 			NotificationChain msgs) {
-
 		OclExpression oldIn = in;
 		in = newIn;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification =
-					new ENotificationImpl(this, Notification.SET,
-							ExpressionsPackageImpl.LET_EXP__IN, oldIn, newIn);
+			ENotificationImpl notification = new ENotificationImpl(this,
+					Notification.SET, ExpressionsPackageImpl.LET_EXP__IN,
+					oldIn, newIn);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -165,22 +162,22 @@ public class LetExpImpl extends OclExpressionImpl implements LetExp {
 	 * @generated
 	 */
 	public void setIn(OclExpression newIn) {
-
 		if (newIn != in) {
 			NotificationChain msgs = null;
 			if (in != null)
-				msgs =
-						((InternalEObject) in).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
-								- ExpressionsPackageImpl.LET_EXP__IN, null, msgs);
+				msgs = ((InternalEObject) in).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE
+								- ExpressionsPackageImpl.LET_EXP__IN, null,
+						msgs);
 			if (newIn != null)
-				msgs =
-						((InternalEObject) newIn).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
-								- ExpressionsPackageImpl.LET_EXP__IN, null, msgs);
+				msgs = ((InternalEObject) newIn).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE
+								- ExpressionsPackageImpl.LET_EXP__IN, null,
+						msgs);
 			msgs = basicSetIn(newIn, msgs);
 			if (msgs != null)
 				msgs.dispatch();
-		}
-		else if (eNotificationRequired())
+		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					ExpressionsPackageImpl.LET_EXP__IN, newIn, newIn));
 	}
@@ -190,7 +187,6 @@ public class LetExpImpl extends OclExpressionImpl implements LetExp {
 	 * @generated
 	 */
 	public Variable getVariable() {
-
 		return variable;
 	}
 
@@ -200,14 +196,12 @@ public class LetExpImpl extends OclExpressionImpl implements LetExp {
 	 */
 	public NotificationChain basicSetVariable(Variable newVariable,
 			NotificationChain msgs) {
-
 		Variable oldVariable = variable;
 		variable = newVariable;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification =
-					new ENotificationImpl(this, Notification.SET,
-							ExpressionsPackageImpl.LET_EXP__VARIABLE, oldVariable,
-							newVariable);
+			ENotificationImpl notification = new ENotificationImpl(this,
+					Notification.SET, ExpressionsPackageImpl.LET_EXP__VARIABLE,
+					oldVariable, newVariable);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -221,26 +215,25 @@ public class LetExpImpl extends OclExpressionImpl implements LetExp {
 	 * @generated
 	 */
 	public void setVariable(Variable newVariable) {
-
 		if (newVariable != variable) {
 			NotificationChain msgs = null;
 			if (variable != null)
-				msgs =
-						((InternalEObject) variable).eInverseRemove(this,
-								EOPPOSITE_FEATURE_BASE
-										- ExpressionsPackageImpl.LET_EXP__VARIABLE, null, msgs);
+				msgs = ((InternalEObject) variable).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE
+								- ExpressionsPackageImpl.LET_EXP__VARIABLE,
+						null, msgs);
 			if (newVariable != null)
-				msgs =
-						((InternalEObject) newVariable).eInverseAdd(this,
-								EOPPOSITE_FEATURE_BASE
-										- ExpressionsPackageImpl.LET_EXP__VARIABLE, null, msgs);
+				msgs = ((InternalEObject) newVariable).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE
+								- ExpressionsPackageImpl.LET_EXP__VARIABLE,
+						null, msgs);
 			msgs = basicSetVariable(newVariable, msgs);
 			if (msgs != null)
 				msgs.dispatch();
-		}
-		else if (eNotificationRequired())
+		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ExpressionsPackageImpl.LET_EXP__VARIABLE, newVariable, newVariable));
+					ExpressionsPackageImpl.LET_EXP__VARIABLE, newVariable,
+					newVariable));
 	}
 
 	/**
@@ -250,7 +243,6 @@ public class LetExpImpl extends OclExpressionImpl implements LetExp {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.LET_EXP__IN:
 			return basicSetIn(null, msgs);
@@ -266,7 +258,6 @@ public class LetExpImpl extends OclExpressionImpl implements LetExp {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.LET_EXP__IN:
 			return getIn();
@@ -282,7 +273,6 @@ public class LetExpImpl extends OclExpressionImpl implements LetExp {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.LET_EXP__IN:
 			setIn((OclExpression) newValue);
@@ -300,7 +290,6 @@ public class LetExpImpl extends OclExpressionImpl implements LetExp {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.LET_EXP__IN:
 			setIn((OclExpression) null);
@@ -318,7 +307,6 @@ public class LetExpImpl extends OclExpressionImpl implements LetExp {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.LET_EXP__IN:
 			return in != null;
@@ -334,7 +322,6 @@ public class LetExpImpl extends OclExpressionImpl implements LetExp {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return ExpressionsPackageImpl.Literals.LET_EXP;
 	}
 

@@ -54,7 +54,6 @@ public abstract class LiteralExpImpl extends OclExpressionImpl implements
 	 * @generated
 	 */
 	protected LiteralExpImpl() {
-
 		super();
 	}
 
@@ -65,7 +64,6 @@ public abstract class LiteralExpImpl extends OclExpressionImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return ExpressionsPackageImpl.Literals.LITERAL_EXP;
 	}
 

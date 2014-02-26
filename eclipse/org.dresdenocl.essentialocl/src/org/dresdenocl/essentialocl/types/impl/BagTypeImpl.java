@@ -57,7 +57,6 @@ public class BagTypeImpl extends CollectionTypeImpl implements BagType {
 	 * @generated
 	 */
 	protected BagTypeImpl() {
-
 		super();
 	}
 
@@ -67,7 +66,6 @@ public class BagTypeImpl extends CollectionTypeImpl implements BagType {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return TypesPackageImpl.Literals.BAG_TYPE;
 	}
 

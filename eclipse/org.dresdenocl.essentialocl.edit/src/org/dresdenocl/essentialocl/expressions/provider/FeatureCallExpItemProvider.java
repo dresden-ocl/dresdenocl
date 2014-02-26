@@ -65,7 +65,6 @@ public class FeatureCallExpItemProvider extends CallExpItemProvider implements
 	 * @generated
 	 */
 	public FeatureCallExpItemProvider(AdapterFactory adapterFactory) {
-
 		super(adapterFactory);
 	}
 
@@ -77,7 +76,6 @@ public class FeatureCallExpItemProvider extends CallExpItemProvider implements
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -93,7 +91,6 @@ public class FeatureCallExpItemProvider extends CallExpItemProvider implements
 	 * @generated
 	 */
 	protected void addSourceTypePropertyDescriptor(Object object) {
-
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -114,7 +111,6 @@ public class FeatureCallExpItemProvider extends CallExpItemProvider implements
 	 */
 	@Override
 	public String getText(Object object) {
-
 		String label = ((FeatureCallExp) object).getName();
 		return label == null || label.length() == 0 ? getString("_UI_FeatureCallExp_type") : //$NON-NLS-1$
 				getString("_UI_FeatureCallExp_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
@@ -129,7 +125,6 @@ public class FeatureCallExpItemProvider extends CallExpItemProvider implements
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
-
 		updateChildren(notification);
 		super.notifyChanged(notification);
 	}
@@ -144,7 +139,6 @@ public class FeatureCallExpItemProvider extends CallExpItemProvider implements
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
-
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

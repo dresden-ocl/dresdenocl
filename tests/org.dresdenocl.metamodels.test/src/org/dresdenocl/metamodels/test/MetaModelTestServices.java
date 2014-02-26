@@ -471,7 +471,8 @@ public final class MetaModelTestServices {
 
 		/* If started head less, try to find the bundle's location anyway. */
 		else {
-			File testLocation = new File(System.getProperty("DRESDENOCL_LOCATION_TESTS") + myTestModelBundleId);
+			File testLocation = new File(
+					System.getProperty("DRESDENOCL_LOCATION_TESTS") + myTestModelBundleId);
 			File eclipseLocation = new File(System.getProperty("DRESDENOCL_LOCATION_ECLIPSE") + myTestModelBundleId);
 			
 			File bundleFile = null;

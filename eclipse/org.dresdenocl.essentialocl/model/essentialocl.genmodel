@@ -9,9 +9,8 @@
   <genPackages prefix="EssentialOcl" basePackage="org.dresdenocl" disposableProviderFactory="true"
       generateExampleClass="false" multipleEditorPages="false" generateModelWizard="false"
       ecorePackage="essentialocl.ecore#/">
-    <nestedGenPackages prefix="Types" basePackage="org.dresdenocl.essentialocl"
-        disposableProviderFactory="true" generateExampleClass="false" multipleEditorPages="false"
-        ecorePackage="essentialocl.ecore#//types">
+    <nestedGenPackages prefix="Types" basePackage="org.dresdenocl.essentialocl" disposableProviderFactory="true"
+        generateExampleClass="false" multipleEditorPages="false" ecorePackage="essentialocl.ecore#//types">
       <genClasses ecoreClass="essentialocl.ecore#//types/BagType"/>
       <genClasses ecoreClass="essentialocl.ecore#//types/TupleType">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"

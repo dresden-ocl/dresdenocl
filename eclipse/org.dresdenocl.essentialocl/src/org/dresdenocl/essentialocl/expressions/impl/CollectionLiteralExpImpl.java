@@ -94,8 +94,7 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 	 * @generated
 	 * @ordered
 	 */
-	protected static final CollectionKind KIND_EDEFAULT =
-			CollectionKind.COLLECTION;
+	protected static final CollectionKind KIND_EDEFAULT = CollectionKind.COLLECTION;
 
 	/**
 	 * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute. <!--
@@ -121,7 +120,6 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 	 * @generated
 	 */
 	protected CollectionLiteralExpImpl() {
-
 		super();
 	}
 
@@ -180,15 +178,16 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 		inferredElementType = oclLibrary.getOclVoid();
 
 		for (CollectionLiteralPart literalPart : part) {
-			inferredElementType =
-					inferredElementType.commonSuperType(literalPart.getType());
+			inferredElementType = inferredElementType
+					.commonSuperType(literalPart.getType());
 		}
 
 		if (elementType != null) {
 			if (!inferredElementType.conformsTo(elementType))
 				throw new WellformednessException(this,
 						"Wrong element type of CollectionLiteralExp. Found: "
-								+ inferredElementType + ", but was expecting " + elementType);
+								+ inferredElementType + ", but was expecting "
+								+ elementType);
 			// use the original type as the inferred type might be to special
 			inferredElementType = elementType;
 		}
@@ -229,12 +228,10 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 	 * @generated
 	 */
 	public List<CollectionLiteralPart> getPart() {
-
 		if (part == null) {
-			part =
-					new EObjectContainmentEList<CollectionLiteralPart>(
-							CollectionLiteralPart.class, this,
-							ExpressionsPackageImpl.COLLECTION_LITERAL_EXP__PART);
+			part = new EObjectContainmentEList<CollectionLiteralPart>(
+					CollectionLiteralPart.class, this,
+					ExpressionsPackageImpl.COLLECTION_LITERAL_EXP__PART);
 		}
 		return part;
 	}
@@ -244,7 +241,6 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 	 * @generated
 	 */
 	public CollectionKind getKind() {
-
 		return kind;
 	}
 
@@ -253,12 +249,12 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 	 * @generated
 	 */
 	public void setKind(CollectionKind newKind) {
-
 		CollectionKind oldKind = kind;
 		kind = newKind == null ? KIND_EDEFAULT : newKind;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ExpressionsPackageImpl.COLLECTION_LITERAL_EXP__KIND, oldKind, kind));
+					ExpressionsPackageImpl.COLLECTION_LITERAL_EXP__KIND,
+					oldKind, kind));
 	}
 
 	/**
@@ -266,13 +262,14 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 	 * @generated
 	 */
 	public Type getElementType() {
-
 		if (elementType != null && elementType.eIsProxy()) {
 			InternalEObject oldElementType = (InternalEObject) elementType;
 			elementType = (Type) eResolveProxy(oldElementType);
 			if (elementType != oldElementType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+					eNotify(new ENotificationImpl(
+							this,
+							Notification.RESOLVE,
 							ExpressionsPackageImpl.COLLECTION_LITERAL_EXP__ELEMENT_TYPE,
 							oldElementType, elementType));
 			}
@@ -285,7 +282,6 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 	 * @generated
 	 */
 	public Type basicGetElementType() {
-
 		return elementType;
 	}
 
@@ -294,11 +290,12 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 	 * @generated
 	 */
 	public void setElementType(Type newElementType) {
-
 		Type oldElementType = elementType;
 		elementType = newElementType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
+			eNotify(new ENotificationImpl(
+					this,
+					Notification.SET,
 					ExpressionsPackageImpl.COLLECTION_LITERAL_EXP__ELEMENT_TYPE,
 					oldElementType, elementType));
 	}
@@ -310,7 +307,6 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.COLLECTION_LITERAL_EXP__PART:
 			return ((InternalEList<?>) getPart()).basicRemove(otherEnd, msgs);
@@ -324,7 +320,6 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.COLLECTION_LITERAL_EXP__PART:
 			return getPart();
@@ -345,11 +340,11 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.COLLECTION_LITERAL_EXP__PART:
 			getPart().clear();
-			getPart().addAll((Collection<? extends CollectionLiteralPart>) newValue);
+			getPart().addAll(
+					(Collection<? extends CollectionLiteralPart>) newValue);
 			return;
 		case ExpressionsPackageImpl.COLLECTION_LITERAL_EXP__KIND:
 			setKind((CollectionKind) newValue);
@@ -367,7 +362,6 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.COLLECTION_LITERAL_EXP__PART:
 			getPart().clear();
@@ -388,7 +382,6 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.COLLECTION_LITERAL_EXP__PART:
 			return part != null && !part.isEmpty();
@@ -406,7 +399,6 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return ExpressionsPackageImpl.Literals.COLLECTION_LITERAL_EXP;
 	}
 

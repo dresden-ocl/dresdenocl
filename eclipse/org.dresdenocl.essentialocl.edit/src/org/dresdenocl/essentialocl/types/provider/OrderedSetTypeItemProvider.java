@@ -35,6 +35,7 @@ package org.dresdenocl.essentialocl.types.provider;
 import java.util.Collection;
 import java.util.List;
 
+import org.dresdenocl.essentialocl.types.OrderedSetType;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -63,7 +64,6 @@ public class OrderedSetTypeItemProvider extends CollectionTypeItemProvider
 	 * @generated
 	 */
 	public OrderedSetTypeItemProvider(AdapterFactory adapterFactory) {
-
 		super(adapterFactory);
 	}
 
@@ -75,7 +75,6 @@ public class OrderedSetTypeItemProvider extends CollectionTypeItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -90,7 +89,6 @@ public class OrderedSetTypeItemProvider extends CollectionTypeItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-
 		return overlayImage(object,
 				getResourceLocator().getImage("full/obj16/OrderedSetType")); //$NON-NLS-1$
 	}
@@ -129,7 +127,6 @@ public class OrderedSetTypeItemProvider extends CollectionTypeItemProvider
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
-
 		updateChildren(notification);
 		super.notifyChanged(notification);
 	}
@@ -144,7 +141,6 @@ public class OrderedSetTypeItemProvider extends CollectionTypeItemProvider
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
-
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

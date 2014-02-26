@@ -35,6 +35,7 @@ package org.dresdenocl.essentialocl.types.provider;
 import java.util.Collection;
 import java.util.List;
 
+import org.dresdenocl.essentialocl.types.TypeType;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
@@ -66,7 +67,6 @@ public class TypeTypeItemProvider extends TypeItemProvider implements
 	 * @generated
 	 */
 	public TypeTypeItemProvider(AdapterFactory adapterFactory) {
-
 		super(adapterFactory);
 	}
 
@@ -78,7 +78,6 @@ public class TypeTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -94,7 +93,6 @@ public class TypeTypeItemProvider extends TypeItemProvider implements
 	 * @generated
 	 */
 	protected void addRepresentedTypePropertyDescriptor(Object object) {
-
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -103,8 +101,8 @@ public class TypeTypeItemProvider extends TypeItemProvider implements
 						getString("_UI_TypeType_representedType_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_TypeType_representedType_feature", "_UI_TypeType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						TypesPackageImpl.Literals.TYPE_TYPE__REPRESENTED_TYPE, true, false,
-						true, null, null, null));
+						TypesPackageImpl.Literals.TYPE_TYPE__REPRESENTED_TYPE,
+						true, false, true, null, null, null));
 	}
 
 	/**
@@ -115,7 +113,6 @@ public class TypeTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-
 		return overlayImage(object,
 				getResourceLocator().getImage("full/obj16/TypeType")); //$NON-NLS-1$
 	}
@@ -144,7 +141,6 @@ public class TypeTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
-
 		updateChildren(notification);
 		super.notifyChanged(notification);
 	}
@@ -159,7 +155,6 @@ public class TypeTypeItemProvider extends TypeItemProvider implements
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
-
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 
@@ -171,7 +166,6 @@ public class TypeTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
-
 		return EssentialOCLEditPlugin.INSTANCE;
 	}
 

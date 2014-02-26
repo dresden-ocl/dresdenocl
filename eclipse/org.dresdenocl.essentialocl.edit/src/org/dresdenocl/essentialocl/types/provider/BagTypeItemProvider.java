@@ -35,6 +35,7 @@ package org.dresdenocl.essentialocl.types.provider;
 import java.util.Collection;
 import java.util.List;
 
+import org.dresdenocl.essentialocl.types.BagType;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -62,7 +63,6 @@ public class BagTypeItemProvider extends CollectionTypeItemProvider implements
 	 * @generated
 	 */
 	public BagTypeItemProvider(AdapterFactory adapterFactory) {
-
 		super(adapterFactory);
 	}
 
@@ -74,7 +74,6 @@ public class BagTypeItemProvider extends CollectionTypeItemProvider implements
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -89,7 +88,6 @@ public class BagTypeItemProvider extends CollectionTypeItemProvider implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-
 		return overlayImage(object,
 				getResourceLocator().getImage("full/obj16/BagType")); //$NON-NLS-1$
 	}
@@ -128,7 +126,6 @@ public class BagTypeItemProvider extends CollectionTypeItemProvider implements
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
-
 		updateChildren(notification);
 		super.notifyChanged(notification);
 	}
@@ -143,7 +140,6 @@ public class BagTypeItemProvider extends CollectionTypeItemProvider implements
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
-
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

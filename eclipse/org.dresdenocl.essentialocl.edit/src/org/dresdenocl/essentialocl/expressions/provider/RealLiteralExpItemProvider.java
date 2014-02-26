@@ -66,7 +66,6 @@ public class RealLiteralExpItemProvider extends NumericLiteralExpItemProvider
 	 * @generated
 	 */
 	public RealLiteralExpItemProvider(AdapterFactory adapterFactory) {
-
 		super(adapterFactory);
 	}
 
@@ -78,7 +77,6 @@ public class RealLiteralExpItemProvider extends NumericLiteralExpItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -94,7 +92,6 @@ public class RealLiteralExpItemProvider extends NumericLiteralExpItemProvider
 	 * @generated
 	 */
 	protected void addRealSymbolPropertyDescriptor(Object object) {
-
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -104,8 +101,8 @@ public class RealLiteralExpItemProvider extends NumericLiteralExpItemProvider
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_RealLiteralExp_realSymbol_feature", "_UI_RealLiteralExp_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 						ExpressionsPackageImpl.Literals.REAL_LITERAL_EXP__REAL_SYMBOL,
-						true, false, false, ItemPropertyDescriptor.REAL_VALUE_IMAGE, null,
-						null));
+						true, false, false,
+						ItemPropertyDescriptor.REAL_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -116,7 +113,6 @@ public class RealLiteralExpItemProvider extends NumericLiteralExpItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-
 		return overlayImage(object,
 				getResourceLocator().getImage("full/obj16/RealLiteralExp")); //$NON-NLS-1$
 	}
@@ -143,7 +139,6 @@ public class RealLiteralExpItemProvider extends NumericLiteralExpItemProvider
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
-
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(RealLiteralExp.class)) {
@@ -165,7 +160,6 @@ public class RealLiteralExpItemProvider extends NumericLiteralExpItemProvider
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
-
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

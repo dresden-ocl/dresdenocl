@@ -84,7 +84,6 @@ public class TupleLiteralPartImpl extends TypedElementImpl implements
 	 * @generated
 	 */
 	protected TupleLiteralPartImpl() {
-
 		super();
 	}
 
@@ -94,7 +93,6 @@ public class TupleLiteralPartImpl extends TypedElementImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return ExpressionsPackageImpl.Literals.TUPLE_LITERAL_PART;
 	}
 
@@ -146,7 +144,6 @@ public class TupleLiteralPartImpl extends TypedElementImpl implements
 	 * @generated
 	 */
 	public Property getProperty() {
-
 		return property;
 	}
 
@@ -156,14 +153,13 @@ public class TupleLiteralPartImpl extends TypedElementImpl implements
 	 */
 	public NotificationChain basicSetProperty(Property newProperty,
 			NotificationChain msgs) {
-
 		Property oldProperty = property;
 		property = newProperty;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification =
-					new ENotificationImpl(this, Notification.SET,
-							ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY, oldProperty,
-							newProperty);
+			ENotificationImpl notification = new ENotificationImpl(this,
+					Notification.SET,
+					ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY,
+					oldProperty, newProperty);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -177,29 +173,29 @@ public class TupleLiteralPartImpl extends TypedElementImpl implements
 	 * @generated
 	 */
 	public void setProperty(Property newProperty) {
-
 		if (newProperty != property) {
 			NotificationChain msgs = null;
 			if (property != null)
-				msgs =
-						((InternalEObject) property).eInverseRemove(this,
+				msgs = ((InternalEObject) property)
+						.eInverseRemove(
+								this,
 								EOPPOSITE_FEATURE_BASE
 										- ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY,
 								null, msgs);
 			if (newProperty != null)
-				msgs =
-						((InternalEObject) newProperty).eInverseAdd(this,
+				msgs = ((InternalEObject) newProperty)
+						.eInverseAdd(
+								this,
 								EOPPOSITE_FEATURE_BASE
 										- ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY,
 								null, msgs);
 			msgs = basicSetProperty(newProperty, msgs);
 			if (msgs != null)
 				msgs.dispatch();
-		}
-		else if (eNotificationRequired())
+		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY, newProperty,
-					newProperty));
+					ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY,
+					newProperty, newProperty));
 	}
 
 	/**
@@ -207,7 +203,6 @@ public class TupleLiteralPartImpl extends TypedElementImpl implements
 	 * @generated
 	 */
 	public OclExpression getValue() {
-
 		return value;
 	}
 
@@ -217,14 +212,13 @@ public class TupleLiteralPartImpl extends TypedElementImpl implements
 	 */
 	public NotificationChain basicSetValue(OclExpression newValue,
 			NotificationChain msgs) {
-
 		OclExpression oldValue = value;
 		value = newValue;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification =
-					new ENotificationImpl(this, Notification.SET,
-							ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE, oldValue,
-							newValue);
+			ENotificationImpl notification = new ENotificationImpl(this,
+					Notification.SET,
+					ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE, oldValue,
+					newValue);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -238,28 +232,29 @@ public class TupleLiteralPartImpl extends TypedElementImpl implements
 	 * @generated
 	 */
 	public void setValue(OclExpression newValue) {
-
 		if (newValue != value) {
 			NotificationChain msgs = null;
 			if (value != null)
-				msgs =
-						((InternalEObject) value).eInverseRemove(this,
+				msgs = ((InternalEObject) value)
+						.eInverseRemove(
+								this,
 								EOPPOSITE_FEATURE_BASE
-										- ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE, null,
-								msgs);
+										- ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE,
+								null, msgs);
 			if (newValue != null)
-				msgs =
-						((InternalEObject) newValue).eInverseAdd(this,
+				msgs = ((InternalEObject) newValue)
+						.eInverseAdd(
+								this,
 								EOPPOSITE_FEATURE_BASE
-										- ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE, null,
-								msgs);
+										- ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE,
+								null, msgs);
 			msgs = basicSetValue(newValue, msgs);
 			if (msgs != null)
 				msgs.dispatch();
-		}
-		else if (eNotificationRequired())
+		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE, newValue, newValue));
+					ExpressionsPackageImpl.TUPLE_LITERAL_PART__VALUE, newValue,
+					newValue));
 	}
 
 	/**
@@ -269,7 +264,6 @@ public class TupleLiteralPartImpl extends TypedElementImpl implements
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY:
 			return basicSetProperty(null, msgs);
@@ -285,7 +279,6 @@ public class TupleLiteralPartImpl extends TypedElementImpl implements
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY:
 			return getProperty();
@@ -301,7 +294,6 @@ public class TupleLiteralPartImpl extends TypedElementImpl implements
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY:
 			setProperty((Property) newValue);
@@ -319,7 +311,6 @@ public class TupleLiteralPartImpl extends TypedElementImpl implements
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY:
 			setProperty((Property) null);
@@ -337,7 +328,6 @@ public class TupleLiteralPartImpl extends TypedElementImpl implements
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.TUPLE_LITERAL_PART__PROPERTY:
 			return property != null;

@@ -47,9 +47,9 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 	}
 
 	protected static final String MODEL_PATH =
-			"bin/resource/package01/TestModel.class";
+			"target/classes/resource/package01/TestModel.class";
 	protected static final String MODEL_INSTANCE_PATH =
-			"bin/resource/package01/TestModelInstance.class";
+			"target/classes/resource/package01/TestModelInstance.class";
 	protected static final String RESOURCE01_PATH = "resources/resource01.ocl";
 
 	/** The last lines received as an event from the {@link OclDebugger}. */

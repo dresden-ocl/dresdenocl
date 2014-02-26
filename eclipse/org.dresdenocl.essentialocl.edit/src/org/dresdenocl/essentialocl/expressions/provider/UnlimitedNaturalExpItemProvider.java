@@ -67,7 +67,6 @@ public class UnlimitedNaturalExpItemProvider extends
 	 * @generated
 	 */
 	public UnlimitedNaturalExpItemProvider(AdapterFactory adapterFactory) {
-
 		super(adapterFactory);
 	}
 
@@ -79,7 +78,6 @@ public class UnlimitedNaturalExpItemProvider extends
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -95,7 +93,6 @@ public class UnlimitedNaturalExpItemProvider extends
 	 * @generated
 	 */
 	protected void addSymbolPropertyDescriptor(Object object) {
-
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -105,8 +102,8 @@ public class UnlimitedNaturalExpItemProvider extends
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_UnlimitedNaturalExp_symbol_feature", "_UI_UnlimitedNaturalExp_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 						ExpressionsPackageImpl.Literals.UNLIMITED_NATURAL_EXP__SYMBOL,
-						true, false, false, ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
-						null, null));
+						true, false, false,
+						ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -117,7 +114,6 @@ public class UnlimitedNaturalExpItemProvider extends
 	 */
 	@Override
 	public Object getImage(Object object) {
-
 		return overlayImage(object,
 				getResourceLocator().getImage("full/obj16/UnlimitedNaturalExp")); //$NON-NLS-1$
 	}
@@ -144,7 +140,6 @@ public class UnlimitedNaturalExpItemProvider extends
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
-
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(UnlimitedNaturalExp.class)) {
@@ -166,7 +161,6 @@ public class UnlimitedNaturalExpItemProvider extends
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
-
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

@@ -102,7 +102,6 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 	 * @generated
 	 */
 	protected VariableImpl() {
-
 		super();
 	}
 
@@ -235,7 +234,6 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 	 * @generated
 	 */
 	public Parameter getRepresentedParameter() {
-
 		return representedParameter;
 	}
 
@@ -244,7 +242,6 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 	 * @generated
 	 */
 	public void setRepresentedParameter(Parameter newRepresentedParameter) {
-
 		Parameter oldRepresentedParameter = representedParameter;
 		representedParameter = newRepresentedParameter;
 		if (eNotificationRequired())
@@ -258,7 +255,6 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 	 * @generated
 	 */
 	public OclExpression getInitExpression() {
-
 		return initExpression;
 	}
 
@@ -268,14 +264,13 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 	 */
 	public NotificationChain basicSetInitExpression(
 			OclExpression newInitExpression, NotificationChain msgs) {
-
 		OclExpression oldInitExpression = initExpression;
 		initExpression = newInitExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification =
-					new ENotificationImpl(this, Notification.SET,
-							ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION,
-							oldInitExpression, newInitExpression);
+			ENotificationImpl notification = new ENotificationImpl(this,
+					Notification.SET,
+					ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION,
+					oldInitExpression, newInitExpression);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -289,29 +284,29 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 	 * @generated
 	 */
 	public void setInitExpression(OclExpression newInitExpression) {
-
 		if (newInitExpression != initExpression) {
 			NotificationChain msgs = null;
 			if (initExpression != null)
-				msgs =
-						((InternalEObject) initExpression).eInverseRemove(this,
+				msgs = ((InternalEObject) initExpression)
+						.eInverseRemove(
+								this,
 								EOPPOSITE_FEATURE_BASE
-										- ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION, null,
-								msgs);
+										- ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION,
+								null, msgs);
 			if (newInitExpression != null)
-				msgs =
-						((InternalEObject) newInitExpression).eInverseAdd(this,
+				msgs = ((InternalEObject) newInitExpression)
+						.eInverseAdd(
+								this,
 								EOPPOSITE_FEATURE_BASE
-										- ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION, null,
-								msgs);
+										- ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION,
+								null, msgs);
 			msgs = basicSetInitExpression(newInitExpression, msgs);
 			if (msgs != null)
 				msgs.dispatch();
-		}
-		else if (eNotificationRequired())
+		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION, newInitExpression,
-					newInitExpression));
+					ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION,
+					newInitExpression, newInitExpression));
 	}
 
 	/**
@@ -369,7 +364,6 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.VARIABLE__INIT_EXPRESSION:
 			return basicSetInitExpression(null, msgs);
@@ -383,7 +377,6 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.VARIABLE__REPRESENTED_PARAMETER:
 			return getRepresentedParameter();
@@ -399,7 +392,6 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.VARIABLE__REPRESENTED_PARAMETER:
 			setRepresentedParameter((Parameter) newValue);
@@ -417,7 +409,6 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.VARIABLE__REPRESENTED_PARAMETER:
 			setRepresentedParameter((Parameter) null);
@@ -435,7 +426,6 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.VARIABLE__REPRESENTED_PARAMETER:
 			return representedParameter != null;
@@ -451,7 +441,6 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return ExpressionsPackageImpl.Literals.VARIABLE;
 	}
 

@@ -54,7 +54,6 @@ public abstract class CollectionLiteralPartImpl extends TypedElementImpl
 	 * @generated
 	 */
 	protected CollectionLiteralPartImpl() {
-
 		super();
 	}
 
@@ -86,7 +85,6 @@ public abstract class CollectionLiteralPartImpl extends TypedElementImpl
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return ExpressionsPackageImpl.Literals.COLLECTION_LITERAL_PART;
 	}
 

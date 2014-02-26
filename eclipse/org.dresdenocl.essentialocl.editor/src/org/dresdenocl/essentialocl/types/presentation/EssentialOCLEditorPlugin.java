@@ -52,8 +52,7 @@ public final class EssentialOCLEditorPlugin extends EMFPlugin {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final EssentialOCLEditorPlugin INSTANCE =
-			new EssentialOCLEditorPlugin();
+	public static final EssentialOCLEditorPlugin INSTANCE = new EssentialOCLEditorPlugin();
 
 	/**
 	 * Keep track of the singleton.
@@ -70,7 +69,6 @@ public final class EssentialOCLEditorPlugin extends EMFPlugin {
 	 * @generated
 	 */
 	public EssentialOCLEditorPlugin() {
-
 		super(new ResourceLocator[] { PivotModelEditPlugin.INSTANCE, });
 	}
 
@@ -83,7 +81,6 @@ public final class EssentialOCLEditorPlugin extends EMFPlugin {
 	 */
 	@Override
 	public ResourceLocator getPluginResourceLocator() {
-
 		return plugin;
 	}
 
@@ -95,7 +92,6 @@ public final class EssentialOCLEditorPlugin extends EMFPlugin {
 	 * @generated
 	 */
 	public static Implementation getPlugin() {
-
 		return plugin;
 	}
 
@@ -114,7 +110,6 @@ public final class EssentialOCLEditorPlugin extends EMFPlugin {
 		 * @generated
 		 */
 		public Implementation() {
-
 			super();
 
 			// Remember the static instance.

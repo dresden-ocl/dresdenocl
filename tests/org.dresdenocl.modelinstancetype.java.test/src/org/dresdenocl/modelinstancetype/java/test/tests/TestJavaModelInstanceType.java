@@ -44,7 +44,7 @@ public class TestJavaModelInstanceType extends ModelInstanceTypeTestSuite {
 
 	/** The path of the model which shall be tested. */
 	private static final String TEST_MODELINSTANCE_PATH =
-			"bin/org/dresdenocl/modelinstancetype/java/test/modelinstance/ProviderClass.class";
+			"target/classes/org/dresdenocl/modelinstancetype/java/test/modelinstance/ProviderClass.class";
 
 	/**
 	 * <p>

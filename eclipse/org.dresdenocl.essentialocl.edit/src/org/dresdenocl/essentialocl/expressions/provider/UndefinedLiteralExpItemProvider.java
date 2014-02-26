@@ -35,6 +35,7 @@ package org.dresdenocl.essentialocl.expressions.provider;
 import java.util.Collection;
 import java.util.List;
 
+import org.dresdenocl.essentialocl.expressions.UndefinedLiteralExp;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -60,7 +61,6 @@ public class UndefinedLiteralExpItemProvider extends LiteralExpItemProvider
 	 * @generated
 	 */
 	public UndefinedLiteralExpItemProvider(AdapterFactory adapterFactory) {
-
 		super(adapterFactory);
 	}
 
@@ -72,7 +72,6 @@ public class UndefinedLiteralExpItemProvider extends LiteralExpItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -88,7 +87,6 @@ public class UndefinedLiteralExpItemProvider extends LiteralExpItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-
 		return overlayImage(object,
 				getResourceLocator().getImage("full/obj16/UndefinedLiteralExp")); //$NON-NLS-1$
 	}
@@ -114,7 +112,6 @@ public class UndefinedLiteralExpItemProvider extends LiteralExpItemProvider
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
-
 		updateChildren(notification);
 		super.notifyChanged(notification);
 	}
@@ -129,7 +126,6 @@ public class UndefinedLiteralExpItemProvider extends LiteralExpItemProvider
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
-
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

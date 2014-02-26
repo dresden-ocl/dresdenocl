@@ -84,7 +84,6 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public TypesSwitch() {
-
 		if (modelPackage == null) {
 			modelPackage = TypesPackageImpl.eINSTANCE;
 		}
@@ -100,7 +99,6 @@ public class TypesSwitch<T> extends Switch<T> {
 	 */
 	@Override
 	protected boolean isSwitchFor(EPackage ePackage) {
-
 		return ePackage == modelPackage;
 	}
 
@@ -113,7 +111,6 @@ public class TypesSwitch<T> extends Switch<T> {
 	 */
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
-
 		switch (classifierID) {
 		case TypesPackageImpl.BAG_TYPE: {
 			BagType bagType = (BagType) theEObject;
@@ -297,7 +294,6 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseBagType(BagType object) {
-
 		return null;
 	}
 
@@ -313,7 +309,6 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTupleType(TupleType object) {
-
 		return null;
 	}
 
@@ -329,7 +324,6 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCollectionType(CollectionType object) {
-
 		return null;
 	}
 
@@ -345,7 +339,6 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseInvalidType(InvalidType object) {
-
 		return null;
 	}
 
@@ -361,7 +354,6 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseOrderedSetType(OrderedSetType object) {
-
 		return null;
 	}
 
@@ -377,7 +369,6 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseSequenceType(SequenceType object) {
-
 		return null;
 	}
 
@@ -393,7 +384,6 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseSetType(SetType object) {
-
 		return null;
 	}
 
@@ -409,7 +399,6 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseVoidType(VoidType object) {
-
 		return null;
 	}
 
@@ -425,7 +414,6 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTypeType(TypeType object) {
-
 		return null;
 	}
 
@@ -441,7 +429,6 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseOclLibrary(OclLibrary object) {
-
 		return null;
 	}
 
@@ -457,7 +444,6 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseAnyType(AnyType object) {
-
 		return null;
 	}
 
@@ -473,7 +459,6 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseNamedElement(NamedElement object) {
-
 		return null;
 	}
 
@@ -489,7 +474,6 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseConstrainableElement(ConstrainableElement object) {
-
 		return null;
 	}
 
@@ -505,7 +489,6 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseGenericElement(GenericElement object) {
-
 		return null;
 	}
 
@@ -521,7 +504,6 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseType(Type object) {
-
 		return null;
 	}
 
@@ -538,7 +520,6 @@ public class TypesSwitch<T> extends Switch<T> {
 	 */
 	@Override
 	public T defaultCase(EObject object) {
-
 		return null;
 	}
 

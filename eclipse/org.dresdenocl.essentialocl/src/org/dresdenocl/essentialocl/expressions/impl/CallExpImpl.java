@@ -72,7 +72,6 @@ public abstract class CallExpImpl extends OclExpressionImpl implements CallExp {
 	 * @generated
 	 */
 	protected CallExpImpl() {
-
 		super();
 	}
 
@@ -83,7 +82,6 @@ public abstract class CallExpImpl extends OclExpressionImpl implements CallExp {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return ExpressionsPackageImpl.Literals.CALL_EXP;
 	}
 
@@ -93,7 +91,6 @@ public abstract class CallExpImpl extends OclExpressionImpl implements CallExp {
 	 * @generated
 	 */
 	public OclExpression getSource() {
-
 		return source;
 	}
 
@@ -104,13 +101,12 @@ public abstract class CallExpImpl extends OclExpressionImpl implements CallExp {
 	 */
 	public NotificationChain basicSetSource(OclExpression newSource,
 			NotificationChain msgs) {
-
 		OclExpression oldSource = source;
 		source = newSource;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification =
-					new ENotificationImpl(this, Notification.SET,
-							ExpressionsPackageImpl.CALL_EXP__SOURCE, oldSource, newSource);
+			ENotificationImpl notification = new ENotificationImpl(this,
+					Notification.SET, ExpressionsPackageImpl.CALL_EXP__SOURCE,
+					oldSource, newSource);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -125,26 +121,25 @@ public abstract class CallExpImpl extends OclExpressionImpl implements CallExp {
 	 * @generated
 	 */
 	public void setSource(OclExpression newSource) {
-
 		if (newSource != source) {
 			NotificationChain msgs = null;
 			if (source != null)
-				msgs =
-						((InternalEObject) source).eInverseRemove(this,
-								EOPPOSITE_FEATURE_BASE
-										- ExpressionsPackageImpl.CALL_EXP__SOURCE, null, msgs);
+				msgs = ((InternalEObject) source).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE
+								- ExpressionsPackageImpl.CALL_EXP__SOURCE,
+						null, msgs);
 			if (newSource != null)
-				msgs =
-						((InternalEObject) newSource).eInverseAdd(this,
-								EOPPOSITE_FEATURE_BASE
-										- ExpressionsPackageImpl.CALL_EXP__SOURCE, null, msgs);
+				msgs = ((InternalEObject) newSource).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE
+								- ExpressionsPackageImpl.CALL_EXP__SOURCE,
+						null, msgs);
 			msgs = basicSetSource(newSource, msgs);
 			if (msgs != null)
 				msgs.dispatch();
-		}
-		else if (eNotificationRequired())
+		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ExpressionsPackageImpl.CALL_EXP__SOURCE, newSource, newSource));
+					ExpressionsPackageImpl.CALL_EXP__SOURCE, newSource,
+					newSource));
 	}
 
 	/**
@@ -155,7 +150,6 @@ public abstract class CallExpImpl extends OclExpressionImpl implements CallExp {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.CALL_EXP__SOURCE:
 			return basicSetSource(null, msgs);
@@ -170,7 +164,6 @@ public abstract class CallExpImpl extends OclExpressionImpl implements CallExp {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.CALL_EXP__SOURCE:
 			return getSource();
@@ -185,7 +178,6 @@ public abstract class CallExpImpl extends OclExpressionImpl implements CallExp {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.CALL_EXP__SOURCE:
 			setSource((OclExpression) newValue);
@@ -201,7 +193,6 @@ public abstract class CallExpImpl extends OclExpressionImpl implements CallExp {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.CALL_EXP__SOURCE:
 			setSource((OclExpression) null);
@@ -217,7 +208,6 @@ public abstract class CallExpImpl extends OclExpressionImpl implements CallExp {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.CALL_EXP__SOURCE:
 			return source != null;

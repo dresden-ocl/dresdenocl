@@ -67,7 +67,6 @@ public class StringLiteralExpItemProvider extends
 	 * @generated
 	 */
 	public StringLiteralExpItemProvider(AdapterFactory adapterFactory) {
-
 		super(adapterFactory);
 	}
 
@@ -79,7 +78,6 @@ public class StringLiteralExpItemProvider extends
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -95,7 +93,6 @@ public class StringLiteralExpItemProvider extends
 	 * @generated
 	 */
 	protected void addStringSymbolPropertyDescriptor(Object object) {
-
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -105,8 +102,8 @@ public class StringLiteralExpItemProvider extends
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_StringLiteralExp_stringSymbol_feature", "_UI_StringLiteralExp_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 						ExpressionsPackageImpl.Literals.STRING_LITERAL_EXP__STRING_SYMBOL,
-						true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-						null, null));
+						true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -117,7 +114,6 @@ public class StringLiteralExpItemProvider extends
 	 */
 	@Override
 	public Object getImage(Object object) {
-
 		return overlayImage(object,
 				getResourceLocator().getImage("full/obj16/StringLiteralExp")); //$NON-NLS-1$
 	}
@@ -144,7 +140,6 @@ public class StringLiteralExpItemProvider extends
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
-
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(StringLiteralExp.class)) {
@@ -166,7 +161,6 @@ public class StringLiteralExpItemProvider extends
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
-
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

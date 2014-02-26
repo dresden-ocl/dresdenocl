@@ -70,7 +70,6 @@ public class CollectionTypeItemProvider extends TypeItemProvider implements
 	 * @generated
 	 */
 	public CollectionTypeItemProvider(AdapterFactory adapterFactory) {
-
 		super(adapterFactory);
 	}
 
@@ -82,7 +81,6 @@ public class CollectionTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -99,7 +97,6 @@ public class CollectionTypeItemProvider extends TypeItemProvider implements
 	 * @generated
 	 */
 	protected void addOclLibraryPropertyDescriptor(Object object) {
-
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -108,8 +105,8 @@ public class CollectionTypeItemProvider extends TypeItemProvider implements
 						getString("_UI_CollectionType_oclLibrary_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_CollectionType_oclLibrary_feature", "_UI_CollectionType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						TypesPackageImpl.Literals.COLLECTION_TYPE__OCL_LIBRARY, true,
-						false, true, null, null, null));
+						TypesPackageImpl.Literals.COLLECTION_TYPE__OCL_LIBRARY,
+						true, false, true, null, null, null));
 	}
 
 	/**
@@ -119,7 +116,6 @@ public class CollectionTypeItemProvider extends TypeItemProvider implements
 	 * @generated
 	 */
 	protected void addKindPropertyDescriptor(Object object) {
-
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -128,8 +124,9 @@ public class CollectionTypeItemProvider extends TypeItemProvider implements
 						getString("_UI_CollectionType_kind_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_CollectionType_kind_feature", "_UI_CollectionType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						TypesPackageImpl.Literals.COLLECTION_TYPE__KIND, true, false,
-						false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+						TypesPackageImpl.Literals.COLLECTION_TYPE__KIND, true,
+						false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -219,7 +216,6 @@ public class CollectionTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
-
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(CollectionType.class)) {
@@ -241,7 +237,6 @@ public class CollectionTypeItemProvider extends TypeItemProvider implements
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
-
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 
@@ -253,7 +248,6 @@ public class CollectionTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
-
 		return EssentialOCLEditPlugin.INSTANCE;
 	}
 

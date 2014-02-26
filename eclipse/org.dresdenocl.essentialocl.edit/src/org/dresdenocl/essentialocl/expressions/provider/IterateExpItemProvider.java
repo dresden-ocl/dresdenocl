@@ -66,7 +66,6 @@ public class IterateExpItemProvider extends LoopExpItemProvider implements
 	 * @generated
 	 */
 	public IterateExpItemProvider(AdapterFactory adapterFactory) {
-
 		super(adapterFactory);
 	}
 
@@ -78,7 +77,6 @@ public class IterateExpItemProvider extends LoopExpItemProvider implements
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -97,10 +95,10 @@ public class IterateExpItemProvider extends LoopExpItemProvider implements
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(
 			Object object) {
-
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(ExpressionsPackageImpl.Literals.ITERATE_EXP__RESULT);
+			childrenFeatures
+					.add(ExpressionsPackageImpl.Literals.ITERATE_EXP__RESULT);
 		}
 		return childrenFeatures;
 	}
@@ -112,7 +110,6 @@ public class IterateExpItemProvider extends LoopExpItemProvider implements
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
-
 		// Check the type of the specified child object and return the proper feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
@@ -127,7 +124,6 @@ public class IterateExpItemProvider extends LoopExpItemProvider implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-
 		return overlayImage(object,
 				getResourceLocator().getImage("full/obj16/IterateExp")); //$NON-NLS-1$
 	}
@@ -153,7 +149,6 @@ public class IterateExpItemProvider extends LoopExpItemProvider implements
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
-
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(IterateExp.class)) {
@@ -175,7 +170,6 @@ public class IterateExpItemProvider extends LoopExpItemProvider implements
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
-
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

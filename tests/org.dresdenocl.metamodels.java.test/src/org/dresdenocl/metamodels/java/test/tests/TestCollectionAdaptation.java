@@ -56,7 +56,7 @@ public class TestCollectionAdaptation extends AbstractJavaModelTest {
 	@BeforeClass
 	public static void setUp() throws Exception {
 
-		File modelFile = getFile("bin/package1/package2/collections/CollectionTestModel.class");
+		File modelFile = getFile("target/classes/package1/package2/collections/CollectionTestModel.class");
 
 		modelUnderTest = Ocl2ForEclipseFacade.getModel(modelFile,
 				Ocl2ForEclipseFacade.JAVA_META_MODEL);

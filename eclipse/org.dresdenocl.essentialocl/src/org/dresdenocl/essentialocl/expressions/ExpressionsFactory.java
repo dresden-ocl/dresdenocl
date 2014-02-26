@@ -47,8 +47,7 @@ public interface ExpressionsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	ExpressionsFactory INSTANCE =
-			org.dresdenocl.essentialocl.expressions.impl.ExpressionsFactoryImpl.eINSTANCE;
+	ExpressionsFactory INSTANCE = org.dresdenocl.essentialocl.expressions.impl.ExpressionsFactoryImpl.eINSTANCE;
 
 	/**
 	 * Returns a new object of class '<em>Variable Exp</em>'.

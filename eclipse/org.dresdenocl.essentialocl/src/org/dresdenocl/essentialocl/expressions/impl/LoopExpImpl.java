@@ -90,7 +90,6 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
 	 * @generated
 	 */
 	protected LoopExpImpl() {
-
 		super();
 	}
 
@@ -174,7 +173,6 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
 	 * @generated
 	 */
 	public OclExpression getBody() {
-
 		return body;
 	}
 
@@ -184,13 +182,12 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
 	 */
 	public NotificationChain basicSetBody(OclExpression newBody,
 			NotificationChain msgs) {
-
 		OclExpression oldBody = body;
 		body = newBody;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification =
-					new ENotificationImpl(this, Notification.SET,
-							ExpressionsPackageImpl.LOOP_EXP__BODY, oldBody, newBody);
+			ENotificationImpl notification = new ENotificationImpl(this,
+					Notification.SET, ExpressionsPackageImpl.LOOP_EXP__BODY,
+					oldBody, newBody);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -204,24 +201,22 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
 	 * @generated
 	 */
 	public void setBody(OclExpression newBody) {
-
 		if (newBody != body) {
 			NotificationChain msgs = null;
 			if (body != null)
-				msgs =
-						((InternalEObject) body).eInverseRemove(this,
-								EOPPOSITE_FEATURE_BASE - ExpressionsPackageImpl.LOOP_EXP__BODY,
-								null, msgs);
+				msgs = ((InternalEObject) body).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE
+								- ExpressionsPackageImpl.LOOP_EXP__BODY, null,
+						msgs);
 			if (newBody != null)
-				msgs =
-						((InternalEObject) newBody).eInverseAdd(this,
-								EOPPOSITE_FEATURE_BASE - ExpressionsPackageImpl.LOOP_EXP__BODY,
-								null, msgs);
+				msgs = ((InternalEObject) newBody).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE
+								- ExpressionsPackageImpl.LOOP_EXP__BODY, null,
+						msgs);
 			msgs = basicSetBody(newBody, msgs);
 			if (msgs != null)
 				msgs.dispatch();
-		}
-		else if (eNotificationRequired())
+		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					ExpressionsPackageImpl.LOOP_EXP__BODY, newBody, newBody));
 	}
@@ -231,11 +226,9 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
 	 * @generated
 	 */
 	public List<Variable> getIterator() {
-
 		if (iterator == null) {
-			iterator =
-					new EObjectContainmentEList<Variable>(Variable.class, this,
-							ExpressionsPackageImpl.LOOP_EXP__ITERATOR);
+			iterator = new EObjectContainmentEList<Variable>(Variable.class,
+					this, ExpressionsPackageImpl.LOOP_EXP__ITERATOR);
 		}
 		return iterator;
 	}
@@ -247,12 +240,12 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.LOOP_EXP__BODY:
 			return basicSetBody(null, msgs);
 		case ExpressionsPackageImpl.LOOP_EXP__ITERATOR:
-			return ((InternalEList<?>) getIterator()).basicRemove(otherEnd, msgs);
+			return ((InternalEList<?>) getIterator()).basicRemove(otherEnd,
+					msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -263,7 +256,6 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.LOOP_EXP__BODY:
 			return getBody();
@@ -280,7 +272,6 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.LOOP_EXP__BODY:
 			setBody((OclExpression) newValue);
@@ -299,7 +290,6 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.LOOP_EXP__BODY:
 			setBody((OclExpression) null);
@@ -317,7 +307,6 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.LOOP_EXP__BODY:
 			return body != null;
@@ -333,7 +322,6 @@ public abstract class LoopExpImpl extends CallExpImpl implements LoopExp {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return ExpressionsPackageImpl.Literals.LOOP_EXP;
 	}
 

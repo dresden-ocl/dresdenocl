@@ -47,8 +47,7 @@ public interface TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	TypesFactory INSTANCE =
-			org.dresdenocl.essentialocl.types.impl.TypesFactoryImpl.eINSTANCE;
+	TypesFactory INSTANCE = org.dresdenocl.essentialocl.types.impl.TypesFactoryImpl.eINSTANCE;
 
 	/**
 	 * Returns a new object of class '<em>Bag Type</em>'.

@@ -71,7 +71,6 @@ public class OclLibraryItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	public OclLibraryItemProvider(AdapterFactory adapterFactory) {
-
 		super(adapterFactory);
 	}
 
@@ -83,7 +82,6 @@ public class OclLibraryItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -103,25 +101,36 @@ public class OclLibraryItemProvider extends ItemProviderAdapter implements
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(
 			Object object) {
-
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_BOOLEAN);
-			childrenFeatures.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_STRING);
-			childrenFeatures.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_INTEGER);
-			childrenFeatures.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_REAL);
-			childrenFeatures.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_ANY);
-			childrenFeatures.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_VOID);
-			childrenFeatures.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_INVALID);
-			childrenFeatures.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_TYPE);
+			childrenFeatures
+					.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_BOOLEAN);
+			childrenFeatures
+					.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_STRING);
+			childrenFeatures
+					.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_INTEGER);
+			childrenFeatures
+					.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_REAL);
+			childrenFeatures
+					.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_ANY);
+			childrenFeatures
+					.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_VOID);
+			childrenFeatures
+					.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_INVALID);
+			childrenFeatures
+					.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_TYPE);
 			childrenFeatures
 					.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_COLLECTION);
-			childrenFeatures.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_SEQUENCE);
-			childrenFeatures.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_BAG);
-			childrenFeatures.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_SET);
+			childrenFeatures
+					.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_SEQUENCE);
+			childrenFeatures
+					.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_BAG);
+			childrenFeatures
+					.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_SET);
 			childrenFeatures
 					.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_ORDERED_SET);
-			childrenFeatures.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_TUPLE);
+			childrenFeatures
+					.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_TUPLE);
 		}
 		return childrenFeatures;
 	}
@@ -132,7 +141,6 @@ public class OclLibraryItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
-
 		// Check the type of the specified child object and return the proper feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
@@ -146,7 +154,6 @@ public class OclLibraryItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-
 		return overlayImage(object,
 				getResourceLocator().getImage("full/obj16/OclLibrary")); //$NON-NLS-1$
 	}
@@ -159,7 +166,6 @@ public class OclLibraryItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	public String getText(Object object) {
-
 		return getString("_UI_OclLibrary_type"); //$NON-NLS-1$
 	}
 
@@ -171,7 +177,6 @@ public class OclLibraryItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
-
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(OclLibrary.class)) {
@@ -283,17 +288,16 @@ public class OclLibraryItemProvider extends ItemProviderAdapter implements
 	 * @generated NOT
 	 */
 	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child,
-			Collection<?> selection) {
+	public String getCreateChildText(Object owner, Object feature,
+			Object child, Collection<?> selection) {
 
 		Object childFeature = feature;
 		Object childObject = child;
 
-		boolean qualify =
-				childFeature == TypesPackageImpl.Literals.OCL_LIBRARY__OCL_BOOLEAN
-						|| childFeature == TypesPackageImpl.Literals.OCL_LIBRARY__OCL_STRING
-						|| childFeature == TypesPackageImpl.Literals.OCL_LIBRARY__OCL_INTEGER
-						|| childFeature == TypesPackageImpl.Literals.OCL_LIBRARY__OCL_REAL;
+		boolean qualify = childFeature == TypesPackageImpl.Literals.OCL_LIBRARY__OCL_BOOLEAN
+				|| childFeature == TypesPackageImpl.Literals.OCL_LIBRARY__OCL_STRING
+				|| childFeature == TypesPackageImpl.Literals.OCL_LIBRARY__OCL_INTEGER
+				|| childFeature == TypesPackageImpl.Literals.OCL_LIBRARY__OCL_REAL;
 
 		if (qualify) {
 			return getString("_UI_CreateChild_text2", //$NON-NLS-1$
@@ -311,7 +315,6 @@ public class OclLibraryItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
-
 		return EssentialOCLEditPlugin.INSTANCE;
 	}
 

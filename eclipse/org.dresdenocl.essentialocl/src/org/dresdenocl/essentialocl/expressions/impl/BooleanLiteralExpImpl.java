@@ -88,7 +88,6 @@ public class BooleanLiteralExpImpl extends PrimitiveLiteralExpImpl implements
 	 * @generated
 	 */
 	protected BooleanLiteralExpImpl() {
-
 		super();
 	}
 
@@ -129,7 +128,6 @@ public class BooleanLiteralExpImpl extends PrimitiveLiteralExpImpl implements
 	 * @generated
 	 */
 	public boolean isBooleanSymbol() {
-
 		return booleanSymbol;
 	}
 
@@ -138,7 +136,6 @@ public class BooleanLiteralExpImpl extends PrimitiveLiteralExpImpl implements
 	 * @generated
 	 */
 	public void setBooleanSymbol(boolean newBooleanSymbol) {
-
 		boolean oldBooleanSymbol = booleanSymbol;
 		booleanSymbol = newBooleanSymbol;
 		if (eNotificationRequired())
@@ -153,7 +150,6 @@ public class BooleanLiteralExpImpl extends PrimitiveLiteralExpImpl implements
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL:
 			return isBooleanSymbol();
@@ -167,7 +163,6 @@ public class BooleanLiteralExpImpl extends PrimitiveLiteralExpImpl implements
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL:
 			setBooleanSymbol((Boolean) newValue);
@@ -182,7 +177,6 @@ public class BooleanLiteralExpImpl extends PrimitiveLiteralExpImpl implements
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL:
 			setBooleanSymbol(BOOLEAN_SYMBOL_EDEFAULT);
@@ -197,7 +191,6 @@ public class BooleanLiteralExpImpl extends PrimitiveLiteralExpImpl implements
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
 		case ExpressionsPackageImpl.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL:
 			return booleanSymbol != BOOLEAN_SYMBOL_EDEFAULT;
@@ -211,7 +204,6 @@ public class BooleanLiteralExpImpl extends PrimitiveLiteralExpImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return ExpressionsPackageImpl.Literals.BOOLEAN_LITERAL_EXP;
 	}
 

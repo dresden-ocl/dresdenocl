@@ -537,7 +537,7 @@ public class ModelRegistryTest {
 		IModelInstance modelInstance01;
 		modelInstance01 =
 				ModelBusTestUtility.getJavaModelInstance(
-						"bin/package1/ModelInstance01ProviderClass.class", model);
+						"target/classes/package1/ModelInstance01ProviderClass.class", model);
 
 		modelInstanceRegistry.addModelInstance(modelInstance01);
 
