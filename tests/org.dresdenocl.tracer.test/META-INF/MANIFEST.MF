@@ -7,13 +7,15 @@ Bundle-Activator: org.dresdenocl.tracer.test.TracerTestPlugin
 Require-Bundle: org.eclipse.core.runtime,
  org.dresdenocl.interpreter;bundle-version="3.1.0",
  org.dresdenocl.modelinstancetype,
+ org.dresdenocl.testsuite.abstract,
  org.dresdenocl.tracer;bundle-version="3.1.0",
  org.dresdenocl.interpreter.test;bundle-version="3.1.0",
  org.eclipse.emf.common;bundle-version="2.7.0",
- org.dresdenocl.testsuite.abstract,
  org.dresdenocl.modelinstance,
  org.dresdenocl.model,
- org.junit;bundle-version="4.11.0"
+ org.junit,
+ org.dresdenocl.essentialocl.standardlibrary,
+ org.dresdenocl.facade
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Vendor: TU Dresden, Software Technology Group
