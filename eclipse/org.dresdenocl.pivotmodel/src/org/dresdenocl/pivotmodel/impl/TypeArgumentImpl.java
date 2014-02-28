@@ -123,6 +123,7 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ComplexGenericType getOwningGenericType() {
 
 		if (eContainerFeatureID() != PivotModelPackage.TYPE_ARGUMENT__OWNING_GENERIC_TYPE)
@@ -170,6 +171,7 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwningGenericType(ComplexGenericType newOwningGenericType) {
 
 		if (newOwningGenericType != eInternalContainer()
@@ -302,9 +304,9 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 	public boolean eIsSet(int featureID) {
 
 		switch (featureID) {
-		case PivotModelPackageImpl.TYPE_ARGUMENT__OWNING_GENERIC_TYPE:
+		case PivotModelPackage.TYPE_ARGUMENT__OWNING_GENERIC_TYPE:
 			return getOwningGenericType() != null;
-		case PivotModelPackageImpl.TYPE_ARGUMENT__NAME:
+		case PivotModelPackage.TYPE_ARGUMENT__NAME:
 			return false;
 		}
 		return super.eIsSet(featureID);

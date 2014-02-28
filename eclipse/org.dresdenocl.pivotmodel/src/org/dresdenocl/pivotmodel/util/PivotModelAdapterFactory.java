@@ -37,7 +37,6 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
-import org.dresdenocl.pivotmodel.*;
 import org.dresdenocl.pivotmodel.AssociationProperty;
 import org.dresdenocl.pivotmodel.ComplexGenericType;
 import org.dresdenocl.pivotmodel.ConstrainableElement;

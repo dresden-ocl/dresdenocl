@@ -83,6 +83,7 @@ public class TypeParameterImpl extends NamedElementImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public GenericElement getGenericElement() {
 
 		if (eContainerFeatureID() != PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT)
@@ -107,6 +108,7 @@ public class TypeParameterImpl extends NamedElementImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setGenericElement(GenericElement newGenericElement) {
 
 		if (newGenericElement != eInternalContainer()

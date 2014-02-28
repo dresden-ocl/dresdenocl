@@ -202,6 +202,7 @@ public class DatatypesPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getSequence() {
 
 		return sequenceEDataType;
@@ -211,6 +212,7 @@ public class DatatypesPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getSet() {
 
 		return setEDataType;
@@ -220,6 +222,7 @@ public class DatatypesPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getUnlimitedNatural() {
 
 		return unlimitedNaturalEDataType;
@@ -229,6 +232,7 @@ public class DatatypesPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getInteger() {
 
 		return integerEDataType;
@@ -238,6 +242,7 @@ public class DatatypesPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getBoolean() {
 
 		return booleanEDataType;
@@ -247,6 +252,7 @@ public class DatatypesPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getString() {
 
 		return stringEDataType;
@@ -256,6 +262,7 @@ public class DatatypesPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getReal() {
 
 		return realEDataType;
@@ -265,6 +272,7 @@ public class DatatypesPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getBag() {
 
 		return bagEDataType;
@@ -274,6 +282,7 @@ public class DatatypesPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getOrderedSet() {
 
 		return orderedSetEDataType;
@@ -283,6 +292,7 @@ public class DatatypesPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getCollection() {
 
 		return collectionEDataType;
@@ -292,6 +302,7 @@ public class DatatypesPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DatatypesFactory getDatatypesFactory() {
 
 		return (DatatypesFactory) getEFactoryInstance();

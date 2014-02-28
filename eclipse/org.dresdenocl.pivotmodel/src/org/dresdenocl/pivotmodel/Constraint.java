@@ -245,6 +245,7 @@ public interface Constraint extends NamedElement {
 	 * 
 	 * @see org.dresdenocl.pivotmodel.NamedElement#clone()
 	 */
+	@Override
 	Constraint clone();
 
 } // Constraint

@@ -39,7 +39,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import org.dresdenocl.pivotmodel.*;
 import org.dresdenocl.pivotmodel.AssociationProperty;
 import org.dresdenocl.pivotmodel.ComplexGenericType;
 import org.dresdenocl.pivotmodel.Constraint;
@@ -189,6 +188,7 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Enumeration createEnumeration() {
 
 		EnumerationImpl enumeration = new EnumerationImpl();
@@ -199,6 +199,7 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Operation createOperation() {
 
 		OperationImpl operation = new OperationImpl();
@@ -209,6 +210,7 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Namespace createNamespace() {
 
 		NamespaceImpl namespace = new NamespaceImpl();
@@ -219,6 +221,7 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Type createType() {
 
 		TypeImpl type = new TypeImpl();
@@ -229,6 +232,7 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Parameter createParameter() {
 
 		ParameterImpl parameter = new ParameterImpl();
@@ -239,6 +243,7 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EnumerationLiteral createEnumerationLiteral() {
 
 		EnumerationLiteralImpl enumerationLiteral = new EnumerationLiteralImpl();
@@ -249,6 +254,7 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Property createProperty() {
 
 		PropertyImpl property = new PropertyImpl();
@@ -259,6 +265,7 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PrimitiveType createPrimitiveType() {
 
 		PrimitiveTypeImpl primitiveType = new PrimitiveTypeImpl();
@@ -269,6 +276,7 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Constraint createConstraint() {
 
 		ConstraintImpl constraint = new ConstraintImpl();
@@ -279,6 +287,7 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Expression createExpression() {
 
 		ExpressionImpl expression = new ExpressionImpl();
@@ -289,6 +298,7 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AssociationProperty createAssociationProperty() {
 
 		AssociationPropertyImpl associationProperty = new AssociationPropertyImpl();
@@ -299,6 +309,7 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TypeParameter createTypeParameter() {
 
 		TypeParameterImpl typeParameter = new TypeParameterImpl();
@@ -309,6 +320,7 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TypeArgument createTypeArgument() {
 
 		TypeArgumentImpl typeArgument = new TypeArgumentImpl();
@@ -319,6 +331,7 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ParameterGenericType createParameterGenericType() {
 
 		ParameterGenericTypeImpl parameterGenericType =
@@ -330,6 +343,7 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ComplexGenericType createComplexGenericType() {
 
 		ComplexGenericTypeImpl complexGenericType = new ComplexGenericTypeImpl();
@@ -390,6 +404,7 @@ public class PivotModelFactoryImpl extends EFactoryImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PivotModelPackage getPivotModelPackage() {
 
 		return (PivotModelPackage) getEPackage();

@@ -317,6 +317,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getEnumeration() {
 
 		return enumerationEClass;
@@ -326,6 +327,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getEnumeration_OwnedLiteral() {
 
 		return (EReference) enumerationEClass.getEStructuralFeatures().get(0);
@@ -335,6 +337,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getNamedElement() {
 
 		return namedElementEClass;
@@ -344,6 +347,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getNamedElement_Name() {
 
 		return (EAttribute) namedElementEClass.getEStructuralFeatures().get(0);
@@ -353,6 +357,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getNamedElement_QualifiedName() {
 
 		return (EAttribute) namedElementEClass.getEStructuralFeatures().get(1);
@@ -362,6 +367,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNamedElement_Owner() {
 
 		return (EReference) namedElementEClass.getEStructuralFeatures().get(2);
@@ -371,6 +377,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getOperation() {
 
 		return operationEClass;
@@ -380,6 +387,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getOperation_OwningType() {
 
 		return (EReference) operationEClass.getEStructuralFeatures().get(0);
@@ -389,6 +397,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getOperation_OwnedParameter() {
 
 		return (EReference) operationEClass.getEStructuralFeatures().get(1);
@@ -398,6 +407,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getOperation_InputParameter() {
 
 		return (EReference) operationEClass.getEStructuralFeatures().get(2);
@@ -407,6 +417,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getOperation_OutputParameter() {
 
 		return (EReference) operationEClass.getEStructuralFeatures().get(3);
@@ -416,6 +427,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getOperation_ReturnParameter() {
 
 		return (EReference) operationEClass.getEStructuralFeatures().get(4);
@@ -425,6 +437,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getOperation_SignatureParameter() {
 
 		return (EReference) operationEClass.getEStructuralFeatures().get(5);
@@ -434,6 +447,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getNamespace() {
 
 		return namespaceEClass;
@@ -443,6 +457,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNamespace_OwnedType() {
 
 		return (EReference) namespaceEClass.getEStructuralFeatures().get(0);
@@ -452,6 +467,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNamespace_OwnedRule() {
 
 		return (EReference) namespaceEClass.getEStructuralFeatures().get(1);
@@ -461,6 +477,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNamespace_NestedNamespace() {
 
 		return (EReference) namespaceEClass.getEStructuralFeatures().get(2);
@@ -470,6 +487,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNamespace_NestingNamespace() {
 
 		return (EReference) namespaceEClass.getEStructuralFeatures().get(3);
@@ -479,6 +497,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getType() {
 
 		return typeEClass;
@@ -488,6 +507,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getType_SuperType() {
 
 		return (EReference) typeEClass.getEStructuralFeatures().get(3);
@@ -497,6 +517,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getType_GenericSuperType() {
 
 		return (EReference) typeEClass.getEStructuralFeatures().get(4);
@@ -506,6 +527,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getType_OwnedOperation() {
 
 		return (EReference) typeEClass.getEStructuralFeatures().get(1);
@@ -515,6 +537,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getType_OwnedProperty() {
 
 		return (EReference) typeEClass.getEStructuralFeatures().get(2);
@@ -524,6 +547,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getType_Namespace() {
 
 		return (EReference) typeEClass.getEStructuralFeatures().get(0);
@@ -533,6 +557,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getParameter() {
 
 		return parameterEClass;
@@ -542,6 +567,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getParameter_Kind() {
 
 		return (EAttribute) parameterEClass.getEStructuralFeatures().get(0);
@@ -551,6 +577,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getParameter_Operation() {
 
 		return (EReference) parameterEClass.getEStructuralFeatures().get(1);
@@ -560,6 +587,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getEnumerationLiteral() {
 
 		return enumerationLiteralEClass;
@@ -569,6 +597,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getEnumerationLiteral_Enumeration() {
 
 		return (EReference) enumerationLiteralEClass.getEStructuralFeatures()
@@ -579,6 +608,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getProperty() {
 
 		return propertyEClass;
@@ -588,6 +618,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getProperty_OwningType() {
 
 		return (EReference) propertyEClass.getEStructuralFeatures().get(0);
@@ -597,6 +628,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTypedElement() {
 
 		return typedElementEClass;
@@ -606,6 +638,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTypedElement_Type() {
 
 		return (EReference) typedElementEClass.getEStructuralFeatures().get(0);
@@ -615,6 +648,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTypedElement_GenericType() {
 
 		return (EReference) typedElementEClass.getEStructuralFeatures().get(1);
@@ -624,6 +658,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPrimitiveType() {
 
 		return primitiveTypeEClass;
@@ -633,6 +668,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPrimitiveType_Kind() {
 
 		return (EAttribute) primitiveTypeEClass.getEStructuralFeatures().get(0);
@@ -642,6 +678,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFeature() {
 
 		return featureEClass;
@@ -651,6 +688,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getFeature_Static() {
 
 		return (EAttribute) featureEClass.getEStructuralFeatures().get(0);
@@ -660,6 +698,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFeature_Semantics() {
 
 		return (EReference) featureEClass.getEStructuralFeatures().get(1);
@@ -669,6 +708,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getConstraint() {
 
 		return constraintEClass;
@@ -678,6 +718,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getConstraint_Kind() {
 
 		return (EAttribute) constraintEClass.getEStructuralFeatures().get(0);
@@ -687,6 +728,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getConstraint_Namespace() {
 
 		return (EReference) constraintEClass.getEStructuralFeatures().get(1);
@@ -696,6 +738,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getConstraint_Specification() {
 
 		return (EReference) constraintEClass.getEStructuralFeatures().get(2);
@@ -705,6 +748,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getConstraint_ConstrainedElement() {
 
 		return (EReference) constraintEClass.getEStructuralFeatures().get(3);
@@ -714,6 +758,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getConstraint_DefinedFeature() {
 
 		return (EReference) constraintEClass.getEStructuralFeatures().get(4);
@@ -723,6 +768,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getExpression() {
 
 		return expressionEClass;
@@ -732,6 +778,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getExpression_Body() {
 
 		return (EAttribute) expressionEClass.getEStructuralFeatures().get(0);
@@ -741,6 +788,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getExpression_Language() {
 
 		return (EAttribute) expressionEClass.getEStructuralFeatures().get(1);
@@ -750,6 +798,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExpression_Constraint() {
 
 		return (EReference) expressionEClass.getEStructuralFeatures().get(2);
@@ -759,6 +808,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAssociationProperty() {
 
 		return associationPropertyEClass;
@@ -768,6 +818,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAssociationProperty_InverseAssociationProperties() {
 
 		return (EReference) associationPropertyEClass.getEStructuralFeatures().get(
@@ -778,6 +829,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getConstrainableElement() {
 
 		return constrainableElementEClass;
@@ -787,6 +839,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getGenericElement() {
 
 		return genericElementEClass;
@@ -796,6 +849,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getGenericElement_OwnedTypeParameter() {
 
 		return (EReference) genericElementEClass.getEStructuralFeatures().get(0);
@@ -805,6 +859,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getGenericType() {
 
 		return genericTypeEClass;
@@ -814,6 +869,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTypeParameter() {
 
 		return typeParameterEClass;
@@ -823,6 +879,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTypeParameter_GenericElement() {
 
 		return (EReference) typeParameterEClass.getEStructuralFeatures().get(0);
@@ -832,6 +889,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTypeArgument() {
 
 		return typeArgumentEClass;
@@ -841,6 +899,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTypeArgument_OwningGenericType() {
 
 		return (EReference) typeArgumentEClass.getEStructuralFeatures().get(0);
@@ -850,6 +909,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getParameterGenericType() {
 
 		return parameterGenericTypeEClass;
@@ -859,6 +919,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getParameterGenericType_TypeParameter() {
 
 		return (EReference) parameterGenericTypeEClass.getEStructuralFeatures()
@@ -869,6 +930,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getComplexGenericType() {
 
 		return complexGenericTypeEClass;
@@ -878,6 +940,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getComplexGenericType_UnboundType() {
 
 		return (EReference) complexGenericTypeEClass.getEStructuralFeatures()
@@ -888,6 +951,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getComplexGenericType_TypeArgument() {
 
 		return (EReference) complexGenericTypeEClass.getEStructuralFeatures()
@@ -898,6 +962,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getParameterDirectionKind() {
 
 		return parameterDirectionKindEEnum;
@@ -907,6 +972,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getConstraintKind() {
 
 		return constraintKindEEnum;
@@ -916,6 +982,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getPrimitiveTypeKind() {
 
 		return primitiveTypeKindEEnum;
@@ -925,6 +992,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getCloneNotSupportedException() {
 
 		return cloneNotSupportedExceptionEDataType;
@@ -934,6 +1002,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PivotModelFactory getPivotModelFactory() {
 
 		return (PivotModelFactory) getEFactoryInstance();

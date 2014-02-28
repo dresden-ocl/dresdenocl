@@ -81,6 +81,7 @@ public interface ParameterGenericType extends GenericType {
 	 * 
 	 * @see org.dresdenocl.pivotmodel.NamedElement#clone()
 	 */
+	@Override
 	ParameterGenericType clone();
 
 } // ParameterGenericType

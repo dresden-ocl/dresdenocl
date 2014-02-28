@@ -117,6 +117,7 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 
 		return name;
@@ -126,6 +127,7 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 
 		String oldName = name;
@@ -144,6 +146,7 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public String getQualifiedName() {
 
 		String result;
@@ -165,6 +168,7 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public NamedElement getOwner() {
 
 		return null;
@@ -199,6 +203,7 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 	 * @return A {@link List} containing the qualified name as {@link String}s.
 	 * @generated NOT
 	 */
+	@Override
 	public List<String> getQualifiedNameList() {
 
 		List<String> result;

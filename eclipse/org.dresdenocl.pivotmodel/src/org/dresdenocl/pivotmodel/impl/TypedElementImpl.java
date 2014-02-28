@@ -95,6 +95,7 @@ public abstract class TypedElementImpl extends NamedElementImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Type getType() {
 
 		return type;
@@ -104,6 +105,7 @@ public abstract class TypedElementImpl extends NamedElementImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setType(Type newType) {
 
 		Type oldType = type;
@@ -117,6 +119,7 @@ public abstract class TypedElementImpl extends NamedElementImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public GenericType getGenericType() {
 
 		return genericType;
@@ -177,6 +180,7 @@ public abstract class TypedElementImpl extends NamedElementImpl implements
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public void setGenericType(GenericType newGenericType) {
 
 		// reset an existing type if the new generic type is different from the old

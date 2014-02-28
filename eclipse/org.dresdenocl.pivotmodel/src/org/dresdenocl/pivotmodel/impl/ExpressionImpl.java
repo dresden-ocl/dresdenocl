@@ -123,6 +123,7 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getBody() {
 
 		return body;
@@ -132,6 +133,7 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBody(String newBody) {
 
 		String oldBody = body;
@@ -145,6 +147,7 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLanguage() {
 
 		return language;
@@ -154,6 +157,7 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLanguage(String newLanguage) {
 
 		String oldLanguage = language;
@@ -167,6 +171,7 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Constraint getConstraint() {
 
 		if (eContainerFeatureID() != PivotModelPackage.EXPRESSION__CONSTRAINT)
@@ -191,6 +196,7 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setConstraint(Constraint newConstraint) {
 
 		if (newConstraint != eInternalContainer()

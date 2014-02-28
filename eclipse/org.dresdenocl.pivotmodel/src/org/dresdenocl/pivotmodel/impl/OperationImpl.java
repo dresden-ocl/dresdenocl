@@ -266,6 +266,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public List<TypeParameter> getOwnedTypeParameter() {
 
 		return getOwnedTypeParameterGen();
@@ -293,6 +294,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Type getOwningType() {
 
 		if (eContainerFeatureID() != PivotModelPackage.OPERATION__OWNING_TYPE)
@@ -317,6 +319,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwningType(Type newOwningType) {
 
 		if (newOwningType != eInternalContainer()
@@ -349,6 +352,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public List<Parameter> getOwnedParameter() {
 
 		return getOwnedParameterGen();
@@ -376,6 +380,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public List<Parameter> getInputParameter() {
 
 		return getFilteredParameters(
@@ -388,6 +393,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public List<Parameter> getOutputParameter() {
 
 		return getFilteredParameters(
@@ -400,6 +406,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public List<Parameter> getSignatureParameter() {
 
 		return getFilteredParameters(EnumSet.of(ParameterDirectionKind.IN,
@@ -450,6 +457,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public Parameter getReturnParameter() {
 
 		Parameter returnParameter = null;
@@ -470,6 +478,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public boolean hasMatchingSignature(List<Type> paramTypes) {
 
 		if (logger.isDebugEnabled()) {
@@ -535,6 +544,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public Operation addParameter(Parameter param) {
 
 		if (logger.isDebugEnabled()) {
@@ -557,6 +567,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public Operation addTypeParameter(TypeParameter typeParameter) {
 
 		if (logger.isDebugEnabled()) {
@@ -579,6 +590,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public Operation bindTypeParameter(List<TypeParameter> parameters,
 			List<? extends Type> types) {
 
@@ -898,7 +910,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	public String toString() {
 
 		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-				.appendToString(super.toString()).toString(); //$NON-NLS-1$
+				.appendToString(super.toString()).toString(); 
 	}
 
 } // OperationImpl

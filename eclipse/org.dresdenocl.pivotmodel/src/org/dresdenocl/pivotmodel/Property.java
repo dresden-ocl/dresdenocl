@@ -124,6 +124,7 @@ public interface Property extends Feature, TypedElement, NamedElement,
 	 * 
 	 * @see org.dresdenocl.pivotmodel.NamedElement#clone()
 	 */
+	@Override
 	Property clone();
 
 } // Property

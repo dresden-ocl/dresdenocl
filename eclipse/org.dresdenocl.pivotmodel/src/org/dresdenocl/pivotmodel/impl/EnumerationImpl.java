@@ -103,6 +103,7 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public List<EnumerationLiteral> getOwnedLiteral() {
 
 		return getOwnedLiteralGen();
@@ -130,6 +131,7 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public Enumeration addLiteral(EnumerationLiteral literal) {
 
 		if (logger.isDebugEnabled()) {
@@ -152,6 +154,7 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public EnumerationLiteral lookupLiteral(String name) {
 
 		if (logger.isDebugEnabled()) {

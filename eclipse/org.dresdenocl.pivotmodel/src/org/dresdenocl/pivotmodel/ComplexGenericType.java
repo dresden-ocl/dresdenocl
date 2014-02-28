@@ -116,6 +116,7 @@ public interface ComplexGenericType extends GenericType {
 	 * 
 	 * @see org.dresdenocl.pivotmodel.NamedElement#clone()
 	 */
+	@Override
 	ComplexGenericType clone();
 
 } // ComplexGenericType

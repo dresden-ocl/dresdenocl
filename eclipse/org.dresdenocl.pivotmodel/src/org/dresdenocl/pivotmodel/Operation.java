@@ -229,6 +229,7 @@ public interface Operation extends Feature, TypedElement, NamedElement,
 	 * @see org.dresdenocl.pivotmodel.GenericElement#bindTypeParameter(java.util.List,
 	 *      java.util.List)
 	 */
+	@Override
 	Operation bindTypeParameter(List<TypeParameter> parameters,
 			List<? extends Type> types);
 
@@ -237,6 +238,7 @@ public interface Operation extends Feature, TypedElement, NamedElement,
 	 * 
 	 * @see org.dresdenocl.pivotmodel.NamedElement#clone()
 	 */
+	@Override
 	Operation clone();
 
 } // Operation

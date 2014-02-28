@@ -39,7 +39,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import org.dresdenocl.datatypes.*;
 import org.dresdenocl.datatypes.DatatypesFactory;
 import org.dresdenocl.datatypes.DatatypesPackage;
 
@@ -173,6 +172,7 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DatatypesPackage getDatatypesPackage() {
 
 		return (DatatypesPackage) getEPackage();

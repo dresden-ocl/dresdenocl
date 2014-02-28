@@ -89,6 +89,7 @@ public interface EnumerationLiteral extends NamedElement {
 	 * 
 	 * @see org.dresdenocl.pivotmodel.NamedElement#clone()
 	 */
+	@Override
 	EnumerationLiteral clone();
 
 } // EnumerationLiteral

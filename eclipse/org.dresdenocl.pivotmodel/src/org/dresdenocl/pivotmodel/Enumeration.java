@@ -122,6 +122,7 @@ public interface Enumeration extends Type {
 	 * 
 	 * @see org.dresdenocl.pivotmodel.Type#clone()
 	 */
+	@Override
 	Enumeration clone();
 
 } // Enumeration

@@ -102,6 +102,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Type getOwningType() {
 
 		if (eContainerFeatureID() != PivotModelPackage.PROPERTY__OWNING_TYPE)
@@ -126,6 +127,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwningType(Type newOwningType) {
 
 		if (newOwningType != eInternalContainer()
@@ -154,6 +156,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public boolean isIdentifier() {
 
 		return false;
@@ -164,6 +167,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public boolean cmpSlots(Property p) {
 
 		if (logger.isDebugEnabled()) {

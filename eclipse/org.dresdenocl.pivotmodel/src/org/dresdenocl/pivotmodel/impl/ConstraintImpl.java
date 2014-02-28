@@ -165,6 +165,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * 
 	 * @generated
 	 */
+	@Override
 	public ConstraintKind getKind() {
 
 		return kind;
@@ -175,6 +176,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * 
 	 * @generated
 	 */
+	@Override
 	public void setKind(ConstraintKind newKind) {
 
 		ConstraintKind oldKind = kind;
@@ -189,6 +191,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * 
 	 * @generated
 	 */
+	@Override
 	public Namespace getNamespace() {
 
 		if (eContainerFeatureID() != PivotModelPackage.CONSTRAINT__NAMESPACE)
@@ -215,6 +218,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * 
 	 * @generated
 	 */
+	@Override
 	public void setNamespace(Namespace newNamespace) {
 
 		if (newNamespace != eInternalContainer()
@@ -243,6 +247,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * 
 	 * @generated
 	 */
+	@Override
 	public Expression getSpecification() {
 
 		return specification;
@@ -276,6 +281,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * 
 	 * @generated
 	 */
+	@Override
 	public void setSpecification(Expression newSpecification) {
 
 		if (newSpecification != specification) {
@@ -308,6 +314,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public List<ConstrainableElement> getConstrainedElement() {
 
 		return getConstrainedElementGen();
@@ -335,6 +342,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * 
 	 * @generated
 	 */
+	@Override
 	public Feature getDefinedFeature() {
 
 		return definedFeature;
@@ -368,6 +376,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * 
 	 * @generated
 	 */
+	@Override
 	public void setDefinedFeature(Feature newDefinedFeature) {
 
 		if (newDefinedFeature != definedFeature) {
@@ -395,6 +404,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public Constraint addConstrainedElement(
 			ConstrainableElement constrainedElement) {
 
@@ -418,6 +428,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * 
 	 * @NOT generated
 	 */
+	@Override
 	public boolean hasStaticContext() {
 
 		switch (this.getKind()) {

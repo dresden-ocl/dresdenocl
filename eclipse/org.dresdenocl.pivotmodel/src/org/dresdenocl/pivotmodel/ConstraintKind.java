@@ -354,6 +354,7 @@ public enum ConstraintKind implements Enumerator {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getValue() {
 
 		return value;
@@ -363,6 +364,7 @@ public enum ConstraintKind implements Enumerator {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 
 		return name;
@@ -372,6 +374,7 @@ public enum ConstraintKind implements Enumerator {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLiteral() {
 
 		return literal;

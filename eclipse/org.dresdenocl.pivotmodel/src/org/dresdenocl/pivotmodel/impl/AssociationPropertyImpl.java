@@ -94,6 +94,7 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<AssociationProperty> getInverseAssociationProperties() {
 
 		if (inverseAssociationProperties == null) {
@@ -110,6 +111,7 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void addAssociation(AssociationProperty bProperty) {
 
 		// TODO: implement this method
@@ -121,6 +123,7 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AssociationProperty getAssociation(String propName) {
 
 		// TODO: implement this method
@@ -132,6 +135,7 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void removeAssociation(AssociationProperty bProperty) {
 
 		// TODO: implement this method
@@ -143,6 +147,7 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isInverseAssociation(AssociationProperty bProperty) {
 
 		// TODO: implement this method
@@ -154,6 +159,7 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void addAssociations(List<AssociationProperty> bProperty) {
 
 		// TODO: implement this method
@@ -165,6 +171,7 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isNavigable() {
 
 		// TODO: implement this method

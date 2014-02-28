@@ -130,6 +130,7 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Type getUnboundType() {
 
 		return unboundType;
@@ -139,6 +140,7 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setUnboundType(Type newUnboundType) {
 
 		Type oldUnboundType = unboundType;
@@ -157,6 +159,7 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public List<TypeArgument> getTypeArgument() {
 
 		return getTypeArgumentGen();
@@ -184,6 +187,7 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public ComplexGenericType addTypeArgument(TypeArgument typeArgument) {
 
 		if (logger.isDebugEnabled()) {

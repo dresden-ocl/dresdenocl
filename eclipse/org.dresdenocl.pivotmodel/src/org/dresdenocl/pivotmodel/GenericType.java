@@ -79,6 +79,7 @@ public interface GenericType extends NamedElement {
 	 * 
 	 * @see org.dresdenocl.pivotmodel.NamedElement#clone()
 	 */
+	@Override
 	GenericType clone();
 
 } // GenericType

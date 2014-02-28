@@ -117,6 +117,7 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public final boolean bindGenericType(List<TypeParameter> parameters,
 			List<? extends Type> types, TypedElement typedElement) {
 
@@ -150,6 +151,7 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public boolean bindGenericSuperType(List<TypeParameter> parameters,
 			List<? extends Type> types, Type subType) {
 
@@ -186,6 +188,7 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public abstract boolean isConformant(Type type);
 
 	/**
@@ -210,7 +213,7 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 	public boolean eIsSet(int featureID) {
 
 		switch (featureID) {
-		case PivotModelPackageImpl.GENERIC_TYPE__NAME:
+		case PivotModelPackage.GENERIC_TYPE__NAME:
 			return false;
 		}
 		return super.eIsSet(featureID);

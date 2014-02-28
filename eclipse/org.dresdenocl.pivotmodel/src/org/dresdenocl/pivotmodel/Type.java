@@ -384,6 +384,7 @@ public interface Type extends NamedElement, ConstrainableElement,
 	 * @see org.dresdenocl.pivotmodel.GenericElement#bindTypeParameter(java.util.List,
 	 *      java.util.List)
 	 */
+	@Override
 	Type bindTypeParameter(List<TypeParameter> parameters,
 			List<? extends Type> types);
 
@@ -392,6 +393,7 @@ public interface Type extends NamedElement, ConstrainableElement,
 	 * 
 	 * @see org.dresdenocl.pivotmodel.NamedElement#clone()
 	 */
+	@Override
 	Type clone();
 
 } // Type

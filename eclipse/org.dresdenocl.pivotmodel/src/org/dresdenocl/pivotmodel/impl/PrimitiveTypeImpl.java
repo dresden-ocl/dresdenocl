@@ -137,6 +137,7 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PrimitiveTypeKind getKind() {
 
 		return kind;
@@ -146,6 +147,7 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setKind(PrimitiveTypeKind newKind) {
 
 		PrimitiveTypeKind oldKind = kind;

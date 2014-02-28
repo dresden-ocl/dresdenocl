@@ -287,6 +287,7 @@ public interface Namespace extends NamedElement, GenericElement {
 	 * 
 	 * @see org.dresdenocl.pivotmodel.NamedElement#clone()
 	 */
+	@Override
 	Namespace clone();
 
 } // Namespace

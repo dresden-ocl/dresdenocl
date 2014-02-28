@@ -175,6 +175,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ParameterDirectionKind getKind() {
 
 		return kind;
@@ -184,6 +185,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setKind(ParameterDirectionKind newKind) {
 
 		ParameterDirectionKind oldKind = kind;
@@ -197,6 +199,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Operation getOperation() {
 
 		if (eContainerFeatureID() != PivotModelPackage.PARAMETER__OPERATION)
@@ -221,6 +224,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOperation(Operation newOperation) {
 
 		if (newOperation != eInternalContainer()
@@ -250,6 +254,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public Property asProperty() {
 
 		Property property;

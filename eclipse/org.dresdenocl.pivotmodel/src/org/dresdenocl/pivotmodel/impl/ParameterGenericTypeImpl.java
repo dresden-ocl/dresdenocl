@@ -112,6 +112,7 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TypeParameter getTypeParameter() {
 
 		return typeParameter;
@@ -121,6 +122,7 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTypeParameter(TypeParameter newTypeParameter) {
 
 		TypeParameter oldTypeParameter = typeParameter;

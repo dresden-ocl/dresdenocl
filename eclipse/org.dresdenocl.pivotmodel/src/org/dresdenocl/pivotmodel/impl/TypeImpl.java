@@ -180,6 +180,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public List<Type> getSuperType() {
 
 		return getSuperTypeGen();
@@ -204,6 +205,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<GenericType> getGenericSuperType() {
 
 		if (genericSuperType == null) {
@@ -222,6 +224,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public List<Operation> getOwnedOperation() {
 
 		return getOwnedOperationGen();
@@ -252,6 +255,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public List<Property> getOwnedProperty() {
 
 		return getOwnedPropertyGen();
@@ -282,6 +286,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public List<TypeParameter> getOwnedTypeParameter() {
 
 		return getOwnedTypeParameterGen();
@@ -309,6 +314,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Namespace getNamespace() {
 
 		if (eContainerFeatureID() != PivotModelPackage.TYPE__NAMESPACE)
@@ -333,6 +339,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setNamespace(Namespace newNamespace) {
 
 		if (newNamespace != eInternalContainer()
@@ -361,6 +368,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public boolean conformsTo(Type other) {
 
 		if (logger.isDebugEnabled()) {
@@ -400,6 +408,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public Type commonSuperType(Type other) {
 
 		if (logger.isDebugEnabled()) {
@@ -512,6 +521,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public List<Property> allProperties() {
 
 		List<Property> allProperties = new ArrayList<Property>();
@@ -558,6 +568,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public List<Operation> allOperations() {
 
 		List<Operation> allOperations = new ArrayList<Operation>();
@@ -578,6 +589,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public Property lookupProperty(String name) {
 
 		if (logger.isDebugEnabled()) {
@@ -611,6 +623,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public Operation lookupOperation(String name, List<Type> paramTypes) {
 
 		if (logger.isDebugEnabled()) {
@@ -645,6 +658,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public Type addProperty(Property property) {
 
 		if (logger.isDebugEnabled()) {
@@ -668,6 +682,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public Type addOperation(Operation operation) {
 
 		if (logger.isDebugEnabled()) {
@@ -691,6 +706,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public Type addSuperType(Type type) {
 
 		if (logger.isDebugEnabled()) {
@@ -714,6 +730,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public boolean removeProperty(Property property) {
 
 		if (logger.isDebugEnabled()) {
@@ -741,6 +758,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public boolean removeOperation(Operation operation) {
 
 		if (logger.isDebugEnabled()) {
@@ -768,6 +786,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public List<Property> getIDProperties() {
 
 		List<Property> props = new ArrayList<Property>();
@@ -783,6 +802,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public Type addTypeParameter(TypeParameter typeParameter) {
 
 		if (logger.isDebugEnabled()) {
@@ -811,6 +831,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public Type bindTypeParameter(List<TypeParameter> parameters,
 			List<? extends Type> types) {
 

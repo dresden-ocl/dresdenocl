@@ -109,6 +109,7 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isStatic() {
 
 		return static_;
@@ -118,6 +119,7 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStatic(boolean newStatic) {
 
 		boolean oldStatic = static_;
@@ -131,6 +133,7 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Constraint getSemantics() {
 
 		if (semantics != null && semantics.eIsProxy()) {
@@ -179,6 +182,7 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSemantics(Constraint newSemantics) {
 
 		if (newSemantics != semantics) {

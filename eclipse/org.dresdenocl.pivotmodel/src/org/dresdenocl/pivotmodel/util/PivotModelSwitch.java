@@ -36,7 +36,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 
-import org.dresdenocl.pivotmodel.*;
 import org.dresdenocl.pivotmodel.AssociationProperty;
 import org.dresdenocl.pivotmodel.ComplexGenericType;
 import org.dresdenocl.pivotmodel.ConstrainableElement;
@@ -547,7 +546,6 @@ public class PivotModelSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	@SuppressWarnings("unused")
 	public T caseConstraint(Constraint object) {
 
 		return null;

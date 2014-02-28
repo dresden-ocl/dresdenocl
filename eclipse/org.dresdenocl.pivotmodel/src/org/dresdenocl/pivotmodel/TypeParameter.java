@@ -82,6 +82,7 @@ public interface TypeParameter extends NamedElement {
 	 * 
 	 * @see org.dresdenocl.pivotmodel.NamedElement#clone()
 	 */
+	@Override
 	TypeParameter clone();
 
 } // TypeParameter

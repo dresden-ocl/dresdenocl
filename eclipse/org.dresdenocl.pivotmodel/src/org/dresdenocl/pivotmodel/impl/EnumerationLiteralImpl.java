@@ -95,6 +95,7 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Enumeration getEnumeration() {
 
 		if (eContainerFeatureID() != PivotModelPackage.ENUMERATION_LITERAL__ENUMERATION)
@@ -130,6 +131,7 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEnumeration(Enumeration newEnumeration) {
 
 		if (newEnumeration != eInternalContainer()

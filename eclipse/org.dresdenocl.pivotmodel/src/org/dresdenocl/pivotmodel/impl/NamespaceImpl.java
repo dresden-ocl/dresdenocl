@@ -162,6 +162,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public List<TypeParameter> getOwnedTypeParameter() {
 
 		return getOwnedTypeParameterGen();
@@ -193,6 +194,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public List<Constraint> getOwnedRule() {
 
 		return getOwnedRuleGen();
@@ -222,6 +224,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public List<Type> getOwnedType() {
 
 		return getOwnedTypeGen();
@@ -251,6 +254,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public List<Namespace> getNestedNamespace() {
 
 		return getNestedNamespaceGen();
@@ -277,6 +281,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Namespace getNestingNamespace() {
 
 		if (eContainerFeatureID() != PivotModelPackage.NAMESPACE__NESTING_NAMESPACE)
@@ -301,6 +306,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setNestingNamespace(Namespace newNestingNamespace) {
 
 		if (newNestingNamespace != eInternalContainer()
@@ -331,6 +337,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public Namespace addType(Type type) {
 
 		if (logger.isDebugEnabled()) {
@@ -352,6 +359,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public Namespace addRule(Constraint rule) {
 
 		if (logger.isDebugEnabled()) {
@@ -373,6 +381,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public Namespace addNestedNamespace(Namespace namespace) {
 
 		if (logger.isDebugEnabled()) {
@@ -396,6 +405,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public List<Constraint> getOwnedAndNestedRules() {
 
 		List<Constraint> result;
@@ -417,6 +427,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public Type lookupType(String name) {
 
 		if (logger.isDebugEnabled()) {
@@ -444,6 +455,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public Namespace lookupNamespace(String name) {
 
 		if (logger.isDebugEnabled()) {
@@ -471,6 +483,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public boolean removeOwnedAndNestedRules() {
 
 		boolean result;
@@ -520,6 +533,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public boolean removeOwnedAndNestedRules(List<Constraint> constraints) {
 
 		boolean result;
@@ -577,6 +591,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public LinkedList<NamedElement> lookupPathName(List<String> names) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("lookupPathName(name=" + names + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -633,6 +648,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public Namespace addTypeParameter(TypeParameter typeParameter) {
 
 		if (logger.isDebugEnabled()) {
@@ -654,6 +670,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NamedElement bindTypeParameter(List<TypeParameter> parameters,
 			List<? extends Type> types) {
 

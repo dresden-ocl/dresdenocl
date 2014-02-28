@@ -82,6 +82,7 @@ public interface TypeArgument extends TypedElement {
 	 * 
 	 * @see org.dresdenocl.pivotmodel.NamedElement#clone()
 	 */
+	@Override
 	TypeArgument clone();
 
 } // TypeArgument
