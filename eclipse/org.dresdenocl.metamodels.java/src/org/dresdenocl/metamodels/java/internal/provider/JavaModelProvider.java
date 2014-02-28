@@ -49,11 +49,12 @@ public class JavaModelProvider extends AbstractModelProvider implements
 		IModelProvider {
 
 	/** The {@link Logger} for this class. */
-	protected static final Logger LOGGER =
-			JavaMetaModelPlugin.getLogger(JavaModelProvider.class);
+	protected static final Logger LOGGER = JavaMetaModelPlugin
+			.getLogger(JavaModelProvider.class);
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.dresdenocl.modelbus.IModelProvider#getModel(java.net.URL)
 	 */
 	public IModel getModel(URL modelURL) throws ModelAccessException {
@@ -78,9 +79,9 @@ public class JavaModelProvider extends AbstractModelProvider implements
 		if (!modelFile.exists()) {
 			String msg;
 
-			msg =
-					NLS.bind(JavaMetaModelMessages.JavaMetaModel_FileDoesNotExist,
-							modelURL);
+			msg = NLS.bind(
+					JavaMetaModelMessages.JavaMetaModel_FileDoesNotExist,
+					modelURL);
 
 			throw new ModelAccessException(msg);
 		}
@@ -112,8 +113,8 @@ public class JavaModelProvider extends AbstractModelProvider implements
 		if (result == null) {
 			String msg;
 
-			msg =
-					NLS.bind(JavaMetaModelMessages.JavaMetaModel_ClassNotFound, modelURL);
+			msg = NLS.bind(JavaMetaModelMessages.JavaMetaModel_ClassNotFound,
+					modelURL);
 
 			throw new ModelAccessException(msg);
 		}
@@ -134,10 +135,10 @@ public class JavaModelProvider extends AbstractModelProvider implements
 	 * </p>
 	 * 
 	 * @param modelClass
-	 *          The {@link Class} which shall be loaded as {@link IModel}.
+	 *            The {@link Class} which shall be loaded as {@link IModel}.
 	 * @return The {@link IModel} created from the given {@link Class}.
 	 * @throws ModelAccessException
-	 *           Thrown, if an error during {@link IModel} loading occurs.
+	 *             Thrown, if an error during {@link IModel} loading occurs.
 	 */
 	public IModel getModel(Class<?> modelClass) throws ModelAccessException {
 
@@ -155,9 +156,8 @@ public class JavaModelProvider extends AbstractModelProvider implements
 
 		IModel result;
 
-		result =
-				new JavaModel(modelClass, ModelBusPlugin.getMetamodelRegistry()
-						.getMetamodel(JavaMetaModelPlugin.ID));
+		result = new JavaModel(modelClass, ModelBusPlugin
+				.getMetamodelRegistry().getMetamodel(JavaMetaModelPlugin.ID));
 
 		/* Probably debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -170,11 +170,11 @@ public class JavaModelProvider extends AbstractModelProvider implements
 
 	/**
 	 * <p>
-	 * A helper method that computes the URLs of the folders which are parents of
-	 * a given {@link File}.
+	 * A helper method that computes the URLs of the folders which are parents
+	 * of a given {@link File}.
 	 * 
 	 * @param modelUrl
-	 *          The {@link URL} for which the folder URL shall be computed.
+	 *            The {@link URL} for which the folder URL shall be computed.
 	 * @return The computed Folder URLs.
 	 */
 	private URL[] computeFolderURLs(URL modelUrl) {
@@ -222,7 +222,7 @@ public class JavaModelProvider extends AbstractModelProvider implements
 	 * </p>
 	 * 
 	 * @param aURL
-	 *          The {@link URL}
+	 *            The {@link URL}
 	 * @return The {@link List} of possible {@link Class} names.
 	 */
 	private List<String> computePossibleClassNames(URL aURL) {
@@ -265,19 +265,20 @@ public class JavaModelProvider extends AbstractModelProvider implements
 
 	/**
 	 * <p>
-	 * A helper method that tries to find a {@link Class} that is described by the
-	 * given URL.
+	 * A helper method that tries to find a {@link Class} that is described by
+	 * the given URL.
 	 * </p>
 	 * 
 	 * @param modelURL
-	 *          The {@link URL} that shall be loaded as a {@link Class}.
+	 *            The {@link URL} that shall be loaded as a {@link Class}.
 	 * @param jarUrls
-	 *          A {@link List} of {@link URL}s leading to additional JAR archives
-	 *          the given {@link Class} (by its {@link URL}) references.
+	 *            A {@link List} of {@link URL}s leading to additional JAR
+	 *            archives the given {@link Class} (by its {@link URL})
+	 *            references.
 	 * @return The loaded {@link Class}.
 	 * @throws ModelAccessException
-	 *           Thrown, if the given {@link File} cannot be accessed as Java
-	 *           {@link IModel}.
+	 *             Thrown, if the given {@link File} cannot be accessed as Java
+	 *             {@link IModel}.
 	 */
 	private Class<?> loadClassFromUrl(URL modelURL, List<URL> jarUrls)
 			throws ModelAccessException {
@@ -326,12 +327,11 @@ public class JavaModelProvider extends AbstractModelProvider implements
 				urls.addAll(jarUrls);
 
 				/*
-				 * The parent class loader from the model bus plug-in is required to
-				 * find types from EMF Ecore like EObject.
+				 * The parent class loader from the model bus plug-in is
+				 * required to find types from EMF Ecore like EObject.
 				 */
-				aClassLoader =
-						new URLClassLoader(urls.toArray(new URL[0]), ModelPlugin.class
-								.getClassLoader());
+				aClassLoader = new URLClassLoader(urls.toArray(new URL[0]),
+						ModelPlugin.class.getClassLoader());
 
 				result = Class.forName(aClassName, true, aClassLoader);
 
@@ -371,11 +371,11 @@ public class JavaModelProvider extends AbstractModelProvider implements
 	 * </p>
 	 * 
 	 * @param modelFile
-	 *          The {@link File} containing the {@link IModel} configuration.
+	 *            The {@link File} containing the {@link IModel} configuration.
 	 * @return The loaded model main {@link Class}.
 	 * @throws ModelAccessException
-	 *           Thrown, if the given {@link File} cannot be accessed as Java
-	 *           {@link IModel}.
+	 *             Thrown, if the given {@link File} cannot be accessed as Java
+	 *             {@link IModel}.
 	 */
 	private Class<?> loadClassWithJarsFromUrl(File modelFile)
 			throws ModelAccessException {
@@ -383,11 +383,11 @@ public class JavaModelProvider extends AbstractModelProvider implements
 		Class<?> result;
 		result = null;
 
+		BufferedReader configFileReader = null;
 		try {
 			List<URL> urls;
 			urls = new ArrayList<URL>();
 
-			BufferedReader configFileReader;
 			configFileReader = new BufferedReader(new FileReader(modelFile));
 
 			/* Read the expected code from file. */
@@ -397,7 +397,8 @@ public class JavaModelProvider extends AbstractModelProvider implements
 				relativeName = configFileReader.readLine();
 
 				URL aURL;
-				aURL = new URL("file:" + modelFile.getParent() + "/" + relativeName);
+				aURL = new URL("file:" + modelFile.getParent() + "/"
+						+ relativeName);
 				urls.add(aURL);
 			}
 			// end while.
@@ -422,6 +423,16 @@ public class JavaModelProvider extends AbstractModelProvider implements
 					+ "' could not be opened.");
 		}
 		// end catch.
+		finally {
+			if (configFileReader != null) {
+				try {
+					configFileReader.close();
+				} catch (IOException e) {
+					throw new ModelAccessException("The given file '"
+							+ modelFile + "' could not be read.");
+				}
+			}
+		}
 
 		return result;
 	}
