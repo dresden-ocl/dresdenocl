@@ -367,7 +367,6 @@ public class PivotModelSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	@SuppressWarnings("unused")
 	public T caseEnumeration(Enumeration object) {
 
 		return null;
@@ -383,7 +382,6 @@ public class PivotModelSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	@SuppressWarnings("unused")
 	public T caseNamedElement(NamedElement object) {
 
 		return null;
@@ -399,7 +397,6 @@ public class PivotModelSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	@SuppressWarnings("unused")
 	public T caseOperation(Operation object) {
 
 		return null;
@@ -415,7 +412,6 @@ public class PivotModelSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	@SuppressWarnings("unused")
 	public T caseNamespace(Namespace object) {
 
 		return null;
@@ -434,7 +430,6 @@ public class PivotModelSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	@SuppressWarnings("unused")
 	public T caseType(Type object) {
 
 		return null;
@@ -450,7 +445,6 @@ public class PivotModelSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	@SuppressWarnings("unused")
 	public T caseParameter(Parameter object) {
 
 		return null;
@@ -466,7 +460,6 @@ public class PivotModelSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	@SuppressWarnings("unused")
 	public T caseEnumerationLiteral(EnumerationLiteral object) {
 
 		return null;
@@ -482,7 +475,6 @@ public class PivotModelSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	@SuppressWarnings("unused")
 	public T caseProperty(Property object) {
 
 		return null;
@@ -498,7 +490,6 @@ public class PivotModelSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	@SuppressWarnings("unused")
 	public T caseTypedElement(TypedElement object) {
 
 		return null;
@@ -514,7 +505,6 @@ public class PivotModelSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	@SuppressWarnings("unused")
 	public T casePrimitiveType(PrimitiveType object) {
 
 		return null;
@@ -530,7 +520,6 @@ public class PivotModelSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	@SuppressWarnings("unused")
 	public T caseFeature(Feature object) {
 
 		return null;
@@ -561,7 +550,6 @@ public class PivotModelSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	@SuppressWarnings("unused")
 	public T caseExpression(Expression object) {
 
 		return null;
@@ -592,7 +580,6 @@ public class PivotModelSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	@SuppressWarnings("unused")
 	public T caseConstrainableElement(ConstrainableElement object) {
 
 		return null;
@@ -699,7 +686,6 @@ public class PivotModelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	@Override
-	@SuppressWarnings("unused")
 	public T defaultCase(EObject object) {
 
 		return null;

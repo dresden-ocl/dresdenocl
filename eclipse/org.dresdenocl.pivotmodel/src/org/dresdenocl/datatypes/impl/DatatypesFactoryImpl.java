@@ -149,7 +149,6 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	 * 
 	 * @generated NOT
 	 */
-	@SuppressWarnings("unused")
 	public String createUnlimitedNaturalFromString(EDataType eDataType,
 			String initialValue) {
 
@@ -161,7 +160,6 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	 * 
 	 * @generated NOT
 	 */
-	@SuppressWarnings("unused")
 	public String convertUnlimitedNaturalToString(EDataType eDataType,
 			Object instanceValue) {
 
@@ -183,7 +181,6 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	 * 
 	 * @generated NOT
 	 */
-	@SuppressWarnings("unused")
 	public Integer createIntegerFromString(EDataType eDataType,
 			String initialValue) {
 
@@ -195,7 +192,6 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	 * 
 	 * @generated NOT
 	 */
-	@SuppressWarnings("unused")
 	public String convertIntegerToString(EDataType eDataType, Object instanceValue) {
 
 		return instanceValue == null ? null : instanceValue.toString();
@@ -206,7 +202,6 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	 * 
 	 * @generated NOT
 	 */
-	@SuppressWarnings("unused")
 	public Boolean createBooleanFromString(EDataType eDataType,
 			String initialValue) {
 
@@ -218,7 +213,6 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	 * 
 	 * @generated NOT
 	 */
-	@SuppressWarnings("unused")
 	public String convertBooleanToString(EDataType eDataType, Object instanceValue) {
 
 		return instanceValue == null ? null : instanceValue.toString();
@@ -229,7 +223,6 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	 * 
 	 * @generated NOT
 	 */
-	@SuppressWarnings("unused")
 	public String createStringFromString(EDataType eDataType, String initialValue) {
 
 		return initialValue;
@@ -240,7 +233,6 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	 * 
 	 * @generated NOT
 	 */
-	@SuppressWarnings("unused")
 	public String convertStringToString(EDataType eDataType, Object instanceValue) {
 
 		return (String) instanceValue;
@@ -251,7 +243,6 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	 * 
 	 * @generated NOT
 	 */
-	@SuppressWarnings("unused")
 	public Float createRealFromString(EDataType eDataType, String initialValue) {
 
 		return initialValue == null ? null : Float.valueOf(initialValue);
@@ -262,7 +253,6 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	 * 
 	 * @generated NOT
 	 */
-	@SuppressWarnings("unused")
 	public String convertRealToString(EDataType eDataType, Object instanceValue) {
 
 		return instanceValue == null ? null : instanceValue.toString();
