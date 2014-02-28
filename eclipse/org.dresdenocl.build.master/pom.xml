@@ -95,6 +95,7 @@
 		<module>../org.dresdenocl.examples.ui</module>
 		<module>../org.dresdenocl.examples.uml</module>
 		<module>../org.dresdenocl.examples.university</module>
+		<module>../org.dresdenocl.examples.royalandloyal</module>
 
 		<module>../../tests/org.dresdenocl.debug.test</module>
 		<module>../../tests/org.dresdenocl.essentialocl.tests</module>
@@ -134,14 +135,6 @@
 		<project.build.sourceEncoding>CP1252</project.build.sourceEncoding>
 		<maven.test.failure.ignore>true</maven.test.failure.ignore>
 	</properties>
-
-	<dependencies>
-		<dependency>
-			<groupId>org.scala-lang</groupId>
-			<artifactId>scala-library</artifactId>
-			<version>${scala.version}</version>
-		</dependency>
-	</dependencies>
 
 	<build>
 		<plugins>
@@ -214,16 +207,19 @@
 			</plugin>
 
 			<plugin>
-				<groupId>org.scala-tools</groupId>
-				<artifactId>maven-scala-plugin</artifactId>
+				<groupId>net.alchim31.maven</groupId>
+				<artifactId>scala-maven-plugin</artifactId>
 				<configuration>
 					<args>
 						<arg>-encoding</arg>
 						<arg>Cp1252</arg>
 					</args>
+					<scalaVersion>${scala.version}</scalaVersion>
 				</configuration>
 				<executions>
 					<execution>
+						<id>scala-compile-first</id>
+						<phase>process-resources</phase>
 						<goals>
 							<goal>add-source</goal>
 							<goal>compile</goal>
@@ -231,20 +227,9 @@
 					</execution>
 				</executions>
 			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-report-plugin</artifactId>
-				<version>2.6</version>
-				<executions>
-					<execution>
-						<phase>test</phase>
-						<goals>
-							<goal>report-only</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-surefire-report-plugin</artifactId> 
+				<version>2.6</version> <executions> <execution> <phase>test</phase> <goals> 
+				<goal>report-only</goal> </goals> </execution> </executions> </plugin> -->
 		</plugins>
 
 		<pluginManagement>
@@ -258,8 +243,8 @@
 							<pluginExecutions>
 								<pluginExecution>
 									<pluginExecutionFilter>
-										<groupId>org.scala-tools</groupId>
-										<artifactId>maven-scala-plugin</artifactId>
+										<groupId>net.alchim31.maven</groupId>
+										<artifactId>scala-maven-plugin</artifactId>
 										<versionRange>[2.15.0,)</versionRange>
 										<goals>
 											<goal>add-source</goal>
@@ -277,37 +262,17 @@
 				</plugin>
 
 				<plugin>
-					<groupId>org.scala-tools</groupId>
-					<artifactId>maven-scala-plugin</artifactId>
-					<version>2.15.0</version>
+					<groupId>net.alchim31.maven</groupId>
+					<artifactId>scala-maven-plugin</artifactId>
+					<version>3.1.6</version>
 				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>2.0.2</version>
-				</plugin>
-
 			</plugins>
 		</pluginManagement>
 	</build>
-
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-report-plugin</artifactId>
-				<version>2.6</version>
-				<reportSets>
-					<reportSet>
-						<reports>
-							<report>report-only</report>
-						</reports>
-					</reportSet>
-				</reportSets>
-			</plugin>
-		</plugins>
-	</reporting>
-
+	<!-- <reporting> <plugins> <plugin> <groupId>org.apache.maven.plugins</groupId> 
+		<artifactId>maven-surefire-report-plugin</artifactId> <version>2.6</version> 
+		<reportSets> <reportSet> <reports> <report>report-only</report> </reports> 
+		</reportSet> </reportSets> </plugin> </plugins> </reporting> -->
 	<repositories>
 		<repository>
 			<id>kepler</id>
