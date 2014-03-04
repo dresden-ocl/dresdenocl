@@ -17,6 +17,8 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Map.Entry;
 import java.util.Properties;
@@ -36,7 +38,7 @@ import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.resource.UMLResource;
 import org.eclipse.xsd.XSDPackage;
 import org.junit.BeforeClass;
-
+import org.osgi.framework.Bundle;
 import org.dresdenocl.logging.LoggingPlugin;
 import org.dresdenocl.essentialocl.types.impl.TypesPackageImpl;
 import org.dresdenocl.language.ocl.OclPackage;
@@ -79,6 +81,7 @@ import org.dresdenocl.tools.transformation.pivot2sql.impl.Pivot2CwmImpl;
 import org.dresdenocl.tools.transformation.pivot2sql.impl.Pivot2Ddl;
 import org.dresdenocl.tools.transformation.pivot2sql.impl.Pivot2DdlAndMappedModel;
 import org.dresdenocl.tools.transformation.pivot2sql.impl.Pivot2MappedModelImpl;
+
 import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
 
 /**
@@ -101,7 +104,6 @@ public class AbstractDresdenOclTest {
 
 	@BeforeClass
 	public static void setUp() throws Exception {
-
 		/* Initializes Dresden OCL when tests were started headless. */
 		if (!Platform.isRunning() && !isInitialized) {
 
@@ -553,16 +555,26 @@ public class AbstractDresdenOclTest {
 	 */
 	public static File getFile(String path, String bundleId) throws IOException {
 
-		URL fileLocation;
-		File file;
+		File file = null;
 
 		if (Platform.isRunning()) {
-			fileLocation = Platform.getBundle(bundleId).getResource(path);
-			fileLocation = FileLocator.resolve(fileLocation);
-			file = new File(fileLocation.getFile());
-		}
-
-		else {
+			Bundle bundle = Platform.getBundle(bundleId);
+			if (bundle != null) {
+				try {
+					URL url = bundle.getEntry(path);
+					file = new File(FileLocator.resolve(url).toURI());
+				} catch (MalformedURLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (URISyntaxException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		} else {
 			File testLocation = new File(
 					System.getProperty("DRESDENOCL_LOCATION_TESTS") + bundleId);
 			File eclipseLocation = new File(
