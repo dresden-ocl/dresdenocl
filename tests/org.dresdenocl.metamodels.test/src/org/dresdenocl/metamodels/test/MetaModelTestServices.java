@@ -14,13 +14,14 @@
 package org.dresdenocl.metamodels.test;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.eclipse.core.runtime.Platform;
-import org.osgi.framework.Bundle;
 
 import org.dresdenocl.facade.Ocl2ForEclipseFacade;
 import org.dresdenocl.model.IModel;
@@ -35,6 +36,9 @@ import org.dresdenocl.pivotmodel.PrimitiveType;
 import org.dresdenocl.pivotmodel.PrimitiveTypeKind;
 import org.dresdenocl.pivotmodel.Property;
 import org.dresdenocl.pivotmodel.Type;
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Platform;
+import org.osgi.framework.Bundle;
 
 /**
  * <p>
@@ -230,7 +234,7 @@ public final class MetaModelTestServices {
 
 	/** The name of the {@link Property} <code>property2</code>. */
 	public static final String PROPERTY_NAME_PROPERTY2 = "property2";
-	
+
 	/** The name of the {@link Property} <code>nonmultipleProperty</code>. */
 	public static final String PROPERTY_NAME_NONMULTIPLEPROPERTY = "nonmultipleProperty";
 
@@ -283,7 +287,7 @@ public final class MetaModelTestServices {
 	/** The name of the {@link Property} <code>nonmultipleAssociationEnd</code>. */
 	public static final String PROPERTY_QUALIFIED_NAME_NONMULTIPLEASSOCIATIONEND = TYPE_QUALIFIED_NAME_TESTPROPERTYCLASS
 			+ "::" + PROPERTY_NAME_NONMULTIPLEASSOCIATONEND;
-	
+
 	/**
 	 * The name of the {@link Property}
 	 * <code>unorderedMultipleAssociationEnd</code>.
@@ -292,7 +296,6 @@ public final class MetaModelTestServices {
 
 	/** The name of the {@link Property} <code>unorderedMultipleProperty</code>. */
 	public static final String PROPERTY_NAME_NONIDENTIFIER = "nonidentifierProperty";
-	
 
 	/** The name of the {@link Parameter} <code>in1</code>. */
 	public static final String PARAMETER_NAME_INPUTPARAMETER1 = "in1";
@@ -335,7 +338,7 @@ public final class MetaModelTestServices {
 	 * Indicates whether or not an adapted metamodel supports operations.
 	 */
 	public static boolean supportsNoOperations = false;
-	
+
 	/**
 	 * Indicates whether or not an adapted metamodel supports inheritance.
 	 */
@@ -455,37 +458,49 @@ public final class MetaModelTestServices {
 
 		IModel result;
 
-		String bundleDirectory;
-		File modelFile;
+		File modelFile = null;
 
 		/* Get the bundle location for the model files. */
-		Bundle bundle = Platform.getBundle(this.myTestModelBundleId);
-		if (bundle != null) {
-			bundleDirectory = Platform.getBundle(this.myTestModelBundleId)
-					.getLocation();
+		Bundle bundle = Platform.getBundle(myTestModelBundleId);
 
-			/* Remove the 'reference:file:' from the beginning. */
-			bundleDirectory = bundleDirectory.substring(15);
-			modelFile = new File(bundleDirectory + myTestModelPath);
+		if (bundle != null) {
+			try {
+				URL url = bundle.getEntry(myTestModelPath);
+				modelFile = new File(FileLocator.resolve(url).toURI());
+			} catch (MalformedURLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (URISyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		/* If started head less, try to find the bundle's location anyway. */
 		else {
 			File testLocation = new File(
-					System.getProperty("DRESDENOCL_LOCATION_TESTS") + myTestModelBundleId);
-			File eclipseLocation = new File(System.getProperty("DRESDENOCL_LOCATION_ECLIPSE") + myTestModelBundleId);
-			
+					System.getProperty("DRESDENOCL_LOCATION_TESTS")
+							+ myTestModelBundleId);
+			File eclipseLocation = new File(
+					System.getProperty("DRESDENOCL_LOCATION_ECLIPSE")
+							+ myTestModelBundleId);
+
 			File bundleFile = null;
 
-			
-			if (testLocation != null && testLocation.exists() && testLocation.isDirectory()) {
+			if (testLocation != null && testLocation.exists()
+					&& testLocation.isDirectory()) {
 				bundleFile = testLocation;
-			} else if (eclipseLocation != null && eclipseLocation.exists() && eclipseLocation.isDirectory()) {
+			} else if (eclipseLocation != null && eclipseLocation.exists()
+					&& eclipseLocation.isDirectory()) {
 				bundleFile = eclipseLocation;
 			}
 
 			if (bundleFile != null)
-				modelFile = new File(bundleFile + File.separator + myTestModelPath);
+				modelFile = new File(bundleFile + File.separator
+						+ myTestModelPath);
 
 			else
 				throw new RuntimeException("Bundle or directory '"
