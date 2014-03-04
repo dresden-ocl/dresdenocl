@@ -214,6 +214,8 @@ public class TestPerformer {
 		} catch (IOException e) {
 			throw new FileNotFoundException(e.getMessage());
 		}
+//		URI uri = URI
+//				.createPlatformResourceURI(oclFile.getAbsolutePath(), true);
 		URI uri = URI.createFileURI(oclFile.getAbsolutePath());
 
 		/* Not replaced by facade method to test the different exception types. */

@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.junit.Test;
-
 import org.dresdenocl.essentialocl.EssentialOclPlugin;
 import org.dresdenocl.language.ocl.ClassifierContextDeclarationCS;
 import org.dresdenocl.language.ocl.ContextDeclarationCS;
@@ -33,6 +32,7 @@ import org.dresdenocl.model.ModelAccessException;
 import org.dresdenocl.ocl2parser.test.constrainttypes.AllConstraintTypeTests;
 import org.dresdenocl.ocl2parser.test.exception.MetaModelNotFoundException;
 import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 
 public class TestAttributeAccess {
 
@@ -164,17 +164,18 @@ public class TestAttributeAccess {
 				AllConstraintTypeTests.MODEL_BUNDLE,
 				AllConstraintTypeTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
-
-		/* Try to parse the constraint file. */
-		String fileDirectory;
-		fileDirectory = Activator.getDefault().getBundle().getLocation();
-
-		/* Remove the 'reference:file:' from the beginning. */
-		fileDirectory = fileDirectory.substring(15);
+		
+//		/* Try to parse the constraint file. */
+//		String fileDirectory;
+//		fileDirectory = Activator.getDefault().getBundle().getLocation();
+//
+//		/* Remove the 'reference:file:' from the beginning. */
+//		fileDirectory = fileDirectory.substring(15);
 
 		File oclFile;
-		oclFile = new File(fileDirectory + TestPerformer.OCL_FILE_DIRECTORY
-				+ oclFileName);
+		oclFile = AbstractDresdenOclTest.getFile(TestPerformer.OCL_FILE_DIRECTORY + oclFileName, Activator.PLUGIN_ID);
+//		oclFile = new File(fileDirectory + TestPerformer.OCL_FILE_DIRECTORY
+//				+ oclFileName);
 
 		/* Check if the file exists at all. */
 		if (!oclFile.exists()) {
@@ -184,6 +185,7 @@ public class TestAttributeAccess {
 		}
 		// no else.
 
+//		URI uri = URI.createPlatformPluginURI(oclFile.getAbsolutePath(), true);
 		URI uri = URI.createFileURI(oclFile.getAbsolutePath());
 		ResourceSet rs = new ResourceSetImpl();
 		OclResource resource = new OclResource(uri);
