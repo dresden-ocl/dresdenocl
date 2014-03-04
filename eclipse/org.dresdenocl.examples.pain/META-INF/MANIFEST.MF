@@ -12,3 +12,4 @@ Require-Bundle: org.dresdenocl.facade,
 Bundle-Activator: org.dresdenocl.examples.pain.PainExamplePlugin
 Bundle-ActivationPolicy: lazy
 Eclipse-ExtensibleAPI: true
+Export-Package: org.dresdenocl.examples.pain

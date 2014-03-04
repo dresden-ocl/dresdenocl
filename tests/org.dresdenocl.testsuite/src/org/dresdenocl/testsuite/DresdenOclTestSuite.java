@@ -28,7 +28,7 @@ import org.dresdenocl.modelinstancetype.xml.test.AllXmlInstanceTests;
 import org.dresdenocl.ocl2parser.test.AllOCL2ParserTests;
 import org.dresdenocl.standardlibrary.java.test.tests.AllStandardLibraryTests;
 import org.dresdenocl.tools.codegen.declarativ.ocl2sql.test.FastOcl2SqlTests;
-//import org.dresdenocl.tools.codegen.ocl2java.test.AllOcl2JavaTests;
+import org.dresdenocl.tools.codegen.ocl2java.test.AllOcl2JavaTests;
 //import org.dresdenocl.tools.codegen.ocl2java.test.aspectj.AllAspectJTests;
 import org.dresdenocl.tools.template.test.AllTestsTemplate;
 import org.dresdenocl.tools.transformation.pivot2sql.test.AllTestsPivot2Sql;
@@ -72,8 +72,8 @@ AllEcoreMetaModelTests.class, TestJavaMetaModel.class,
 		AllTestsTemplate.class,
 
 		/* OCL2Java tests: */
-//		AllOcl2JavaTests.class, AllAspectJTests.class,
-//		AllRoyalAndLoyalAspectJTests.class,
+		AllOcl2JavaTests.class,// AllAspectJTests.class,
+		//AllRoyalAndLoyalAspectJTests.class,
 
 		/* OCL2SQL tests: */
 		AllTestsTransformation.class, AllTestsPivot2Sql.class,
