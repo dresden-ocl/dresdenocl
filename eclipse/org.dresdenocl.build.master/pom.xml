@@ -97,7 +97,7 @@
 		<module>../org.dresdenocl.examples.university</module>
 		<module>../org.dresdenocl.examples.royalandloyal</module>
 
-		<module>../../tests/org.dresdenocl.debug.test</module>
+		<!-- <module>../../tests/org.dresdenocl.debug.test</module> -->
 		<module>../../tests/org.dresdenocl.essentialocl.tests</module>
 		<module>../../tests/org.dresdenocl.examples.pain.tests</module>
 		<module>../../tests/org.dresdenocl.interpreter.test</module>
@@ -123,7 +123,7 @@
 		<module>../../tests/org.dresdenocl.tools.template.test</module>
 		<module>../../tests/org.dresdenocl.tools.transformation.pivot2sql.test</module>
 		<module>../../tests/org.dresdenocl.tools.transformation.test</module>
-		<module>../../tests/org.dresdenocl.tracer.test</module>
+		<!-- <module>../../tests/org.dresdenocl.tracer.test</module> -->
 	</modules>
 
 	<properties>
@@ -227,6 +227,7 @@
 					</execution>
 				</executions>
 			</plugin>
+
 			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-surefire-report-plugin</artifactId> 
 				<version>2.6</version> <executions> <execution> <phase>test</phase> <goals> 
 				<goal>report-only</goal> </goals> </execution> </executions> </plugin> -->
@@ -269,10 +270,12 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+
 	<!-- <reporting> <plugins> <plugin> <groupId>org.apache.maven.plugins</groupId> 
 		<artifactId>maven-surefire-report-plugin</artifactId> <version>2.6</version> 
-		<reportSets> <reportSet> <reports> <report>report-only</report> </reports> 
-		</reportSet> </reportSets> </plugin> </plugins> </reporting> -->
+		<configuration> <aggregate>true</aggregate> </configuration> <reportSets> 
+		<reportSet> <reports> <report>report-only</report> </reports> </reportSet> 
+		</reportSets> </plugin> </plugins> </reporting> -->
 	<repositories>
 		<repository>
 			<id>kepler</id>

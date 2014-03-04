@@ -1,10 +1,14 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Tests for the Pain example
-Bundle-SymbolicName: org.dresdenocl.examples.pain.tests
+Bundle-SymbolicName: org.dresdenocl.examples.pain.tests;singleton:=true
 Bundle-Version: 3.3.0.qualifier
-Fragment-Host: org.dresdenocl.examples.pain;bundle-version="3.1.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.dresdenocl.examples.pain.test;uses:="org.dresdenocl.testsuite._abstract,org.dresdenocl.interpreter"
-Require-Bundle: org.dresdenocl.testsuite.abstract;bundle-version="3.1.0",
- org.junit
+Require-Bundle: org.dresdenocl.testsuite.abstract,
+ org.junit,
+ org.dresdenocl.examples.pain,
+ org.dresdenocl.pivotmodel,
+ org.dresdenocl.facade,
+ org.dresdenocl.modelinstancetype.xml,
+ org.dresdenocl.metamodels.xsd

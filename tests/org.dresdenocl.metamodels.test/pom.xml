@@ -11,6 +11,5 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
   </parent>
 
   <artifactId>org.dresdenocl.metamodels.test</artifactId>
-  <packaging>eclipse-test-plugin</packaging>
-
-</project> 
+  <packaging>eclipse-plugin</packaging>
+ </project> 
