@@ -22,6 +22,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,7 +38,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
-
+import org.osgi.framework.Bundle;
 import org.dresdenocl.essentialocl.EssentialOclPlugin;
 import org.dresdenocl.essentialocl.expressions.BooleanLiteralExp;
 import org.dresdenocl.essentialocl.expressions.CollectionItem;
@@ -200,8 +202,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.dresdenocl.tools.codegen.IOcl2Code#setSettings(org.dresdenocl
+	 * @see org.dresdenocl.tools.codegen.IOcl2Code#setSettings(org.dresdenocl
 	 * .pivot.tools.codegen.IOcl2CodeSettings)
 	 */
 	public void setSettings(IOcl2JavaSettings settings) {
@@ -215,8 +216,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.dresdenocl.ocl2java.IOcl2Code#transformFragmentCode(java.util
+	 * @see org.dresdenocl.ocl2java.IOcl2Code#transformFragmentCode(java.util
 	 * .List)
 	 */
 	public List<String> transformFragmentCode(List<Constraint> constraints)
@@ -258,8 +258,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.dresdenocl.ocl2java.IOcl2Code#transformInstrumentationCode
+	 * @see org.dresdenocl.ocl2java.IOcl2Code#transformInstrumentationCode
 	 * (java.util.List)
 	 */
 	public List<String> transformInstrumentationCode(
@@ -294,8 +293,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
+	 * @see org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseBooleanLiteralExp
 	 * (org.dresdenocl.essentialocl.expressions.BooleanLiteralExp)
 	 */
@@ -327,8 +325,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
+	 * @see org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseCollectionLiteralExp
 	 * (org.dresdenocl.essentialocl.expressions.CollectionLiteralExp)
 	 */
@@ -432,8 +429,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
+	 * @see org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseEnumLiteralExp
 	 * (org.dresdenocl.essentialocl.expressions.EnumLiteralExp)
 	 */
@@ -487,8 +483,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
+	 * @see org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseExpressionInOcl
 	 * (org.dresdenocl.essentialocl.expressions.ExpressionInOcl)
 	 */
@@ -516,8 +511,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
+	 * @see org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseIfExp(org.dresdenocl.essentialocl.expressions.IfExp)
 	 */
 	public ITransformedCode caseIfExp(IfExp anIfExp) {
@@ -564,8 +558,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
+	 * @see org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseIntegerLiteralExp
 	 * (org.dresdenocl.essentialocl.expressions.IntegerLiteralExp)
 	 */
@@ -597,8 +590,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
+	 * @see org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseInvalidLiteralExp
 	 * (org.dresdenocl.essentialocl.expressions.InvalidLiteralExp)
 	 */
@@ -635,10 +627,8 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
-	 * #caseIterateExp
-	 * (org.dresdenocl.essentialocl.expressions.IterateExp)
+	 * @see org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseIterateExp (org.dresdenocl.essentialocl.expressions.IterateExp)
 	 */
 	public ITransformedCode caseIterateExp(IterateExp anIterateExp) {
 
@@ -733,10 +723,8 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
-	 * #caseIteratorExp
-	 * (org.dresdenocl.essentialocl.expressions.IteratorExp)
+	 * @see org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseIteratorExp (org.dresdenocl.essentialocl.expressions.IteratorExp)
 	 */
 	public ITransformedCode caseIteratorExp(IteratorExp anIteratorExp) {
 
@@ -932,8 +920,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
+	 * @see org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseLetExp(org.dresdenocl.essentialocl.expressions.LetExp)
 	 */
 	public ITransformedCode caseLetExp(LetExp aLetExp) {
@@ -1708,8 +1695,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
+	 * @see org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
 	 * #casePropertyCallExp
 	 * (org.dresdenocl.essentialocl.expressions.PropertyCallExp)
 	 */
@@ -1819,8 +1805,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
+	 * @see org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseRealLiteralExp
 	 * (org.dresdenocl.essentialocl.expressions.RealLiteralExp)
 	 */
@@ -1851,8 +1836,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
+	 * @see org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseStringLiteralExp
 	 * (org.dresdenocl.essentialocl.expressions.StringLiteralExp)
 	 */
@@ -1882,8 +1866,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
+	 * @see org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseTupleLiteralExp
 	 * (org.dresdenocl.essentialocl.expressions.TupleLiteralExp)
 	 */
@@ -1935,8 +1918,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
+	 * @see org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseTypeLiteralExp
 	 * (org.dresdenocl.essentialocl.expressions.TypeLiteralExp)
 	 */
@@ -1967,8 +1949,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
+	 * @see org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseUndefinedLiteralExp
 	 * (org.dresdenocl.essentialocl.expressions.UndefinedLiteralExp)
 	 */
@@ -1997,8 +1978,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
+	 * @see org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseUnlimitedNaturalExp
 	 * (org.dresdenocl.essentialocl.expressions.UnlimitedNaturalExp)
 	 */
@@ -2032,10 +2012,8 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
-	 * #caseVariableExp
-	 * (org.dresdenocl.essentialocl.expressions.VariableExp)
+	 * @see org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseVariableExp (org.dresdenocl.essentialocl.expressions.VariableExp)
 	 */
 	public ITransformedCode caseVariableExp(VariableExp aVariableExp) {
 
@@ -2119,10 +2097,8 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 
 			templatePaths.add(getUrl(TEMPLATE_PATH + JAVA_TEMPLATE_FILE));
 			templatePaths.add(getUrl(TEMPLATE_PATH + TYPE_TEMPLATE_FILE));
-			templatePaths.add(getUrl(TEMPLATE_PATH
-					+ OPERATION_TEMPLATE_FILE));
-			templatePaths.add(getUrl(TEMPLATE_PATH
-					+ EXPRESSION_TEMPLATE_FILE));
+			templatePaths.add(getUrl(TEMPLATE_PATH + OPERATION_TEMPLATE_FILE));
+			templatePaths.add(getUrl(TEMPLATE_PATH + EXPRESSION_TEMPLATE_FILE));
 			templatePaths.add(getUrl(TEMPLATE_PATH
 					+ INSTRUMENTATION_TEMPLATE_FILE));
 
@@ -2165,26 +2141,42 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 */
 	private String getUrl(String path) throws IOException {
 
-		URL fileLocation;
-		File file;
-
+		File file = null;
+		
 		if (Platform.isRunning()) {
-			fileLocation = Platform.getBundle(Ocl2JavaPlugin.PLUGIN_ID)
-					.getResource(path);
-			fileLocation = FileLocator.resolve(fileLocation);
-			file = new File(fileLocation.getFile());
+			Bundle bundle = Platform.getBundle(Ocl2JavaPlugin.PLUGIN_ID);
+			if (bundle != null) {
+				try {
+					URL url = bundle.getEntry(path);
+					file = new File(FileLocator.resolve(url).toURI());
+				} catch (MalformedURLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (URISyntaxException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
-
 		else {
-			File testLocation = new File(System.getProperty("DRESDENOCL_LOCATION_TESTS") + Ocl2JavaPlugin.PLUGIN_ID);
-			File eclipseLocation = new File(System.getProperty("DRESDENOCL_LOCATION_ECLIPSE") + Ocl2JavaPlugin.PLUGIN_ID);
-			
+
+			File testLocation = new File(
+					System.getProperty("DRESDENOCL_LOCATION_TESTS")
+							+ Ocl2JavaPlugin.PLUGIN_ID);
+			File eclipseLocation = new File(
+					System.getProperty("DRESDENOCL_LOCATION_ECLIPSE")
+							+ Ocl2JavaPlugin.PLUGIN_ID);
+
 			File bundleFile = null;
 
-			
-			if (testLocation != null && testLocation.exists() && testLocation.isDirectory()) {
+			if (testLocation != null && testLocation.exists()
+					&& testLocation.isDirectory()) {
 				bundleFile = testLocation;
-			} else if (eclipseLocation != null && eclipseLocation.exists() && eclipseLocation.isDirectory()) {
+			} else if (eclipseLocation != null && eclipseLocation.exists()
+					&& eclipseLocation.isDirectory()) {
 				bundleFile = eclipseLocation;
 			}
 
@@ -2195,8 +2187,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 				throw new RuntimeException("Bundle or directory '"
 						+ Ocl2JavaPlugin.PLUGIN_ID + "' was not found.");
 		}
-
-		return file.getPath();
+		return file.getAbsolutePath();
 	}
 
 	/**
