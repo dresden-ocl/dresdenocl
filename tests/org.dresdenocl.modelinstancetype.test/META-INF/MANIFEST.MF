@@ -9,7 +9,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.junit,
  org.dresdenocl.metamodels.uml2,
  org.dresdenocl.facade,
- org.dresdenocl.testsuite.abstract;visibility:=reexport
+ org.dresdenocl.testsuite.abstract;visibility:=reexport,
+ org.eclipse.core.resources;visibility:=reexport
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: org.dresdenocl.modelinstancetype.test,

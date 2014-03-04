@@ -5,9 +5,11 @@ Bundle-SymbolicName: org.dresdenocl.metamodels.test
 Bundle-Version: 3.3.0.qualifier
 Bundle-Activator: org.dresdenocl.metamodels.test.MetaModelTestPlugin
 Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.equinox.registry,
  org.junit,
  org.dresdenocl.facade,
- org.dresdenocl.testsuite.abstract;visibility:=reexport
+ org.dresdenocl.testsuite.abstract;visibility:=reexport,
+ org.eclipse.core.resources;visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.dresdenocl.metamodels.test
