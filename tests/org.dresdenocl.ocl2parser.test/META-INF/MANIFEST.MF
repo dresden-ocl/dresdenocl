@@ -5,11 +5,11 @@ Bundle-SymbolicName: org.dresdenocl.ocl2parser.test;singleton:=true
 Bundle-Version: 3.3.0.qualifier
 Bundle-Activator: org.dresdenocl.ocl2parser.test.Activator
 Require-Bundle: org.eclipse.core.runtime,
- org.junit;bundle-version="4.0.0",
+ org.junit,
  org.dresdenocl.facade,
  org.dresdenocl.language.ocl.staticsemantics,
  org.dresdenocl.language.ocl.resource.ocl,
- org.dresdenocl.language.ocl;bundle-version="3.1.0",
+ org.dresdenocl.language.ocl,
  org.dresdenocl.testsuite.abstract
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
