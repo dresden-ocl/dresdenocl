@@ -10,7 +10,8 @@ Require-Bundle: org.dresdenocl.logging,
  org.eclipse.core.runtime,
  org.dresdenocl.tools.template,
  org.junit,
- org.dresdenocl.testsuite.abstract
+ org.dresdenocl.testsuite.abstract,
+ org.eclipse.core.resources;visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: TU Dresden, Software Technology Group
 Export-Package: org.dresdenocl.tools.template.test
