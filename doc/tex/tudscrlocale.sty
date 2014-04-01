@@ -1,0 +1,190 @@
+\providecommand*{\dissertationname}{}
+\AtBeginDocument{%
+	\@ifundefined{captionsenglish}{\let\captionsenglish\@empty}{}%
+	\providecommand*{\@restrictioncompany}{}
+	% default-Variante
+	\providerobustcmd*{\enquote}{\@ifstar{\tud@senquote}{\tud@enquote}}
+	\def\tud@enquote#1{``#1''}\def\tud@senquote#1{`#1'}
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% Deutsch: ngerman, german, germanb, naustrian, austrian
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\tud@ger@cap{ngerman}
+	\tud@ger@cap{german}
+	\tud@ger@cap{germanb}
+	\tud@ger@cap{naustrian}
+	\tud@ger@cap{austrian}
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% Englisch: english, USenglish, american, UKenglish, british,
+	%           canadian, australian, newzealand
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% Titelseite für Abschlussarbeit
+	\tud@eng@cap{english}
+	\tud@eng@cap{USenglish}
+	\tud@eng@cap{american}
+	\tud@eng@cap{UKenglish}
+	\tud@eng@cap{british}
+	\tud@eng@cap{canadian}
+	\tud@eng@cap{australian}
+	\tud@eng@cap{newzealand}
+	
+	% Fehlerbehandlung für nicht vorhandene Sprachen
+	\providecommand*{\titlename}{\tud@lang@error{\titlename}}
+	\providecommand*{\titlepagename}{}
+	\providecommand*{\authortext}{\ifstr{\tud@lyt@titl}{opt}%
+		{\tud@lang@error{\authortext}}{}}
+	\providecommand*{\dissertationname}{\tud@lang@error{\dissertationname}}
+	\providecommand*{\degreetext}{\tud@lang@warning{\degreetext}\ }
+	\providecommand*{\supervisorname}{\tud@lang@error{\supervisorname}}
+	\providecommand*{\supervisorIIname}%
+		{\if@dissertation\tud@lang@error{\supervisorIIname}\fi}
+	\providecommand*{\studentidname}{\tud@lang@error{\studentidname}}
+	\providecommand*{\professorname}{\tud@lang@error{\professorname}}
+	\providecommand*{\submissiontext}{\tud@lang@error{\submissiontext}}
+	\providecommand*{\birthdaytext}{\tud@lang@error{\birthdaytext}}
+	\providecommand*{\birthplacetext}%
+		{\tud@lang@warning{\birthplacetext}\hspace{-0.3em}}
+	\providecommand*{\defensetext}{\tud@lang@error{\defensetext}}
+	\providecommand*{\taskname}{\tud@lang@error{\taskname}}
+	\providecommand*{\tasktext}{}
+	\providecommand*{\coursename}{\tud@lang@error{\coursename}}
+	\providecommand*{\branchname}{\tud@lang@error{\branchname}}
+	\providecommand*{\enrolmentname}{\tud@lang@error{\enrolmentname}}
+	\providecommand*{\authorname}{\tud@lang@error{\authorname}}
+	\providecommand*{\starttext}{\tud@lang@error{\starttext}}
+	\providecommand*{\duetext}{\tud@lang@error{\duetext}}
+	\providecommand*{\chairmanname}{\tud@lang@error{\chairmanname}}
+	\providecommand*{\objectivestext}{\tud@lang@error{\objectivestext}}
+	\providecommand*{\focustext}{\tud@lang@error{\focustext}}
+	\providecommand*{\confirmationname}{\tud@lang@error{\confirmationname}}
+	\providecommand*{\confirmationtext}{\tud@lang@warning{\confirmationtext}}
+	\providecommand*{\restrictionname}{\tud@lang@error{\restrictionname}}
+	\providecommand*{\restrictiontext}{\tud@lang@warning{\restrictiontext}}
+}
+
+\newcommand*{\tud@ger@cap}[1]{%
+	\providecaptionname{#1}{\titlename}{Titel}
+	\providecaptionname{#1}{\titlepagename}{Titelblatt}
+	\providecaptionname{#1}{\dissertationname}{Dissertation}
+	\providecaptionname{#1}{\degreetext}%
+		{zur Erlangung des akademischen Grades}
+	\providecaptionname{#1}{\supervisorname}%
+		{\if@dissertation{}Erstgutachter\else{}Betreuer\fi}
+	\providecaptionname{#1}{\supervisorIIname}%
+		{\if@dissertation{}Zweitgutachter\fi}
+	\providecaptionname{#1}{\studentidname}{Matrikelnummer}
+	\providecaptionname{#1}{\professorname}{Betreuender Hochschullehrer}
+	\providecaptionname{#1}{\submissiontext}{Eingereicht am}
+	% Zusatz für alternative Titelseite
+	\providecaptionname{#1}{\authortext}{Vorgelegt von}
+	\providecaptionname{#1}{\birthdaytext}{Geboren am}
+	\providecaptionname{#1}{\birthplacetext}{in}
+	\providecaptionname{#1}{\defensetext}{Verteidigt am}
+	% Felder für Task
+	\providecaptionname{#1}{\titlecoldelim}{:}
+	\providecaptionname{#1}{\taskname}{Aufgabenstellung}
+	\providecaptionname{#1}{\tasktext}{f\"ur die Anfertigung einer}
+	\providecaptionname{#1}{\coursename}{Studiengang}
+	\providecaptionname{#1}{\branchname}{Studienrichtung}
+	\providecaptionname{#1}{\enrolmentname}{Jahrgang}
+	\providecaptionname{#1}{\authorname}{Name}
+	\providecaptionname{#1}{\starttext}{Ausgeh\"andigt am}
+	\providecaptionname{#1}{\duetext}{Einzureichen am}
+	\providecaptionname{#1}{\chairmanname}%
+		{Vorsitzender des Pr\"ufungsausschusses}
+	\providecaptionname{#1}{\objectivestext}{Ziele der Arbeit}
+	\providecaptionname{#1}{\focustext}{Schwerpunkte der Arbeit}
+	% Sonstiges
+	\providecaptionname{#1}{\confirmationname}%
+		{Selbstst\"andigkeitserkl\"arung}
+	\providecaptionname{#1}{\confirmationtext}{%
+		Hiermit erkl\"are ich, dass ich die vorliegende \@thesis{} mit dem Titel
+		\enquote{\@title} selbstst\"andig verfasst habe. Es wurden keine anderen
+		als die	in der Arbeit angegebenen Quellen und Hilfsmittel benutzt. Die
+		w\"ortlichen oder sinngem\"a\ss{} \"ubernommenen Zitate habe ich als
+		solche kenntlich gemacht.
+	}
+	\providecaptionname{#1}{\restrictionname}{Sperrvermerk}
+	\providecaptionname{#1}{\restrictiontext}{%
+		Die nachfolgende Arbeit enth\"alt vertrauliche Informationen.
+		Ver\"offentlichungen und Vervielf\"altigungen dieses Berichts --~auch
+		nur	auszugsweise~--	sind ohne ausdr\"uckliche Genehmigung
+		\ifx\@restrictioncompany\empty\else%
+			durch \@restrictioncompany{}
+		\fi%
+		nicht gestattet. Die vorliegende Arbeit ist nur den Gutachtern sowie
+		den Mitgliedern des Pr\"ufungsausschusses zug\"anglich zu machen.%
+	}
+}
+
+\newcommand*{\tud@eng@cap}[1]{%
+	\providecaptionname{#1}{\titlename}{Title}
+	\providecaptionname{#1}{\titlepagename}{Title page}
+	\providecaptionname{#1}{\dissertationname}{Dissertation}
+	\providecaptionname{#1}{\degreetext}{to achieve the academic degree}
+	\providecaptionname{#1}{\supervisorname}%
+		{\if@dissertation{}First referee\else{}Supervisor\fi}
+	\providecaptionname{#1}{\supervisorIIname}%
+		{\if@dissertation{}Second referee\fi}
+	\providecaptionname{#1}{\studentidname}{Matriculation number}
+	\providecaptionname{#1}{\professorname}{Supervising professor}
+	\providecaptionname{#1}{\submissiontext}{Submitted on}
+	% Zusatz für alternative Titelseite
+	\providecaptionname{#1}{\authortext}{Submitted by}
+	\providecaptionname{#1}{\birthdaytext}{Born on}
+	\providecaptionname{#1}{\birthplacetext}{in}
+	\providecaptionname{#1}{\defensetext}{Defended on}
+	% Felder für Task
+	\providecaptionname{#1}{\titlecoldelim}{}
+	\providecaptionname{#1}{\taskname}{Task}
+	\providecaptionname{#1}{\tasktext}{for the preparation of a}
+	\providecaptionname{#1}{\coursename}{Course}
+	\providecaptionname{#1}{\branchname}{Branch}
+	\providecaptionname{#1}{\enrolmentname}{Enrolment year}
+	\providecaptionname{#1}{\authorname}{Name}
+	\providecaptionname{#1}{\starttext}{Handed out on}
+	\providecaptionname{#1}{\duetext}{To be submitted on}
+	\providecaptionname{#1}{\chairmanname}%
+		{Chairman of the examination board}
+	\providecaptionname{#1}{\objectivestext}{Objectives of work}
+	\providecaptionname{#1}{\focustext}{Focus of work}
+	% Sonstiges
+	\providecaptionname{#1}{\confirmationname}{Statement of authorship}
+	\providecaptionname{#1}{\confirmationtext}{%
+		I declare that I have written this \@thesis, titled \enquote{\@title}
+		independently. There were no other references and resources used as
+		stated in the work.	I indicated literal or accordingly adopted 
+		quotations.
+	}
+	\providecaptionname{#1}{\restrictionname}{Restriction note}
+	\providecaptionname{#1}{\restrictiontext}{%
+		The following work contains confidential information%
+		\ifx\@restrictioncompany\empty\else%
+			\space of \@restrictioncompany{}%
+		\fi%
+		. Publications and copies of this report---even in part---are prohibited
+		without permission.	The presented work is to be made accessible only to
+		the referees and the members of the	examination board.%
+	}
+}
+
+\newcommand*{\tud@lang@error}[1]{%
+	\ClassError{\tud@classname}{selected language not supported}
+		{\tud@lang@text{#1}}%
+}
+\newcommand*{\tud@lang@warning}[1]{%
+	\ClassWarningNoLine{\tud@classname}{\MessageBreak\tud@lang@text{#1}}%
+}
+\newcommand*{\tud@lang@text}[1]{%
+	Currently the class \tud@classname\space only supports the\MessageBreak
+	language options german, ngerman and english.\MessageBreak
+	It seems, that you are using another language\MessageBreak
+	(maybe \languagename). You have to define\MessageBreak
+	\string#1\space by yourself!\MessageBreak
+    e.g.:\MessageBreak
+    \string\providecaptionname{\languagename}{\string#1}{<string>}\MessageBreak
+    \space\MessageBreak
+    It would be nice if you'll contact the author\MessageBreak
+    of this class and send your definitions to\MessageBreak\tud@file@mail%
+}

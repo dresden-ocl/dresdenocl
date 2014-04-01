@@ -1,0 +1,41 @@
+\documentclass[color,abstract=new]{tudscrbook}
+
+\usepackage[ngerman,english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{eso-pic}
+\usepackage{pstricks}
+\usepackage{listings}
+\usepackage{floatflt}
+\usepackage{rotating}
+\usepackage{textcomp}
+\usepackage{environ}
+\usepackage[printonlyused]{acronym}
+\usepackage{xspace}
+	
+\definecolor{darkgreen}{rgb}{0,0.5,0}
+\lstset{
+  frame=single,
+  frameround=tttt,
+  xleftmargin=0.7cm,
+  xrightmargin=0.3cm,
+  numbers=left,
+  basicstyle=\fontfamily{pcr} \small \color{black},
+  keywordstyle=\bfseries \color{blue},
+  stringstyle=\color{red},
+  commentstyle=\color{darkgreen},
+  breaklines=true,
+  showstringspaces=false
+}
+
+\newcommand{\model}[1]{{\begin{ttfamily}#1\end{ttfamily}}}
+\newcommand{\code}[1]{{\begin{ttfamily}#1\end{ttfamily}}}
+\newcommand{\reference}[1]{{\begin{ttfamily}#1\end{ttfamily}}}
+\newcommand{\keyword}[1]{{\begin{itshape}#1\end{itshape}}}
+\newcommand{\eclipse}[1]{{\begin{itshape}#1\end{itshape}}}
+\newcommand{\todo}[1]{\color{red}\textbf{TODO #1}\color{black}}
+\newcommand{\eclipseversion}{Eclipse~4.2\xspace}
+\newcommand{\oclversion}{OCL~2.3\xspace}
