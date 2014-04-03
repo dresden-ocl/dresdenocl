@@ -16,3 +16,4 @@ Export-Package: package1.package2,
 Bundle-Vendor: TU Dresden, Software Technology Group
 Bundle-ClassPath: lib/simple.jar,
  .
+Import-Package: org.dresdenocl.examples.simple
