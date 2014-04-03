@@ -186,6 +186,14 @@ Library.
          id="org.dresdenocl.feature.core"
          version="0.0.0"/>
 
+   <includes
+         id="org.dresdenocl.feature.ocl2java"
+         version="0.0.0"/>
+
+   <includes
+         id="org.dresdenocl.feature.ocl2sql"
+         version="0.0.0"/>
+
    <requires>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.dresdenocl.logging"/>
@@ -226,5 +234,11 @@ Library.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+
+   <plugin
+         id="org.dresdenocl.tools.codegen.ocl2java"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
 
 </feature>

@@ -191,10 +191,6 @@ Library.
          version="0.0.0"/>
 
    <includes
-         id="org.dresdenocl.feature.codegen"
-         version="0.0.0"/>
-
-   <includes
          id="org.dresdenocl.feature.metamodels"
          version="0.0.0"/>
 

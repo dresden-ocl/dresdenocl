@@ -184,6 +184,7 @@ Library.
    </license>
 
    <requires>
+      <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.dresdenocl.modelbus" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.dresdenocl.metamodels.ecore" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.dresdenocl.metamodels.java" version="2.1.0" match="greaterOrEqual"/>
@@ -203,7 +204,6 @@ Library.
       <import plugin="org.dresdenocl.modelinstancetype.xml"/>
       <import plugin="org.dresdenocl.language.ocl.resource.ocl"/>
       <import plugin="org.dresdenocl.metrics"/>
-      <import plugin="org.eclipse.core.runtime"/>
    </requires>
 
    <plugin

@@ -182,6 +182,10 @@ permanent authorization for you to choose that version for the
 Library.
    </license>
 
+   <includes
+         id="org.dresdenocl.feature.facade"
+         version="0.0.0"/>
+
    <requires>
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.dresdenocl.facade" match="greaterOrEqual"/>
