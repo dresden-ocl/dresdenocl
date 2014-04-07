@@ -2,7 +2,7 @@
 Dresden OCL is organized as a group of Eclipse Plug-ins.
 
 ##How to run Dresden OCL
-Dresden OCL2 for Eclipse is distributed as source code and binary jar archives. 
+Dresden OCL for Eclipse is distributed as source code and binary jar archives. 
 How to run the toolkit in both situation is explained below.
 
 a) How to run a source code distribution
