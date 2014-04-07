@@ -17,5 +17,5 @@ Export-Package: org.dresdenocl.tools.template,
  org.dresdenocl.tools.template.stringtemplate
 Bundle-ClassPath: .,
  lib/antlr-3.3-complete.jar,
- lib/ST-4.0.4.jar
+ lib/ST-4.0.8.jar
 Bundle-Vendor: TU Dresden, Software Technology Group
