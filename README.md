@@ -1,28 +1,9 @@
 #Instructions for Dresden OCL
-Dresden OCL is organized as a group of Eclipse Plug-ins.
+Dresden OCL is organized as a group of Eclipse Plug-ins. More information is also available at the [Toolkit Website](http://dresden-ocl.org/).
 
-##How to run Dresden OCL
-Dresden OCL for Eclipse is distributed as source code and binary jar archives. 
-How to run the toolkit in both situation is explained below.
+##Detailed steps for running the source code distribution
 
-a) How to run a source code distribution
-
-Follow the steps listed in the detailed description below. Afterwards you 
-can run the plug-ins in a new Eclipse instance.
-
-b) How to run a binary distribution
-
-If you got a binary distribution, copy the jars located in the directory 'eclipse/plugins' into the
-'plugins' directory of your eclipse distribution.
-
-For further details look into the tutorials provided in the directory 'doc'.
-
-More information about the Dresden OCL is also available at the
-[Toolkit Website](http://dresden-ocl.org/).
-
-Detailed steps for running the source code distribution
-=======================================================
-For this guide, Eclipse 3.7 and Java6 has been used.
+For this guide, Eclipse 4.3.2 (Kepler SR2) and Java6 has been used.
 
 __Prerequisites__:
 
@@ -37,11 +18,11 @@ __Prerequisites__:
 		* EMF - Eclipse Modeling Framework SDK
 		* UML2 Extender SDK
 		* XSD - XML Schema Definition SDK
-	* Help -> Install New Software... -> Available Software Sites -> filter for 'Orbit' and choose the update-site.
-	* Then find and install the following Plug-Ins:
-		* Apache Jakarta Log4J plugin
-		* Apache Commons IO
-	* Help -> Install New Software... -> http://www.emftext.org/update ->
+	* Help -> Install New Software... -> http://download.eclipse.org/tools/orbit/downloads/drops/R20140114142710/repository/
+		* Then find and install the following Plug-Ins:
+			* Apache Jakarta Log4J plugin
+			* Apache Commons IO
+	* Help -> Install New Software... -> http://www.emftext.org/update
 		* EMFText
 
 __Installation__:
