@@ -13,31 +13,67 @@
 	<artifactId>org.dresdenocl.language.ocl.staticsemantics</artifactId>
 	<packaging>eclipse-plugin</packaging>
 
-<!-- 
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.7</version>
+				<groupId>net.alchim31.maven</groupId>
+				<artifactId>scala-maven-plugin</artifactId>
+				<configuration>
+					<args>
+						<arg>-encoding</arg>
+						<arg>Cp1252</arg>
+					</args>
+					<scalaVersion>${scala.version}</scalaVersion>
+				</configuration>
 				<executions>
 					<execution>
-						<phase>compile</phase>
+						<id>scala-compile-first</id>
+						<phase>process-resources</phase>
 						<goals>
-							<goal>run</goal>
+							<goal>add-source</goal>
+							<goal>compile</goal>
 						</goals>
-						<configuration>
-							<tasks>
-								<property name="eclipse.home" value="${eclipse.home}" />
-								<ant antfile="build.xml"
-									target="Compile org.dresdenocl.language.ocl.staticsemantics" />
-							</tasks>
-						</configuration>
 					</execution>
 				</executions>
 			</plugin>
 		</plugins>
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>net.alchim31.maven</groupId>
+										<artifactId>scala-maven-plugin</artifactId>
+										<versionRange>[2.15.0,)</versionRange>
+										<goals>
+											<goal>add-source</goal>
+											<goal>testCompile</goal>
+											<goal>compile</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>net.alchim31.maven</groupId>
+					<artifactId>scala-maven-plugin</artifactId>
+					<version>3.1.6</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
-	-->
 
 </project> 
