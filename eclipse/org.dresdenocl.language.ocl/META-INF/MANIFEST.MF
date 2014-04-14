@@ -10,7 +10,7 @@ Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
- org.dresdenocl.pivotmodel;bundle-version="3.2.0",
+ org.dresdenocl.pivotmodel,
  org.emftext.commons.layout
 Bundle-ActivationPolicy: lazy
 Export-Package: org.dresdenocl.language.ocl,
