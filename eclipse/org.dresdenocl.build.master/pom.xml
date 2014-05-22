@@ -4,6 +4,10 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
+	<prerequisites>
+		<maven>3.0</maven>
+	</prerequisites>
+
 	<organization>
 		<name>Dresden OCL</name>
 		<url>http://www.dresden-ocl.org</url>
@@ -13,6 +17,17 @@
 	<artifactId>parent</artifactId>
 	<version>3.3.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
+
+	<properties>
+		<tycho.version>0.20.0</tycho.version>
+		<tycho.extras.version>0.20.0</tycho.extras.version>
+		<scala.version>2.9.1</scala.version>
+		<maven.compiler.source>1.6</maven.compiler.source>
+		<maven.compiler.target>1.6</maven.compiler.target>
+		<eclipse-repo.url>http://download.eclipse.org/releases/kepler</eclipse-repo.url>
+		<project.build.sourceEncoding>CP1252</project.build.sourceEncoding>
+		<maven.test.failure.ignore>true</maven.test.failure.ignore>
+	</properties>
 
 	<modules>
 		<module>../org.dresdenocl.codegen.adapter</module>
@@ -126,46 +141,8 @@
 		<!-- <module>../../tests/org.dresdenocl.tracer.test</module> -->
 	</modules>
 
-	<properties>
-		<tycho.version>0.19.0</tycho.version>
-		<scala.version>2.9.1</scala.version>
-		<maven.compiler.source>1.6</maven.compiler.source>
-		<maven.compiler.target>1.6</maven.compiler.target>
-		<eclipse-repo.url>http://download.eclipse.org/releases/kepler</eclipse-repo.url>
-		<project.build.sourceEncoding>CP1252</project.build.sourceEncoding>
-		<maven.test.failure.ignore>true</maven.test.failure.ignore>
-	</properties>
-
 	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>org.dresdenocl</groupId>
-										<!-- <artifactId></artifactId> -->
-										<versionRange>[1.0.0,)</versionRange>
-										<goals>
-											<goal>compile</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore />
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-
+		<sourceDirectory>src</sourceDirectory>
 		<plugins>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
@@ -176,65 +153,139 @@
 
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-compiler-plugin</artifactId>
+				<artifactId>target-platform-configuration</artifactId>
+				<configuration>
+					<includePackedArtifacts>true</includePackedArtifacts>
+					<resolver>p2</resolver>
+				</configuration>
+			</plugin>
+
+			<!-- enable source bundle generation -->
+			<!-- disable until we got source bundles from scala and kiama
+			
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-source-plugin</artifactId>
 				<version>${tycho.version}</version>
+				<configuration>
+					<archive>
+						<addMavenDescriptor>false</addMavenDescriptor>
+					</archive>
+				</configuration>
+				<executions>
+					<execution>
+						<id>plugin-source</id>
+						<goals>
+							<goal>plugin-source</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.eclipse.tycho.extras</groupId>
+				<artifactId>tycho-source-feature-plugin</artifactId>
+				<version>${tycho.extras.version}</version>
+				<configuration>
+					<archive>
+						<addMavenDescriptor>false</addMavenDescriptor>
+					</archive>
+				</configuration>
+				<executions>
+					<execution>
+						<id>source-feature</id>
+						<phase>package</phase>
+						<goals>
+							<goal>source-feature</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			-->
+			
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-packaging-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<configuration>
+					<archive>
+						<addMavenDescriptor>false</addMavenDescriptor>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-compiler-plugin</artifactId>
 				<configuration>
 					<excludeResources>
 						<excludeResource>**/*.scala</excludeResource>
 					</excludeResources>
 				</configuration>
 			</plugin>
-
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>target-platform-configuration</artifactId>
-				<version>${tycho.version}</version>
-				<configuration>
-					<resolver>p2</resolver>
-					<pomDependencies>consider</pomDependencies>
-					<environments>
-						<environment>
-							<os>linux</os>
-							<ws>gtk</ws>
-							<arch>x86</arch>
-						</environment>
-						<environment>
-							<os>linux</os>
-							<ws>gtk</ws>
-							<arch>x86_64</arch>
-						</environment>
-						<environment>
-							<os>win32</os>
-							<ws>win32</ws>
-							<arch>x86</arch>
-						</environment>
-						<environment>
-							<os>win32</os>
-							<ws>win32</ws>
-							<arch>x86_64</arch>
-						</environment>
-						<environment>
-							<os>macosx</os>
-							<ws>cocoa</ws>
-							<arch>x86_64</arch>
-						</environment>
-					</environments>
-
-					<filters>
-						<!-- This filter is due to a bug of eclipse -->
-						<filter>
-							<type>eclipse-plugin</type>
-							<id>org.eclipse.jdt.core</id>
-							<restrictTo>
-								<!-- this is the version for Kepler SR1, have to adapt for other 
-									release trains/service releases -->
-								<version>3.9.1.v20130905-0837</version>
-							</restrictTo>
-						</filter>
-					</filters>
-				</configuration>
-			</plugin>
 		</plugins>
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>target-platform-configuration</artifactId>
+					<version>${tycho.version}</version>
+					<configuration>
+						<environments>
+							<environment>
+								<os>linux</os>
+								<ws>gtk</ws>
+								<arch>x86</arch>
+							</environment>
+							<environment>
+								<os>win32</os>
+								<ws>win32</ws>
+								<arch>x86</arch>
+							</environment>
+							<environment>
+								<os>win32</os>
+								<ws>win32</ws>
+								<arch>x86_64</arch>
+							</environment>
+							<environment>
+								<os>linux</os>
+								<ws>gtk</ws>
+								<arch>x86_64</arch>
+							</environment>
+							<environment>
+								<os>macosx</os>
+								<ws>cocoa</ws>
+								<arch>x86_64</arch>
+							</environment>
+						</environments>
+						<filters>
+							<!-- This filter is due to a bug of eclipse -->
+							<filter>
+								<type>eclipse-plugin</type>
+								<id>org.eclipse.jdt.core</id>
+								<restrictTo>
+									<!-- this is the version for Kepler SR1, have to adapt for other 
+										release trains/service releases -->
+									<version>3.9.1.v20130905-0837</version>
+								</restrictTo>
+							</filter>
+						</filters>
+					</configuration>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-compiler-plugin</artifactId>
+					<version>${tycho.version}</version>
+					<configuration>
+						<encoding>CP1252</encoding>
+						<source>1.6</source>
+						<target>1.6</target>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 
 	<repositories>
