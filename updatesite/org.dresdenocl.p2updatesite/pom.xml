@@ -31,7 +31,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
    <properties>
     <!-- Properties relative to the 
     distant host where to upload the repo -->
-    <ftp.url>scp://lars.inf.tu-dresden.de</ftp.url>
+    <ftp.url>scp://hudson@lars.inf.tu-dresden.de</ftp.url>
     <ftp.toDir>/dresdenocl_latestbuild</ftp.toDir>
     <!-- Relative path to the repo being uploaded -->
     <repo.path>${project.build.directory}/repository/</repo.path>
