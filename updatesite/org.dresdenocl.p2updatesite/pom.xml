@@ -16,13 +16,12 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 
   <build>
   <extensions>
-   <!-- Enabling the use of FTP -->
-   <extension>
-    <groupId>org.apache.maven.wagon</groupId>
-    <artifactId>wagon-ftp</artifactId>
-    <version>1.0-beta-6</version>
-   </extension>
-  </extensions>
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-ssh</artifactId>
+        <version>1.0</version>
+      </extension>
+    </extensions>
  </build>
 
  <profiles>
@@ -44,7 +43,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
      <plugin>
       <groupId>org.codehaus.mojo</groupId>
       <artifactId>wagon-maven-plugin</artifactId>
-      <version>1.0-beta-4</version>
+      <version>1.0-beta-5</version>
       <executions>
        <execution>
         <id>upload-repo</id>
