@@ -31,8 +31,8 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
    <properties>
     <!-- Properties relative to the 
     distant host where to upload the repo -->
-    <ftp.url>scp://hudson@lars.inf.tu-dresden.de</ftp.url>
-    <ftp.toDir>/dresdenocl_latestbuild</ftp.toDir>
+    <scp.url>scp://${env.DROPSBOX_UPLOAD_USER}:${env.DROPSBOX_UPLOAD_PASS}@lars.inf.tu-dresden.de</scp.url>
+    <scp.toDir>/dresdenocl_latestbuild</scp.toDir>
     <!-- Relative path to the repo being uploaded -->
     <repo.path>${project.build.directory}/repository/</repo.path>
    </properties>
@@ -54,8 +54,8 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
         <configuration>
          <fromDir>${repo.path}</fromDir>
          <includes>**</includes>
-         <toDir>${ftp.toDir}</toDir>
-         <url>${ftp.url}</url>
+         <toDir>${scp.toDir}</toDir>
+         <url>${scp.url}</url>
          <!-- <server> -->
          <!-- <id>p2Repo</id> -->
          <!-- <username>username</username> -->
