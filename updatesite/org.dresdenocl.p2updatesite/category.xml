@@ -24,6 +24,15 @@
    <feature url="features/org.dresdenocl.feature.metrics_3.3.0.qualifier.jar" id="org.dresdenocl.feature.metrics" version="3.3.0.qualifier">
       <category name="new_category_3"/>
    </feature>
+   <feature url="features/org.dresdenocl.feature.ocl2java_3.3.0.qualifier.jar" id="org.dresdenocl.feature.ocl2java" version="3.3.0.qualifier">
+      <category name="new_category_5"/>
+   </feature>
+   <feature url="features/org.dresdenocl.feature.examples.ocl22java_3.3.0.qualifier.jar" id="org.dresdenocl.feature.examples.ocl22java" version="3.3.0.qualifier">
+      <category name="new_category_4"/>
+   </feature>
+   <feature url="features/org.dresdenocl.feature.ocl2sql_3.3.0.qualifier.jar" id="org.dresdenocl.feature.ocl2sql" version="3.3.0.qualifier">
+      <category name="new_category_5"/>
+   </feature>
    <category-def name="new_category_3" label="Dresden OCL Core"/>
    <category-def name="new_category_4" label="Dresden OCL Examples"/>
    <category-def name="new_category_5" label="Dresden OCL Codegeneration"/>

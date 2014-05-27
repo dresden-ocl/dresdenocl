@@ -192,29 +192,33 @@ Library.
    <requires>
       <import plugin="org.eclipse.core.runtime" version="3.4.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="scala.library" version="2.9.1" match="greaterOrEqual"/>
       <import plugin="org.dresdenocl.pivotmodel"/>
+      <import plugin="org.emftext.access"/>
+      <import plugin="org.emftext.commons.antlr3_4_0"/>
+      <import plugin="org.dresdenocl.model"/>
+      <import plugin="org.dresdenocl.modelbus" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.validation"/>
       <import plugin="org.eclipse.core.resources" version="3.5.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf"/>
       <import plugin="org.eclipse.emf.codegen.ecore"/>
       <import plugin="org.eclipse.emf.ecore.edit"/>
-      <import plugin="org.eclipse.emf.validation"/>
-      <import plugin="org.eclipse.emf.workspace"/>
-      <import plugin="org.emftext.commons.antlr3_4_0"/>
-      <import plugin="org.dresdenocl.modelbus" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.edit.ui"/>
+      <import plugin="org.eclipse.emf.workspace"/>
       <import plugin="org.eclipse.jface"/>
       <import plugin="org.eclipse.jface.text"/>
       <import plugin="org.eclipse.ui" version="3.5.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.editors"/>
       <import plugin="org.eclipse.ui.ide"/>
       <import plugin="org.eclipse.ui.views"/>
-      <import plugin="org.dresdenocl.essentialocl.standardlibrary"/>
-      <import plugin="org.dresdenocl.model"/>
-      <import plugin="org.dresdenocl.essentialocl" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="org.emftext.access"/>
       <import plugin="org.eclipse.emf.edit"/>
       <import plugin="org.dresdenocl.pivotmodel.edit"/>
+      <import plugin="org.emftext.commons.layout"/>
+      <import plugin="org.eclipse.emf.ecore.change"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="org.apache.commons.io"/>
+      <import plugin="org.eclipse.ui.workbench.texteditor"/>
+      <import plugin="org.emftext.commons.layout.edit"/>
+      <import plugin="org.dresdenocl.essentialocl" version="3.3.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin

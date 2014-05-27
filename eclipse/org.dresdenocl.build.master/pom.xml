@@ -98,19 +98,23 @@
 		<module>../../updatesite/org.dresdenocl.feature.ocl2sql</module>
 		<module>../../updatesite/org.dresdenocl.feature.parser</module>
 		<module>../../updatesite/org.dresdenocl.feature.examples</module>
+		<module>../../updatesite/org.dresdenocl.feature.examples.ocl22java</module>
 		<module>../../updatesite/org.dresdenocl.feature.all</module>
 		<module>../../updatesite/org.dresdenocl.feature.facade</module>
 		<module>../../updatesite/org.dresdenocl.feature.tests</module>
 		<module>../../updatesite/org.dresdenocl.p2updatesite</module>
 
 		<module>../org.dresdenocl.examples.living</module>
+		<module>../org.dresdenocl.examples.ocl22java</module>
 		<module>../org.dresdenocl.examples.pain</module>
 		<module>../org.dresdenocl.examples.pml</module>
 		<module>../org.dresdenocl.examples.simple</module>
+		<module>../org.dresdenocl.examples.simple.ocl22javacode</module>
 		<module>../org.dresdenocl.examples.ui</module>
 		<module>../org.dresdenocl.examples.uml</module>
 		<module>../org.dresdenocl.examples.university</module>
 		<module>../org.dresdenocl.examples.royalandloyal</module>
+		<module>../org.dresdenocl.examples.royalandloyal.ocl22javacode</module>
 
 		<!-- <module>../../tests/org.dresdenocl.debug.test</module> -->
 		<module>../../tests/org.dresdenocl.essentialocl.tests</module>
@@ -220,6 +224,7 @@
 				<configuration>
 					<excludeResources>
 						<excludeResource>**/*.scala</excludeResource>
+						<excludeResource>**/*.aj</excludeResource>
 					</excludeResources>
 				</configuration>
 			</plugin>
