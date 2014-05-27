@@ -38,6 +38,7 @@ public abstract class AbstractExampleWizard extends
 	 * @see org.eclipse.emf.common.ui.wizard.AbstractExampleInstallerWizard#
 	 * getProjectDescriptors()
 	 */
+	@Override
 	protected List<ProjectDescriptor> getProjectDescriptors() {
 
 		Collection<String[]> plugins = this.getExamplePlugins();
@@ -73,6 +74,7 @@ public abstract class AbstractExampleWizard extends
 	 * @see org.eclipse.emf.common.ui.wizard.AbstractExampleInstallerWizard#
 	 * getFilesToOpen()
 	 */
+	@Override
 	protected List<FileToOpen> getFilesToOpen() {
 		/* No files should be open after the wizard finished. */
 		return null;
