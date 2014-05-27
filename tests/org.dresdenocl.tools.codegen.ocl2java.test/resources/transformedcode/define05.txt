@@ -1,4 +1,4 @@
-package org.dresdenocl.examples.royalsandloyals.constraints;
+package org.dresdenocl.examples.royalandloyal.constraints;
 
 /**
  * <p>Generated Aspect to enforce OCL constraint.</p>
@@ -13,12 +13,12 @@ public privileged aspect Customer_DefAspect_initial {
      * <code>context Customer
      *       def: initial: String = name.substring(1, 1)</code></p>
      */
-    public String org.dresdenocl.examples.royalsandloyals.Customer.initial;
+    public String org.dresdenocl.examples.royalandloyal.Customer.initial;
     
     /**
-     * <p>Pointcut for all requests on {@link org.dresdenocl.examples.royalsandloyals.Customer#initial}.</p>
+     * <p>Pointcut for all requests on {@link org.dresdenocl.examples.royalandloyal.Customer#initial}.</p>
      */
-    protected pointcut initialGetter(org.dresdenocl.examples.royalsandloyals.Customer aClass) :
+    protected pointcut initialGetter(org.dresdenocl.examples.royalandloyal.Customer aClass) :
     	get(* initial) && target(aClass);
     
     /**
@@ -26,7 +26,7 @@ public privileged aspect Customer_DefAspect_initial {
      * <code>context Customer
      *       def: initial: String = name.substring(1, 1)</code></p>
      */
-    before(org.dresdenocl.examples.royalsandloyals.Customer aClass): initialGetter(aClass) {
+    before(org.dresdenocl.examples.royalandloyal.Customer aClass): initialGetter(aClass) {
         aClass.initial = aClass.name.substring(new Integer(1) - 1, new Integer(1));
     }
 }

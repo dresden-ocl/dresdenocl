@@ -1,6 +1,6 @@
 -- Constraint taken from [1] page 173f.
--- @model{../../model/royalsandloyals.uml}
-package org::dresdenocl::examples::royalsandloyals
+-- @model{../../model/royalandloyal.uml}
+package org::dresdenocl::examples::royalandloyal
 
 context Membership
 inv: Sequence{'a','b','c','c','d','e'}->prepend('X') = Sequence{'X','a','b','c','c','d','e'}

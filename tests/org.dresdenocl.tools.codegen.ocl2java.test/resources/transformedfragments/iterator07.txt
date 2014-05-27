@@ -1,8 +1,8 @@
-java.util.HashSet<org.dresdenocl.examples.royalsandloyals.Transaction> result1;
-result1 = new java.util.HashSet<org.dresdenocl.examples.royalsandloyals.Transaction>();
+java.util.HashSet<org.dresdenocl.examples.royalandloyal.Transaction> result1;
+result1 = new java.util.HashSet<org.dresdenocl.examples.royalandloyal.Transaction>();
 
 /* Iterator Select: Select all elements which fulfill the condition. */
-for (org.dresdenocl.examples.royalsandloyals.Transaction anElement1 : aClass.transactions) {
+for (org.dresdenocl.examples.royalandloyal.Transaction anElement1 : aClass.transactions) {
     if ((anElement1.points > new Integer(100))) {
         result1.add(anElement1);
     }

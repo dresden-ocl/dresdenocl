@@ -1,4 +1,4 @@
-package org::dresdenocl::examples::royalsandloyals
+package org::dresdenocl::examples::royalandloyal
 
 context LoyaltyProgram::enroll(c : Customer)
 post: 

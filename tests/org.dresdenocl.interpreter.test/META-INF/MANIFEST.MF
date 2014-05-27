@@ -13,3 +13,4 @@ Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Vendor: TU Dresden, Software Technology Group
 Export-Package: org.dresdenocl.interpreter.test
+Import-Package: org.dresdenocl.examples.royalandloyal.ocl22javacode

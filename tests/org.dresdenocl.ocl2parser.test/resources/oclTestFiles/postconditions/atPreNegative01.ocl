@@ -1,4 +1,4 @@
-package org::dresdenocl::examples::royalsandloyals
+package org::dresdenocl::examples::royalandloyal
 
 -- Should not be parsed. @pre is only valid in postconditions.
 context LoyaltyProgram::enroll(c : Customer)

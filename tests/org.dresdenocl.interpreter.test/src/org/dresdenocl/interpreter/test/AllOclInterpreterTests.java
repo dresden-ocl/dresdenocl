@@ -21,9 +21,8 @@ package org.dresdenocl.interpreter.test;
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
-
 import org.dresdenocl.interpreter.test.constraintkinds.AllConstraintKindTests;
-import org.dresdenocl.interpreter.test.royalsandloyals.TestInterpretation;
+import org.dresdenocl.interpreter.test.royalandloyal.TestInterpretation;
 import org.dresdenocl.interpreter.test.standardlibrary.AllStandardLibraryTests;
 
 /**

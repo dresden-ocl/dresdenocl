@@ -1,6 +1,6 @@
 -- Constraint taken from [1] page 172f and extended.
--- @model{../../model/royalsandloyals.uml}
-package org::dresdenocl::examples::royalsandloyals
+-- @model{../../model/royalandloyal.uml}
+package org::dresdenocl::examples::royalandloyal
 
 context Membership
 inv: Set { 1, 4, 7, 10 } - Set { 4, 7 } = Set { 1, 10 }

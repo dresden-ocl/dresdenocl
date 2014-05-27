@@ -20,7 +20,7 @@
 				<artifactId>tycho-surefire-plugin</artifactId>
 				<configuration>
 					<explodedBundles>
-						<bundle>org.dresdenocl.examples.royalsandloyals</bundle>
+						<bundle>org.dresdenocl.examples.royalandloyal</bundle>
 					</explodedBundles>
 					<!--<skip>true</skip> -->
 				</configuration>

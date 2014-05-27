@@ -60,7 +60,7 @@ public final class CodegenTestPerformer {
 			"org.dresdenocl.examples.royalandloyal";
 
 	/** The path of the UML model file. */
-	private static final String MODEL_FILE_NAME = "model/royalsandloyals.uml";
+	private static final String MODEL_FILE_NAME = "model/royalandloyal.uml";
 
 	/** The name of the bundle for the transformed code. */
 	private static final String OUTPUT_BUNDLE =

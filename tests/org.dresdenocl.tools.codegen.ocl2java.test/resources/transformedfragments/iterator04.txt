@@ -1,12 +1,12 @@
-java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.LoyaltyAccount> result1;
-java.util.Comparator<org.dresdenocl.examples.royalsandloyals.LoyaltyAccount> comparator1;
+java.util.ArrayList<org.dresdenocl.examples.royalandloyal.LoyaltyAccount> result1;
+java.util.Comparator<org.dresdenocl.examples.royalandloyal.LoyaltyAccount> comparator1;
 
 result1 = aClass.membership.accounts;
 
-comparator1 = new java.util.Comparator<org.dresdenocl.examples.royalsandloyals.LoyaltyAccount>() {
+comparator1 = new java.util.Comparator<org.dresdenocl.examples.royalandloyal.LoyaltyAccount>() {
 
     /** Method which compares two elements of the collection. */
-    public int compare(org.dresdenocl.examples.royalsandloyals.LoyaltyAccount anElement1, org.dresdenocl.examples.royalsandloyals.LoyaltyAccount anElement2) {
+    public int compare(org.dresdenocl.examples.royalandloyal.LoyaltyAccount anElement1, org.dresdenocl.examples.royalandloyal.LoyaltyAccount anElement2) {
         int result2;
 
         result2 = 0;

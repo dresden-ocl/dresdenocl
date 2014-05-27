@@ -2,7 +2,7 @@ java.util.ArrayList<Integer> result2;
 result2 = new java.util.ArrayList<Integer>();
 
 /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
-for (org.dresdenocl.examples.royalsandloyals.Transaction anElement1 : aClass.transactions) {
+for (org.dresdenocl.examples.royalandloyal.Transaction anElement1 : aClass.transactions) {
     result2.add(anElement1.points);
 }
 Boolean result1;

@@ -1,6 +1,6 @@
 -- Constraint taken from [1] page 177 and adapted.
--- @model{../../model/royalsandloyals.uml}
-package org::dresdenocl::examples::royalsandloyals
+-- @model{../../model/royalandloyal.uml}
+package org::dresdenocl::examples::royalandloyal
 
 context LoyaltyProgram
 inv: self.membership.accounts->sortedBy(number)->sortedBy(number)->size() > 0

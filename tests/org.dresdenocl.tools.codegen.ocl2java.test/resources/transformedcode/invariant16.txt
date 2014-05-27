@@ -1,4 +1,4 @@
-package org.dresdenocl.examples.royalsandloyals.constraints;
+package org.dresdenocl.examples.royalandloyal.constraints;
 
 /**
  * <p>Generated Aspect to enforce OCL constraint.</p>
@@ -8,16 +8,16 @@ package org.dresdenocl.examples.royalsandloyals.constraints;
  */
 public privileged aspect Service_InvAspect1 {
 
-    declare parents: org.dresdenocl.examples.royalsandloyals.Service implements org.dresdenocl.tools.codegen.ocl2java.types.OclCheckable;
+    declare parents: org.dresdenocl.examples.royalandloyal.Service implements org.dresdenocl.tools.codegen.ocl2java.types.OclCheckable;
 
-    public void org.dresdenocl.examples.royalsandloyals.Service.checkInvariants() {
+    public void org.dresdenocl.examples.royalandloyal.Service.checkInvariants() {
         /* Remains empty. Is only filled with behavior by advice(s). */
     }
 
     /**
-     * <p>Pointcut for all calls on {@link org.dresdenocl.examples.royalsandloyals.Service#checkInvariants()}.</p>
+     * <p>Pointcut for all calls on {@link org.dresdenocl.examples.royalandloyal.Service#checkInvariants()}.</p>
      */
-    protected pointcut checkInvariantsCaller(org.dresdenocl.examples.royalsandloyals.Service aClass):
+    protected pointcut checkInvariantsCaller(org.dresdenocl.examples.royalandloyal.Service aClass):
     	call(void checkInvariants())
     	&& target(aClass);
 
@@ -26,9 +26,9 @@ public privileged aspect Service_InvAspect1 {
      * <code>context Service
      *       inv: self.oclIsUndefined() = false</code></p>
      */
-    after(org.dresdenocl.examples.royalsandloyals.Service aClass) : checkInvariantsCaller(aClass) {
+    after(org.dresdenocl.examples.royalandloyal.Service aClass) : checkInvariantsCaller(aClass) {
         /* Disable this constraint for subclasses of Service. */
-        if (aClass.getClass().getCanonicalName().equals("org.dresdenocl.examples.royalsandloyals.Service")) {
+        if (aClass.getClass().getCanonicalName().equals("org.dresdenocl.examples.royalandloyal.Service")) {
         if (!((Object) (aClass == null)).equals(new Boolean(false))) {
         	// TODO Auto-generated code executed when constraint is violated.
         	String msg = "Error: Constraint 'undefined' (inv: self.oclIsUndefined() = false) was violated for Object " + aClass.toString() + ".";

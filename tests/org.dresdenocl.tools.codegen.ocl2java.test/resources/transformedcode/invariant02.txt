@@ -1,4 +1,4 @@
-package org.dresdenocl.examples.royalsandloyals.constraints;
+package org.dresdenocl.examples.royalandloyal.constraints;
 
 /**
  * <p>Generated Aspect to enforce OCL constraint.</p>
@@ -9,27 +9,27 @@ package org.dresdenocl.examples.royalsandloyals.constraints;
 public privileged aspect CustomerCard_InvAspect_checkDates {
 
     /**
-     * <p>Describes all Constructors of the class {@link org.dresdenocl.examples.royalsandloyals.CustomerCard}.</p>
+     * <p>Describes all Constructors of the class {@link org.dresdenocl.examples.royalandloyal.CustomerCard}.</p>
      */
-    protected pointcut allCustomerCardConstructors(org.dresdenocl.examples.royalsandloyals.CustomerCard aClass):
-        execution(org.dresdenocl.examples.royalsandloyals.CustomerCard.new(..)) && this(aClass);
+    protected pointcut allCustomerCardConstructors(org.dresdenocl.examples.royalandloyal.CustomerCard aClass):
+        execution(org.dresdenocl.examples.royalandloyal.CustomerCard.new(..)) && this(aClass);
 
     /**
-     * <p>Pointcut for all changes of the attribute {@link org.dresdenocl.examples.royalsandloyals.CustomerCard#validFrom}.</p>
+     * <p>Pointcut for all changes of the attribute {@link org.dresdenocl.examples.royalandloyal.CustomerCard#validFrom}.</p>
      */
-    protected pointcut validFromSetter(org.dresdenocl.examples.royalsandloyals.CustomerCard aClass) :
-        set(* org.dresdenocl.examples.royalsandloyals.CustomerCard.validFrom) && target(aClass); 
+    protected pointcut validFromSetter(org.dresdenocl.examples.royalandloyal.CustomerCard aClass) :
+        set(* org.dresdenocl.examples.royalandloyal.CustomerCard.validFrom) && target(aClass); 
 
     /**
-     * <p>Pointcut for all changes of the attribute {@link org.dresdenocl.examples.royalsandloyals.CustomerCard#validThru}.</p>
+     * <p>Pointcut for all changes of the attribute {@link org.dresdenocl.examples.royalandloyal.CustomerCard#validThru}.</p>
      */
-    protected pointcut validThruSetter(org.dresdenocl.examples.royalsandloyals.CustomerCard aClass) :
-        set(* org.dresdenocl.examples.royalsandloyals.CustomerCard.validThru) && target(aClass); 
+    protected pointcut validThruSetter(org.dresdenocl.examples.royalandloyal.CustomerCard aClass) :
+        set(* org.dresdenocl.examples.royalandloyal.CustomerCard.validThru) && target(aClass); 
     
     /**
      * <p>Pointcut to collect all attributeSetters.</p>
      */
-    protected pointcut allSetters(org.dresdenocl.examples.royalsandloyals.CustomerCard aClass) :
+    protected pointcut allSetters(org.dresdenocl.examples.royalandloyal.CustomerCard aClass) :
     	validFromSetter(aClass)
     	|| validThruSetter(aClass);
 
@@ -38,9 +38,9 @@ public privileged aspect CustomerCard_InvAspect_checkDates {
      * <code>context CustomerCard
      *       inv checkDates: validFrom.isBefore(validThru)</code></p>
      */
-    after(org.dresdenocl.examples.royalsandloyals.CustomerCard aClass) : allCustomerCardConstructors(aClass) || allSetters(aClass) {
+    after(org.dresdenocl.examples.royalandloyal.CustomerCard aClass) : allCustomerCardConstructors(aClass) || allSetters(aClass) {
         /* Disable this constraint for subclasses of CustomerCard. */
-        if (aClass.getClass().getCanonicalName().equals("org.dresdenocl.examples.royalsandloyals.CustomerCard")) {
+        if (aClass.getClass().getCanonicalName().equals("org.dresdenocl.examples.royalandloyal.CustomerCard")) {
         if (!aClass.validFrom.isBefore(aClass.validThru)) {
         	// TODO Auto-generated code executed when constraint is violated.
         	String msg = "Error: Constraint 'checkDates' (inv checkDates: validFrom.isBefore(validThru)) was violated for Object " + aClass.toString() + ".";

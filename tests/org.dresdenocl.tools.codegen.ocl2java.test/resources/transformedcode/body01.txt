@@ -1,4 +1,4 @@
-package org.dresdenocl.examples.royalsandloyals.constraints;
+package org.dresdenocl.examples.royalandloyal.constraints;
 
 /**
  * <p>Generated Aspect to enforce OCL constraint.</p>
@@ -9,23 +9,23 @@ package org.dresdenocl.examples.royalsandloyals.constraints;
 public privileged aspect LoyaltyProgram_BodyAspect_getServices {
 
     /**
-     * <p>Pointcut for all calls on {@link org.dresdenocl.examples.royalsandloyals.LoyaltyProgram#getServices()}.</p>
+     * <p>Pointcut for all calls on {@link org.dresdenocl.examples.royalandloyal.LoyaltyProgram#getServices()}.</p>
      */
-    protected pointcut getServicesCaller(org.dresdenocl.examples.royalsandloyals.LoyaltyProgram aClass):
-    	call(* org.dresdenocl.examples.royalsandloyals.LoyaltyProgram.getServices())
+    protected pointcut getServicesCaller(org.dresdenocl.examples.royalandloyal.LoyaltyProgram aClass):
+    	call(* org.dresdenocl.examples.royalandloyal.LoyaltyProgram.getServices())
     	&& target(aClass);
 
     /**
      * <p>Defines the body of the method getServices() defined by the constraint
-     * <code>context LoyaltyProgram::getServices(): java.util.Set<org.dresdenocl.examples.royalsandloyals.Service>
+     * <code>context LoyaltyProgram::getServices(): java.util.Set<org.dresdenocl.examples.royalandloyal.Service>
      *       body: partners.deliveredServices->asSet()</code></p>
      */
-    java.util.Set<org.dresdenocl.examples.royalsandloyals.Service> around(org.dresdenocl.examples.royalsandloyals.LoyaltyProgram aClass): getServicesCaller(aClass) {
-        java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.Service> result1;
-        result1 = new java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.Service>();
+    java.util.Set<org.dresdenocl.examples.royalandloyal.Service> around(org.dresdenocl.examples.royalandloyal.LoyaltyProgram aClass): getServicesCaller(aClass) {
+        java.util.ArrayList<org.dresdenocl.examples.royalandloyal.Service> result1;
+        result1 = new java.util.ArrayList<org.dresdenocl.examples.royalandloyal.Service>();
         
         /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
-        for (org.dresdenocl.examples.royalsandloyals.ProgramPartner anElement1 : aClass.partners) {
+        for (org.dresdenocl.examples.royalandloyal.ProgramPartner anElement1 : aClass.partners) {
             result1.addAll(anElement1.deliveredServices);
         }
 

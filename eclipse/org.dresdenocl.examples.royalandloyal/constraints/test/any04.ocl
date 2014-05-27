@@ -1,6 +1,6 @@
 -- Constraint taken from [1] page 196ff.
--- @model{../../model/royalsandloyals.uml}
-package org::dresdenocl::examples::royalsandloyals
+-- @model{../../model/royalandloyal.uml}
+package org::dresdenocl::examples::royalandloyal
 
 context Transaction
 inv: 1.oclIsKindOf(Real)

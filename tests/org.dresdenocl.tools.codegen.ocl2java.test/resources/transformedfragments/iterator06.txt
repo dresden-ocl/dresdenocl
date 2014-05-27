@@ -1,15 +1,15 @@
-java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.ProgramPartner> result2;
-result2 = new java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.ProgramPartner>();
+java.util.ArrayList<org.dresdenocl.examples.royalandloyal.ProgramPartner> result2;
+result2 = new java.util.ArrayList<org.dresdenocl.examples.royalandloyal.ProgramPartner>();
 
 /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
-for (org.dresdenocl.examples.royalsandloyals.LoyaltyProgram anElement1 : aClass.programs) {
+for (org.dresdenocl.examples.royalandloyal.LoyaltyProgram anElement1 : aClass.programs) {
     result2.addAll(anElement1.partners);
 }
-java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.ProgramPartner> result1;
-result1 = new java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.ProgramPartner>();
+java.util.ArrayList<org.dresdenocl.examples.royalandloyal.ProgramPartner> result1;
+result1 = new java.util.ArrayList<org.dresdenocl.examples.royalandloyal.ProgramPartner>();
 
 /* Iterator Select: Select all elements which fulfill the condition. */
-for (org.dresdenocl.examples.royalsandloyals.ProgramPartner anElement2 : result2) {
+for (org.dresdenocl.examples.royalandloyal.ProgramPartner anElement2 : result2) {
     if (!anElement2.equals(aClass)) {
         result1.add(anElement2);
     }

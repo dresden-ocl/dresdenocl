@@ -1,1 +1,1 @@
-!"".equals(org.dresdenocl.examples.royalsandloyals.Date.nowString)
+!"".equals(org.dresdenocl.examples.royalandloyal.Date.nowString)

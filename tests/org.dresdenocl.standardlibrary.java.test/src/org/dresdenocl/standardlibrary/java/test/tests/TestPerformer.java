@@ -27,12 +27,12 @@ import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.dresdenocl.essentialocl.EssentialOclPlugin;
 import org.dresdenocl.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
 import org.dresdenocl.essentialocl.types.OclLibrary;
-import org.dresdenocl.examples.royalsandloyals.Customer;
-import org.dresdenocl.examples.royalsandloyals.CustomerCard;
-import org.dresdenocl.examples.royalsandloyals.Date;
-import org.dresdenocl.examples.royalsandloyals.LoyaltyAccount;
-import org.dresdenocl.examples.royalsandloyals.LoyaltyProgram;
-import org.dresdenocl.examples.royalsandloyals.ProgramPartner;
+import org.dresdenocl.examples.royalandloyal.Customer;
+import org.dresdenocl.examples.royalandloyal.CustomerCard;
+import org.dresdenocl.examples.royalandloyal.Date;
+import org.dresdenocl.examples.royalandloyal.LoyaltyAccount;
+import org.dresdenocl.examples.royalandloyal.LoyaltyProgram;
+import org.dresdenocl.examples.royalandloyal.ProgramPartner;
 import org.dresdenocl.metamodels.uml2.UML2MetamodelPlugin;
 import org.dresdenocl.model.IModel;
 import org.dresdenocl.model.IModelRegistry;
@@ -67,7 +67,7 @@ public class TestPerformer {
 	 */
 
 	public static String QUALIFIED_NAME_MODEL_PACKAGE = ModelConstants.ROOT_PACKAGE_NAME
-			+ "::org::dresdenocl::examples::royalsandloyals";
+			+ "::org::dresdenocl::examples::royalandloyal";
 
 	/** The qualified Name of {@link Customer}. */
 	public static String QUALIFIED_NAME_CUSTOMER = QUALIFIED_NAME_MODEL_PACKAGE
@@ -104,7 +104,7 @@ public class TestPerformer {
 	private final static String MODEL_BUNDLE = "org.dresdenocl.examples.royalandloyal";
 
 	/** The path of the UML model file. */
-	private final static String MODEL_FILE = "model/royalsandloyals.uml";
+	private final static String MODEL_FILE = "model/royalandloyal.uml";
 
 	/** The standard library factory to create OclAny and sub-types. */
 	protected IStandardLibraryFactory myStandardLibraryFactory = JavaStandardlibraryPlugin

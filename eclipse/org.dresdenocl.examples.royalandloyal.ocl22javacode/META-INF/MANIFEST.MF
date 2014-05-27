@@ -3,9 +3,9 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Royal and Loyal Example, Generated Java Code and Test Cases
 Bundle-SymbolicName: org.dresdenocl.examples.royalandloyal.ocl22javacode;singleton:=true
 Bundle-Version: 3.3.0.qualifier
-Export-Package: org.dresdenocl.examples.royalsandloyals.ocl22javacode,
- org.dresdenocl.examples.royalsandloyals.ocl22javacode.constraints,
- org.dresdenocl.examples.royalsandloyals.ocl22javacode.test
+Export-Package: org.dresdenocl.examples.royalandloyal.ocl22javacode,
+ org.dresdenocl.examples.royalandloyal.ocl22javacode.constraints,
+ org.dresdenocl.examples.royalandloyal.ocl22javacode.test
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.aspectj.runtime,
  org.junit,

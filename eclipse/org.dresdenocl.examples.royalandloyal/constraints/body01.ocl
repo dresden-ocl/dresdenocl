@@ -1,6 +1,6 @@
 -- Constraint taken from [1] page 44 and modified.
--- @model{../model/royalsandloyals.uml}
-package org::dresdenocl::examples::royalsandloyals
+-- @model{../model/royalandloyal.uml}
+package org::dresdenocl::examples::royalandloyal
 
 -- The expression type must match the operation return type in the context. Error occured at line 7 and column 1. The error occured at the token body.
 context LoyaltyProgram::getServices(): Set(Service)

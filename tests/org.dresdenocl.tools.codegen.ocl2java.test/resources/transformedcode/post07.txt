@@ -1,4 +1,4 @@
-package org.dresdenocl.examples.royalsandloyals.constraints;
+package org.dresdenocl.examples.royalandloyal.constraints;
 
 /**
  * <p>Generated Aspect to enforce OCL constraint.</p>
@@ -9,10 +9,10 @@ package org.dresdenocl.examples.royalsandloyals.constraints;
 public privileged aspect Service_PostAspect_upgradePointsEarned {
 
     /**
-     * <p>Pointcut for all calls on {@link org.dresdenocl.examples.royalsandloyals.Service#upgradePointsEarned(Integer amount)}.</p>
+     * <p>Pointcut for all calls on {@link org.dresdenocl.examples.royalandloyal.Service#upgradePointsEarned(Integer amount)}.</p>
      */
-    protected pointcut upgradePointsEarnedCaller(org.dresdenocl.examples.royalsandloyals.Service aClass, Integer amount):
-    	call(* org.dresdenocl.examples.royalsandloyals.Service.upgradePointsEarned(Integer))
+    protected pointcut upgradePointsEarnedCaller(org.dresdenocl.examples.royalandloyal.Service aClass, Integer amount):
+    	call(* org.dresdenocl.examples.royalandloyal.Service.upgradePointsEarned(Integer))
     	&& target(aClass) && args(amount);
     
     /**
@@ -20,9 +20,9 @@ public privileged aspect Service_PostAspect_upgradePointsEarned {
      * <code>context Service::upgradePointsEarned(amount: Integer) : 
      *       post: calcPoints() = calcPoints@pre() + amount</code></p>
      */
-    void around(org.dresdenocl.examples.royalsandloyals.Service aClass, Integer amount): upgradePointsEarnedCaller(aClass, amount) {
+    void around(org.dresdenocl.examples.royalandloyal.Service aClass, Integer amount): upgradePointsEarnedCaller(aClass, amount) {
         /* Disable this constraint for subclasses of Service. */
-        if (aClass.getClass().getCanonicalName().equals("org.dresdenocl.examples.royalsandloyals.Service")) {
+        if (aClass.getClass().getCanonicalName().equals("org.dresdenocl.examples.royalandloyal.Service")) {
     
         Integer atPreValue1;
         

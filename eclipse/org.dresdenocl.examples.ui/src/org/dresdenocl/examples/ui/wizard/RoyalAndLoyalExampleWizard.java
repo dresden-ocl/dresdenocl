@@ -17,12 +17,13 @@ public class RoyalAndLoyalExampleWizard extends AbstractExampleWizard {
 	 * @see org.dresdenocl.examples.ui.wizard.AbstractExampleWizard#
 	 * getExamplePlugins()
 	 */
+	@Override
 	protected Collection<String[]> getExamplePlugins() {
 
 		Collection<String[]> result = new ArrayList<String[]>(1);
 		result.add(new String[] { "org.dresdenocl.examples.royalandloyal",
 				"Dresden OCL - Royal & Loyal UML/Java Example" });
-		
+
 		return result;
 	}
 }

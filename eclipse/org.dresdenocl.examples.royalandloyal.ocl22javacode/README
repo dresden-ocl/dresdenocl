@@ -20,7 +20,7 @@ into your Eclipse distribution.
 
 Provided Tests
 ==============
-The directory org.dresdenocl.examples.royalsandloyals.constraints.test 
+The directory org.dresdenocl.examples.royalandloyal.constraints.test 
 contains test cases to test generated AspectJ code with JUnit.
 
 * AllAspectTests tests all generated constraint code.

@@ -1,5 +1,5 @@
--- @model{../../model/royalsandloyals.uml}
-package org::dresdenocl::examples::royalsandloyals
+-- @model{../../model/royalandloyal.uml}
+package org::dresdenocl::examples::royalandloyal
 
 -- Used to test the preparation contained in '../define05.ocl'
 context Customer
