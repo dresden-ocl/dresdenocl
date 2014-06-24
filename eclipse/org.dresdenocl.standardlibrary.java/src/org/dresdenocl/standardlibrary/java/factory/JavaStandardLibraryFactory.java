@@ -686,19 +686,6 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
       /*
        * (non-Javadoc)
        * 
-       * @seeorg.dresdenocl.essentialocl.standardlibrary.OclAny# getModelInstanceElement()
-       */
-      @Override
-      public IModelInstanceElement getModelInstanceElement() {
-        if (type instanceof VoidType) {
-          return IModelInstanceVoid.INSTANCE;
-        }
-        return super.getModelInstanceElement();
-      }
-
-      /*
-       * (non-Javadoc)
-       * 
        * @see org.dresdenocl.essentialocl.standardlibrary.OclType#
        * allInstances(org.dresdenocl.modelinstance.IModelInstance)
        */
