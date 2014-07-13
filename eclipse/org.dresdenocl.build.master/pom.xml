@@ -24,7 +24,7 @@
 		<scala.version>2.9.1</scala.version>
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
-		<eclipse-repo.url>http://download.eclipse.org/releases/kepler</eclipse-repo.url>
+		<eclipse-repo.url>http://download.eclipse.org/releases/luna</eclipse-repo.url>
 		<project.build.sourceEncoding>CP1252</project.build.sourceEncoding>
 		<maven.test.failure.ignore>true</maven.test.failure.ignore>
 	</properties>
@@ -266,15 +266,17 @@
 						</environments>
 						<filters>
 							<!-- This filter is due to a bug of eclipse -->
+							<!-- 
 							<filter>
 								<type>eclipse-plugin</type>
 								<id>org.eclipse.jdt.core</id>
 								<restrictTo>
-									<!-- this is the version for Kepler SR1, have to adapt for other 
-										release trains/service releases -->
+									 this is the version for Kepler SR1, have to adapt for other 
+										release trains/service releases
 									<version>3.9.1.v20130905-0837</version>
 								</restrictTo>
 							</filter>
+							-->
 						</filters>
 					</configuration>
 				</plugin>
