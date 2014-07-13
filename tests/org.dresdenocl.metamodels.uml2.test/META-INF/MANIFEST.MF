@@ -5,12 +5,12 @@ Bundle-SymbolicName: org.dresdenocl.metamodels.uml2.test;singleton:=true
 Bundle-Version: 3.3.0.qualifier
 Bundle-Activator: org.dresdenocl.metamodels.uml2.test.UML2MetaModelTestPlugin
 Require-Bundle: org.eclipse.core.runtime,
- org.junit,
+ org.junit;bundle-version="4.0.0",
  org.dresdenocl.metamodels.test,
  org.dresdenocl.metamodels.uml2,
  org.dresdenocl.facade,
  org.eclipse.emf.ecore.xmi,
- org.eclipse.uml2.uml;bundle-version="[3.1.0,5.0.0)"
+ org.eclipse.uml2.uml;bundle-version="3.1.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Vendor: TU Dresden, Software Technology Group
