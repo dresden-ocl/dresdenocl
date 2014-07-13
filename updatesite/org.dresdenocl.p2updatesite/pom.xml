@@ -19,7 +19,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
       <extension>
         <groupId>org.apache.maven.wagon</groupId>
         <artifactId>wagon-ssh</artifactId>
-        <version>1.0</version>
+        <version>2.6</version>
       </extension>
     </extensions>
  </build>
@@ -32,7 +32,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
     <!-- Properties relative to the 
     distant host where to upload the repo -->
     <scp.url>scp://${env.DROPSBOX_UPLOAD_USER}:${env.DROPSBOX_UPLOAD_PASS}@lars.inf.tu-dresden.de</scp.url>
-    <scp.toDir>/srv/www/dresdenocl_updatesite/4.4/latest</scp.toDir>
+    <scp.toDir>/srv/www/dresdenocl_updatesite/4.4/latest/</scp.toDir>
     <!-- Relative path to the repo being uploaded -->
     <repo.path>${project.build.directory}/repository/</repo.path>
    </properties>
