@@ -19,8 +19,8 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<tycho.version>0.20.0</tycho.version>
-		<tycho.extras.version>0.20.0</tycho.extras.version>
+		<tycho.version>0.21.0</tycho.version>
+		<tycho.extras.version>0.21.0</tycho.extras.version>
 		<scala.version>2.9.1</scala.version>
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
@@ -297,7 +297,7 @@
 
 	<repositories>
 		<repository>
-			<id>kepler</id>
+			<id>eclipse</id>
 			<url>${eclipse-repo.url}</url>
 			<layout>p2</layout>
 		</repository>
