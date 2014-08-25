@@ -3,7 +3,7 @@ Dresden OCL is organized as a group of Eclipse Plug-ins. More information is als
 
 ##Detailed steps for running the source code distribution
 
-For this guide, Eclipse 4.3.2 (Kepler SR2) and Java6 has been used.
+For this guide, Eclipse 4.4 and Java 6 has been used.
 
 __Prerequisites__:
 
@@ -13,7 +13,7 @@ __Prerequisites__:
 	* You can either download AJDT from the Eclipse Marketplace or using their website.
 3. Eclipse Plug-Ins
 	* You either use the Eclipse Modeling Tools or install following Plug-Ins afterwards:
-	* Help -> Install New Software... -> Indigo -> Modeling ->
+	* Help -> Install New Software... -> Luna -> Modeling ->
 		* Ecore Tools SDK
 		* EMF - Eclipse Modeling Framework SDK
 		* UML2 Extender SDK
@@ -32,12 +32,7 @@ __Installation__:
 	* eclipse/** (all)
 	* tests/** (all)
 3. Build the project
-	* org.dresdenocl.language.ocl.staticsemantics -> build.xml -> Run As -> 2nd entry of Ant-Build 
-		* Tab Targets:
-			- select Clean org.dresdenocl.language.ocl.staticsemantics 
-		* Tab JRE:
-			- Runtime JRE: select "Run in the same JRE as the workspace"
-	* Run
+	* org.dresdenocl.build.master -> pom.xml -> Run As -> maven install
 4. Final
 	* In order to run the project now right-click any Dresden OCL Plug-In and select
 	  run as -> Eclipse Plug-In 
@@ -53,3 +48,4 @@ Code Contribution
 If you plan to submit any code to the Dresden OCL repository, please use the JDT code
 formatter available at http://www.dresden-ocl.org/update/stuff/formatter.xml.
 Please note the [best practices](http://st.inf.tu-dresden.de/stwiki/index.php/OCL:Best_Practices).
+Just fork Dresden OCL on GitHub and make a pull request!
