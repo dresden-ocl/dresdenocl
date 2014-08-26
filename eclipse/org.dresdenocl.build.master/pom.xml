@@ -15,7 +15,7 @@
 
 	<groupId>org.dresdenocl</groupId>
 	<artifactId>parent</artifactId>
-	<version>3.3.0-SNAPSHOT</version>
+	<version>3.4.0</version>
 	<packaging>pom</packaging>
 
 	<properties>
@@ -268,6 +268,13 @@
 			<id>typesafe</id>
 			<name>Typesafe Repository</name>
 			<url>http://repo.typesafe.com/typesafe/releases/</url>
+		</repository>
+		
+		<repository>
+			<id>orbit</id>
+			<name>Orbit Repository</name>
+			<url>http://download.eclipse.org/tools/orbit/downloads/drops/R20140525021250/repository/</url>
+			<layout>p2</layout>
 		</repository>
 	</repositories>
 

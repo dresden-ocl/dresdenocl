@@ -7,7 +7,7 @@
 		<relativePath>../../eclipse/org.dresdenocl.build.master/pom.xml</relativePath>
 		<groupId>org.dresdenocl</groupId>
 		<artifactId>parent</artifactId>
-		<version>3.3.0-SNAPSHOT</version>
+		<version>3.4.0</version>
 	</parent>
 
 	<artifactId>org.dresdenocl.tools.codegen.declarativ.ocl2sql.test</artifactId>

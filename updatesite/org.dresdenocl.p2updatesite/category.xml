@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/org.dresdenocl.feature.core_3.3.0.qualifier.jar" id="org.dresdenocl.feature.core" version="3.3.0.qualifier">
+   <feature url="features/org.dresdenocl.feature.core_3.4.0.jar" id="org.dresdenocl.feature.core" version="3.4.0">
       <category name="new_category_3"/>
    </feature>
-   <feature url="features/org.dresdenocl.feature.parser_3.3.0.qualifier.jar" id="org.dresdenocl.feature.parser" version="3.3.0.qualifier">
+   <feature url="features/org.dresdenocl.feature.parser_3.4.0.jar" id="org.dresdenocl.feature.parser" version="3.4.0">
       <category name="new_category_3"/>
    </feature>
-   <feature url="features/org.dresdenocl.feature.interpreter_3.3.0.qualifier.jar" id="org.dresdenocl.feature.interpreter" version="3.3.0.qualifier">
+   <feature url="features/org.dresdenocl.feature.interpreter_3.4.0.jar" id="org.dresdenocl.feature.interpreter" version="3.4.0">
       <category name="new_category_3"/>
    </feature>
-   <feature url="features/org.dresdenocl.feature.metamodels_3.3.0.qualifier.jar" id="org.dresdenocl.feature.metamodels" version="3.3.0.qualifier">
+   <feature url="features/org.dresdenocl.feature.metamodels_3.4.0.jar" id="org.dresdenocl.feature.metamodels" version="3.4.0">
       <category name="new_category_3"/>
    </feature>
-   <feature url="features/org.dresdenocl.feature.modelinstances_3.3.0.qualifier.jar" id="org.dresdenocl.feature.modelinstances" version="3.3.0.qualifier">
+   <feature url="features/org.dresdenocl.feature.modelinstances_3.4.0.jar" id="org.dresdenocl.feature.modelinstances" version="3.4.0">
       <category name="new_category_3"/>
    </feature>
-   <feature url="features/org.dresdenocl.feature.examples_3.3.0.qualifier.jar" id="org.dresdenocl.feature.examples" version="3.3.0.qualifier">
+   <feature url="features/org.dresdenocl.feature.examples_3.4.0.jar" id="org.dresdenocl.feature.examples" version="3.4.0">
       <category name="new_category_4"/>
    </feature>
-   <feature url="features/org.dresdenocl.feature.codegen_3.3.0.qualifier.jar" id="org.dresdenocl.feature.codegen" version="3.3.0.qualifier">
+   <feature url="features/org.dresdenocl.feature.codegen_3.4.0.jar" id="org.dresdenocl.feature.codegen" version="3.4.0">
       <category name="new_category_5"/>
    </feature>
-   <feature url="features/org.dresdenocl.feature.metrics_3.3.0.qualifier.jar" id="org.dresdenocl.feature.metrics" version="3.3.0.qualifier">
+   <feature url="features/org.dresdenocl.feature.metrics_3.4.0.jar" id="org.dresdenocl.feature.metrics" version="3.4.0">
       <category name="new_category_3"/>
    </feature>
-   <feature url="features/org.dresdenocl.feature.ocl2java_3.3.0.qualifier.jar" id="org.dresdenocl.feature.ocl2java" version="3.3.0.qualifier">
+   <feature url="features/org.dresdenocl.feature.ocl2java_3.4.0.jar" id="org.dresdenocl.feature.ocl2java" version="3.4.0">
       <category name="new_category_5"/>
    </feature>
-   <feature url="features/org.dresdenocl.feature.examples.ocl22java_3.3.0.qualifier.jar" id="org.dresdenocl.feature.examples.ocl22java" version="3.3.0.qualifier">
+   <feature url="features/org.dresdenocl.feature.examples.ocl22java_3.4.0.jar" id="org.dresdenocl.feature.examples.ocl22java" version="3.4.0">
       <category name="new_category_4"/>
    </feature>
-   <feature url="features/org.dresdenocl.feature.ocl2sql_3.3.0.qualifier.jar" id="org.dresdenocl.feature.ocl2sql" version="3.3.0.qualifier">
+   <feature url="features/org.dresdenocl.feature.ocl2sql_3.4.0.jar" id="org.dresdenocl.feature.ocl2sql" version="3.4.0">
       <category name="new_category_5"/>
    </feature>
    <category-def name="new_category_3" label="Dresden OCL Core"/>

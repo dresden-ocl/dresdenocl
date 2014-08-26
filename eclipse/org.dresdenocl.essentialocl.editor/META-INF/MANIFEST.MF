@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Essential OCL Editor Plug-in
 Bundle-SymbolicName: org.dresdenocl.essentialocl.editor;singleton:=true
-Bundle-Version: 3.3.0.qualifier
+Bundle-Version: 3.4.0
 Bundle-ClassPath: .
 Bundle-Activator: org.dresdenocl.essentialocl.types.presentation.EssentialOCLEditorPlugin$Implementation
 Bundle-Vendor: TU Dresden,

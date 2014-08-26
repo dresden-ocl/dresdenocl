@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Java Meta-Model Test Plug-in
 Bundle-SymbolicName: org.dresdenocl.metamodels.java.test;singleton:=true
-Bundle-Version: 3.3.0.qualifier
+Bundle-Version: 3.4.0
 Bundle-Activator: org.dresdenocl.metamodels.java.test.JavaMetaModelTestPlugin
 Require-Bundle: org.eclipse.core.runtime,
  org.junit,

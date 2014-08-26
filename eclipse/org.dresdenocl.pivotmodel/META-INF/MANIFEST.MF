@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Pivot Model Plug-in
 Bundle-SymbolicName: org.dresdenocl.pivotmodel; singleton:=true
-Bundle-Version: 3.3.0.qualifier
+Bundle-Version: 3.4.0
 Bundle-ClassPath: .
 Bundle-Vendor: TU Dresden, Software Technology Group
 Bundle-Localization: plugin
