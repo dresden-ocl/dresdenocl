@@ -127,7 +127,7 @@ public class Ocl2JavaSettings implements IOcl2JavaSettings {
 
 		this.constraintFolder = "constraints";
 
-		this.saveCode = 0;
+		this.saveCode = 1;
 
 		this.createGettersForDefinedAttributes = false;
 

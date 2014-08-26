@@ -477,7 +477,7 @@ public class SelectDirectoryPage extends WizardPage {
 
 				/* Check if the directory file is a directory. */
 				else if (directoryFile.isDirectory()) {
-
+					
 					/* Check if the sub directory has been set. */
 					if (this.getConstraintDirectory().length() > 0) {
 
