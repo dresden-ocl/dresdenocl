@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Model Instance
 Bundle-SymbolicName: org.dresdenocl.modelinstance
-Bundle-Version: 3.4.0
+Bundle-Version: 3.4.0.qualifier
 Bundle-Activator: org.dresdenocl.modelinstance.ModelInstancePlugin
 Bundle-Vendor: TU Dresden, Software Technology Group
 Require-Bundle: org.eclipse.core.runtime,

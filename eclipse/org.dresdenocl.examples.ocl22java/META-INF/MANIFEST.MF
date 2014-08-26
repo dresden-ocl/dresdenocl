@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Dresden OCL Ocl22java Example Wizard
 Bundle-SymbolicName: org.dresdenocl.examples.ocl22java;singleton:=true
-Bundle-Version: 3.4.0
+Bundle-Version: 3.4.0.qualifier
 Bundle-Activator: org.dresdenocl.examples.ocl22java.Ocl22JavaExamplesPlugin
 Bundle-Vendor: TU Dresden, Software Technology Group
 Require-Bundle: org.eclipse.core.runtime,

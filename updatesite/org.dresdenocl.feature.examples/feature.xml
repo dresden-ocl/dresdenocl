@@ -2,7 +2,7 @@
 <feature
       id="org.dresdenocl.feature.examples"
       label="Dresden OCL Examples"
-      version="3.4.0"
+      version="3.4.0.qualifier"
       provider-name="TU Dresden, Software Technology Group">
    <install-handler library="" handler=""/>
 

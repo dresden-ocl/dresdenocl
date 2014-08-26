@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Dresden OCL2 for Eclipse Facade
 Bundle-SymbolicName: org.dresdenocl.facade
-Bundle-Version: 3.4.0
+Bundle-Version: 3.4.0.qualifier
 Bundle-Activator: org.dresdenocl.facade.Activator
 Bundle-Vendor: TU Dresden, Software Technology Group
 Require-Bundle: org.eclipse.core.runtime,

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Meta-Model Adapter Generator Plug-in
 Bundle-SymbolicName: org.dresdenocl.codegen.adapter;singleton:=true
-Bundle-Version: 3.4.0
+Bundle-Version: 3.4.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.dresdenocl.codegen.adapter.PivotAdapterGeneratorPlugin$Implementation
 Bundle-Vendor: TU Dresden, Software Technology Group

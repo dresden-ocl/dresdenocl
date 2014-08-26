@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: OCL22java Code Generator Plug-in
 Bundle-SymbolicName: org.dresdenocl.tools.codegen.ocl2java
-Bundle-Version: 3.4.0
+Bundle-Version: 3.4.0.qualifier
 Bundle-Activator: org.dresdenocl.tools.codegen.ocl2java.Ocl2JavaPlugin
 Require-Bundle: org.eclipse.core.runtime,
  org.dresdenocl.modelbus,

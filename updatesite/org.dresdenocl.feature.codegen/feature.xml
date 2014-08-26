@@ -2,7 +2,7 @@
 <feature
       id="org.dresdenocl.feature.codegen"
       label="Dresden OCL Code Generator Basis"
-      version="3.4.0"
+      version="3.4.0.qualifier"
       provider-name="TU Dresden, Software Technology Group">
 
    <description url="http://www.example.com/description">

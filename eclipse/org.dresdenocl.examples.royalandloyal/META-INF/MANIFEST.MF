@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Royal And Loyal Example
 Bundle-SymbolicName: org.dresdenocl.examples.royalandloyal
-Bundle-Version: 3.4.0
+Bundle-Version: 3.4.0.qualifier
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.dresdenocl.examples.royalandloyal,

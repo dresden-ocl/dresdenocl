@@ -2,7 +2,7 @@
 <feature
       id="org.dresdenocl.feature.facade"
       label="Dresden OCL Eclipse Integration Facade"
-      version="3.4.0"
+      version="3.4.0.qualifier"
       provider-name="TU Dresden, Software Technology Group">
 
    <description url="http://www.example.com/description">

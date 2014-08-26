@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: OCL Abstract Syntax Model Edit
 Bundle-SymbolicName: org.dresdenocl.language.ocl.edit;singleton:=true
-Bundle-Version: 3.4.0
+Bundle-Version: 3.4.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.dresdenocl.language.ocl.provider.OCLEditPlugin$Implementation
 Bundle-Vendor: TU Dresden,
