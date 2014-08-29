@@ -2148,7 +2148,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 			if (bundle != null) {
 				try {
 					URL url = bundle.getEntry(path);
-					file = new File(FileLocator.resolve(url).toURI());
+					file = new File(FileLocator.toFileURL(url).toURI());
 				} catch (MalformedURLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
