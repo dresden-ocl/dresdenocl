@@ -143,6 +143,9 @@
 		<module>../../tests/org.dresdenocl.tools.transformation.pivot2sql.test</module>
 		<module>../../tests/org.dresdenocl.tools.transformation.test</module>
 		<!-- <module>../../tests/org.dresdenocl.tracer.test</module> -->
+		<module>
+			../../tests/org.dresdenocl.tools.codegen.ocl2java.test.aspectj
+		</module>
 	</modules>
 
 	<build>
@@ -163,7 +166,7 @@
 					<resolver>p2</resolver>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-packaging-plugin</artifactId>
@@ -178,7 +181,6 @@
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-compiler-plugin</artifactId>
-				<version>${tycho.version}</version>
 				<configuration>
 					<excludeResources>
 						<excludeResource>**/*.scala</excludeResource>
@@ -190,6 +192,16 @@
 
 		<pluginManagement>
 			<plugins>
+
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-surefire-plugin</artifactId>
+					<version>${tycho.version}</version>
+					<configuration>
+						<!--<skip>true</skip> -->
+					</configuration>
+				</plugin>
+				
 				<plugin>
 					<groupId>org.eclipse.tycho</groupId>
 					<artifactId>target-platform-configuration</artifactId>
@@ -224,7 +236,7 @@
 						</environments>
 					</configuration>
 				</plugin>
-				
+
 				<plugin>
 					<groupId>org.eclipse.tycho</groupId>
 					<artifactId>tycho-compiler-plugin</artifactId>
@@ -269,7 +281,7 @@
 			<name>Typesafe Repository</name>
 			<url>http://repo.typesafe.com/typesafe/releases/</url>
 		</repository>
-		
+
 		<repository>
 			<id>orbit</id>
 			<name>Orbit Repository</name>

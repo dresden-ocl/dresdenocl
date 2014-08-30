@@ -12,5 +12,6 @@ Export-Package: org.dresdenocl.modelinstancetype.ecore.test,
 Require-Bundle: org.eclipse.core.runtime,
  org.junit,
  org.dresdenocl.modelinstancetype.ecore,
- org.dresdenocl.modelinstancetype.test
+ org.dresdenocl.modelinstancetype.test,
+ org.dresdenocl.examples.pain
 Bundle-ActivationPolicy: lazy
