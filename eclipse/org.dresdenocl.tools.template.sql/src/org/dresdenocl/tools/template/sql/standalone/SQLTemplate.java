@@ -126,7 +126,7 @@ public class SQLTemplate {
 		if (Platform.isRunning()) {
 			fileLocation = Platform.getBundle(SQLTemplatePlugin.ID)
 					.getResource(path);
-			fileLocation = FileLocator.resolve(fileLocation);
+			fileLocation = FileLocator.toFileURL(fileLocation);
 			file = new File(fileLocation.getFile());
 		}
 

@@ -466,7 +466,7 @@ public final class MetaModelTestServices {
 		if (bundle != null) {
 			try {
 				URL url = bundle.getEntry(myTestModelPath);
-				modelFile = new File(FileLocator.resolve(url).toURI());
+				modelFile = new File(FileLocator.toFileURL(url).toURI());
 			} catch (MalformedURLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
