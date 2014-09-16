@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<relativePath>../pom.xml</relativePath>
+		<groupId>org.dresdenocl</groupId>
+		<artifactId>org.dresdenocl</artifactId>
+		<version>3.4.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>tests</artifactId>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>org.dresdenocl.debug.test</module>
+		<module>org.dresdenocl.essentialocl.tests</module>
+		<module>org.dresdenocl.examples.pain.tests</module>
+		<module>org.dresdenocl.interpreter.test</module>
+		<module>org.dresdenocl.metamodels.cwmrelational.test</module>
+		<module>org.dresdenocl.metamodels.ecore.test</module>
+		<module>org.dresdenocl.metamodels.java.test</module>
+		<module>org.dresdenocl.metamodels.test</module>
+		<module>org.dresdenocl.metamodels.uml2.test</module>
+		<module>org.dresdenocl.metamodels.xsd.test</module>
+		<module>org.dresdenocl.metrics.test</module>
+		<module>org.dresdenocl.modelbus.test</module>
+		<module>org.dresdenocl.modelinstancetype.ecore.test</module>
+		<module>org.dresdenocl.modelinstancetype.ecore.testmodel</module>
+		<module>org.dresdenocl.modelinstancetype.java.test</module>
+		<module>org.dresdenocl.modelinstancetype.test</module>
+		<module>org.dresdenocl.modelinstancetype.xml.test</module>
+		<module>org.dresdenocl.ocl2parser.test</module>
+		<module>org.dresdenocl.standardlibrary.java.test</module>
+		<module>org.dresdenocl.testsuite.abstract</module>
+		<module>org.dresdenocl.tools.codegen.declarativ.ocl2sql.test</module>
+		<module>org.dresdenocl.tools.codegen.ocl2java.test</module>
+		<module>org.dresdenocl.tools.codegen.ocl2java.test.aspectj</module>
+		<module>org.dresdenocl.tools.codegen.ocl2java.types.test</module>
+		<module>org.dresdenocl.tools.template.test</module>
+		<module>org.dresdenocl.tools.transformation.pivot2sql.test</module>
+		<module>org.dresdenocl.tools.transformation.test</module>
+		<module>org.dresdenocl.tracer.test</module>
+	</modules>
+</project> 
