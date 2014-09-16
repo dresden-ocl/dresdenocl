@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <relativePath>../pom.xml</relativePath>
+    <groupId>org.dresdenocl</groupId>
+    <artifactId>org.dresdenocl</artifactId>
+    <version>3.4.0-SNAPSHOT</version>
+  </parent>
+  
+  <artifactId>features</artifactId>
+  <packaging>pom</packaging>
+
+  <modules>
+  	<module>org.dresdenocl.feature.codegen</module>
+	<module>org.dresdenocl.feature.core</module>
+	<module>org.dresdenocl.feature.examples</module>
+	<module>org.dresdenocl.feature.examples.ocl22java</module>
+	<module>org.dresdenocl.feature.facade</module>
+	<module>org.dresdenocl.feature.interpreter</module>
+	<module>org.dresdenocl.feature.metamodels</module>
+	<module>org.dresdenocl.feature.metrics</module>
+	<module>org.dresdenocl.feature.modelinstances</module>
+	<module>org.dresdenocl.feature.ocl2java</module>
+	<module>org.dresdenocl.feature.ocl2sql</module>
+	<module>org.dresdenocl.feature.parser</module>
+	<module>org.dresdenocl.feature.tests</module>
+  </modules>
+
+</project>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.dresdenocl.feature.tests"
+      label="Tests"
+      version="3.4.0.qualifier">
+
+   <description url="http://www.example.com/description">
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <requires>
+      <import plugin="org.junit" version="4.0.0" match="greaterOrEqual"/>
+      <import plugin="org.dresdenocl.modelbus"/>
+      <import plugin="org.dresdenocl.testsuite.abstract"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.dresdenocl.facade"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.dresdenocl.metamodels.ecore"/>
+      <import plugin="org.dresdenocl.metamodels.java"/>
+      <import plugin="org.dresdenocl.metamodels.uml2"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="org.eclipse.uml2.uml" version="3.1.0"/>
+      <import plugin="org.dresdenocl.metamodels.xsd"/>
+      <import plugin="org.eclipse.xsd"/>
+      <import plugin="org.dresdenocl.modelinstancetype.ecore"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.dresdenocl.modelinstancetype.java"/>
+      <import plugin="org.dresdenocl.modelinstancetype.xml"/>
+      <import plugin="org.dresdenocl.language.ocl.staticsemantics"/>
+      <import plugin="org.dresdenocl.language.ocl.resource.ocl"/>
+      <import plugin="org.dresdenocl.language.ocl" version="3.1.0" match="greaterOrEqual"/>
+      <import plugin="org.dresdenocl.essentialocl"/>
+      <import plugin="org.dresdenocl.standardlibrary.java"/>
+      <import plugin="org.dresdenocl.tools.codegen.declarativ"/>
+      <import plugin="org.dresdenocl.tools.codegen.declarativ.ocl2sql"/>
+      <import plugin="org.dresdenocl.parser"/>
+      <import plugin="org.dresdenocl.tools.transformation"/>
+      <import plugin="org.eclipse.osgi"/>
+      <import plugin="org.dresdenocl.tools.codegen"/>
+      <import plugin="org.dresdenocl.tools.codegen.ocl2java"/>
+      <import plugin="org.dresdenocl.tools.codegen.ocl2java.types"/>
+      <import plugin="org.dresdenocl.logging"/>
+      <import plugin="org.dresdenocl.tools.template"/>
+      <import plugin="org.dresdenocl.tools.CWM"/>
+      <import plugin="org.dresdenocl.metrics"/>
+      <import plugin="org.dresdenocl.interpreter" version="3.1.0" match="greaterOrEqual"/>
+      <import plugin="org.dresdenocl.modelinstancetype"/>
+      <import plugin="org.dresdenocl.tracer" version="3.1.0" match="greaterOrEqual"/>
+      <import plugin="org.dresdenocl.interpreter.test" version="3.1.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.common" version="2.7.0" match="greaterOrEqual"/>
+      <import plugin="org.dresdenocl.essentialocl.standardlibrary"/>
+      <import plugin="org.dresdenocl.model"/>
+      <import plugin="org.dresdenocl.modelinstance"/>
+      <import plugin="org.dresdenocl.pivotmodel"/>
+   </requires>
+
+   <plugin
+         id="org.dresdenocl.essentialocl.tests"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.dresdenocl.interpreter.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.dresdenocl.metamodels.ecore.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.dresdenocl.metamodels.java.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.dresdenocl.metamodels.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.dresdenocl.metamodels.uml2.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.dresdenocl.metamodels.xsd.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.dresdenocl.modelbus.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.dresdenocl.modelinstancetype.ecore.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.dresdenocl.modelinstancetype.ecore.testmodel"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.dresdenocl.modelinstancetype.java.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.dresdenocl.modelinstancetype.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.dresdenocl.modelinstancetype.xml.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.dresdenocl.ocl2parser.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.dresdenocl.standardlibrary.java.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.dresdenocl.tools.codegen.declarativ.ocl2sql.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.dresdenocl.tools.codegen.ocl2java.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.dresdenocl.tools.template.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.dresdenocl.tools.transformation.pivot2sql.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.dresdenocl.tools.transformation.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.dresdenocl.metrics.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.dresdenocl.examples.royalandloyal"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
