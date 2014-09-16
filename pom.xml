@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<prerequisites>
+		<maven>3.0.5</maven>
+	</prerequisites>
+
+	<organization>
+		<name>Dresden OCL</name>
+		<url>http://www.dresden-ocl.org</url>
+	</organization>
+	
+	<licenses>
+		<license>
+			<name>GNU Lesser General Public License v3.0 only</name>
+			<url>http://www.gnu.org/licenses/lgpl-3.0-standalone.html</url>
+		</license>
+	</licenses>
+
+	<groupId>org.dresdenocl</groupId>
+	<artifactId>org.dresdenocl</artifactId>
+	<version>3.4.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>eclipse-maven-releases</id>
+			<url>https://repo.eclipse.org/content/repositories/releases/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<properties>
+		<tycho.version>0.21.0</tycho.version>
+		<tycho.extras.version>0.21.0</tycho.extras.version>
+		<scala.version>2.9.1</scala.version>
+		<maven.compiler.source>1.6</maven.compiler.source>
+		<maven.compiler.target>1.6</maven.compiler.target>
+		<eclipse-repo.url>http://download.eclipse.org/releases/luna</eclipse-repo.url>
+		<project.build.sourceEncoding>CP1252</project.build.sourceEncoding>
+		<maven.test.failure.ignore>true</maven.test.failure.ignore>
+		<java.version>1.6</java.version>
+	</properties>
+
+	<modules>
+		<module>releng</module>
+		<module>targets</module>
+		<module>plugins</module>
+		<module>tests</module>
+		<module>features</module>
+		<module>repositories</module>
+	</modules>
+
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<extensions>true</extensions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<configuration>
+					<includePackedArtifacts>true</includePackedArtifacts>
+					<resolver>p2</resolver>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-packaging-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<configuration>
+					<archive>
+						<addMavenDescriptor>false</addMavenDescriptor>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-compiler-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<configuration>
+					<excludeResources>
+						<excludeResource>**/*.scala</excludeResource>
+						<excludeResource>**/*.aj</excludeResource>
+					</excludeResources>
+				</configuration>
+			</plugin>
+		</plugins>
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>target-platform-configuration</artifactId>
+					<version>${tycho.version}</version>
+					<configuration>
+						<executionEnvironmentDefault>JavaSE-${java.version}</executionEnvironmentDefault>
+						<includePackedArtifacts>true</includePackedArtifacts>
+						<environments>
+							<environment>
+								<os>linux</os>
+								<ws>gtk</ws>
+								<arch>x86</arch>
+							</environment>
+							<environment>
+								<os>win32</os>
+								<ws>win32</ws>
+								<arch>x86</arch>
+							</environment>
+							<environment>
+								<os>win32</os>
+								<ws>win32</ws>
+								<arch>x86_64</arch>
+							</environment>
+							<environment>
+								<os>linux</os>
+								<ws>gtk</ws>
+								<arch>x86_64</arch>
+							</environment>
+							<environment>
+								<os>macosx</os>
+								<ws>cocoa</ws>
+								<arch>x86_64</arch>
+							</environment>
+						</environments>
+					</configuration>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-compiler-plugin</artifactId>
+					<version>${tycho.version}</version>
+					<configuration>
+						<encoding>CP1252</encoding>
+						<source>${java.version}</source>
+						<target>${java.version}</target>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<repositories>
+		<repository>
+			<id>eclipse</id>
+			<url>${eclipse-repo.url}</url>
+			<layout>p2</layout>
+		</repository>
+
+		<repository>
+			<id>emftext</id>
+			<url>http://www.emftext.org/update</url>
+			<layout>p2</layout>
+		</repository>
+
+		<repository>
+			<id>scala-tools.org</id>
+			<name>Scala-tools Maven2 Repository</name>
+			<url>https://oss.sonatype.org/content/groups/scala-tools/</url>
+		</repository>
+
+		<repository>
+			<id>eclipse-scala-ide</id>
+			<layout>p2</layout>
+			<url>http://download.scala-ide.org/releases-29/milestone/site</url>
+		</repository>
+
+		<repository>
+			<id>typesafe</id>
+			<name>Typesafe Repository</name>
+			<url>http://repo.typesafe.com/typesafe/releases/</url>
+		</repository>
+		
+		<repository>
+			<id>orbit</id>
+			<name>Orbit Repository</name>
+			<url>http://download.eclipse.org/tools/orbit/downloads/drops/R20140525021250/repository/</url>
+			<layout>p2</layout>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>scala-tools.org</id>
+			<name>Scala-tools Maven2 Repository</name>
+			<url>https://oss.sonatype.org/content/groups/scala-tools/</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+</project> 
