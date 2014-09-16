@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <relativePath>../pom.xml</relativePath>
+    <groupId>org.dresdenocl</groupId>
+    <artifactId>org.dresdenocl</artifactId>
+    <version>3.4.0-SNAPSHOT</version>
+  </parent>
+  
+  <artifactId>plugins</artifactId>
+  <packaging>pom</packaging>
+
+  <modules>
+  	<module>org.apache.commons.lang</module>
+	<module>org.dresdenocl.attributegrammar.integration.kiama</module>
+	<module>org.dresdenocl.codegen.adapter</module>
+	<module>org.dresdenocl.debug</module>
+	<module>org.dresdenocl.debug.ui</module>
+	<module>org.dresdenocl.essentialocl</module>
+	<module>org.dresdenocl.essentialocl.edit</module>
+	<module>org.dresdenocl.essentialocl.editor</module>
+	<module>org.dresdenocl.essentialocl.standardlibrary</module>
+	<module>org.dresdenocl.examples.forms</module>
+	<module>org.dresdenocl.examples.living</module>
+	<module>org.dresdenocl.examples.ocl22java</module>
+	<module>org.dresdenocl.examples.pain</module>
+	<module>org.dresdenocl.examples.pml</module>
+	<module>org.dresdenocl.examples.royalandloyal</module>
+	<module>org.dresdenocl.examples.royalandloyal.ocl22javacode</module>
+	<module>org.dresdenocl.examples.simple</module>
+	<module>org.dresdenocl.examples.simple.ocl22javacode</module>
+	<module>org.dresdenocl.examples.ui</module>
+	<module>org.dresdenocl.examples.uml</module>
+	<module>org.dresdenocl.examples.university</module>
+	<module>org.dresdenocl.facade</module>
+	<module>org.dresdenocl.interpreter</module>
+	<module>org.dresdenocl.interpreter.ui</module>
+	<module>org.dresdenocl.language.ocl</module>
+	<module>org.dresdenocl.language.ocl.edit</module>
+	<module>org.dresdenocl.language.ocl.resource.ocl</module>
+	<module>org.dresdenocl.language.ocl.resource.ocl.ui</module>
+	<module>org.dresdenocl.language.ocl.staticsemantics</module>
+	<module>org.dresdenocl.logging</module>
+	<module>org.dresdenocl.metamodels.cwmrelational</module>
+	<module>org.dresdenocl.metamodels.ecore</module>
+	<module>org.dresdenocl.metamodels.java</module>
+	<module>org.dresdenocl.metamodels.uml2</module>
+	<module>org.dresdenocl.metamodels.xsd</module>
+	<module>org.dresdenocl.metrics</module>
+	<module>org.dresdenocl.metrics.ui</module>
+	<module>org.dresdenocl.model</module>
+	<module>org.dresdenocl.modelbus</module>
+	<module>org.dresdenocl.modelbus.ui</module>
+	<module>org.dresdenocl.modelinstance</module>
+	<module>org.dresdenocl.modelinstancetype</module>
+	<module>org.dresdenocl.modelinstancetype.ecore</module>
+	<module>org.dresdenocl.modelinstancetype.java</module>
+	<module>org.dresdenocl.modelinstancetype.xml</module>
+	<module>org.dresdenocl.parser</module>
+	<module>org.dresdenocl.pivotmodel</module>
+	<module>org.dresdenocl.pivotmodel.edit</module>
+	<module>org.dresdenocl.standardlibrary.java</module>
+	<module>org.dresdenocl.tools.codegen</module>
+	<module>org.dresdenocl.tools.codegen.declarativ</module>
+	<module>org.dresdenocl.tools.codegen.declarativ.ocl2sql</module>
+	<module>org.dresdenocl.tools.codegen.declarativ.ocl2sql.ui</module>
+	<module>org.dresdenocl.tools.codegen.ocl2java</module>
+	<module>org.dresdenocl.tools.codegen.ocl2java.types</module>
+	<module>org.dresdenocl.tools.codegen.ocl2java.ui</module>
+	<module>org.dresdenocl.tools.codegen.ui</module>
+	<module>org.dresdenocl.tools.CWM</module>
+	<module>org.dresdenocl.tools.template</module>
+	<module>org.dresdenocl.tools.template.sql</module>
+	<module>org.dresdenocl.tools.transformation</module>
+	<module>org.dresdenocl.tools.transformation.pivot2sql</module>
+	<module>org.dresdenocl.tracer</module>
+	<module>org.dresdenocl.tracer.ui</module>
+	<module>org.emftext.commons.antlr3_4_0</module>
+	<module>org.kiama.attribution</module>
+	<module>scala.library</module>
+  </modules>
+
+</project>
