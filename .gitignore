@@ -1,14 +1,22 @@
-bin/
-.DS_Store
-Thumbs.db
-pdf/
-*.aux
-*.lo*
-*.toc
-*.out
-*.pmd
-*.orig*
-*.BASE.*
-.settings/
+## No derived resources
 target/
+
+## No Eclipse settings
+.project
+.classpath
+.settings/
+
+## No Checkstyle plugin settings
+.checkstyle
+
+## No Coverity project config files
 cov-int/
+
+## various other file types we don't want to have in the repository:
+.DS_Store
+*~
+*#
+*.licensed
+*.aux
+*.thumb
+*_trace
