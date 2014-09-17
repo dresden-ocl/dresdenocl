@@ -11,3 +11,4 @@ pdf/
 *.BASE.*
 .settings/
 target/
+cov-int/

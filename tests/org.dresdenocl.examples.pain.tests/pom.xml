@@ -22,7 +22,6 @@
 					<explodedBundles>
 						<bundle>org.dresdenocl.examples.pain</bundle>
 					</explodedBundles>
-					<!--<skip>true</skip> -->
 				</configuration>
 			</plugin>
 		</plugins>

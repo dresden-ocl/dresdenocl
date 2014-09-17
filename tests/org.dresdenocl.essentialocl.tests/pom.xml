@@ -19,7 +19,7 @@
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-surefire-plugin</artifactId>
 				<configuration>
-					<!--<skip>true</skip>-->
+					<skip>true</skip>
 				</configuration>
 			</plugin>
 		</plugins>

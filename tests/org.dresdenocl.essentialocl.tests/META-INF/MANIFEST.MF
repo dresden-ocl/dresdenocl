@@ -9,7 +9,7 @@ Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.dresdenocl.essentialocl.expressions.tests,
  org.dresdenocl.essentialocl.types.tests
-Require-Bundle: org.junit;bundle-version="4.0.0";visibility:=reexport,
+Require-Bundle: org.junit;visibility:=reexport,
  org.dresdenocl.modelbus,
  org.dresdenocl.testsuite.abstract
 Bundle-ActivationPolicy: lazy
