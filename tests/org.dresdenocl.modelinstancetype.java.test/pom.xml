@@ -6,7 +6,7 @@
 	<parent>
 		<relativePath>../pom.xml</relativePath>
 		<groupId>org.dresdenocl</groupId>
-		<artifactId>parent</artifactId>
+		<artifactId>tests</artifactId>
 		<version>3.4.0-SNAPSHOT</version>
 	</parent>
 
