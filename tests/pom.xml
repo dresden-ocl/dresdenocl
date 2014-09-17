@@ -18,7 +18,7 @@
 		<module>org.dresdenocl.essentialocl.tests</module>
 		<module>org.dresdenocl.examples.pain.tests</module>
 		<module>org.dresdenocl.interpreter.test</module>
-		<module>org.dresdenocl.metamodels.cwmrelational.test</module>
+		<!--<module>org.dresdenocl.metamodels.cwmrelational.test</module>-->
 		<module>org.dresdenocl.metamodels.ecore.test</module>
 		<module>org.dresdenocl.metamodels.java.test</module>
 		<module>org.dresdenocl.metamodels.test</module>
