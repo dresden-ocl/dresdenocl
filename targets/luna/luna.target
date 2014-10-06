@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.8"?><target name="Dresden OCL Luna Target Platform" sequenceNumber="41">
+<locations>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.apache.commons.io" version="2.0.1.v201105210651"/>
+<unit id="org.apache.log4j.source" version="1.2.15.v201012070815"/>
+<unit id="org.apache.commons.io.source" version="2.0.1.v201105210651"/>
+<unit id="org.apache.log4j" version="1.2.15.v201012070815"/>
+<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20140114142710/repository/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.ajdt.feature.group" version="2.2.4.e44x-20140918-1700"/>
+<repository location="http://download.eclipse.org/tools/ajdt/44/dev/update/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.emftext.sdk.feature.group" version="1.4.2.v201409301909"/>
+<unit id="org.emftext.commons.jdt.feature.group" version="1.4.8.v201409301909"/>
+<unit id="org.emftext.access.feature.group" version="1.4.2.v201409301909"/>
+<unit id="org.emftext.commons.layout.feature.group" version="1.4.2.v201409301909"/>
+<unit id="org.emftext.commons.antlr3_4_0.feature.group" version="3.4.0.v201409301909"/>
+<repository location="http://emftext.org/update_trunk"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.uml2.sdk.feature.group" version="5.0.1.v20140910-1354"/>
+<unit id="org.eclipse.xsd.sdk.feature.group" version="2.10.0.v20140901-1055"/>
+<unit id="org.eclipse.emf.sdk.feature.group" version="2.10.1.v20140901-1055"/>
+<unit id="org.eclipse.emf.transaction.sdk.feature.group" version="1.8.0.201405281451"/>
+<repository location="http://download.eclipse.org/releases/luna"/>
+</location>
+</locations>
+<targetJRE path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+</target>

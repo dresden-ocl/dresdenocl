@@ -61,6 +61,12 @@
 				<configuration>
 					<includePackedArtifacts>true</includePackedArtifacts>
 					<resolver>p2</resolver>
+					<target>
+						<artifact>
+								<groupId>org.dresdenocl</groupId>
+								<artifactId>luna</artifactId>
+						</artifact>
+					</target>
 				</configuration>
 			</plugin>
 			
@@ -140,7 +146,9 @@
 		</pluginManagement>
 	</build>
 
+
 	<repositories>
+	<!--
 		<repository>
 			<id>eclipse</id>
 			<url>${eclipse-repo.url}</url>
@@ -160,6 +168,13 @@
 		</repository>
 
 		<repository>
+			<id>orbit</id>
+			<name>Orbit Repository</name>
+			<url>http://download.eclipse.org/tools/orbit/downloads/drops/R20140525021250/repository/</url>
+			<layout>p2</layout>
+		</repository>
+	-->
+		<repository>
 			<id>eclipse-scala-ide</id>
 			<layout>p2</layout>
 			<url>http://download.scala-ide.org/releases-29/milestone/site</url>
@@ -170,13 +185,6 @@
 			<name>Typesafe Repository</name>
 			<url>http://repo.typesafe.com/typesafe/releases/</url>
 		</repository>
-		
-		<repository>
-			<id>orbit</id>
-			<name>Orbit Repository</name>
-			<url>http://download.eclipse.org/tools/orbit/downloads/drops/R20140525021250/repository/</url>
-			<layout>p2</layout>
-		</repository>
 	</repositories>
 
 	<pluginRepositories>
@@ -185,7 +193,7 @@
 			<name>Scala-tools Maven2 Repository</name>
 			<url>https://oss.sonatype.org/content/groups/scala-tools/</url>
 		</pluginRepository>
-
+	<!--
 		<pluginRepository>
 			<id>eclipse-maven-releases</id>
 			<url>https://repo.eclipse.org/content/repositories/releases/</url>
@@ -193,6 +201,7 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</pluginRepository>
+	-->
 	</pluginRepositories>
 
 </project> 
