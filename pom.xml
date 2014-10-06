@@ -65,6 +65,7 @@
 						<artifact>
 								<groupId>org.dresdenocl</groupId>
 								<artifactId>luna</artifactId>
+								<classifier>luna</classifier>
 						</artifact>
 					</target>
 				</configuration>
