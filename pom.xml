@@ -26,7 +26,6 @@
 
 	<properties>
 		<tycho.version>0.21.0</tycho.version>
-		<tycho.extras.version>0.21.0</tycho.extras.version>
 		<scala.version>2.9.1</scala.version>
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
@@ -141,6 +140,15 @@
 						<encoding>CP1252</encoding>
 						<source>${java.version}</source>
 						<target>${java.version}</target>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-surefire-plugin</artifactId>
+					<version>${tycho.version}</version>
+					<configuration>
+						<parallel>both</parallel>
 					</configuration>
 				</plugin>
 			</plugins>
