@@ -3,7 +3,7 @@ Dresden OCL is organized as a group of Eclipse Plug-ins.
 More information is also available at the [Toolkit Website](http://dresden-ocl.org/).
 
 ##Build and run the source code
-For this guide, Eclipse 4.4.1 and Java 6 has been used.
+We develop with Eclipse 4.4.1 and Java 6. However, TravisCI tests Dresden OCL althought against Java 7.
 
 __Prerequisites__:
 
@@ -17,11 +17,11 @@ __Installation__:
 2. Check out the following projects from the folders
 	* plugins/** (all)
 	* tests/** (all)
-3. Build the project
+3. Build the project (otherwise it will complain about Ocl22Parser not found)
 	* *mvn verify* at the root of Dresden OCL
 4. Final
 	* In order to run the project now right-click any Dresden OCL Plug-in and select
-	  Run as -> Eclipse Plug-in 
+	  	Run as -> Eclipse Plug-in 
 
 #Bugs and known issues
 Please be aware, that the Dresden OCL is still under construction and 
