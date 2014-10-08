@@ -1,5 +1,5 @@
-#Instructions for Dresden OCL
-Dresden OCL is organized as a group of Eclipse Plug-ins.
+[![Build Status](https://travis-ci.org/dresden-ocl/dresdenocl.svg?branch=master)](https://travis-ci.org/dresden-ocl/dresdenocl)
+
 More information is also available at the [Toolkit Website](http://dresden-ocl.org/).
 
 ##Build and run the source code
@@ -32,4 +32,5 @@ Bugs already found are listed on the issue tracker. **Please feel free to contri
 If you plan to submit any code to the Dresden OCL repository, please use the JDT code
 formatter available at http://www.dresden-ocl.org/update/stuff/formatter.xml.
 Please note the [best practices](http://st.inf.tu-dresden.de/stwiki/index.php/OCL:Best_Practices).
+
 **Just fork Dresden OCL on GitHub and make a pull request!**
