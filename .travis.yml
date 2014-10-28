@@ -2,4 +2,4 @@ language: java
 jdk:
   - openjdk7
   - openjdk6
-script: "mvn test"
+script: mvn integration-test -B
