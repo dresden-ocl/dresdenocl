@@ -98,10 +98,10 @@
                 <artifactId>coveralls-maven-plugin</artifactId>
                 <version>3.0.1</version>
                 <configuration>
-                    <coverallsFile>${project.basedir}/target/coveralls.json</coverallsFile>
+                    <coverallsFile>target/coveralls.json</coverallsFile>
                     <sourceDirectories>
-                        <sourceDirectory>${project.basedir}/src</sourceDirectory>
-                        <sourceDirectory>${project.basedir}/src/testpackage</sourceDirectory>
+                        <sourceDirectory>src</sourceDirectory>
+                        <sourceDirectory>src/testpackage</sourceDirectory>
                     </sourceDirectories>
                 </configuration>
             </plugin>
@@ -112,7 +112,7 @@
                 <version>2.5.2</version>
                 <configuration>
                     <format>xml</format>
-                    <maxmem>256m</maxmem>
+                    <maxmem>512m</maxmem>
                     <aggregate>true</aggregate>
                 </configuration>
             </plugin>
