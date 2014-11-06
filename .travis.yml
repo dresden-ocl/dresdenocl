@@ -4,4 +4,4 @@ jdk:
 script:
   - mvn integration-test -B
 after_success:
-  - mvn clean cobertura:cobertura coveralls:cobertura
+  - mvn clean cobertura:cobertura coveralls:cobertura -X
