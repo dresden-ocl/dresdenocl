@@ -101,12 +101,12 @@ public enum PrimitiveTypeKind implements Enumerator {
 	 * @ordered
 	 */
 	STRING(4, "String", "String"), /**
-																	 * The '<em><b>Void</b></em>' literal object.
-																	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-																	 * @see #VOID_VALUE
-																	 * @generated
-																	 * @ordered
-																	 */
+									 * The '<em><b>Void</b></em>' literal object.
+									 * <!-- begin-user-doc --> <!-- end-user-doc -->
+									 * @see #VOID_VALUE
+									 * @generated
+									 * @ordered
+									 */
 	VOID(5, "Void", "Void"); //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
@@ -205,8 +205,8 @@ public enum PrimitiveTypeKind implements Enumerator {
 	 * 
 	 * @generated
 	 */
-	private static final PrimitiveTypeKind[] VALUES_ARRAY =
-			new PrimitiveTypeKind[] { UNKNOWN, INTEGER, REAL, BOOLEAN, STRING, VOID, };
+	private static final PrimitiveTypeKind[] VALUES_ARRAY = new PrimitiveTypeKind[] {
+			UNKNOWN, INTEGER, REAL, BOOLEAN, STRING, VOID, };
 
 	/**
 	 * A public read-only list of all the '<em><b>Primitive Type Kind</b></em>' enumerators.
@@ -222,7 +222,6 @@ public enum PrimitiveTypeKind implements Enumerator {
 	 * @generated
 	 */
 	public static PrimitiveTypeKind get(String literal) {
-
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
 			PrimitiveTypeKind result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
@@ -238,7 +237,6 @@ public enum PrimitiveTypeKind implements Enumerator {
 	 * @generated
 	 */
 	public static PrimitiveTypeKind getByName(String name) {
-
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
 			PrimitiveTypeKind result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
@@ -254,7 +252,6 @@ public enum PrimitiveTypeKind implements Enumerator {
 	 * @generated
 	 */
 	public static PrimitiveTypeKind get(int value) {
-
 		switch (value) {
 		case UNKNOWN_VALUE:
 			return UNKNOWN;
@@ -297,7 +294,6 @@ public enum PrimitiveTypeKind implements Enumerator {
 	 * @generated
 	 */
 	private PrimitiveTypeKind(int value, String name, String literal) {
-
 		this.value = value;
 		this.name = name;
 		this.literal = literal;
@@ -309,7 +305,6 @@ public enum PrimitiveTypeKind implements Enumerator {
 	 */
 	@Override
 	public int getValue() {
-
 		return value;
 	}
 
@@ -319,7 +314,6 @@ public enum PrimitiveTypeKind implements Enumerator {
 	 */
 	@Override
 	public String getName() {
-
 		return name;
 	}
 
@@ -329,7 +323,6 @@ public enum PrimitiveTypeKind implements Enumerator {
 	 */
 	@Override
 	public String getLiteral() {
-
 		return literal;
 	}
 
@@ -340,7 +333,6 @@ public enum PrimitiveTypeKind implements Enumerator {
 	 */
 	@Override
 	public String toString() {
-
 		return literal;
 	}
 

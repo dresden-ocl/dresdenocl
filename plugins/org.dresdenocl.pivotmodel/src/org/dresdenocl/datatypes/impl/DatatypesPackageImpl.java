@@ -136,7 +136,6 @@ public class DatatypesPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	private DatatypesPackageImpl() {
-
 		super(eNS_URI, DatatypesFactory.eINSTANCE);
 	}
 
@@ -162,24 +161,22 @@ public class DatatypesPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	public static DatatypesPackage init() {
-
 		if (isInited)
 			return (DatatypesPackage) EPackage.Registry.INSTANCE
 					.getEPackage(DatatypesPackage.eNS_URI);
 
 		// Obtain or create and register package
-		DatatypesPackageImpl theDatatypesPackage =
-				(DatatypesPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof DatatypesPackageImpl ? EPackage.Registry.INSTANCE
-						.get(eNS_URI) : new DatatypesPackageImpl());
+		DatatypesPackageImpl theDatatypesPackage = (DatatypesPackageImpl) (EPackage.Registry.INSTANCE
+				.get(eNS_URI) instanceof DatatypesPackageImpl ? EPackage.Registry.INSTANCE
+				.get(eNS_URI) : new DatatypesPackageImpl());
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		PivotModelPackageImpl thePivotModelPackage =
-				(PivotModelPackageImpl) (EPackage.Registry.INSTANCE
-						.getEPackage(PivotModelPackage.eNS_URI) instanceof PivotModelPackageImpl ? EPackage.Registry.INSTANCE
-						.getEPackage(PivotModelPackage.eNS_URI)
-						: PivotModelPackage.eINSTANCE);
+		PivotModelPackageImpl thePivotModelPackage = (PivotModelPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(PivotModelPackage.eNS_URI) instanceof PivotModelPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(PivotModelPackage.eNS_URI)
+				: PivotModelPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theDatatypesPackage.createPackageContents();
@@ -204,7 +201,6 @@ public class DatatypesPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EDataType getSequence() {
-
 		return sequenceEDataType;
 	}
 
@@ -214,7 +210,6 @@ public class DatatypesPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EDataType getSet() {
-
 		return setEDataType;
 	}
 
@@ -224,7 +219,6 @@ public class DatatypesPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EDataType getUnlimitedNatural() {
-
 		return unlimitedNaturalEDataType;
 	}
 
@@ -234,7 +228,6 @@ public class DatatypesPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EDataType getInteger() {
-
 		return integerEDataType;
 	}
 
@@ -244,7 +237,6 @@ public class DatatypesPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EDataType getBoolean() {
-
 		return booleanEDataType;
 	}
 
@@ -254,7 +246,6 @@ public class DatatypesPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EDataType getString() {
-
 		return stringEDataType;
 	}
 
@@ -264,7 +255,6 @@ public class DatatypesPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EDataType getReal() {
-
 		return realEDataType;
 	}
 
@@ -274,7 +264,6 @@ public class DatatypesPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EDataType getBag() {
-
 		return bagEDataType;
 	}
 
@@ -284,7 +273,6 @@ public class DatatypesPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EDataType getOrderedSet() {
-
 		return orderedSetEDataType;
 	}
 
@@ -294,7 +282,6 @@ public class DatatypesPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EDataType getCollection() {
-
 		return collectionEDataType;
 	}
 
@@ -304,7 +291,6 @@ public class DatatypesPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public DatatypesFactory getDatatypesFactory() {
-
 		return (DatatypesFactory) getEFactoryInstance();
 	}
 
@@ -322,7 +308,6 @@ public class DatatypesPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	public void createPackageContents() {
-
 		if (isCreated)
 			return;
 		isCreated = true;
@@ -354,7 +339,6 @@ public class DatatypesPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	public void initializePackageContents() {
-
 		if (isInitialized)
 			return;
 		isInitialized = true;
@@ -373,7 +357,9 @@ public class DatatypesPackageImpl extends EPackageImpl implements
 				"Real", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEDataType(stringEDataType, String.class,
 				"String", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEDataType(unlimitedNaturalEDataType, long.class,
+		initEDataType(
+				unlimitedNaturalEDataType,
+				long.class,
 				"UnlimitedNatural", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEDataType(collectionEDataType, Collection.class,
 				"Collection", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$

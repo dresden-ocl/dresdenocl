@@ -48,8 +48,8 @@ public interface DatatypesFactory extends EFactory {
 	 * end-user-doc -->
 	 * @generated
 	 */
-	DatatypesFactory eINSTANCE =
-			org.dresdenocl.datatypes.impl.DatatypesFactoryImpl.init();
+	DatatypesFactory eINSTANCE = org.dresdenocl.datatypes.impl.DatatypesFactoryImpl
+			.init();
 
 	/**
 	 * Returns the package supported by this factory.

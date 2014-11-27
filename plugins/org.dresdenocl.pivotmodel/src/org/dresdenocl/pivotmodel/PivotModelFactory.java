@@ -48,8 +48,8 @@ public interface PivotModelFactory extends EFactory {
 	 * end-user-doc -->
 	 * @generated
 	 */
-	PivotModelFactory eINSTANCE =
-			org.dresdenocl.pivotmodel.impl.PivotModelFactoryImpl.init();
+	PivotModelFactory eINSTANCE = org.dresdenocl.pivotmodel.impl.PivotModelFactoryImpl
+			.init();
 
 	/**
 	 * Returns a new object of class '<em>Enumeration</em>'.

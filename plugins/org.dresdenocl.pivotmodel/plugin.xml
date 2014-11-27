@@ -50,4 +50,19 @@
        genModel = "model/pivotmodel.genmodel" /> 
   </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated pivotmodel -->
+      <package
+            uri="http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel"
+            class="org.dresdenocl.pivotmodel.PivotModelPackage"
+            genModel="model/pivotmodel.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated pivotmodel -->
+      <package
+            uri="http://www.tu-dresden.de/ocl20/pivot/2007/datatypes"
+            class="org.dresdenocl.datatypes.DatatypesPackage"
+            genModel="model/pivotmodel.genmodel"/>
+   </extension>
 </plugin>

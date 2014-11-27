@@ -99,7 +99,6 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 	 * @generated
 	 */
 	protected NamedElementImpl() {
-
 		super();
 	}
 
@@ -109,7 +108,6 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return PivotModelPackage.Literals.NAMED_ELEMENT;
 	}
 
@@ -119,7 +117,6 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 	 */
 	@Override
 	public String getName() {
-
 		return name;
 	}
 
@@ -129,7 +126,6 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 	 */
 	@Override
 	public void setName(String newName) {
-
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
@@ -260,7 +256,6 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
 		case PivotModelPackage.NAMED_ELEMENT__NAME:
 			return getName();
@@ -278,7 +273,6 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
 		case PivotModelPackage.NAMED_ELEMENT__NAME:
 			setName((String) newValue);
@@ -293,7 +287,6 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
 		case PivotModelPackage.NAMED_ELEMENT__NAME:
 			setName(NAME_EDEFAULT);
@@ -308,10 +301,10 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
 		case PivotModelPackage.NAMED_ELEMENT__NAME:
-			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT
+					.equals(name);
 		case PivotModelPackage.NAMED_ELEMENT__QUALIFIED_NAME:
 			return QUALIFIED_NAME_EDEFAULT == null ? getQualifiedName() != null
 					: !QUALIFIED_NAME_EDEFAULT.equals(getQualifiedName());
@@ -332,8 +325,8 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 	@Override
 	public String toString() {
 
-		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append(
-				"name", getName()).toString(); //$NON-NLS-1$
+		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+				.append("name", getName()).toString(); //$NON-NLS-1$
 	}
 
 } // NamedElementImpl

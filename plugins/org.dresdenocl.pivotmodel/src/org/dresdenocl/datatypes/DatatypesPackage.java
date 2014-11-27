@@ -78,8 +78,8 @@ public interface DatatypesPackage extends EPackage {
 	 * end-user-doc -->
 	 * @generated
 	 */
-	DatatypesPackage eINSTANCE =
-			org.dresdenocl.datatypes.impl.DatatypesPackageImpl.init();
+	DatatypesPackage eINSTANCE = org.dresdenocl.datatypes.impl.DatatypesPackageImpl
+			.init();
 
 	/**
 	 * The meta object id for the '<em>Boolean</em>' data type. <!--

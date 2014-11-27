@@ -76,7 +76,6 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	 * @generated
 	 */
 	protected AssociationPropertyImpl() {
-
 		super();
 	}
 
@@ -86,7 +85,6 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return PivotModelPackage.Literals.ASSOCIATION_PROPERTY;
 	}
 
@@ -96,13 +94,11 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	 */
 	@Override
 	public List<AssociationProperty> getInverseAssociationProperties() {
-
 		if (inverseAssociationProperties == null) {
-			inverseAssociationProperties =
-					new EObjectContainmentEList<AssociationProperty>(
-							AssociationProperty.class,
-							this,
-							PivotModelPackage.ASSOCIATION_PROPERTY__INVERSE_ASSOCIATION_PROPERTIES);
+			inverseAssociationProperties = new EObjectContainmentEList<AssociationProperty>(
+					AssociationProperty.class,
+					this,
+					PivotModelPackage.ASSOCIATION_PROPERTY__INVERSE_ASSOCIATION_PROPERTIES);
 		}
 		return inverseAssociationProperties;
 	}
@@ -113,7 +109,6 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	 */
 	@Override
 	public void addAssociation(AssociationProperty bProperty) {
-
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
@@ -125,7 +120,6 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	 */
 	@Override
 	public AssociationProperty getAssociation(String propName) {
-
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
@@ -137,7 +131,6 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	 */
 	@Override
 	public void removeAssociation(AssociationProperty bProperty) {
-
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
@@ -149,7 +142,6 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	 */
 	@Override
 	public boolean isInverseAssociation(AssociationProperty bProperty) {
-
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
@@ -161,7 +153,6 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	 */
 	@Override
 	public void addAssociations(List<AssociationProperty> bProperty) {
-
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
@@ -173,7 +164,6 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	 */
 	@Override
 	public boolean isNavigable() {
-
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
@@ -186,7 +176,6 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-
 		switch (featureID) {
 		case PivotModelPackage.ASSOCIATION_PROPERTY__INVERSE_ASSOCIATION_PROPERTIES:
 			return ((InternalEList<?>) getInverseAssociationProperties())
@@ -201,7 +190,6 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
 		case PivotModelPackage.ASSOCIATION_PROPERTY__INVERSE_ASSOCIATION_PROPERTIES:
 			return getInverseAssociationProperties();
@@ -216,7 +204,6 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
 		case PivotModelPackage.ASSOCIATION_PROPERTY__INVERSE_ASSOCIATION_PROPERTIES:
 			getInverseAssociationProperties().clear();
@@ -233,7 +220,6 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
 		case PivotModelPackage.ASSOCIATION_PROPERTY__INVERSE_ASSOCIATION_PROPERTIES:
 			getInverseAssociationProperties().clear();
@@ -248,7 +234,6 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
 		case PivotModelPackage.ASSOCIATION_PROPERTY__INVERSE_ASSOCIATION_PROPERTIES:
 			return inverseAssociationProperties != null

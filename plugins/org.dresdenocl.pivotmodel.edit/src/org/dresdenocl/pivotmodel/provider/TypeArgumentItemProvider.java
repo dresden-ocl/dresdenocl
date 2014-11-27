@@ -58,9 +58,7 @@ import org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl;
  * 
  * @generated
  */
-public class TypeArgumentItemProvider extends TypedElementItemProvider
-		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class TypeArgumentItemProvider extends TypedElementItemProvider {
 
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
@@ -69,7 +67,6 @@ public class TypeArgumentItemProvider extends TypedElementItemProvider
 	 * @generated
 	 */
 	public TypeArgumentItemProvider(AdapterFactory adapterFactory) {
-
 		super(adapterFactory);
 	}
 
@@ -81,7 +78,6 @@ public class TypeArgumentItemProvider extends TypedElementItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -97,7 +93,6 @@ public class TypeArgumentItemProvider extends TypedElementItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-
 		return overlayImage(object,
 				getResourceLocator().getImage("full/obj16/TypeArgument")); //$NON-NLS-1$
 	}
@@ -141,12 +136,13 @@ public class TypeArgumentItemProvider extends TypedElementItemProvider
 
 			// update all element labels until we arrive at the Type that contains the
 			// type argument
-			for (NamedElement element = (NamedElement) notification.getNotifier(); // start
-																																							// at
-																																							// notifier
+			for (NamedElement element = (NamedElement) notification
+					.getNotifier(); // start
+									// at
+									// notifier
 			element != null; element = element.getOwner()) {
-				fireNotifyChanged(new ViewerNotification(notification, element, false,
-						true));
+				fireNotifyChanged(new ViewerNotification(notification, element,
+						false, true));
 
 				// stop iteration when we have reached the type
 				if (element instanceof Type) {
@@ -170,7 +166,6 @@ public class TypeArgumentItemProvider extends TypedElementItemProvider
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
-
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

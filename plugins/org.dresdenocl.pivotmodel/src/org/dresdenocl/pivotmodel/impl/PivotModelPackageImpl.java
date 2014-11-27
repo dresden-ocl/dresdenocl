@@ -252,7 +252,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	private PivotModelPackageImpl() {
-
 		super(eNS_URI, PivotModelFactory.eINSTANCE);
 	}
 
@@ -278,23 +277,22 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	public static PivotModelPackage init() {
-
 		if (isInited)
 			return (PivotModelPackage) EPackage.Registry.INSTANCE
 					.getEPackage(PivotModelPackage.eNS_URI);
 
 		// Obtain or create and register package
-		PivotModelPackageImpl thePivotModelPackage =
-				(PivotModelPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof PivotModelPackageImpl ? EPackage.Registry.INSTANCE
-						.get(eNS_URI) : new PivotModelPackageImpl());
+		PivotModelPackageImpl thePivotModelPackage = (PivotModelPackageImpl) (EPackage.Registry.INSTANCE
+				.get(eNS_URI) instanceof PivotModelPackageImpl ? EPackage.Registry.INSTANCE
+				.get(eNS_URI) : new PivotModelPackageImpl());
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		DatatypesPackageImpl theDatatypesPackage =
-				(DatatypesPackageImpl) (EPackage.Registry.INSTANCE
-						.getEPackage(DatatypesPackage.eNS_URI) instanceof DatatypesPackageImpl ? EPackage.Registry.INSTANCE
-						.getEPackage(DatatypesPackage.eNS_URI) : DatatypesPackage.eINSTANCE);
+		DatatypesPackageImpl theDatatypesPackage = (DatatypesPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(DatatypesPackage.eNS_URI) instanceof DatatypesPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(DatatypesPackage.eNS_URI)
+				: DatatypesPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		thePivotModelPackage.createPackageContents();
@@ -319,7 +317,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EClass getEnumeration() {
-
 		return enumerationEClass;
 	}
 
@@ -329,7 +326,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getEnumeration_OwnedLiteral() {
-
 		return (EReference) enumerationEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -339,7 +335,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EClass getNamedElement() {
-
 		return namedElementEClass;
 	}
 
@@ -349,7 +344,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EAttribute getNamedElement_Name() {
-
 		return (EAttribute) namedElementEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -359,7 +353,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EAttribute getNamedElement_QualifiedName() {
-
 		return (EAttribute) namedElementEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -369,7 +362,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getNamedElement_Owner() {
-
 		return (EReference) namedElementEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -379,7 +371,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EClass getOperation() {
-
 		return operationEClass;
 	}
 
@@ -389,7 +380,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getOperation_OwningType() {
-
 		return (EReference) operationEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -399,7 +389,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getOperation_OwnedParameter() {
-
 		return (EReference) operationEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -409,7 +398,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getOperation_InputParameter() {
-
 		return (EReference) operationEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -419,7 +407,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getOperation_OutputParameter() {
-
 		return (EReference) operationEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -429,7 +416,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getOperation_ReturnParameter() {
-
 		return (EReference) operationEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -439,7 +425,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getOperation_SignatureParameter() {
-
 		return (EReference) operationEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -449,7 +434,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EClass getNamespace() {
-
 		return namespaceEClass;
 	}
 
@@ -459,7 +443,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getNamespace_OwnedType() {
-
 		return (EReference) namespaceEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -469,7 +452,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getNamespace_OwnedRule() {
-
 		return (EReference) namespaceEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -479,7 +461,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getNamespace_NestedNamespace() {
-
 		return (EReference) namespaceEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -489,7 +470,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getNamespace_NestingNamespace() {
-
 		return (EReference) namespaceEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -499,7 +479,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EClass getType() {
-
 		return typeEClass;
 	}
 
@@ -509,7 +488,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getType_SuperType() {
-
 		return (EReference) typeEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -519,7 +497,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getType_GenericSuperType() {
-
 		return (EReference) typeEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -529,7 +506,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getType_OwnedOperation() {
-
 		return (EReference) typeEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -539,7 +515,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getType_OwnedProperty() {
-
 		return (EReference) typeEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -549,7 +524,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getType_Namespace() {
-
 		return (EReference) typeEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -559,7 +533,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EClass getParameter() {
-
 		return parameterEClass;
 	}
 
@@ -569,7 +542,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EAttribute getParameter_Kind() {
-
 		return (EAttribute) parameterEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -579,7 +551,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getParameter_Operation() {
-
 		return (EReference) parameterEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -589,7 +560,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EClass getEnumerationLiteral() {
-
 		return enumerationLiteralEClass;
 	}
 
@@ -599,7 +569,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getEnumerationLiteral_Enumeration() {
-
 		return (EReference) enumerationLiteralEClass.getEStructuralFeatures()
 				.get(0);
 	}
@@ -610,7 +579,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EClass getProperty() {
-
 		return propertyEClass;
 	}
 
@@ -620,7 +588,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getProperty_OwningType() {
-
 		return (EReference) propertyEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -630,7 +597,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EClass getTypedElement() {
-
 		return typedElementEClass;
 	}
 
@@ -640,7 +606,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getTypedElement_Type() {
-
 		return (EReference) typedElementEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -650,7 +615,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getTypedElement_GenericType() {
-
 		return (EReference) typedElementEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -660,7 +624,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EClass getPrimitiveType() {
-
 		return primitiveTypeEClass;
 	}
 
@@ -670,7 +633,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EAttribute getPrimitiveType_Kind() {
-
 		return (EAttribute) primitiveTypeEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -680,7 +642,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EClass getFeature() {
-
 		return featureEClass;
 	}
 
@@ -690,7 +651,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EAttribute getFeature_Static() {
-
 		return (EAttribute) featureEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -700,7 +660,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getFeature_Semantics() {
-
 		return (EReference) featureEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -710,7 +669,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EClass getConstraint() {
-
 		return constraintEClass;
 	}
 
@@ -720,7 +678,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EAttribute getConstraint_Kind() {
-
 		return (EAttribute) constraintEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -730,7 +687,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getConstraint_Namespace() {
-
 		return (EReference) constraintEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -740,7 +696,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getConstraint_Specification() {
-
 		return (EReference) constraintEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -750,7 +705,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getConstraint_ConstrainedElement() {
-
 		return (EReference) constraintEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -760,7 +714,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getConstraint_DefinedFeature() {
-
 		return (EReference) constraintEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -770,7 +723,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EClass getExpression() {
-
 		return expressionEClass;
 	}
 
@@ -780,7 +732,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EAttribute getExpression_Body() {
-
 		return (EAttribute) expressionEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -790,7 +741,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EAttribute getExpression_Language() {
-
 		return (EAttribute) expressionEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -800,7 +750,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getExpression_Constraint() {
-
 		return (EReference) expressionEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -810,7 +759,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EClass getAssociationProperty() {
-
 		return associationPropertyEClass;
 	}
 
@@ -820,9 +768,8 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getAssociationProperty_InverseAssociationProperties() {
-
-		return (EReference) associationPropertyEClass.getEStructuralFeatures().get(
-				0);
+		return (EReference) associationPropertyEClass.getEStructuralFeatures()
+				.get(0);
 	}
 
 	/**
@@ -831,7 +778,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EClass getConstrainableElement() {
-
 		return constrainableElementEClass;
 	}
 
@@ -841,7 +787,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EClass getGenericElement() {
-
 		return genericElementEClass;
 	}
 
@@ -851,8 +796,8 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getGenericElement_OwnedTypeParameter() {
-
-		return (EReference) genericElementEClass.getEStructuralFeatures().get(0);
+		return (EReference) genericElementEClass.getEStructuralFeatures()
+				.get(0);
 	}
 
 	/**
@@ -861,7 +806,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EClass getGenericType() {
-
 		return genericTypeEClass;
 	}
 
@@ -871,7 +815,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EClass getTypeParameter() {
-
 		return typeParameterEClass;
 	}
 
@@ -881,7 +824,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getTypeParameter_GenericElement() {
-
 		return (EReference) typeParameterEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -891,7 +833,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EClass getTypeArgument() {
-
 		return typeArgumentEClass;
 	}
 
@@ -901,7 +842,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getTypeArgument_OwningGenericType() {
-
 		return (EReference) typeArgumentEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -911,7 +851,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EClass getParameterGenericType() {
-
 		return parameterGenericTypeEClass;
 	}
 
@@ -921,7 +860,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getParameterGenericType_TypeParameter() {
-
 		return (EReference) parameterGenericTypeEClass.getEStructuralFeatures()
 				.get(0);
 	}
@@ -932,7 +870,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EClass getComplexGenericType() {
-
 		return complexGenericTypeEClass;
 	}
 
@@ -942,7 +879,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getComplexGenericType_UnboundType() {
-
 		return (EReference) complexGenericTypeEClass.getEStructuralFeatures()
 				.get(0);
 	}
@@ -953,7 +889,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EReference getComplexGenericType_TypeArgument() {
-
 		return (EReference) complexGenericTypeEClass.getEStructuralFeatures()
 				.get(1);
 	}
@@ -964,7 +899,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EEnum getParameterDirectionKind() {
-
 		return parameterDirectionKindEEnum;
 	}
 
@@ -974,7 +908,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EEnum getConstraintKind() {
-
 		return constraintKindEEnum;
 	}
 
@@ -984,7 +917,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EEnum getPrimitiveTypeKind() {
-
 		return primitiveTypeKindEEnum;
 	}
 
@@ -994,7 +926,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public EDataType getCloneNotSupportedException() {
-
 		return cloneNotSupportedExceptionEDataType;
 	}
 
@@ -1004,7 +935,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 */
 	@Override
 	public PivotModelFactory getPivotModelFactory() {
-
 		return (PivotModelFactory) getEFactoryInstance();
 	}
 
@@ -1022,7 +952,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	public void createPackageContents() {
-
 		if (isCreated)
 			return;
 		isCreated = true;
@@ -1067,7 +996,8 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 		createEReference(enumerationEClass, ENUMERATION__OWNED_LITERAL);
 
 		enumerationLiteralEClass = createEClass(ENUMERATION_LITERAL);
-		createEReference(enumerationLiteralEClass, ENUMERATION_LITERAL__ENUMERATION);
+		createEReference(enumerationLiteralEClass,
+				ENUMERATION_LITERAL__ENUMERATION);
 
 		propertyEClass = createEClass(PROPERTY);
 		createEReference(propertyEClass, PROPERTY__OWNING_TYPE);
@@ -1124,8 +1054,7 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 		constraintKindEEnum = createEEnum(CONSTRAINT_KIND);
 
 		// Create data types
-		cloneNotSupportedExceptionEDataType =
-				createEDataType(CLONE_NOT_SUPPORTED_EXCEPTION);
+		cloneNotSupportedExceptionEDataType = createEDataType(CLONE_NOT_SUPPORTED_EXCEPTION);
 	}
 
 	/**
@@ -1142,7 +1071,6 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	public void initializePackageContents() {
-
 		if (isInitialized)
 			return;
 		isInitialized = true;
@@ -1153,9 +1081,8 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		DatatypesPackage theDatatypesPackage =
-				(DatatypesPackage) EPackage.Registry.INSTANCE
-						.getEPackage(DatatypesPackage.eNS_URI);
+		DatatypesPackage theDatatypesPackage = (DatatypesPackage) EPackage.Registry.INSTANCE
+				.getEPackage(DatatypesPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -1193,7 +1120,9 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 		associationPropertyEClass.getESuperTypes().add(this.getProperty());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(namedElementEClass, NamedElement.class,
+		initEClass(
+				namedElementEClass,
+				NamedElement.class,
 				"NamedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEAttribute(
 				getNamedElement_Name(),
@@ -1209,15 +1138,16 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 				null,
 				"owner", null, 0, 1, NamedElement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		EOperation op =
-				addEOperation(namedElementEClass, this.getNamedElement(),
-						"clone", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		EOperation op = addEOperation(namedElementEClass,
+				this.getNamedElement(), "clone", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEException(op, this.getCloneNotSupportedException());
 
 		addEOperation(namedElementEClass, theDatatypesPackage.getString(),
 				"getQualifiedNameList", 0, -1, !IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(typedElementEClass, TypedElement.class,
+		initEClass(
+				typedElementEClass,
+				TypedElement.class,
 				"TypedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(
 				getTypedElement_Type(),
@@ -1230,7 +1160,9 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 				null,
 				"genericType", null, 0, 1, TypedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(featureEClass, Feature.class,
+		initEClass(
+				featureEClass,
+				Feature.class,
 				"Feature", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEAttribute(
 				getFeature_Static(),
@@ -1252,9 +1184,8 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 				this.getTypeParameter_GenericElement(),
 				"ownedTypeParameter", null, 0, -1, GenericElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		op =
-				addEOperation(genericElementEClass, this.getNamedElement(),
-						"bindTypeParameter", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(genericElementEClass, this.getNamedElement(),
+				"bindTypeParameter", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		EGenericType g1 = createEGenericType(theDatatypesPackage.getSequence());
 		EGenericType g2 = createEGenericType(this.getTypeParameter());
 		g1.getETypeArguments().add(g2);
@@ -1266,9 +1197,8 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 		g2.setEUpperBound(g3);
 		addEParameter(op, g1, "types", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op =
-				addEOperation(genericElementEClass, this.getGenericElement(),
-						"addTypeParameter", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(genericElementEClass, this.getGenericElement(),
+				"addTypeParameter", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getTypeParameter(),
 				"typeParameter", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
@@ -1277,7 +1207,9 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 				ConstrainableElement.class,
 				"ConstrainableElement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-		initEClass(namespaceEClass, Namespace.class,
+		initEClass(
+				namespaceEClass,
+				Namespace.class,
 				"Namespace", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(
 				getNamespace_OwnedType(),
@@ -1300,47 +1232,49 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 				this.getNamespace_NestedNamespace(),
 				"nestingNamespace", null, 0, 1, Namespace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		op =
-				addEOperation(namespaceEClass, this.getNamespace(),
-						"addType", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(namespaceEClass, this.getNamespace(),
+				"addType", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getType(), "type", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op =
-				addEOperation(namespaceEClass, this.getNamespace(),
-						"addRule", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		addEParameter(op, this.getConstraint(), "rule", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(namespaceEClass, this.getNamespace(),
+				"addRule", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, this.getConstraint(),
+				"rule", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op =
-				addEOperation(namespaceEClass, this.getNamespace(),
-						"addNestedNamespace", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(namespaceEClass, this.getNamespace(),
+				"addNestedNamespace", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getNamespace(),
 				"namespace", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
 		addEOperation(namespaceEClass, this.getConstraint(),
 				"getOwnedAndNestedRules", 0, -1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op =
-				addEOperation(namespaceEClass, this.getType(),
-						"lookupType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(namespaceEClass, this.getType(),
+				"lookupType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, theDatatypesPackage.getString(),
 				"name", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op =
-				addEOperation(namespaceEClass, this.getNamespace(),
-						"lookupNamespace", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(namespaceEClass, this.getNamespace(),
+				"lookupNamespace", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, theDatatypesPackage.getString(),
 				"name", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
 		addEOperation(namespaceEClass, theDatatypesPackage.getBoolean(),
 				"removeOwnedAndNestedRules", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op =
-				addEOperation(namespaceEClass, theDatatypesPackage.getBoolean(),
-						"removeOwnedAndNestedRules", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(namespaceEClass, theDatatypesPackage.getBoolean(),
+				"removeOwnedAndNestedRules", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getConstraint(),
 				"constraints", 0, -1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(typeEClass, Type.class,
+		op = addEOperation(namespaceEClass, this.getNamedElement(),
+				"lookupPathName", 0, -1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, theDatatypesPackage.getString(),
+				"names", 0, -1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		initEClass(
+				typeEClass,
+				Type.class,
 				"Type", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(
 				getType_Namespace(),
@@ -1368,41 +1302,35 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 				null,
 				"genericSuperType", null, 0, -1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		op =
-				addEOperation(typeEClass, theDatatypesPackage.getBoolean(),
-						"conformsTo", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(typeEClass, theDatatypesPackage.getBoolean(),
+				"conformsTo", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getType(), "other", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op =
-				addEOperation(typeEClass, this.getType(),
-						"commonSuperType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(typeEClass, this.getType(),
+				"commonSuperType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getType(), "other", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op =
-				addEOperation(typeEClass, null,
-						"allProperties", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(typeEClass, null,
+				"allProperties", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(theDatatypesPackage.getSequence());
 		g2 = createEGenericType(this.getProperty());
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
 
-		op =
-				addEOperation(typeEClass, null,
-						"allOperations", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(typeEClass, null,
+				"allOperations", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(theDatatypesPackage.getSequence());
 		g2 = createEGenericType(this.getOperation());
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
 
-		op =
-				addEOperation(typeEClass, this.getProperty(),
-						"lookupProperty", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(typeEClass, this.getProperty(),
+				"lookupProperty", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, theDatatypesPackage.getString(),
 				"name", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op =
-				addEOperation(typeEClass, this.getOperation(),
-						"lookupOperation", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(typeEClass, this.getOperation(),
+				"lookupOperation", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, theDatatypesPackage.getString(),
 				"name", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(theDatatypesPackage.getSequence());
@@ -1410,32 +1338,27 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "paramTypes", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op =
-				addEOperation(typeEClass, this.getType(),
-						"addProperty", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(typeEClass, this.getType(),
+				"addProperty", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getProperty(),
 				"property", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op =
-				addEOperation(typeEClass, this.getType(),
-						"addOperation", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(typeEClass, this.getType(),
+				"addOperation", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getOperation(),
 				"operation", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op =
-				addEOperation(typeEClass, this.getType(),
-						"addSuperType", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(typeEClass, this.getType(),
+				"addSuperType", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getType(), "type", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op =
-				addEOperation(typeEClass, theDatatypesPackage.getBoolean(),
-						"removeProperty", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(typeEClass, theDatatypesPackage.getBoolean(),
+				"removeProperty", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getProperty(),
 				"property", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op =
-				addEOperation(typeEClass, theDatatypesPackage.getBoolean(),
-						"removeOperation", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(typeEClass, theDatatypesPackage.getBoolean(),
+				"removeOperation", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getOperation(),
 				"operation", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
@@ -1451,7 +1374,9 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 				this.getPrimitiveTypeKind(),
 				"kind", "Unknown", 1, 1, PrimitiveType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
 
-		initEClass(enumerationEClass, Enumeration.class,
+		initEClass(
+				enumerationEClass,
+				Enumeration.class,
 				"Enumeration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(
 				getEnumeration_OwnedLiteral(),
@@ -1459,15 +1384,13 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 				this.getEnumerationLiteral_Enumeration(),
 				"ownedLiteral", null, 0, -1, Enumeration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		op =
-				addEOperation(enumerationEClass, this.getEnumeration(),
-						"addLiteral", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(enumerationEClass, this.getEnumeration(),
+				"addLiteral", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getEnumerationLiteral(),
 				"literal", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op =
-				addEOperation(enumerationEClass, this.getEnumerationLiteral(),
-						"lookupLiteral", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(enumerationEClass, this.getEnumerationLiteral(),
+				"lookupLiteral", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, theDatatypesPackage.getString(),
 				"name", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
@@ -1481,7 +1404,9 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 				this.getEnumeration_OwnedLiteral(),
 				"enumeration", null, 0, 1, EnumerationLiteral.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(propertyEClass, Property.class,
+		initEClass(
+				propertyEClass,
+				Property.class,
 				"Property", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(
 				getProperty_OwningType(),
@@ -1489,15 +1414,16 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 				this.getType_OwnedProperty(),
 				"owningType", null, 0, 1, Property.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		op =
-				addEOperation(propertyEClass, theDatatypesPackage.getBoolean(),
-						"cmpSlots", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(propertyEClass, theDatatypesPackage.getBoolean(),
+				"cmpSlots", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getProperty(), "p", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
 		addEOperation(propertyEClass, ecorePackage.getEBoolean(),
 				"isIdentifier", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(operationEClass, Operation.class,
+		initEClass(
+				operationEClass,
+				Operation.class,
 				"Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(
 				getOperation_OwningType(),
@@ -1530,20 +1456,21 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 				null,
 				"signatureParameter", null, 0, -1, Operation.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		op =
-				addEOperation(operationEClass, theDatatypesPackage.getBoolean(),
-						"hasMatchingSignature", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(operationEClass, theDatatypesPackage.getBoolean(),
+				"hasMatchingSignature", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(theDatatypesPackage.getSequence());
 		g2 = createEGenericType(this.getType());
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "paramTypes", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op =
-				addEOperation(operationEClass, this.getOperation(),
-						"addParameter", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		addEParameter(op, this.getParameter(), "param", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(operationEClass, this.getOperation(),
+				"addParameter", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, this.getParameter(),
+				"param", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(parameterEClass, Parameter.class,
+		initEClass(
+				parameterEClass,
+				Parameter.class,
 				"Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEAttribute(
 				getParameter_Kind(),
@@ -1558,12 +1485,13 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 		addEOperation(parameterEClass, this.getProperty(),
 				"asProperty", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(genericTypeEClass, GenericType.class,
+		initEClass(
+				genericTypeEClass,
+				GenericType.class,
 				"GenericType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-		op =
-				addEOperation(genericTypeEClass, theDatatypesPackage.getBoolean(),
-						"bindGenericType", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(genericTypeEClass, theDatatypesPackage.getBoolean(),
+				"bindGenericType", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(theDatatypesPackage.getSequence());
 		g2 = createEGenericType(this.getTypeParameter());
 		g1.getETypeArguments().add(g2);
@@ -1577,9 +1505,8 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 		addEParameter(op, this.getTypedElement(),
 				"typedElement", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op =
-				addEOperation(genericTypeEClass, theDatatypesPackage.getBoolean(),
-						"bindGenericSuperType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(genericTypeEClass, theDatatypesPackage.getBoolean(),
+				"bindGenericSuperType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(theDatatypesPackage.getSequence());
 		g2 = createEGenericType(this.getTypeParameter());
 		g1.getETypeArguments().add(g2);
@@ -1590,11 +1517,11 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 		g3 = createEGenericType(this.getType());
 		g2.setEUpperBound(g3);
 		addEParameter(op, g1, "types", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		addEParameter(op, this.getType(), "subType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, this.getType(),
+				"subType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op =
-				addEOperation(genericTypeEClass, theDatatypesPackage.getBoolean(),
-						"isConformant", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(genericTypeEClass, theDatatypesPackage.getBoolean(),
+				"isConformant", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getType(), "type", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(
@@ -1622,9 +1549,9 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 				this.getTypeArgument_OwningGenericType(),
 				"typeArgument", null, 0, -1, ComplexGenericType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		op =
-				addEOperation(complexGenericTypeEClass, this.getComplexGenericType(),
-						"addTypeArgument", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(complexGenericTypeEClass,
+				this.getComplexGenericType(),
+				"addTypeArgument", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getTypeArgument(),
 				"typeArgument", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
@@ -1648,7 +1575,9 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 				this.getComplexGenericType_TypeArgument(),
 				"owningGenericType", null, 0, 1, TypeArgument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(constraintEClass, Constraint.class,
+		initEClass(
+				constraintEClass,
+				Constraint.class,
 				"Constraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEAttribute(
 				getConstraint_Kind(),
@@ -1675,16 +1604,17 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 				this.getFeature_Semantics(),
 				"definedFeature", null, 0, 1, Constraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		op =
-				addEOperation(constraintEClass, this.getConstraint(),
-						"addConstrainedElement", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(constraintEClass, this.getConstraint(),
+				"addConstrainedElement", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getConstrainableElement(),
 				"constrainedElement", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
 		addEOperation(constraintEClass, theDatatypesPackage.getBoolean(),
 				"hasStaticContext", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(expressionEClass, Expression.class,
+		initEClass(
+				expressionEClass,
+				Expression.class,
 				"Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEAttribute(
 				getExpression_Body(),
@@ -1710,38 +1640,35 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 				null,
 				"inverseAssociationProperties", null, 0, -1, AssociationProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		op =
-				addEOperation(associationPropertyEClass, null,
-						"addAssociation", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(associationPropertyEClass, null,
+				"addAssociation", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getAssociationProperty(),
 				"bProperty", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op =
-				addEOperation(associationPropertyEClass, this.getAssociationProperty(),
-						"getAssociation", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(associationPropertyEClass,
+				this.getAssociationProperty(),
+				"getAssociation", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, theDatatypesPackage.getString(),
 				"propName", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op =
-				addEOperation(associationPropertyEClass, null,
-						"removeAssociation", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(associationPropertyEClass, null,
+				"removeAssociation", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getAssociationProperty(),
 				"bProperty", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op =
-				addEOperation(associationPropertyEClass,
-						theDatatypesPackage.getBoolean(),
-						"isInverseAssociation", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(associationPropertyEClass,
+				theDatatypesPackage.getBoolean(),
+				"isInverseAssociation", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getAssociationProperty(),
 				"bProperty", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op =
-				addEOperation(associationPropertyEClass, null,
-						"addAssociations", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(associationPropertyEClass, null,
+				"addAssociations", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getAssociationProperty(),
 				"bProperty", 0, -1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		addEOperation(associationPropertyEClass, theDatatypesPackage.getBoolean(),
+		addEOperation(associationPropertyEClass,
+				theDatatypesPackage.getBoolean(),
 				"isNavigable", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
 		// Initialize enums and add enum literals
@@ -1758,8 +1685,10 @@ public class PivotModelPackageImpl extends EPackageImpl implements
 				"ParameterDirectionKind"); //$NON-NLS-1$
 		addEEnumLiteral(parameterDirectionKindEEnum, ParameterDirectionKind.IN);
 		addEEnumLiteral(parameterDirectionKindEEnum, ParameterDirectionKind.OUT);
-		addEEnumLiteral(parameterDirectionKindEEnum, ParameterDirectionKind.INOUT);
-		addEEnumLiteral(parameterDirectionKindEEnum, ParameterDirectionKind.RETURN);
+		addEEnumLiteral(parameterDirectionKindEEnum,
+				ParameterDirectionKind.INOUT);
+		addEEnumLiteral(parameterDirectionKindEEnum,
+				ParameterDirectionKind.RETURN);
 
 		initEEnum(constraintKindEEnum, ConstraintKind.class, "ConstraintKind"); //$NON-NLS-1$
 		addEEnumLiteral(constraintKindEEnum, ConstraintKind.INVARIANT);

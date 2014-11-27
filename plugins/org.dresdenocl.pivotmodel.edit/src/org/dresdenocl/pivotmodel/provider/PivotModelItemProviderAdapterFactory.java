@@ -94,7 +94,6 @@ public class PivotModelItemProviderAdapterFactory extends
 	 * @generated
 	 */
 	public PivotModelItemProviderAdapterFactory() {
-
 		supportedTypes.add(IEditingDomainItemProvider.class);
 		supportedTypes.add(IStructuredItemContentProvider.class);
 		supportedTypes.add(ITreeItemContentProvider.class);
@@ -119,7 +118,6 @@ public class PivotModelItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createEnumerationAdapter() {
-
 		if (enumerationItemProvider == null) {
 			enumerationItemProvider = new EnumerationItemProvider(this);
 		}
@@ -144,7 +142,6 @@ public class PivotModelItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createOperationAdapter() {
-
 		if (operationItemProvider == null) {
 			operationItemProvider = new OperationItemProvider(this);
 		}
@@ -169,7 +166,6 @@ public class PivotModelItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createNamespaceAdapter() {
-
 		if (namespaceItemProvider == null) {
 			namespaceItemProvider = new NamespaceItemProvider(this);
 		}
@@ -193,7 +189,6 @@ public class PivotModelItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createTypeAdapter() {
-
 		if (typeItemProvider == null) {
 			typeItemProvider = new TypeItemProvider(this);
 		}
@@ -218,7 +213,6 @@ public class PivotModelItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createParameterAdapter() {
-
 		if (parameterItemProvider == null) {
 			parameterItemProvider = new ParameterItemProvider(this);
 		}
@@ -244,9 +238,9 @@ public class PivotModelItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createEnumerationLiteralAdapter() {
-
 		if (enumerationLiteralItemProvider == null) {
-			enumerationLiteralItemProvider = new EnumerationLiteralItemProvider(this);
+			enumerationLiteralItemProvider = new EnumerationLiteralItemProvider(
+					this);
 		}
 
 		return enumerationLiteralItemProvider;
@@ -269,7 +263,6 @@ public class PivotModelItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createPropertyAdapter() {
-
 		if (propertyItemProvider == null) {
 			propertyItemProvider = new PropertyItemProvider(this);
 		}
@@ -294,7 +287,6 @@ public class PivotModelItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createPrimitiveTypeAdapter() {
-
 		if (primitiveTypeItemProvider == null) {
 			primitiveTypeItemProvider = new PrimitiveTypeItemProvider(this);
 		}
@@ -319,7 +311,6 @@ public class PivotModelItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createConstraintAdapter() {
-
 		if (constraintItemProvider == null) {
 			constraintItemProvider = new ConstraintItemProvider(this);
 		}
@@ -344,7 +335,6 @@ public class PivotModelItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createExpressionAdapter() {
-
 		if (expressionItemProvider == null) {
 			expressionItemProvider = new ExpressionItemProvider(this);
 		}
@@ -368,10 +358,9 @@ public class PivotModelItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createAssociationPropertyAdapter() {
-
 		if (associationPropertyItemProvider == null) {
-			associationPropertyItemProvider =
-					new AssociationPropertyItemProvider(this);
+			associationPropertyItemProvider = new AssociationPropertyItemProvider(
+					this);
 		}
 
 		return associationPropertyItemProvider;
@@ -394,7 +383,6 @@ public class PivotModelItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createTypeParameterAdapter() {
-
 		if (typeParameterItemProvider == null) {
 			typeParameterItemProvider = new TypeParameterItemProvider(this);
 		}
@@ -419,7 +407,6 @@ public class PivotModelItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createTypeArgumentAdapter() {
-
 		if (typeArgumentItemProvider == null) {
 			typeArgumentItemProvider = new TypeArgumentItemProvider(this);
 		}
@@ -443,10 +430,9 @@ public class PivotModelItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createParameterGenericTypeAdapter() {
-
 		if (parameterGenericTypeItemProvider == null) {
-			parameterGenericTypeItemProvider =
-					new ParameterGenericTypeItemProvider(this);
+			parameterGenericTypeItemProvider = new ParameterGenericTypeItemProvider(
+					this);
 		}
 
 		return parameterGenericTypeItemProvider;
@@ -470,9 +456,9 @@ public class PivotModelItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createComplexGenericTypeAdapter() {
-
 		if (complexGenericTypeItemProvider == null) {
-			complexGenericTypeItemProvider = new ComplexGenericTypeItemProvider(this);
+			complexGenericTypeItemProvider = new ComplexGenericTypeItemProvider(
+					this);
 		}
 
 		return complexGenericTypeItemProvider;
@@ -485,7 +471,6 @@ public class PivotModelItemProviderAdapterFactory extends
 	 * @generated
 	 */
 	public ComposeableAdapterFactory getRootAdapterFactory() {
-
 		return parentAdapterFactory == null ? this : parentAdapterFactory
 				.getRootAdapterFactory();
 	}
@@ -498,7 +483,6 @@ public class PivotModelItemProviderAdapterFactory extends
 	 */
 	public void setParentAdapterFactory(
 			ComposedAdapterFactory parentAdapterFactory) {
-
 		this.parentAdapterFactory = parentAdapterFactory;
 	}
 
@@ -508,7 +492,6 @@ public class PivotModelItemProviderAdapterFactory extends
 	 */
 	@Override
 	public boolean isFactoryForType(Object type) {
-
 		return supportedTypes.contains(type) || super.isFactoryForType(type);
 	}
 
@@ -519,7 +502,6 @@ public class PivotModelItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter adapt(Notifier notifier, Object type) {
-
 		return super.adapt(notifier, this);
 	}
 
@@ -529,7 +511,6 @@ public class PivotModelItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Object adapt(Object object, Object type) {
-
 		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
 			if (!(type instanceof Class<?>)
@@ -547,7 +528,6 @@ public class PivotModelItemProviderAdapterFactory extends
 	 * @generated
 	 */
 	public void addListener(INotifyChangedListener notifyChangedListener) {
-
 		changeNotifier.addListener(notifyChangedListener);
 	}
 
@@ -557,7 +537,6 @@ public class PivotModelItemProviderAdapterFactory extends
 	 * @generated
 	 */
 	public void removeListener(INotifyChangedListener notifyChangedListener) {
-
 		changeNotifier.removeListener(notifyChangedListener);
 	}
 
@@ -569,7 +548,6 @@ public class PivotModelItemProviderAdapterFactory extends
 	 * @generated
 	 */
 	public void fireNotifyChanged(Notification notification) {
-
 		changeNotifier.fireNotifyChanged(notification);
 
 		if (parentAdapterFactory != null) {
@@ -584,7 +562,6 @@ public class PivotModelItemProviderAdapterFactory extends
 	 * @generated
 	 */
 	public void dispose() {
-
 		if (namespaceItemProvider != null)
 			namespaceItemProvider.dispose();
 		if (typeItemProvider != null)

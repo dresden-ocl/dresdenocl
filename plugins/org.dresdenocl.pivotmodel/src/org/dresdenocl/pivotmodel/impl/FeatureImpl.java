@@ -91,7 +91,6 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 * @generated
 	 */
 	protected FeatureImpl() {
-
 		super();
 	}
 
@@ -101,7 +100,6 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return PivotModelPackage.Literals.FEATURE;
 	}
 
@@ -111,7 +109,6 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 */
 	@Override
 	public boolean isStatic() {
-
 		return static_;
 	}
 
@@ -121,7 +118,6 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 */
 	@Override
 	public void setStatic(boolean newStatic) {
-
 		boolean oldStatic = static_;
 		static_ = newStatic;
 		if (eNotificationRequired())
@@ -135,14 +131,14 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 */
 	@Override
 	public Constraint getSemantics() {
-
 		if (semantics != null && semantics.eIsProxy()) {
 			InternalEObject oldSemantics = (InternalEObject) semantics;
 			semantics = (Constraint) eResolveProxy(oldSemantics);
 			if (semantics != oldSemantics) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							PivotModelPackage.FEATURE__SEMANTICS, oldSemantics, semantics));
+							PivotModelPackage.FEATURE__SEMANTICS, oldSemantics,
+							semantics));
 			}
 		}
 		return semantics;
@@ -153,7 +149,6 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 * @generated
 	 */
 	public Constraint basicGetSemantics() {
-
 		return semantics;
 	}
 
@@ -163,13 +158,12 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 */
 	public NotificationChain basicSetSemantics(Constraint newSemantics,
 			NotificationChain msgs) {
-
 		Constraint oldSemantics = semantics;
 		semantics = newSemantics;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification =
-					new ENotificationImpl(this, Notification.SET,
-							PivotModelPackage.FEATURE__SEMANTICS, oldSemantics, newSemantics);
+			ENotificationImpl notification = new ENotificationImpl(this,
+					Notification.SET, PivotModelPackage.FEATURE__SEMANTICS,
+					oldSemantics, newSemantics);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -184,26 +178,23 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 */
 	@Override
 	public void setSemantics(Constraint newSemantics) {
-
 		if (newSemantics != semantics) {
 			NotificationChain msgs = null;
 			if (semantics != null)
-				msgs =
-						((InternalEObject) semantics).eInverseRemove(this,
-								PivotModelPackage.CONSTRAINT__DEFINED_FEATURE,
-								Constraint.class, msgs);
+				msgs = ((InternalEObject) semantics).eInverseRemove(this,
+						PivotModelPackage.CONSTRAINT__DEFINED_FEATURE,
+						Constraint.class, msgs);
 			if (newSemantics != null)
-				msgs =
-						((InternalEObject) newSemantics).eInverseAdd(this,
-								PivotModelPackage.CONSTRAINT__DEFINED_FEATURE,
-								Constraint.class, msgs);
+				msgs = ((InternalEObject) newSemantics).eInverseAdd(this,
+						PivotModelPackage.CONSTRAINT__DEFINED_FEATURE,
+						Constraint.class, msgs);
 			msgs = basicSetSemantics(newSemantics, msgs);
 			if (msgs != null)
 				msgs.dispatch();
-		}
-		else if (eNotificationRequired())
+		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackage.FEATURE__SEMANTICS, newSemantics, newSemantics));
+					PivotModelPackage.FEATURE__SEMANTICS, newSemantics,
+					newSemantics));
 	}
 
 	/**
@@ -211,16 +202,14 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
-			NotificationChain msgs) {
-
+	public NotificationChain eInverseAdd(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case PivotModelPackage.FEATURE__SEMANTICS:
 			if (semantics != null)
-				msgs =
-						((InternalEObject) semantics).eInverseRemove(this,
-								PivotModelPackage.CONSTRAINT__DEFINED_FEATURE,
-								Constraint.class, msgs);
+				msgs = ((InternalEObject) semantics).eInverseRemove(this,
+						PivotModelPackage.CONSTRAINT__DEFINED_FEATURE,
+						Constraint.class, msgs);
 			return basicSetSemantics((Constraint) otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -233,7 +222,6 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-
 		switch (featureID) {
 		case PivotModelPackage.FEATURE__SEMANTICS:
 			return basicSetSemantics(null, msgs);
@@ -258,7 +246,6 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
 		case PivotModelPackage.FEATURE__STATIC:
 			return isStatic();
@@ -276,7 +263,6 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
 		case PivotModelPackage.FEATURE__STATIC:
 			setStatic((Boolean) newValue);
@@ -294,7 +280,6 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
 		case PivotModelPackage.FEATURE__STATIC:
 			setStatic(STATIC_EDEFAULT);
@@ -312,7 +297,6 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
 		case PivotModelPackage.FEATURE__STATIC:
 			return static_ != STATIC_EDEFAULT;

@@ -83,7 +83,6 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 	 * @generated
 	 */
 	protected ParameterGenericTypeImpl() {
-
 		super();
 	}
 
@@ -93,7 +92,6 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return PivotModelPackage.Literals.PARAMETER_GENERIC_TYPE;
 	}
 
@@ -114,7 +112,6 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 	 */
 	@Override
 	public TypeParameter getTypeParameter() {
-
 		return typeParameter;
 	}
 
@@ -124,7 +121,6 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 	 */
 	@Override
 	public void setTypeParameter(TypeParameter newTypeParameter) {
-
 		TypeParameter oldTypeParameter = typeParameter;
 		typeParameter = newTypeParameter;
 		if (eNotificationRequired())
@@ -215,7 +211,8 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 	@Override
 	public ParameterGenericType clone() {
 
-		return initialize(PivotModelFactory.eINSTANCE.createParameterGenericType());
+		return initialize(PivotModelFactory.eINSTANCE
+				.createParameterGenericType());
 	}
 
 	/**
@@ -235,7 +232,6 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
 		case PivotModelPackage.PARAMETER_GENERIC_TYPE__TYPE_PARAMETER:
 			return getTypeParameter();
@@ -249,7 +245,6 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
 		case PivotModelPackage.PARAMETER_GENERIC_TYPE__TYPE_PARAMETER:
 			setTypeParameter((TypeParameter) newValue);
@@ -264,7 +259,6 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
 		case PivotModelPackage.PARAMETER_GENERIC_TYPE__TYPE_PARAMETER:
 			setTypeParameter((TypeParameter) null);
@@ -279,7 +273,6 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
 		case PivotModelPackage.PARAMETER_GENERIC_TYPE__TYPE_PARAMETER:
 			return typeParameter != null;

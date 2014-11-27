@@ -57,9 +57,7 @@ import org.dresdenocl.pivotmodel.PivotModelPackage;
  * 
  * @generated
  */
-public class EnumerationItemProvider extends TypeItemProvider implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class EnumerationItemProvider extends TypeItemProvider {
 
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
@@ -68,7 +66,6 @@ public class EnumerationItemProvider extends TypeItemProvider implements
 	 * @generated
 	 */
 	public EnumerationItemProvider(AdapterFactory adapterFactory) {
-
 		super(adapterFactory);
 	}
 
@@ -80,7 +77,6 @@ public class EnumerationItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -98,7 +94,6 @@ public class EnumerationItemProvider extends TypeItemProvider implements
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(
 			Object object) {
-
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures
@@ -113,7 +108,6 @@ public class EnumerationItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
-
 		// Check the type of the specified child object and return the proper feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
@@ -127,7 +121,6 @@ public class EnumerationItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-
 		return overlayImage(object,
 				getResourceLocator().getImage("full/obj16/Enumeration")); //$NON-NLS-1$
 	}
@@ -153,7 +146,6 @@ public class EnumerationItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
-
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Enumeration.class)) {
@@ -175,7 +167,6 @@ public class EnumerationItemProvider extends TypeItemProvider implements
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
-
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
 		newChildDescriptors.add(createChildParameter(

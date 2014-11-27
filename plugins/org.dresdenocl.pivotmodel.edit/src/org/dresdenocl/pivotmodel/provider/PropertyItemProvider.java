@@ -56,9 +56,7 @@ import org.dresdenocl.pivotmodel.Property;
  * --> <!-- end-user-doc -->
  * @generated
  */
-public class PropertyItemProvider extends FeatureItemProvider implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class PropertyItemProvider extends FeatureItemProvider {
 
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
@@ -67,7 +65,6 @@ public class PropertyItemProvider extends FeatureItemProvider implements
 	 * @generated
 	 */
 	public PropertyItemProvider(AdapterFactory adapterFactory) {
-
 		super(adapterFactory);
 	}
 
@@ -79,7 +76,6 @@ public class PropertyItemProvider extends FeatureItemProvider implements
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -98,15 +94,13 @@ public class PropertyItemProvider extends FeatureItemProvider implements
 		Object result;
 
 		if (object instanceof Property && ((Property) object).isStatic()) {
-			result =
-					overlayImage(object,
-							getResourceLocator().getImage("full/obj16/StaticProperty"));
+			result = overlayImage(object,
+					getResourceLocator().getImage("full/obj16/StaticProperty"));
 		}
 
 		else {
-			result =
-					overlayImage(object,
-							getResourceLocator().getImage("full/obj16/Property"));
+			result = overlayImage(object,
+					getResourceLocator().getImage("full/obj16/Property"));
 		}
 
 		return result;
@@ -141,7 +135,6 @@ public class PropertyItemProvider extends FeatureItemProvider implements
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
-
 		updateChildren(notification);
 		super.notifyChanged(notification);
 	}
@@ -156,7 +149,6 @@ public class PropertyItemProvider extends FeatureItemProvider implements
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
-
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 
