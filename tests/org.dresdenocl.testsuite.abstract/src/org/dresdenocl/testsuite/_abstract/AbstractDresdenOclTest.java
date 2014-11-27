@@ -82,7 +82,7 @@ import org.dresdenocl.tools.transformation.pivot2sql.impl.Pivot2Ddl;
 import org.dresdenocl.tools.transformation.pivot2sql.impl.Pivot2DdlAndMappedModel;
 import org.dresdenocl.tools.transformation.pivot2sql.impl.Pivot2MappedModelImpl;
 
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
+import org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
 
 /**
  * Abstract class for Dresden OCL test cases. Contains static setUp and tearDown
