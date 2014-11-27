@@ -1,6 +1,6 @@
 /**
  */
-package ecore.org.dresdenocl.modelinstancetype.test.testmodel;
+package org.dresdenocl.modelinstancetype.test.testmodel;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  *
- * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage#getInterface2()
+ * @see org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage#getInterface2()
  * @model interface="true" abstract="true"
  * @generated
  */

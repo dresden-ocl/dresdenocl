@@ -11,9 +11,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
+import org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1;
+import org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
 
 
 
@@ -30,7 +30,7 @@ import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
  *
  * @generated
  */
-public class EnumerationLiteralProviderClassImpl extends EObjectImpl implements EnumerationLiteralProviderClass {
+public class EnumerationLiteralProviderClassImpl extends EObjectImpl implements org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass {
 	/**
 	 * The default value of the '{@link #getEnumerationLiteralProperty1() <em>Enumeration Literal Property1</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -39,7 +39,7 @@ public class EnumerationLiteralProviderClassImpl extends EObjectImpl implements 
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Enumeration1 ENUMERATION_LITERAL_PROPERTY1_EDEFAULT = Enumeration1.LITERAL1;
+	protected static final org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1 ENUMERATION_LITERAL_PROPERTY1_EDEFAULT = org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1.LITERAL1;
 
 	/**
 	 * The cached value of the '{@link #getEnumerationLiteralProperty1() <em>Enumeration Literal Property1</em>}' attribute.
@@ -49,7 +49,7 @@ public class EnumerationLiteralProviderClassImpl extends EObjectImpl implements 
 	 * @generated
 	 * @ordered
 	 */
-	protected Enumeration1 enumerationLiteralProperty1 = ENUMERATION_LITERAL_PROPERTY1_EDEFAULT;
+	protected org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1 enumerationLiteralProperty1 = ENUMERATION_LITERAL_PROPERTY1_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -67,7 +67,7 @@ public class EnumerationLiteralProviderClassImpl extends EObjectImpl implements 
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TestmodelPackage.Literals.ENUMERATION_LITERAL_PROVIDER_CLASS;
+		return org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.Literals.ENUMERATION_LITERAL_PROVIDER_CLASS;
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class EnumerationLiteralProviderClassImpl extends EObjectImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Enumeration1 getEnumerationLiteralProperty1() {
+	public org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1 getEnumerationLiteralProperty1() {
 		return enumerationLiteralProperty1;
 	}
 
@@ -84,11 +84,11 @@ public class EnumerationLiteralProviderClassImpl extends EObjectImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setEnumerationLiteralProperty1(Enumeration1 newEnumerationLiteralProperty1) {
-		Enumeration1 oldEnumerationLiteralProperty1 = enumerationLiteralProperty1;
+	public void setEnumerationLiteralProperty1(org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1 newEnumerationLiteralProperty1) {
+		org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1 oldEnumerationLiteralProperty1 = enumerationLiteralProperty1;
 		enumerationLiteralProperty1 = newEnumerationLiteralProperty1 == null ? ENUMERATION_LITERAL_PROPERTY1_EDEFAULT : newEnumerationLiteralProperty1;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TestmodelPackage.ENUMERATION_LITERAL_PROVIDER_CLASS__ENUMERATION_LITERAL_PROPERTY1, oldEnumerationLiteralProperty1, enumerationLiteralProperty1));
+			eNotify(new ENotificationImpl(this, Notification.SET, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.ENUMERATION_LITERAL_PROVIDER_CLASS__ENUMERATION_LITERAL_PROPERTY1, oldEnumerationLiteralProperty1, enumerationLiteralProperty1));
 	}
 
 	/**
@@ -99,7 +99,7 @@ public class EnumerationLiteralProviderClassImpl extends EObjectImpl implements 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TestmodelPackage.ENUMERATION_LITERAL_PROVIDER_CLASS__ENUMERATION_LITERAL_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.ENUMERATION_LITERAL_PROVIDER_CLASS__ENUMERATION_LITERAL_PROPERTY1:
 				return getEnumerationLiteralProperty1();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -113,8 +113,8 @@ public class EnumerationLiteralProviderClassImpl extends EObjectImpl implements 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TestmodelPackage.ENUMERATION_LITERAL_PROVIDER_CLASS__ENUMERATION_LITERAL_PROPERTY1:
-				setEnumerationLiteralProperty1((Enumeration1)newValue);
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.ENUMERATION_LITERAL_PROVIDER_CLASS__ENUMERATION_LITERAL_PROPERTY1:
+				setEnumerationLiteralProperty1((org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -128,7 +128,7 @@ public class EnumerationLiteralProviderClassImpl extends EObjectImpl implements 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TestmodelPackage.ENUMERATION_LITERAL_PROVIDER_CLASS__ENUMERATION_LITERAL_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.ENUMERATION_LITERAL_PROVIDER_CLASS__ENUMERATION_LITERAL_PROPERTY1:
 				setEnumerationLiteralProperty1(ENUMERATION_LITERAL_PROPERTY1_EDEFAULT);
 				return;
 		}
@@ -143,7 +143,7 @@ public class EnumerationLiteralProviderClassImpl extends EObjectImpl implements 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TestmodelPackage.ENUMERATION_LITERAL_PROVIDER_CLASS__ENUMERATION_LITERAL_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.ENUMERATION_LITERAL_PROVIDER_CLASS__ENUMERATION_LITERAL_PROPERTY1:
 				return enumerationLiteralProperty1 != ENUMERATION_LITERAL_PROPERTY1_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

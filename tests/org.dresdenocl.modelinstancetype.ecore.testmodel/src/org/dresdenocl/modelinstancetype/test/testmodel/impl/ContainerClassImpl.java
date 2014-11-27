@@ -16,19 +16,19 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class2;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.CopyableClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Interface1;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Interface2;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Interface3;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.NonCopyableClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
+import org.dresdenocl.modelinstancetype.test.testmodel.Class1;
+import org.dresdenocl.modelinstancetype.test.testmodel.Class2;
+import org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.CopyableClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.Interface1;
+import org.dresdenocl.modelinstancetype.test.testmodel.Interface2;
+import org.dresdenocl.modelinstancetype.test.testmodel.Interface3;
+import org.dresdenocl.modelinstancetype.test.testmodel.NonCopyableClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
 
 
 
@@ -55,7 +55,7 @@ import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
  *
  * @generated
  */
-public class ContainerClassImpl extends EObjectImpl implements ContainerClass {
+public class ContainerClassImpl extends EObjectImpl implements org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass {
 	/**
 	 * The cached value of the '{@link #getPrimitiveTypeProviderClassInstances() <em>Primitive Type Provider Class Instances</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -64,7 +64,7 @@ public class ContainerClassImpl extends EObjectImpl implements ContainerClass {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<PrimitiveTypeProviderClass> primitiveTypeProviderClassInstances;
+	protected EList<org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass> primitiveTypeProviderClassInstances;
 
 	/**
 	 * The cached value of the '{@link #getCollectionTypeProviderClassInstances() <em>Collection Type Provider Class Instances</em>}' containment reference list.
@@ -74,7 +74,7 @@ public class ContainerClassImpl extends EObjectImpl implements ContainerClass {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<CollectionTypeProviderClass> collectionTypeProviderClassInstances;
+	protected EList<org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass> collectionTypeProviderClassInstances;
 
 	/**
 	 * The cached value of the '{@link #getEnumerationLiteralProviderClassInstances() <em>Enumeration Literal Provider Class Instances</em>}' containment reference list.
@@ -84,7 +84,7 @@ public class ContainerClassImpl extends EObjectImpl implements ContainerClass {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<EnumerationLiteralProviderClass> enumerationLiteralProviderClassInstances;
+	protected EList<org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass> enumerationLiteralProviderClassInstances;
 
 	/**
 	 * The cached value of the '{@link #getClass1Instances() <em>Class1 Instances</em>}' containment reference list.
@@ -94,7 +94,7 @@ public class ContainerClassImpl extends EObjectImpl implements ContainerClass {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Class1> class1Instances;
+	protected EList<org.dresdenocl.modelinstancetype.test.testmodel.Class1> class1Instances;
 
 	/**
 	 * The cached value of the '{@link #getClass2Instances() <em>Class2 Instances</em>}' containment reference list.
@@ -104,7 +104,7 @@ public class ContainerClassImpl extends EObjectImpl implements ContainerClass {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Class2> class2Instances;
+	protected EList<org.dresdenocl.modelinstancetype.test.testmodel.Class2> class2Instances;
 
 	/**
 	 * The cached value of the '{@link #getInterface1Instances() <em>Interface1 Instances</em>}' containment reference list.
@@ -114,7 +114,7 @@ public class ContainerClassImpl extends EObjectImpl implements ContainerClass {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Interface1> interface1Instances;
+	protected EList<org.dresdenocl.modelinstancetype.test.testmodel.Interface1> interface1Instances;
 
 	/**
 	 * The cached value of the '{@link #getInterface2Instances() <em>Interface2 Instances</em>}' containment reference list.
@@ -124,7 +124,7 @@ public class ContainerClassImpl extends EObjectImpl implements ContainerClass {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Interface2> interface2Instances;
+	protected EList<org.dresdenocl.modelinstancetype.test.testmodel.Interface2> interface2Instances;
 
 	/**
 	 * The cached value of the '{@link #getInterface3Instances() <em>Interface3 Instances</em>}' containment reference list.
@@ -134,7 +134,7 @@ public class ContainerClassImpl extends EObjectImpl implements ContainerClass {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Interface3> interface3Instances;
+	protected EList<org.dresdenocl.modelinstancetype.test.testmodel.Interface3> interface3Instances;
 
 	/**
 	 * The cached value of the '{@link #getCopyableClassInstances() <em>Copyable Class Instances</em>}' containment reference list.
@@ -144,7 +144,7 @@ public class ContainerClassImpl extends EObjectImpl implements ContainerClass {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<CopyableClass> copyableClassInstances;
+	protected EList<org.dresdenocl.modelinstancetype.test.testmodel.CopyableClass> copyableClassInstances;
 
 	/**
 	 * The cached value of the '{@link #getNonCopyableClassInstances() <em>Non Copyable Class Instances</em>}' containment reference list.
@@ -154,7 +154,7 @@ public class ContainerClassImpl extends EObjectImpl implements ContainerClass {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<NonCopyableClass> nonCopyableClassInstances;
+	protected EList<org.dresdenocl.modelinstancetype.test.testmodel.NonCopyableClass> nonCopyableClassInstances;
 
 	/**
 	 * The cached value of the '{@link #getStaticPropertyAndOperationClassInstances() <em>Static Property And Operation Class Instances</em>}' containment reference list.
@@ -164,7 +164,7 @@ public class ContainerClassImpl extends EObjectImpl implements ContainerClass {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<StaticPropertyAndOperationClass> staticPropertyAndOperationClassInstances;
+	protected EList<org.dresdenocl.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass> staticPropertyAndOperationClassInstances;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -182,7 +182,7 @@ public class ContainerClassImpl extends EObjectImpl implements ContainerClass {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TestmodelPackage.Literals.CONTAINER_CLASS;
+		return org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.Literals.CONTAINER_CLASS;
 	}
 
 	/**
@@ -190,9 +190,9 @@ public class ContainerClassImpl extends EObjectImpl implements ContainerClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<PrimitiveTypeProviderClass> getPrimitiveTypeProviderClassInstances() {
+	public EList<org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass> getPrimitiveTypeProviderClassInstances() {
 		if (primitiveTypeProviderClassInstances == null) {
-			primitiveTypeProviderClassInstances = new EObjectContainmentEList<PrimitiveTypeProviderClass>(PrimitiveTypeProviderClass.class, this, TestmodelPackage.CONTAINER_CLASS__PRIMITIVE_TYPE_PROVIDER_CLASS_INSTANCES);
+			primitiveTypeProviderClassInstances = new EObjectContainmentEList<org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass>(org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass.class, this, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__PRIMITIVE_TYPE_PROVIDER_CLASS_INSTANCES);
 		}
 		return primitiveTypeProviderClassInstances;
 	}
@@ -202,9 +202,9 @@ public class ContainerClassImpl extends EObjectImpl implements ContainerClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<CollectionTypeProviderClass> getCollectionTypeProviderClassInstances() {
+	public EList<org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass> getCollectionTypeProviderClassInstances() {
 		if (collectionTypeProviderClassInstances == null) {
-			collectionTypeProviderClassInstances = new EObjectContainmentEList<CollectionTypeProviderClass>(CollectionTypeProviderClass.class, this, TestmodelPackage.CONTAINER_CLASS__COLLECTION_TYPE_PROVIDER_CLASS_INSTANCES);
+			collectionTypeProviderClassInstances = new EObjectContainmentEList<org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass>(org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass.class, this, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__COLLECTION_TYPE_PROVIDER_CLASS_INSTANCES);
 		}
 		return collectionTypeProviderClassInstances;
 	}
@@ -214,9 +214,9 @@ public class ContainerClassImpl extends EObjectImpl implements ContainerClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<EnumerationLiteralProviderClass> getEnumerationLiteralProviderClassInstances() {
+	public EList<org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass> getEnumerationLiteralProviderClassInstances() {
 		if (enumerationLiteralProviderClassInstances == null) {
-			enumerationLiteralProviderClassInstances = new EObjectContainmentEList<EnumerationLiteralProviderClass>(EnumerationLiteralProviderClass.class, this, TestmodelPackage.CONTAINER_CLASS__ENUMERATION_LITERAL_PROVIDER_CLASS_INSTANCES);
+			enumerationLiteralProviderClassInstances = new EObjectContainmentEList<org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass>(org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass.class, this, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__ENUMERATION_LITERAL_PROVIDER_CLASS_INSTANCES);
 		}
 		return enumerationLiteralProviderClassInstances;
 	}
@@ -226,9 +226,9 @@ public class ContainerClassImpl extends EObjectImpl implements ContainerClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Class1> getClass1Instances() {
+	public EList<org.dresdenocl.modelinstancetype.test.testmodel.Class1> getClass1Instances() {
 		if (class1Instances == null) {
-			class1Instances = new EObjectContainmentEList<Class1>(Class1.class, this, TestmodelPackage.CONTAINER_CLASS__CLASS1_INSTANCES);
+			class1Instances = new EObjectContainmentEList<org.dresdenocl.modelinstancetype.test.testmodel.Class1>(org.dresdenocl.modelinstancetype.test.testmodel.Class1.class, this, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__CLASS1_INSTANCES);
 		}
 		return class1Instances;
 	}
@@ -238,9 +238,9 @@ public class ContainerClassImpl extends EObjectImpl implements ContainerClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Class2> getClass2Instances() {
+	public EList<org.dresdenocl.modelinstancetype.test.testmodel.Class2> getClass2Instances() {
 		if (class2Instances == null) {
-			class2Instances = new EObjectContainmentEList<Class2>(Class2.class, this, TestmodelPackage.CONTAINER_CLASS__CLASS2_INSTANCES);
+			class2Instances = new EObjectContainmentEList<org.dresdenocl.modelinstancetype.test.testmodel.Class2>(org.dresdenocl.modelinstancetype.test.testmodel.Class2.class, this, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__CLASS2_INSTANCES);
 		}
 		return class2Instances;
 	}
@@ -250,9 +250,9 @@ public class ContainerClassImpl extends EObjectImpl implements ContainerClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Interface1> getInterface1Instances() {
+	public EList<org.dresdenocl.modelinstancetype.test.testmodel.Interface1> getInterface1Instances() {
 		if (interface1Instances == null) {
-			interface1Instances = new EObjectContainmentEList<Interface1>(Interface1.class, this, TestmodelPackage.CONTAINER_CLASS__INTERFACE1_INSTANCES);
+			interface1Instances = new EObjectContainmentEList<org.dresdenocl.modelinstancetype.test.testmodel.Interface1>(org.dresdenocl.modelinstancetype.test.testmodel.Interface1.class, this, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__INTERFACE1_INSTANCES);
 		}
 		return interface1Instances;
 	}
@@ -262,9 +262,9 @@ public class ContainerClassImpl extends EObjectImpl implements ContainerClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Interface2> getInterface2Instances() {
+	public EList<org.dresdenocl.modelinstancetype.test.testmodel.Interface2> getInterface2Instances() {
 		if (interface2Instances == null) {
-			interface2Instances = new EObjectContainmentEList<Interface2>(Interface2.class, this, TestmodelPackage.CONTAINER_CLASS__INTERFACE2_INSTANCES);
+			interface2Instances = new EObjectContainmentEList<org.dresdenocl.modelinstancetype.test.testmodel.Interface2>(org.dresdenocl.modelinstancetype.test.testmodel.Interface2.class, this, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__INTERFACE2_INSTANCES);
 		}
 		return interface2Instances;
 	}
@@ -274,9 +274,9 @@ public class ContainerClassImpl extends EObjectImpl implements ContainerClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Interface3> getInterface3Instances() {
+	public EList<org.dresdenocl.modelinstancetype.test.testmodel.Interface3> getInterface3Instances() {
 		if (interface3Instances == null) {
-			interface3Instances = new EObjectContainmentEList<Interface3>(Interface3.class, this, TestmodelPackage.CONTAINER_CLASS__INTERFACE3_INSTANCES);
+			interface3Instances = new EObjectContainmentEList<org.dresdenocl.modelinstancetype.test.testmodel.Interface3>(org.dresdenocl.modelinstancetype.test.testmodel.Interface3.class, this, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__INTERFACE3_INSTANCES);
 		}
 		return interface3Instances;
 	}
@@ -286,9 +286,9 @@ public class ContainerClassImpl extends EObjectImpl implements ContainerClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<CopyableClass> getCopyableClassInstances() {
+	public EList<org.dresdenocl.modelinstancetype.test.testmodel.CopyableClass> getCopyableClassInstances() {
 		if (copyableClassInstances == null) {
-			copyableClassInstances = new EObjectContainmentEList<CopyableClass>(CopyableClass.class, this, TestmodelPackage.CONTAINER_CLASS__COPYABLE_CLASS_INSTANCES);
+			copyableClassInstances = new EObjectContainmentEList<org.dresdenocl.modelinstancetype.test.testmodel.CopyableClass>(org.dresdenocl.modelinstancetype.test.testmodel.CopyableClass.class, this, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__COPYABLE_CLASS_INSTANCES);
 		}
 		return copyableClassInstances;
 	}
@@ -298,9 +298,9 @@ public class ContainerClassImpl extends EObjectImpl implements ContainerClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<NonCopyableClass> getNonCopyableClassInstances() {
+	public EList<org.dresdenocl.modelinstancetype.test.testmodel.NonCopyableClass> getNonCopyableClassInstances() {
 		if (nonCopyableClassInstances == null) {
-			nonCopyableClassInstances = new EObjectContainmentEList<NonCopyableClass>(NonCopyableClass.class, this, TestmodelPackage.CONTAINER_CLASS__NON_COPYABLE_CLASS_INSTANCES);
+			nonCopyableClassInstances = new EObjectContainmentEList<org.dresdenocl.modelinstancetype.test.testmodel.NonCopyableClass>(org.dresdenocl.modelinstancetype.test.testmodel.NonCopyableClass.class, this, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__NON_COPYABLE_CLASS_INSTANCES);
 		}
 		return nonCopyableClassInstances;
 	}
@@ -310,9 +310,9 @@ public class ContainerClassImpl extends EObjectImpl implements ContainerClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<StaticPropertyAndOperationClass> getStaticPropertyAndOperationClassInstances() {
+	public EList<org.dresdenocl.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass> getStaticPropertyAndOperationClassInstances() {
 		if (staticPropertyAndOperationClassInstances == null) {
-			staticPropertyAndOperationClassInstances = new EObjectContainmentEList<StaticPropertyAndOperationClass>(StaticPropertyAndOperationClass.class, this, TestmodelPackage.CONTAINER_CLASS__STATIC_PROPERTY_AND_OPERATION_CLASS_INSTANCES);
+			staticPropertyAndOperationClassInstances = new EObjectContainmentEList<org.dresdenocl.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass>(org.dresdenocl.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass.class, this, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__STATIC_PROPERTY_AND_OPERATION_CLASS_INSTANCES);
 		}
 		return staticPropertyAndOperationClassInstances;
 	}
@@ -325,27 +325,27 @@ public class ContainerClassImpl extends EObjectImpl implements ContainerClass {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TestmodelPackage.CONTAINER_CLASS__PRIMITIVE_TYPE_PROVIDER_CLASS_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__PRIMITIVE_TYPE_PROVIDER_CLASS_INSTANCES:
 				return ((InternalEList<?>)getPrimitiveTypeProviderClassInstances()).basicRemove(otherEnd, msgs);
-			case TestmodelPackage.CONTAINER_CLASS__COLLECTION_TYPE_PROVIDER_CLASS_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__COLLECTION_TYPE_PROVIDER_CLASS_INSTANCES:
 				return ((InternalEList<?>)getCollectionTypeProviderClassInstances()).basicRemove(otherEnd, msgs);
-			case TestmodelPackage.CONTAINER_CLASS__ENUMERATION_LITERAL_PROVIDER_CLASS_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__ENUMERATION_LITERAL_PROVIDER_CLASS_INSTANCES:
 				return ((InternalEList<?>)getEnumerationLiteralProviderClassInstances()).basicRemove(otherEnd, msgs);
-			case TestmodelPackage.CONTAINER_CLASS__CLASS1_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__CLASS1_INSTANCES:
 				return ((InternalEList<?>)getClass1Instances()).basicRemove(otherEnd, msgs);
-			case TestmodelPackage.CONTAINER_CLASS__CLASS2_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__CLASS2_INSTANCES:
 				return ((InternalEList<?>)getClass2Instances()).basicRemove(otherEnd, msgs);
-			case TestmodelPackage.CONTAINER_CLASS__INTERFACE1_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__INTERFACE1_INSTANCES:
 				return ((InternalEList<?>)getInterface1Instances()).basicRemove(otherEnd, msgs);
-			case TestmodelPackage.CONTAINER_CLASS__INTERFACE2_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__INTERFACE2_INSTANCES:
 				return ((InternalEList<?>)getInterface2Instances()).basicRemove(otherEnd, msgs);
-			case TestmodelPackage.CONTAINER_CLASS__INTERFACE3_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__INTERFACE3_INSTANCES:
 				return ((InternalEList<?>)getInterface3Instances()).basicRemove(otherEnd, msgs);
-			case TestmodelPackage.CONTAINER_CLASS__COPYABLE_CLASS_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__COPYABLE_CLASS_INSTANCES:
 				return ((InternalEList<?>)getCopyableClassInstances()).basicRemove(otherEnd, msgs);
-			case TestmodelPackage.CONTAINER_CLASS__NON_COPYABLE_CLASS_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__NON_COPYABLE_CLASS_INSTANCES:
 				return ((InternalEList<?>)getNonCopyableClassInstances()).basicRemove(otherEnd, msgs);
-			case TestmodelPackage.CONTAINER_CLASS__STATIC_PROPERTY_AND_OPERATION_CLASS_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__STATIC_PROPERTY_AND_OPERATION_CLASS_INSTANCES:
 				return ((InternalEList<?>)getStaticPropertyAndOperationClassInstances()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -359,27 +359,27 @@ public class ContainerClassImpl extends EObjectImpl implements ContainerClass {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TestmodelPackage.CONTAINER_CLASS__PRIMITIVE_TYPE_PROVIDER_CLASS_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__PRIMITIVE_TYPE_PROVIDER_CLASS_INSTANCES:
 				return getPrimitiveTypeProviderClassInstances();
-			case TestmodelPackage.CONTAINER_CLASS__COLLECTION_TYPE_PROVIDER_CLASS_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__COLLECTION_TYPE_PROVIDER_CLASS_INSTANCES:
 				return getCollectionTypeProviderClassInstances();
-			case TestmodelPackage.CONTAINER_CLASS__ENUMERATION_LITERAL_PROVIDER_CLASS_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__ENUMERATION_LITERAL_PROVIDER_CLASS_INSTANCES:
 				return getEnumerationLiteralProviderClassInstances();
-			case TestmodelPackage.CONTAINER_CLASS__CLASS1_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__CLASS1_INSTANCES:
 				return getClass1Instances();
-			case TestmodelPackage.CONTAINER_CLASS__CLASS2_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__CLASS2_INSTANCES:
 				return getClass2Instances();
-			case TestmodelPackage.CONTAINER_CLASS__INTERFACE1_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__INTERFACE1_INSTANCES:
 				return getInterface1Instances();
-			case TestmodelPackage.CONTAINER_CLASS__INTERFACE2_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__INTERFACE2_INSTANCES:
 				return getInterface2Instances();
-			case TestmodelPackage.CONTAINER_CLASS__INTERFACE3_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__INTERFACE3_INSTANCES:
 				return getInterface3Instances();
-			case TestmodelPackage.CONTAINER_CLASS__COPYABLE_CLASS_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__COPYABLE_CLASS_INSTANCES:
 				return getCopyableClassInstances();
-			case TestmodelPackage.CONTAINER_CLASS__NON_COPYABLE_CLASS_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__NON_COPYABLE_CLASS_INSTANCES:
 				return getNonCopyableClassInstances();
-			case TestmodelPackage.CONTAINER_CLASS__STATIC_PROPERTY_AND_OPERATION_CLASS_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__STATIC_PROPERTY_AND_OPERATION_CLASS_INSTANCES:
 				return getStaticPropertyAndOperationClassInstances();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -394,49 +394,49 @@ public class ContainerClassImpl extends EObjectImpl implements ContainerClass {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TestmodelPackage.CONTAINER_CLASS__PRIMITIVE_TYPE_PROVIDER_CLASS_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__PRIMITIVE_TYPE_PROVIDER_CLASS_INSTANCES:
 				getPrimitiveTypeProviderClassInstances().clear();
-				getPrimitiveTypeProviderClassInstances().addAll((Collection<? extends PrimitiveTypeProviderClass>)newValue);
+				getPrimitiveTypeProviderClassInstances().addAll((Collection<? extends org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass>)newValue);
 				return;
-			case TestmodelPackage.CONTAINER_CLASS__COLLECTION_TYPE_PROVIDER_CLASS_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__COLLECTION_TYPE_PROVIDER_CLASS_INSTANCES:
 				getCollectionTypeProviderClassInstances().clear();
-				getCollectionTypeProviderClassInstances().addAll((Collection<? extends CollectionTypeProviderClass>)newValue);
+				getCollectionTypeProviderClassInstances().addAll((Collection<? extends org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass>)newValue);
 				return;
-			case TestmodelPackage.CONTAINER_CLASS__ENUMERATION_LITERAL_PROVIDER_CLASS_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__ENUMERATION_LITERAL_PROVIDER_CLASS_INSTANCES:
 				getEnumerationLiteralProviderClassInstances().clear();
-				getEnumerationLiteralProviderClassInstances().addAll((Collection<? extends EnumerationLiteralProviderClass>)newValue);
+				getEnumerationLiteralProviderClassInstances().addAll((Collection<? extends org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass>)newValue);
 				return;
-			case TestmodelPackage.CONTAINER_CLASS__CLASS1_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__CLASS1_INSTANCES:
 				getClass1Instances().clear();
-				getClass1Instances().addAll((Collection<? extends Class1>)newValue);
+				getClass1Instances().addAll((Collection<? extends org.dresdenocl.modelinstancetype.test.testmodel.Class1>)newValue);
 				return;
-			case TestmodelPackage.CONTAINER_CLASS__CLASS2_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__CLASS2_INSTANCES:
 				getClass2Instances().clear();
-				getClass2Instances().addAll((Collection<? extends Class2>)newValue);
+				getClass2Instances().addAll((Collection<? extends org.dresdenocl.modelinstancetype.test.testmodel.Class2>)newValue);
 				return;
-			case TestmodelPackage.CONTAINER_CLASS__INTERFACE1_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__INTERFACE1_INSTANCES:
 				getInterface1Instances().clear();
-				getInterface1Instances().addAll((Collection<? extends Interface1>)newValue);
+				getInterface1Instances().addAll((Collection<? extends org.dresdenocl.modelinstancetype.test.testmodel.Interface1>)newValue);
 				return;
-			case TestmodelPackage.CONTAINER_CLASS__INTERFACE2_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__INTERFACE2_INSTANCES:
 				getInterface2Instances().clear();
-				getInterface2Instances().addAll((Collection<? extends Interface2>)newValue);
+				getInterface2Instances().addAll((Collection<? extends org.dresdenocl.modelinstancetype.test.testmodel.Interface2>)newValue);
 				return;
-			case TestmodelPackage.CONTAINER_CLASS__INTERFACE3_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__INTERFACE3_INSTANCES:
 				getInterface3Instances().clear();
-				getInterface3Instances().addAll((Collection<? extends Interface3>)newValue);
+				getInterface3Instances().addAll((Collection<? extends org.dresdenocl.modelinstancetype.test.testmodel.Interface3>)newValue);
 				return;
-			case TestmodelPackage.CONTAINER_CLASS__COPYABLE_CLASS_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__COPYABLE_CLASS_INSTANCES:
 				getCopyableClassInstances().clear();
-				getCopyableClassInstances().addAll((Collection<? extends CopyableClass>)newValue);
+				getCopyableClassInstances().addAll((Collection<? extends org.dresdenocl.modelinstancetype.test.testmodel.CopyableClass>)newValue);
 				return;
-			case TestmodelPackage.CONTAINER_CLASS__NON_COPYABLE_CLASS_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__NON_COPYABLE_CLASS_INSTANCES:
 				getNonCopyableClassInstances().clear();
-				getNonCopyableClassInstances().addAll((Collection<? extends NonCopyableClass>)newValue);
+				getNonCopyableClassInstances().addAll((Collection<? extends org.dresdenocl.modelinstancetype.test.testmodel.NonCopyableClass>)newValue);
 				return;
-			case TestmodelPackage.CONTAINER_CLASS__STATIC_PROPERTY_AND_OPERATION_CLASS_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__STATIC_PROPERTY_AND_OPERATION_CLASS_INSTANCES:
 				getStaticPropertyAndOperationClassInstances().clear();
-				getStaticPropertyAndOperationClassInstances().addAll((Collection<? extends StaticPropertyAndOperationClass>)newValue);
+				getStaticPropertyAndOperationClassInstances().addAll((Collection<? extends org.dresdenocl.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -450,37 +450,37 @@ public class ContainerClassImpl extends EObjectImpl implements ContainerClass {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TestmodelPackage.CONTAINER_CLASS__PRIMITIVE_TYPE_PROVIDER_CLASS_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__PRIMITIVE_TYPE_PROVIDER_CLASS_INSTANCES:
 				getPrimitiveTypeProviderClassInstances().clear();
 				return;
-			case TestmodelPackage.CONTAINER_CLASS__COLLECTION_TYPE_PROVIDER_CLASS_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__COLLECTION_TYPE_PROVIDER_CLASS_INSTANCES:
 				getCollectionTypeProviderClassInstances().clear();
 				return;
-			case TestmodelPackage.CONTAINER_CLASS__ENUMERATION_LITERAL_PROVIDER_CLASS_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__ENUMERATION_LITERAL_PROVIDER_CLASS_INSTANCES:
 				getEnumerationLiteralProviderClassInstances().clear();
 				return;
-			case TestmodelPackage.CONTAINER_CLASS__CLASS1_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__CLASS1_INSTANCES:
 				getClass1Instances().clear();
 				return;
-			case TestmodelPackage.CONTAINER_CLASS__CLASS2_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__CLASS2_INSTANCES:
 				getClass2Instances().clear();
 				return;
-			case TestmodelPackage.CONTAINER_CLASS__INTERFACE1_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__INTERFACE1_INSTANCES:
 				getInterface1Instances().clear();
 				return;
-			case TestmodelPackage.CONTAINER_CLASS__INTERFACE2_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__INTERFACE2_INSTANCES:
 				getInterface2Instances().clear();
 				return;
-			case TestmodelPackage.CONTAINER_CLASS__INTERFACE3_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__INTERFACE3_INSTANCES:
 				getInterface3Instances().clear();
 				return;
-			case TestmodelPackage.CONTAINER_CLASS__COPYABLE_CLASS_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__COPYABLE_CLASS_INSTANCES:
 				getCopyableClassInstances().clear();
 				return;
-			case TestmodelPackage.CONTAINER_CLASS__NON_COPYABLE_CLASS_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__NON_COPYABLE_CLASS_INSTANCES:
 				getNonCopyableClassInstances().clear();
 				return;
-			case TestmodelPackage.CONTAINER_CLASS__STATIC_PROPERTY_AND_OPERATION_CLASS_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__STATIC_PROPERTY_AND_OPERATION_CLASS_INSTANCES:
 				getStaticPropertyAndOperationClassInstances().clear();
 				return;
 		}
@@ -495,27 +495,27 @@ public class ContainerClassImpl extends EObjectImpl implements ContainerClass {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TestmodelPackage.CONTAINER_CLASS__PRIMITIVE_TYPE_PROVIDER_CLASS_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__PRIMITIVE_TYPE_PROVIDER_CLASS_INSTANCES:
 				return primitiveTypeProviderClassInstances != null && !primitiveTypeProviderClassInstances.isEmpty();
-			case TestmodelPackage.CONTAINER_CLASS__COLLECTION_TYPE_PROVIDER_CLASS_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__COLLECTION_TYPE_PROVIDER_CLASS_INSTANCES:
 				return collectionTypeProviderClassInstances != null && !collectionTypeProviderClassInstances.isEmpty();
-			case TestmodelPackage.CONTAINER_CLASS__ENUMERATION_LITERAL_PROVIDER_CLASS_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__ENUMERATION_LITERAL_PROVIDER_CLASS_INSTANCES:
 				return enumerationLiteralProviderClassInstances != null && !enumerationLiteralProviderClassInstances.isEmpty();
-			case TestmodelPackage.CONTAINER_CLASS__CLASS1_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__CLASS1_INSTANCES:
 				return class1Instances != null && !class1Instances.isEmpty();
-			case TestmodelPackage.CONTAINER_CLASS__CLASS2_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__CLASS2_INSTANCES:
 				return class2Instances != null && !class2Instances.isEmpty();
-			case TestmodelPackage.CONTAINER_CLASS__INTERFACE1_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__INTERFACE1_INSTANCES:
 				return interface1Instances != null && !interface1Instances.isEmpty();
-			case TestmodelPackage.CONTAINER_CLASS__INTERFACE2_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__INTERFACE2_INSTANCES:
 				return interface2Instances != null && !interface2Instances.isEmpty();
-			case TestmodelPackage.CONTAINER_CLASS__INTERFACE3_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__INTERFACE3_INSTANCES:
 				return interface3Instances != null && !interface3Instances.isEmpty();
-			case TestmodelPackage.CONTAINER_CLASS__COPYABLE_CLASS_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__COPYABLE_CLASS_INSTANCES:
 				return copyableClassInstances != null && !copyableClassInstances.isEmpty();
-			case TestmodelPackage.CONTAINER_CLASS__NON_COPYABLE_CLASS_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__NON_COPYABLE_CLASS_INSTANCES:
 				return nonCopyableClassInstances != null && !nonCopyableClassInstances.isEmpty();
-			case TestmodelPackage.CONTAINER_CLASS__STATIC_PROPERTY_AND_OPERATION_CLASS_INSTANCES:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS__STATIC_PROPERTY_AND_OPERATION_CLASS_INSTANCES:
 				return staticPropertyAndOperationClassInstances != null && !staticPropertyAndOperationClassInstances.isEmpty();
 		}
 		return super.eIsSet(featureID);

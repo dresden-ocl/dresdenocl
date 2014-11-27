@@ -1,6 +1,6 @@
 /**
  */
-package ecore.org.dresdenocl.modelinstancetype.test.testmodel;
+package org.dresdenocl.modelinstancetype.test.testmodel;
 
 
 /**
@@ -9,7 +9,7 @@ package ecore.org.dresdenocl.modelinstancetype.test.testmodel;
  * <!-- end-user-doc -->
  *
  *
- * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage#getClonableCopyableClass()
+ * @see org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage#getClonableCopyableClass()
  * @model
  * @generated
  */

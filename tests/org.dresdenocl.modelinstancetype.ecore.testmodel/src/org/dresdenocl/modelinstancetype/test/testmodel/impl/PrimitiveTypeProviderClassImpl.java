@@ -11,8 +11,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
+import org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
 
 
 
@@ -32,7 +32,7 @@ import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
  *
  * @generated
  */
-public class PrimitiveTypeProviderClassImpl extends EObjectImpl implements PrimitiveTypeProviderClass {
+public class PrimitiveTypeProviderClassImpl extends EObjectImpl implements org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass {
 	/**
 	 * The default value of the '{@link #isBooleanProperty1() <em>Boolean Property1</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -129,7 +129,7 @@ public class PrimitiveTypeProviderClassImpl extends EObjectImpl implements Primi
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TestmodelPackage.Literals.PRIMITIVE_TYPE_PROVIDER_CLASS;
+		return org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.Literals.PRIMITIVE_TYPE_PROVIDER_CLASS;
 	}
 
 	/**
@@ -150,7 +150,7 @@ public class PrimitiveTypeProviderClassImpl extends EObjectImpl implements Primi
 		boolean oldBooleanProperty1 = booleanProperty1;
 		booleanProperty1 = newBooleanProperty1;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__BOOLEAN_PROPERTY1, oldBooleanProperty1, booleanProperty1));
+			eNotify(new ENotificationImpl(this, Notification.SET, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__BOOLEAN_PROPERTY1, oldBooleanProperty1, booleanProperty1));
 	}
 
 	/**
@@ -171,7 +171,7 @@ public class PrimitiveTypeProviderClassImpl extends EObjectImpl implements Primi
 		int oldIntegerProperty1 = integerProperty1;
 		integerProperty1 = newIntegerProperty1;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__INTEGER_PROPERTY1, oldIntegerProperty1, integerProperty1));
+			eNotify(new ENotificationImpl(this, Notification.SET, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__INTEGER_PROPERTY1, oldIntegerProperty1, integerProperty1));
 	}
 
 	/**
@@ -192,7 +192,7 @@ public class PrimitiveTypeProviderClassImpl extends EObjectImpl implements Primi
 		float oldRealProperty1 = realProperty1;
 		realProperty1 = newRealProperty1;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__REAL_PROPERTY1, oldRealProperty1, realProperty1));
+			eNotify(new ENotificationImpl(this, Notification.SET, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__REAL_PROPERTY1, oldRealProperty1, realProperty1));
 	}
 
 	/**
@@ -213,7 +213,7 @@ public class PrimitiveTypeProviderClassImpl extends EObjectImpl implements Primi
 		String oldStringProperty1 = stringProperty1;
 		stringProperty1 = newStringProperty1;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__STRING_PROPERTY1, oldStringProperty1, stringProperty1));
+			eNotify(new ENotificationImpl(this, Notification.SET, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__STRING_PROPERTY1, oldStringProperty1, stringProperty1));
 	}
 
 	/**
@@ -224,13 +224,13 @@ public class PrimitiveTypeProviderClassImpl extends EObjectImpl implements Primi
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__BOOLEAN_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__BOOLEAN_PROPERTY1:
 				return isBooleanProperty1();
-			case TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__INTEGER_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__INTEGER_PROPERTY1:
 				return getIntegerProperty1();
-			case TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__REAL_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__REAL_PROPERTY1:
 				return getRealProperty1();
-			case TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__STRING_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__STRING_PROPERTY1:
 				return getStringProperty1();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -244,16 +244,16 @@ public class PrimitiveTypeProviderClassImpl extends EObjectImpl implements Primi
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__BOOLEAN_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__BOOLEAN_PROPERTY1:
 				setBooleanProperty1((Boolean)newValue);
 				return;
-			case TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__INTEGER_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__INTEGER_PROPERTY1:
 				setIntegerProperty1((Integer)newValue);
 				return;
-			case TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__REAL_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__REAL_PROPERTY1:
 				setRealProperty1((Float)newValue);
 				return;
-			case TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__STRING_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__STRING_PROPERTY1:
 				setStringProperty1((String)newValue);
 				return;
 		}
@@ -268,16 +268,16 @@ public class PrimitiveTypeProviderClassImpl extends EObjectImpl implements Primi
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__BOOLEAN_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__BOOLEAN_PROPERTY1:
 				setBooleanProperty1(BOOLEAN_PROPERTY1_EDEFAULT);
 				return;
-			case TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__INTEGER_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__INTEGER_PROPERTY1:
 				setIntegerProperty1(INTEGER_PROPERTY1_EDEFAULT);
 				return;
-			case TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__REAL_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__REAL_PROPERTY1:
 				setRealProperty1(REAL_PROPERTY1_EDEFAULT);
 				return;
-			case TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__STRING_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__STRING_PROPERTY1:
 				setStringProperty1(STRING_PROPERTY1_EDEFAULT);
 				return;
 		}
@@ -292,13 +292,13 @@ public class PrimitiveTypeProviderClassImpl extends EObjectImpl implements Primi
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__BOOLEAN_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__BOOLEAN_PROPERTY1:
 				return booleanProperty1 != BOOLEAN_PROPERTY1_EDEFAULT;
-			case TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__INTEGER_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__INTEGER_PROPERTY1:
 				return integerProperty1 != INTEGER_PROPERTY1_EDEFAULT;
-			case TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__REAL_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__REAL_PROPERTY1:
 				return realProperty1 != REAL_PROPERTY1_EDEFAULT;
-			case TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__STRING_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS__STRING_PROPERTY1:
 				return STRING_PROPERTY1_EDEFAULT == null ? stringProperty1 != null : !STRING_PROPERTY1_EDEFAULT.equals(stringProperty1);
 		}
 		return super.eIsSet(featureID);

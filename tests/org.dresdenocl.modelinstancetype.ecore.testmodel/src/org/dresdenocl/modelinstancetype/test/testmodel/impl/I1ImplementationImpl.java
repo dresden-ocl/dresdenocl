@@ -9,8 +9,8 @@ package org.dresdenocl.modelinstancetype.test.testmodel.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.I1Implementation;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
+import org.dresdenocl.modelinstancetype.test.testmodel.I1Implementation;
+import org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
 
 
 
@@ -23,7 +23,7 @@ import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
  *
  * @generated
  */
-public class I1ImplementationImpl extends EObjectImpl implements I1Implementation {
+public class I1ImplementationImpl extends EObjectImpl implements org.dresdenocl.modelinstancetype.test.testmodel.I1Implementation {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -40,7 +40,7 @@ public class I1ImplementationImpl extends EObjectImpl implements I1Implementatio
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TestmodelPackage.Literals.I1_IMPLEMENTATION;
+		return org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.Literals.I1_IMPLEMENTATION;
 	}
 
 } //I1ImplementationImpl

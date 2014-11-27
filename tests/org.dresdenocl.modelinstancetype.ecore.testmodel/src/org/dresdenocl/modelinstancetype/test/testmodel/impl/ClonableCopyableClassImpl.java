@@ -8,8 +8,8 @@ package org.dresdenocl.modelinstancetype.test.testmodel.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.ClonableCopyableClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
+import org.dresdenocl.modelinstancetype.test.testmodel.ClonableCopyableClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
 
 
 
@@ -22,7 +22,7 @@ import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
  *
  * @generated
  */
-public class ClonableCopyableClassImpl extends CopyableClassImpl implements ClonableCopyableClass {
+public class ClonableCopyableClassImpl extends CopyableClassImpl implements org.dresdenocl.modelinstancetype.test.testmodel.ClonableCopyableClass {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -39,7 +39,7 @@ public class ClonableCopyableClassImpl extends CopyableClassImpl implements Clon
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TestmodelPackage.Literals.CLONABLE_COPYABLE_CLASS;
+		return org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.Literals.CLONABLE_COPYABLE_CLASS;
 	}
 
 } //ClonableCopyableClassImpl

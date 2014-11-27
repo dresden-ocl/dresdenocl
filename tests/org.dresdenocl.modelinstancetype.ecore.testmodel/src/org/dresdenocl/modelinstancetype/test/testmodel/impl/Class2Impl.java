@@ -8,8 +8,8 @@ package org.dresdenocl.modelinstancetype.test.testmodel.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class2;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
+import org.dresdenocl.modelinstancetype.test.testmodel.Class2;
+import org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
 
 
 
@@ -22,7 +22,7 @@ import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
  *
  * @generated
  */
-public class Class2Impl extends Class1Impl implements Class2 {
+public class Class2Impl extends Class1Impl implements org.dresdenocl.modelinstancetype.test.testmodel.Class2 {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -39,7 +39,7 @@ public class Class2Impl extends Class1Impl implements Class2 {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TestmodelPackage.Literals.CLASS2;
+		return org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.Literals.CLASS2;
 	}
 
 } //Class2Impl

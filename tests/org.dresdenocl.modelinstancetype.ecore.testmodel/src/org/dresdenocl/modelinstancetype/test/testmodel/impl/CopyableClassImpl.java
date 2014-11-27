@@ -9,8 +9,8 @@ package org.dresdenocl.modelinstancetype.test.testmodel.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.CopyableClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
+import org.dresdenocl.modelinstancetype.test.testmodel.CopyableClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
 
 
 /**

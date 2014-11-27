@@ -10,27 +10,28 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.C1Implementation;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class2;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.ClonableCopyableClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.CopyableClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.I1I2Implementation;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.I1Implementation;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.I2C1Implementation;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.I3C2Implementation;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.I3Implementation;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.InitializableCopyableClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Interface1;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Interface2;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Interface3;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.NonCopyableClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
+import org.dresdenocl.modelinstancetype.test.testmodel.C1Implementation;
+import org.dresdenocl.modelinstancetype.test.testmodel.Class1;
+import org.dresdenocl.modelinstancetype.test.testmodel.Class2;
+import org.dresdenocl.modelinstancetype.test.testmodel.ClonableCopyableClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.CopyableClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.I1I2Implementation;
+import org.dresdenocl.modelinstancetype.test.testmodel.I1Implementation;
+import org.dresdenocl.modelinstancetype.test.testmodel.I2C1Implementation;
+import org.dresdenocl.modelinstancetype.test.testmodel.I3C2Implementation;
+import org.dresdenocl.modelinstancetype.test.testmodel.I3Implementation;
+import org.dresdenocl.modelinstancetype.test.testmodel.InitializableCopyableClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.Interface1;
+import org.dresdenocl.modelinstancetype.test.testmodel.Interface2;
+import org.dresdenocl.modelinstancetype.test.testmodel.Interface3;
+import org.dresdenocl.modelinstancetype.test.testmodel.NonCopyableClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
+import org.dresdenocl.modelinstancetype.test.testmodel.*;
 
 
 /**
@@ -43,7 +44,7 @@ import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage
+ * @see org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage
  * @generated
  */
 public class TestmodelSwitch<T> extends 
@@ -54,7 +55,7 @@ Switch<T> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static TestmodelPackage modelPackage;
+	protected static org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage modelPackage;
 
 	/**
 	 * Creates an instance of the switch.
@@ -64,7 +65,7 @@ Switch<T> {
 	 */
 	public TestmodelSwitch() {
 		if (modelPackage == null) {
-			modelPackage = TestmodelPackage.eINSTANCE;
+			modelPackage = org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.eINSTANCE;
 		}
 	}
 
@@ -91,100 +92,100 @@ Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case TestmodelPackage.CONTAINER_CLASS: {
-				ContainerClass containerClass = (ContainerClass)theEObject;
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS: {
+				org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass containerClass = (org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass)theEObject;
 				T result = caseContainerClass(containerClass);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS: {
-				PrimitiveTypeProviderClass primitiveTypeProviderClass = (PrimitiveTypeProviderClass)theEObject;
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS: {
+				org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass primitiveTypeProviderClass = (org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass)theEObject;
 				T result = casePrimitiveTypeProviderClass(primitiveTypeProviderClass);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS: {
-				CollectionTypeProviderClass collectionTypeProviderClass = (CollectionTypeProviderClass)theEObject;
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS: {
+				org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass collectionTypeProviderClass = (org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass)theEObject;
 				T result = caseCollectionTypeProviderClass(collectionTypeProviderClass);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TestmodelPackage.ENUMERATION_LITERAL_PROVIDER_CLASS: {
-				EnumerationLiteralProviderClass enumerationLiteralProviderClass = (EnumerationLiteralProviderClass)theEObject;
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.ENUMERATION_LITERAL_PROVIDER_CLASS: {
+				org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass enumerationLiteralProviderClass = (org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass)theEObject;
 				T result = caseEnumerationLiteralProviderClass(enumerationLiteralProviderClass);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TestmodelPackage.CLASS1: {
-				Class1 class1 = (Class1)theEObject;
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1: {
+				org.dresdenocl.modelinstancetype.test.testmodel.Class1 class1 = (org.dresdenocl.modelinstancetype.test.testmodel.Class1)theEObject;
 				T result = caseClass1(class1);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TestmodelPackage.CLASS2: {
-				Class2 class2 = (Class2)theEObject;
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS2: {
+				org.dresdenocl.modelinstancetype.test.testmodel.Class2 class2 = (org.dresdenocl.modelinstancetype.test.testmodel.Class2)theEObject;
 				T result = caseClass2(class2);
 				if (result == null) result = caseClass1(class2);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TestmodelPackage.INTERFACE1: {
-				Interface1 interface1 = (Interface1)theEObject;
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.INTERFACE1: {
+				org.dresdenocl.modelinstancetype.test.testmodel.Interface1 interface1 = (org.dresdenocl.modelinstancetype.test.testmodel.Interface1)theEObject;
 				T result = caseInterface1(interface1);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TestmodelPackage.INTERFACE2: {
-				Interface2 interface2 = (Interface2)theEObject;
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.INTERFACE2: {
+				org.dresdenocl.modelinstancetype.test.testmodel.Interface2 interface2 = (org.dresdenocl.modelinstancetype.test.testmodel.Interface2)theEObject;
 				T result = caseInterface2(interface2);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TestmodelPackage.INTERFACE3: {
-				Interface3 interface3 = (Interface3)theEObject;
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.INTERFACE3: {
+				org.dresdenocl.modelinstancetype.test.testmodel.Interface3 interface3 = (org.dresdenocl.modelinstancetype.test.testmodel.Interface3)theEObject;
 				T result = caseInterface3(interface3);
 				if (result == null) result = caseInterface2(interface3);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TestmodelPackage.COPYABLE_CLASS: {
-				CopyableClass copyableClass = (CopyableClass)theEObject;
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.COPYABLE_CLASS: {
+				org.dresdenocl.modelinstancetype.test.testmodel.CopyableClass copyableClass = (org.dresdenocl.modelinstancetype.test.testmodel.CopyableClass)theEObject;
 				T result = caseCopyableClass(copyableClass);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TestmodelPackage.C1_IMPLEMENTATION: {
-				C1Implementation c1Implementation = (C1Implementation)theEObject;
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.C1_IMPLEMENTATION: {
+				org.dresdenocl.modelinstancetype.test.testmodel.C1Implementation c1Implementation = (org.dresdenocl.modelinstancetype.test.testmodel.C1Implementation)theEObject;
 				T result = caseC1Implementation(c1Implementation);
 				if (result == null) result = caseClass1(c1Implementation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TestmodelPackage.I1I2_IMPLEMENTATION: {
-				I1I2Implementation i1I2Implementation = (I1I2Implementation)theEObject;
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.I1I2_IMPLEMENTATION: {
+				org.dresdenocl.modelinstancetype.test.testmodel.I1I2Implementation i1I2Implementation = (org.dresdenocl.modelinstancetype.test.testmodel.I1I2Implementation)theEObject;
 				T result = caseI1I2Implementation(i1I2Implementation);
 				if (result == null) result = caseInterface1(i1I2Implementation);
 				if (result == null) result = caseInterface2(i1I2Implementation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TestmodelPackage.I1_IMPLEMENTATION: {
-				I1Implementation i1Implementation = (I1Implementation)theEObject;
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.I1_IMPLEMENTATION: {
+				org.dresdenocl.modelinstancetype.test.testmodel.I1Implementation i1Implementation = (org.dresdenocl.modelinstancetype.test.testmodel.I1Implementation)theEObject;
 				T result = caseI1Implementation(i1Implementation);
 				if (result == null) result = caseInterface1(i1Implementation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TestmodelPackage.I2C1_IMPLEMENTATION: {
-				I2C1Implementation i2C1Implementation = (I2C1Implementation)theEObject;
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.I2C1_IMPLEMENTATION: {
+				org.dresdenocl.modelinstancetype.test.testmodel.I2C1Implementation i2C1Implementation = (org.dresdenocl.modelinstancetype.test.testmodel.I2C1Implementation)theEObject;
 				T result = caseI2C1Implementation(i2C1Implementation);
 				if (result == null) result = caseInterface2(i2C1Implementation);
 				if (result == null) result = caseClass1(i2C1Implementation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TestmodelPackage.I3C2_IMPLEMENTATION: {
-				I3C2Implementation i3C2Implementation = (I3C2Implementation)theEObject;
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.I3C2_IMPLEMENTATION: {
+				org.dresdenocl.modelinstancetype.test.testmodel.I3C2Implementation i3C2Implementation = (org.dresdenocl.modelinstancetype.test.testmodel.I3C2Implementation)theEObject;
 				T result = caseI3C2Implementation(i3C2Implementation);
 				if (result == null) result = caseClass2(i3C2Implementation);
 				if (result == null) result = caseInterface3(i3C2Implementation);
@@ -193,36 +194,36 @@ Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TestmodelPackage.I3_IMPLEMENTATION: {
-				I3Implementation i3Implementation = (I3Implementation)theEObject;
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.I3_IMPLEMENTATION: {
+				org.dresdenocl.modelinstancetype.test.testmodel.I3Implementation i3Implementation = (org.dresdenocl.modelinstancetype.test.testmodel.I3Implementation)theEObject;
 				T result = caseI3Implementation(i3Implementation);
 				if (result == null) result = caseInterface3(i3Implementation);
 				if (result == null) result = caseInterface2(i3Implementation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TestmodelPackage.CLONABLE_COPYABLE_CLASS: {
-				ClonableCopyableClass clonableCopyableClass = (ClonableCopyableClass)theEObject;
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLONABLE_COPYABLE_CLASS: {
+				org.dresdenocl.modelinstancetype.test.testmodel.ClonableCopyableClass clonableCopyableClass = (org.dresdenocl.modelinstancetype.test.testmodel.ClonableCopyableClass)theEObject;
 				T result = caseClonableCopyableClass(clonableCopyableClass);
 				if (result == null) result = caseCopyableClass(clonableCopyableClass);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TestmodelPackage.INITIALIZABLE_COPYABLE_CLASS: {
-				InitializableCopyableClass initializableCopyableClass = (InitializableCopyableClass)theEObject;
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.INITIALIZABLE_COPYABLE_CLASS: {
+				org.dresdenocl.modelinstancetype.test.testmodel.InitializableCopyableClass initializableCopyableClass = (org.dresdenocl.modelinstancetype.test.testmodel.InitializableCopyableClass)theEObject;
 				T result = caseInitializableCopyableClass(initializableCopyableClass);
 				if (result == null) result = caseCopyableClass(initializableCopyableClass);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TestmodelPackage.NON_COPYABLE_CLASS: {
-				NonCopyableClass nonCopyableClass = (NonCopyableClass)theEObject;
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.NON_COPYABLE_CLASS: {
+				org.dresdenocl.modelinstancetype.test.testmodel.NonCopyableClass nonCopyableClass = (org.dresdenocl.modelinstancetype.test.testmodel.NonCopyableClass)theEObject;
 				T result = caseNonCopyableClass(nonCopyableClass);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TestmodelPackage.STATIC_PROPERTY_AND_OPERATION_CLASS: {
-				StaticPropertyAndOperationClass staticPropertyAndOperationClass = (StaticPropertyAndOperationClass)theEObject;
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.STATIC_PROPERTY_AND_OPERATION_CLASS: {
+				org.dresdenocl.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass staticPropertyAndOperationClass = (org.dresdenocl.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass)theEObject;
 				T result = caseStaticPropertyAndOperationClass(staticPropertyAndOperationClass);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -242,7 +243,7 @@ Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseContainerClass(ContainerClass object) {
+	public T caseContainerClass(org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass object) {
 		return null;
 	}
 
@@ -257,7 +258,7 @@ Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T casePrimitiveTypeProviderClass(PrimitiveTypeProviderClass object) {
+	public T casePrimitiveTypeProviderClass(org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass object) {
 		return null;
 	}
 
@@ -272,7 +273,7 @@ Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseCollectionTypeProviderClass(CollectionTypeProviderClass object) {
+	public T caseCollectionTypeProviderClass(org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass object) {
 		return null;
 	}
 
@@ -287,7 +288,7 @@ Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseEnumerationLiteralProviderClass(EnumerationLiteralProviderClass object) {
+	public T caseEnumerationLiteralProviderClass(org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass object) {
 		return null;
 	}
 
@@ -302,7 +303,7 @@ Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseClass1(Class1 object) {
+	public T caseClass1(org.dresdenocl.modelinstancetype.test.testmodel.Class1 object) {
 		return null;
 	}
 
@@ -317,7 +318,7 @@ Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseClass2(Class2 object) {
+	public T caseClass2(org.dresdenocl.modelinstancetype.test.testmodel.Class2 object) {
 		return null;
 	}
 
@@ -332,7 +333,7 @@ Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseInterface1(Interface1 object) {
+	public T caseInterface1(org.dresdenocl.modelinstancetype.test.testmodel.Interface1 object) {
 		return null;
 	}
 
@@ -347,7 +348,7 @@ Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseInterface2(Interface2 object) {
+	public T caseInterface2(org.dresdenocl.modelinstancetype.test.testmodel.Interface2 object) {
 		return null;
 	}
 
@@ -362,7 +363,7 @@ Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseInterface3(Interface3 object) {
+	public T caseInterface3(org.dresdenocl.modelinstancetype.test.testmodel.Interface3 object) {
 		return null;
 	}
 
@@ -377,7 +378,7 @@ Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseCopyableClass(CopyableClass object) {
+	public T caseCopyableClass(org.dresdenocl.modelinstancetype.test.testmodel.CopyableClass object) {
 		return null;
 	}
 
@@ -392,7 +393,7 @@ Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseC1Implementation(C1Implementation object) {
+	public T caseC1Implementation(org.dresdenocl.modelinstancetype.test.testmodel.C1Implementation object) {
 		return null;
 	}
 
@@ -407,7 +408,7 @@ Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseI1I2Implementation(I1I2Implementation object) {
+	public T caseI1I2Implementation(org.dresdenocl.modelinstancetype.test.testmodel.I1I2Implementation object) {
 		return null;
 	}
 
@@ -422,7 +423,7 @@ Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseI1Implementation(I1Implementation object) {
+	public T caseI1Implementation(org.dresdenocl.modelinstancetype.test.testmodel.I1Implementation object) {
 		return null;
 	}
 
@@ -437,7 +438,7 @@ Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseI2C1Implementation(I2C1Implementation object) {
+	public T caseI2C1Implementation(org.dresdenocl.modelinstancetype.test.testmodel.I2C1Implementation object) {
 		return null;
 	}
 
@@ -452,7 +453,7 @@ Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseI3C2Implementation(I3C2Implementation object) {
+	public T caseI3C2Implementation(org.dresdenocl.modelinstancetype.test.testmodel.I3C2Implementation object) {
 		return null;
 	}
 
@@ -467,7 +468,7 @@ Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseI3Implementation(I3Implementation object) {
+	public T caseI3Implementation(org.dresdenocl.modelinstancetype.test.testmodel.I3Implementation object) {
 		return null;
 	}
 
@@ -482,7 +483,7 @@ Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseClonableCopyableClass(ClonableCopyableClass object) {
+	public T caseClonableCopyableClass(org.dresdenocl.modelinstancetype.test.testmodel.ClonableCopyableClass object) {
 		return null;
 	}
 
@@ -497,7 +498,7 @@ Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseInitializableCopyableClass(InitializableCopyableClass object) {
+	public T caseInitializableCopyableClass(org.dresdenocl.modelinstancetype.test.testmodel.InitializableCopyableClass object) {
 		return null;
 	}
 
@@ -512,7 +513,7 @@ Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseNonCopyableClass(NonCopyableClass object) {
+	public T caseNonCopyableClass(org.dresdenocl.modelinstancetype.test.testmodel.NonCopyableClass object) {
 		return null;
 	}
 
@@ -527,7 +528,7 @@ Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseStaticPropertyAndOperationClass(StaticPropertyAndOperationClass object) {
+	public T caseStaticPropertyAndOperationClass(org.dresdenocl.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass object) {
 		return null;
 	}
 

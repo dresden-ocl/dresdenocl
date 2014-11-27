@@ -13,26 +13,27 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.C1Implementation;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class2;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.ClonableCopyableClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.CopyableClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.I1I2Implementation;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.I1Implementation;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.I2C1Implementation;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.I3C2Implementation;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.I3Implementation;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.InitializableCopyableClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.NonCopyableClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelFactory;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
+import org.dresdenocl.modelinstancetype.test.testmodel.C1Implementation;
+import org.dresdenocl.modelinstancetype.test.testmodel.Class1;
+import org.dresdenocl.modelinstancetype.test.testmodel.Class2;
+import org.dresdenocl.modelinstancetype.test.testmodel.ClonableCopyableClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.CopyableClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1;
+import org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.I1I2Implementation;
+import org.dresdenocl.modelinstancetype.test.testmodel.I1Implementation;
+import org.dresdenocl.modelinstancetype.test.testmodel.I2C1Implementation;
+import org.dresdenocl.modelinstancetype.test.testmodel.I3C2Implementation;
+import org.dresdenocl.modelinstancetype.test.testmodel.I3Implementation;
+import org.dresdenocl.modelinstancetype.test.testmodel.InitializableCopyableClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.NonCopyableClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.TestmodelFactory;
+import org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
+import org.dresdenocl.modelinstancetype.test.testmodel.*;
 
 
 /**
@@ -41,16 +42,16 @@ import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFactory {
+public class TestmodelFactoryImpl extends EFactoryImpl implements org.dresdenocl.modelinstancetype.test.testmodel.TestmodelFactory {
 	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static TestmodelFactory init() {
+	public static org.dresdenocl.modelinstancetype.test.testmodel.TestmodelFactory init() {
 		try {
-			TestmodelFactory theTestmodelFactory = (TestmodelFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.tudresden.de/ocl20/pivot/modelinstancetype/test/testmodel"); 
+			org.dresdenocl.modelinstancetype.test.testmodel.TestmodelFactory theTestmodelFactory = (org.dresdenocl.modelinstancetype.test.testmodel.TestmodelFactory)EPackage.Registry.INSTANCE.getEFactory(TestmodelPackage.eNS_URI);
 			if (theTestmodelFactory != null) {
 				return theTestmodelFactory;
 			}
@@ -79,23 +80,23 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case TestmodelPackage.CONTAINER_CLASS: return createContainerClass();
-			case TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS: return createPrimitiveTypeProviderClass();
-			case TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS: return createCollectionTypeProviderClass();
-			case TestmodelPackage.ENUMERATION_LITERAL_PROVIDER_CLASS: return createEnumerationLiteralProviderClass();
-			case TestmodelPackage.CLASS1: return createClass1();
-			case TestmodelPackage.CLASS2: return createClass2();
-			case TestmodelPackage.COPYABLE_CLASS: return createCopyableClass();
-			case TestmodelPackage.C1_IMPLEMENTATION: return createC1Implementation();
-			case TestmodelPackage.I1I2_IMPLEMENTATION: return createI1I2Implementation();
-			case TestmodelPackage.I1_IMPLEMENTATION: return createI1Implementation();
-			case TestmodelPackage.I2C1_IMPLEMENTATION: return createI2C1Implementation();
-			case TestmodelPackage.I3C2_IMPLEMENTATION: return createI3C2Implementation();
-			case TestmodelPackage.I3_IMPLEMENTATION: return createI3Implementation();
-			case TestmodelPackage.CLONABLE_COPYABLE_CLASS: return createClonableCopyableClass();
-			case TestmodelPackage.INITIALIZABLE_COPYABLE_CLASS: return createInitializableCopyableClass();
-			case TestmodelPackage.NON_COPYABLE_CLASS: return createNonCopyableClass();
-			case TestmodelPackage.STATIC_PROPERTY_AND_OPERATION_CLASS: return createStaticPropertyAndOperationClass();
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CONTAINER_CLASS: return createContainerClass();
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.PRIMITIVE_TYPE_PROVIDER_CLASS: return createPrimitiveTypeProviderClass();
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS: return createCollectionTypeProviderClass();
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.ENUMERATION_LITERAL_PROVIDER_CLASS: return createEnumerationLiteralProviderClass();
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1: return createClass1();
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS2: return createClass2();
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.COPYABLE_CLASS: return createCopyableClass();
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.C1_IMPLEMENTATION: return createC1Implementation();
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.I1I2_IMPLEMENTATION: return createI1I2Implementation();
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.I1_IMPLEMENTATION: return createI1Implementation();
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.I2C1_IMPLEMENTATION: return createI2C1Implementation();
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.I3C2_IMPLEMENTATION: return createI3C2Implementation();
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.I3_IMPLEMENTATION: return createI3Implementation();
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLONABLE_COPYABLE_CLASS: return createClonableCopyableClass();
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.INITIALIZABLE_COPYABLE_CLASS: return createInitializableCopyableClass();
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.NON_COPYABLE_CLASS: return createNonCopyableClass();
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.STATIC_PROPERTY_AND_OPERATION_CLASS: return createStaticPropertyAndOperationClass();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -109,7 +110,7 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case TestmodelPackage.ENUMERATION1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.ENUMERATION1:
 				return createEnumeration1FromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
@@ -124,7 +125,7 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case TestmodelPackage.ENUMERATION1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.ENUMERATION1:
 				return convertEnumeration1ToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
@@ -136,7 +137,7 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ContainerClass createContainerClass() {
+	public org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass createContainerClass() {
 		ContainerClassImpl containerClass = new ContainerClassImpl();
 		return containerClass;
 	}
@@ -146,7 +147,7 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PrimitiveTypeProviderClass createPrimitiveTypeProviderClass() {
+	public org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass createPrimitiveTypeProviderClass() {
 		PrimitiveTypeProviderClassImpl primitiveTypeProviderClass = new PrimitiveTypeProviderClassImpl();
 		return primitiveTypeProviderClass;
 	}
@@ -156,7 +157,7 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CollectionTypeProviderClass createCollectionTypeProviderClass() {
+	public org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass createCollectionTypeProviderClass() {
 		CollectionTypeProviderClassImpl collectionTypeProviderClass = new CollectionTypeProviderClassImpl();
 		return collectionTypeProviderClass;
 	}
@@ -166,7 +167,7 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EnumerationLiteralProviderClass createEnumerationLiteralProviderClass() {
+	public org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass createEnumerationLiteralProviderClass() {
 		EnumerationLiteralProviderClassImpl enumerationLiteralProviderClass = new EnumerationLiteralProviderClassImpl();
 		return enumerationLiteralProviderClass;
 	}
@@ -176,7 +177,7 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Class1 createClass1() {
+	public org.dresdenocl.modelinstancetype.test.testmodel.Class1 createClass1() {
 		Class1Impl class1 = new Class1Impl();
 		return class1;
 	}
@@ -186,7 +187,7 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Class2 createClass2() {
+	public org.dresdenocl.modelinstancetype.test.testmodel.Class2 createClass2() {
 		Class2Impl class2 = new Class2Impl();
 		return class2;
 	}
@@ -196,7 +197,7 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CopyableClass createCopyableClass() {
+	public org.dresdenocl.modelinstancetype.test.testmodel.CopyableClass createCopyableClass() {
 		CopyableClassImpl copyableClass = new CopyableClassImpl();
 		return copyableClass;
 	}
@@ -206,7 +207,7 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public C1Implementation createC1Implementation() {
+	public org.dresdenocl.modelinstancetype.test.testmodel.C1Implementation createC1Implementation() {
 		C1ImplementationImpl c1Implementation = new C1ImplementationImpl();
 		return c1Implementation;
 	}
@@ -216,7 +217,7 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public I1I2Implementation createI1I2Implementation() {
+	public org.dresdenocl.modelinstancetype.test.testmodel.I1I2Implementation createI1I2Implementation() {
 		I1I2ImplementationImpl i1I2Implementation = new I1I2ImplementationImpl();
 		return i1I2Implementation;
 	}
@@ -226,7 +227,7 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public I1Implementation createI1Implementation() {
+	public org.dresdenocl.modelinstancetype.test.testmodel.I1Implementation createI1Implementation() {
 		I1ImplementationImpl i1Implementation = new I1ImplementationImpl();
 		return i1Implementation;
 	}
@@ -236,7 +237,7 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public I2C1Implementation createI2C1Implementation() {
+	public org.dresdenocl.modelinstancetype.test.testmodel.I2C1Implementation createI2C1Implementation() {
 		I2C1ImplementationImpl i2C1Implementation = new I2C1ImplementationImpl();
 		return i2C1Implementation;
 	}
@@ -246,7 +247,7 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public I3C2Implementation createI3C2Implementation() {
+	public org.dresdenocl.modelinstancetype.test.testmodel.I3C2Implementation createI3C2Implementation() {
 		I3C2ImplementationImpl i3C2Implementation = new I3C2ImplementationImpl();
 		return i3C2Implementation;
 	}
@@ -256,7 +257,7 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public I3Implementation createI3Implementation() {
+	public org.dresdenocl.modelinstancetype.test.testmodel.I3Implementation createI3Implementation() {
 		I3ImplementationImpl i3Implementation = new I3ImplementationImpl();
 		return i3Implementation;
 	}
@@ -266,7 +267,7 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClonableCopyableClass createClonableCopyableClass() {
+	public org.dresdenocl.modelinstancetype.test.testmodel.ClonableCopyableClass createClonableCopyableClass() {
 		ClonableCopyableClassImpl clonableCopyableClass = new ClonableCopyableClassImpl();
 		return clonableCopyableClass;
 	}
@@ -276,7 +277,7 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public InitializableCopyableClass createInitializableCopyableClass() {
+	public org.dresdenocl.modelinstancetype.test.testmodel.InitializableCopyableClass createInitializableCopyableClass() {
 		InitializableCopyableClassImpl initializableCopyableClass = new InitializableCopyableClassImpl();
 		return initializableCopyableClass;
 	}
@@ -286,7 +287,7 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NonCopyableClass createNonCopyableClass() {
+	public org.dresdenocl.modelinstancetype.test.testmodel.NonCopyableClass createNonCopyableClass() {
 		NonCopyableClassImpl nonCopyableClass = new NonCopyableClassImpl();
 		return nonCopyableClass;
 	}
@@ -296,7 +297,7 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public StaticPropertyAndOperationClass createStaticPropertyAndOperationClass() {
+	public org.dresdenocl.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass createStaticPropertyAndOperationClass() {
 		StaticPropertyAndOperationClassImpl staticPropertyAndOperationClass = new StaticPropertyAndOperationClassImpl();
 		return staticPropertyAndOperationClass;
 	}
@@ -306,8 +307,8 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Enumeration1 createEnumeration1FromString(EDataType eDataType, String initialValue) {
-		Enumeration1 result = Enumeration1.get(initialValue);
+	public org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1 createEnumeration1FromString(EDataType eDataType, String initialValue) {
+		org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1 result = org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
@@ -326,8 +327,8 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TestmodelPackage getTestmodelPackage() {
-		return (TestmodelPackage)getEPackage();
+	public org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage getTestmodelPackage() {
+		return (org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage)getEPackage();
 	}
 
 	/**
@@ -337,8 +338,8 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 	 * @generated
 	 */
 	@Deprecated
-	public static TestmodelPackage getPackage() {
-		return TestmodelPackage.eINSTANCE;
+	public static org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage getPackage() {
+		return org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.eINSTANCE;
 	}
 
 } //TestmodelFactoryImpl

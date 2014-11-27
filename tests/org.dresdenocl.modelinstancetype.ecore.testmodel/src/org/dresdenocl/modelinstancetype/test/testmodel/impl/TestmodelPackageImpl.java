@@ -14,29 +14,29 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.C1Implementation;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class2;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.ClonableCopyableClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.CopyableClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.I1I2Implementation;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.I1Implementation;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.I2C1Implementation;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.I3C2Implementation;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.I3Implementation;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.InitializableCopyableClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Interface1;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Interface2;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Interface3;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.NonCopyableClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelFactory;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
+import org.dresdenocl.modelinstancetype.test.testmodel.C1Implementation;
+import org.dresdenocl.modelinstancetype.test.testmodel.Class1;
+import org.dresdenocl.modelinstancetype.test.testmodel.Class2;
+import org.dresdenocl.modelinstancetype.test.testmodel.ClonableCopyableClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.CopyableClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1;
+import org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.I1I2Implementation;
+import org.dresdenocl.modelinstancetype.test.testmodel.I1Implementation;
+import org.dresdenocl.modelinstancetype.test.testmodel.I2C1Implementation;
+import org.dresdenocl.modelinstancetype.test.testmodel.I3C2Implementation;
+import org.dresdenocl.modelinstancetype.test.testmodel.I3Implementation;
+import org.dresdenocl.modelinstancetype.test.testmodel.InitializableCopyableClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.Interface1;
+import org.dresdenocl.modelinstancetype.test.testmodel.Interface2;
+import org.dresdenocl.modelinstancetype.test.testmodel.Interface3;
+import org.dresdenocl.modelinstancetype.test.testmodel.NonCopyableClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.TestmodelFactory;
+import org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
 
 
 
@@ -46,7 +46,7 @@ import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class TestmodelPackageImpl extends EPackageImpl implements TestmodelPackage {
+public class TestmodelPackageImpl extends EPackageImpl implements org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -205,12 +205,12 @@ public class TestmodelPackageImpl extends EPackageImpl implements TestmodelPacka
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage#eNS_URI
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */
 	private TestmodelPackageImpl() {
-		super(eNS_URI, TestmodelFactory.eINSTANCE);
+		super(eNS_URI, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelFactory.eINSTANCE);
 	}
 
 	/**
@@ -223,7 +223,7 @@ public class TestmodelPackageImpl extends EPackageImpl implements TestmodelPacka
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
 	 * 
-	 * <p>This method is used to initialize {@link TestmodelPackage#eINSTANCE} when that field is accessed.
+	 * <p>This method is used to initialize {@link org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -232,8 +232,8 @@ public class TestmodelPackageImpl extends EPackageImpl implements TestmodelPacka
 	 * @see #initializePackageContents()
 	 * @generated
 	 */
-	public static TestmodelPackage init() {
-		if (isInited) return (TestmodelPackage)EPackage.Registry.INSTANCE.getEPackage(TestmodelPackage.eNS_URI);
+	public static org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage init() {
+		if (isInited) return (org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage)EPackage.Registry.INSTANCE.getEPackage(org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.eNS_URI);
 
 		// Obtain or create and register package
 		TestmodelPackageImpl theTestmodelPackage = (TestmodelPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TestmodelPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new TestmodelPackageImpl());
@@ -251,7 +251,7 @@ public class TestmodelPackageImpl extends EPackageImpl implements TestmodelPacka
 
   
 		// Update the registry and return the package
-		EPackage.Registry.INSTANCE.put(TestmodelPackage.eNS_URI, theTestmodelPackage);
+		EPackage.Registry.INSTANCE.put(org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.eNS_URI, theTestmodelPackage);
 		return theTestmodelPackage;
 	}
 
@@ -746,8 +746,8 @@ public class TestmodelPackageImpl extends EPackageImpl implements TestmodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TestmodelFactory getTestmodelFactory() {
-		return (TestmodelFactory)getEFactoryInstance();
+	public org.dresdenocl.modelinstancetype.test.testmodel.TestmodelFactory getTestmodelFactory() {
+		return (org.dresdenocl.modelinstancetype.test.testmodel.TestmodelFactory)getEFactoryInstance();
 	}
 
 	/**
@@ -889,48 +889,48 @@ public class TestmodelPackageImpl extends EPackageImpl implements TestmodelPacka
 		initializableCopyableClassEClass.getESuperTypes().add(this.getCopyableClass());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(containerClassEClass, ContainerClass.class, "ContainerClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getContainerClass_PrimitiveTypeProviderClassInstances(), this.getPrimitiveTypeProviderClass(), null, "primitiveTypeProviderClassInstances", null, 0, -1, ContainerClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getContainerClass_CollectionTypeProviderClassInstances(), this.getCollectionTypeProviderClass(), null, "collectionTypeProviderClassInstances", null, 0, -1, ContainerClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getContainerClass_EnumerationLiteralProviderClassInstances(), this.getEnumerationLiteralProviderClass(), null, "enumerationLiteralProviderClassInstances", null, 0, -1, ContainerClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getContainerClass_Class1Instances(), this.getClass1(), null, "class1Instances", null, 0, -1, ContainerClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getContainerClass_Class2Instances(), this.getClass2(), null, "class2Instances", null, 0, -1, ContainerClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getContainerClass_Interface1Instances(), this.getInterface1(), null, "interface1Instances", null, 0, -1, ContainerClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getContainerClass_Interface2Instances(), this.getInterface2(), null, "interface2Instances", null, 0, -1, ContainerClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getContainerClass_Interface3Instances(), this.getInterface3(), null, "interface3Instances", null, 0, -1, ContainerClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getContainerClass_CopyableClassInstances(), this.getCopyableClass(), null, "copyableClassInstances", null, 0, -1, ContainerClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getContainerClass_NonCopyableClassInstances(), this.getNonCopyableClass(), null, "nonCopyableClassInstances", null, 0, -1, ContainerClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getContainerClass_StaticPropertyAndOperationClassInstances(), this.getStaticPropertyAndOperationClass(), null, "staticPropertyAndOperationClassInstances", null, 0, -1, ContainerClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(containerClassEClass, org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass.class, "ContainerClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getContainerClass_PrimitiveTypeProviderClassInstances(), this.getPrimitiveTypeProviderClass(), null, "primitiveTypeProviderClassInstances", null, 0, -1, org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getContainerClass_CollectionTypeProviderClassInstances(), this.getCollectionTypeProviderClass(), null, "collectionTypeProviderClassInstances", null, 0, -1, org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getContainerClass_EnumerationLiteralProviderClassInstances(), this.getEnumerationLiteralProviderClass(), null, "enumerationLiteralProviderClassInstances", null, 0, -1, org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getContainerClass_Class1Instances(), this.getClass1(), null, "class1Instances", null, 0, -1, org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getContainerClass_Class2Instances(), this.getClass2(), null, "class2Instances", null, 0, -1, org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getContainerClass_Interface1Instances(), this.getInterface1(), null, "interface1Instances", null, 0, -1, org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getContainerClass_Interface2Instances(), this.getInterface2(), null, "interface2Instances", null, 0, -1, org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getContainerClass_Interface3Instances(), this.getInterface3(), null, "interface3Instances", null, 0, -1, org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getContainerClass_CopyableClassInstances(), this.getCopyableClass(), null, "copyableClassInstances", null, 0, -1, org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getContainerClass_NonCopyableClassInstances(), this.getNonCopyableClass(), null, "nonCopyableClassInstances", null, 0, -1, org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getContainerClass_StaticPropertyAndOperationClassInstances(), this.getStaticPropertyAndOperationClass(), null, "staticPropertyAndOperationClassInstances", null, 0, -1, org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(primitiveTypeProviderClassEClass, PrimitiveTypeProviderClass.class, "PrimitiveTypeProviderClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPrimitiveTypeProviderClass_BooleanProperty1(), ecorePackage.getEBoolean(), "booleanProperty1", null, 0, 1, PrimitiveTypeProviderClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPrimitiveTypeProviderClass_IntegerProperty1(), ecorePackage.getEInt(), "integerProperty1", null, 0, 1, PrimitiveTypeProviderClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPrimitiveTypeProviderClass_RealProperty1(), ecorePackage.getEFloat(), "realProperty1", null, 0, 1, PrimitiveTypeProviderClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPrimitiveTypeProviderClass_StringProperty1(), ecorePackage.getEString(), "stringProperty1", null, 0, 1, PrimitiveTypeProviderClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(primitiveTypeProviderClassEClass, org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass.class, "PrimitiveTypeProviderClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPrimitiveTypeProviderClass_BooleanProperty1(), ecorePackage.getEBoolean(), "booleanProperty1", null, 0, 1, org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPrimitiveTypeProviderClass_IntegerProperty1(), ecorePackage.getEInt(), "integerProperty1", null, 0, 1, org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPrimitiveTypeProviderClass_RealProperty1(), ecorePackage.getEFloat(), "realProperty1", null, 0, 1, org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPrimitiveTypeProviderClass_StringProperty1(), ecorePackage.getEString(), "stringProperty1", null, 0, 1, org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(collectionTypeProviderClassEClass, CollectionTypeProviderClass.class, "CollectionTypeProviderClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getCollectionTypeProviderClass_BagProperty1(), ecorePackage.getEString(), "bagProperty1", null, 0, -1, CollectionTypeProviderClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getCollectionTypeProviderClass_OrderedSetProperty1(), ecorePackage.getEInt(), "orderedSetProperty1", null, 0, -1, CollectionTypeProviderClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCollectionTypeProviderClass_SequenceProperty1(), ecorePackage.getEString(), "sequenceProperty1", null, 0, -1, CollectionTypeProviderClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCollectionTypeProviderClass_SetProperty1(), ecorePackage.getEString(), "setProperty1", null, 0, -1, CollectionTypeProviderClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEClass(collectionTypeProviderClassEClass, org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass.class, "CollectionTypeProviderClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCollectionTypeProviderClass_BagProperty1(), ecorePackage.getEString(), "bagProperty1", null, 0, -1, org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getCollectionTypeProviderClass_OrderedSetProperty1(), ecorePackage.getEInt(), "orderedSetProperty1", null, 0, -1, org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCollectionTypeProviderClass_SequenceProperty1(), ecorePackage.getEString(), "sequenceProperty1", null, 0, -1, org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCollectionTypeProviderClass_SetProperty1(), ecorePackage.getEString(), "setProperty1", null, 0, -1, org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
-		initEClass(enumerationLiteralProviderClassEClass, EnumerationLiteralProviderClass.class, "EnumerationLiteralProviderClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEnumerationLiteralProviderClass_EnumerationLiteralProperty1(), this.getEnumeration1(), "enumerationLiteralProperty1", null, 0, 1, EnumerationLiteralProviderClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEClass(enumerationLiteralProviderClassEClass, org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass.class, "EnumerationLiteralProviderClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getEnumerationLiteralProviderClass_EnumerationLiteralProperty1(), this.getEnumeration1(), "enumerationLiteralProperty1", null, 0, 1, org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
-		initEClass(class1EClass, Class1.class, "Class1", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getClass1_NonMultipleProperty(), ecorePackage.getEString(), "nonMultipleProperty", null, 0, 1, Class1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getClass1_MultipleUniqueOrderedProperty(), ecorePackage.getEString(), "multipleUniqueOrderedProperty", null, 0, -1, Class1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getClass1_MultipleUniqueUnorderedProperty(), ecorePackage.getEString(), "multipleUniqueUnorderedProperty", null, 0, -1, Class1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getClass1_MultipleNonuniqueOrderedProperty(), ecorePackage.getEString(), "multipleNonuniqueOrderedProperty", null, 0, -1, Class1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getClass1_MultipleNonuniqueUnorderedProperty(), ecorePackage.getEString(), "multipleNonuniqueUnorderedProperty", null, 0, -1, Class1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getClass1_ArgumentPropertyBooleanNonMultiple(), ecorePackage.getEBoolean(), "argumentPropertyBooleanNonMultiple", null, 0, 1, Class1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getClass1_ArgumentPropertyStringNonMultiple(), ecorePackage.getEString(), "argumentPropertyStringNonMultiple", null, 0, 1, Class1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getClass1_ArgumentPropertyBooleanMultiple(), ecorePackage.getEBoolean(), "argumentPropertyBooleanMultiple", null, 0, -1, Class1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getClass1_ArgumentPropertyStringMultiple(), ecorePackage.getEString(), "argumentPropertyStringMultiple", null, 0, -1, Class1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getClass1_ArgumentPropertyObjectNonMultiple(), this.getClass1(), null, "argumentPropertyObjectNonMultiple", null, 0, 1, Class1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getClass1_ArgumentPropertyObjectMultiple(), this.getClass1(), null, "argumentPropertyObjectMultiple", null, 0, -1, Class1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getClass1_ArgumentPropertyEnumerationLiteralNonMultiple(), this.getEnumeration1(), "argumentPropertyEnumerationLiteralNonMultiple", null, 0, 1, Class1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getClass1_ArgumentPropertyEnumerationLiteralMultiple(), this.getEnumeration1(), "argumentPropertyEnumerationLiteralMultiple", null, 0, -1, Class1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(class1EClass, org.dresdenocl.modelinstancetype.test.testmodel.Class1.class, "Class1", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getClass1_NonMultipleProperty(), ecorePackage.getEString(), "nonMultipleProperty", null, 0, 1, org.dresdenocl.modelinstancetype.test.testmodel.Class1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getClass1_MultipleUniqueOrderedProperty(), ecorePackage.getEString(), "multipleUniqueOrderedProperty", null, 0, -1, org.dresdenocl.modelinstancetype.test.testmodel.Class1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getClass1_MultipleUniqueUnorderedProperty(), ecorePackage.getEString(), "multipleUniqueUnorderedProperty", null, 0, -1, org.dresdenocl.modelinstancetype.test.testmodel.Class1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getClass1_MultipleNonuniqueOrderedProperty(), ecorePackage.getEString(), "multipleNonuniqueOrderedProperty", null, 0, -1, org.dresdenocl.modelinstancetype.test.testmodel.Class1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getClass1_MultipleNonuniqueUnorderedProperty(), ecorePackage.getEString(), "multipleNonuniqueUnorderedProperty", null, 0, -1, org.dresdenocl.modelinstancetype.test.testmodel.Class1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getClass1_ArgumentPropertyBooleanNonMultiple(), ecorePackage.getEBoolean(), "argumentPropertyBooleanNonMultiple", null, 0, 1, org.dresdenocl.modelinstancetype.test.testmodel.Class1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getClass1_ArgumentPropertyStringNonMultiple(), ecorePackage.getEString(), "argumentPropertyStringNonMultiple", null, 0, 1, org.dresdenocl.modelinstancetype.test.testmodel.Class1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getClass1_ArgumentPropertyBooleanMultiple(), ecorePackage.getEBoolean(), "argumentPropertyBooleanMultiple", null, 0, -1, org.dresdenocl.modelinstancetype.test.testmodel.Class1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getClass1_ArgumentPropertyStringMultiple(), ecorePackage.getEString(), "argumentPropertyStringMultiple", null, 0, -1, org.dresdenocl.modelinstancetype.test.testmodel.Class1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClass1_ArgumentPropertyObjectNonMultiple(), this.getClass1(), null, "argumentPropertyObjectNonMultiple", null, 0, 1, org.dresdenocl.modelinstancetype.test.testmodel.Class1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClass1_ArgumentPropertyObjectMultiple(), this.getClass1(), null, "argumentPropertyObjectMultiple", null, 0, -1, org.dresdenocl.modelinstancetype.test.testmodel.Class1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getClass1_ArgumentPropertyEnumerationLiteralNonMultiple(), this.getEnumeration1(), "argumentPropertyEnumerationLiteralNonMultiple", null, 0, 1, org.dresdenocl.modelinstancetype.test.testmodel.Class1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getClass1_ArgumentPropertyEnumerationLiteralMultiple(), this.getEnumeration1(), "argumentPropertyEnumerationLiteralMultiple", null, 0, -1, org.dresdenocl.modelinstancetype.test.testmodel.Class1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(class1EClass, null, "voidOperation", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -968,40 +968,40 @@ public class TestmodelPackageImpl extends EPackageImpl implements TestmodelPacka
 		op = addEOperation(class1EClass, null, "voidOperationWithEnumerationLiteralMultipleArgument", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getEnumeration1(), "arg1", 0, -1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(class2EClass, Class2.class, "Class2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(class2EClass, org.dresdenocl.modelinstancetype.test.testmodel.Class2.class, "Class2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(interface1EClass, Interface1.class, "Interface1", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(interface1EClass, org.dresdenocl.modelinstancetype.test.testmodel.Interface1.class, "Interface1", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(interface2EClass, Interface2.class, "Interface2", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(interface2EClass, org.dresdenocl.modelinstancetype.test.testmodel.Interface2.class, "Interface2", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(interface3EClass, Interface3.class, "Interface3", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(interface3EClass, org.dresdenocl.modelinstancetype.test.testmodel.Interface3.class, "Interface3", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(copyableClassEClass, CopyableClass.class, "CopyableClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(copyableClassEClass, org.dresdenocl.modelinstancetype.test.testmodel.CopyableClass.class, "CopyableClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(c1ImplementationEClass, C1Implementation.class, "C1Implementation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(c1ImplementationEClass, org.dresdenocl.modelinstancetype.test.testmodel.C1Implementation.class, "C1Implementation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(i1I2ImplementationEClass, I1I2Implementation.class, "I1I2Implementation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(i1I2ImplementationEClass, org.dresdenocl.modelinstancetype.test.testmodel.I1I2Implementation.class, "I1I2Implementation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(i1ImplementationEClass, I1Implementation.class, "I1Implementation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(i1ImplementationEClass, org.dresdenocl.modelinstancetype.test.testmodel.I1Implementation.class, "I1Implementation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(i2C1ImplementationEClass, I2C1Implementation.class, "I2C1Implementation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(i2C1ImplementationEClass, org.dresdenocl.modelinstancetype.test.testmodel.I2C1Implementation.class, "I2C1Implementation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(i3C2ImplementationEClass, I3C2Implementation.class, "I3C2Implementation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(i3C2ImplementationEClass, org.dresdenocl.modelinstancetype.test.testmodel.I3C2Implementation.class, "I3C2Implementation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(i3ImplementationEClass, I3Implementation.class, "I3Implementation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(i3ImplementationEClass, org.dresdenocl.modelinstancetype.test.testmodel.I3Implementation.class, "I3Implementation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(clonableCopyableClassEClass, ClonableCopyableClass.class, "ClonableCopyableClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(clonableCopyableClassEClass, org.dresdenocl.modelinstancetype.test.testmodel.ClonableCopyableClass.class, "ClonableCopyableClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(initializableCopyableClassEClass, InitializableCopyableClass.class, "InitializableCopyableClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(initializableCopyableClassEClass, org.dresdenocl.modelinstancetype.test.testmodel.InitializableCopyableClass.class, "InitializableCopyableClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(nonCopyableClassEClass, NonCopyableClass.class, "NonCopyableClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(nonCopyableClassEClass, org.dresdenocl.modelinstancetype.test.testmodel.NonCopyableClass.class, "NonCopyableClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(staticPropertyAndOperationClassEClass, StaticPropertyAndOperationClass.class, "StaticPropertyAndOperationClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(staticPropertyAndOperationClassEClass, org.dresdenocl.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass.class, "StaticPropertyAndOperationClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
-		initEEnum(enumeration1EEnum, Enumeration1.class, "Enumeration1");
-		addEEnumLiteral(enumeration1EEnum, Enumeration1.LITERAL1);
-		addEEnumLiteral(enumeration1EEnum, Enumeration1.LITERAL2);
+		initEEnum(enumeration1EEnum, org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1.class, "Enumeration1");
+		addEEnumLiteral(enumeration1EEnum, org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1.LITERAL1);
+		addEEnumLiteral(enumeration1EEnum, org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1.LITERAL2);
 
 		// Create resource
 		createResource(eNS_URI);

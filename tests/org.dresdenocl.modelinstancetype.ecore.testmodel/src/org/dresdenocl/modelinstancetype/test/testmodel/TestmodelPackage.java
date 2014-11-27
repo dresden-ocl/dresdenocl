@@ -1,6 +1,6 @@
 /**
  */
-package ecore.org.dresdenocl.modelinstancetype.test.testmodel;
+package org.dresdenocl.modelinstancetype.test.testmodel;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelFactory
+ * @see org.dresdenocl.modelinstancetype.test.testmodel.TestmodelFactory
  * @model kind="package"
  * @generated
  */
@@ -585,10 +585,10 @@ public interface TestmodelPackage extends EPackage {
 	int CLASS2_FEATURE_COUNT = CLASS1_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.Interface1 <em>Interface1</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.modelinstancetype.test.testmodel.Interface1 <em>Interface1</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.Interface1
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.Interface1
 	 * @see org.dresdenocl.modelinstancetype.test.testmodel.impl.TestmodelPackageImpl#getInterface1()
 	 * @generated
 	 */
@@ -604,10 +604,10 @@ public interface TestmodelPackage extends EPackage {
 	int INTERFACE1_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.Interface2 <em>Interface2</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.modelinstancetype.test.testmodel.Interface2 <em>Interface2</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.Interface2
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.Interface2
 	 * @see org.dresdenocl.modelinstancetype.test.testmodel.impl.TestmodelPackageImpl#getInterface2()
 	 * @generated
 	 */
@@ -623,10 +623,10 @@ public interface TestmodelPackage extends EPackage {
 	int INTERFACE2_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.Interface3 <em>Interface3</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.modelinstancetype.test.testmodel.Interface3 <em>Interface3</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.Interface3
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.Interface3
 	 * @see org.dresdenocl.modelinstancetype.test.testmodel.impl.TestmodelPackageImpl#getInterface3()
 	 * @generated
 	 */
@@ -1202,10 +1202,10 @@ public interface TestmodelPackage extends EPackage {
 	int STATIC_PROPERTY_AND_OPERATION_CLASS_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1 <em>Enumeration1</em>}' enum.
+	 * The meta object id for the '{@link org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1 <em>Enumeration1</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1
 	 * @see org.dresdenocl.modelinstancetype.test.testmodel.impl.TestmodelPackageImpl#getEnumeration1()
 	 * @generated
 	 */
@@ -1213,574 +1213,574 @@ public interface TestmodelPackage extends EPackage {
 
 
 	/**
-	 * Returns the meta object for class '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass <em>Container Class</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass <em>Container Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Container Class</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass
 	 * @generated
 	 */
 	EClass getContainerClass();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getPrimitiveTypeProviderClassInstances <em>Primitive Type Provider Class Instances</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getPrimitiveTypeProviderClassInstances <em>Primitive Type Provider Class Instances</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Primitive Type Provider Class Instances</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getPrimitiveTypeProviderClassInstances()
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getPrimitiveTypeProviderClassInstances()
 	 * @see #getContainerClass()
 	 * @generated
 	 */
 	EReference getContainerClass_PrimitiveTypeProviderClassInstances();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getCollectionTypeProviderClassInstances <em>Collection Type Provider Class Instances</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getCollectionTypeProviderClassInstances <em>Collection Type Provider Class Instances</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Collection Type Provider Class Instances</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getCollectionTypeProviderClassInstances()
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getCollectionTypeProviderClassInstances()
 	 * @see #getContainerClass()
 	 * @generated
 	 */
 	EReference getContainerClass_CollectionTypeProviderClassInstances();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getEnumerationLiteralProviderClassInstances <em>Enumeration Literal Provider Class Instances</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getEnumerationLiteralProviderClassInstances <em>Enumeration Literal Provider Class Instances</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Enumeration Literal Provider Class Instances</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getEnumerationLiteralProviderClassInstances()
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getEnumerationLiteralProviderClassInstances()
 	 * @see #getContainerClass()
 	 * @generated
 	 */
 	EReference getContainerClass_EnumerationLiteralProviderClassInstances();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getClass1Instances <em>Class1 Instances</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getClass1Instances <em>Class1 Instances</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Class1 Instances</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getClass1Instances()
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getClass1Instances()
 	 * @see #getContainerClass()
 	 * @generated
 	 */
 	EReference getContainerClass_Class1Instances();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getClass2Instances <em>Class2 Instances</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getClass2Instances <em>Class2 Instances</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Class2 Instances</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getClass2Instances()
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getClass2Instances()
 	 * @see #getContainerClass()
 	 * @generated
 	 */
 	EReference getContainerClass_Class2Instances();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getInterface1Instances <em>Interface1 Instances</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getInterface1Instances <em>Interface1 Instances</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Interface1 Instances</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getInterface1Instances()
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getInterface1Instances()
 	 * @see #getContainerClass()
 	 * @generated
 	 */
 	EReference getContainerClass_Interface1Instances();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getInterface2Instances <em>Interface2 Instances</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getInterface2Instances <em>Interface2 Instances</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Interface2 Instances</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getInterface2Instances()
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getInterface2Instances()
 	 * @see #getContainerClass()
 	 * @generated
 	 */
 	EReference getContainerClass_Interface2Instances();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getInterface3Instances <em>Interface3 Instances</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getInterface3Instances <em>Interface3 Instances</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Interface3 Instances</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getInterface3Instances()
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getInterface3Instances()
 	 * @see #getContainerClass()
 	 * @generated
 	 */
 	EReference getContainerClass_Interface3Instances();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getCopyableClassInstances <em>Copyable Class Instances</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getCopyableClassInstances <em>Copyable Class Instances</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Copyable Class Instances</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getCopyableClassInstances()
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getCopyableClassInstances()
 	 * @see #getContainerClass()
 	 * @generated
 	 */
 	EReference getContainerClass_CopyableClassInstances();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getNonCopyableClassInstances <em>Non Copyable Class Instances</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getNonCopyableClassInstances <em>Non Copyable Class Instances</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Non Copyable Class Instances</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getNonCopyableClassInstances()
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getNonCopyableClassInstances()
 	 * @see #getContainerClass()
 	 * @generated
 	 */
 	EReference getContainerClass_NonCopyableClassInstances();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getStaticPropertyAndOperationClassInstances <em>Static Property And Operation Class Instances</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getStaticPropertyAndOperationClassInstances <em>Static Property And Operation Class Instances</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Static Property And Operation Class Instances</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getStaticPropertyAndOperationClassInstances()
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass#getStaticPropertyAndOperationClassInstances()
 	 * @see #getContainerClass()
 	 * @generated
 	 */
 	EReference getContainerClass_StaticPropertyAndOperationClassInstances();
 
 	/**
-	 * Returns the meta object for class '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass <em>Primitive Type Provider Class</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass <em>Primitive Type Provider Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Primitive Type Provider Class</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass
 	 * @generated
 	 */
 	EClass getPrimitiveTypeProviderClass();
 
 	/**
-	 * Returns the meta object for the attribute '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass#isBooleanProperty1 <em>Boolean Property1</em>}'.
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass#isBooleanProperty1 <em>Boolean Property1</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Boolean Property1</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass#isBooleanProperty1()
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass#isBooleanProperty1()
 	 * @see #getPrimitiveTypeProviderClass()
 	 * @generated
 	 */
 	EAttribute getPrimitiveTypeProviderClass_BooleanProperty1();
 
 	/**
-	 * Returns the meta object for the attribute '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass#getIntegerProperty1 <em>Integer Property1</em>}'.
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass#getIntegerProperty1 <em>Integer Property1</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Integer Property1</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass#getIntegerProperty1()
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass#getIntegerProperty1()
 	 * @see #getPrimitiveTypeProviderClass()
 	 * @generated
 	 */
 	EAttribute getPrimitiveTypeProviderClass_IntegerProperty1();
 
 	/**
-	 * Returns the meta object for the attribute '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass#getRealProperty1 <em>Real Property1</em>}'.
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass#getRealProperty1 <em>Real Property1</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Real Property1</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass#getRealProperty1()
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass#getRealProperty1()
 	 * @see #getPrimitiveTypeProviderClass()
 	 * @generated
 	 */
 	EAttribute getPrimitiveTypeProviderClass_RealProperty1();
 
 	/**
-	 * Returns the meta object for the attribute '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass#getStringProperty1 <em>String Property1</em>}'.
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass#getStringProperty1 <em>String Property1</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>String Property1</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass#getStringProperty1()
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass#getStringProperty1()
 	 * @see #getPrimitiveTypeProviderClass()
 	 * @generated
 	 */
 	EAttribute getPrimitiveTypeProviderClass_StringProperty1();
 
 	/**
-	 * Returns the meta object for class '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass <em>Collection Type Provider Class</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass <em>Collection Type Provider Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Collection Type Provider Class</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass
 	 * @generated
 	 */
 	EClass getCollectionTypeProviderClass();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass#getBagProperty1 <em>Bag Property1</em>}'.
+	 * Returns the meta object for the attribute list '{@link org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass#getBagProperty1 <em>Bag Property1</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute list '<em>Bag Property1</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass#getBagProperty1()
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass#getBagProperty1()
 	 * @see #getCollectionTypeProviderClass()
 	 * @generated
 	 */
 	EAttribute getCollectionTypeProviderClass_BagProperty1();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass#getOrderedSetProperty1 <em>Ordered Set Property1</em>}'.
+	 * Returns the meta object for the attribute list '{@link org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass#getOrderedSetProperty1 <em>Ordered Set Property1</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute list '<em>Ordered Set Property1</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass#getOrderedSetProperty1()
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass#getOrderedSetProperty1()
 	 * @see #getCollectionTypeProviderClass()
 	 * @generated
 	 */
 	EAttribute getCollectionTypeProviderClass_OrderedSetProperty1();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass#getSequenceProperty1 <em>Sequence Property1</em>}'.
+	 * Returns the meta object for the attribute list '{@link org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass#getSequenceProperty1 <em>Sequence Property1</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute list '<em>Sequence Property1</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass#getSequenceProperty1()
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass#getSequenceProperty1()
 	 * @see #getCollectionTypeProviderClass()
 	 * @generated
 	 */
 	EAttribute getCollectionTypeProviderClass_SequenceProperty1();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass#getSetProperty1 <em>Set Property1</em>}'.
+	 * Returns the meta object for the attribute list '{@link org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass#getSetProperty1 <em>Set Property1</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute list '<em>Set Property1</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass#getSetProperty1()
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass#getSetProperty1()
 	 * @see #getCollectionTypeProviderClass()
 	 * @generated
 	 */
 	EAttribute getCollectionTypeProviderClass_SetProperty1();
 
 	/**
-	 * Returns the meta object for class '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass <em>Enumeration Literal Provider Class</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass <em>Enumeration Literal Provider Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Enumeration Literal Provider Class</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass
 	 * @generated
 	 */
 	EClass getEnumerationLiteralProviderClass();
 
 	/**
-	 * Returns the meta object for the attribute '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass#getEnumerationLiteralProperty1 <em>Enumeration Literal Property1</em>}'.
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass#getEnumerationLiteralProperty1 <em>Enumeration Literal Property1</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Enumeration Literal Property1</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass#getEnumerationLiteralProperty1()
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass#getEnumerationLiteralProperty1()
 	 * @see #getEnumerationLiteralProviderClass()
 	 * @generated
 	 */
 	EAttribute getEnumerationLiteralProviderClass_EnumerationLiteralProperty1();
 
 	/**
-	 * Returns the meta object for class '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1 <em>Class1</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.modelinstancetype.test.testmodel.Class1 <em>Class1</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Class1</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.Class1
 	 * @generated
 	 */
 	EClass getClass1();
 
 	/**
-	 * Returns the meta object for the attribute '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1#getNonMultipleProperty <em>Non Multiple Property</em>}'.
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.modelinstancetype.test.testmodel.Class1#getNonMultipleProperty <em>Non Multiple Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Non Multiple Property</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1#getNonMultipleProperty()
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.Class1#getNonMultipleProperty()
 	 * @see #getClass1()
 	 * @generated
 	 */
 	EAttribute getClass1_NonMultipleProperty();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1#getMultipleUniqueOrderedProperty <em>Multiple Unique Ordered Property</em>}'.
+	 * Returns the meta object for the attribute list '{@link org.dresdenocl.modelinstancetype.test.testmodel.Class1#getMultipleUniqueOrderedProperty <em>Multiple Unique Ordered Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute list '<em>Multiple Unique Ordered Property</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1#getMultipleUniqueOrderedProperty()
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.Class1#getMultipleUniqueOrderedProperty()
 	 * @see #getClass1()
 	 * @generated
 	 */
 	EAttribute getClass1_MultipleUniqueOrderedProperty();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1#getMultipleUniqueUnorderedProperty <em>Multiple Unique Unordered Property</em>}'.
+	 * Returns the meta object for the attribute list '{@link org.dresdenocl.modelinstancetype.test.testmodel.Class1#getMultipleUniqueUnorderedProperty <em>Multiple Unique Unordered Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute list '<em>Multiple Unique Unordered Property</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1#getMultipleUniqueUnorderedProperty()
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.Class1#getMultipleUniqueUnorderedProperty()
 	 * @see #getClass1()
 	 * @generated
 	 */
 	EAttribute getClass1_MultipleUniqueUnorderedProperty();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1#getMultipleNonuniqueOrderedProperty <em>Multiple Nonunique Ordered Property</em>}'.
+	 * Returns the meta object for the attribute list '{@link org.dresdenocl.modelinstancetype.test.testmodel.Class1#getMultipleNonuniqueOrderedProperty <em>Multiple Nonunique Ordered Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute list '<em>Multiple Nonunique Ordered Property</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1#getMultipleNonuniqueOrderedProperty()
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.Class1#getMultipleNonuniqueOrderedProperty()
 	 * @see #getClass1()
 	 * @generated
 	 */
 	EAttribute getClass1_MultipleNonuniqueOrderedProperty();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1#getMultipleNonuniqueUnorderedProperty <em>Multiple Nonunique Unordered Property</em>}'.
+	 * Returns the meta object for the attribute list '{@link org.dresdenocl.modelinstancetype.test.testmodel.Class1#getMultipleNonuniqueUnorderedProperty <em>Multiple Nonunique Unordered Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute list '<em>Multiple Nonunique Unordered Property</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1#getMultipleNonuniqueUnorderedProperty()
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.Class1#getMultipleNonuniqueUnorderedProperty()
 	 * @see #getClass1()
 	 * @generated
 	 */
 	EAttribute getClass1_MultipleNonuniqueUnorderedProperty();
 
 	/**
-	 * Returns the meta object for the attribute '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1#isArgumentPropertyBooleanNonMultiple <em>Argument Property Boolean Non Multiple</em>}'.
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.modelinstancetype.test.testmodel.Class1#isArgumentPropertyBooleanNonMultiple <em>Argument Property Boolean Non Multiple</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Argument Property Boolean Non Multiple</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1#isArgumentPropertyBooleanNonMultiple()
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.Class1#isArgumentPropertyBooleanNonMultiple()
 	 * @see #getClass1()
 	 * @generated
 	 */
 	EAttribute getClass1_ArgumentPropertyBooleanNonMultiple();
 
 	/**
-	 * Returns the meta object for the attribute '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1#getArgumentPropertyStringNonMultiple <em>Argument Property String Non Multiple</em>}'.
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.modelinstancetype.test.testmodel.Class1#getArgumentPropertyStringNonMultiple <em>Argument Property String Non Multiple</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Argument Property String Non Multiple</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1#getArgumentPropertyStringNonMultiple()
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.Class1#getArgumentPropertyStringNonMultiple()
 	 * @see #getClass1()
 	 * @generated
 	 */
 	EAttribute getClass1_ArgumentPropertyStringNonMultiple();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1#getArgumentPropertyBooleanMultiple <em>Argument Property Boolean Multiple</em>}'.
+	 * Returns the meta object for the attribute list '{@link org.dresdenocl.modelinstancetype.test.testmodel.Class1#getArgumentPropertyBooleanMultiple <em>Argument Property Boolean Multiple</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute list '<em>Argument Property Boolean Multiple</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1#getArgumentPropertyBooleanMultiple()
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.Class1#getArgumentPropertyBooleanMultiple()
 	 * @see #getClass1()
 	 * @generated
 	 */
 	EAttribute getClass1_ArgumentPropertyBooleanMultiple();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1#getArgumentPropertyStringMultiple <em>Argument Property String Multiple</em>}'.
+	 * Returns the meta object for the attribute list '{@link org.dresdenocl.modelinstancetype.test.testmodel.Class1#getArgumentPropertyStringMultiple <em>Argument Property String Multiple</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute list '<em>Argument Property String Multiple</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1#getArgumentPropertyStringMultiple()
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.Class1#getArgumentPropertyStringMultiple()
 	 * @see #getClass1()
 	 * @generated
 	 */
 	EAttribute getClass1_ArgumentPropertyStringMultiple();
 
 	/**
-	 * Returns the meta object for the reference '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1#getArgumentPropertyObjectNonMultiple <em>Argument Property Object Non Multiple</em>}'.
+	 * Returns the meta object for the reference '{@link org.dresdenocl.modelinstancetype.test.testmodel.Class1#getArgumentPropertyObjectNonMultiple <em>Argument Property Object Non Multiple</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Argument Property Object Non Multiple</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1#getArgumentPropertyObjectNonMultiple()
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.Class1#getArgumentPropertyObjectNonMultiple()
 	 * @see #getClass1()
 	 * @generated
 	 */
 	EReference getClass1_ArgumentPropertyObjectNonMultiple();
 
 	/**
-	 * Returns the meta object for the reference list '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1#getArgumentPropertyObjectMultiple <em>Argument Property Object Multiple</em>}'.
+	 * Returns the meta object for the reference list '{@link org.dresdenocl.modelinstancetype.test.testmodel.Class1#getArgumentPropertyObjectMultiple <em>Argument Property Object Multiple</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Argument Property Object Multiple</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1#getArgumentPropertyObjectMultiple()
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.Class1#getArgumentPropertyObjectMultiple()
 	 * @see #getClass1()
 	 * @generated
 	 */
 	EReference getClass1_ArgumentPropertyObjectMultiple();
 
 	/**
-	 * Returns the meta object for the attribute '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1#getArgumentPropertyEnumerationLiteralNonMultiple <em>Argument Property Enumeration Literal Non Multiple</em>}'.
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.modelinstancetype.test.testmodel.Class1#getArgumentPropertyEnumerationLiteralNonMultiple <em>Argument Property Enumeration Literal Non Multiple</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Argument Property Enumeration Literal Non Multiple</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1#getArgumentPropertyEnumerationLiteralNonMultiple()
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.Class1#getArgumentPropertyEnumerationLiteralNonMultiple()
 	 * @see #getClass1()
 	 * @generated
 	 */
 	EAttribute getClass1_ArgumentPropertyEnumerationLiteralNonMultiple();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1#getArgumentPropertyEnumerationLiteralMultiple <em>Argument Property Enumeration Literal Multiple</em>}'.
+	 * Returns the meta object for the attribute list '{@link org.dresdenocl.modelinstancetype.test.testmodel.Class1#getArgumentPropertyEnumerationLiteralMultiple <em>Argument Property Enumeration Literal Multiple</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute list '<em>Argument Property Enumeration Literal Multiple</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1#getArgumentPropertyEnumerationLiteralMultiple()
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.Class1#getArgumentPropertyEnumerationLiteralMultiple()
 	 * @see #getClass1()
 	 * @generated
 	 */
 	EAttribute getClass1_ArgumentPropertyEnumerationLiteralMultiple();
 
 	/**
-	 * Returns the meta object for class '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class2 <em>Class2</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.modelinstancetype.test.testmodel.Class2 <em>Class2</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Class2</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class2
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.Class2
 	 * @generated
 	 */
 	EClass getClass2();
 
 	/**
-	 * Returns the meta object for class '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.Interface1 <em>Interface1</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.modelinstancetype.test.testmodel.Interface1 <em>Interface1</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Interface1</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.Interface1
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.Interface1
 	 * @generated
 	 */
 	EClass getInterface1();
 
 	/**
-	 * Returns the meta object for class '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.Interface2 <em>Interface2</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.modelinstancetype.test.testmodel.Interface2 <em>Interface2</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Interface2</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.Interface2
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.Interface2
 	 * @generated
 	 */
 	EClass getInterface2();
 
 	/**
-	 * Returns the meta object for class '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.Interface3 <em>Interface3</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.modelinstancetype.test.testmodel.Interface3 <em>Interface3</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Interface3</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.Interface3
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.Interface3
 	 * @generated
 	 */
 	EClass getInterface3();
 
 	/**
-	 * Returns the meta object for class '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.CopyableClass <em>Copyable Class</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.modelinstancetype.test.testmodel.CopyableClass <em>Copyable Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Copyable Class</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.CopyableClass
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.CopyableClass
 	 * @generated
 	 */
 	EClass getCopyableClass();
 
 	/**
-	 * Returns the meta object for class '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.C1Implementation <em>C1 Implementation</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.modelinstancetype.test.testmodel.C1Implementation <em>C1 Implementation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>C1 Implementation</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.C1Implementation
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.C1Implementation
 	 * @generated
 	 */
 	EClass getC1Implementation();
 
 	/**
-	 * Returns the meta object for class '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.I1I2Implementation <em>I1I2 Implementation</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.modelinstancetype.test.testmodel.I1I2Implementation <em>I1I2 Implementation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>I1I2 Implementation</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.I1I2Implementation
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.I1I2Implementation
 	 * @generated
 	 */
 	EClass getI1I2Implementation();
 
 	/**
-	 * Returns the meta object for class '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.I1Implementation <em>I1 Implementation</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.modelinstancetype.test.testmodel.I1Implementation <em>I1 Implementation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>I1 Implementation</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.I1Implementation
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.I1Implementation
 	 * @generated
 	 */
 	EClass getI1Implementation();
 
 	/**
-	 * Returns the meta object for class '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.I2C1Implementation <em>I2C1 Implementation</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.modelinstancetype.test.testmodel.I2C1Implementation <em>I2C1 Implementation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>I2C1 Implementation</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.I2C1Implementation
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.I2C1Implementation
 	 * @generated
 	 */
 	EClass getI2C1Implementation();
 
 	/**
-	 * Returns the meta object for class '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.I3C2Implementation <em>I3C2 Implementation</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.modelinstancetype.test.testmodel.I3C2Implementation <em>I3C2 Implementation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>I3C2 Implementation</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.I3C2Implementation
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.I3C2Implementation
 	 * @generated
 	 */
 	EClass getI3C2Implementation();
 
 	/**
-	 * Returns the meta object for class '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.I3Implementation <em>I3 Implementation</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.modelinstancetype.test.testmodel.I3Implementation <em>I3 Implementation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>I3 Implementation</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.I3Implementation
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.I3Implementation
 	 * @generated
 	 */
 	EClass getI3Implementation();
 
 	/**
-	 * Returns the meta object for class '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.ClonableCopyableClass <em>Clonable Copyable Class</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.modelinstancetype.test.testmodel.ClonableCopyableClass <em>Clonable Copyable Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Clonable Copyable Class</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.ClonableCopyableClass
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.ClonableCopyableClass
 	 * @generated
 	 */
 	EClass getClonableCopyableClass();
 
 	/**
-	 * Returns the meta object for class '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.InitializableCopyableClass <em>Initializable Copyable Class</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.modelinstancetype.test.testmodel.InitializableCopyableClass <em>Initializable Copyable Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Initializable Copyable Class</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.InitializableCopyableClass
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.InitializableCopyableClass
 	 * @generated
 	 */
 	EClass getInitializableCopyableClass();
 
 	/**
-	 * Returns the meta object for class '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.NonCopyableClass <em>Non Copyable Class</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.modelinstancetype.test.testmodel.NonCopyableClass <em>Non Copyable Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Non Copyable Class</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.NonCopyableClass
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.NonCopyableClass
 	 * @generated
 	 */
 	EClass getNonCopyableClass();
 
 	/**
-	 * Returns the meta object for class '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass <em>Static Property And Operation Class</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass <em>Static Property And Operation Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Static Property And Operation Class</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass
 	 * @generated
 	 */
 	EClass getStaticPropertyAndOperationClass();
 
 	/**
-	 * Returns the meta object for enum '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1 <em>Enumeration1</em>}'.
+	 * Returns the meta object for enum '{@link org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1 <em>Enumeration1</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for enum '<em>Enumeration1</em>'.
-	 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1
+	 * @see org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1
 	 * @generated
 	 */
 	EEnum getEnumeration1();
@@ -2132,30 +2132,30 @@ public interface TestmodelPackage extends EPackage {
 		EClass CLASS2 = eINSTANCE.getClass2();
 
 		/**
-		 * The meta object literal for the '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.Interface1 <em>Interface1</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.modelinstancetype.test.testmodel.Interface1 <em>Interface1</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.Interface1
+		 * @see org.dresdenocl.modelinstancetype.test.testmodel.Interface1
 		 * @see org.dresdenocl.modelinstancetype.test.testmodel.impl.TestmodelPackageImpl#getInterface1()
 		 * @generated
 		 */
 		EClass INTERFACE1 = eINSTANCE.getInterface1();
 
 		/**
-		 * The meta object literal for the '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.Interface2 <em>Interface2</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.modelinstancetype.test.testmodel.Interface2 <em>Interface2</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.Interface2
+		 * @see org.dresdenocl.modelinstancetype.test.testmodel.Interface2
 		 * @see org.dresdenocl.modelinstancetype.test.testmodel.impl.TestmodelPackageImpl#getInterface2()
 		 * @generated
 		 */
 		EClass INTERFACE2 = eINSTANCE.getInterface2();
 
 		/**
-		 * The meta object literal for the '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.Interface3 <em>Interface3</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.modelinstancetype.test.testmodel.Interface3 <em>Interface3</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.Interface3
+		 * @see org.dresdenocl.modelinstancetype.test.testmodel.Interface3
 		 * @see org.dresdenocl.modelinstancetype.test.testmodel.impl.TestmodelPackageImpl#getInterface3()
 		 * @generated
 		 */
@@ -2272,10 +2272,10 @@ public interface TestmodelPackage extends EPackage {
 		EClass STATIC_PROPERTY_AND_OPERATION_CLASS = eINSTANCE.getStaticPropertyAndOperationClass();
 
 		/**
-		 * The meta object literal for the '{@link ecore.org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1 <em>Enumeration1</em>}' enum.
+		 * The meta object literal for the '{@link org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1 <em>Enumeration1</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1
+		 * @see org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1
 		 * @see org.dresdenocl.modelinstancetype.test.testmodel.impl.TestmodelPackageImpl#getEnumeration1()
 		 * @generated
 		 */

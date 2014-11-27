@@ -18,9 +18,9 @@ import org.eclipse.emf.ecore.util.EDataTypeEList;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
+import org.dresdenocl.modelinstancetype.test.testmodel.Class1;
+import org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1;
+import org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
 
 
 
@@ -48,7 +48,7 @@ import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
  *
  * @generated
  */
-public class Class1Impl extends EObjectImpl implements Class1 {
+public class Class1Impl extends EObjectImpl implements org.dresdenocl.modelinstancetype.test.testmodel.Class1 {
 
 	/**
 	 * The default value of the '{@link #getNonMultipleProperty() <em>Non Multiple Property</em>}' attribute.
@@ -193,7 +193,7 @@ public class Class1Impl extends EObjectImpl implements Class1 {
 	 * @generated
 	 * @ordered
 	 */
-	protected Class1 argumentPropertyObjectNonMultiple;
+	protected org.dresdenocl.modelinstancetype.test.testmodel.Class1 argumentPropertyObjectNonMultiple;
 
 	/**
 	 * The cached value of the '{@link #getArgumentPropertyObjectMultiple()
@@ -204,7 +204,7 @@ public class Class1Impl extends EObjectImpl implements Class1 {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Class1> argumentPropertyObjectMultiple;
+	protected EList<org.dresdenocl.modelinstancetype.test.testmodel.Class1> argumentPropertyObjectMultiple;
 
 	/**
 	 * The default value of the '{@link #getArgumentPropertyEnumerationLiteralNonMultiple() <em>Argument Property Enumeration Literal Non Multiple</em>}' attribute.
@@ -213,8 +213,8 @@ public class Class1Impl extends EObjectImpl implements Class1 {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Enumeration1 ARGUMENT_PROPERTY_ENUMERATION_LITERAL_NON_MULTIPLE_EDEFAULT =
-			Enumeration1.LITERAL1;
+	protected static final org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1 ARGUMENT_PROPERTY_ENUMERATION_LITERAL_NON_MULTIPLE_EDEFAULT =
+			org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1.LITERAL1;
 
 	/**
 	 * The cached value of the '{@link #getArgumentPropertyEnumerationLiteralNonMultiple() <em>Argument Property Enumeration Literal Non Multiple</em>}' attribute.
@@ -223,7 +223,7 @@ public class Class1Impl extends EObjectImpl implements Class1 {
 	 * @generated
 	 * @ordered
 	 */
-	protected Enumeration1 argumentPropertyEnumerationLiteralNonMultiple =
+	protected org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1 argumentPropertyEnumerationLiteralNonMultiple =
 			ARGUMENT_PROPERTY_ENUMERATION_LITERAL_NON_MULTIPLE_EDEFAULT;
 
 	/**
@@ -233,7 +233,7 @@ public class Class1Impl extends EObjectImpl implements Class1 {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Enumeration1> argumentPropertyEnumerationLiteralMultiple;
+	protected EList<org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1> argumentPropertyEnumerationLiteralMultiple;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -249,7 +249,7 @@ public class Class1Impl extends EObjectImpl implements Class1 {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TestmodelPackage.Literals.CLASS1;
+		return org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.Literals.CLASS1;
 	}
 
 	/**
@@ -268,7 +268,7 @@ public class Class1Impl extends EObjectImpl implements Class1 {
 		String oldNonMultipleProperty = nonMultipleProperty;
 		nonMultipleProperty = newNonMultipleProperty;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TestmodelPackage.CLASS1__NON_MULTIPLE_PROPERTY, oldNonMultipleProperty, nonMultipleProperty));
+			eNotify(new ENotificationImpl(this, Notification.SET, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__NON_MULTIPLE_PROPERTY, oldNonMultipleProperty, nonMultipleProperty));
 	}
 
 	/**
@@ -277,7 +277,7 @@ public class Class1Impl extends EObjectImpl implements Class1 {
 	 */
 	public EList<String> getMultipleUniqueOrderedProperty() {
 		if (multipleUniqueOrderedProperty == null) {
-			multipleUniqueOrderedProperty = new EDataTypeUniqueEList<String>(String.class, this, TestmodelPackage.CLASS1__MULTIPLE_UNIQUE_ORDERED_PROPERTY);
+			multipleUniqueOrderedProperty = new EDataTypeUniqueEList<String>(String.class, this, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__MULTIPLE_UNIQUE_ORDERED_PROPERTY);
 		}
 		return multipleUniqueOrderedProperty;
 	}
@@ -288,7 +288,7 @@ public class Class1Impl extends EObjectImpl implements Class1 {
 	 */
 	public EList<String> getMultipleUniqueUnorderedProperty() {
 		if (multipleUniqueUnorderedProperty == null) {
-			multipleUniqueUnorderedProperty = new EDataTypeUniqueEList<String>(String.class, this, TestmodelPackage.CLASS1__MULTIPLE_UNIQUE_UNORDERED_PROPERTY);
+			multipleUniqueUnorderedProperty = new EDataTypeUniqueEList<String>(String.class, this, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__MULTIPLE_UNIQUE_UNORDERED_PROPERTY);
 		}
 		return multipleUniqueUnorderedProperty;
 	}
@@ -299,7 +299,7 @@ public class Class1Impl extends EObjectImpl implements Class1 {
 	 */
 	public EList<String> getMultipleNonuniqueOrderedProperty() {
 		if (multipleNonuniqueOrderedProperty == null) {
-			multipleNonuniqueOrderedProperty = new EDataTypeEList<String>(String.class, this, TestmodelPackage.CLASS1__MULTIPLE_NONUNIQUE_ORDERED_PROPERTY);
+			multipleNonuniqueOrderedProperty = new EDataTypeEList<String>(String.class, this, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__MULTIPLE_NONUNIQUE_ORDERED_PROPERTY);
 		}
 		return multipleNonuniqueOrderedProperty;
 	}
@@ -310,7 +310,7 @@ public class Class1Impl extends EObjectImpl implements Class1 {
 	 */
 	public EList<String> getMultipleNonuniqueUnorderedProperty() {
 		if (multipleNonuniqueUnorderedProperty == null) {
-			multipleNonuniqueUnorderedProperty = new EDataTypeEList<String>(String.class, this, TestmodelPackage.CLASS1__MULTIPLE_NONUNIQUE_UNORDERED_PROPERTY);
+			multipleNonuniqueUnorderedProperty = new EDataTypeEList<String>(String.class, this, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__MULTIPLE_NONUNIQUE_UNORDERED_PROPERTY);
 		}
 		return multipleNonuniqueUnorderedProperty;
 	}
@@ -332,7 +332,7 @@ public class Class1Impl extends EObjectImpl implements Class1 {
 		boolean oldArgumentPropertyBooleanNonMultiple = argumentPropertyBooleanNonMultiple;
 		argumentPropertyBooleanNonMultiple = newArgumentPropertyBooleanNonMultiple;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_BOOLEAN_NON_MULTIPLE, oldArgumentPropertyBooleanNonMultiple, argumentPropertyBooleanNonMultiple));
+			eNotify(new ENotificationImpl(this, Notification.SET, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_BOOLEAN_NON_MULTIPLE, oldArgumentPropertyBooleanNonMultiple, argumentPropertyBooleanNonMultiple));
 	}
 
 	/**
@@ -352,7 +352,7 @@ public class Class1Impl extends EObjectImpl implements Class1 {
 		String oldArgumentPropertyStringNonMultiple = argumentPropertyStringNonMultiple;
 		argumentPropertyStringNonMultiple = newArgumentPropertyStringNonMultiple;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_STRING_NON_MULTIPLE, oldArgumentPropertyStringNonMultiple, argumentPropertyStringNonMultiple));
+			eNotify(new ENotificationImpl(this, Notification.SET, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_STRING_NON_MULTIPLE, oldArgumentPropertyStringNonMultiple, argumentPropertyStringNonMultiple));
 	}
 
 	/**
@@ -361,7 +361,7 @@ public class Class1Impl extends EObjectImpl implements Class1 {
 	 */
 	public EList<Boolean> getArgumentPropertyBooleanMultiple() {
 		if (argumentPropertyBooleanMultiple == null) {
-			argumentPropertyBooleanMultiple = new EDataTypeUniqueEList<Boolean>(Boolean.class, this, TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_BOOLEAN_MULTIPLE);
+			argumentPropertyBooleanMultiple = new EDataTypeUniqueEList<Boolean>(Boolean.class, this, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_BOOLEAN_MULTIPLE);
 		}
 		return argumentPropertyBooleanMultiple;
 	}
@@ -372,7 +372,7 @@ public class Class1Impl extends EObjectImpl implements Class1 {
 	 */
 	public EList<String> getArgumentPropertyStringMultiple() {
 		if (argumentPropertyStringMultiple == null) {
-			argumentPropertyStringMultiple = new EDataTypeUniqueEList<String>(String.class, this, TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_STRING_MULTIPLE);
+			argumentPropertyStringMultiple = new EDataTypeUniqueEList<String>(String.class, this, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_STRING_MULTIPLE);
 		}
 		return argumentPropertyStringMultiple;
 	}
@@ -381,13 +381,13 @@ public class Class1Impl extends EObjectImpl implements Class1 {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Class1 getArgumentPropertyObjectNonMultiple() {
+	public org.dresdenocl.modelinstancetype.test.testmodel.Class1 getArgumentPropertyObjectNonMultiple() {
 		if (argumentPropertyObjectNonMultiple != null && argumentPropertyObjectNonMultiple.eIsProxy()) {
 			InternalEObject oldArgumentPropertyObjectNonMultiple = (InternalEObject)argumentPropertyObjectNonMultiple;
-			argumentPropertyObjectNonMultiple = (Class1)eResolveProxy(oldArgumentPropertyObjectNonMultiple);
+			argumentPropertyObjectNonMultiple = (org.dresdenocl.modelinstancetype.test.testmodel.Class1)eResolveProxy(oldArgumentPropertyObjectNonMultiple);
 			if (argumentPropertyObjectNonMultiple != oldArgumentPropertyObjectNonMultiple) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_OBJECT_NON_MULTIPLE, oldArgumentPropertyObjectNonMultiple, argumentPropertyObjectNonMultiple));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_OBJECT_NON_MULTIPLE, oldArgumentPropertyObjectNonMultiple, argumentPropertyObjectNonMultiple));
 			}
 		}
 		return argumentPropertyObjectNonMultiple;
@@ -397,29 +397,29 @@ public class Class1Impl extends EObjectImpl implements Class1 {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Class1 basicGetArgumentPropertyObjectNonMultiple() {
+	public org.dresdenocl.modelinstancetype.test.testmodel.Class1 basicGetArgumentPropertyObjectNonMultiple() {
 		return argumentPropertyObjectNonMultiple;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setArgumentPropertyObjectNonMultiple(
-			Class1 newArgumentPropertyObjectNonMultiple) {
-		Class1 oldArgumentPropertyObjectNonMultiple = argumentPropertyObjectNonMultiple;
+	public void setArgumentPropertyObjectNonMultiple(org.dresdenocl.modelinstancetype.test.testmodel.Class1 newArgumentPropertyObjectNonMultiple) {
+		org.dresdenocl.modelinstancetype.test.testmodel.Class1 oldArgumentPropertyObjectNonMultiple = argumentPropertyObjectNonMultiple;
 		argumentPropertyObjectNonMultiple = newArgumentPropertyObjectNonMultiple;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_OBJECT_NON_MULTIPLE, oldArgumentPropertyObjectNonMultiple, argumentPropertyObjectNonMultiple));
+			eNotify(new ENotificationImpl(this, Notification.SET, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_OBJECT_NON_MULTIPLE, oldArgumentPropertyObjectNonMultiple, argumentPropertyObjectNonMultiple));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Class1> getArgumentPropertyObjectMultiple() {
+	public EList<org.dresdenocl.modelinstancetype.test.testmodel.Class1> getArgumentPropertyObjectMultiple() {
 		if (argumentPropertyObjectMultiple == null) {
-			argumentPropertyObjectMultiple = new EObjectResolvingEList<Class1>(Class1.class, this, TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_OBJECT_MULTIPLE);
+			argumentPropertyObjectMultiple = new EObjectResolvingEList<org.dresdenocl.modelinstancetype.test.testmodel.Class1>(org.dresdenocl.modelinstancetype.test.testmodel.Class1.class, this, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_OBJECT_MULTIPLE);
 		}
 		return argumentPropertyObjectMultiple;
 	}
@@ -428,29 +428,29 @@ public class Class1Impl extends EObjectImpl implements Class1 {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Enumeration1 getArgumentPropertyEnumerationLiteralNonMultiple() {
+	public org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1 getArgumentPropertyEnumerationLiteralNonMultiple() {
 		return argumentPropertyEnumerationLiteralNonMultiple;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setArgumentPropertyEnumerationLiteralNonMultiple(
-			Enumeration1 newArgumentPropertyEnumerationLiteralNonMultiple) {
-		Enumeration1 oldArgumentPropertyEnumerationLiteralNonMultiple = argumentPropertyEnumerationLiteralNonMultiple;
+	public void setArgumentPropertyEnumerationLiteralNonMultiple(org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1 newArgumentPropertyEnumerationLiteralNonMultiple) {
+		org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1 oldArgumentPropertyEnumerationLiteralNonMultiple = argumentPropertyEnumerationLiteralNonMultiple;
 		argumentPropertyEnumerationLiteralNonMultiple = newArgumentPropertyEnumerationLiteralNonMultiple == null ? ARGUMENT_PROPERTY_ENUMERATION_LITERAL_NON_MULTIPLE_EDEFAULT : newArgumentPropertyEnumerationLiteralNonMultiple;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_ENUMERATION_LITERAL_NON_MULTIPLE, oldArgumentPropertyEnumerationLiteralNonMultiple, argumentPropertyEnumerationLiteralNonMultiple));
+			eNotify(new ENotificationImpl(this, Notification.SET, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_ENUMERATION_LITERAL_NON_MULTIPLE, oldArgumentPropertyEnumerationLiteralNonMultiple, argumentPropertyEnumerationLiteralNonMultiple));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Enumeration1> getArgumentPropertyEnumerationLiteralMultiple() {
+	public EList<org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1> getArgumentPropertyEnumerationLiteralMultiple() {
 		if (argumentPropertyEnumerationLiteralMultiple == null) {
-			argumentPropertyEnumerationLiteralMultiple = new EDataTypeUniqueEList<Enumeration1>(Enumeration1.class, this, TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_ENUMERATION_LITERAL_MULTIPLE);
+			argumentPropertyEnumerationLiteralMultiple = new EDataTypeUniqueEList<org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1>(org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1.class, this, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_ENUMERATION_LITERAL_MULTIPLE);
 		}
 		return argumentPropertyEnumerationLiteralMultiple;
 	}
@@ -624,32 +624,32 @@ public class Class1Impl extends EObjectImpl implements Class1 {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TestmodelPackage.CLASS1__NON_MULTIPLE_PROPERTY:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__NON_MULTIPLE_PROPERTY:
 				return getNonMultipleProperty();
-			case TestmodelPackage.CLASS1__MULTIPLE_UNIQUE_ORDERED_PROPERTY:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__MULTIPLE_UNIQUE_ORDERED_PROPERTY:
 				return getMultipleUniqueOrderedProperty();
-			case TestmodelPackage.CLASS1__MULTIPLE_UNIQUE_UNORDERED_PROPERTY:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__MULTIPLE_UNIQUE_UNORDERED_PROPERTY:
 				return getMultipleUniqueUnorderedProperty();
-			case TestmodelPackage.CLASS1__MULTIPLE_NONUNIQUE_ORDERED_PROPERTY:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__MULTIPLE_NONUNIQUE_ORDERED_PROPERTY:
 				return getMultipleNonuniqueOrderedProperty();
-			case TestmodelPackage.CLASS1__MULTIPLE_NONUNIQUE_UNORDERED_PROPERTY:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__MULTIPLE_NONUNIQUE_UNORDERED_PROPERTY:
 				return getMultipleNonuniqueUnorderedProperty();
-			case TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_BOOLEAN_NON_MULTIPLE:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_BOOLEAN_NON_MULTIPLE:
 				return isArgumentPropertyBooleanNonMultiple();
-			case TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_STRING_NON_MULTIPLE:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_STRING_NON_MULTIPLE:
 				return getArgumentPropertyStringNonMultiple();
-			case TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_BOOLEAN_MULTIPLE:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_BOOLEAN_MULTIPLE:
 				return getArgumentPropertyBooleanMultiple();
-			case TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_STRING_MULTIPLE:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_STRING_MULTIPLE:
 				return getArgumentPropertyStringMultiple();
-			case TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_OBJECT_NON_MULTIPLE:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_OBJECT_NON_MULTIPLE:
 				if (resolve) return getArgumentPropertyObjectNonMultiple();
 				return basicGetArgumentPropertyObjectNonMultiple();
-			case TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_OBJECT_MULTIPLE:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_OBJECT_MULTIPLE:
 				return getArgumentPropertyObjectMultiple();
-			case TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_ENUMERATION_LITERAL_NON_MULTIPLE:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_ENUMERATION_LITERAL_NON_MULTIPLE:
 				return getArgumentPropertyEnumerationLiteralNonMultiple();
-			case TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_ENUMERATION_LITERAL_MULTIPLE:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_ENUMERATION_LITERAL_MULTIPLE:
 				return getArgumentPropertyEnumerationLiteralMultiple();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -663,52 +663,52 @@ public class Class1Impl extends EObjectImpl implements Class1 {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TestmodelPackage.CLASS1__NON_MULTIPLE_PROPERTY:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__NON_MULTIPLE_PROPERTY:
 				setNonMultipleProperty((String)newValue);
 				return;
-			case TestmodelPackage.CLASS1__MULTIPLE_UNIQUE_ORDERED_PROPERTY:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__MULTIPLE_UNIQUE_ORDERED_PROPERTY:
 				getMultipleUniqueOrderedProperty().clear();
 				getMultipleUniqueOrderedProperty().addAll((Collection<? extends String>)newValue);
 				return;
-			case TestmodelPackage.CLASS1__MULTIPLE_UNIQUE_UNORDERED_PROPERTY:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__MULTIPLE_UNIQUE_UNORDERED_PROPERTY:
 				getMultipleUniqueUnorderedProperty().clear();
 				getMultipleUniqueUnorderedProperty().addAll((Collection<? extends String>)newValue);
 				return;
-			case TestmodelPackage.CLASS1__MULTIPLE_NONUNIQUE_ORDERED_PROPERTY:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__MULTIPLE_NONUNIQUE_ORDERED_PROPERTY:
 				getMultipleNonuniqueOrderedProperty().clear();
 				getMultipleNonuniqueOrderedProperty().addAll((Collection<? extends String>)newValue);
 				return;
-			case TestmodelPackage.CLASS1__MULTIPLE_NONUNIQUE_UNORDERED_PROPERTY:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__MULTIPLE_NONUNIQUE_UNORDERED_PROPERTY:
 				getMultipleNonuniqueUnorderedProperty().clear();
 				getMultipleNonuniqueUnorderedProperty().addAll((Collection<? extends String>)newValue);
 				return;
-			case TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_BOOLEAN_NON_MULTIPLE:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_BOOLEAN_NON_MULTIPLE:
 				setArgumentPropertyBooleanNonMultiple((Boolean)newValue);
 				return;
-			case TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_STRING_NON_MULTIPLE:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_STRING_NON_MULTIPLE:
 				setArgumentPropertyStringNonMultiple((String)newValue);
 				return;
-			case TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_BOOLEAN_MULTIPLE:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_BOOLEAN_MULTIPLE:
 				getArgumentPropertyBooleanMultiple().clear();
 				getArgumentPropertyBooleanMultiple().addAll((Collection<? extends Boolean>)newValue);
 				return;
-			case TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_STRING_MULTIPLE:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_STRING_MULTIPLE:
 				getArgumentPropertyStringMultiple().clear();
 				getArgumentPropertyStringMultiple().addAll((Collection<? extends String>)newValue);
 				return;
-			case TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_OBJECT_NON_MULTIPLE:
-				setArgumentPropertyObjectNonMultiple((Class1)newValue);
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_OBJECT_NON_MULTIPLE:
+				setArgumentPropertyObjectNonMultiple((org.dresdenocl.modelinstancetype.test.testmodel.Class1)newValue);
 				return;
-			case TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_OBJECT_MULTIPLE:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_OBJECT_MULTIPLE:
 				getArgumentPropertyObjectMultiple().clear();
-				getArgumentPropertyObjectMultiple().addAll((Collection<? extends Class1>)newValue);
+				getArgumentPropertyObjectMultiple().addAll((Collection<? extends org.dresdenocl.modelinstancetype.test.testmodel.Class1>)newValue);
 				return;
-			case TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_ENUMERATION_LITERAL_NON_MULTIPLE:
-				setArgumentPropertyEnumerationLiteralNonMultiple((Enumeration1)newValue);
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_ENUMERATION_LITERAL_NON_MULTIPLE:
+				setArgumentPropertyEnumerationLiteralNonMultiple((org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1)newValue);
 				return;
-			case TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_ENUMERATION_LITERAL_MULTIPLE:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_ENUMERATION_LITERAL_MULTIPLE:
 				getArgumentPropertyEnumerationLiteralMultiple().clear();
-				getArgumentPropertyEnumerationLiteralMultiple().addAll((Collection<? extends Enumeration1>)newValue);
+				getArgumentPropertyEnumerationLiteralMultiple().addAll((Collection<? extends org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -721,43 +721,43 @@ public class Class1Impl extends EObjectImpl implements Class1 {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TestmodelPackage.CLASS1__NON_MULTIPLE_PROPERTY:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__NON_MULTIPLE_PROPERTY:
 				setNonMultipleProperty(NON_MULTIPLE_PROPERTY_EDEFAULT);
 				return;
-			case TestmodelPackage.CLASS1__MULTIPLE_UNIQUE_ORDERED_PROPERTY:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__MULTIPLE_UNIQUE_ORDERED_PROPERTY:
 				getMultipleUniqueOrderedProperty().clear();
 				return;
-			case TestmodelPackage.CLASS1__MULTIPLE_UNIQUE_UNORDERED_PROPERTY:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__MULTIPLE_UNIQUE_UNORDERED_PROPERTY:
 				getMultipleUniqueUnorderedProperty().clear();
 				return;
-			case TestmodelPackage.CLASS1__MULTIPLE_NONUNIQUE_ORDERED_PROPERTY:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__MULTIPLE_NONUNIQUE_ORDERED_PROPERTY:
 				getMultipleNonuniqueOrderedProperty().clear();
 				return;
-			case TestmodelPackage.CLASS1__MULTIPLE_NONUNIQUE_UNORDERED_PROPERTY:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__MULTIPLE_NONUNIQUE_UNORDERED_PROPERTY:
 				getMultipleNonuniqueUnorderedProperty().clear();
 				return;
-			case TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_BOOLEAN_NON_MULTIPLE:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_BOOLEAN_NON_MULTIPLE:
 				setArgumentPropertyBooleanNonMultiple(ARGUMENT_PROPERTY_BOOLEAN_NON_MULTIPLE_EDEFAULT);
 				return;
-			case TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_STRING_NON_MULTIPLE:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_STRING_NON_MULTIPLE:
 				setArgumentPropertyStringNonMultiple(ARGUMENT_PROPERTY_STRING_NON_MULTIPLE_EDEFAULT);
 				return;
-			case TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_BOOLEAN_MULTIPLE:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_BOOLEAN_MULTIPLE:
 				getArgumentPropertyBooleanMultiple().clear();
 				return;
-			case TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_STRING_MULTIPLE:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_STRING_MULTIPLE:
 				getArgumentPropertyStringMultiple().clear();
 				return;
-			case TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_OBJECT_NON_MULTIPLE:
-				setArgumentPropertyObjectNonMultiple((Class1)null);
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_OBJECT_NON_MULTIPLE:
+				setArgumentPropertyObjectNonMultiple((org.dresdenocl.modelinstancetype.test.testmodel.Class1)null);
 				return;
-			case TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_OBJECT_MULTIPLE:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_OBJECT_MULTIPLE:
 				getArgumentPropertyObjectMultiple().clear();
 				return;
-			case TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_ENUMERATION_LITERAL_NON_MULTIPLE:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_ENUMERATION_LITERAL_NON_MULTIPLE:
 				setArgumentPropertyEnumerationLiteralNonMultiple(ARGUMENT_PROPERTY_ENUMERATION_LITERAL_NON_MULTIPLE_EDEFAULT);
 				return;
-			case TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_ENUMERATION_LITERAL_MULTIPLE:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_ENUMERATION_LITERAL_MULTIPLE:
 				getArgumentPropertyEnumerationLiteralMultiple().clear();
 				return;
 		}
@@ -771,31 +771,31 @@ public class Class1Impl extends EObjectImpl implements Class1 {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TestmodelPackage.CLASS1__NON_MULTIPLE_PROPERTY:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__NON_MULTIPLE_PROPERTY:
 				return NON_MULTIPLE_PROPERTY_EDEFAULT == null ? nonMultipleProperty != null : !NON_MULTIPLE_PROPERTY_EDEFAULT.equals(nonMultipleProperty);
-			case TestmodelPackage.CLASS1__MULTIPLE_UNIQUE_ORDERED_PROPERTY:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__MULTIPLE_UNIQUE_ORDERED_PROPERTY:
 				return multipleUniqueOrderedProperty != null && !multipleUniqueOrderedProperty.isEmpty();
-			case TestmodelPackage.CLASS1__MULTIPLE_UNIQUE_UNORDERED_PROPERTY:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__MULTIPLE_UNIQUE_UNORDERED_PROPERTY:
 				return multipleUniqueUnorderedProperty != null && !multipleUniqueUnorderedProperty.isEmpty();
-			case TestmodelPackage.CLASS1__MULTIPLE_NONUNIQUE_ORDERED_PROPERTY:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__MULTIPLE_NONUNIQUE_ORDERED_PROPERTY:
 				return multipleNonuniqueOrderedProperty != null && !multipleNonuniqueOrderedProperty.isEmpty();
-			case TestmodelPackage.CLASS1__MULTIPLE_NONUNIQUE_UNORDERED_PROPERTY:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__MULTIPLE_NONUNIQUE_UNORDERED_PROPERTY:
 				return multipleNonuniqueUnorderedProperty != null && !multipleNonuniqueUnorderedProperty.isEmpty();
-			case TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_BOOLEAN_NON_MULTIPLE:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_BOOLEAN_NON_MULTIPLE:
 				return argumentPropertyBooleanNonMultiple != ARGUMENT_PROPERTY_BOOLEAN_NON_MULTIPLE_EDEFAULT;
-			case TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_STRING_NON_MULTIPLE:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_STRING_NON_MULTIPLE:
 				return ARGUMENT_PROPERTY_STRING_NON_MULTIPLE_EDEFAULT == null ? argumentPropertyStringNonMultiple != null : !ARGUMENT_PROPERTY_STRING_NON_MULTIPLE_EDEFAULT.equals(argumentPropertyStringNonMultiple);
-			case TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_BOOLEAN_MULTIPLE:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_BOOLEAN_MULTIPLE:
 				return argumentPropertyBooleanMultiple != null && !argumentPropertyBooleanMultiple.isEmpty();
-			case TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_STRING_MULTIPLE:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_STRING_MULTIPLE:
 				return argumentPropertyStringMultiple != null && !argumentPropertyStringMultiple.isEmpty();
-			case TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_OBJECT_NON_MULTIPLE:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_OBJECT_NON_MULTIPLE:
 				return argumentPropertyObjectNonMultiple != null;
-			case TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_OBJECT_MULTIPLE:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_OBJECT_MULTIPLE:
 				return argumentPropertyObjectMultiple != null && !argumentPropertyObjectMultiple.isEmpty();
-			case TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_ENUMERATION_LITERAL_NON_MULTIPLE:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_ENUMERATION_LITERAL_NON_MULTIPLE:
 				return argumentPropertyEnumerationLiteralNonMultiple != ARGUMENT_PROPERTY_ENUMERATION_LITERAL_NON_MULTIPLE_EDEFAULT;
-			case TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_ENUMERATION_LITERAL_MULTIPLE:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.CLASS1__ARGUMENT_PROPERTY_ENUMERATION_LITERAL_MULTIPLE:
 				return argumentPropertyEnumerationLiteralMultiple != null && !argumentPropertyEnumerationLiteralMultiple.isEmpty();
 		}
 		return super.eIsSet(featureID);

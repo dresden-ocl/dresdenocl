@@ -9,8 +9,8 @@ package org.dresdenocl.modelinstancetype.test.testmodel.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.NonCopyableClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
+import org.dresdenocl.modelinstancetype.test.testmodel.NonCopyableClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
 
 
 
@@ -23,7 +23,7 @@ import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
  *
  * @generated
  */
-public class NonCopyableClassImpl extends EObjectImpl implements NonCopyableClass {
+public class NonCopyableClassImpl extends EObjectImpl implements org.dresdenocl.modelinstancetype.test.testmodel.NonCopyableClass {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -40,7 +40,7 @@ public class NonCopyableClassImpl extends EObjectImpl implements NonCopyableClas
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TestmodelPackage.Literals.NON_COPYABLE_CLASS;
+		return org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.Literals.NON_COPYABLE_CLASS;
 	}
 
 } //NonCopyableClassImpl

@@ -8,8 +8,8 @@ package org.dresdenocl.modelinstancetype.test.testmodel.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.InitializableCopyableClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
+import org.dresdenocl.modelinstancetype.test.testmodel.InitializableCopyableClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
 
 
 
@@ -22,7 +22,7 @@ import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
  * @generated
  */
 public class InitializableCopyableClassImpl extends CopyableClassImpl implements
-		InitializableCopyableClass {
+		org.dresdenocl.modelinstancetype.test.testmodel.InitializableCopyableClass {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -40,7 +40,7 @@ public class InitializableCopyableClassImpl extends CopyableClassImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TestmodelPackage.Literals.INITIALIZABLE_COPYABLE_CLASS;
+		return org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.Literals.INITIALIZABLE_COPYABLE_CLASS;
 	}
 
 } // InitializableCopyableClassImpl

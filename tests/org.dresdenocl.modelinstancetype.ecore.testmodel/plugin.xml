@@ -13,7 +13,14 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="http://www.tudresden.de/ocl20/pivot/modelinstancetype/test/testmodel"
-            class="ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage"/>
+            class="org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated testmodel -->
+      <package
+            uri="http://www.tudresden.de/ocl20/pivot/modelinstancetype/test/testmodel"
+            class="org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage"/>
    </extension>
 
 </plugin>

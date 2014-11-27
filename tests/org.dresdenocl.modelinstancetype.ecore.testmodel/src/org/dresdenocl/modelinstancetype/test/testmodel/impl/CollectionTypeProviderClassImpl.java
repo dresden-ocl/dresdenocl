@@ -14,8 +14,8 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EDataTypeEList;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass;
-import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
+import org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
 
 
 
@@ -35,7 +35,7 @@ import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
  *
  * @generated
  */
-public class CollectionTypeProviderClassImpl extends EObjectImpl implements CollectionTypeProviderClass {
+public class CollectionTypeProviderClassImpl extends EObjectImpl implements org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass {
 	/**
 	 * The cached value of the '{@link #getBagProperty1() <em>Bag Property1</em>}' attribute list.
 	 * <!-- begin-user-doc -->
@@ -92,7 +92,7 @@ public class CollectionTypeProviderClassImpl extends EObjectImpl implements Coll
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TestmodelPackage.Literals.COLLECTION_TYPE_PROVIDER_CLASS;
+		return org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.Literals.COLLECTION_TYPE_PROVIDER_CLASS;
 	}
 
 	/**
@@ -102,7 +102,7 @@ public class CollectionTypeProviderClassImpl extends EObjectImpl implements Coll
 	 */
 	public EList<String> getBagProperty1() {
 		if (bagProperty1 == null) {
-			bagProperty1 = new EDataTypeEList<String>(String.class, this, TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__BAG_PROPERTY1);
+			bagProperty1 = new EDataTypeEList<String>(String.class, this, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__BAG_PROPERTY1);
 		}
 		return bagProperty1;
 	}
@@ -114,7 +114,7 @@ public class CollectionTypeProviderClassImpl extends EObjectImpl implements Coll
 	 */
 	public EList<Integer> getOrderedSetProperty1() {
 		if (orderedSetProperty1 == null) {
-			orderedSetProperty1 = new EDataTypeUniqueEList<Integer>(Integer.class, this, TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__ORDERED_SET_PROPERTY1);
+			orderedSetProperty1 = new EDataTypeUniqueEList<Integer>(Integer.class, this, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__ORDERED_SET_PROPERTY1);
 		}
 		return orderedSetProperty1;
 	}
@@ -126,7 +126,7 @@ public class CollectionTypeProviderClassImpl extends EObjectImpl implements Coll
 	 */
 	public EList<String> getSequenceProperty1() {
 		if (sequenceProperty1 == null) {
-			sequenceProperty1 = new EDataTypeEList<String>(String.class, this, TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__SEQUENCE_PROPERTY1);
+			sequenceProperty1 = new EDataTypeEList<String>(String.class, this, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__SEQUENCE_PROPERTY1);
 		}
 		return sequenceProperty1;
 	}
@@ -138,7 +138,7 @@ public class CollectionTypeProviderClassImpl extends EObjectImpl implements Coll
 	 */
 	public EList<String> getSetProperty1() {
 		if (setProperty1 == null) {
-			setProperty1 = new EDataTypeUniqueEList<String>(String.class, this, TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__SET_PROPERTY1);
+			setProperty1 = new EDataTypeUniqueEList<String>(String.class, this, org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__SET_PROPERTY1);
 		}
 		return setProperty1;
 	}
@@ -151,13 +151,13 @@ public class CollectionTypeProviderClassImpl extends EObjectImpl implements Coll
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__BAG_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__BAG_PROPERTY1:
 				return getBagProperty1();
-			case TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__ORDERED_SET_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__ORDERED_SET_PROPERTY1:
 				return getOrderedSetProperty1();
-			case TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__SEQUENCE_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__SEQUENCE_PROPERTY1:
 				return getSequenceProperty1();
-			case TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__SET_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__SET_PROPERTY1:
 				return getSetProperty1();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -172,19 +172,19 @@ public class CollectionTypeProviderClassImpl extends EObjectImpl implements Coll
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__BAG_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__BAG_PROPERTY1:
 				getBagProperty1().clear();
 				getBagProperty1().addAll((Collection<? extends String>)newValue);
 				return;
-			case TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__ORDERED_SET_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__ORDERED_SET_PROPERTY1:
 				getOrderedSetProperty1().clear();
 				getOrderedSetProperty1().addAll((Collection<? extends Integer>)newValue);
 				return;
-			case TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__SEQUENCE_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__SEQUENCE_PROPERTY1:
 				getSequenceProperty1().clear();
 				getSequenceProperty1().addAll((Collection<? extends String>)newValue);
 				return;
-			case TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__SET_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__SET_PROPERTY1:
 				getSetProperty1().clear();
 				getSetProperty1().addAll((Collection<? extends String>)newValue);
 				return;
@@ -200,16 +200,16 @@ public class CollectionTypeProviderClassImpl extends EObjectImpl implements Coll
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__BAG_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__BAG_PROPERTY1:
 				getBagProperty1().clear();
 				return;
-			case TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__ORDERED_SET_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__ORDERED_SET_PROPERTY1:
 				getOrderedSetProperty1().clear();
 				return;
-			case TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__SEQUENCE_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__SEQUENCE_PROPERTY1:
 				getSequenceProperty1().clear();
 				return;
-			case TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__SET_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__SET_PROPERTY1:
 				getSetProperty1().clear();
 				return;
 		}
@@ -224,13 +224,13 @@ public class CollectionTypeProviderClassImpl extends EObjectImpl implements Coll
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__BAG_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__BAG_PROPERTY1:
 				return bagProperty1 != null && !bagProperty1.isEmpty();
-			case TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__ORDERED_SET_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__ORDERED_SET_PROPERTY1:
 				return orderedSetProperty1 != null && !orderedSetProperty1.isEmpty();
-			case TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__SEQUENCE_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__SEQUENCE_PROPERTY1:
 				return sequenceProperty1 != null && !sequenceProperty1.isEmpty();
-			case TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__SET_PROPERTY1:
+			case org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage.COLLECTION_TYPE_PROVIDER_CLASS__SET_PROPERTY1:
 				return setProperty1 != null && !setProperty1.isEmpty();
 		}
 		return super.eIsSet(featureID);
