@@ -52,9 +52,7 @@ import org.dresdenocl.essentialocl.expressions.LiteralExp;
  * <!-- end-user-doc -->
  * @generated
  */
-public class LiteralExpItemProvider extends OclExpressionItemProvider implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class LiteralExpItemProvider extends OclExpressionItemProvider {
 
 	/**
 	 * This constructs an instance from a factory and a notifier.

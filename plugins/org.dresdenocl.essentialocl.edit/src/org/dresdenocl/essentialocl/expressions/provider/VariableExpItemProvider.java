@@ -53,9 +53,7 @@ import org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl;
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * @generated
  */
-public class VariableExpItemProvider extends OclExpressionItemProvider
-		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class VariableExpItemProvider extends OclExpressionItemProvider {
 
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--

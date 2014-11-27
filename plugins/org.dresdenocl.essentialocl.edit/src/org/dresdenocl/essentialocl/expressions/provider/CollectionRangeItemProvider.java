@@ -56,9 +56,7 @@ import org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl;
  * @generated
  */
 public class CollectionRangeItemProvider extends
-		CollectionLiteralPartItemProvider implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+		CollectionLiteralPartItemProvider {
 
 	/**
 	 * This constructs an instance from a factory and a notifier.

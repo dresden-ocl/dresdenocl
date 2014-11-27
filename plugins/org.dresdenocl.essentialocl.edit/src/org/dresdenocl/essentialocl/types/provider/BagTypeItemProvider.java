@@ -52,9 +52,7 @@ import org.dresdenocl.pivotmodel.Type;
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * @generated
  */
-public class BagTypeItemProvider extends CollectionTypeItemProvider implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class BagTypeItemProvider extends CollectionTypeItemProvider {
 
 	/**
 	 * This constructs an instance from a factory and a notifier.

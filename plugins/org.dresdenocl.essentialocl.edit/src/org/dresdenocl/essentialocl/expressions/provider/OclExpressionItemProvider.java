@@ -55,9 +55,7 @@ import org.dresdenocl.pivotmodel.provider.TypedElementItemProvider;
  * <!-- end-user-doc -->
  * @generated
  */
-public class OclExpressionItemProvider extends TypedElementItemProvider
-		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class OclExpressionItemProvider extends TypedElementItemProvider {
 
 	/**
 	 * This constructs an instance from a factory and a notifier.

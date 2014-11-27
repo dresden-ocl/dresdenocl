@@ -55,9 +55,7 @@ import org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl;
  * <!-- end-user-doc -->
  * @generated
  */
-public class IterateExpItemProvider extends LoopExpItemProvider implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class IterateExpItemProvider extends LoopExpItemProvider {
 
 	/**
 	 * This constructs an instance from a factory and a notifier.

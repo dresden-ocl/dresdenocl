@@ -58,9 +58,7 @@ import org.dresdenocl.pivotmodel.provider.ExpressionItemProvider;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ExpressionInOclItemProvider extends ExpressionItemProvider
-		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class ExpressionInOclItemProvider extends ExpressionItemProvider {
 
 	/**
 	 * This constructs an instance from a factory and a notifier.

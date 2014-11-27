@@ -56,9 +56,7 @@ import org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl;
  * @generated
  */
 public class IntegerLiteralExpItemProvider extends
-		NumericLiteralExpItemProvider implements IEditingDomainItemProvider,
-		IStructuredItemContentProvider, ITreeItemContentProvider,
-		IItemLabelProvider, IItemPropertySource {
+		NumericLiteralExpItemProvider {
 
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--

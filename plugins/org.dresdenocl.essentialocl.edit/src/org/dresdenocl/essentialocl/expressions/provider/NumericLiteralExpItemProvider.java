@@ -53,9 +53,7 @@ import org.dresdenocl.essentialocl.expressions.NumericLiteralExp;
  * @generated
  */
 public class NumericLiteralExpItemProvider extends
-		PrimitiveLiteralExpItemProvider implements IEditingDomainItemProvider,
-		IStructuredItemContentProvider, ITreeItemContentProvider,
-		IItemLabelProvider, IItemPropertySource {
+		PrimitiveLiteralExpItemProvider {
 
 	/**
 	 * This constructs an instance from a factory and a notifier.

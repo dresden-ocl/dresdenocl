@@ -55,9 +55,7 @@ import org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl;
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * @generated
  */
-public class RealLiteralExpItemProvider extends NumericLiteralExpItemProvider
-		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class RealLiteralExpItemProvider extends NumericLiteralExpItemProvider {
 
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--

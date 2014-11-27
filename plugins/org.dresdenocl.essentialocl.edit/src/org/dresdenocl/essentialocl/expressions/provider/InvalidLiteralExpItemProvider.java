@@ -51,9 +51,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
  * <!-- end-user-doc -->
  * @generated
  */
-public class InvalidLiteralExpItemProvider extends LiteralExpItemProvider
-		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class InvalidLiteralExpItemProvider extends LiteralExpItemProvider {
 
 	/**
 	 * This constructs an instance from a factory and a notifier.

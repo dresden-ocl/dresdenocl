@@ -54,9 +54,7 @@ import org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl;
  * <!-- end-user-doc -->
  * @generated
  */
-public class FeatureCallExpItemProvider extends CallExpItemProvider implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class FeatureCallExpItemProvider extends CallExpItemProvider {
 
 	/**
 	 * This constructs an instance from a factory and a notifier.

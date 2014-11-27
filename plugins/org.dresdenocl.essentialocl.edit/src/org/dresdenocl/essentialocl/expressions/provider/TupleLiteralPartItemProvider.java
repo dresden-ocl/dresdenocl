@@ -58,9 +58,7 @@ import org.dresdenocl.pivotmodel.provider.TypedElementItemProvider;
  * <!-- end-user-doc -->
  * @generated
  */
-public class TupleLiteralPartItemProvider extends TypedElementItemProvider
-		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class TupleLiteralPartItemProvider extends TypedElementItemProvider {
 
 	/**
 	 * This constructs an instance from a factory and a notifier.

@@ -56,9 +56,7 @@ import org.dresdenocl.pivotmodel.provider.TypeItemProvider;
  * <!-- end-user-doc -->
  * @generated
  */
-public class TypeTypeItemProvider extends TypeItemProvider implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class TypeTypeItemProvider extends TypeItemProvider {
 
 	/**
 	 * This constructs an instance from a factory and a notifier.
