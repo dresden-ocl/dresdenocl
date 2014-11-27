@@ -6,6 +6,7 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl;
 
+
 /**
  * Implementors of this interface provide an EMF resource.
  */

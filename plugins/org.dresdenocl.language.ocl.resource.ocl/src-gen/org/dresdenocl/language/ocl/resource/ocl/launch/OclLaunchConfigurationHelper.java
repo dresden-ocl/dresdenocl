@@ -6,6 +6,7 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.launch;
 
+
 /**
  * A class that provides common methods that are required by launch configuration
  * delegates.

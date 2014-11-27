@@ -6,10 +6,19 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.ui;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.jface.dialogs.IDialogConstants;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.osgi.framework.BundleContext;
+
 /**
  * A singleton class for the text resource UI plug-in.
  */
-public class OclUIPlugin extends org.eclipse.ui.plugin.AbstractUIPlugin {
+public class OclUIPlugin extends AbstractUIPlugin {
 	
 	public static final String PLUGIN_ID = "org.dresdenocl.language.ocl.resource.ocl.ui";
 	public static final String EDITOR_ID = "org.dresdenocl.language.ocl.resource.ocl.ui.OclEditor";
@@ -23,12 +32,12 @@ public class OclUIPlugin extends org.eclipse.ui.plugin.AbstractUIPlugin {
 		super();
 	}
 	
-	public void start(org.osgi.framework.BundleContext context) throws Exception {
+	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
 	}
 	
-	public void stop(org.osgi.framework.BundleContext context) throws Exception {
+	public void stop(BundleContext context) throws Exception {
 		plugin = null;
 		super.stop(context);
 	}
@@ -38,10 +47,10 @@ public class OclUIPlugin extends org.eclipse.ui.plugin.AbstractUIPlugin {
 	}
 	
 	public static void showErrorDialog(final String title, final String message) {
-		org.eclipse.swt.widgets.Display.getDefault().asyncExec(new Runnable() {
+		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
-				org.eclipse.swt.widgets.Shell parent = new org.eclipse.swt.widgets.Shell();
-				org.eclipse.jface.dialogs.MessageDialog dialog = new org.eclipse.jface.dialogs.MessageDialog(parent, title, null, message, org.eclipse.jface.dialogs.MessageDialog.ERROR, new String[] { org.eclipse.jface.dialogs.IDialogConstants.OK_LABEL }, 0) {
+				Shell parent = new Shell();
+				MessageDialog dialog = new MessageDialog(parent, title, null, message, MessageDialog.ERROR, new String[] { IDialogConstants.OK_LABEL }, 0) {
 				};
 				dialog.open();
 			}
@@ -49,25 +58,71 @@ public class OclUIPlugin extends org.eclipse.ui.plugin.AbstractUIPlugin {
 	}
 	
 	/**
+	 * <p>
 	 * Helper method for error logging.
+	 * </p>
 	 * 
 	 * @param message the error message to log
-	 * @param exception the exception that describes the error in detail
+	 * @param throwable the exception that describes the error in detail (can be null)
 	 * 
 	 * @return the status object describing the error
 	 */
-	public static org.eclipse.core.runtime.IStatus logError(String message, Throwable exception) {
-		org.eclipse.core.runtime.IStatus status;
-		if (exception != null) {
-			status = new org.eclipse.core.runtime.Status(org.eclipse.core.runtime.IStatus.ERROR, OclUIPlugin.PLUGIN_ID, 0, message, exception);
+	public static IStatus logError(String message, Throwable throwable) {
+		return log(IStatus.ERROR, message, throwable);
+	}
+	
+	/**
+	 * <p>
+	 * Helper method for logging warnings.
+	 * </p>
+	 * 
+	 * @param message the warning message to log
+	 * @param throwable the exception that describes the warning in detail (can be
+	 * null)
+	 * 
+	 * @return the status object describing the warning
+	 */
+	public static IStatus logWarning(String message, Throwable throwable) {
+		return log(IStatus.WARNING, message, throwable);
+	}
+	
+	/**
+	 * <p>
+	 * Helper method for logging infos.
+	 * </p>
+	 * 
+	 * @param message the info message to log
+	 * @param throwable the exception that describes the info in detail (can be null)
+	 * 
+	 * @return the status object describing the info
+	 */
+	public static IStatus logInfo(String message, Throwable throwable) {
+		return log(IStatus.INFO, message, throwable);
+	}
+	
+	/**
+	 * <p>
+	 * Helper method for logging.
+	 * </p>
+	 * 
+	 * @param type the type of the message to log
+	 * @param message the message to log
+	 * @param throwable the exception that describes the error in detail (can be null)
+	 * 
+	 * @return the status object describing the error
+	 */
+	protected static IStatus log(int type, String message, Throwable throwable) {
+		IStatus status;
+		if (throwable != null) {
+			status = new Status(type, OclUIPlugin.PLUGIN_ID, 0, message, throwable);
 		} else {
-			status = new org.eclipse.core.runtime.Status(org.eclipse.core.runtime.IStatus.ERROR, OclUIPlugin.PLUGIN_ID, message);
+			status = new Status(type, OclUIPlugin.PLUGIN_ID, message);
 		}
 		final OclUIPlugin pluginInstance = OclUIPlugin.getDefault();
 		if (pluginInstance == null) {
 			System.err.println(message);
-			if (exception != null) {
-				exception.printStackTrace();
+			if (throwable != null) {
+				throwable.printStackTrace();
 			}
 		} else {
 			pluginInstance.getLog().log(status);

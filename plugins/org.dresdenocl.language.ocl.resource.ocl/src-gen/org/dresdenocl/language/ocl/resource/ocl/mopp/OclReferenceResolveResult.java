@@ -6,20 +6,29 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import org.eclipse.emf.common.util.URI;
+
 /**
+ * <p>
  * A basic implementation of the
  * org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult interface
  * that collects mappings in a list.
+ * </p>
  * 
  * @param <ReferenceType> the type of the references that can be contained in this
  * result
  */
 public class OclReferenceResolveResult<ReferenceType> implements org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> {
 	
-	private java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType>> mappings;
+	private Collection<org.dresdenocl.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType>> mappings;
 	private String errorMessage;
 	private boolean resolveFuzzy;
-	private java.util.Set<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix> quickFixes;
+	private Set<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix> quickFixes;
 	
 	public OclReferenceResolveResult(boolean resolveFuzzy) {
 		super();
@@ -30,21 +39,21 @@ public class OclReferenceResolveResult<ReferenceType> implements org.dresdenocl.
 		return errorMessage;
 	}
 	
-	public java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix> getQuickFixes() {
+	public Collection<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix> getQuickFixes() {
 		if (quickFixes == null) {
-			quickFixes = new java.util.LinkedHashSet<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix>();
+			quickFixes = new LinkedHashSet<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix>();
 		}
-		return java.util.Collections.unmodifiableSet(quickFixes);
+		return Collections.unmodifiableSet(quickFixes);
 	}
 	
 	public void addQuickFix(org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix quickFix) {
 		if (quickFixes == null) {
-			quickFixes = new java.util.LinkedHashSet<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix>();
+			quickFixes = new LinkedHashSet<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix>();
 		}
 		quickFixes.add(quickFix);
 	}
 	
-	public java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType>> getMappings() {
+	public Collection<org.dresdenocl.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType>> getMappings() {
 		return mappings;
 	}
 	
@@ -73,19 +82,19 @@ public class OclReferenceResolveResult<ReferenceType> implements org.dresdenocl.
 	
 	public void addMapping(String identifier, ReferenceType target, String warning) {
 		if (mappings == null) {
-			mappings = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType>>(1);
+			mappings = new ArrayList<org.dresdenocl.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType>>(1);
 		}
 		mappings.add(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclElementMapping<ReferenceType>(identifier, target, warning));
 		errorMessage = null;
 	}
 	
-	public void addMapping(String identifier, org.eclipse.emf.common.util.URI uri) {
+	public void addMapping(String identifier, URI uri) {
 		addMapping(identifier, uri, null);
 	}
 	
-	public void addMapping(String identifier, org.eclipse.emf.common.util.URI uri, String warning) {
+	public void addMapping(String identifier, URI uri, String warning) {
 		if (mappings == null) {
-			mappings = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType>>(1);
+			mappings = new ArrayList<org.dresdenocl.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType>>(1);
 		}
 		mappings.add(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclURIMapping<ReferenceType>(identifier, uri, warning));
 	}

@@ -21,22 +21,22 @@ import org.eclipse.emf.ecore.EClass;
  */
 public class MultOperationCallExpCSImpl extends OperationCallBinaryExpCSImpl implements MultOperationCallExpCS {
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected MultOperationCallExpCSImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-    return OclPackage.Literals.MULT_OPERATION_CALL_EXP_CS;
-  }
+		return OclPackage.Literals.MULT_OPERATION_CALL_EXP_CS;
+	}
 
 } //MultOperationCallExpCSImpl

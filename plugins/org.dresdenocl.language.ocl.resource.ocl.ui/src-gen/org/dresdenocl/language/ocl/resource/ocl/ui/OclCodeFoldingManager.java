@@ -6,6 +6,45 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.ui;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.SafeRunner;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.Position;
+import org.eclipse.jface.text.source.Annotation;
+import org.eclipse.jface.text.source.projection.ProjectionAnnotation;
+import org.eclipse.jface.text.source.projection.ProjectionAnnotationModel;
+import org.eclipse.jface.text.source.projection.ProjectionViewer;
+import org.eclipse.jface.util.SafeRunnable;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IMemento;
+import org.eclipse.ui.IPartListener2;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.IWorkbenchPartReference;
+import org.eclipse.ui.XMLMemento;
+import org.osgi.framework.Bundle;
+
 /**
  * This manager adds new projection annotations for the code folding and deletes
  * old projection annotations with lines < 3. It is needed to hold the toggle
@@ -15,12 +54,12 @@ package org.dresdenocl.language.ocl.resource.ocl.ui;
 public class OclCodeFoldingManager {
 	
 	private class FoldingUpdateListener implements org.dresdenocl.language.ocl.resource.ocl.IOclBackgroundParsingListener {
-		public void parsingCompleted(org.eclipse.emf.ecore.resource.Resource resource) {
+		public void parsingCompleted(Resource resource) {
 			calculatePositions();
 		}
 	}
 	
-	private class EditorOnCloseListener implements org.eclipse.ui.IPartListener2 {
+	private class EditorOnCloseListener implements IPartListener2 {
 		
 		private org.dresdenocl.language.ocl.resource.ocl.ui.OclEditor editor;
 		
@@ -28,26 +67,26 @@ public class OclCodeFoldingManager {
 			this.editor = editor;
 		}
 		
-		public void partActivated(org.eclipse.ui.IWorkbenchPartReference partRef) {
+		public void partActivated(IWorkbenchPartReference partRef) {
 		}
 		
-		public void partBroughtToTop(org.eclipse.ui.IWorkbenchPartReference partRef) {
+		public void partBroughtToTop(IWorkbenchPartReference partRef) {
 		}
 		
-		public void partClosed(org.eclipse.ui.IWorkbenchPartReference partRef) {
+		public void partClosed(IWorkbenchPartReference partRef) {
 			if (partRef.isDirty()) {
 				return;
 			}
-			org.eclipse.ui.IWorkbenchPart workbenchPart = partRef.getPart(false);
+			IWorkbenchPart workbenchPart = partRef.getPart(false);
 			if (workbenchPart instanceof org.dresdenocl.language.ocl.resource.ocl.ui.OclEditor) {
 				org.dresdenocl.language.ocl.resource.ocl.ui.OclEditor editor = (org.dresdenocl.language.ocl.resource.ocl.ui.OclEditor) workbenchPart;
-				org.eclipse.emf.ecore.resource.Resource editorResource = editor.getResource();
+				Resource editorResource = editor.getResource();
 				if (editorResource == null) {
 					return;
 				}
 				String uri = editorResource.getURI().toString();
-				org.eclipse.emf.ecore.resource.Resource thisEditorResource = this.editor.getResource();
-				org.eclipse.emf.common.util.URI thisEditorResourceURI = thisEditorResource.getURI();
+				Resource thisEditorResource = this.editor.getResource();
+				URI thisEditorResourceURI = thisEditorResource.getURI();
 				if (uri.equals(thisEditorResourceURI.toString())) {
 					saveCodeFoldingStateFile(uri);
 					editor.getSite().getPage().removePartListener(this);
@@ -55,19 +94,19 @@ public class OclCodeFoldingManager {
 			}
 		}
 		
-		public void partDeactivated(org.eclipse.ui.IWorkbenchPartReference partRef) {
+		public void partDeactivated(IWorkbenchPartReference partRef) {
 		}
 		
-		public void partHidden(org.eclipse.ui.IWorkbenchPartReference partRef) {
+		public void partHidden(IWorkbenchPartReference partRef) {
 		}
 		
-		public void partInputChanged(org.eclipse.ui.IWorkbenchPartReference partRef) {
+		public void partInputChanged(IWorkbenchPartReference partRef) {
 		}
 		
-		public void partOpened(org.eclipse.ui.IWorkbenchPartReference partRef) {
+		public void partOpened(IWorkbenchPartReference partRef) {
 		}
 		
-		public void partVisible(org.eclipse.ui.IWorkbenchPartReference partRef) {
+		public void partVisible(IWorkbenchPartReference partRef) {
 		}
 		
 	}
@@ -78,19 +117,20 @@ public class OclCodeFoldingManager {
 	private static final String OFFSET = "OFFSET";
 	private static final String LENGTH = "LENGTH";
 	private static final String MODEL = "MODEL";
-	protected java.util.List<org.eclipse.jface.text.source.projection.ProjectionAnnotation> oldAnnotations = new java.util.ArrayList<org.eclipse.jface.text.source.projection.ProjectionAnnotation>();
-	protected java.util.Map<org.eclipse.jface.text.source.projection.ProjectionAnnotation, org.eclipse.jface.text.Position> additions = new java.util.LinkedHashMap<org.eclipse.jface.text.source.projection.ProjectionAnnotation, org.eclipse.jface.text.Position>();
-	protected org.eclipse.jface.text.source.projection.ProjectionAnnotationModel projectionAnnotationModel;
-	protected org.eclipse.jface.text.source.projection.ProjectionViewer sourceViewer;
+	protected List<ProjectionAnnotation> oldAnnotations = new ArrayList<ProjectionAnnotation>();
+	protected Map<ProjectionAnnotation, Position> additions = new LinkedHashMap<ProjectionAnnotation, Position>();
+	protected ProjectionAnnotationModel projectionAnnotationModel;
+	protected ProjectionViewer sourceViewer;
 	protected org.dresdenocl.language.ocl.resource.ocl.ui.OclEditor editor;
 	
 	/**
-	 * Creates a code folding manager to handle the
-	 * <code>org.eclipse.jface.text.source.projection.ProjectionAnnotation</code>.
+	 * <p>
+	 * Creates a code folding manager to handle the <code>ProjectionAnnotation</code>.
+	 * </p>
 	 * 
 	 * @param sourceViewer the source viewer to calculate the element lines
 	 */
-	public OclCodeFoldingManager(org.eclipse.jface.text.source.projection.ProjectionViewer sourceViewer,org.dresdenocl.language.ocl.resource.ocl.ui.OclEditor textEditor) {
+	public OclCodeFoldingManager(ProjectionViewer sourceViewer,org.dresdenocl.language.ocl.resource.ocl.ui.OclEditor textEditor) {
 		this.projectionAnnotationModel = sourceViewer.getProjectionAnnotationModel();
 		this.sourceViewer = sourceViewer;
 		this.editor = textEditor;
@@ -108,47 +148,49 @@ public class OclCodeFoldingManager {
 	}
 	
 	/**
+	 * <p>
 	 * Checks whether the given positions are in the
-	 * <code>org.eclipse.jface.text.source.projection.ProjectionAnnotationModel</code>
-	 * or in the addition set. If not it tries to add into <code>additions</code>.
-	 * Deletes old org.eclipse.jface.text.source.projection.ProjectionAnnotation with
-	 * line count less than 2.
+	 * <code>ProjectionAnnotationModel</code> or in the addition set. If not it tries
+	 * to add into <code>additions</code>. Deletes old ProjectionAnnotation with line
+	 * count less than 2.
+	 * </p>
 	 * 
 	 * @param positions a list of available foldable positions
 	 */
-	public void updateCodefolding(java.util.List<org.eclipse.jface.text.Position> positions) {
-		org.eclipse.jface.text.IDocument document = sourceViewer.getDocument();
+	public void updateCodefolding(List<Position> positions) {
+		IDocument document = sourceViewer.getDocument();
 		if (document == null) {
 			return;
 		}
 		oldAnnotations.clear();
-		java.util.Iterator<?> annotationIterator = projectionAnnotationModel.getAnnotationIterator();
+		Iterator<?> annotationIterator = projectionAnnotationModel.getAnnotationIterator();
 		while (annotationIterator.hasNext()) {
-			oldAnnotations.add((org.eclipse.jface.text.source.projection.ProjectionAnnotation) annotationIterator.next());
+			oldAnnotations.add((ProjectionAnnotation) annotationIterator.next());
 		}
 		// Add new Position with a unique line offset
-		for (org.eclipse.jface.text.Position position : positions) {
+		for (Position position : positions) {
 			if (!isInAdditions(position)) {
 				addPosition(position);
 			}
 		}
-		projectionAnnotationModel.modifyAnnotations(oldAnnotations.toArray(new org.eclipse.jface.text.source.Annotation[0]), additions, null);
+		projectionAnnotationModel.modifyAnnotations(oldAnnotations.toArray(new Annotation[0]), additions, null);
 		additions.clear();
 	}
 	
 	/**
-	 * Checks the offset of the given <code>org.eclipse.jface.text.Position</code>
-	 * against the <code>org.eclipse.jface.text.Position</code>s in
-	 * <code>additions</code> to determine the existence whether the given position is
-	 * contained in the additions set.
+	 * <p>
+	 * Checks the offset of the given <code>Position</code> against the
+	 * <code>Position</code>s in <code>additions</code> to determine the existence
+	 * whether the given position is contained in the additions set.
+	 * </p>
 	 * 
 	 * @param position the position to check
 	 * 
 	 * @return <code>true</code> if it is in the <code>additions</code>
 	 */
-	private boolean isInAdditions(org.eclipse.jface.text.Position position) {
-		for (org.eclipse.jface.text.source.Annotation addition : additions.keySet()) {
-			org.eclipse.jface.text.Position additionPosition = additions.get(addition);
+	private boolean isInAdditions(Position position) {
+		for (Annotation addition : additions.keySet()) {
+			Position additionPosition = additions.get(addition);
 			if (position.offset == additionPosition.offset && position.length == additionPosition.length) {
 				return true;
 			}
@@ -157,18 +199,20 @@ public class OclCodeFoldingManager {
 	}
 	
 	/**
+	 * <p>
 	 * Tries to add this position into the model. Only positions with more than 3
 	 * lines can be taken in. If multiple positions exist on the same line, the
 	 * longest will be chosen. The shorter ones will be deleted.
+	 * </p>
 	 * 
 	 * @param position the position to be added.
 	 */
-	private void addPosition(org.eclipse.jface.text.Position position) {
-		org.eclipse.jface.text.IDocument document = sourceViewer.getDocument();
+	private void addPosition(Position position) {
+		IDocument document = sourceViewer.getDocument();
 		int lines = 0;
 		try {
 			lines = document.getNumberOfLines(position.offset, position.length);
-		} catch (org.eclipse.jface.text.BadLocationException e) {
+		} catch (BadLocationException e) {
 			e.printStackTrace();
 			return;
 		}
@@ -178,8 +222,8 @@ public class OclCodeFoldingManager {
 		
 		// if a position to add existed on the same line, the longest one will be chosen
 		try {
-			for (org.eclipse.jface.text.source.projection.ProjectionAnnotation annotationToAdd : additions.keySet()) {
-				org.eclipse.jface.text.Position positionToAdd = additions.get(annotationToAdd);
+			for (ProjectionAnnotation annotationToAdd : additions.keySet()) {
+				Position positionToAdd = additions.get(annotationToAdd);
 				if (document.getLineOfOffset(position.offset) == document.getLineOfOffset(positionToAdd.offset)) {
 					if (positionToAdd.length < position.length) {
 						additions.remove(annotationToAdd);
@@ -188,29 +232,34 @@ public class OclCodeFoldingManager {
 					}
 				}
 			}
-		} catch (org.eclipse.jface.text.BadLocationException e) {
+		} catch (BadLocationException e) {
 			return;
 		}
-		for (org.eclipse.jface.text.source.projection.ProjectionAnnotation annotationInModel : oldAnnotations) {
-			org.eclipse.jface.text.Position positionInModel = projectionAnnotationModel.getPosition(annotationInModel);
+		for (ProjectionAnnotation annotationInModel : oldAnnotations) {
+			Position positionInModel = projectionAnnotationModel.getPosition(annotationInModel);
 			if (position.offset == positionInModel.offset && position.length == positionInModel.length) {
 				oldAnnotations.remove(annotationInModel);
 				return;
 			}
 		}
 		
-		additions.put(new org.eclipse.jface.text.source.projection.ProjectionAnnotation(), position);
+		additions.put(new ProjectionAnnotation(), position);
 	}
 	
 	/**
 	 * Saves the code folding state into the given memento.
 	 */
-	public void saveCodeFolding(org.eclipse.ui.IMemento memento) {
-		java.util.Iterator<?> annotationIt = projectionAnnotationModel.getAnnotationIterator();
+	public void saveCodeFolding(IMemento memento) {
+		// The annotation model might be null if the editor opened an storage input
+		// instead of a file input.
+		if (projectionAnnotationModel == null) {
+			return;
+		}
+		Iterator<?> annotationIt = projectionAnnotationModel.getAnnotationIterator();
 		while (annotationIt.hasNext()) {
-			org.eclipse.jface.text.source.projection.ProjectionAnnotation annotation = (org.eclipse.jface.text.source.projection.ProjectionAnnotation) annotationIt.next();
-			org.eclipse.ui.IMemento annotationMemento = memento.createChild(ANNOTATION);
-			org.eclipse.jface.text.Position position = projectionAnnotationModel.getPosition(annotation);
+			ProjectionAnnotation annotation = (ProjectionAnnotation) annotationIt.next();
+			IMemento annotationMemento = memento.createChild(ANNOTATION);
+			Position position = projectionAnnotationModel.getPosition(annotation);
 			annotationMemento.putBoolean(IS_COLLAPSED, annotation.isCollapsed());
 			annotationMemento.putInteger(OFFSET, position.offset);
 			annotationMemento.putInteger(LENGTH, position.length);
@@ -220,25 +269,25 @@ public class OclCodeFoldingManager {
 	/**
 	 * Restores the code folding state information from the given memento.
 	 */
-	public void restoreCodeFolding(org.eclipse.ui.IMemento memento) {
+	public void restoreCodeFolding(IMemento memento) {
 		if (memento == null) {
 			return;
 		}
-		org.eclipse.ui.IMemento[] annotationMementos = memento.getChildren(ANNOTATION);
+		IMemento[] annotationMementos = memento.getChildren(ANNOTATION);
 		if (annotationMementos == null) {
 			return;
 		}
-		java.util.Map<org.eclipse.jface.text.source.projection.ProjectionAnnotation, Boolean> collapsedStates = new java.util.LinkedHashMap<org.eclipse.jface.text.source.projection.ProjectionAnnotation, Boolean>();
-		for (org.eclipse.ui.IMemento annotationMemento : annotationMementos) {
-			org.eclipse.jface.text.source.projection.ProjectionAnnotation annotation = new org.eclipse.jface.text.source.projection.ProjectionAnnotation();
+		Map<ProjectionAnnotation, Boolean> collapsedStates = new LinkedHashMap<ProjectionAnnotation, Boolean>();
+		for (IMemento annotationMemento : annotationMementos) {
+			ProjectionAnnotation annotation = new ProjectionAnnotation();
 			collapsedStates.put(annotation, annotationMemento.getBoolean(IS_COLLAPSED));
 			int offset = annotationMemento.getInteger(OFFSET);
 			int length = annotationMemento.getInteger(LENGTH);
-			org.eclipse.jface.text.Position position = new org.eclipse.jface.text.Position(offset, length);
+			Position position = new Position(offset, length);
 			projectionAnnotationModel.addAnnotation(annotation, position);
 		}
 		// postset collapse state to prevent wrong displaying folding code.
-		for (org.eclipse.jface.text.source.projection.ProjectionAnnotation annotation : collapsedStates.keySet()) {
+		for (ProjectionAnnotation annotation : collapsedStates.keySet()) {
 			Boolean isCollapsed = collapsedStates.get(annotation);
 			if (isCollapsed != null && isCollapsed.booleanValue()) {
 				projectionAnnotationModel.collapse(annotation);
@@ -247,21 +296,23 @@ public class OclCodeFoldingManager {
 	}
 	
 	/**
+	 * <p>
 	 * Restores the code folding state from a XML file in the state location.
+	 * </p>
 	 * 
 	 * @param uriString the key to determine the file to load the state from
 	 */
 	public void restoreCodeFoldingStateFromFile(String uriString) {
-		final java.io.File stateFile = getCodeFoldingStateFile(uriString);
+		final File stateFile = getCodeFoldingStateFile(uriString);
 		if (stateFile == null || !stateFile.exists()) {
 			calculatePositions();
 			return;
 		}
-		org.eclipse.core.runtime.SafeRunner.run(new org.eclipse.jface.util.SafeRunnable("Unable to read code folding state. The state will be reset.") {
+		SafeRunner.run(new SafeRunnable("Unable to read code folding state. The state will be reset.") {
 			public void run() throws Exception {
-				java.io.FileInputStream input = new java.io.FileInputStream(stateFile);
-				java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.InputStreamReader(input, "utf-8"));
-				org.eclipse.ui.IMemento memento = org.eclipse.ui.XMLMemento.createReadRoot(reader);
+				FileInputStream input = new FileInputStream(stateFile);
+				BufferedReader reader = new BufferedReader(new InputStreamReader(input, "utf-8"));
+				IMemento memento = XMLMemento.createReadRoot(reader);
 				reader.close();
 				String sourceText = sourceViewer.getDocument().get();
 				if (memento.getString(VERIFY_KEY).equals(makeMD5(sourceText))) {
@@ -274,36 +325,38 @@ public class OclCodeFoldingManager {
 	}
 	
 	/**
+	 * <p>
 	 * Saves the code folding state to a XML file in the state location.
+	 * </p>
 	 * 
 	 * @param uriString the key to determine the file to save to
 	 */
 	public void saveCodeFoldingStateFile(String uriString) {
-		org.eclipse.jface.text.IDocument document = sourceViewer.getDocument();
+		IDocument document = sourceViewer.getDocument();
 		if (document == null) {
 			return;
 		}
-		org.eclipse.ui.XMLMemento codeFoldingMemento = org.eclipse.ui.XMLMemento.createWriteRoot(MODEL);
+		XMLMemento codeFoldingMemento = XMLMemento.createWriteRoot(MODEL);
 		codeFoldingMemento.putString(VERIFY_KEY, makeMD5(document.get()));
 		saveCodeFolding(codeFoldingMemento);
-		java.io.File stateFile = getCodeFoldingStateFile(uriString);
+		File stateFile = getCodeFoldingStateFile(uriString);
 		if (stateFile == null) {
 			return;
 		}
 		try {
-			java.io.FileOutputStream stream = new java.io.FileOutputStream(stateFile);
-			java.io.OutputStreamWriter writer = new java.io.OutputStreamWriter(stream, "utf-8");
+			FileOutputStream stream = new FileOutputStream(stateFile);
+			OutputStreamWriter writer = new OutputStreamWriter(stream, "utf-8");
 			codeFoldingMemento.save(writer);
 			writer.close();
-		} catch (java.io.IOException e) {
+		} catch (IOException e) {
 			stateFile.delete();
-			org.eclipse.jface.dialogs.MessageDialog.openError((org.eclipse.swt.widgets.Shell) null, "Saving Problems", "Unable to save code folding state.");
+			MessageDialog.openError((Shell) null, "Saving Problems", "Unable to save code folding state.");
 		}
 	}
 	
-	private java.io.File getCodeFoldingStateFile(String uriString) {
-		org.osgi.framework.Bundle bundle = org.eclipse.core.runtime.Platform.getBundle(org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.PLUGIN_ID);
-		org.eclipse.core.runtime.IPath path = org.eclipse.core.runtime.Platform.getStateLocation(bundle);
+	private File getCodeFoldingStateFile(String uriString) {
+		Bundle bundle = Platform.getBundle(org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.PLUGIN_ID);
+		IPath path = Platform.getStateLocation(bundle);
 		if (path == null) {
 			return null;
 		}
@@ -312,12 +365,12 @@ public class OclCodeFoldingManager {
 	}
 	
 	private String makeMD5(String text) {
-		java.security.MessageDigest md = null;
+		MessageDigest md = null;
 		byte[] encryptMsg = null;
 		try {
-			md = java.security.MessageDigest.getInstance("MD5");
+			md = MessageDigest.getInstance("MD5");
 			encryptMsg = md.digest(text.getBytes());
-		} catch (java.security.NoSuchAlgorithmException e) {
+		} catch (NoSuchAlgorithmException e) {
 			org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.logError("NoSuchAlgorithmException while creating MD5 checksum.", e);
 			return "";
 		}
@@ -344,30 +397,29 @@ public class OclCodeFoldingManager {
 	}
 	
 	protected void calculatePositions() {
-		org.dresdenocl.language.ocl.resource.ocl.IOclTextResource textResource = (org.dresdenocl.language.ocl.resource.ocl.IOclTextResource) editor.getResource();
-		org.eclipse.jface.text.IDocument document = sourceViewer.getDocument();
+		org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource textResource = (org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource) editor.getResource();
+		IDocument document = sourceViewer.getDocument();
 		if (textResource == null || document == null) {
 			return;
 		}
-		org.eclipse.emf.common.util.EList<?> errorList = textResource.getErrors();
-		if (errorList != null && errorList.size() > 0) {
+		if (textResource.hasErrors()) {
 			return;
 		}
-		final java.util.List<org.eclipse.jface.text.Position> positions = new java.util.ArrayList<org.eclipse.jface.text.Position>();
+		final List<Position> positions = new ArrayList<Position>();
 		org.dresdenocl.language.ocl.resource.ocl.IOclLocationMap locationMap = textResource.getLocationMap();
-		org.eclipse.emf.ecore.EClass[] foldableClasses = textResource.getMetaInformation().getFoldableClasses();
+		EClass[] foldableClasses = textResource.getMetaInformation().getFoldableClasses();
 		if (foldableClasses == null) {
 			return;
 		}
 		if (foldableClasses.length < 1) {
 			return;
 		}
-		java.util.List<org.eclipse.emf.ecore.EObject> contents = textResource.getContents();
-		org.eclipse.emf.ecore.EObject[] contentArray = contents.toArray(new org.eclipse.emf.ecore.EObject[0]);
-		java.util.List<org.eclipse.emf.ecore.EObject> allContents = getAllContents(contentArray);
-		for (org.eclipse.emf.ecore.EObject nextObject : allContents) {
+		List<EObject> contents = textResource.getContents();
+		EObject[] contentArray = contents.toArray(new EObject[0]);
+		List<EObject> allContents = getAllContents(contentArray);
+		for (EObject nextObject : allContents) {
 			boolean isFoldable = false;
-			for (org.eclipse.emf.ecore.EClass eClass : foldableClasses) {
+			for (EClass eClass : foldableClasses) {
 				if (nextObject.eClass().equals(eClass)) {
 					isFoldable = true;
 					break;
@@ -383,38 +435,38 @@ public class OclCodeFoldingManager {
 				if (lines < 2) {
 					continue;
 				}
-			} catch (org.eclipse.jface.text.BadLocationException e) {
+			} catch (BadLocationException e) {
 				continue;
 			}
 			length = getOffsetOfNextLine(document, length + offset) - offset;
 			if (offset >= 0 && length > 0) {
-				positions.add(new org.eclipse.jface.text.Position(offset, length));
+				positions.add(new Position(offset, length));
 			}
 		}
-		org.eclipse.swt.widgets.Display.getDefault().asyncExec(new Runnable() {
+		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
 				updateCodefolding(positions);
 			}
 		});
 	}
 	
-	private java.util.List<org.eclipse.emf.ecore.EObject> getAllContents(org.eclipse.emf.ecore.EObject[] contentArray) {
-		java.util.List<org.eclipse.emf.ecore.EObject> result = new java.util.ArrayList<org.eclipse.emf.ecore.EObject>();
-		for (org.eclipse.emf.ecore.EObject eObject : contentArray) {
+	private List<EObject> getAllContents(EObject[] contentArray) {
+		List<EObject> result = new ArrayList<EObject>();
+		for (EObject eObject : contentArray) {
 			if (eObject == null) {
 				continue;
 			}
 			result.add(eObject);
-			java.util.List<org.eclipse.emf.ecore.EObject> contents = eObject.eContents();
+			List<EObject> contents = eObject.eContents();
 			if (contents == null) {
 				continue;
 			}
-			result.addAll(getAllContents(contents.toArray(new org.eclipse.emf.ecore.EObject[0])));
+			result.addAll(getAllContents(contents.toArray(new EObject[0])));
 		}
 		return result;
 	}
 	
-	private int getOffsetOfNextLine(org.eclipse.jface.text.IDocument document, int offset) {
+	private int getOffsetOfNextLine(IDocument document, int offset) {
 		int end = document.getLength();
 		int nextLineOffset = offset;
 		if (offset < 0 || offset > end) {
@@ -424,7 +476,7 @@ public class OclCodeFoldingManager {
 			String charAtOffset = "";
 			try {
 				charAtOffset += document.getChar(nextLineOffset);
-			} catch (org.eclipse.jface.text.BadLocationException e) {
+			} catch (BadLocationException e) {
 				return -1;
 			}
 			if (charAtOffset.matches("\\S")) {

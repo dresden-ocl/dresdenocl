@@ -6,6 +6,9 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl;
 
+import java.util.List;
+import org.eclipse.emf.ecore.EClass;
+
 /**
  * A text parser parses a text into a tree of <code>EObject</code>s. It is
  * associated with a <code>TextResource</code>.
@@ -13,17 +16,22 @@ package org.dresdenocl.language.ocl.resource.ocl;
 public interface IOclTextParser extends org.dresdenocl.language.ocl.resource.ocl.IOclConfigurable {
 	
 	/**
+	 * <p>
 	 * Parses the content given to the parser and create a tree of EObjects. The root
 	 * of this tree is wrapped together with some commands that might be executed
 	 * after parsing into a result object.
+	 * </p>
 	 * 
 	 * @return the result of the parse process
 	 */
 	public org.dresdenocl.language.ocl.resource.ocl.IOclParseResult parse();
 	
 	/**
+	 * <p>
 	 * Parses the document and returns a list of expected elements. Each expected
 	 * element covers a range in the input stream.
+	 * </p>
+	 * <p>
 	 * If the parser implementation can not determine expected elements null can be
 	 * returned. This method is used by the code completion to figure out which
 	 * proposals can be shown to users for a given cursor position. The class
@@ -31,8 +39,9 @@ public interface IOclTextParser extends org.dresdenocl.language.ocl.resource.ocl
 	 * <code>null</code>, the start symbols from the syntax specification are used.
 	 * The <code>cursorPosition</code> is used to discard expected elements, which
 	 * will not be needed.
+	 * </p>
 	 */
-	public java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal> parseToExpectedElements(org.eclipse.emf.ecore.EClass type, org.dresdenocl.language.ocl.resource.ocl.IOclTextResource dummyResource, int cursorOffset);
+	public List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal> parseToExpectedElements(EClass type, org.dresdenocl.language.ocl.resource.ocl.IOclTextResource dummyResource, int cursorOffset);
 	
 	/**
 	 * Signals the parse to terminate parsing as soon as possible. This method must be

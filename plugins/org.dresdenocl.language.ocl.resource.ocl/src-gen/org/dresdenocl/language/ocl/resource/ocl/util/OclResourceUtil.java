@@ -6,6 +6,26 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.util;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+
 /**
  * Class ResourceUtil can be used to perform common tasks on resources, such as
  * resolving proxy object, saving resources, as well as, checking them for errors.
@@ -13,38 +33,44 @@ package org.dresdenocl.language.ocl.resource.ocl.util;
 public class OclResourceUtil {
 	
 	/**
+	 * <p>
 	 * Searches for all unresolved proxy objects in the given resource set.
+	 * </p>
 	 * 
 	 * @param resourceSet
 	 * 
 	 * @return all proxy objects that are not resolvable
 	 */
-	public static java.util.Set<org.eclipse.emf.ecore.EObject> findUnresolvedProxies(org.eclipse.emf.ecore.resource.ResourceSet resourceSet) {
+	public static Set<EObject> findUnresolvedProxies(ResourceSet resourceSet) {
 		return new org.dresdenocl.language.ocl.resource.ocl.util.OclInterruptibleEcoreResolver().findUnresolvedProxies(resourceSet);
 	}
 	
 	/**
+	 * <p>
 	 * Searches for all unresolved proxy objects in the given resource.
+	 * </p>
 	 * 
 	 * @param resource
 	 * 
 	 * @return all proxy objects that are not resolvable
 	 */
-	public static java.util.Set<org.eclipse.emf.ecore.EObject> findUnresolvedProxies(org.eclipse.emf.ecore.resource.Resource resource) {
+	public static Set<EObject> findUnresolvedProxies(Resource resource) {
 		return new org.dresdenocl.language.ocl.resource.ocl.util.OclInterruptibleEcoreResolver().findUnresolvedProxies(resource);
 	}
 	
 	/**
+	 * <p>
 	 * Tries to resolve all unresolved proxy objects in the given resource. If all
 	 * proxies were resolved true is returned. If some could not be resolved, false is
 	 * returned.
+	 * </p>
 	 * 
 	 * @param resource the resource containing the proxy object
 	 * 
 	 * @return true on success
 	 */
-	public static boolean resolveAll(org.eclipse.emf.ecore.resource.Resource resource) {
-		org.eclipse.emf.ecore.util.EcoreUtil.resolveAll(resource);
+	public static boolean resolveAll(Resource resource) {
+		EcoreUtil.resolveAll(resource);
 		if (findUnresolvedProxies(resource).size() > 0) {
 			return false;
 		} else {
@@ -52,12 +78,12 @@ public class OclResourceUtil {
 		}
 	}
 	
-	public static String getProxyIdentifier(org.eclipse.emf.ecore.EObject eObject) {
+	public static String getProxyIdentifier(EObject eObject) {
 		String deresolvedReference = null;
-		if (eObject instanceof org.eclipse.emf.ecore.EObject) {
-			org.eclipse.emf.ecore.EObject eObjectToDeResolve = (org.eclipse.emf.ecore.EObject) eObject;
+		if (eObject instanceof EObject) {
+			EObject eObjectToDeResolve = (EObject) eObject;
 			if (eObjectToDeResolve.eIsProxy()) {
-				deresolvedReference = ((org.eclipse.emf.ecore.InternalEObject) eObjectToDeResolve).eProxyURI().fragment();
+				deresolvedReference = ((InternalEObject) eObjectToDeResolve).eProxyURI().fragment();
 				// If the proxy was created by EMFText, we can try to recover the identifier from
 				// the proxy URI
 				if (deresolvedReference != null && deresolvedReference.startsWith(org.dresdenocl.language.ocl.resource.ocl.IOclContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX)) {
@@ -69,44 +95,79 @@ public class OclResourceUtil {
 		return deresolvedReference;
 	}
 	
-	public static org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource getResource(java.io.File file) {
+	public static org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource getResource(File file) {
 		return getResource(file, null);
 	}
 	
-	public static org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource getResource(java.io.File file, java.util.Map<?,?> options) {
-		return getResource(org.eclipse.emf.common.util.URI.createFileURI(file.getAbsolutePath()), options);
+	public static org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource getResource(File file, Map<?,?> options) {
+		return getResource(URI.createFileURI(file.getAbsolutePath()), options);
 	}
 	
-	public static org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource getResource(org.eclipse.emf.common.util.URI uri) {
+	public static org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource getResource(URI uri) {
 		return getResource(uri, null);
 	}
 	
-	public static org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource getResource(org.eclipse.emf.common.util.URI uri, java.util.Map<?,?> options) {
+	public static org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource getResource(URI uri, Map<?,?> options) {
 		new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation().registerResourceFactory();
-		org.eclipse.emf.ecore.resource.ResourceSet rs = new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl();
+		ResourceSet rs = new ResourceSetImpl();
 		if (options != null) {
 			rs.getLoadOptions().putAll(options);
 		}
-		org.eclipse.emf.ecore.resource.Resource resource = rs.getResource(uri, true);
+		Resource resource = rs.getResource(uri, true);
 		return (org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource) resource;
 	}
 	
 	/**
-	 * Returns the resource after parsing the given text.
+	 * Returns the resource after parsing the given text. This method is deprecated
+	 * because it uses the default platform encoding. Use {@link #getResource(byte[])}
+	 * instead.
 	 */
-	public static org.eclipse.emf.ecore.resource.Resource getResource(String text) {
+	@Deprecated
+	public static Resource getResource(String text) {
+		ResourceSet resourceSet = new ResourceSetImpl();
+		return getResource(text, resourceSet);
+	}
+	
+	/**
+	 * Returns the resource after parsing the given text. This method is deprecated
+	 * because it uses the default platform encoding. Use {@link #getResource(byte[],
+	 * ResourceSet)} instead.
+	 */
+	@Deprecated
+	public static Resource getResource(String text, ResourceSet resourceSet) {
+		return getResource(text.getBytes(), resourceSet);
+	}
+	
+	/**
+	 * Returns the resource after parsing the given bytes.
+	 */
+	public static Resource getResource(byte[] content) {
+		ResourceSet resourceSet = new ResourceSetImpl();
+		return getResource(content, resourceSet);
+	}
+	
+	/**
+	 * Returns the resource after parsing the given bytes.
+	 */
+	public static Resource getResource(byte[] content, ResourceSet resourceSet) {
+		return getResource(content, resourceSet, null);
+	}
+	
+	/**
+	 * Returns the resource after parsing the given bytes using the given load options.
+	 */
+	public static Resource getResource(byte[] content, ResourceSet resourceSet, Map<?, ?> loadOptions) {
 		org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation metaInformation = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation();
 		metaInformation.registerResourceFactory();
-		org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createURI("temp." + metaInformation.getSyntaxName());
-		org.eclipse.emf.ecore.resource.ResourceSet resourceSet = new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl();
-		org.eclipse.emf.ecore.resource.Resource resource = resourceSet.createResource(uri);
+		URI uri = URI.createURI("temp." + metaInformation.getSyntaxName());
+		Resource resource = resourceSet.createResource(uri);
 		if (resource == null) {
 			return null;
 		}
-		java.io.ByteArrayInputStream inputStream = new java.io.ByteArrayInputStream(text.getBytes());
+		ByteArrayInputStream inputStream = new ByteArrayInputStream(content);
 		try {
-			resource.load(inputStream, null);
-		} catch (java.io.IOException ioe) {
+			resource.load(inputStream, loadOptions);
+		} catch (IOException ioe) {
 			return null;
 		}
 		return resource;
@@ -115,83 +176,108 @@ public class OclResourceUtil {
 	/**
 	 * Returns the root element of the resource with the given URI.
 	 */
-	public static org.eclipse.emf.ecore.EObject getResourceContent(org.eclipse.emf.common.util.URI uri) {
+	public static EObject getResourceContent(URI uri) {
 		return getResourceContent(uri, null);
 	}
 	
 	/**
 	 * Returns the root element of the resource with the given URI.
 	 */
-	public static org.eclipse.emf.ecore.EObject getResourceContent(org.eclipse.emf.common.util.URI uri, java.util.Map<?,?> options) {
-		org.eclipse.emf.ecore.resource.Resource resource = getResource(uri, options);
+	public static EObject getResourceContent(URI uri, Map<?,?> options) {
+		Resource resource = getResource(uri, options);
 		if (resource == null) {
 			return null;
 		}
-		java.util.List<org.eclipse.emf.ecore.EObject> contents = resource.getContents();
+		List<EObject> contents = resource.getContents();
 		if (contents == null || contents.isEmpty()) {
 			return null;
 		}
-		org.eclipse.emf.ecore.EObject root = contents.get(0);
-		return (org.eclipse.emf.ecore.EObject) root;
+		EObject root = contents.get(0);
+		return (EObject) root;
 	}
 	
 	/**
 	 * Returns the root element after parsing the given text.
 	 */
-	public static org.eclipse.emf.ecore.EObject getResourceContent(String text) {
-		org.eclipse.emf.ecore.resource.Resource resource = getResource(text);
+	public static EObject getResourceContent(String text) {
+		return (EObject) getResourceContent(text, null);
+	}
+	
+	/**
+	 * Returns the root element after parsing the given text assuming the specified
+	 * EClass as start rule.
+	 */
+	public static EObject getResourceContent(String text, EClass startEClass) {
+		Map<Object, Object> loadOptions = new LinkedHashMap<Object, Object>();
+		
+		if (startEClass != null) {
+			loadOptions.put(org.dresdenocl.language.ocl.resource.ocl.IOclOptions.RESOURCE_CONTENT_TYPE, startEClass);
+		}
+		
+		Resource resource = getResource(text.getBytes(), new ResourceSetImpl(), loadOptions);
+		
 		if (resource == null) {
 			return null;
 		}
-		java.util.List<org.eclipse.emf.ecore.EObject> contents = resource.getContents();
+		List<EObject> contents = resource.getContents();
 		if (contents == null || contents.isEmpty()) {
 			return null;
 		}
-		org.eclipse.emf.ecore.EObject root = contents.get(0);
-		return (org.eclipse.emf.ecore.EObject) root;
+		EObject root = contents.get(0);
+		return (EObject) root;
 	}
 	
-	public static void saveResource(java.io.File file, org.eclipse.emf.ecore.resource.Resource resource) throws java.io.IOException {
-		java.util.Map<?, ?> options = java.util.Collections.EMPTY_MAP;
-		java.io.OutputStream outputStream = new java.io.FileOutputStream(file);
+	public static void saveResource(File file, Resource resource) throws IOException {
+		Map<?, ?> options = Collections.EMPTY_MAP;
+		OutputStream outputStream = new FileOutputStream(file);
 		resource.save(outputStream, options);
 		outputStream.close();
 	}
 	
-	public static String getText(org.eclipse.emf.ecore.EObject eObject) {
+	public static String getText(EObject eObject) {
 		org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation metaInformation = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation();
 		metaInformation.registerResourceFactory();
-		org.eclipse.emf.ecore.resource.ResourceSet rs = null;
-		org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource = (org.dresdenocl.language.ocl.resource.ocl.IOclTextResource) eObject.eResource();
+		ResourceSet rs = null;
+		org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource resource = (org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource) eObject.eResource();
 		if (resource != null) {
 			rs = resource.getResourceSet();
 		}
 		if (rs == null) {
-			rs = new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl();
+			rs = new ResourceSetImpl();
 		}
 		if (resource == null) {
-			org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createURI("temp." + metaInformation.getSyntaxName());
-			resource = (org.dresdenocl.language.ocl.resource.ocl.IOclTextResource) rs.createResource(uri);
+			URI uri = URI.createURI("temp." + metaInformation.getSyntaxName());
+			resource = (org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource) rs.createResource(uri);
 		}
-		java.io.ByteArrayOutputStream outputStream = new java.io.ByteArrayOutputStream();
+		// Convert layout information to EAdapters because the printer retrieves layout
+		// information from these adapters.
+		org.dresdenocl.language.ocl.resource.ocl.util.OclLayoutUtil layoutUtil = new org.dresdenocl.language.ocl.resource.ocl.util.OclLayoutUtil();
+		if (resource.isLayoutInformationRecordingEnabled()) {
+			layoutUtil.transferAllLayoutInformationFromModel(eObject);
+		}
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		org.dresdenocl.language.ocl.resource.ocl.IOclTextPrinter printer = metaInformation.createPrinter(outputStream, resource);
 		try {
 			printer.print(eObject);
-		} catch (java.io.IOException e) {
+		} catch (IOException e) {
 			return null;
+		}
+		// Move layout information from EAdapters back to the model.
+		if (resource.isLayoutInformationRecordingEnabled()) {
+			layoutUtil.transferAllLayoutInformationToModel(eObject);
 		}
 		return outputStream.toString();
 	}
 	
-	public static boolean containsErrors(org.eclipse.emf.ecore.resource.Resource resource) {
+	public static boolean containsErrors(Resource resource) {
 		return !resource.getErrors().isEmpty();
 	}
 	
-	public static boolean containsWarnings(org.eclipse.emf.ecore.resource.Resource resource) {
+	public static boolean containsWarnings(Resource resource) {
 		return !resource.getWarnings().isEmpty();
 	}
 	
-	public static boolean containsProblems(org.eclipse.emf.ecore.resource.Resource resource) {
+	public static boolean containsProblems(Resource resource) {
 		return containsErrors(resource) || containsWarnings(resource);
 	}
 	

@@ -6,7 +6,26 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.analysis;
 
-public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ecore.EObject, ReferenceType extends org.eclipse.emf.ecore.EObject> {
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature.Setting;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+
+public class OclDefaultResolverDelegate<ContainerType extends EObject, ReferenceType extends EObject> {
 	
 	private static class StringMatch {
 		
@@ -50,7 +69,7 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 	 * resolve proxy objects, which causes reference resolving to slow down
 	 * exponentially.
 	 */
-	private java.util.Set<org.eclipse.emf.ecore.EObject> referencedExternalObjects;
+	private Set<EObject> referencedExternalObjects;
 	
 	/**
 	 * We store the number of proxy objects that were present when
@@ -62,7 +81,7 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 	
 	private static org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation metaInformation = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation();
 	
-	private org.dresdenocl.language.ocl.resource.ocl.IOclNameProvider nameProvider = metaInformation.createNameProvider();
+	protected org.dresdenocl.language.ocl.resource.ocl.IOclNameProvider nameProvider = metaInformation.createNameProvider();
 	
 	/**
 	 * This standard implementation searches for objects in the resource, which have
@@ -70,11 +89,11 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 	 * matching object is found, the identifier is used as URI. If the resource at
 	 * this URI has a root element of the correct type, this element is returned.
 	 */
-	protected void resolve(String identifier, ContainerType container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> result) {
+	public void resolve(String identifier, ContainerType container, EReference reference, int position, boolean resolveFuzzy, org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> result) {
 		try {
-			org.eclipse.emf.ecore.EObject root = container;
+			EObject root = container;
 			if (!enableScoping) {
-				root = org.eclipse.emf.ecore.util.EcoreUtil.getRootContainer(container);
+				root = EcoreUtil.getRootContainer(container);
 			}
 			while (root != null) {
 				boolean continueSearch = tryToResolveIdentifierInObjectTree(identifier, container, root, reference, position, resolveFuzzy, result, !enableScoping);
@@ -85,8 +104,8 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 			}
 			boolean continueSearch = tryToResolveIdentifierAsURI(identifier, container, reference, position, resolveFuzzy, result);
 			if (continueSearch) {
-				java.util.Set<org.eclipse.emf.ecore.EObject> crossReferencedObjectsInOtherResource = findReferencedExternalObjects(container);
-				for (org.eclipse.emf.ecore.EObject externalObject : crossReferencedObjectsInOtherResource) {
+				Set<EObject> crossReferencedObjectsInOtherResource = findReferencedExternalObjects(container);
+				for (EObject externalObject : crossReferencedObjectsInOtherResource) {
 					continueSearch = tryToResolveIdentifierInObjectTree(identifier, container, externalObject, reference, position, resolveFuzzy, result, !enableScoping);
 					if (!continueSearch) {
 						return;
@@ -96,7 +115,7 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 			if (continueSearch) {
 				continueSearch = tryToResolveIdentifierInGenModelRegistry(identifier, container, reference, position, resolveFuzzy, result);
 			}
-		} catch (java.lang.RuntimeException rte) {
+		} catch (RuntimeException rte) {
 			// catch exception here to prevent EMF proxy resolution from swallowing it
 			rte.printStackTrace();
 		}
@@ -106,24 +125,24 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 	 * Returns all EObjects that are referenced by EObjects in the resource that
 	 * contains <code>object</code>, but that are located in different resources.
 	 */
-	protected java.util.Set<org.eclipse.emf.ecore.EObject> findReferencedExternalObjects(org.eclipse.emf.ecore.EObject object) {
-		org.eclipse.emf.ecore.EObject root = org.eclipse.emf.ecore.util.EcoreUtil.getRootContainer(object);
-		java.util.Map<org.eclipse.emf.ecore.EObject, java.util.Collection<org.eclipse.emf.ecore.EStructuralFeature.Setting>> proxies = org.eclipse.emf.ecore.util.EcoreUtil.ProxyCrossReferencer.find(root);
+	protected Set<EObject> findReferencedExternalObjects(EObject object) {
+		EObject root = EcoreUtil.getRootContainer(object);
+		Map<EObject, Collection<Setting>> proxies = EcoreUtil.ProxyCrossReferencer.find(root);
 		int proxyCount = 0;
-		for (java.util.Collection<org.eclipse.emf.ecore.EStructuralFeature.Setting> settings : proxies.values()) {
+		for (Collection<Setting> settings : proxies.values()) {
 			proxyCount += settings.size();
 		}
 		// Use the cache if it is still valid
 		if (referencedExternalObjects != null && oldProxyCount == proxyCount) {
 			return referencedExternalObjects;
 		}
-		referencedExternalObjects = new java.util.LinkedHashSet<org.eclipse.emf.ecore.EObject>();
+		referencedExternalObjects = new LinkedHashSet<EObject>();
 		oldProxyCount = proxyCount;
-		java.util.Set<org.eclipse.emf.ecore.EObject> referencedExternalObjects = new java.util.LinkedHashSet<org.eclipse.emf.ecore.EObject>();
+		Set<EObject> referencedExternalObjects = new LinkedHashSet<EObject>();
 		referencedExternalObjects.addAll(getExternalObjects(root.eCrossReferences(), object));
-		java.util.Iterator<org.eclipse.emf.ecore.EObject> eAllContents = root.eAllContents();
+		Iterator<EObject> eAllContents = root.eAllContents();
 		while (eAllContents.hasNext()) {
-			org.eclipse.emf.ecore.EObject next = eAllContents.next();
+			EObject next = eAllContents.next();
 			referencedExternalObjects.addAll(getExternalObjects(next.eCrossReferences(), object));
 		}
 		return referencedExternalObjects;
@@ -133,9 +152,9 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 	 * Returns all EObjects that are not contained in the same resource as the given
 	 * EObject.
 	 */
-	protected java.util.Set<org.eclipse.emf.ecore.EObject> getExternalObjects(java.util.Collection<org.eclipse.emf.ecore.EObject> objects, org.eclipse.emf.ecore.EObject object) {
-		java.util.Set<org.eclipse.emf.ecore.EObject> externalObjects = new java.util.LinkedHashSet<org.eclipse.emf.ecore.EObject>();
-		for (org.eclipse.emf.ecore.EObject next : objects) {
+	protected Set<EObject> getExternalObjects(Collection<EObject> objects, EObject object) {
+		Set<EObject> externalObjects = new LinkedHashSet<EObject>();
+		for (EObject next : objects) {
 			if (next.eResource() != object.eResource()) {
 				externalObjects.add(next);
 			}
@@ -150,8 +169,8 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 	 * resolvers which require to search in a particular scope for referenced
 	 * elements, rather than in the whole resource as done by resolve().
 	 */
-	protected boolean tryToResolveIdentifierInObjectTree(String identifier, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EObject root, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> result, boolean checkRootFirst) {
-		org.eclipse.emf.ecore.EClass type = reference.getEReferenceType();
+	protected boolean tryToResolveIdentifierInObjectTree(String identifier, EObject container, EObject root, EReference reference, int position, boolean resolveFuzzy, org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> result, boolean checkRootFirst) {
+		EClass type = reference.getEReferenceType();
 		boolean continueSearch;
 		if (checkRootFirst) {
 			// check whether the root element matches
@@ -161,8 +180,8 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 			}
 		}
 		// check the contents
-		for (java.util.Iterator<org.eclipse.emf.ecore.EObject> iterator = root.eAllContents(); iterator.hasNext(); ) {
-			org.eclipse.emf.ecore.EObject element = iterator.next();
+		for (Iterator<EObject> iterator = root.eAllContents(); iterator.hasNext(); ) {
+			EObject element = iterator.next();
 			continueSearch = checkElement(container, element, reference, position, type, identifier, resolveFuzzy, true, result);
 			if (!continueSearch) {
 				return false;
@@ -180,13 +199,13 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 		return true;
 	}
 	
-	protected boolean tryToResolveIdentifierAsURI(String identifier, ContainerType container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> result) {
-		org.eclipse.emf.ecore.EClass type = reference.getEReferenceType();
-		org.eclipse.emf.ecore.resource.Resource resource = container.eResource();
+	protected boolean tryToResolveIdentifierAsURI(String identifier, ContainerType container, EReference reference, int position, boolean resolveFuzzy, org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> result) {
+		EClass type = reference.getEReferenceType();
+		Resource resource = container.eResource();
 		if (resource != null) {
-			org.eclipse.emf.common.util.URI uri = getURI(identifier, resource.getURI());
+			URI uri = getURI(identifier, resource.getURI());
 			if (uri != null) {
-				org.eclipse.emf.ecore.EObject element = loadResource(container.eResource().getResourceSet(), uri);
+				EObject element = loadResource(container.eResource().getResourceSet(), uri);
 				if (element == null) {
 					return true;
 				}
@@ -197,22 +216,22 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 	}
 	
 	protected boolean tryToResolveIdentifierInGenModelRegistry(String identifier, ContainerType container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> result) {
-		org.eclipse.emf.ecore.EClass type = reference.getEReferenceType();
+		EClass type = reference.getEReferenceType();
 		
-		final java.util.Map<String, org.eclipse.emf.common.util.URI> packageNsURIToGenModelLocationMap = org.eclipse.emf.ecore.plugin.EcorePlugin.getEPackageNsURIToGenModelLocationMap();
+		final Map<String, URI> packageNsURIToGenModelLocationMap = EcorePlugin.getEPackageNsURIToGenModelLocationMap();
 		for (String nextNS : packageNsURIToGenModelLocationMap.keySet()) {
-			org.eclipse.emf.common.util.URI genModelURI = packageNsURIToGenModelLocationMap.get(nextNS);
+			URI genModelURI = packageNsURIToGenModelLocationMap.get(nextNS);
 			try {
-				final org.eclipse.emf.ecore.resource.ResourceSet rs = container.eResource().getResourceSet();
-				org.eclipse.emf.ecore.resource.Resource genModelResource = rs.getResource(genModelURI, true);
+				final ResourceSet rs = container.eResource().getResourceSet();
+				Resource genModelResource = rs.getResource(genModelURI, true);
 				if (genModelResource == null) {
 					continue;
 				}
-				final java.util.List<org.eclipse.emf.ecore.EObject> contents = genModelResource.getContents();
+				final List<EObject> contents = genModelResource.getContents();
 				if (contents == null || contents.size() == 0) {
 					continue;
 				}
-				org.eclipse.emf.ecore.EObject genModel = contents.get(0);
+				EObject genModel = contents.get(0);
 				boolean continueSearch = checkElement(container, genModel, reference, position, type, identifier, resolveFuzzy, false, result);
 				if (!continueSearch) {
 					return false;
@@ -224,7 +243,7 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 		return true;
 	}
 	
-	protected boolean checkElement(org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EObject element, org.eclipse.emf.ecore.EReference reference, int position, org.eclipse.emf.ecore.EClass type, String identifier, boolean resolveFuzzy, boolean checkStringWise, org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> result) {
+	protected boolean checkElement(EObject container, EObject element, EReference reference, int position, EClass type, String identifier, boolean resolveFuzzy, boolean checkStringWise, org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> result) {
 		if (element.eIsProxy()) {
 			return true;
 		}
@@ -245,13 +264,13 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 		if (exactMatch == null) {
 			String similarMatch = match.getSimilarMatch();
 			if (similarMatch != null) {
-				org.eclipse.emf.ecore.EObject oldTarget;
+				EObject oldTarget;
 				Object value = container.eGet(reference);
-				if (value instanceof java.util.List) {
-					java.util.List<?> list = (java.util.List<?>) container.eGet(reference);
-					oldTarget = (org.eclipse.emf.ecore.EObject) list.get(position);
+				if (value instanceof List) {
+					List<?> list = (List<?>) container.eGet(reference);
+					oldTarget = (EObject) list.get(position);
 				} else {
-					oldTarget = (org.eclipse.emf.ecore.EObject) container.eGet(reference, false);
+					oldTarget = (EObject) container.eGet(reference, false);
 				}
 				result.addQuickFix(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclChangeReferenceQuickFix("Replace with " + similarMatch, "IMG_TOOL_FORWARD", container, reference, oldTarget, element));
 			}
@@ -273,19 +292,20 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 	 * cannot do this cast strictly type safe, because type parameters are erased by
 	 * compilation. Thus, an instanceof check cannot be performed at runtime.
 	 */
-	@SuppressWarnings("unchecked")	
-	protected ReferenceType cast(org.eclipse.emf.ecore.EObject element) {
+	@SuppressWarnings("unchecked")
+	
+	protected ReferenceType cast(EObject element) {
 		return (ReferenceType) element;
 	}
 	
-	protected String produceDeResolveErrorMessage(org.eclipse.emf.ecore.EObject refObject, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference, org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource) {
+	protected String produceDeResolveErrorMessage(EObject refObject, EObject container, EReference reference, org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource) {
 		String msg = getClass().getSimpleName() + ": " + reference.getEType().getName() + " \"" + refObject.toString() + "\" not de-resolveable";
 		return msg;
 	}
 	
-	protected String deResolve(ReferenceType element, ContainerType container, org.eclipse.emf.ecore.EReference reference) {
-		/* TODO: Small hack: Find out why the original code does not work
-		org.eclipse.emf.ecore.resource.Resource elementResource = element.eResource();
+	protected String deResolve(ReferenceType element, ContainerType container, EReference reference) {
+		/*
+		Resource elementResource = element.eResource();
 		// For elements in external resources we return the resource URI instead of the
 		// name of the element.
 		if (elementResource != null && !elementResource.equals(container.eResource())) {
@@ -295,7 +315,7 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 		return getName(element);
 	}
 	
-	protected StringMatch matches(org.eclipse.emf.ecore.EObject element, String identifier, boolean matchFuzzy) {
+	protected StringMatch matches(EObject element, String identifier, boolean matchFuzzy) {
 		for (Object name : getNames(element)) {
 			StringMatch match = matches(identifier, name, matchFuzzy);
 			if (match.getExactMatch() != null) {
@@ -310,7 +330,7 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 	 * delegates all calls to a name provider, but previous custom implementation of
 	 * this class may have overridden this method.
 	 */
-	public java.util.List<String> getNames(org.eclipse.emf.ecore.EObject element) {
+	public List<String> getNames(EObject element) {
 		return nameProvider.getNames(element);
 	}
 	
@@ -331,10 +351,10 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 	
 	protected String getName(ReferenceType element) {
 		String deresolvedReference = null;
-		if (element instanceof org.eclipse.emf.ecore.EObject) {
-			org.eclipse.emf.ecore.EObject eObjectToDeResolve = (org.eclipse.emf.ecore.EObject) element;
+		if (element instanceof EObject) {
+			EObject eObjectToDeResolve = (EObject) element;
 			if (eObjectToDeResolve.eIsProxy()) {
-				deresolvedReference = ((org.eclipse.emf.ecore.InternalEObject) eObjectToDeResolve).eProxyURI().fragment();
+				deresolvedReference = ((InternalEObject) eObjectToDeResolve).eProxyURI().fragment();
 				// If the proxy was created by EMFText, we can try to recover the identifier from
 				// the proxy URI
 				if (deresolvedReference != null && deresolvedReference.startsWith(org.dresdenocl.language.ocl.resource.ocl.IOclContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX)) {
@@ -348,7 +368,7 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 		}
 		// if the referenced element was not a proxy, we try the same magic that was used
 		// while resolving elements to obtain names for elements
-		java.util.List<String> names = getNames(element);
+		List<String> names = getNames(element);
 		for (String name : names) {
 			if (name != null) {
 				return name;
@@ -357,50 +377,50 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 		return null;
 	}
 	
-	protected boolean hasCorrectEType(org.eclipse.emf.ecore.EObject element, org.eclipse.emf.ecore.EClass expectedTypeEClass) {
+	protected boolean hasCorrectEType(EObject element, EClass expectedTypeEClass) {
 		if (expectedTypeEClass.getInstanceClass() == null) {
 			return expectedTypeEClass.isInstance(element);
 		}
 		return hasCorrectType(element, expectedTypeEClass.getInstanceClass());
 	}
 	
-	protected boolean hasCorrectType(org.eclipse.emf.ecore.EObject element, Class<?> expectedTypeClass) {
+	protected boolean hasCorrectType(EObject element, Class<?> expectedTypeClass) {
 		return expectedTypeClass.isInstance(element);
 	}
 	
-	protected org.eclipse.emf.ecore.EObject loadResource(org.eclipse.emf.ecore.resource.ResourceSet resourceSet, org.eclipse.emf.common.util.URI uri) {
+	protected EObject loadResource(ResourceSet resourceSet, URI uri) {
 		try {
-			org.eclipse.emf.ecore.resource.Resource resource = resourceSet.getResource(uri, true);
-			org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.EObject> contents = resource.getContents();
+			Resource resource = resourceSet.getResource(uri, true);
+			EList<EObject> contents = resource.getContents();
 			if (contents.size() > 0) {
 				return contents.get(0);
 			}
-		} catch (java.lang.RuntimeException re) {
+		} catch (RuntimeException re) {
 			// do nothing here. if no resource can be loaded the uriString is probably not a
 			// valid resource URI
 		}
 		return null;
 	}
 	
-	protected org.eclipse.emf.common.util.URI getURI(String identifier, org.eclipse.emf.common.util.URI baseURI) {
+	protected URI getURI(String identifier, URI baseURI) {
 		if (identifier == null) {
 			return null;
 		}
 		try {
-			org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createURI(identifier);
+			URI uri = URI.createURI(identifier);
 			if (uri.isRelative()) {
 				uri = uri.resolve(baseURI);
 			}
 			return uri;
-		} catch (java.lang.IllegalArgumentException iae) {
+		} catch (IllegalArgumentException iae) {
 			// the identifier string is not a valid URI
 			return null;
 		}
 	}
 	
-	protected org.dresdenocl.language.ocl.resource.ocl.IOclReferenceCache getCache(org.eclipse.emf.ecore.EObject object) {
-		org.eclipse.emf.ecore.EObject root = org.eclipse.emf.ecore.util.EcoreUtil.getRootContainer(object);
-		org.eclipse.emf.common.notify.Adapter adapter = org.dresdenocl.language.ocl.resource.ocl.util.OclEObjectUtil.getEAdapter(root, org.dresdenocl.language.ocl.resource.ocl.analysis.OclReferenceCache.class);
+	protected org.dresdenocl.language.ocl.resource.ocl.IOclReferenceCache getCache(EObject object) {
+		EObject root = EcoreUtil.getRootContainer(object);
+		Adapter adapter = org.dresdenocl.language.ocl.resource.ocl.util.OclEObjectUtil.getEAdapter(root, org.dresdenocl.language.ocl.resource.ocl.analysis.OclReferenceCache.class);
 		org.dresdenocl.language.ocl.resource.ocl.analysis.OclReferenceCache cache = org.dresdenocl.language.ocl.resource.ocl.util.OclCastUtil.cast(adapter);
 		if (cache != null) {
 			return cache;

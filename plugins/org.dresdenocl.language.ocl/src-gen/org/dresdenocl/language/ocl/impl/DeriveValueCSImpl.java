@@ -21,22 +21,22 @@ import org.eclipse.emf.ecore.EClass;
  */
 public class DeriveValueCSImpl extends InitOrDeriveValueCSImpl implements DeriveValueCS {
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected DeriveValueCSImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-    return OclPackage.Literals.DERIVE_VALUE_CS;
-  }
+		return OclPackage.Literals.DERIVE_VALUE_CS;
+	}
 
 } //DeriveValueCSImpl

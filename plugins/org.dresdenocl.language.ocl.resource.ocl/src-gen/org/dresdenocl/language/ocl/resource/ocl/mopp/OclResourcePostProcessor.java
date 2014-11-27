@@ -6,6 +6,7 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
+
 public class OclResourcePostProcessor implements org.dresdenocl.language.ocl.resource.ocl.IOclResourcePostProcessor {
 	
 	public void process(org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource resource) {

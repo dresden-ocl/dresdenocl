@@ -22,22 +22,22 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  */
 public abstract class CollectionLiteralPartsCSImpl extends EObjectImpl implements CollectionLiteralPartsCS {
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected CollectionLiteralPartsCSImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-    return OclPackage.Literals.COLLECTION_LITERAL_PARTS_CS;
-  }
+		return OclPackage.Literals.COLLECTION_LITERAL_PARTS_CS;
+	}
 
 } //CollectionLiteralPartsCSImpl

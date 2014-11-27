@@ -6,6 +6,13 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.analysis;
 
+import java.util.ArrayList;
+import java.util.List;
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.EStructuralFeature;
+
 public class OclDefaultNameProvider implements org.dresdenocl.language.ocl.resource.ocl.IOclNameProvider {
 	
 	public final static String NAME_FEATURE = "name";
@@ -15,12 +22,12 @@ public class OclDefaultNameProvider implements org.dresdenocl.language.ocl.resou
 	 * element. This method can be overridden to customize the identification of
 	 * elements.
 	 */
-	public java.util.List<String> getNames(org.eclipse.emf.ecore.EObject element) {
-		java.util.List<String> names = new java.util.ArrayList<String>();
+	public List<String> getNames(EObject element) {
+		List<String> names = new ArrayList<String>();
 		
 		// first check for attributes that have set the ID flag to true
-		java.util.List<org.eclipse.emf.ecore.EAttribute> attributes = element.eClass().getEAllAttributes();
-		for (org.eclipse.emf.ecore.EAttribute attribute : attributes) {
+		List<EAttribute> attributes = element.eClass().getEAllAttributes();
+		for (EAttribute attribute : attributes) {
 			if (attribute.isID()) {
 				Object attributeValue = element.eGet(attribute);
 				if (attributeValue != null) {
@@ -30,15 +37,15 @@ public class OclDefaultNameProvider implements org.dresdenocl.language.ocl.resou
 		}
 		
 		// then check for an attribute that is called 'name'
-		org.eclipse.emf.ecore.EStructuralFeature nameAttr = element.eClass().getEStructuralFeature(NAME_FEATURE);
-		if (nameAttr instanceof org.eclipse.emf.ecore.EAttribute) {
+		EStructuralFeature nameAttr = element.eClass().getEStructuralFeature(NAME_FEATURE);
+		if (nameAttr instanceof EAttribute) {
 			Object attributeValue = element.eGet(nameAttr);
 			if (attributeValue != null) {
 				names.add(attributeValue.toString());
 			}
 		} else {
 			// try any other string attribute found
-			for (org.eclipse.emf.ecore.EAttribute attribute : attributes) {
+			for (EAttribute attribute : attributes) {
 				if ("java.lang.String".equals(attribute.getEType().getInstanceClassName())) {
 					Object attributeValue = element.eGet(attribute);
 					if (attributeValue != null) {
@@ -49,7 +56,7 @@ public class OclDefaultNameProvider implements org.dresdenocl.language.ocl.resou
 			
 			// try operations without arguments that return strings and which have a name that
 			// ends with 'name'
-			for (org.eclipse.emf.ecore.EOperation operation : element.eClass().getEAllOperations()) {
+			for (EOperation operation : element.eClass().getEAllOperations()) {
 				if (operation.getName().toLowerCase().endsWith(NAME_FEATURE) && operation.getEParameters().size() == 0) {
 					Object result = org.dresdenocl.language.ocl.resource.ocl.util.OclEObjectUtil.invokeOperation(element, operation);
 					if (result != null) {

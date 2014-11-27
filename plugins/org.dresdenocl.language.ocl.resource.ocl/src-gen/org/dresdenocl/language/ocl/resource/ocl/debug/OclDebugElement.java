@@ -6,6 +6,7 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.debug;
 
+
 public class OclDebugElement {
 	// The generator for this class is currently disabled by option
 	// 'disableDebugSupport' in the .cs file.

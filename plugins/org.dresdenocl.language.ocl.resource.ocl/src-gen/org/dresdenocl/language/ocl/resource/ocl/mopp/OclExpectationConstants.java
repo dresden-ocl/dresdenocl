@@ -6,6 +6,7 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
+
 /**
  * This class contains some constants that are used during code completion.
  */

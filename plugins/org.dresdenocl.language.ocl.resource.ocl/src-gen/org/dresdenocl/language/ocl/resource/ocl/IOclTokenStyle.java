@@ -6,6 +6,7 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl;
 
+
 /**
  * A common interface for token styles. Text resources must return style
  * information using classes that implement this interface.
@@ -27,6 +28,11 @@ public interface IOclTokenStyle {
 	 * Returns true if the token must be displayed in bold face.
 	 */
 	public boolean isBold();
+	
+	/**
+	 * Sets whether the token must be displayed in bold face.
+	 */
+	public void setBold(boolean bold);
 	
 	/**
 	 * Returns true if the token must be displayed in italic face.

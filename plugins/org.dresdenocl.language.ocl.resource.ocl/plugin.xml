@@ -45,6 +45,20 @@
 		</super>
 	</extension>
 	
+	<extension id="org.dresdenocl.language.ocl.resource.ocl.problem.batch_constraint_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.dresdenocl.language.ocl.resource.ocl.problem">
+		</super>
+	</extension>
+	
+	<extension id="org.dresdenocl.language.ocl.resource.ocl.problem.live_constraint_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.dresdenocl.language.ocl.resource.ocl.problem">
+		</super>
+	</extension>
+	
 	<extension id="org.dresdenocl.language.ocl.resource.ocl.problem.builder_error" name="EMFText Problem" point="org.eclipse.core.resources.markers">
 		<persistent value="true">
 		</persistent>
@@ -78,4 +92,5 @@
 	
 	<extension-point id="org.dresdenocl.language.ocl.resource.ocl.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd">
 	</extension-point>
+	
 </plugin>

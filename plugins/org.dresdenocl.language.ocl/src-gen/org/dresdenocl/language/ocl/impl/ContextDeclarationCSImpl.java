@@ -22,22 +22,22 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  */
 public abstract class ContextDeclarationCSImpl extends EObjectImpl implements ContextDeclarationCS {
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected ContextDeclarationCSImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-    return OclPackage.Literals.CONTEXT_DECLARATION_CS;
-  }
+		return OclPackage.Literals.CONTEXT_DECLARATION_CS;
+	}
 
 } //ContextDeclarationCSImpl

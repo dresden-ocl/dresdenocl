@@ -6,6 +6,7 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
+
 public class OclTokenStyleInformationProvider {
 	
 	public static String TASK_ITEM_TOKEN_NAME = "TASK_ITEM";

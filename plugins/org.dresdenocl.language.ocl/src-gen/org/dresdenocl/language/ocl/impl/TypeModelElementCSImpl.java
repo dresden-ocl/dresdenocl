@@ -26,154 +26,147 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class TypeModelElementCSImpl extends TypeCSImpl implements TypeModelElementCS {
 	/**
-   * The cached value of the '{@link #getModelElement() <em>Model Element</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getModelElement() <em>Model Element</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getModelElement()
-   * @generated
-   * @ordered
-   */
+	 * @see #getModelElement()
+	 * @generated
+	 * @ordered
+	 */
 	protected ModelElementCS modelElement;
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected TypeModelElementCSImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-    return OclPackage.Literals.TYPE_MODEL_ELEMENT_CS;
-  }
+		return OclPackage.Literals.TYPE_MODEL_ELEMENT_CS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public ModelElementCS getModelElement() {
-    return modelElement;
-  }
+		return modelElement;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public NotificationChain basicSetModelElement(ModelElementCS newModelElement, NotificationChain msgs) {
-    ModelElementCS oldModelElement = modelElement;
-    modelElement = newModelElement;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OclPackage.TYPE_MODEL_ELEMENT_CS__MODEL_ELEMENT, oldModelElement, newModelElement);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
+		ModelElementCS oldModelElement = modelElement;
+		modelElement = newModelElement;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OclPackage.TYPE_MODEL_ELEMENT_CS__MODEL_ELEMENT, oldModelElement, newModelElement);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public void setModelElement(ModelElementCS newModelElement) {
-    if (newModelElement != modelElement)
-    {
-      NotificationChain msgs = null;
-      if (modelElement != null)
-        msgs = ((InternalEObject)modelElement).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OclPackage.TYPE_MODEL_ELEMENT_CS__MODEL_ELEMENT, null, msgs);
-      if (newModelElement != null)
-        msgs = ((InternalEObject)newModelElement).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OclPackage.TYPE_MODEL_ELEMENT_CS__MODEL_ELEMENT, null, msgs);
-      msgs = basicSetModelElement(newModelElement, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.TYPE_MODEL_ELEMENT_CS__MODEL_ELEMENT, newModelElement, newModelElement));
-  }
+		if (newModelElement != modelElement) {
+			NotificationChain msgs = null;
+			if (modelElement != null)
+				msgs = ((InternalEObject)modelElement).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OclPackage.TYPE_MODEL_ELEMENT_CS__MODEL_ELEMENT, null, msgs);
+			if (newModelElement != null)
+				msgs = ((InternalEObject)newModelElement).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OclPackage.TYPE_MODEL_ELEMENT_CS__MODEL_ELEMENT, null, msgs);
+			msgs = basicSetModelElement(newModelElement, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.TYPE_MODEL_ELEMENT_CS__MODEL_ELEMENT, newModelElement, newModelElement));
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-    switch (featureID)
-    {
-      case OclPackage.TYPE_MODEL_ELEMENT_CS__MODEL_ELEMENT:
-        return basicSetModelElement(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+		switch (featureID) {
+			case OclPackage.TYPE_MODEL_ELEMENT_CS__MODEL_ELEMENT:
+				return basicSetModelElement(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID)
-    {
-      case OclPackage.TYPE_MODEL_ELEMENT_CS__MODEL_ELEMENT:
-        return getModelElement();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case OclPackage.TYPE_MODEL_ELEMENT_CS__MODEL_ELEMENT:
+				return getModelElement();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-    switch (featureID)
-    {
-      case OclPackage.TYPE_MODEL_ELEMENT_CS__MODEL_ELEMENT:
-        setModelElement((ModelElementCS)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case OclPackage.TYPE_MODEL_ELEMENT_CS__MODEL_ELEMENT:
+				setModelElement((ModelElementCS)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public void eUnset(int featureID) {
-    switch (featureID)
-    {
-      case OclPackage.TYPE_MODEL_ELEMENT_CS__MODEL_ELEMENT:
-        setModelElement((ModelElementCS)null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case OclPackage.TYPE_MODEL_ELEMENT_CS__MODEL_ELEMENT:
+				setModelElement((ModelElementCS)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-    switch (featureID)
-    {
-      case OclPackage.TYPE_MODEL_ELEMENT_CS__MODEL_ELEMENT:
-        return modelElement != null;
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case OclPackage.TYPE_MODEL_ELEMENT_CS__MODEL_ELEMENT:
+				return modelElement != null;
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //TypeModelElementCSImpl

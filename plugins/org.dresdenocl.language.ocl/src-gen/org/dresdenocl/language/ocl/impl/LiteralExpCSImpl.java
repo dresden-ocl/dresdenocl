@@ -21,22 +21,22 @@ import org.eclipse.emf.ecore.EClass;
  */
 public abstract class LiteralExpCSImpl extends OclExpressionCSImpl implements LiteralExpCS {
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected LiteralExpCSImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-    return OclPackage.Literals.LITERAL_EXP_CS;
-  }
+		return OclPackage.Literals.LITERAL_EXP_CS;
+	}
 
 } //LiteralExpCSImpl

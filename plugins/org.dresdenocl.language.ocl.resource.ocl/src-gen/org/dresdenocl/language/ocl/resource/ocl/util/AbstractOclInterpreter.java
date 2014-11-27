@@ -6,6 +6,127 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.util;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.EmptyStackException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Stack;
+import org.dresdenocl.language.ocl.AdditiveOperationCallExpCS;
+import org.dresdenocl.language.ocl.AttributeContextDeclarationCS;
+import org.dresdenocl.language.ocl.BodyDeclarationCS;
+import org.dresdenocl.language.ocl.BooleanLiteralExpCS;
+import org.dresdenocl.language.ocl.BracketExpCS;
+import org.dresdenocl.language.ocl.CallExpCS;
+import org.dresdenocl.language.ocl.ClassifierContextDeclarationCS;
+import org.dresdenocl.language.ocl.CollectionLiteralExpCS;
+import org.dresdenocl.language.ocl.CollectionLiteralPartsCS;
+import org.dresdenocl.language.ocl.CollectionLiteralPartsOclExpCS;
+import org.dresdenocl.language.ocl.CollectionRangeCS;
+import org.dresdenocl.language.ocl.CollectionTypeIdentifierCS;
+import org.dresdenocl.language.ocl.CollectionTypeLiteralExpCS;
+import org.dresdenocl.language.ocl.ContextDeclarationCS;
+import org.dresdenocl.language.ocl.DefinitionExpCS;
+import org.dresdenocl.language.ocl.DefinitionExpOperationCS;
+import org.dresdenocl.language.ocl.DefinitionExpPartCS;
+import org.dresdenocl.language.ocl.DefinitionExpPropertyCS;
+import org.dresdenocl.language.ocl.DeriveValueCS;
+import org.dresdenocl.language.ocl.EqualityOperationCallExpCS;
+import org.dresdenocl.language.ocl.FeatureCallExpCS;
+import org.dresdenocl.language.ocl.IfExpCS;
+import org.dresdenocl.language.ocl.ImplicitFeatureCallCS;
+import org.dresdenocl.language.ocl.ImplicitOperationCallCS;
+import org.dresdenocl.language.ocl.ImplicitPropertyCallCS;
+import org.dresdenocl.language.ocl.InitOrDeriveValueCS;
+import org.dresdenocl.language.ocl.InitValueCS;
+import org.dresdenocl.language.ocl.IntegerLiteralExpCS;
+import org.dresdenocl.language.ocl.InvalidLiteralExpCS;
+import org.dresdenocl.language.ocl.InvariantExpCS;
+import org.dresdenocl.language.ocl.InvariantOrDefinitionCS;
+import org.dresdenocl.language.ocl.IterateExpCS;
+import org.dresdenocl.language.ocl.IteratorExpCS;
+import org.dresdenocl.language.ocl.IteratorExpVariableCS;
+import org.dresdenocl.language.ocl.LetExpCS;
+import org.dresdenocl.language.ocl.LiteralExpCS;
+import org.dresdenocl.language.ocl.LogicalAndOperationCallExpCS;
+import org.dresdenocl.language.ocl.LogicalImpliesOperationCallExpCS;
+import org.dresdenocl.language.ocl.LogicalNotOperationCallExpCS;
+import org.dresdenocl.language.ocl.LogicalOrOperationCallExpCS;
+import org.dresdenocl.language.ocl.LogicalXorOperationCallExpCS;
+import org.dresdenocl.language.ocl.LoopExpCS;
+import org.dresdenocl.language.ocl.ModelElementCS;
+import org.dresdenocl.language.ocl.MultOperationCallExpCS;
+import org.dresdenocl.language.ocl.NamedElementCS;
+import org.dresdenocl.language.ocl.NavigationCallExp;
+import org.dresdenocl.language.ocl.NullLiteralExpCS;
+import org.dresdenocl.language.ocl.OclExpressionCS;
+import org.dresdenocl.language.ocl.OperationCallBaseExpCS;
+import org.dresdenocl.language.ocl.OperationCallBinaryExpCS;
+import org.dresdenocl.language.ocl.OperationCallExpCS;
+import org.dresdenocl.language.ocl.OperationCallOnSelfExpCS;
+import org.dresdenocl.language.ocl.OperationCallWithImlicitSourceExpCS;
+import org.dresdenocl.language.ocl.OperationCallWithSourceExpCS;
+import org.dresdenocl.language.ocl.OperationContextDeclarationCS;
+import org.dresdenocl.language.ocl.OperationDefinitionCS;
+import org.dresdenocl.language.ocl.OperationDefinitionInContextCS;
+import org.dresdenocl.language.ocl.OperationDefinitionInDefCS;
+import org.dresdenocl.language.ocl.PackageDeclarationCS;
+import org.dresdenocl.language.ocl.PackageDeclarationNestedNamespaceCS;
+import org.dresdenocl.language.ocl.PackageDeclarationWithNamespaceCS;
+import org.dresdenocl.language.ocl.PackageDeclarationWithoutNamespaceCS;
+import org.dresdenocl.language.ocl.ParameterCS;
+import org.dresdenocl.language.ocl.PathNameCS;
+import org.dresdenocl.language.ocl.PathNamePathCS;
+import org.dresdenocl.language.ocl.PathNameSimpleCS;
+import org.dresdenocl.language.ocl.PostConditionDeclarationCS;
+import org.dresdenocl.language.ocl.PreConditionDeclarationCS;
+import org.dresdenocl.language.ocl.PrePostOrBodyDeclarationCS;
+import org.dresdenocl.language.ocl.PrimitiveLiteralExpCS;
+import org.dresdenocl.language.ocl.PropertyCallBaseExpCS;
+import org.dresdenocl.language.ocl.PropertyCallExpCS;
+import org.dresdenocl.language.ocl.PropertyCallExplicitPathExpCS;
+import org.dresdenocl.language.ocl.PropertyCallOnSelfExpCS;
+import org.dresdenocl.language.ocl.RealLiteralExpCS;
+import org.dresdenocl.language.ocl.RelationalOperationCallExpCS;
+import org.dresdenocl.language.ocl.SimpleNameCS;
+import org.dresdenocl.language.ocl.StaticOperationCallExpCS;
+import org.dresdenocl.language.ocl.StringLiteralExpCS;
+import org.dresdenocl.language.ocl.TupleLiteralExpCS;
+import org.dresdenocl.language.ocl.TupleTypeCS;
+import org.dresdenocl.language.ocl.TupleTypeLiteralExpCS;
+import org.dresdenocl.language.ocl.TypeCS;
+import org.dresdenocl.language.ocl.TypeModelElementCS;
+import org.dresdenocl.language.ocl.UnaryOperationCallExpCS;
+import org.dresdenocl.language.ocl.UnreservedSimpleNameCS;
+import org.dresdenocl.language.ocl.VariableDeclarationCS;
+import org.dresdenocl.language.ocl.VariableDeclarationWithInitCS;
+import org.dresdenocl.language.ocl.VariableDeclarationWithInitListCS;
+import org.dresdenocl.language.ocl.VariableDeclarationWithoutInitCS;
+import org.dresdenocl.language.ocl.VariableDeclarationWithoutInitListCS;
+import org.dresdenocl.pivotmodel.AssociationProperty;
+import org.dresdenocl.pivotmodel.ComplexGenericType;
+import org.dresdenocl.pivotmodel.ConstrainableElement;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.pivotmodel.Enumeration;
+import org.dresdenocl.pivotmodel.EnumerationLiteral;
+import org.dresdenocl.pivotmodel.Expression;
+import org.dresdenocl.pivotmodel.Feature;
+import org.dresdenocl.pivotmodel.GenericElement;
+import org.dresdenocl.pivotmodel.GenericType;
+import org.dresdenocl.pivotmodel.NamedElement;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.Parameter;
+import org.dresdenocl.pivotmodel.ParameterGenericType;
+import org.dresdenocl.pivotmodel.PrimitiveType;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.TypeArgument;
+import org.dresdenocl.pivotmodel.TypeParameter;
+import org.dresdenocl.pivotmodel.TypedElement;
+import org.eclipse.emf.ecore.EObject;
+
 /**
  * This class provides basic infrastructure to interpret models. To implement
  * concrete interpreters, subclass this abstract interpreter and override the
@@ -20,19 +141,19 @@ package org.dresdenocl.language.ocl.resource.ocl.util;
  */
 public class AbstractOclInterpreter<ResultType, ContextType> {
 	
-	private java.util.Stack<org.eclipse.emf.ecore.EObject> interpretationStack = new java.util.Stack<org.eclipse.emf.ecore.EObject>();
-	private java.util.List<org.dresdenocl.language.ocl.resource.ocl.IOclInterpreterListener> listeners = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.IOclInterpreterListener>();
-	private org.eclipse.emf.ecore.EObject nextObjectToInterprete;
-	private Object currentContext;
+	private Stack<EObject> interpretationStack = new Stack<EObject>();
+	private List<org.dresdenocl.language.ocl.resource.ocl.IOclInterpreterListener> listeners = new ArrayList<org.dresdenocl.language.ocl.resource.ocl.IOclInterpreterListener>();
+	private EObject nextObjectToInterprete;
+	private ContextType currentContext;
 	
 	public ResultType interprete(ContextType context) {
 		ResultType result = null;
-		org.eclipse.emf.ecore.EObject next = null;
+		EObject next = null;
 		currentContext = context;
 		while (!interpretationStack.empty()) {
 			try {
 				next = interpretationStack.pop();
-			} catch (java.util.EmptyStackException ese) {
+			} catch (EmptyStackException ese) {
 				// this can happen when the interpreter was terminated between the call to empty()
 				// and pop()
 				break;
@@ -56,7 +177,7 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 		return true;
 	}
 	
-	public ResultType interprete(org.eclipse.emf.ecore.EObject object, ContextType context) {
+	public ResultType interprete(EObject object, ContextType context) {
 		ResultType result = null;
 		if (object instanceof org.dresdenocl.language.ocl.BracketExpCS) {
 			result = interprete_org_dresdenocl_language_ocl_BracketExpCS((org.dresdenocl.language.ocl.BracketExpCS) object, context);
@@ -244,6 +365,66 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 		if (result != null) {
 			return result;
 		}
+		if (object instanceof org.dresdenocl.language.ocl.FeatureCallExpCS) {
+			result = interprete_org_dresdenocl_language_ocl_FeatureCallExpCS((org.dresdenocl.language.ocl.FeatureCallExpCS) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
+		if (object instanceof org.dresdenocl.language.ocl.ImplicitOperationCallCS) {
+			result = interprete_org_dresdenocl_language_ocl_ImplicitOperationCallCS((org.dresdenocl.language.ocl.ImplicitOperationCallCS) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
+		if (object instanceof org.dresdenocl.language.ocl.OperationCallBaseExpCS) {
+			result = interprete_org_dresdenocl_language_ocl_OperationCallBaseExpCS((org.dresdenocl.language.ocl.OperationCallBaseExpCS) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
+		if (object instanceof org.dresdenocl.language.ocl.ImplicitPropertyCallCS) {
+			result = interprete_org_dresdenocl_language_ocl_ImplicitPropertyCallCS((org.dresdenocl.language.ocl.ImplicitPropertyCallCS) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
+		if (object instanceof org.dresdenocl.language.ocl.PropertyCallBaseExpCS) {
+			result = interprete_org_dresdenocl_language_ocl_PropertyCallBaseExpCS((org.dresdenocl.language.ocl.PropertyCallBaseExpCS) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
+		if (object instanceof org.dresdenocl.language.ocl.ImplicitFeatureCallCS) {
+			result = interprete_org_dresdenocl_language_ocl_ImplicitFeatureCallCS((org.dresdenocl.language.ocl.ImplicitFeatureCallCS) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
+		if (object instanceof org.dresdenocl.language.ocl.PropertyCallOnSelfExpCS) {
+			result = interprete_org_dresdenocl_language_ocl_PropertyCallOnSelfExpCS((org.dresdenocl.language.ocl.PropertyCallOnSelfExpCS) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
+		if (object instanceof org.dresdenocl.language.ocl.PropertyCallExplicitPathExpCS) {
+			result = interprete_org_dresdenocl_language_ocl_PropertyCallExplicitPathExpCS((org.dresdenocl.language.ocl.PropertyCallExplicitPathExpCS) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
+		if (object instanceof org.dresdenocl.language.ocl.PropertyCallExpCS) {
+			result = interprete_org_dresdenocl_language_ocl_PropertyCallExpCS((org.dresdenocl.language.ocl.PropertyCallExpCS) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
+		if (object instanceof org.dresdenocl.language.ocl.OperationCallOnSelfExpCS) {
+			result = interprete_org_dresdenocl_language_ocl_OperationCallOnSelfExpCS((org.dresdenocl.language.ocl.OperationCallOnSelfExpCS) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
 		if (object instanceof org.dresdenocl.language.ocl.StaticOperationCallExpCS) {
 			result = interprete_org_dresdenocl_language_ocl_StaticOperationCallExpCS((org.dresdenocl.language.ocl.StaticOperationCallExpCS) object, context);
 		}
@@ -324,66 +505,6 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 		}
 		if (object instanceof org.dresdenocl.language.ocl.OperationCallWithImlicitSourceExpCS) {
 			result = interprete_org_dresdenocl_language_ocl_OperationCallWithImlicitSourceExpCS((org.dresdenocl.language.ocl.OperationCallWithImlicitSourceExpCS) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.dresdenocl.language.ocl.FeatureCallExpCS) {
-			result = interprete_org_dresdenocl_language_ocl_FeatureCallExpCS((org.dresdenocl.language.ocl.FeatureCallExpCS) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.dresdenocl.language.ocl.OperationCallBaseExpCS) {
-			result = interprete_org_dresdenocl_language_ocl_OperationCallBaseExpCS((org.dresdenocl.language.ocl.OperationCallBaseExpCS) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.dresdenocl.language.ocl.ImplicitPropertyCallCS) {
-			result = interprete_org_dresdenocl_language_ocl_ImplicitPropertyCallCS((org.dresdenocl.language.ocl.ImplicitPropertyCallCS) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.dresdenocl.language.ocl.PropertyCallBaseExpCS) {
-			result = interprete_org_dresdenocl_language_ocl_PropertyCallBaseExpCS((org.dresdenocl.language.ocl.PropertyCallBaseExpCS) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.dresdenocl.language.ocl.ImplicitOperationCallCS) {
-			result = interprete_org_dresdenocl_language_ocl_ImplicitOperationCallCS((org.dresdenocl.language.ocl.ImplicitOperationCallCS) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.dresdenocl.language.ocl.ImplicitFeatureCallCS) {
-			result = interprete_org_dresdenocl_language_ocl_ImplicitFeatureCallCS((org.dresdenocl.language.ocl.ImplicitFeatureCallCS) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.dresdenocl.language.ocl.PropertyCallOnSelfExpCS) {
-			result = interprete_org_dresdenocl_language_ocl_PropertyCallOnSelfExpCS((org.dresdenocl.language.ocl.PropertyCallOnSelfExpCS) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.dresdenocl.language.ocl.PropertyCallExplicitPathExpCS) {
-			result = interprete_org_dresdenocl_language_ocl_PropertyCallExplicitPathExpCS((org.dresdenocl.language.ocl.PropertyCallExplicitPathExpCS) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.dresdenocl.language.ocl.PropertyCallExpCS) {
-			result = interprete_org_dresdenocl_language_ocl_PropertyCallExpCS((org.dresdenocl.language.ocl.PropertyCallExpCS) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.dresdenocl.language.ocl.OperationCallOnSelfExpCS) {
-			result = interprete_org_dresdenocl_language_ocl_OperationCallOnSelfExpCS((org.dresdenocl.language.ocl.OperationCallOnSelfExpCS) object, context);
 		}
 		if (result != null) {
 			return result;
@@ -604,6 +725,18 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 		if (result != null) {
 			return result;
 		}
+		if (object instanceof org.dresdenocl.pivotmodel.Property) {
+			result = interprete_org_dresdenocl_pivotmodel_Property((org.dresdenocl.pivotmodel.Property) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
+		if (object instanceof org.dresdenocl.pivotmodel.Operation) {
+			result = interprete_org_dresdenocl_pivotmodel_Operation((org.dresdenocl.pivotmodel.Operation) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
 		if (object instanceof org.dresdenocl.pivotmodel.Feature) {
 			result = interprete_org_dresdenocl_pivotmodel_Feature((org.dresdenocl.pivotmodel.Feature) object, context);
 		}
@@ -612,6 +745,12 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 		}
 		if (object instanceof org.dresdenocl.pivotmodel.TypedElement) {
 			result = interprete_org_dresdenocl_pivotmodel_TypedElement((org.dresdenocl.pivotmodel.TypedElement) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
+		if (object instanceof org.dresdenocl.pivotmodel.Namespace) {
+			result = interprete_org_dresdenocl_pivotmodel_Namespace((org.dresdenocl.pivotmodel.Namespace) object, context);
 		}
 		if (result != null) {
 			return result;
@@ -628,6 +767,12 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 		if (result != null) {
 			return result;
 		}
+		if (object instanceof org.dresdenocl.pivotmodel.Type) {
+			result = interprete_org_dresdenocl_pivotmodel_Type((org.dresdenocl.pivotmodel.Type) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
 		if (object instanceof org.dresdenocl.pivotmodel.GenericElement) {
 			result = interprete_org_dresdenocl_pivotmodel_GenericElement((org.dresdenocl.pivotmodel.GenericElement) object, context);
 		}
@@ -636,18 +781,6 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 		}
 		if (object instanceof org.dresdenocl.pivotmodel.EnumerationLiteral) {
 			result = interprete_org_dresdenocl_pivotmodel_EnumerationLiteral((org.dresdenocl.pivotmodel.EnumerationLiteral) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.dresdenocl.pivotmodel.Property) {
-			result = interprete_org_dresdenocl_pivotmodel_Property((org.dresdenocl.pivotmodel.Property) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.dresdenocl.pivotmodel.Operation) {
-			result = interprete_org_dresdenocl_pivotmodel_Operation((org.dresdenocl.pivotmodel.Operation) object, context);
 		}
 		if (result != null) {
 			return result;
@@ -676,12 +809,6 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 		if (result != null) {
 			return result;
 		}
-		if (object instanceof org.dresdenocl.pivotmodel.TypeParameter) {
-			result = interprete_org_dresdenocl_pivotmodel_TypeParameter((org.dresdenocl.pivotmodel.TypeParameter) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
 		if (object instanceof org.dresdenocl.pivotmodel.TypeArgument) {
 			result = interprete_org_dresdenocl_pivotmodel_TypeArgument((org.dresdenocl.pivotmodel.TypeArgument) object, context);
 		}
@@ -690,6 +817,12 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 		}
 		if (object instanceof org.dresdenocl.pivotmodel.Constraint) {
 			result = interprete_org_dresdenocl_pivotmodel_Constraint((org.dresdenocl.pivotmodel.Constraint) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
+		if (object instanceof org.dresdenocl.pivotmodel.AssociationProperty) {
+			result = interprete_org_dresdenocl_pivotmodel_AssociationProperty((org.dresdenocl.pivotmodel.AssociationProperty) object, context);
 		}
 		if (result != null) {
 			return result;
@@ -706,14 +839,8 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 		if (result != null) {
 			return result;
 		}
-		if (object instanceof org.dresdenocl.pivotmodel.Namespace) {
-			result = interprete_org_dresdenocl_pivotmodel_Namespace((org.dresdenocl.pivotmodel.Namespace) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.dresdenocl.pivotmodel.Type) {
-			result = interprete_org_dresdenocl_pivotmodel_Type((org.dresdenocl.pivotmodel.Type) object, context);
+		if (object instanceof org.dresdenocl.pivotmodel.TypeParameter) {
+			result = interprete_org_dresdenocl_pivotmodel_TypeParameter((org.dresdenocl.pivotmodel.TypeParameter) object, context);
 		}
 		if (result != null) {
 			return result;
@@ -724,464 +851,458 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 		if (result != null) {
 			return result;
 		}
-		if (object instanceof org.dresdenocl.pivotmodel.AssociationProperty) {
-			result = interprete_org_dresdenocl_pivotmodel_AssociationProperty((org.dresdenocl.pivotmodel.AssociationProperty) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
 		return result;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_OclExpressionCS(org.dresdenocl.language.ocl.OclExpressionCS oclExpressionCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_OclExpressionCS(OclExpressionCS oclExpressionCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_BracketExpCS(org.dresdenocl.language.ocl.BracketExpCS bracketExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_BracketExpCS(BracketExpCS bracketExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_ModelElementCS(org.dresdenocl.language.ocl.ModelElementCS modelElementCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_ModelElementCS(ModelElementCS modelElementCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_PathNameCS(org.dresdenocl.language.ocl.PathNameCS pathNameCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_PathNameCS(PathNameCS pathNameCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_PathNameSimpleCS(org.dresdenocl.language.ocl.PathNameSimpleCS pathNameSimpleCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_PathNameSimpleCS(PathNameSimpleCS pathNameSimpleCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_PathNamePathCS(org.dresdenocl.language.ocl.PathNamePathCS pathNamePathCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_PathNamePathCS(PathNamePathCS pathNamePathCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_UnreservedSimpleNameCS(org.dresdenocl.language.ocl.UnreservedSimpleNameCS unreservedSimpleNameCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_UnreservedSimpleNameCS(UnreservedSimpleNameCS unreservedSimpleNameCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_NamedElementCS(org.dresdenocl.language.ocl.NamedElementCS namedElementCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_NamedElementCS(NamedElementCS namedElementCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_SimpleNameCS(org.dresdenocl.language.ocl.SimpleNameCS simpleNameCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_SimpleNameCS(SimpleNameCS simpleNameCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_TypeCS(org.dresdenocl.language.ocl.TypeCS typeCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_TypeCS(TypeCS typeCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_TypeModelElementCS(org.dresdenocl.language.ocl.TypeModelElementCS typeModelElementCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_TypeModelElementCS(TypeModelElementCS typeModelElementCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_TupleTypeCS(org.dresdenocl.language.ocl.TupleTypeCS tupleTypeCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_TupleTypeCS(TupleTypeCS tupleTypeCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_CollectionTypeLiteralExpCS(org.dresdenocl.language.ocl.CollectionTypeLiteralExpCS collectionTypeLiteralExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_CollectionTypeLiteralExpCS(CollectionTypeLiteralExpCS collectionTypeLiteralExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_TupleTypeLiteralExpCS(org.dresdenocl.language.ocl.TupleTypeLiteralExpCS tupleTypeLiteralExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_TupleTypeLiteralExpCS(TupleTypeLiteralExpCS tupleTypeLiteralExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_VariableDeclarationCS(org.dresdenocl.language.ocl.VariableDeclarationCS variableDeclarationCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_VariableDeclarationCS(VariableDeclarationCS variableDeclarationCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_VariableDeclarationWithInitCS(org.dresdenocl.language.ocl.VariableDeclarationWithInitCS variableDeclarationWithInitCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_VariableDeclarationWithInitCS(VariableDeclarationWithInitCS variableDeclarationWithInitCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_VariableDeclarationWithoutInitCS(org.dresdenocl.language.ocl.VariableDeclarationWithoutInitCS variableDeclarationWithoutInitCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_VariableDeclarationWithoutInitCS(VariableDeclarationWithoutInitCS variableDeclarationWithoutInitCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_VariableDeclarationWithInitListCS(org.dresdenocl.language.ocl.VariableDeclarationWithInitListCS variableDeclarationWithInitListCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_VariableDeclarationWithInitListCS(VariableDeclarationWithInitListCS variableDeclarationWithInitListCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_VariableDeclarationWithoutInitListCS(org.dresdenocl.language.ocl.VariableDeclarationWithoutInitListCS variableDeclarationWithoutInitListCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_VariableDeclarationWithoutInitListCS(VariableDeclarationWithoutInitListCS variableDeclarationWithoutInitListCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_LiteralExpCS(org.dresdenocl.language.ocl.LiteralExpCS literalExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_LiteralExpCS(LiteralExpCS literalExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_CollectionLiteralExpCS(org.dresdenocl.language.ocl.CollectionLiteralExpCS collectionLiteralExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_CollectionLiteralExpCS(CollectionLiteralExpCS collectionLiteralExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_CollectionTypeIdentifierCS(org.dresdenocl.language.ocl.CollectionTypeIdentifierCS collectionTypeIdentifierCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_CollectionTypeIdentifierCS(CollectionTypeIdentifierCS collectionTypeIdentifierCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_CollectionLiteralPartsCS(org.dresdenocl.language.ocl.CollectionLiteralPartsCS collectionLiteralPartsCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_CollectionLiteralPartsCS(CollectionLiteralPartsCS collectionLiteralPartsCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_CollectionLiteralPartsOclExpCS(org.dresdenocl.language.ocl.CollectionLiteralPartsOclExpCS collectionLiteralPartsOclExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_CollectionLiteralPartsOclExpCS(CollectionLiteralPartsOclExpCS collectionLiteralPartsOclExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_CollectionRangeCS(org.dresdenocl.language.ocl.CollectionRangeCS collectionRangeCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_CollectionRangeCS(CollectionRangeCS collectionRangeCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_CallExpCS(org.dresdenocl.language.ocl.CallExpCS callExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_CallExpCS(CallExpCS callExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_LoopExpCS(org.dresdenocl.language.ocl.LoopExpCS loopExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_LoopExpCS(LoopExpCS loopExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_IteratorExpVariableCS(org.dresdenocl.language.ocl.IteratorExpVariableCS iteratorExpVariableCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_IteratorExpVariableCS(IteratorExpVariableCS iteratorExpVariableCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_IteratorExpCS(org.dresdenocl.language.ocl.IteratorExpCS iteratorExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_IteratorExpCS(IteratorExpCS iteratorExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_IterateExpCS(org.dresdenocl.language.ocl.IterateExpCS iterateExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_IterateExpCS(IterateExpCS iterateExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_FeatureCallExpCS(org.dresdenocl.language.ocl.FeatureCallExpCS featureCallExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_FeatureCallExpCS(FeatureCallExpCS featureCallExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_NavigationCallExp(org.dresdenocl.language.ocl.NavigationCallExp navigationCallExp, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_NavigationCallExp(NavigationCallExp navigationCallExp, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_OperationCallBaseExpCS(org.dresdenocl.language.ocl.OperationCallBaseExpCS operationCallBaseExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_OperationCallBaseExpCS(OperationCallBaseExpCS operationCallBaseExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_PropertyCallBaseExpCS(org.dresdenocl.language.ocl.PropertyCallBaseExpCS propertyCallBaseExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_PropertyCallBaseExpCS(PropertyCallBaseExpCS propertyCallBaseExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_ImplicitFeatureCallCS(org.dresdenocl.language.ocl.ImplicitFeatureCallCS implicitFeatureCallCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_ImplicitFeatureCallCS(ImplicitFeatureCallCS implicitFeatureCallCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_ImplicitPropertyCallCS(org.dresdenocl.language.ocl.ImplicitPropertyCallCS implicitPropertyCallCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_ImplicitPropertyCallCS(ImplicitPropertyCallCS implicitPropertyCallCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_ImplicitOperationCallCS(org.dresdenocl.language.ocl.ImplicitOperationCallCS implicitOperationCallCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_ImplicitOperationCallCS(ImplicitOperationCallCS implicitOperationCallCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_PropertyCallExpCS(org.dresdenocl.language.ocl.PropertyCallExpCS propertyCallExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_PropertyCallExpCS(PropertyCallExpCS propertyCallExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_PropertyCallOnSelfExpCS(org.dresdenocl.language.ocl.PropertyCallOnSelfExpCS propertyCallOnSelfExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_PropertyCallOnSelfExpCS(PropertyCallOnSelfExpCS propertyCallOnSelfExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_PropertyCallExplicitPathExpCS(org.dresdenocl.language.ocl.PropertyCallExplicitPathExpCS propertyCallExplicitPathExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_PropertyCallExplicitPathExpCS(PropertyCallExplicitPathExpCS propertyCallExplicitPathExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_OperationCallExpCS(org.dresdenocl.language.ocl.OperationCallExpCS operationCallExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_OperationCallExpCS(OperationCallExpCS operationCallExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_OperationCallOnSelfExpCS(org.dresdenocl.language.ocl.OperationCallOnSelfExpCS operationCallOnSelfExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_OperationCallOnSelfExpCS(OperationCallOnSelfExpCS operationCallOnSelfExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_StaticOperationCallExpCS(org.dresdenocl.language.ocl.StaticOperationCallExpCS staticOperationCallExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_StaticOperationCallExpCS(StaticOperationCallExpCS staticOperationCallExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_UnaryOperationCallExpCS(org.dresdenocl.language.ocl.UnaryOperationCallExpCS unaryOperationCallExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_UnaryOperationCallExpCS(UnaryOperationCallExpCS unaryOperationCallExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_LogicalNotOperationCallExpCS(org.dresdenocl.language.ocl.LogicalNotOperationCallExpCS logicalNotOperationCallExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_LogicalNotOperationCallExpCS(LogicalNotOperationCallExpCS logicalNotOperationCallExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_OperationCallWithSourceExpCS(org.dresdenocl.language.ocl.OperationCallWithSourceExpCS operationCallWithSourceExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_OperationCallWithSourceExpCS(OperationCallWithSourceExpCS operationCallWithSourceExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_OperationCallBinaryExpCS(org.dresdenocl.language.ocl.OperationCallBinaryExpCS operationCallBinaryExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_OperationCallBinaryExpCS(OperationCallBinaryExpCS operationCallBinaryExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_AdditiveOperationCallExpCS(org.dresdenocl.language.ocl.AdditiveOperationCallExpCS additiveOperationCallExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_AdditiveOperationCallExpCS(AdditiveOperationCallExpCS additiveOperationCallExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_MultOperationCallExpCS(org.dresdenocl.language.ocl.MultOperationCallExpCS multOperationCallExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_MultOperationCallExpCS(MultOperationCallExpCS multOperationCallExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_RelationalOperationCallExpCS(org.dresdenocl.language.ocl.RelationalOperationCallExpCS relationalOperationCallExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_RelationalOperationCallExpCS(RelationalOperationCallExpCS relationalOperationCallExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_EqualityOperationCallExpCS(org.dresdenocl.language.ocl.EqualityOperationCallExpCS equalityOperationCallExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_EqualityOperationCallExpCS(EqualityOperationCallExpCS equalityOperationCallExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_LogicalAndOperationCallExpCS(org.dresdenocl.language.ocl.LogicalAndOperationCallExpCS logicalAndOperationCallExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_LogicalAndOperationCallExpCS(LogicalAndOperationCallExpCS logicalAndOperationCallExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_LogicalOrOperationCallExpCS(org.dresdenocl.language.ocl.LogicalOrOperationCallExpCS logicalOrOperationCallExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_LogicalOrOperationCallExpCS(LogicalOrOperationCallExpCS logicalOrOperationCallExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_LogicalXorOperationCallExpCS(org.dresdenocl.language.ocl.LogicalXorOperationCallExpCS logicalXorOperationCallExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_LogicalXorOperationCallExpCS(LogicalXorOperationCallExpCS logicalXorOperationCallExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_LogicalImpliesOperationCallExpCS(org.dresdenocl.language.ocl.LogicalImpliesOperationCallExpCS logicalImpliesOperationCallExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_LogicalImpliesOperationCallExpCS(LogicalImpliesOperationCallExpCS logicalImpliesOperationCallExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_OperationCallWithImlicitSourceExpCS(org.dresdenocl.language.ocl.OperationCallWithImlicitSourceExpCS operationCallWithImlicitSourceExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_OperationCallWithImlicitSourceExpCS(OperationCallWithImlicitSourceExpCS operationCallWithImlicitSourceExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_TupleLiteralExpCS(org.dresdenocl.language.ocl.TupleLiteralExpCS tupleLiteralExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_TupleLiteralExpCS(TupleLiteralExpCS tupleLiteralExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_PrimitiveLiteralExpCS(org.dresdenocl.language.ocl.PrimitiveLiteralExpCS primitiveLiteralExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_PrimitiveLiteralExpCS(PrimitiveLiteralExpCS primitiveLiteralExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_IntegerLiteralExpCS(org.dresdenocl.language.ocl.IntegerLiteralExpCS integerLiteralExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_IntegerLiteralExpCS(IntegerLiteralExpCS integerLiteralExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_RealLiteralExpCS(org.dresdenocl.language.ocl.RealLiteralExpCS realLiteralExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_RealLiteralExpCS(RealLiteralExpCS realLiteralExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_BooleanLiteralExpCS(org.dresdenocl.language.ocl.BooleanLiteralExpCS booleanLiteralExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_BooleanLiteralExpCS(BooleanLiteralExpCS booleanLiteralExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_StringLiteralExpCS(org.dresdenocl.language.ocl.StringLiteralExpCS stringLiteralExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_StringLiteralExpCS(StringLiteralExpCS stringLiteralExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_InvalidLiteralExpCS(org.dresdenocl.language.ocl.InvalidLiteralExpCS invalidLiteralExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_InvalidLiteralExpCS(InvalidLiteralExpCS invalidLiteralExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_NullLiteralExpCS(org.dresdenocl.language.ocl.NullLiteralExpCS nullLiteralExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_NullLiteralExpCS(NullLiteralExpCS nullLiteralExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_LetExpCS(org.dresdenocl.language.ocl.LetExpCS letExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_LetExpCS(LetExpCS letExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_IfExpCS(org.dresdenocl.language.ocl.IfExpCS ifExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_IfExpCS(IfExpCS ifExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_PackageDeclarationCS(org.dresdenocl.language.ocl.PackageDeclarationCS packageDeclarationCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_PackageDeclarationCS(PackageDeclarationCS packageDeclarationCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_PackageDeclarationWithNamespaceCS(org.dresdenocl.language.ocl.PackageDeclarationWithNamespaceCS packageDeclarationWithNamespaceCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_PackageDeclarationWithNamespaceCS(PackageDeclarationWithNamespaceCS packageDeclarationWithNamespaceCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_PackageDeclarationNestedNamespaceCS(org.dresdenocl.language.ocl.PackageDeclarationNestedNamespaceCS packageDeclarationNestedNamespaceCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_PackageDeclarationNestedNamespaceCS(PackageDeclarationNestedNamespaceCS packageDeclarationNestedNamespaceCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_PackageDeclarationWithoutNamespaceCS(org.dresdenocl.language.ocl.PackageDeclarationWithoutNamespaceCS packageDeclarationWithoutNamespaceCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_PackageDeclarationWithoutNamespaceCS(PackageDeclarationWithoutNamespaceCS packageDeclarationWithoutNamespaceCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_ContextDeclarationCS(org.dresdenocl.language.ocl.ContextDeclarationCS contextDeclarationCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_ContextDeclarationCS(ContextDeclarationCS contextDeclarationCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_AttributeContextDeclarationCS(org.dresdenocl.language.ocl.AttributeContextDeclarationCS attributeContextDeclarationCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_AttributeContextDeclarationCS(AttributeContextDeclarationCS attributeContextDeclarationCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_ClassifierContextDeclarationCS(org.dresdenocl.language.ocl.ClassifierContextDeclarationCS classifierContextDeclarationCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_ClassifierContextDeclarationCS(ClassifierContextDeclarationCS classifierContextDeclarationCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_OperationContextDeclarationCS(org.dresdenocl.language.ocl.OperationContextDeclarationCS operationContextDeclarationCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_OperationContextDeclarationCS(OperationContextDeclarationCS operationContextDeclarationCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_InitOrDeriveValueCS(org.dresdenocl.language.ocl.InitOrDeriveValueCS initOrDeriveValueCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_InitOrDeriveValueCS(InitOrDeriveValueCS initOrDeriveValueCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_InitValueCS(org.dresdenocl.language.ocl.InitValueCS initValueCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_InitValueCS(InitValueCS initValueCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_DeriveValueCS(org.dresdenocl.language.ocl.DeriveValueCS deriveValueCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_DeriveValueCS(DeriveValueCS deriveValueCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_InvariantOrDefinitionCS(org.dresdenocl.language.ocl.InvariantOrDefinitionCS invariantOrDefinitionCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_InvariantOrDefinitionCS(InvariantOrDefinitionCS invariantOrDefinitionCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_InvariantExpCS(org.dresdenocl.language.ocl.InvariantExpCS invariantExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_InvariantExpCS(InvariantExpCS invariantExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_DefinitionExpCS(org.dresdenocl.language.ocl.DefinitionExpCS definitionExpCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_DefinitionExpCS(DefinitionExpCS definitionExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_DefinitionExpPartCS(org.dresdenocl.language.ocl.DefinitionExpPartCS definitionExpPartCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_DefinitionExpPartCS(DefinitionExpPartCS definitionExpPartCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_DefinitionExpPropertyCS(org.dresdenocl.language.ocl.DefinitionExpPropertyCS definitionExpPropertyCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_DefinitionExpPropertyCS(DefinitionExpPropertyCS definitionExpPropertyCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_DefinitionExpOperationCS(org.dresdenocl.language.ocl.DefinitionExpOperationCS definitionExpOperationCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_DefinitionExpOperationCS(DefinitionExpOperationCS definitionExpOperationCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_PrePostOrBodyDeclarationCS(org.dresdenocl.language.ocl.PrePostOrBodyDeclarationCS prePostOrBodyDeclarationCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_PrePostOrBodyDeclarationCS(PrePostOrBodyDeclarationCS prePostOrBodyDeclarationCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_PreConditionDeclarationCS(org.dresdenocl.language.ocl.PreConditionDeclarationCS preConditionDeclarationCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_PreConditionDeclarationCS(PreConditionDeclarationCS preConditionDeclarationCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_PostConditionDeclarationCS(org.dresdenocl.language.ocl.PostConditionDeclarationCS postConditionDeclarationCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_PostConditionDeclarationCS(PostConditionDeclarationCS postConditionDeclarationCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_BodyDeclarationCS(org.dresdenocl.language.ocl.BodyDeclarationCS bodyDeclarationCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_BodyDeclarationCS(BodyDeclarationCS bodyDeclarationCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_OperationDefinitionCS(org.dresdenocl.language.ocl.OperationDefinitionCS operationDefinitionCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_OperationDefinitionCS(OperationDefinitionCS operationDefinitionCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_OperationDefinitionInContextCS(org.dresdenocl.language.ocl.OperationDefinitionInContextCS operationDefinitionInContextCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_OperationDefinitionInContextCS(OperationDefinitionInContextCS operationDefinitionInContextCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_OperationDefinitionInDefCS(org.dresdenocl.language.ocl.OperationDefinitionInDefCS operationDefinitionInDefCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_OperationDefinitionInDefCS(OperationDefinitionInDefCS operationDefinitionInDefCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_language_ocl_ParameterCS(org.dresdenocl.language.ocl.ParameterCS parameterCS, ContextType context) {
+	public ResultType interprete_org_dresdenocl_language_ocl_ParameterCS(ParameterCS parameterCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_pivotmodel_NamedElement(org.dresdenocl.pivotmodel.NamedElement namedElement, ContextType context) {
+	public ResultType interprete_org_dresdenocl_pivotmodel_NamedElement(NamedElement namedElement, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_pivotmodel_TypedElement(org.dresdenocl.pivotmodel.TypedElement typedElement, ContextType context) {
+	public ResultType interprete_org_dresdenocl_pivotmodel_TypedElement(TypedElement typedElement, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_pivotmodel_Feature(org.dresdenocl.pivotmodel.Feature feature, ContextType context) {
+	public ResultType interprete_org_dresdenocl_pivotmodel_Feature(Feature feature, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_pivotmodel_GenericElement(org.dresdenocl.pivotmodel.GenericElement genericElement, ContextType context) {
+	public ResultType interprete_org_dresdenocl_pivotmodel_GenericElement(GenericElement genericElement, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_pivotmodel_ConstrainableElement(org.dresdenocl.pivotmodel.ConstrainableElement constrainableElement, ContextType context) {
+	public ResultType interprete_org_dresdenocl_pivotmodel_ConstrainableElement(ConstrainableElement constrainableElement, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_pivotmodel_Namespace(org.dresdenocl.pivotmodel.Namespace namespace, ContextType context) {
+	public ResultType interprete_org_dresdenocl_pivotmodel_Namespace(Namespace namespace, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_pivotmodel_Type(org.dresdenocl.pivotmodel.Type type, ContextType context) {
+	public ResultType interprete_org_dresdenocl_pivotmodel_Type(Type type, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_pivotmodel_PrimitiveType(org.dresdenocl.pivotmodel.PrimitiveType primitiveType, ContextType context) {
+	public ResultType interprete_org_dresdenocl_pivotmodel_PrimitiveType(PrimitiveType primitiveType, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_pivotmodel_Enumeration(org.dresdenocl.pivotmodel.Enumeration enumeration, ContextType context) {
+	public ResultType interprete_org_dresdenocl_pivotmodel_Enumeration(Enumeration enumeration, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_pivotmodel_EnumerationLiteral(org.dresdenocl.pivotmodel.EnumerationLiteral enumerationLiteral, ContextType context) {
+	public ResultType interprete_org_dresdenocl_pivotmodel_EnumerationLiteral(EnumerationLiteral enumerationLiteral, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_pivotmodel_Property(org.dresdenocl.pivotmodel.Property property, ContextType context) {
+	public ResultType interprete_org_dresdenocl_pivotmodel_Property(Property property, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_pivotmodel_Operation(org.dresdenocl.pivotmodel.Operation operation, ContextType context) {
+	public ResultType interprete_org_dresdenocl_pivotmodel_Operation(Operation operation, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_pivotmodel_Parameter(org.dresdenocl.pivotmodel.Parameter parameter, ContextType context) {
+	public ResultType interprete_org_dresdenocl_pivotmodel_Parameter(Parameter parameter, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_pivotmodel_GenericType(org.dresdenocl.pivotmodel.GenericType genericType, ContextType context) {
+	public ResultType interprete_org_dresdenocl_pivotmodel_GenericType(GenericType genericType, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_pivotmodel_ParameterGenericType(org.dresdenocl.pivotmodel.ParameterGenericType parameterGenericType, ContextType context) {
+	public ResultType interprete_org_dresdenocl_pivotmodel_ParameterGenericType(ParameterGenericType parameterGenericType, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_pivotmodel_ComplexGenericType(org.dresdenocl.pivotmodel.ComplexGenericType complexGenericType, ContextType context) {
+	public ResultType interprete_org_dresdenocl_pivotmodel_ComplexGenericType(ComplexGenericType complexGenericType, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_pivotmodel_TypeParameter(org.dresdenocl.pivotmodel.TypeParameter typeParameter, ContextType context) {
+	public ResultType interprete_org_dresdenocl_pivotmodel_TypeParameter(TypeParameter typeParameter, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_pivotmodel_TypeArgument(org.dresdenocl.pivotmodel.TypeArgument typeArgument, ContextType context) {
+	public ResultType interprete_org_dresdenocl_pivotmodel_TypeArgument(TypeArgument typeArgument, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_pivotmodel_Constraint(org.dresdenocl.pivotmodel.Constraint constraint, ContextType context) {
+	public ResultType interprete_org_dresdenocl_pivotmodel_Constraint(Constraint constraint, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_pivotmodel_Expression(org.dresdenocl.pivotmodel.Expression expression, ContextType context) {
+	public ResultType interprete_org_dresdenocl_pivotmodel_Expression(Expression expression, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_org_dresdenocl_pivotmodel_AssociationProperty(org.dresdenocl.pivotmodel.AssociationProperty associationProperty, ContextType context) {
+	public ResultType interprete_org_dresdenocl_pivotmodel_AssociationProperty(AssociationProperty associationProperty, ContextType context) {
 		return null;
 	}
 	
-	private void notifyListeners(org.eclipse.emf.ecore.EObject element) {
+	private void notifyListeners(EObject element) {
 		for (org.dresdenocl.language.ocl.resource.ocl.IOclInterpreterListener listener : listeners) {
 			listener.handleInterpreteObject(element);
 		}
@@ -1191,7 +1312,7 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 	 * Adds the given object to the interpretation stack. Attention: Objects that are
 	 * added first, are interpret last.
 	 */
-	public void addObjectToInterprete(org.eclipse.emf.ecore.EObject object) {
+	public void addObjectToInterprete(EObject object) {
 		interpretationStack.push(object);
 	}
 	
@@ -1199,8 +1320,8 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 	 * Adds the given collection of objects to the interpretation stack. Attention:
 	 * Collections that are added first, are interpret last.
 	 */
-	public void addObjectsToInterprete(java.util.Collection<? extends org.eclipse.emf.ecore.EObject> objects) {
-		for (org.eclipse.emf.ecore.EObject object : objects) {
+	public void addObjectsToInterprete(Collection<? extends EObject> objects) {
+		for (EObject object : objects) {
 			addObjectToInterprete(object);
 		}
 	}
@@ -1209,10 +1330,10 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 	 * Adds the given collection of objects in reverse order to the interpretation
 	 * stack.
 	 */
-	public void addObjectsToInterpreteInReverseOrder(java.util.Collection<? extends org.eclipse.emf.ecore.EObject> objects) {
-		java.util.List<org.eclipse.emf.ecore.EObject> reverse = new java.util.ArrayList<org.eclipse.emf.ecore.EObject>(objects.size());
+	public void addObjectsToInterpreteInReverseOrder(Collection<? extends EObject> objects) {
+		List<EObject> reverse = new ArrayList<EObject>(objects.size());
 		reverse.addAll(objects);
-		java.util.Collections.reverse(reverse);
+		Collections.reverse(reverse);
 		addObjectsToInterprete(reverse);
 	}
 	
@@ -1220,12 +1341,12 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 	 * Adds the given object and all its children to the interpretation stack such
 	 * that they are interpret in top down order.
 	 */
-	public void addObjectTreeToInterpreteTopDown(org.eclipse.emf.ecore.EObject root) {
-		java.util.List<org.eclipse.emf.ecore.EObject> objects = new java.util.ArrayList<org.eclipse.emf.ecore.EObject>();
+	public void addObjectTreeToInterpreteTopDown(EObject root) {
+		List<EObject> objects = new ArrayList<EObject>();
 		objects.add(root);
-		java.util.Iterator<org.eclipse.emf.ecore.EObject> it = root.eAllContents();
+		Iterator<EObject> it = root.eAllContents();
 		while (it.hasNext()) {
-			org.eclipse.emf.ecore.EObject eObject = (org.eclipse.emf.ecore.EObject) it.next();
+			EObject eObject = (EObject) it.next();
 			objects.add(eObject);
 		}
 		addObjectsToInterpreteInReverseOrder(objects);
@@ -1239,11 +1360,11 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 		return listeners.remove(listener);
 	}
 	
-	public org.eclipse.emf.ecore.EObject getNextObjectToInterprete() {
+	public EObject getNextObjectToInterprete() {
 		return nextObjectToInterprete;
 	}
 	
-	public java.util.Stack<org.eclipse.emf.ecore.EObject> getInterpretationStack() {
+	public Stack<EObject> getInterpretationStack() {
 		return interpretationStack;
 	}
 	
@@ -1251,7 +1372,7 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 		interpretationStack.clear();
 	}
 	
-	public Object getCurrentContext() {
+	public ContextType getCurrentContext() {
 		return currentContext;
 	}
 	

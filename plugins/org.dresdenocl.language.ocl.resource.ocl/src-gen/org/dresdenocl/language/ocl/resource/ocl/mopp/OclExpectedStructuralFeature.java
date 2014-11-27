@@ -6,6 +6,10 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
+import java.util.Collections;
+import java.util.Set;
+import org.eclipse.emf.ecore.EStructuralFeature;
+
 /**
  * A representation for a range in a document where a structural feature (e.g., a
  * reference) is expected.
@@ -19,7 +23,7 @@ public class OclExpectedStructuralFeature extends org.dresdenocl.language.ocl.re
 		this.placeholder = placeholder;
 	}
 	
-	public org.eclipse.emf.ecore.EStructuralFeature getFeature() {
+	public EStructuralFeature getFeature() {
 		return placeholder.getFeature();
 	}
 	
@@ -34,8 +38,8 @@ public class OclExpectedStructuralFeature extends org.dresdenocl.language.ocl.re
 		return placeholder.getTokenName();
 	}
 	
-	public java.util.Set<String> getTokenNames() {
-		return java.util.Collections.singleton(getTokenName());
+	public Set<String> getTokenNames() {
+		return Collections.singleton(getTokenName());
 	}
 	
 	public String toString() {
@@ -48,7 +52,7 @@ public class OclExpectedStructuralFeature extends org.dresdenocl.language.ocl.re
 		}
 		return false;
 	}
-	@Override	
+	@Override
 	public int hashCode() {
 		return getFeature().hashCode();
 	}

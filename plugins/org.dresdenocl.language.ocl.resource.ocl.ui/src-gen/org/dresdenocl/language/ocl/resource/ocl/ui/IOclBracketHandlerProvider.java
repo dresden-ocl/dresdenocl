@@ -6,6 +6,7 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.ui;
 
+
 /**
  * A provider for BracketHandler objects.
  */

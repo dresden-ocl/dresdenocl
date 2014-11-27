@@ -38,250 +38,240 @@ import org.emftext.commons.layout.LayoutInformation;
  */
 public class PackageDeclarationNestedNamespaceCSImpl extends EObjectImpl implements PackageDeclarationNestedNamespaceCS {
 	/**
-   * The cached value of the '{@link #getNamespace() <em>Namespace</em>}' reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getNamespace() <em>Namespace</em>}' reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getNamespace()
-   * @generated
-   * @ordered
-   */
+	 * @see #getNamespace()
+	 * @generated
+	 * @ordered
+	 */
 	protected Namespace namespace;
 
 	/**
-   * The cached value of the '{@link #getNestedNamespace() <em>Nested Namespace</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getNestedNamespace() <em>Nested Namespace</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getNestedNamespace()
-   * @generated
-   * @ordered
-   */
+	 * @see #getNestedNamespace()
+	 * @generated
+	 * @ordered
+	 */
 	protected PackageDeclarationNestedNamespaceCS nestedNamespace;
 
 	/**
-   * The cached value of the '{@link #getLayoutInformation() <em>Layout Information</em>}' reference list.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getLayoutInformation() <em>Layout Information</em>}' reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getLayoutInformation()
-   * @generated
-   * @ordered
-   */
+	 * @see #getLayoutInformation()
+	 * @generated
+	 * @ordered
+	 */
 	protected EList<LayoutInformation> layoutInformation;
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected PackageDeclarationNestedNamespaceCSImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-    return OclPackage.Literals.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS;
-  }
+		return OclPackage.Literals.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public Namespace getNamespace() {
-    if (namespace != null && namespace.eIsProxy())
-    {
-      InternalEObject oldNamespace = (InternalEObject)namespace;
-      namespace = (Namespace)eResolveProxy(oldNamespace);
-      if (namespace != oldNamespace)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NAMESPACE, oldNamespace, namespace));
-      }
-    }
-    return namespace;
-  }
+		if (namespace != null && namespace.eIsProxy()) {
+			InternalEObject oldNamespace = (InternalEObject)namespace;
+			namespace = (Namespace)eResolveProxy(oldNamespace);
+			if (namespace != oldNamespace) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NAMESPACE, oldNamespace, namespace));
+			}
+		}
+		return namespace;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public Namespace basicGetNamespace() {
-    return namespace;
-  }
+		return namespace;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public void setNamespace(Namespace newNamespace) {
-    Namespace oldNamespace = namespace;
-    namespace = newNamespace;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NAMESPACE, oldNamespace, namespace));
-  }
+		Namespace oldNamespace = namespace;
+		namespace = newNamespace;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NAMESPACE, oldNamespace, namespace));
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public PackageDeclarationNestedNamespaceCS getNestedNamespace() {
-    return nestedNamespace;
-  }
+		return nestedNamespace;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public NotificationChain basicSetNestedNamespace(PackageDeclarationNestedNamespaceCS newNestedNamespace, NotificationChain msgs) {
-    PackageDeclarationNestedNamespaceCS oldNestedNamespace = nestedNamespace;
-    nestedNamespace = newNestedNamespace;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE, oldNestedNamespace, newNestedNamespace);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
+		PackageDeclarationNestedNamespaceCS oldNestedNamespace = nestedNamespace;
+		nestedNamespace = newNestedNamespace;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE, oldNestedNamespace, newNestedNamespace);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public void setNestedNamespace(PackageDeclarationNestedNamespaceCS newNestedNamespace) {
-    if (newNestedNamespace != nestedNamespace)
-    {
-      NotificationChain msgs = null;
-      if (nestedNamespace != null)
-        msgs = ((InternalEObject)nestedNamespace).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE, null, msgs);
-      if (newNestedNamespace != null)
-        msgs = ((InternalEObject)newNestedNamespace).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE, null, msgs);
-      msgs = basicSetNestedNamespace(newNestedNamespace, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE, newNestedNamespace, newNestedNamespace));
-  }
+		if (newNestedNamespace != nestedNamespace) {
+			NotificationChain msgs = null;
+			if (nestedNamespace != null)
+				msgs = ((InternalEObject)nestedNamespace).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE, null, msgs);
+			if (newNestedNamespace != null)
+				msgs = ((InternalEObject)newNestedNamespace).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE, null, msgs);
+			msgs = basicSetNestedNamespace(newNestedNamespace, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE, newNestedNamespace, newNestedNamespace));
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EList<LayoutInformation> getLayoutInformation() {
-    if (layoutInformation == null)
-    {
-      layoutInformation = new EObjectResolvingEList<LayoutInformation>(LayoutInformation.class, this, OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__LAYOUT_INFORMATION);
-    }
-    return layoutInformation;
-  }
+		if (layoutInformation == null) {
+			layoutInformation = new EObjectResolvingEList<LayoutInformation>(LayoutInformation.class, this, OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__LAYOUT_INFORMATION);
+		}
+		return layoutInformation;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-    switch (featureID)
-    {
-      case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE:
-        return basicSetNestedNamespace(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+		switch (featureID) {
+			case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE:
+				return basicSetNestedNamespace(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID)
-    {
-      case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NAMESPACE:
-        if (resolve) return getNamespace();
-        return basicGetNamespace();
-      case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE:
-        return getNestedNamespace();
-      case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__LAYOUT_INFORMATION:
-        return getLayoutInformation();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NAMESPACE:
+				if (resolve) return getNamespace();
+				return basicGetNamespace();
+			case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE:
+				return getNestedNamespace();
+			case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__LAYOUT_INFORMATION:
+				return getLayoutInformation();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-    switch (featureID)
-    {
-      case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NAMESPACE:
-        setNamespace((Namespace)newValue);
-        return;
-      case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE:
-        setNestedNamespace((PackageDeclarationNestedNamespaceCS)newValue);
-        return;
-      case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__LAYOUT_INFORMATION:
-        getLayoutInformation().clear();
-        getLayoutInformation().addAll((Collection<? extends LayoutInformation>)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NAMESPACE:
+				setNamespace((Namespace)newValue);
+				return;
+			case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE:
+				setNestedNamespace((PackageDeclarationNestedNamespaceCS)newValue);
+				return;
+			case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__LAYOUT_INFORMATION:
+				getLayoutInformation().clear();
+				getLayoutInformation().addAll((Collection<? extends LayoutInformation>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public void eUnset(int featureID) {
-    switch (featureID)
-    {
-      case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NAMESPACE:
-        setNamespace((Namespace)null);
-        return;
-      case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE:
-        setNestedNamespace((PackageDeclarationNestedNamespaceCS)null);
-        return;
-      case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__LAYOUT_INFORMATION:
-        getLayoutInformation().clear();
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NAMESPACE:
+				setNamespace((Namespace)null);
+				return;
+			case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE:
+				setNestedNamespace((PackageDeclarationNestedNamespaceCS)null);
+				return;
+			case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__LAYOUT_INFORMATION:
+				getLayoutInformation().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-    switch (featureID)
-    {
-      case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NAMESPACE:
-        return namespace != null;
-      case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE:
-        return nestedNamespace != null;
-      case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__LAYOUT_INFORMATION:
-        return layoutInformation != null && !layoutInformation.isEmpty();
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NAMESPACE:
+				return namespace != null;
+			case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE:
+				return nestedNamespace != null;
+			case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__LAYOUT_INFORMATION:
+				return layoutInformation != null && !layoutInformation.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //PackageDeclarationNestedNamespaceCSImpl

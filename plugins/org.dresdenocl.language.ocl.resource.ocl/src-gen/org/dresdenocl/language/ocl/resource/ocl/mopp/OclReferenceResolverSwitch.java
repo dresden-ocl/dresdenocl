@@ -6,12 +6,19 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
+
 public class OclReferenceResolverSwitch implements org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolverSwitch {
 	
 	/**
 	 * This map stores a copy of the options the were set for loading the resource.
 	 */
-	private java.util.Map<Object, Object> options;
+	private Map<Object, Object> options;
 	
 	protected org.dresdenocl.language.ocl.resource.ocl.analysis.PackageDeclarationNestedNamespaceCSNamespaceReferenceResolver packageDeclarationNestedNamespaceCSNamespaceReferenceResolver = new org.dresdenocl.language.ocl.resource.ocl.analysis.PackageDeclarationNestedNamespaceCSNamespaceReferenceResolver();
 	protected org.dresdenocl.language.ocl.resource.ocl.analysis.OperationDefinitionCSOperationReferenceResolver operationDefinitionCSOperationReferenceResolver = new org.dresdenocl.language.ocl.resource.ocl.analysis.OperationDefinitionCSOperationReferenceResolver();
@@ -59,9 +66,9 @@ public class OclReferenceResolverSwitch implements org.dresdenocl.language.ocl.r
 		return getResolverChain(org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNamedElementCS_NamedElement(), namedElementCSNamedElementReferenceResolver);
 	}
 	
-	public void setOptions(java.util.Map<?, ?> options) {
+	public void setOptions(Map<?, ?> options) {
 		if (options != null) {
-			this.options = new java.util.LinkedHashMap<Object, Object>();
+			this.options = new LinkedHashMap<Object, Object>();
 			this.options.putAll(options);
 		}
 		packageDeclarationNestedNamespaceCSNamespaceReferenceResolver.setOptions(options);
@@ -75,85 +82,85 @@ public class OclReferenceResolverSwitch implements org.dresdenocl.language.ocl.r
 		namedElementCSNamedElementReferenceResolver.setOptions(options);
 	}
 	
-	public void resolveFuzzy(String identifier, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference, int position, org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<org.eclipse.emf.ecore.EObject> result) {
+	public void resolveFuzzy(String identifier, EObject container, EReference reference, int position, org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<EObject> result) {
 		if (container == null) {
 			return;
 		}
 		if (org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationNestedNamespaceCS().isInstance(container)) {
 			OclFuzzyResolveResult<org.dresdenocl.pivotmodel.Namespace> frr = new OclFuzzyResolveResult<org.dresdenocl.pivotmodel.Namespace>(result);
 			String referenceName = reference.getName();
-			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
-			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("namespace")) {
-				packageDeclarationNestedNamespaceCSNamespaceReferenceResolver.resolve(identifier, (org.dresdenocl.language.ocl.PackageDeclarationNestedNamespaceCS) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
+			EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
+			if (feature != null && feature instanceof EReference && referenceName != null && referenceName.equals("namespace")) {
+				packageDeclarationNestedNamespaceCSNamespaceReferenceResolver.resolve(identifier, (org.dresdenocl.language.ocl.PackageDeclarationNestedNamespaceCS) container, (EReference) feature, position, true, frr);
 			}
 		}
 		if (org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationDefinitionCS().isInstance(container)) {
 			OclFuzzyResolveResult<org.dresdenocl.pivotmodel.Operation> frr = new OclFuzzyResolveResult<org.dresdenocl.pivotmodel.Operation>(result);
 			String referenceName = reference.getName();
-			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
-			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("operation")) {
-				operationDefinitionCSOperationReferenceResolver.resolve(identifier, (org.dresdenocl.language.ocl.OperationDefinitionCS) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
+			EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
+			if (feature != null && feature instanceof EReference && referenceName != null && referenceName.equals("operation")) {
+				operationDefinitionCSOperationReferenceResolver.resolve(identifier, (org.dresdenocl.language.ocl.OperationDefinitionCS) container, (EReference) feature, position, true, frr);
 			}
 		}
 		if (org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getParameterCS().isInstance(container)) {
 			OclFuzzyResolveResult<org.dresdenocl.pivotmodel.Parameter> frr = new OclFuzzyResolveResult<org.dresdenocl.pivotmodel.Parameter>(result);
 			String referenceName = reference.getName();
-			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
-			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("parameter")) {
-				parameterCSParameterReferenceResolver.resolve(identifier, (org.dresdenocl.language.ocl.ParameterCS) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
+			EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
+			if (feature != null && feature instanceof EReference && referenceName != null && referenceName.equals("parameter")) {
+				parameterCSParameterReferenceResolver.resolve(identifier, (org.dresdenocl.language.ocl.ParameterCS) container, (EReference) feature, position, true, frr);
 			}
 		}
 		if (org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationCallBaseExpCS().isInstance(container)) {
 			OclFuzzyResolveResult<org.dresdenocl.pivotmodel.Operation> frr = new OclFuzzyResolveResult<org.dresdenocl.pivotmodel.Operation>(result);
 			String referenceName = reference.getName();
-			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
-			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("operationName")) {
-				operationCallBaseExpCSOperationNameReferenceResolver.resolve(identifier, (org.dresdenocl.language.ocl.OperationCallBaseExpCS) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
+			EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
+			if (feature != null && feature instanceof EReference && referenceName != null && referenceName.equals("operationName")) {
+				operationCallBaseExpCSOperationNameReferenceResolver.resolve(identifier, (org.dresdenocl.language.ocl.OperationCallBaseExpCS) container, (EReference) feature, position, true, frr);
 			}
 		}
 		if (org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPropertyCallBaseExpCS().isInstance(container)) {
 			OclFuzzyResolveResult<org.dresdenocl.pivotmodel.Property> frr = new OclFuzzyResolveResult<org.dresdenocl.pivotmodel.Property>(result);
 			String referenceName = reference.getName();
-			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
-			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("property")) {
-				propertyCallBaseExpCSPropertyReferenceResolver.resolve(identifier, (org.dresdenocl.language.ocl.PropertyCallBaseExpCS) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
+			EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
+			if (feature != null && feature instanceof EReference && referenceName != null && referenceName.equals("property")) {
+				propertyCallBaseExpCSPropertyReferenceResolver.resolve(identifier, (org.dresdenocl.language.ocl.PropertyCallBaseExpCS) container, (EReference) feature, position, true, frr);
 			}
 		}
 		if (org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getCollectionTypeIdentifierCS().isInstance(container)) {
 			OclFuzzyResolveResult<org.dresdenocl.pivotmodel.Type> frr = new OclFuzzyResolveResult<org.dresdenocl.pivotmodel.Type>(result);
 			String referenceName = reference.getName();
-			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
-			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("typeName")) {
-				collectionTypeIdentifierCSTypeNameReferenceResolver.resolve(identifier, (org.dresdenocl.language.ocl.CollectionTypeIdentifierCS) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
+			EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
+			if (feature != null && feature instanceof EReference && referenceName != null && referenceName.equals("typeName")) {
+				collectionTypeIdentifierCSTypeNameReferenceResolver.resolve(identifier, (org.dresdenocl.language.ocl.CollectionTypeIdentifierCS) container, (EReference) feature, position, true, frr);
 			}
 		}
 		if (org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getStaticOperationCallExpCS().isInstance(container)) {
 			OclFuzzyResolveResult<org.dresdenocl.pivotmodel.Operation> frr = new OclFuzzyResolveResult<org.dresdenocl.pivotmodel.Operation>(result);
 			String referenceName = reference.getName();
-			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
-			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("operationName")) {
-				staticOperationCallExpCSOperationNameReferenceResolver.resolve(identifier, (org.dresdenocl.language.ocl.StaticOperationCallExpCS) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
+			EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
+			if (feature != null && feature instanceof EReference && referenceName != null && referenceName.equals("operationName")) {
+				staticOperationCallExpCSOperationNameReferenceResolver.resolve(identifier, (org.dresdenocl.language.ocl.StaticOperationCallExpCS) container, (EReference) feature, position, true, frr);
 			}
 		}
 		if (org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPathNameSimpleCS().isInstance(container)) {
 			OclFuzzyResolveResult<org.dresdenocl.pivotmodel.NamedElement> frr = new OclFuzzyResolveResult<org.dresdenocl.pivotmodel.NamedElement>(result);
 			String referenceName = reference.getName();
-			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
-			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("namedElement")) {
-				pathNameSimpleCSNamedElementReferenceResolver.resolve(identifier, (org.dresdenocl.language.ocl.PathNameSimpleCS) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
+			EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
+			if (feature != null && feature instanceof EReference && referenceName != null && referenceName.equals("namedElement")) {
+				pathNameSimpleCSNamedElementReferenceResolver.resolve(identifier, (org.dresdenocl.language.ocl.PathNameSimpleCS) container, (EReference) feature, position, true, frr);
 			}
 		}
 		if (org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getNamedElementCS().isInstance(container)) {
 			OclFuzzyResolveResult<org.dresdenocl.pivotmodel.NamedElement> frr = new OclFuzzyResolveResult<org.dresdenocl.pivotmodel.NamedElement>(result);
 			String referenceName = reference.getName();
-			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
-			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("namedElement")) {
-				namedElementCSNamedElementReferenceResolver.resolve(identifier, (org.dresdenocl.language.ocl.NamedElementCS) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
+			EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
+			if (feature != null && feature instanceof EReference && referenceName != null && referenceName.equals("namedElement")) {
+				namedElementCSNamedElementReferenceResolver.resolve(identifier, (org.dresdenocl.language.ocl.NamedElementCS) container, (EReference) feature, position, true, frr);
 			}
 		}
 	}
 	
-	public org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolver<? extends org.eclipse.emf.ecore.EObject, ? extends org.eclipse.emf.ecore.EObject> getResolver(org.eclipse.emf.ecore.EStructuralFeature reference) {
+	public org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolver<? extends EObject, ? extends EObject> getResolver(EStructuralFeature reference) {
 		if (reference == org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationNestedNamespaceCS_Namespace()) {
 			return getResolverChain(reference, packageDeclarationNestedNamespaceCSNamespaceReferenceResolver);
 		}
@@ -184,8 +191,8 @@ public class OclReferenceResolverSwitch implements org.dresdenocl.language.ocl.r
 		return null;
 	}
 	
-	@SuppressWarnings({"rawtypes", "unchecked"})	
-	public <ContainerType extends org.eclipse.emf.ecore.EObject, ReferenceType extends org.eclipse.emf.ecore.EObject> org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolver<ContainerType, ReferenceType> getResolverChain(org.eclipse.emf.ecore.EStructuralFeature reference, org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolver<ContainerType, ReferenceType> originalResolver) {
+	@SuppressWarnings({"rawtypes", "unchecked"})
+	public <ContainerType extends EObject, ReferenceType extends EObject> org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolver<ContainerType, ReferenceType> getResolverChain(EStructuralFeature reference, org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolver<ContainerType, ReferenceType> originalResolver) {
 		if (options == null) {
 			return originalResolver;
 		}
@@ -193,12 +200,12 @@ public class OclReferenceResolverSwitch implements org.dresdenocl.language.ocl.r
 		if (value == null) {
 			return originalResolver;
 		}
-		if (!(value instanceof java.util.Map)) {
+		if (!(value instanceof Map)) {
 			// send this to the error log
-			new org.dresdenocl.language.ocl.resource.ocl.util.OclRuntimeUtil().logWarning("Found value with invalid type for option " + org.dresdenocl.language.ocl.resource.ocl.IOclOptions.ADDITIONAL_REFERENCE_RESOLVERS + " (expected " + java.util.Map.class.getName() + ", but was " + value.getClass().getName() + ")", null);
+			new org.dresdenocl.language.ocl.resource.ocl.util.OclRuntimeUtil().logWarning("Found value with invalid type for option " + org.dresdenocl.language.ocl.resource.ocl.IOclOptions.ADDITIONAL_REFERENCE_RESOLVERS + " (expected " + Map.class.getName() + ", but was " + value.getClass().getName() + ")", null);
 			return originalResolver;
 		}
-		java.util.Map<?,?> resolverMap = (java.util.Map<?,?>) value;
+		Map<?,?> resolverMap = (Map<?,?>) value;
 		Object resolverValue = resolverMap.get(reference);
 		if (resolverValue == null) {
 			return originalResolver;
@@ -210,8 +217,8 @@ public class OclReferenceResolverSwitch implements org.dresdenocl.language.ocl.r
 				((org.dresdenocl.language.ocl.resource.ocl.IOclDelegatingReferenceResolver) replacingResolver).setDelegate(originalResolver);
 			}
 			return replacingResolver;
-		} else if (resolverValue instanceof java.util.Collection) {
-			java.util.Collection replacingResolvers = (java.util.Collection) resolverValue;
+		} else if (resolverValue instanceof Collection) {
+			Collection replacingResolvers = (Collection) resolverValue;
 			org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolver replacingResolver = originalResolver;
 			for (Object next : replacingResolvers) {
 				if (next instanceof org.dresdenocl.language.ocl.resource.ocl.IOclReferenceCache) {

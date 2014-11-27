@@ -25,135 +25,129 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class PathNameSimpleCSImpl extends PathNameCSImpl implements PathNameSimpleCS {
 	/**
-   * The cached value of the '{@link #getNamedElement() <em>Named Element</em>}' reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getNamedElement() <em>Named Element</em>}' reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getNamedElement()
-   * @generated
-   * @ordered
-   */
+	 * @see #getNamedElement()
+	 * @generated
+	 * @ordered
+	 */
 	protected NamedElement namedElement;
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected PathNameSimpleCSImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-    return OclPackage.Literals.PATH_NAME_SIMPLE_CS;
-  }
+		return OclPackage.Literals.PATH_NAME_SIMPLE_CS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public NamedElement getNamedElement() {
-    if (namedElement != null && namedElement.eIsProxy())
-    {
-      InternalEObject oldNamedElement = (InternalEObject)namedElement;
-      namedElement = (NamedElement)eResolveProxy(oldNamedElement);
-      if (namedElement != oldNamedElement)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, OclPackage.PATH_NAME_SIMPLE_CS__NAMED_ELEMENT, oldNamedElement, namedElement));
-      }
-    }
-    return namedElement;
-  }
+		if (namedElement != null && namedElement.eIsProxy()) {
+			InternalEObject oldNamedElement = (InternalEObject)namedElement;
+			namedElement = (NamedElement)eResolveProxy(oldNamedElement);
+			if (namedElement != oldNamedElement) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OclPackage.PATH_NAME_SIMPLE_CS__NAMED_ELEMENT, oldNamedElement, namedElement));
+			}
+		}
+		return namedElement;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public NamedElement basicGetNamedElement() {
-    return namedElement;
-  }
+		return namedElement;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public void setNamedElement(NamedElement newNamedElement) {
-    NamedElement oldNamedElement = namedElement;
-    namedElement = newNamedElement;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.PATH_NAME_SIMPLE_CS__NAMED_ELEMENT, oldNamedElement, namedElement));
-  }
+		NamedElement oldNamedElement = namedElement;
+		namedElement = newNamedElement;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.PATH_NAME_SIMPLE_CS__NAMED_ELEMENT, oldNamedElement, namedElement));
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID)
-    {
-      case OclPackage.PATH_NAME_SIMPLE_CS__NAMED_ELEMENT:
-        if (resolve) return getNamedElement();
-        return basicGetNamedElement();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case OclPackage.PATH_NAME_SIMPLE_CS__NAMED_ELEMENT:
+				if (resolve) return getNamedElement();
+				return basicGetNamedElement();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-    switch (featureID)
-    {
-      case OclPackage.PATH_NAME_SIMPLE_CS__NAMED_ELEMENT:
-        setNamedElement((NamedElement)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case OclPackage.PATH_NAME_SIMPLE_CS__NAMED_ELEMENT:
+				setNamedElement((NamedElement)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public void eUnset(int featureID) {
-    switch (featureID)
-    {
-      case OclPackage.PATH_NAME_SIMPLE_CS__NAMED_ELEMENT:
-        setNamedElement((NamedElement)null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case OclPackage.PATH_NAME_SIMPLE_CS__NAMED_ELEMENT:
+				setNamedElement((NamedElement)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-    switch (featureID)
-    {
-      case OclPackage.PATH_NAME_SIMPLE_CS__NAMED_ELEMENT:
-        return namedElement != null;
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case OclPackage.PATH_NAME_SIMPLE_CS__NAMED_ELEMENT:
+				return namedElement != null;
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //PathNameSimpleCSImpl

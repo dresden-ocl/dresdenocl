@@ -6,10 +6,15 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Plugin;
+import org.eclipse.core.runtime.Status;
+import org.osgi.framework.BundleContext;
+
 /**
  * A singleton class for the text resource plug-in.
  */
-public class OclPlugin extends org.eclipse.core.runtime.Plugin {
+public class OclPlugin extends Plugin {
 	
 	public static final String PLUGIN_ID = "org.dresdenocl.language.ocl.resource.ocl";
 	/**
@@ -30,12 +35,12 @@ public class OclPlugin extends org.eclipse.core.runtime.Plugin {
 		super();
 	}
 	
-	public void start(org.osgi.framework.BundleContext context) throws Exception {
+	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
 	}
 	
-	public void stop(org.osgi.framework.BundleContext context) throws Exception {
+	public void stop(BundleContext context) throws Exception {
 		plugin = null;
 		super.stop(context);
 	}
@@ -45,19 +50,23 @@ public class OclPlugin extends org.eclipse.core.runtime.Plugin {
 	}
 	
 	/**
+	 * <p>
 	 * Helper method for error logging.
+	 * </p>
 	 * 
 	 * @param message the error message to log
 	 * @param throwable the exception that describes the error in detail (can be null)
 	 * 
 	 * @return the status object describing the error
 	 */
-	public static org.eclipse.core.runtime.IStatus logError(String message, Throwable throwable) {
-		return log(org.eclipse.core.runtime.IStatus.ERROR, message, throwable);
+	public static IStatus logError(String message, Throwable throwable) {
+		return log(IStatus.ERROR, message, throwable);
 	}
 	
 	/**
+	 * <p>
 	 * Helper method for logging warnings.
+	 * </p>
 	 * 
 	 * @param message the warning message to log
 	 * @param throwable the exception that describes the warning in detail (can be
@@ -65,12 +74,28 @@ public class OclPlugin extends org.eclipse.core.runtime.Plugin {
 	 * 
 	 * @return the status object describing the warning
 	 */
-	public static org.eclipse.core.runtime.IStatus logWarning(String message, Throwable throwable) {
-		return log(org.eclipse.core.runtime.IStatus.WARNING, message, throwable);
+	public static IStatus logWarning(String message, Throwable throwable) {
+		return log(IStatus.WARNING, message, throwable);
 	}
 	
 	/**
+	 * <p>
+	 * Helper method for logging infos.
+	 * </p>
+	 * 
+	 * @param message the info message to log
+	 * @param throwable the exception that describes the info in detail (can be null)
+	 * 
+	 * @return the status object describing the info
+	 */
+	public static IStatus logInfo(String message, Throwable throwable) {
+		return log(IStatus.INFO, message, throwable);
+	}
+	
+	/**
+	 * <p>
 	 * Helper method for logging.
+	 * </p>
 	 * 
 	 * @param type the type of the message to log
 	 * @param message the message to log
@@ -78,12 +103,12 @@ public class OclPlugin extends org.eclipse.core.runtime.Plugin {
 	 * 
 	 * @return the status object describing the error
 	 */
-	protected static org.eclipse.core.runtime.IStatus log(int type, String message, Throwable throwable) {
-		org.eclipse.core.runtime.IStatus status;
+	protected static IStatus log(int type, String message, Throwable throwable) {
+		IStatus status;
 		if (throwable != null) {
-			status = new org.eclipse.core.runtime.Status(type, OclPlugin.PLUGIN_ID, 0, message, throwable);
+			status = new Status(type, OclPlugin.PLUGIN_ID, 0, message, throwable);
 		} else {
-			status = new org.eclipse.core.runtime.Status(type, OclPlugin.PLUGIN_ID, message);
+			status = new Status(type, OclPlugin.PLUGIN_ID, message);
 		}
 		final OclPlugin pluginInstance = OclPlugin.getDefault();
 		if (pluginInstance == null) {

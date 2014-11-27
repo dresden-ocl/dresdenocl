@@ -21,22 +21,22 @@ import org.eclipse.emf.ecore.EClass;
  */
 public abstract class CallExpCSImpl extends OclExpressionCSImpl implements CallExpCS {
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected CallExpCSImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-    return OclPackage.Literals.CALL_EXP_CS;
-  }
+		return OclPackage.Literals.CALL_EXP_CS;
+	}
 
 } //CallExpCSImpl

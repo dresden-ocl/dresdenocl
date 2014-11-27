@@ -21,22 +21,22 @@ import org.eclipse.emf.ecore.EClass;
  */
 public abstract class FeatureCallExpCSImpl extends CallExpCSImpl implements FeatureCallExpCS {
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected FeatureCallExpCSImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-    return OclPackage.Literals.FEATURE_CALL_EXP_CS;
-  }
+		return OclPackage.Literals.FEATURE_CALL_EXP_CS;
+	}
 
 } //FeatureCallExpCSImpl

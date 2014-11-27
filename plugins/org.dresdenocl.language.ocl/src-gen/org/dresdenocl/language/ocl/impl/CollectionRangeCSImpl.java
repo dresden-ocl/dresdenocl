@@ -31,221 +31,212 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class CollectionRangeCSImpl extends CollectionLiteralPartsCSImpl implements CollectionRangeCS {
 	/**
-   * The cached value of the '{@link #getFrom() <em>From</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getFrom() <em>From</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getFrom()
-   * @generated
-   * @ordered
-   */
+	 * @see #getFrom()
+	 * @generated
+	 * @ordered
+	 */
 	protected OclExpressionCS from;
 
 	/**
-   * The cached value of the '{@link #getTo() <em>To</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getTo() <em>To</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getTo()
-   * @generated
-   * @ordered
-   */
+	 * @see #getTo()
+	 * @generated
+	 * @ordered
+	 */
 	protected OclExpressionCS to;
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected CollectionRangeCSImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-    return OclPackage.Literals.COLLECTION_RANGE_CS;
-  }
+		return OclPackage.Literals.COLLECTION_RANGE_CS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public OclExpressionCS getFrom() {
-    return from;
-  }
+		return from;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public NotificationChain basicSetFrom(OclExpressionCS newFrom, NotificationChain msgs) {
-    OclExpressionCS oldFrom = from;
-    from = newFrom;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OclPackage.COLLECTION_RANGE_CS__FROM, oldFrom, newFrom);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
+		OclExpressionCS oldFrom = from;
+		from = newFrom;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OclPackage.COLLECTION_RANGE_CS__FROM, oldFrom, newFrom);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public void setFrom(OclExpressionCS newFrom) {
-    if (newFrom != from)
-    {
-      NotificationChain msgs = null;
-      if (from != null)
-        msgs = ((InternalEObject)from).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OclPackage.COLLECTION_RANGE_CS__FROM, null, msgs);
-      if (newFrom != null)
-        msgs = ((InternalEObject)newFrom).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OclPackage.COLLECTION_RANGE_CS__FROM, null, msgs);
-      msgs = basicSetFrom(newFrom, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.COLLECTION_RANGE_CS__FROM, newFrom, newFrom));
-  }
+		if (newFrom != from) {
+			NotificationChain msgs = null;
+			if (from != null)
+				msgs = ((InternalEObject)from).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OclPackage.COLLECTION_RANGE_CS__FROM, null, msgs);
+			if (newFrom != null)
+				msgs = ((InternalEObject)newFrom).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OclPackage.COLLECTION_RANGE_CS__FROM, null, msgs);
+			msgs = basicSetFrom(newFrom, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.COLLECTION_RANGE_CS__FROM, newFrom, newFrom));
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public OclExpressionCS getTo() {
-    return to;
-  }
+		return to;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public NotificationChain basicSetTo(OclExpressionCS newTo, NotificationChain msgs) {
-    OclExpressionCS oldTo = to;
-    to = newTo;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OclPackage.COLLECTION_RANGE_CS__TO, oldTo, newTo);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
+		OclExpressionCS oldTo = to;
+		to = newTo;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OclPackage.COLLECTION_RANGE_CS__TO, oldTo, newTo);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public void setTo(OclExpressionCS newTo) {
-    if (newTo != to)
-    {
-      NotificationChain msgs = null;
-      if (to != null)
-        msgs = ((InternalEObject)to).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OclPackage.COLLECTION_RANGE_CS__TO, null, msgs);
-      if (newTo != null)
-        msgs = ((InternalEObject)newTo).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OclPackage.COLLECTION_RANGE_CS__TO, null, msgs);
-      msgs = basicSetTo(newTo, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.COLLECTION_RANGE_CS__TO, newTo, newTo));
-  }
+		if (newTo != to) {
+			NotificationChain msgs = null;
+			if (to != null)
+				msgs = ((InternalEObject)to).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OclPackage.COLLECTION_RANGE_CS__TO, null, msgs);
+			if (newTo != null)
+				msgs = ((InternalEObject)newTo).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OclPackage.COLLECTION_RANGE_CS__TO, null, msgs);
+			msgs = basicSetTo(newTo, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.COLLECTION_RANGE_CS__TO, newTo, newTo));
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-    switch (featureID)
-    {
-      case OclPackage.COLLECTION_RANGE_CS__FROM:
-        return basicSetFrom(null, msgs);
-      case OclPackage.COLLECTION_RANGE_CS__TO:
-        return basicSetTo(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+		switch (featureID) {
+			case OclPackage.COLLECTION_RANGE_CS__FROM:
+				return basicSetFrom(null, msgs);
+			case OclPackage.COLLECTION_RANGE_CS__TO:
+				return basicSetTo(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID)
-    {
-      case OclPackage.COLLECTION_RANGE_CS__FROM:
-        return getFrom();
-      case OclPackage.COLLECTION_RANGE_CS__TO:
-        return getTo();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case OclPackage.COLLECTION_RANGE_CS__FROM:
+				return getFrom();
+			case OclPackage.COLLECTION_RANGE_CS__TO:
+				return getTo();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-    switch (featureID)
-    {
-      case OclPackage.COLLECTION_RANGE_CS__FROM:
-        setFrom((OclExpressionCS)newValue);
-        return;
-      case OclPackage.COLLECTION_RANGE_CS__TO:
-        setTo((OclExpressionCS)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case OclPackage.COLLECTION_RANGE_CS__FROM:
+				setFrom((OclExpressionCS)newValue);
+				return;
+			case OclPackage.COLLECTION_RANGE_CS__TO:
+				setTo((OclExpressionCS)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public void eUnset(int featureID) {
-    switch (featureID)
-    {
-      case OclPackage.COLLECTION_RANGE_CS__FROM:
-        setFrom((OclExpressionCS)null);
-        return;
-      case OclPackage.COLLECTION_RANGE_CS__TO:
-        setTo((OclExpressionCS)null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case OclPackage.COLLECTION_RANGE_CS__FROM:
+				setFrom((OclExpressionCS)null);
+				return;
+			case OclPackage.COLLECTION_RANGE_CS__TO:
+				setTo((OclExpressionCS)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-    switch (featureID)
-    {
-      case OclPackage.COLLECTION_RANGE_CS__FROM:
-        return from != null;
-      case OclPackage.COLLECTION_RANGE_CS__TO:
-        return to != null;
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case OclPackage.COLLECTION_RANGE_CS__FROM:
+				return from != null;
+			case OclPackage.COLLECTION_RANGE_CS__TO:
+				return to != null;
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //CollectionRangeCSImpl

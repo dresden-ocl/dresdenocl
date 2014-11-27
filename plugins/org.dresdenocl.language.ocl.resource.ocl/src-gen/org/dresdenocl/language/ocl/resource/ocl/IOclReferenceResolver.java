@@ -6,19 +6,26 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+
 /**
+ * <p>
  * A reference resolver tries to resolve a reference to one or many model elements
  * (EObjects). It is called by the EMF proxy resolution mechanism.
+ * </p>
  * 
  * @param <ContainerType> the type of the container that contains the reference
  * that is resolved by this resolver
  * @param <ReferenceType> the type of the reference that is resolved by this
  * resolver
  */
-public interface IOclReferenceResolver<ContainerType extends org.eclipse.emf.ecore.EObject, ReferenceType extends org.eclipse.emf.ecore.EObject> extends org.dresdenocl.language.ocl.resource.ocl.IOclConfigurable {
+public interface IOclReferenceResolver<ContainerType extends EObject, ReferenceType extends EObject> extends org.dresdenocl.language.ocl.resource.ocl.IOclConfigurable {
 	
 	/**
+	 * <p>
 	 * Attempts to resolve a reference string.
+	 * </p>
 	 * 
 	 * @param identifier The identifier for the reference.
 	 * @param container The object that contains the reference.
@@ -30,11 +37,13 @@ public interface IOclReferenceResolver<ContainerType extends org.eclipse.emf.eco
 	 * @param result an object that can be used to store the result of the resolve
 	 * operation.
 	 */
-	public void resolve(String identifier, ContainerType container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> result);
+	public void resolve(String identifier, ContainerType container, EReference reference, int position, boolean resolveFuzzy, org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> result);
 	
 	/**
+	 * <p>
 	 * Reverse of the resolve operation: constructs a String representing the given
 	 * object.
+	 * </p>
 	 * 
 	 * @param element The referenced model element.
 	 * @param container The object referencing the element.
@@ -42,6 +51,6 @@ public interface IOclReferenceResolver<ContainerType extends org.eclipse.emf.eco
 	 * 
 	 * @return The identification string for the reference
 	 */
-	public String deResolve(ReferenceType element, ContainerType container, org.eclipse.emf.ecore.EReference reference);
+	public String deResolve(ReferenceType element, ContainerType container, EReference reference);
 	
 }

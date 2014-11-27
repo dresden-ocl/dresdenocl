@@ -6,16 +6,45 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.ui;
 
-public class OclNewFileWizard extends org.eclipse.jface.wizard.Wizard implements org.eclipse.ui.INewWizard {
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
+import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.wizard.Wizard;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.ui.INewWizard;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.ide.IDE;
+
+public class OclNewFileWizard extends Wizard implements INewWizard {
 	
-	private String categoryId = null;
-	private org.dresdenocl.language.ocl.resource.ocl.ui.OclNewFileWizardPage page;
-	private org.eclipse.jface.viewers.ISelection selection;
-	private String newName = null;
+	protected String categoryId = null;
+	protected org.dresdenocl.language.ocl.resource.ocl.ui.OclNewFileWizardPage page;
+	protected ISelection selection;
+	protected String newName = null;
 	
 	public OclNewFileWizard() {
 		super();
 		setNeedsProgressMonitor(true);
+		setWindowTitle(org.dresdenocl.language.ocl.resource.ocl.ui.OclUIResourceBundle.NEW_FILE_WIZARD_WINDOW_TITLE);
 	}
 	
 	public String getCategoryId() {
@@ -46,31 +75,31 @@ public class OclNewFileWizard extends org.eclipse.jface.wizard.Wizard implements
 		if (seperatorIdx != -1) {
 			newName = newName.substring(0, seperatorIdx);
 		}
-		final org.eclipse.core.resources.IFile file;
+		final IFile file;
 		try {
 			file = getFile(fileName, containerName);
-		} catch (org.eclipse.core.runtime.CoreException e1) {
+		} catch (CoreException e1) {
 			org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.logError("Exception while initializing new file", e1);
 			return false;
 		}
 		
 		if (file.exists()) {
 			// ask for confirmation
-			org.eclipse.swt.widgets.MessageBox messageBox = new org.eclipse.swt.widgets.MessageBox(getShell(), org.eclipse.swt.SWT.ICON_QUESTION			| org.eclipse.swt.SWT.YES | org.eclipse.swt.SWT.NO);
+			MessageBox messageBox = new MessageBox(getShell(), SWT.ICON_QUESTION			| SWT.YES | SWT.NO);
 			messageBox.setMessage("File \"" + fileName + "\" already exists. Do you want to override it?");
 			messageBox.setText("File exists");
 			int response = messageBox.open();
-			if (response == org.eclipse.swt.SWT.NO) {
+			if (response == SWT.NO) {
 				return true;
 			}
 		}
 		
-		org.eclipse.jface.operation.IRunnableWithProgress op = new org.eclipse.jface.operation.IRunnableWithProgress() {
-			public void run(org.eclipse.core.runtime.IProgressMonitor monitor) throws java.lang.reflect.InvocationTargetException {
+		IRunnableWithProgress op = new IRunnableWithProgress() {
+			public void run(IProgressMonitor monitor) throws InvocationTargetException {
 				try {
 					doFinish(containerName, fileName, monitor);
-				} catch (org.eclipse.core.runtime.CoreException e) {
-					throw new java.lang.reflect.InvocationTargetException(e);
+				} catch (CoreException e) {
+					throw new InvocationTargetException(e);
 				} finally {
 					monitor.done();
 				}
@@ -80,9 +109,9 @@ public class OclNewFileWizard extends org.eclipse.jface.wizard.Wizard implements
 			getContainer().run(true, false, op);
 		} catch (InterruptedException e) {
 			return false;
-		} catch (java.lang.reflect.InvocationTargetException e) {
+		} catch (InvocationTargetException e) {
 			Throwable realException = e.getTargetException();
-			org.eclipse.jface.dialogs.MessageDialog.openError(getShell(), "Error", realException.getMessage());
+			MessageDialog.openError(getShell(), "Error", realException.getMessage());
 			org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.logError("Exception while initializing new file", e);
 			return false;
 		}
@@ -93,65 +122,66 @@ public class OclNewFileWizard extends org.eclipse.jface.wizard.Wizard implements
 	 * The worker method. It will find the container, create the file if missing or
 	 * just replace its contents, and open the editor on the newly created file.
 	 */
-	private void doFinish(String containerName, String fileName, org.eclipse.core.runtime.IProgressMonitor monitor) throws org.eclipse.core.runtime.CoreException {
+	protected void doFinish(String containerName, String fileName, IProgressMonitor monitor) throws CoreException {
 		// create a sample file
 		monitor.beginTask("Creating " + fileName, 2);
-		final org.eclipse.core.resources.IFile file = getFile(fileName, containerName);
+		final IFile file = getFile(fileName, containerName);
 		try {
-			java.io.InputStream stream = openContentStream();
+			InputStream stream = openContentStream();
 			if (file.exists()) {
 				file.setContents(stream, true, true, monitor);
 			} else {
 				file.create(stream, true, monitor);
 			}
 			stream.close();
-		} catch (java.io.IOException e) {
+		} catch (IOException e) {
 		}
 		monitor.worked(1);
 		monitor.setTaskName("Opening file for editing...");
 		getShell().getDisplay().asyncExec(new Runnable() {
 			public void run() {
-				org.eclipse.ui.IWorkbenchPage page = org.eclipse.ui.PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 				try {
-					org.eclipse.ui.ide.IDE.openEditor(page, file, true);
-				} catch (org.eclipse.ui.PartInitException e) {
+					IDE.openEditor(page, file, true);
+				} catch (PartInitException e) {
 				}
 			}
 		});
 		monitor.worked(1);
 	}
 	
-	private org.eclipse.core.resources.IFile getFile(String fileName, String containerName) throws org.eclipse.core.runtime.CoreException {
-		org.eclipse.core.resources.IWorkspaceRoot root = org.eclipse.core.resources.ResourcesPlugin.getWorkspace().getRoot();
-		org.eclipse.core.resources.IResource resource = root.findMember(new org.eclipse.core.runtime.Path(containerName));
-		if (!resource.exists() || !(resource instanceof org.eclipse.core.resources.IContainer)) {
+	protected IFile getFile(String fileName, String containerName) throws CoreException {
+		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+		IResource resource = root.findMember(new Path(containerName));
+		if (!resource.exists() || !(resource instanceof IContainer)) {
 			throwCoreException("Container \"" + containerName + "\" does not exist.");
 		}
-		org.eclipse.core.resources.IContainer container = (org.eclipse.core.resources.IContainer) resource;
-		final org.eclipse.core.resources.IFile file = container.getFile(new org.eclipse.core.runtime.Path(fileName));
+		IContainer container = (IContainer) resource;
+		final IFile file = container.getFile(new Path(fileName));
 		return file;
 	}
 	
 	/**
-	 * We will initialize file contents with a sample text.
+	 * Initializes file contents with a sample text.
 	 */
-	private java.io.InputStream openContentStream() {
-		return new java.io.ByteArrayInputStream(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation().getNewFileContentProvider().getNewFileContent(newName).getBytes());
+	protected InputStream openContentStream() {
+		return new ByteArrayInputStream(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation().getNewFileContentProvider().getNewFileContent(newName).getBytes());
 	}
 	
-	private void throwCoreException(String message) throws org.eclipse.core.runtime.CoreException {
-		org.eclipse.core.runtime.IStatus status = new org.eclipse.core.runtime.Status(org.eclipse.core.runtime.IStatus.ERROR, "NewFileContentPrinter", org.eclipse.core.runtime.IStatus.OK, message, null);
-		throw new org.eclipse.core.runtime.CoreException(status);
+	protected void throwCoreException(String message) throws CoreException {
+		IStatus status = new Status(IStatus.ERROR, "NewFileContentPrinter", IStatus.OK, message, null);
+		throw new CoreException(status);
 	}
 	
 	/**
+	 * <p>
 	 * We will accept the selection in the workbench to see if we can initialize from
 	 * it.
+	 * </p>
 	 * 
-	 * @see IWorkbenchWizard#init(org.eclipse.ui.IWorkbench,
-	 * org.eclipse.jface.viewers.IStructuredSelection)
+	 * @see IWorkbenchWizard#init(IWorkbench, IStructuredSelection)
 	 */
-	public void init(org.eclipse.ui.IWorkbench workbench, org.eclipse.jface.viewers.IStructuredSelection selection) {
+	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.selection = selection;
 	}
 	

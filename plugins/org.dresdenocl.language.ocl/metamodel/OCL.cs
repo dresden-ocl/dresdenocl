@@ -15,15 +15,15 @@ OPTIONS {
 	// -----------------------------
 	// set this to true but check out OclEditor.setFocus() method
 	// see documentation for more information
-	overrideEditor = "false";
+	//overrideEditor = "false";
 	//------------------------------
 	overrideTextResource = "true";
 	overrideCodeCompletionHelper = "true";
-	overrideManifest = "false";
-	overridePluginXML = "false";
+	//overrideManifest = "false";
+	//overridePluginXML = "false";
 	usePredefinedTokens = "false";
-	overrideHyperlink = "false";
-	overrideDefaultResolverDelegate = "false";
+	//overrideHyperlink = "false";
+	//overrideDefaultResolverDelegate = "false";
 	resourcePluginID = "org.dresdenocl.language.ocl.resource.ocl";
 	resourceUIPluginID = "org.dresdenocl.language.ocl.resource.ocl.ui";
 	srcFolder = "src";

@@ -6,59 +6,96 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.ui;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature.Setting;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.ITextViewerExtension5;
+import org.eclipse.jface.text.Position;
+import org.eclipse.jface.text.Region;
+import org.eclipse.jface.text.rules.IToken;
+import org.eclipse.jface.text.source.Annotation;
+import org.eclipse.jface.text.source.IAnnotationModel;
+import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.jface.text.source.projection.ProjectionViewer;
+import org.eclipse.swt.custom.StyledText;
+
 /**
- * This class finds the positions to highlight and adds them to the document.
+ * This class finds text positions to highlight and adds them to the document.
  */
 public class OclOccurrence {
+	
+	private static interface ITokenScannerConstraint {
+		public boolean mustStop(org.dresdenocl.language.ocl.resource.ocl.ui.IOclTokenScanner tokenScanner);
+	}
 	
 	public final static String OCCURRENCE_ANNOTATION_ID = "org.dresdenocl.language.ocl.resource.ocl.ui.occurences";
 	public final static String DECLARATION_ANNOTATION_ID = "org.dresdenocl.language.ocl.resource.ocl.ui.occurences.declaration";
 	
 	private final static org.dresdenocl.language.ocl.resource.ocl.ui.OclPositionHelper positionHelper = new org.dresdenocl.language.ocl.resource.ocl.ui.OclPositionHelper();
 	
-	private org.dresdenocl.language.ocl.resource.ocl.ui.OclTokenScanner tokenScanner;
-	private java.util.List<String> quotedTokenArray;
-	private org.eclipse.jface.text.source.projection.ProjectionViewer projectionViewer;
-	private org.dresdenocl.language.ocl.resource.ocl.IOclTextResource textResource;
-	private String tokenText = "";
-	private org.eclipse.jface.text.Region tokenRegion;
+	/**
+	 * The viewer showing the document the we search occurrences for
+	 */
+	private ProjectionViewer projectionViewer;
 	
 	/**
-	 * Creates the Occurrence class to find position to highlight.
+	 * The resource we operate on
+	 */
+	private org.dresdenocl.language.ocl.resource.ocl.IOclTextResource textResource;
+	
+	/**
+	 * The text of the token that was located at the caret position at the time
+	 * occurrence were computed last
+	 */
+	private String tokenText = "";
+	
+	/**
+	 * The region of the token that was located at the caret position at the time
+	 * occurrence were computed last
+	 */
+	private Region tokenRegion;
+	
+	/**
+	 * <p>
+	 * Creates a OclOccurrence object to find positions to highlight.
+	 * </p>
 	 * 
 	 * @param textResource the text resource for location
-	 * @param sourceViewer the source viewer for the text
-	 * @param tokenScanner the token scanner helps to find the searched tokens
+	 * @param projectionViewer the viewer for the text
 	 */
-	public OclOccurrence(org.dresdenocl.language.ocl.resource.ocl.IOclTextResource textResource, org.eclipse.jface.text.source.projection.ProjectionViewer sourceViewer, org.dresdenocl.language.ocl.resource.ocl.ui.OclTokenScanner tokenScanner) {
+	public OclOccurrence(org.dresdenocl.language.ocl.resource.ocl.IOclTextResource textResource, ProjectionViewer projectionViewer) {
+		super();
 		this.textResource = textResource;
-		this.projectionViewer = sourceViewer;
+		this.projectionViewer = projectionViewer;
 		
-		quotedTokenArray = new java.util.ArrayList<String>();
-		String[] tokenNames = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation().getTokenNames();
-		for (String tokenName : tokenNames) {
-			if (tokenName.startsWith("'") && tokenName.endsWith("'")) {
-				quotedTokenArray.add(tokenName.substring(1, tokenName.length() - 1).trim());
-			}
-		}
-		this.tokenScanner = tokenScanner;
-		tokenRegion = new org.eclipse.jface.text.Region(-1, 0);
+		resetTokenRegion();
 	}
 	
-	private org.eclipse.emf.ecore.EObject getResolvedEObject(org.eclipse.emf.ecore.EObject eObject) {
-		return eObject.eIsProxy() ? org.eclipse.emf.ecore.util.EcoreUtil.resolve(eObject, textResource) : eObject;
+	protected EObject getResolvedEObject(EObject eObject) {
+		return eObject.eIsProxy() ? EcoreUtil.resolve(eObject, textResource) : eObject;
 	}
 	
 	/**
-	 * Tries to resolve the first proxy object in a list.
+	 * <p>
+	 * Tries to resolve the first proxy object in the given list.
+	 * </p>
 	 * 
-	 * @param objects the <code>EObject</code>s at the text caret
+	 * @param objects the <code>EObject</code>s located at the caret position
 	 * 
 	 * @return the resolved <code>EObject</code> of the first proxy
-	 * <code>EObject</code> in a list. If there are none returns <code>null</code>
+	 * <code>EObject</code> in a list. If resolving fails, <code>null</code> is
+	 * returned.
 	 */
-	public org.eclipse.emf.ecore.EObject tryToResolve(java.util.List<org.eclipse.emf.ecore.EObject> objects) {
-		for (org.eclipse.emf.ecore.EObject object : objects) {
+	public EObject tryToResolve(List<EObject> objects) {
+		for (EObject object : objects) {
 			if (object.eIsProxy()) {
 				return getResolvedEObject(object);
 			}
@@ -67,26 +104,23 @@ public class OclOccurrence {
 	}
 	
 	/**
-	 * 
-	 * @return the eObject at the current cursor position.
+	 * Returns the EObject at the current caret position.
 	 */
-	public org.eclipse.emf.ecore.EObject getEObjectAtCurrentPosition() {
-		org.eclipse.swt.custom.StyledText textWidget = projectionViewer.getTextWidget();
-		if (textWidget == null) {
-			return null;
-		}
-		int caretOffset = textWidget.getCaretOffset();
-		caretOffset = projectionViewer.widgetOffset2ModelOffset(caretOffset);
+	public EObject getEObjectAtCurrentPosition() {
 		if (textResource == null) {
 			return null;
 		}
+		
+		int caretOffset = getCaretOffset();
+		
 		org.dresdenocl.language.ocl.resource.ocl.IOclLocationMap locationMap = textResource.getLocationMap();
-		java.util.List<org.eclipse.emf.ecore.EObject> elementsAtOffset = locationMap.getElementsAt(caretOffset);
+		List<EObject> elementsAtOffset = locationMap.getElementsAt(caretOffset);
 		
 		if (elementsAtOffset == null || elementsAtOffset.isEmpty()) {
 			return null;
 		}
-		for (org.eclipse.emf.ecore.EObject candidate : elementsAtOffset) {
+		
+		for (EObject candidate : elementsAtOffset) {
 			if (candidate.eIsProxy()) {
 				candidate = getResolvedEObject(candidate);
 			}
@@ -101,189 +135,298 @@ public class OclOccurrence {
 	}
 	
 	/**
-	 * Returns the token text at the caret.
+	 * <p>
+	 * Returns the text of the token that was found at the caret position at the time
+	 * occurrence we computed last.
+	 * </p>
 	 * 
 	 * @return the token text
 	 */
-	public String getTokenText() {
+	protected String getTokenText() {
 		return tokenText;
 	}
 	
-	private int getLength(org.eclipse.emf.ecore.EObject eObject) {
-		org.dresdenocl.language.ocl.resource.ocl.IOclLocationMap locationMap = textResource.getLocationMap();
+	protected int getLength(org.dresdenocl.language.ocl.resource.ocl.IOclLocationMap locationMap, EObject eObject) {
 		return locationMap.getCharEnd(eObject) - locationMap.getCharStart(eObject) + 1;
 	}
 	
 	/**
-	 * Finds the positions of the occurrences which will be highlighted. The brackets
-	 * and the key words should not be highlighted.
-	 * 
-	 * @param bracketSet the set of brackets which have to be ignored.
+	 * Finds the positions of the occurrences and declarations which will be
+	 * highlighted.
 	 */
-	public void handleOccurrenceHighlighting(org.dresdenocl.language.ocl.resource.ocl.ui.OclBracketSet bracketSet) {
+	public void updateOccurrenceAnnotations() {
 		if (textResource == null) {
 			return;
 		}
-		org.eclipse.swt.custom.StyledText textWidget = projectionViewer.getTextWidget();
-		int caretOffset = textWidget.getCaretOffset();
-		caretOffset = projectionViewer.widgetOffset2ModelOffset(caretOffset);
-		org.eclipse.jface.text.IDocument document = projectionViewer.getDocument();
+		
+		final int caretOffset = getCaretOffset();
+		IDocument document = getSourceViewer().getDocument();
 		if (caretOffset < 0 || caretOffset >= document.getLength()) {
+			// The caret is outside of the document.
+			removeAnnotations();
 			return;
 		}
-		int tokenRegionOffset = tokenRegion.getOffset();
-		if (caretOffset >= tokenRegionOffset && caretOffset <= tokenRegionOffset + tokenRegion.getLength()) {
+		
+		if (isContainedIn(tokenRegion, caretOffset)) {
+			// The caret is still contained in the same token region. No need to update
+			// occurrence annotations.
 			return;
 		}
-		tokenRegion = new org.eclipse.jface.text.Region(-1,0);
+		
+		resetTokenRegion();
 		org.dresdenocl.language.ocl.resource.ocl.IOclLocationMap locationMap = textResource.getLocationMap();
-		java.util.List<org.eclipse.emf.ecore.EObject> elementsAtOffset = locationMap.getElementsAt(caretOffset);
+		List<EObject> elementsAtOffset = locationMap.getElementsAt(caretOffset);
 		
 		if (elementsAtOffset == null || elementsAtOffset.size() < 1) {
+			// The document does not contain EObjects. Probably there is a syntax error.
+			removeAnnotations();
 			return;
 		}
-		org.eclipse.emf.ecore.EObject firstElementAtOffset = elementsAtOffset.get(0);
-		org.eclipse.emf.ecore.EObject resolvedEO = tryToResolve(elementsAtOffset);
-		if (resolvedEO != null) {
-			elementsAtOffset = locationMap.getElementsAt(locationMap.getCharStart(resolvedEO));
+		
+		removeAnnotations();
+		EObject resolvedEObject = tryToResolve(elementsAtOffset);
+		EObject referencedElement;
+		EObject firstElementAtOffset = elementsAtOffset.get(0);
+		if (resolvedEObject != null) {
+			referencedElement = resolvedEObject;
+		} else {
+			referencedElement = firstElementAtOffset;
 		}
 		
-		tokenScanner.setRange(document, locationMap.getCharStart(firstElementAtOffset), getLength(firstElementAtOffset));
-		org.eclipse.jface.text.rules.IToken token = tokenScanner.nextToken();
-		while (!token.isEOF()) {
+		// Scan the region in which the referenced object is located.
+		org.dresdenocl.language.ocl.resource.ocl.ui.IOclTokenScanner tokenScanner = scan(referencedElement, new ITokenScannerConstraint() {
+			
+			public boolean mustStop(org.dresdenocl.language.ocl.resource.ocl.ui.IOclTokenScanner tokenScanner) {
+				int tokenOffset = tokenScanner.getTokenOffset();
+				int tokenLength = tokenScanner.getTokenLength();
+				// check whether the caret in this token
+				return isContainedIn(tokenOffset, tokenLength, caretOffset);
+			}
+		});
+		
+		if (tokenScanner != null) {
+			// caret is located in referenced element
+			removeAnnotations();
+			
 			int tokenOffset = tokenScanner.getTokenOffset();
 			int tokenLength = tokenScanner.getTokenLength();
-			String text = tokenScanner.getTokenText();
-			if (tokenOffset <= caretOffset && tokenLength + tokenOffset > caretOffset) {
-				if (text.trim().equals("")) {
-					// the rejected elements
-					return;
-				}
-				tokenText = text;
-				tokenRegion = new org.eclipse.jface.text.Region(tokenOffset, tokenLength);
-				removeAnnotations();
-				break;
-			}
-			token = tokenScanner.nextToken();
+			tokenText = tokenScanner.getTokenText();
+			tokenRegion = new Region(tokenOffset, tokenLength);
 		}
 		
-		if (tokenText == null || tokenText.equals("")) {
-			return;
-		}
-		if ((resolvedEO == null && quotedTokenArray.contains(tokenText)) || (resolvedEO == null && elementsAtOffset.get(0).eResource() == null) || bracketSet.isBracket(tokenText)) {
-			tokenText = "";
-			return;
-		}
-		try {
-			setHighlightingPositions(resolvedEO, elementsAtOffset);
-		} catch (Exception e) {
-			e.printStackTrace();
+		// The tokenScanner must always be not null if there was no proxy at the caret
+		// position, but to prevent JDT from complaining about a potential null pointer
+		// access, we check both conditions here.
+		if (resolvedEObject == null && tokenScanner != null) {
+			// caret is within definition
+			int tokenOffset = tokenScanner.getTokenOffset();
+			// we pass null as 'definitionText' because we do not know whether the token at
+			// the caret is actually the defining name
+			addAnnotations(referencedElement, null, tokenOffset, caretOffset);
+		} else {
+			// caret is within reference
+			int proxyOffset = locationMap.getCharStart(firstElementAtOffset);
+			int proxyLength = getLength(locationMap, firstElementAtOffset);
+			try {
+				String proxyText = document.get(proxyOffset, proxyLength);
+				int index = getIndexOf(referencedElement, proxyText);
+				if (index >= 0) {
+					addAnnotations(referencedElement, proxyText, index, caretOffset);
+				}
+			} catch (BadLocationException e) {
+				// ignore
+			}
 		}
 	}
 	
-	private void setHighlightingPositions(org.eclipse.emf.ecore.EObject definitionElement, java.util.List<org.eclipse.emf.ecore.EObject> elementsAtDefinition) {
-		org.eclipse.jface.text.IDocument document = projectionViewer.getDocument();
-		org.dresdenocl.language.ocl.resource.ocl.IOclLocationMap locationMap = textResource.getLocationMap();
-		org.eclipse.jface.text.rules.IToken token;
-		int defPosition = -1;
-		if (definitionElement == null) {
-			definitionElement = elementsAtDefinition.get(0);
-		}
-		org.eclipse.emf.ecore.resource.Resource resource = definitionElement.eResource();
-		if (resource == null) {
+	protected boolean isContainedIn(Region region, int offset) {
+		int regionOffset = region.getOffset();
+		int regionEnd = regionOffset + region.getLength();
+		return offset >= regionOffset && offset <= regionEnd;
+	}
+	
+	protected boolean isContainedIn(int regionOffset, int regionLength, int offset) {
+		int regionEnd = regionOffset + regionLength;
+		return regionOffset <= offset && offset < regionEnd;
+	}
+	
+	protected void addAnnotations(EObject referencedElement, String definitionText, int definitionOffset, int caretOffset) {
+		List<String> matchingNames = addAnnotationsForDefinition(referencedElement, definitionText, definitionOffset, caretOffset);
+		addAnnotationsForReferences(referencedElement, matchingNames);
+	}
+	
+	protected void addAnnotationsForReferences(EObject referencedElement, List<String> matchingNames) {
+		
+		IDocument document = getSourceViewer().getDocument();
+		
+		// Determine all references to the EObject
+		Map<EObject, Collection<Setting>> map = EcoreUtil.UsageCrossReferencer.find(Collections.singleton(textResource));
+		Collection<Setting> referencingObjects = map.get(referencedElement);
+		if (referencingObjects == null) {
+			// No references found
 			return;
 		}
-		if (resource.equals(textResource)) {
-			tokenScanner.setRange(projectionViewer.getDocument(), locationMap.getCharStart(definitionElement), getLength(definitionElement));
-			token = tokenScanner.nextToken();
-			while (!token.isEOF()) {
-				String text = tokenScanner.getTokenText();
-				if (text.equals(tokenText)) {
-					defPosition = tokenScanner.getTokenOffset();
-					addAnnotation(document, org.dresdenocl.language.ocl.resource.ocl.ui.OclPositionCategory.DEFINTION, text);
-					break;
+		
+		// Highlight the token in the text for the referencing objects
+		for (Setting setting : referencingObjects) {
+			EObject referencingElement = setting.getEObject();
+			// Search through all tokens in the elements that reference the element at the
+			// caret position
+			for (String name : matchingNames) {
+				int index = getIndexOf(referencingElement, name);
+				if (index > 0) {
+					addAnnotation(document, org.dresdenocl.language.ocl.resource.ocl.ui.OclPositionCategory.PROXY, name, index, name.length());
 				}
-				token = tokenScanner.nextToken();
 			}
 		}
-		tokenScanner.setRange(projectionViewer.getDocument(), 0, projectionViewer.getDocument().getLength());
-		org.eclipse.emf.ecore.EObject occEO;
-		token = tokenScanner.nextToken();
-		while (!token.isEOF()) {
-			String text = tokenScanner.getTokenText();
-			if (text != null && text.equals(tokenText) && tokenScanner.getTokenOffset() != defPosition) {
-				occEO = tryToResolve(locationMap.getElementsAt(tokenScanner.getTokenOffset()));
-				if (occEO != null) {
-					if (elementsAtDefinition.contains(occEO) || definitionElement.equals(occEO)) {
-						addAnnotation(document, org.dresdenocl.language.ocl.resource.ocl.ui.OclPositionCategory.PROXY, text);
+	}
+	
+	protected List<String> addAnnotationsForDefinition(EObject referencedElement, String definitionText, int definitionOffset, final int caretOffset) {
+		
+		final IDocument document = getSourceViewer().getDocument();
+		final List<String> matchingNames = new ArrayList<String>();
+		if (definitionText == null) {
+			// The object at the caret position is not referenced from within the resource.
+			// Thus, we cannot highlight occurrences or declarations.
+			final List<String> names = new org.dresdenocl.language.ocl.resource.ocl.analysis.OclDefaultNameProvider().getNames(referencedElement);
+			scan(referencedElement, new ITokenScannerConstraint() {
+				
+				public boolean mustStop(org.dresdenocl.language.ocl.resource.ocl.ui.IOclTokenScanner tokenScanner) {
+					int offset = tokenScanner.getTokenOffset();
+					int length = tokenScanner.getTokenLength();
+					String text = tokenScanner.getTokenText();
+					if (names.contains(text) && isContainedIn(offset, length, caretOffset)) {
+						matchingNames.add(text);
+						addAnnotation(document, org.dresdenocl.language.ocl.resource.ocl.ui.OclPositionCategory.DEFINITION, text, offset, text.length());
 					}
+					return false;
 				}
+			});
+		} else {
+			// Highlight the token in the text for the referenced object
+			addAnnotation(document, org.dresdenocl.language.ocl.resource.ocl.ui.OclPositionCategory.DEFINITION, definitionText, definitionOffset, definitionText.length());
+			matchingNames.add(definitionText);
+		}
+		return matchingNames;
+	}
+	
+	/**
+	 * Returns the index of the given text within the text that corresponds to  the
+	 * EObject.
+	 */
+	protected int getIndexOf(EObject eObject, final String text) {
+		org.dresdenocl.language.ocl.resource.ocl.ui.IOclTokenScanner tokenScanner = scan(eObject, new ITokenScannerConstraint() {
+			
+			public boolean mustStop(org.dresdenocl.language.ocl.resource.ocl.ui.IOclTokenScanner tokenScanner) {
+				String tokenText = tokenScanner.getTokenText();
+				return tokenText.equals(text);
 			}
-			token = tokenScanner.nextToken();
+		});
+		
+		if (tokenScanner == null) {
+			return -1;
+		} else {
+			return tokenScanner.getTokenOffset();
 		}
 	}
 	
-	private void addAnnotation(org.eclipse.jface.text.IDocument document, org.dresdenocl.language.ocl.resource.ocl.ui.OclPositionCategory type, String text) {
-		int tokenOffset = tokenScanner.getTokenOffset();
-		int tokenLength = tokenScanner.getTokenLength();
+	protected org.dresdenocl.language.ocl.resource.ocl.ui.IOclTokenScanner scan(EObject object, ITokenScannerConstraint constraint) {
+		IDocument document = getSourceViewer().getDocument();
+		
+		org.dresdenocl.language.ocl.resource.ocl.IOclLocationMap locationMap = textResource.getLocationMap();
+		
+		org.dresdenocl.language.ocl.resource.ocl.ui.IOclTokenScanner tokenScanner = createTokenScanner();
+		int offset = locationMap.getCharStart(object);
+		int length = getLength(locationMap, object);
+		
+		tokenScanner.setRange(document, offset, length);
+		IToken token = tokenScanner.nextToken();
+		while (!token.isEOF()) {
+			if (constraint.mustStop(tokenScanner)) {
+				return tokenScanner;
+			}
+			token = tokenScanner.nextToken();
+		}
+		return null;
+	}
+	
+	protected org.dresdenocl.language.ocl.resource.ocl.ui.IOclTokenScanner createTokenScanner() {
+		return new org.dresdenocl.language.ocl.resource.ocl.ui.OclUIMetaInformation().createTokenScanner(null, null);
+	}
+	
+	protected void addAnnotation(IDocument document, org.dresdenocl.language.ocl.resource.ocl.ui.OclPositionCategory type, String text, int offset, int length) {
 		// for declarations and occurrences we do not need to add the position to the
 		// document
-		org.eclipse.jface.text.Position position = positionHelper.createPosition(tokenOffset, tokenLength);
+		Position position = positionHelper.createPosition(offset, length);
 		// instead, an annotation is created
-		org.eclipse.jface.text.source.Annotation annotation = new org.eclipse.jface.text.source.Annotation(false);
-		if (type == org.dresdenocl.language.ocl.resource.ocl.ui.OclPositionCategory.DEFINTION) {
+		Annotation annotation = new Annotation(false);
+		if (type == org.dresdenocl.language.ocl.resource.ocl.ui.OclPositionCategory.DEFINITION) {
 			annotation.setText("Declaration of " + text);
 			annotation.setType(DECLARATION_ANNOTATION_ID);
 		} else {
 			annotation.setText("Occurrence of " + text);
 			annotation.setType(OCCURRENCE_ANNOTATION_ID);
 		}
-		projectionViewer.getAnnotationModel().addAnnotation(annotation, position);
+		getSourceViewer().getAnnotationModel().addAnnotation(annotation, position);
 	}
 	
-	private void removeAnnotations() {
+	protected void removeAnnotations() {
 		removeAnnotations(org.dresdenocl.language.ocl.resource.ocl.ui.OclOccurrence.OCCURRENCE_ANNOTATION_ID);
 		removeAnnotations(org.dresdenocl.language.ocl.resource.ocl.ui.OclOccurrence.DECLARATION_ANNOTATION_ID);
 	}
 	
-	private void removeAnnotations(String annotationTypeID) {
-		java.util.List<org.eclipse.jface.text.source.Annotation> annotationsToRemove = new java.util.ArrayList<org.eclipse.jface.text.source.Annotation>();
-		org.eclipse.jface.text.source.IAnnotationModel annotationModel = projectionViewer.getAnnotationModel();
-		java.util.Iterator<?> annotationIterator = annotationModel.getAnnotationIterator();
+	protected void removeAnnotations(String annotationTypeID) {
+		List<Annotation> annotationsToRemove = new ArrayList<Annotation>();
+		IAnnotationModel annotationModel = getSourceViewer().getAnnotationModel();
+		Iterator<?> annotationIterator = annotationModel.getAnnotationIterator();
 		while (annotationIterator.hasNext()) {
 			Object object = (Object) annotationIterator.next();
-			if (object instanceof org.eclipse.jface.text.source.Annotation) {
-				org.eclipse.jface.text.source.Annotation annotation = (org.eclipse.jface.text.source.Annotation) object;
+			if (object instanceof Annotation) {
+				Annotation annotation = (Annotation) object;
 				if (annotationTypeID.equals(annotation.getType())) {
 					annotationsToRemove.add(annotation);
 				}
 			}
 		}
-		for (org.eclipse.jface.text.source.Annotation annotation : annotationsToRemove) {
+		for (Annotation annotation : annotationsToRemove) {
 			annotationModel.removeAnnotation(annotation);
 		}
 	}
 	
 	/**
-	 * Check whether it is time to remove the occurrence highlighting.
-	 * 
-	 * @return <code>true</code> if the caret changed the token.
+	 * Resets the token region to enable remove highlighting if the text is changing.
 	 */
-	public boolean isToRemoveHighlighting() {
-		org.eclipse.swt.custom.StyledText textWidget = projectionViewer.getTextWidget();
-		int caretOffset = textWidget.getCaretOffset();
-		caretOffset = projectionViewer.widgetOffset2ModelOffset(caretOffset);
-		if (caretOffset >= tokenRegion.getOffset() && caretOffset <= tokenRegion.getOffset() + tokenRegion.getLength()) {
-			return false;
+	public void resetTokenRegion() {
+		tokenRegion = new Region(-1, 0);
+	}
+	
+	protected int getCaretOffset() {
+		StyledText textWidget = getSourceViewer().getTextWidget();
+		
+		if (textWidget == null) {
+			return -1;
 		}
-		return true;
+		
+		int widgetOffset = textWidget.getCaretOffset();
+		return getTextViewerExtension5().widgetOffset2ModelOffset(widgetOffset);
 	}
 	
 	/**
-	 * Resets the token region to enable remove highlighting if the text is changing.
+	 * Accessor method for the field <code>projectionViewer</code>. The accessor is
+	 * also used for unit testing to inject a custom source viewer by overriding this
+	 * method.
 	 */
-	public void resetTokenRegion(){
-		tokenRegion = new org.eclipse.jface.text.Region(-1, 0);
+	protected ISourceViewer getSourceViewer() {
+		return projectionViewer;
+	}
+	
+	/**
+	 * Accessor method for the field <code>projectionViewer</code>. The accessor is
+	 * also used for unit testing to inject a custom text viewer extension by
+	 * overriding this method.
+	 */
+	protected ITextViewerExtension5 getTextViewerExtension5() {
+		return projectionViewer;
 	}
 	
 }

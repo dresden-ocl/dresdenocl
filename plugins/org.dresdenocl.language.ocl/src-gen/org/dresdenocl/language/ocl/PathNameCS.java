@@ -21,11 +21,11 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface PathNameCS extends EObject {
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @model kind="operation" required="true"
-   * @generated
-   */
+	 * @model kind="operation" required="true"
+	 * @generated
+	 */
 	NamedElement getNamedElement();
 
 } // PathNameCS

@@ -6,6 +6,7 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.grammar;
 
+
 public class OclCompound extends org.dresdenocl.language.ocl.resource.ocl.grammar.OclSyntaxElement {
 	
 	public OclCompound(org.dresdenocl.language.ocl.resource.ocl.grammar.OclChoice choice, org.dresdenocl.language.ocl.resource.ocl.grammar.OclCardinality cardinality) {

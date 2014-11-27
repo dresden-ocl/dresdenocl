@@ -6,6 +6,8 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.util;
 
+import org.eclipse.core.runtime.Platform;
+
 /**
  * This utility class provides methods to obtain information about the current
  * runtime, for example whether Eclipse is available or not.
@@ -20,6 +22,21 @@ public class OclRuntimeUtil {
 	public boolean isEclipsePlatformAvailable() {
 		try {
 			Class.forName("org.eclipse.core.runtime.Platform");
+			return true;
+		} catch (ClassNotFoundException cnfe) {
+		}
+		return false;
+	}
+	
+	/**
+	 * Checks whether the class
+	 * <code>org.eclipse.emf.validation.internal.EMFModelValidationPlugin</code> is
+	 * available on the classpath. This can be used to determine if Eclipse is
+	 * available in the current runtime environment.
+	 */
+	public boolean isEMFValidationAvailable() {
+		try {
+			Class.forName("org.eclipse.emf.validation.internal.EMFModelValidationPlugin");
 			return true;
 		} catch (ClassNotFoundException cnfe) {
 		}
@@ -63,7 +80,7 @@ public class OclRuntimeUtil {
 		if (!isEclipsePlatformAvailable()) {
 			return false;
 		}
-		return org.eclipse.core.runtime.Platform.isRunning();
+		return Platform.isRunning();
 	}
 	
 }

@@ -6,6 +6,9 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EStructuralFeature;
+
 /**
  * A OclContainedFeature represents a path element of a
  * org.dresdenocl.language.ocl.resource.ocl.grammar.OclContainmentTrace
@@ -15,24 +18,24 @@ public class OclContainedFeature {
 	/**
 	 * The class to which the feature points.
 	 */
-	private org.eclipse.emf.ecore.EClass containerClass;
+	private EClass containerClass;
 	
 	/**
 	 * The feature that points to the container class.
 	 */
-	private org.eclipse.emf.ecore.EStructuralFeature feature;
+	private EStructuralFeature feature;
 	
-	public OclContainedFeature(org.eclipse.emf.ecore.EClass containerClass, org.eclipse.emf.ecore.EStructuralFeature feature) {
+	public OclContainedFeature(EClass containerClass, EStructuralFeature feature) {
 		super();
 		this.containerClass = containerClass;
 		this.feature = feature;
 	}
 	
-	public org.eclipse.emf.ecore.EClass getContainerClass() {
+	public EClass getContainerClass() {
 		return containerClass;
 	}
 	
-	public org.eclipse.emf.ecore.EStructuralFeature getFeature() {
+	public EStructuralFeature getFeature() {
 		return feature;
 	}
 	

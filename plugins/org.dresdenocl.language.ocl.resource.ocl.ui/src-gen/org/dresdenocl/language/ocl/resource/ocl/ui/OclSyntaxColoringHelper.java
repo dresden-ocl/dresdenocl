@@ -6,6 +6,7 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.ui;
 
+
 public class OclSyntaxColoringHelper {
 	
 	public static enum StyleProperty {

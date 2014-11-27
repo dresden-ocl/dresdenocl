@@ -6,6 +6,9 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class OclSyntaxElementDecorator {
 	
 	/**
@@ -22,7 +25,7 @@ public class OclSyntaxElementDecorator {
 	/**
 	 * a list of the indices that must be printed
 	 */
-	private java.util.List<Integer> indicesToPrint = new java.util.ArrayList<Integer>();
+	private List<Integer> indicesToPrint = new ArrayList<Integer>();
 	
 	public OclSyntaxElementDecorator(org.dresdenocl.language.ocl.resource.ocl.grammar.OclSyntaxElement decoratedElement, OclSyntaxElementDecorator[] childDecorators) {
 		super();

@@ -6,6 +6,7 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
+
 /**
  * A basic implementation of the ITokenResolveResult interface.
  */

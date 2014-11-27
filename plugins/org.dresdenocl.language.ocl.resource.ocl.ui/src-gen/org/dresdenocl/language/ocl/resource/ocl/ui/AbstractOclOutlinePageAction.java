@@ -6,7 +6,12 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.ui;
 
-public abstract class AbstractOclOutlinePageAction extends org.eclipse.jface.action.Action {
+import org.eclipse.jface.action.Action;
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.swt.custom.BusyIndicator;
+import org.eclipse.swt.widgets.Display;
+
+public abstract class AbstractOclOutlinePageAction extends Action {
 	
 	private String preferenceKey = this.getClass().getSimpleName() + ".isChecked";
 	
@@ -18,7 +23,7 @@ public abstract class AbstractOclOutlinePageAction extends org.eclipse.jface.act
 	}
 	
 	public void initialize(String imagePath) {
-		org.eclipse.jface.resource.ImageDescriptor descriptor = org.dresdenocl.language.ocl.resource.ocl.ui.OclImageProvider.INSTANCE.getImageDescriptor(imagePath);
+		ImageDescriptor descriptor = org.dresdenocl.language.ocl.resource.ocl.ui.OclImageProvider.INSTANCE.getImageDescriptor(imagePath);
 		setDisabledImageDescriptor(descriptor);
 		setImageDescriptor(descriptor);
 		setHoverImageDescriptor(descriptor);
@@ -26,7 +31,7 @@ public abstract class AbstractOclOutlinePageAction extends org.eclipse.jface.act
 		valueChanged(checked, false);
 	}
 	
-	@Override	
+	@Override
 	public void run() {
 		if (keepState()) {
 			valueChanged(isChecked(), true);
@@ -36,7 +41,7 @@ public abstract class AbstractOclOutlinePageAction extends org.eclipse.jface.act
 	}
 	
 	public void runBusy(final boolean on) {
-		org.eclipse.swt.custom.BusyIndicator.showWhile(org.eclipse.swt.widgets.Display.getCurrent(), new Runnable() {
+		BusyIndicator.showWhile(Display.getCurrent(), new Runnable() {
 			public void run() {
 				runInternal(on);
 			}

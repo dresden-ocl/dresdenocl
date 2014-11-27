@@ -6,10 +6,12 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
+import org.eclipse.emf.ecore.EClass;
+
 public class OclFoldingInformationProvider {
 	
-	public org.eclipse.emf.ecore.EClass[] getFoldableClasses() {
-		return new org.eclipse.emf.ecore.EClass[] {
+	public EClass[] getFoldableClasses() {
+		return new EClass[] {
 			org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getOperationContextDeclarationCS(),
 			org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getAttributeContextDeclarationCS(),
 			org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getClassifierContextDeclarationCS(),

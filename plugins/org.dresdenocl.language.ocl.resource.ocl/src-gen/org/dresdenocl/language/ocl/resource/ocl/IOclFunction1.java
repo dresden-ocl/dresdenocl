@@ -6,6 +6,7 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl;
 
+
 /**
  * A simple interface for generic functions with one argument.
  */

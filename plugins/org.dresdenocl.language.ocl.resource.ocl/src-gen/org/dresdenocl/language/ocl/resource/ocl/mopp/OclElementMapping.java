@@ -6,9 +6,12 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
+
 /**
+ * <p>
  * A basic implementation of the
  * org.dresdenocl.language.ocl.resource.ocl.IOclElementMapping interface.
+ * </p>
  * 
  * @param <ReferenceType> the type of the reference that can be mapped to
  */

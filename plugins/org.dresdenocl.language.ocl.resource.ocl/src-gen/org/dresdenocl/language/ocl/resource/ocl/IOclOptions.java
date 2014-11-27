@@ -6,6 +6,7 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl;
 
+
 /**
  * A list of constants that contains the keys for some options that are built into
  * EMFText. Generated resource plug-ins do automatically recognize these options
@@ -69,12 +70,29 @@ public interface IOclOptions {
 	public final String DISABLE_LAYOUT_INFORMATION_RECORDING = "DISABLE_LAYOUT_INFORMATION_RECORDING";
 	
 	/**
+	 * The key for the option to disable EMF validation when loading resources. If
+	 * this option is set to <code>true</code>, the EMF validation framework is not
+	 * invoked.
+	 */
+	public final String DISABLE_EMF_VALIDATION = "DISABLE_EMF_VALIDATION";
+	
+	/**
+	 * <p>
 	 * The key for the option to set the encoding to use when loading or saving
 	 * resources. This is equivalent to the same option specified in class
 	 * <code>org.eclipse.emf.ecore.xmi.XMLResource</code>.
+	 * </p>
 	 * 
 	 * @see org.eclipse.emf.ecore.xmi.XMLResource
 	 */
 	public final String OPTION_ENCODING = "ENCODING";
+	
+	/**
+	 * The key for the option to set the line delimiter character sequence that is
+	 * used when printing models. By default, platform line breaks are used. Note that
+	 * these characters are only used when the resource does not contain layout
+	 * information, but the syntax contains line break printing instructions.
+	 */
+	public final String LINE_DELIMITER_FOR_PRINTING = "LINE_DELIMITER_FOR_PRINTING";
 	
 }

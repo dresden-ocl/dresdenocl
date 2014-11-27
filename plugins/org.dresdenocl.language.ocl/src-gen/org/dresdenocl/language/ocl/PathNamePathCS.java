@@ -22,19 +22,19 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface PathNamePathCS extends PathNameCS {
 	/**
-   * Returns the value of the '<em><b>Path Name</b></em>' containment reference list.
-   * The list contents are of type {@link org.dresdenocl.language.ocl.UnreservedSimpleNameCS}.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Path Name</b></em>' containment reference list.
+	 * The list contents are of type {@link org.dresdenocl.language.ocl.UnreservedSimpleNameCS}.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Path Name</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Path Name</em>' containment reference list.
-   * @see org.dresdenocl.language.ocl.OclPackage#getPathNamePathCS_PathName()
-   * @model containment="true" lower="2"
-   * @generated
-   */
+	 * @return the value of the '<em>Path Name</em>' containment reference list.
+	 * @see org.dresdenocl.language.ocl.OclPackage#getPathNamePathCS_PathName()
+	 * @model containment="true" lower="2"
+	 * @generated
+	 */
 	EList<UnreservedSimpleNameCS> getPathName();
 
 } // PathNamePathCS

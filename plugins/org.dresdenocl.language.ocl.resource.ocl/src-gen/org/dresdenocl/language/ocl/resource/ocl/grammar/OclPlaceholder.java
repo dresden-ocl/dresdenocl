@@ -6,6 +6,8 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.grammar;
 
+import org.eclipse.emf.ecore.EStructuralFeature;
+
 /**
  * A class to represent placeholders in a grammar.
  */
@@ -13,7 +15,7 @@ public class OclPlaceholder extends org.dresdenocl.language.ocl.resource.ocl.gra
 	
 	private final String tokenName;
 	
-	public OclPlaceholder(org.eclipse.emf.ecore.EStructuralFeature feature, String tokenName, org.dresdenocl.language.ocl.resource.ocl.grammar.OclCardinality cardinality, int mandatoryOccurencesAfter) {
+	public OclPlaceholder(EStructuralFeature feature, String tokenName, org.dresdenocl.language.ocl.resource.ocl.grammar.OclCardinality cardinality, int mandatoryOccurencesAfter) {
 		super(feature, cardinality, mandatoryOccurencesAfter);
 		this.tokenName = tokenName;
 	}

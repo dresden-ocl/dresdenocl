@@ -6,6 +6,14 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.resource.Resource.Factory;
+
 public class OclMetaInformation implements org.dresdenocl.language.ocl.resource.ocl.IOclMetaInformation {
 	
 	public String getSyntaxName() {
@@ -20,19 +28,19 @@ public class OclMetaInformation implements org.dresdenocl.language.ocl.resource.
 		return new org.dresdenocl.language.ocl.resource.ocl.mopp.OclAntlrScanner(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclLexer());
 	}
 	
-	public org.dresdenocl.language.ocl.resource.ocl.IOclTextParser createParser(java.io.InputStream inputStream, String encoding) {
+	public org.dresdenocl.language.ocl.resource.ocl.IOclTextParser createParser(InputStream inputStream, String encoding) {
 		return new org.dresdenocl.language.ocl.resource.ocl.mopp.OclParser().createInstance(inputStream, encoding);
 	}
 	
-	public org.dresdenocl.language.ocl.resource.ocl.IOclTextPrinter createPrinter(java.io.OutputStream outputStream, org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource) {
+	public org.dresdenocl.language.ocl.resource.ocl.IOclTextPrinter createPrinter(OutputStream outputStream, org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource) {
 		return new org.dresdenocl.language.ocl.resource.ocl.mopp.OclPrinter2(outputStream, resource);
 	}
 	
-	public org.eclipse.emf.ecore.EClass[] getClassesWithSyntax() {
+	public EClass[] getClassesWithSyntax() {
 		return new org.dresdenocl.language.ocl.resource.ocl.mopp.OclSyntaxCoverageInformationProvider().getClassesWithSyntax();
 	}
 	
-	public org.eclipse.emf.ecore.EClass[] getStartSymbols() {
+	public EClass[] getStartSymbols() {
 		return new org.dresdenocl.language.ocl.resource.ocl.mopp.OclSyntaxCoverageInformationProvider().getStartSymbols();
 	}
 	
@@ -56,15 +64,15 @@ public class OclMetaInformation implements org.dresdenocl.language.ocl.resource.
 		return new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTokenStyleInformationProvider().getDefaultTokenStyle(tokenName);
 	}
 	
-	public java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair> getBracketPairs() {
+	public Collection<org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair> getBracketPairs() {
 		return new org.dresdenocl.language.ocl.resource.ocl.mopp.OclBracketInformationProvider().getBracketPairs();
 	}
 	
-	public org.eclipse.emf.ecore.EClass[] getFoldableClasses() {
+	public EClass[] getFoldableClasses() {
 		return new org.dresdenocl.language.ocl.resource.ocl.mopp.OclFoldingInformationProvider().getFoldableClasses();
 	}
 	
-	public org.eclipse.emf.ecore.resource.Resource.Factory createResourceFactory() {
+	public Factory createResourceFactory() {
 		return new org.dresdenocl.language.ocl.resource.ocl.mopp.OclResourceFactory();
 	}
 	
@@ -73,7 +81,10 @@ public class OclMetaInformation implements org.dresdenocl.language.ocl.resource.
 	}
 	
 	public void registerResourceFactory() {
-		org.eclipse.emf.ecore.resource.Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(getSyntaxName(), new org.dresdenocl.language.ocl.resource.ocl.mopp.OclResourceFactory());
+		// if no resource factory registered, register delegator
+		if (Factory.Registry.INSTANCE.getExtensionToFactoryMap().get(getSyntaxName()) == null) {
+			Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(getSyntaxName(), new org.dresdenocl.language.ocl.resource.ocl.mopp.OclResourceFactoryDelegator());
+		}
 	}
 	
 	/**
@@ -106,7 +117,7 @@ public class OclMetaInformation implements org.dresdenocl.language.ocl.resource.
 	
 	public String[] getSyntaxHighlightableTokenNames() {
 		org.dresdenocl.language.ocl.resource.ocl.mopp.OclAntlrTokenHelper tokenHelper = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclAntlrTokenHelper();
-		java.util.List<String> highlightableTokens = new java.util.ArrayList<String>();
+		List<String> highlightableTokens = new ArrayList<String>();
 		String[] parserTokenNames = getTokenNames();
 		for (int i = 0; i < parserTokenNames.length; i++) {
 			// If ANTLR is used we need to normalize the token names

@@ -6,6 +6,8 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.grammar;
 
+import org.eclipse.emf.ecore.EStructuralFeature;
+
 /**
  * This class provides the follow sets for all terminals of the grammar. These
  * sets are used during code completion.
@@ -14,7 +16,7 @@ public class OclFollowSetProvider {
 	
 	public final static org.dresdenocl.language.ocl.resource.ocl.IOclExpectedElement TERMINALS[] = new org.dresdenocl.language.ocl.resource.ocl.IOclExpectedElement[134];
 	
-	public final static org.eclipse.emf.ecore.EStructuralFeature[] FEATURES = new org.eclipse.emf.ecore.EStructuralFeature[62];
+	public final static EStructuralFeature[] FEATURES = new EStructuralFeature[62];
 	
 	public final static org.dresdenocl.language.ocl.resource.ocl.mopp.OclContainedFeature[] LINKS = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContainedFeature[11189];
 	

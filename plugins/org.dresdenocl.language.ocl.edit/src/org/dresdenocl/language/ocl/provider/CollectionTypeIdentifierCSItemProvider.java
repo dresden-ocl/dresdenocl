@@ -29,9 +29,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * @generated
  */
-public class CollectionTypeIdentifierCSItemProvider extends TypeCSItemProvider
-		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class CollectionTypeIdentifierCSItemProvider extends TypeCSItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->

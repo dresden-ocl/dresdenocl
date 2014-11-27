@@ -30,125 +30,119 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class PathNamePathCSImpl extends PathNameCSImpl implements PathNamePathCS {
 	/**
-   * The cached value of the '{@link #getPathName() <em>Path Name</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getPathName() <em>Path Name</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getPathName()
-   * @generated
-   * @ordered
-   */
+	 * @see #getPathName()
+	 * @generated
+	 * @ordered
+	 */
 	protected EList<UnreservedSimpleNameCS> pathName;
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected PathNamePathCSImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-    return OclPackage.Literals.PATH_NAME_PATH_CS;
-  }
+		return OclPackage.Literals.PATH_NAME_PATH_CS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EList<UnreservedSimpleNameCS> getPathName() {
-    if (pathName == null)
-    {
-      pathName = new EObjectContainmentEList<UnreservedSimpleNameCS>(UnreservedSimpleNameCS.class, this, OclPackage.PATH_NAME_PATH_CS__PATH_NAME);
-    }
-    return pathName;
-  }
+		if (pathName == null) {
+			pathName = new EObjectContainmentEList<UnreservedSimpleNameCS>(UnreservedSimpleNameCS.class, this, OclPackage.PATH_NAME_PATH_CS__PATH_NAME);
+		}
+		return pathName;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-    switch (featureID)
-    {
-      case OclPackage.PATH_NAME_PATH_CS__PATH_NAME:
-        return ((InternalEList<?>)getPathName()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+		switch (featureID) {
+			case OclPackage.PATH_NAME_PATH_CS__PATH_NAME:
+				return ((InternalEList<?>)getPathName()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID)
-    {
-      case OclPackage.PATH_NAME_PATH_CS__PATH_NAME:
-        return getPathName();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case OclPackage.PATH_NAME_PATH_CS__PATH_NAME:
+				return getPathName();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-    switch (featureID)
-    {
-      case OclPackage.PATH_NAME_PATH_CS__PATH_NAME:
-        getPathName().clear();
-        getPathName().addAll((Collection<? extends UnreservedSimpleNameCS>)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case OclPackage.PATH_NAME_PATH_CS__PATH_NAME:
+				getPathName().clear();
+				getPathName().addAll((Collection<? extends UnreservedSimpleNameCS>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public void eUnset(int featureID) {
-    switch (featureID)
-    {
-      case OclPackage.PATH_NAME_PATH_CS__PATH_NAME:
-        getPathName().clear();
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case OclPackage.PATH_NAME_PATH_CS__PATH_NAME:
+				getPathName().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-    switch (featureID)
-    {
-      case OclPackage.PATH_NAME_PATH_CS__PATH_NAME:
-        return pathName != null && !pathName.isEmpty();
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case OclPackage.PATH_NAME_PATH_CS__PATH_NAME:
+				return pathName != null && !pathName.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
 
 	@Override

@@ -6,24 +6,41 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.ui;
 
+import java.util.ArrayList;
+import java.util.List;
+import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.preference.PreferenceConverter;
+import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.TextAttribute;
+import org.eclipse.jface.text.rules.IToken;
+import org.eclipse.jface.text.rules.Token;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.RGB;
+
 /**
  * An adapter from the Eclipse
  * <code>org.eclipse.jface.text.rules.ITokenScanner</code> interface to the
  * generated lexer.
  */
-public class OclTokenScanner implements org.eclipse.jface.text.rules.ITokenScanner {
+public class OclTokenScanner implements org.dresdenocl.language.ocl.resource.ocl.ui.IOclTokenScanner {
 	
 	private org.dresdenocl.language.ocl.resource.ocl.IOclTextScanner lexer;
 	private org.dresdenocl.language.ocl.resource.ocl.IOclTextToken currentToken;
-	private java.util.List<org.dresdenocl.language.ocl.resource.ocl.IOclTextToken> nextTokens;
+	private List<org.dresdenocl.language.ocl.resource.ocl.IOclTextToken> nextTokens;
 	private int offset;
 	private String languageId;
-	private org.eclipse.jface.preference.IPreferenceStore store;
+	private IPreferenceStore store;
 	private org.dresdenocl.language.ocl.resource.ocl.ui.OclColorManager colorManager;
 	private org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource;
 	
 	/**
+	 * <p>
+	 * Creates a new OclTokenScanner.
+	 * </p>
 	 * 
+	 * @param resource The resource to scan
 	 * @param colorManager A manager to obtain color objects
 	 */
 	public OclTokenScanner(org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource, org.dresdenocl.language.ocl.resource.ocl.ui.OclColorManager colorManager) {
@@ -35,7 +52,7 @@ public class OclTokenScanner implements org.eclipse.jface.text.rules.ITokenScann
 		if (plugin != null) {
 			this.store = plugin.getPreferenceStore();
 		}
-		this.nextTokens = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.IOclTextToken>();
+		this.nextTokens = new ArrayList<org.dresdenocl.language.ocl.resource.ocl.IOclTextToken>();
 	}
 	
 	public int getTokenLength() {
@@ -46,7 +63,7 @@ public class OclTokenScanner implements org.eclipse.jface.text.rules.ITokenScann
 		return offset + currentToken.getOffset();
 	}
 	
-	public org.eclipse.jface.text.rules.IToken nextToken() {
+	public IToken nextToken() {
 		boolean isOriginalToken = true;
 		if (!nextTokens.isEmpty()) {
 			currentToken = nextTokens.remove(0);
@@ -55,14 +72,14 @@ public class OclTokenScanner implements org.eclipse.jface.text.rules.ITokenScann
 			currentToken = lexer.getNextToken();
 		}
 		if (currentToken == null || !currentToken.canBeUsedForSyntaxHighlighting()) {
-			return org.eclipse.jface.text.rules.Token.EOF;
+			return Token.EOF;
 		}
 		
 		if (isOriginalToken) {
 			splitCurrentToken();
 		}
 		
-		org.eclipse.jface.text.TextAttribute textAttribute = null;
+		TextAttribute textAttribute = null;
 		String tokenName = currentToken.getName();
 		if (tokenName != null) {
 			org.dresdenocl.language.ocl.resource.ocl.IOclTokenStyle staticStyle = getStaticTokenStyle();
@@ -74,14 +91,14 @@ public class OclTokenScanner implements org.eclipse.jface.text.rules.ITokenScann
 			}
 		}
 		
-		return new org.eclipse.jface.text.rules.Token(textAttribute);
+		return new Token(textAttribute);
 	}
 	
-	public void setRange(org.eclipse.jface.text.IDocument document, int offset, int length) {
+	public void setRange(IDocument document, int offset, int length) {
 		this.offset = offset;
 		try {
 			lexer.setText(document.get(offset, length));
-		} catch (org.eclipse.jface.text.BadLocationException e) {
+		} catch (BadLocationException e) {
 			// ignore this error. It might occur during editing when locations are outdated
 			// quickly.
 		}
@@ -91,7 +108,7 @@ public class OclTokenScanner implements org.eclipse.jface.text.rules.ITokenScann
 		return currentToken.getText();
 	}
 	
-	public int[] convertToIntArray(org.eclipse.swt.graphics.RGB rgb) {
+	public int[] convertToIntArray(RGB rgb) {
 		if (rgb == null) {
 			return null;
 		}
@@ -99,57 +116,62 @@ public class OclTokenScanner implements org.eclipse.jface.text.rules.ITokenScann
 	}
 	
 	public org.dresdenocl.language.ocl.resource.ocl.IOclTokenStyle getStaticTokenStyle() {
-		org.dresdenocl.language.ocl.resource.ocl.IOclTokenStyle staticStyle = null;
 		String tokenName = currentToken.getName();
 		String enableKey = org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.ENABLE);
-		boolean enabled = store.getBoolean(enableKey);
-		if (enabled) {
-			String colorKey = org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.COLOR);
-			org.eclipse.swt.graphics.RGB foregroundRGB = org.eclipse.jface.preference.PreferenceConverter.getColor(store, colorKey);
-			org.eclipse.swt.graphics.RGB backgroundRGB = null;
-			boolean bold = store.getBoolean(org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.BOLD));
-			boolean italic = store.getBoolean(org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.ITALIC));
-			boolean strikethrough = store.getBoolean(org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.STRIKETHROUGH));
-			boolean underline = store.getBoolean(org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.UNDERLINE));
-			staticStyle = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTokenStyle(convertToIntArray(foregroundRGB), convertToIntArray(backgroundRGB), bold, italic, strikethrough, underline);
+		if (store == null) {
+			return null;
 		}
-		return staticStyle;
+		
+		boolean enabled = store.getBoolean(enableKey);
+		if (!enabled) {
+			return null;
+		}
+		
+		String colorKey = org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.COLOR);
+		RGB foregroundRGB = PreferenceConverter.getColor(store, colorKey);
+		RGB backgroundRGB = null;
+		boolean bold = store.getBoolean(org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.BOLD));
+		boolean italic = store.getBoolean(org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.ITALIC));
+		boolean strikethrough = store.getBoolean(org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.STRIKETHROUGH));
+		boolean underline = store.getBoolean(org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.UNDERLINE));
+		return new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTokenStyle(convertToIntArray(foregroundRGB), convertToIntArray(backgroundRGB), bold, italic, strikethrough, underline);
 	}
 	
 	public org.dresdenocl.language.ocl.resource.ocl.IOclTokenStyle getDynamicTokenStyle(org.dresdenocl.language.ocl.resource.ocl.IOclTokenStyle staticStyle) {
 		org.dresdenocl.language.ocl.resource.ocl.mopp.OclDynamicTokenStyler dynamicTokenStyler = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclDynamicTokenStyler();
+		dynamicTokenStyler.setOffset(offset);
 		org.dresdenocl.language.ocl.resource.ocl.IOclTokenStyle dynamicStyle = dynamicTokenStyler.getDynamicTokenStyle(resource, currentToken, staticStyle);
 		return dynamicStyle;
 	}
 	
-	public org.eclipse.jface.text.TextAttribute getTextAttribute(org.dresdenocl.language.ocl.resource.ocl.IOclTokenStyle tokeStyle) {
+	public TextAttribute getTextAttribute(org.dresdenocl.language.ocl.resource.ocl.IOclTokenStyle tokeStyle) {
 		int[] foregroundColorArray = tokeStyle.getColorAsRGB();
-		org.eclipse.swt.graphics.Color foregroundColor = null;
+		Color foregroundColor = null;
 		if (colorManager != null) {
-			foregroundColor = colorManager.getColor(new org.eclipse.swt.graphics.RGB(foregroundColorArray[0], foregroundColorArray[1], foregroundColorArray[2]));
+			foregroundColor = colorManager.getColor(new RGB(foregroundColorArray[0], foregroundColorArray[1], foregroundColorArray[2]));
 		}
 		int[] backgroundColorArray = tokeStyle.getBackgroundColorAsRGB();
-		org.eclipse.swt.graphics.Color backgroundColor = null;
+		Color backgroundColor = null;
 		if (backgroundColorArray != null) {
-			org.eclipse.swt.graphics.RGB backgroundRGB = new org.eclipse.swt.graphics.RGB(backgroundColorArray[0], backgroundColorArray[1], backgroundColorArray[2]);
+			RGB backgroundRGB = new RGB(backgroundColorArray[0], backgroundColorArray[1], backgroundColorArray[2]);
 			if (colorManager != null) {
 				backgroundColor = colorManager.getColor(backgroundRGB);
 			}
 		}
-		int style = org.eclipse.swt.SWT.NORMAL;
+		int style = SWT.NORMAL;
 		if (tokeStyle.isBold()) {
-			style = style | org.eclipse.swt.SWT.BOLD;
+			style = style | SWT.BOLD;
 		}
 		if (tokeStyle.isItalic()) {
-			style = style | org.eclipse.swt.SWT.ITALIC;
+			style = style | SWT.ITALIC;
 		}
 		if (tokeStyle.isStrikethrough()) {
-			style = style | org.eclipse.jface.text.TextAttribute.STRIKETHROUGH;
+			style = style | TextAttribute.STRIKETHROUGH;
 		}
 		if (tokeStyle.isUnderline()) {
-			style = style | org.eclipse.jface.text.TextAttribute.UNDERLINE;
+			style = style | TextAttribute.UNDERLINE;
 		}
-		return new org.eclipse.jface.text.TextAttribute(foregroundColor, backgroundColor, style);
+		return new TextAttribute(foregroundColor, backgroundColor, style);
 	}
 	
 	/**
@@ -162,19 +184,19 @@ public class OclTokenScanner implements org.eclipse.jface.text.rules.ITokenScann
 		final int charStart = currentToken.getOffset();
 		final int column = currentToken.getColumn();
 		
-		java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclTaskItem> taskItems = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTaskItemDetector().findTaskItems(text, line, charStart);
+		List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclTaskItem> taskItems = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTaskItemDetector().findTaskItems(text, line, charStart);
 		
 		// this is the offset for the next token to be added
 		int offset = charStart;
 		int itemBeginRelative;
-		java.util.List<org.dresdenocl.language.ocl.resource.ocl.IOclTextToken> newItems = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.IOclTextToken>();
+		List<org.dresdenocl.language.ocl.resource.ocl.IOclTextToken> newItems = new ArrayList<org.dresdenocl.language.ocl.resource.ocl.IOclTextToken>();
 		for (org.dresdenocl.language.ocl.resource.ocl.mopp.OclTaskItem taskItem : taskItems) {
 			int itemBegin = taskItem.getCharStart();
 			int itemLine = taskItem.getLine();
 			int itemColumn = 0;
 			
 			itemBeginRelative = itemBegin - charStart;
-			// create token before task item (TODO if required)
+			// create token before task item
 			String textBefore = text.substring(offset - charStart, itemBeginRelative);
 			int textBeforeLength = textBefore.length();
 			newItems.add(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTextToken(name, textBefore, offset, textBeforeLength, line, column, true));
@@ -189,7 +211,7 @@ public class OclTokenScanner implements org.eclipse.jface.text.rules.ITokenScann
 		}
 		
 		if (!taskItems.isEmpty()) {
-			// create token after last task item (TODO if required)
+			// create token after last task item
 			String textAfter = text.substring(offset - charStart);
 			newItems.add(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTextToken(name, textAfter, offset, textAfter.length(), line, column, true));
 		}

@@ -6,66 +6,88 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.ui;
 
+import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.wizard.WizardPage;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.dialogs.ContainerSelectionDialog;
+
 /**
  * The NewFileWizardPage allows setting the container for the new file, as well as
  * the file name. The page will only accept file names without extension OR with
  * an extension that matches the expected one.
  */
-public class OclNewFileWizardPage extends org.eclipse.jface.wizard.WizardPage {
+public class OclNewFileWizardPage extends WizardPage {
 	
 	private final String fileExtension;
-	private org.eclipse.swt.widgets.Text containerText;
-	private org.eclipse.swt.widgets.Text fileText;
-	private org.eclipse.jface.viewers.ISelection selection;
+	private Text containerText;
+	private Text fileText;
+	private ISelection selection;
 	
 	/**
 	 * Constructor for the NewFileWizardPage.
 	 */
-	public OclNewFileWizardPage(org.eclipse.jface.viewers.ISelection selection, String fileExtension) {
+	public OclNewFileWizardPage(ISelection selection, String fileExtension) {
 		super("wizardPage");
-		setTitle("Create new ocl file");
-		setDescription("This wizard creates a new file with *." + fileExtension + " extension that can be opened with the EMFText editor.");
+		setTitle(org.dresdenocl.language.ocl.resource.ocl.ui.OclUIResourceBundle.NEW_FILE_WIZARD_PAGE_TITLE);
+		setDescription(org.dresdenocl.language.ocl.resource.ocl.ui.OclUIResourceBundle.NEW_FILE_WIZARD_DESCRIPTION);
 		this.selection = selection;
 		this.fileExtension = fileExtension;
 	}
 	
 	/**
 	 * 
-	 * @see IDialogPage#createControl(org.eclipse.swt.widgets.Composite)
+	 * @see IDialogPage#createControl(Composite)
 	 */
-	public void createControl(org.eclipse.swt.widgets.Composite parent) {
-		org.eclipse.swt.widgets.Composite container = new org.eclipse.swt.widgets.Composite(parent, org.eclipse.swt.SWT.NULL);
-		org.eclipse.swt.layout.GridLayout layout = new org.eclipse.swt.layout.GridLayout();
+	public void createControl(Composite parent) {
+		Composite container = new Composite(parent, SWT.NULL);
+		GridLayout layout = new GridLayout();
 		container.setLayout(layout);
 		layout.numColumns = 3;
 		layout.verticalSpacing = 9;
-		org.eclipse.swt.widgets.Label label = new org.eclipse.swt.widgets.Label(container, org.eclipse.swt.SWT.NULL);
+		Label label = new Label(container, SWT.NULL);
 		label.setText("&Container:");
 		
-		containerText = new org.eclipse.swt.widgets.Text(container, org.eclipse.swt.SWT.BORDER | org.eclipse.swt.SWT.SINGLE);
-		org.eclipse.swt.layout.GridData gd = new org.eclipse.swt.layout.GridData(org.eclipse.swt.layout.GridData.FILL_HORIZONTAL);
+		containerText = new Text(container, SWT.BORDER | SWT.SINGLE);
+		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
 		containerText.setLayoutData(gd);
-		containerText.addModifyListener(new org.eclipse.swt.events.ModifyListener() {
-			public void modifyText(org.eclipse.swt.events.ModifyEvent e) {
+		containerText.addModifyListener(new ModifyListener() {
+			public void modifyText(ModifyEvent e) {
 				dialogChanged();
 			}
 		});
 		
-		org.eclipse.swt.widgets.Button button = new org.eclipse.swt.widgets.Button(container, org.eclipse.swt.SWT.PUSH);
+		Button button = new Button(container, SWT.PUSH);
 		button.setText("Browse...");
-		button.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+		button.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
 				handleBrowse();
 			}
 		});
-		label = new org.eclipse.swt.widgets.Label(container, org.eclipse.swt.SWT.NULL);
+		label = new Label(container, SWT.NULL);
 		label.setText("&File name:");
 		
-		fileText = new org.eclipse.swt.widgets.Text(container, org.eclipse.swt.SWT.BORDER | org.eclipse.swt.SWT.SINGLE);
-		gd = new org.eclipse.swt.layout.GridData(org.eclipse.swt.layout.GridData.FILL_HORIZONTAL);
+		fileText = new Text(container, SWT.BORDER | SWT.SINGLE);
+		gd = new GridData(GridData.FILL_HORIZONTAL);
 		fileText.setLayoutData(gd);
-		fileText.addModifyListener(new org.eclipse.swt.events.ModifyListener() {
-			public void modifyText(org.eclipse.swt.events.ModifyEvent e) {
+		fileText.addModifyListener(new ModifyListener() {
+			public void modifyText(ModifyEvent e) {
 				dialogChanged();
 			}
 		});
@@ -78,30 +100,48 @@ public class OclNewFileWizardPage extends org.eclipse.jface.wizard.WizardPage {
 	 * Tests if the current workbench selection is a suitable container to use.
 	 */
 	private void initialize() {
-		String name = "new_file";
-		if (selection != null && selection.isEmpty() == false		&& selection instanceof org.eclipse.jface.viewers.IStructuredSelection) {
-			org.eclipse.jface.viewers.IStructuredSelection ssel = (org.eclipse.jface.viewers.IStructuredSelection) selection;
-			if (ssel.size() > 1)			return;
+		String name = org.dresdenocl.language.ocl.resource.ocl.ui.OclUIResourceBundle.NEW_FILE_WIZARD_FILE_NAME;
+		if (selection != null && selection.isEmpty() == false && selection instanceof IStructuredSelection) {
+			IStructuredSelection ssel = (IStructuredSelection) selection;
+			if (ssel.size() > 1) {
+				return;
+			}
 			Object obj = ssel.getFirstElement();
 			// test for IAdaptable
-			if ((! (obj instanceof org.eclipse.core.resources.IResource)) && (obj instanceof org.eclipse.core.runtime.IAdaptable)) {
-				obj = (org.eclipse.core.resources.IResource) ((org.eclipse.core.runtime.IAdaptable) obj).getAdapter(org.eclipse.core.resources.IResource.class);
+			if ((! (obj instanceof IResource)) && (obj instanceof IAdaptable)) {
+				obj = (IResource) ((IAdaptable) obj).getAdapter(IResource.class);
 			}
-			if (obj instanceof org.eclipse.core.resources.IResource) {
-				org.eclipse.core.resources.IContainer container;
-				if (obj instanceof org.eclipse.core.resources.IContainer) {
-					container = (org.eclipse.core.resources.IContainer) obj;
+			if (obj instanceof IResource) {
+				IContainer container;
+				if (obj instanceof IContainer) {
+					container = (IContainer) obj;
 				} else {
-					org.eclipse.core.resources.IResource resource = (org.eclipse.core.resources.IResource) obj;
+					IResource resource = (IResource) obj;
 					container = resource.getParent();
 					// we use the name of the currently selected file instead of 'new_file'.
 					name = resource.getFullPath().removeFileExtension().lastSegment();
+					name = name + "." + fileExtension;
 				}
-				org.eclipse.core.runtime.IPath fullPath = container.getFullPath();
+				IPath fullPath = container.getFullPath();
 				containerText.setText(fullPath.toString());
 			}
 		}
-		fileText.setText(name + "." + fileExtension);
+		
+		// Select default name for new file
+		fileText.setText(name);
+		
+		// Select file name without extension
+		int indexOfDot = name.lastIndexOf(".");
+		if (indexOfDot > 0) {
+			fileText.setSelection(0, indexOfDot);
+		}
+	}
+	
+	public void setVisible(boolean visible) {
+		super.setVisible(visible);
+		if (visible) {
+			fileText.setFocus();
+		}
 	}
 	
 	/**
@@ -109,12 +149,11 @@ public class OclNewFileWizardPage extends org.eclipse.jface.wizard.WizardPage {
 	 * container field.
 	 */
 	private void handleBrowse() {
-		org.eclipse.ui.dialogs.ContainerSelectionDialog dialog = new org.eclipse.ui.dialogs.ContainerSelectionDialog(		getShell(), org.eclipse.core.resources.ResourcesPlugin.getWorkspace().getRoot(), false,
-		"Select new file container");
-		if (dialog.open() == org.eclipse.ui.dialogs.ContainerSelectionDialog.OK) {
+		ContainerSelectionDialog dialog = new ContainerSelectionDialog(getShell(), ResourcesPlugin.getWorkspace().getRoot(), false, "Select new file container");
+		if (dialog.open() == ContainerSelectionDialog.OK) {
 			Object[] result = dialog.getResult();
 			if (result.length == 1) {
-				containerText.setText(((org.eclipse.core.runtime.Path) result[0]).toString());
+				containerText.setText(((Path) result[0]).toString());
 			}
 		}
 	}
@@ -123,14 +162,14 @@ public class OclNewFileWizardPage extends org.eclipse.jface.wizard.WizardPage {
 	 * Ensures that both text fields are set.
 	 */
 	private void dialogChanged() {
-		org.eclipse.core.resources.IResource container = org.eclipse.core.resources.ResourcesPlugin.getWorkspace().getRoot().findMember(new org.eclipse.core.runtime.Path(getContainerName()));
+		IResource container = ResourcesPlugin.getWorkspace().getRoot().findMember(new Path(getContainerName()));
 		String fileName = getFileName();
 		
 		if (getContainerName().length() == 0) {
 			updateStatus("File container must be specified");
 			return;
 		}
-		if (container == null || (container.getType() & (org.eclipse.core.resources.IResource.PROJECT | org.eclipse.core.resources.IResource.FOLDER)) == 0) {
+		if (container == null || (container.getType() & (IResource.PROJECT | IResource.FOLDER)) == 0) {
 			updateStatus("File container must exist");
 			return;
 		}
@@ -165,4 +204,5 @@ public class OclNewFileWizardPage extends org.eclipse.jface.wizard.WizardPage {
 	public String getFileName() {
 		return fileText.getText();
 	}
+	
 }

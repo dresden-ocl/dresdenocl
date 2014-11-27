@@ -6,6 +6,7 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.grammar;
 
+
 /**
  * A class to represent a keyword in the grammar.
  */

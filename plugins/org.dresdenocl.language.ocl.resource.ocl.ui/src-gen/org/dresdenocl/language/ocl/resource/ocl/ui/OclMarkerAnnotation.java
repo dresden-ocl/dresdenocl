@@ -6,11 +6,16 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.ui;
 
-public class OclMarkerAnnotation extends org.eclipse.ui.texteditor.MarkerAnnotation implements org.eclipse.jface.text.quickassist.IQuickFixableAnnotation {
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.jface.text.quickassist.IQuickFixableAnnotation;
+import org.eclipse.ui.texteditor.MarkerAnnotation;
+
+public class OclMarkerAnnotation extends MarkerAnnotation implements IQuickFixableAnnotation {
 	
 	// private boolean isQuickFixable;
 	
-	public OclMarkerAnnotation(org.eclipse.core.resources.IMarker marker) {
+	public OclMarkerAnnotation(IMarker marker) {
 		super(marker);
 	}
 	
@@ -24,8 +29,8 @@ public class OclMarkerAnnotation extends org.eclipse.ui.texteditor.MarkerAnnotat
 	
 	public boolean isQuickFixable() {
 		try {
-			return getMarker().getAttribute(org.eclipse.core.resources.IMarker.SOURCE_ID) != null;
-		} catch (org.eclipse.core.runtime.CoreException e) {
+			return getMarker().getAttribute(IMarker.SOURCE_ID) != null;
+		} catch (CoreException e) {
 			// ignore
 		}
 		return false;

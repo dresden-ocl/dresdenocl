@@ -6,31 +6,42 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
 /**
+ * <p>
  * The DummyEObject is used to build a stack of dummy objects when descending by
  * tail recursion into left recursive rules. They cache the setting information
  * for initializing concrete EObject instances.
+ * </p>
+ * <p>
  * When the tail descent is finished this stack is reduced in reverse order. The
  * EObjects are created using the setting informations and a containment hierarchy
  * is build using the left recursive EStructuralFeature.
+ * </p>
  */
-public class OclDummyEObject extends org.eclipse.emf.ecore.impl.EObjectImpl  {
+public class OclDummyEObject extends EObjectImpl  {
 	
-	private java.util.Map<org.eclipse.emf.ecore.EStructuralFeature, Object> keyValueMap;
+	private Map<EStructuralFeature, Object> keyValueMap;
 	private String recurseFeatureName;
-	private org.eclipse.emf.ecore.EClass type;
+	private EClass type;
 	
-	public OclDummyEObject(org.eclipse.emf.ecore.EClass type, String recurseFeatureName) {
+	public OclDummyEObject(EClass type, String recurseFeatureName) {
 		this.recurseFeatureName = recurseFeatureName;
 		this.type = type;
-		keyValueMap = new java.util.LinkedHashMap<org.eclipse.emf.ecore.EStructuralFeature, Object>();
+		keyValueMap = new LinkedHashMap<EStructuralFeature, Object>();
 	}
 	
-	public org.eclipse.emf.ecore.EObject applyTo(org.eclipse.emf.ecore.EObject currentTarget) {
-		org.eclipse.emf.ecore.EStructuralFeature recurseFeature = currentTarget.eClass().getEStructuralFeature(this.recurseFeatureName);
-		org.eclipse.emf.ecore.EObject newObject = currentTarget.eClass().getEPackage().getEFactoryInstance().create(type);
-		for (org.eclipse.emf.ecore.EStructuralFeature f : keyValueMap.keySet()) {
-			org.eclipse.emf.ecore.EStructuralFeature structuralFeature = newObject.eClass().getEStructuralFeature(f.getName());
+	public EObject applyTo(EObject currentTarget) {
+		EStructuralFeature recurseFeature = currentTarget.eClass().getEStructuralFeature(this.recurseFeatureName);
+		EObject newObject = currentTarget.eClass().getEPackage().getEFactoryInstance().create(type);
+		for (EStructuralFeature f : keyValueMap.keySet()) {
+			EStructuralFeature structuralFeature = newObject.eClass().getEStructuralFeature(f.getName());
 			newObject.eSet(structuralFeature, keyValueMap.get(f));
 		}
 		
@@ -39,7 +50,7 @@ public class OclDummyEObject extends org.eclipse.emf.ecore.impl.EObjectImpl  {
 	}
 	
 	public Object getValueByName(String name) {
-		for (org.eclipse.emf.ecore.EStructuralFeature f : this.keyValueMap.keySet()) {
+		for (EStructuralFeature f : this.keyValueMap.keySet()) {
 			if (f.getName().equals(name)) return this.keyValueMap.get(f);
 		}
 		return null;
@@ -48,17 +59,17 @@ public class OclDummyEObject extends org.eclipse.emf.ecore.impl.EObjectImpl  {
 	/**
 	 * proxy method
 	 */
-	public org.eclipse.emf.ecore.EClass eClass() {
+	public EClass eClass() {
 		return type;
 	}
 	
-	public void eSet(org.eclipse.emf.ecore.EStructuralFeature structuralFeature, Object a0) {
+	public void eSet(EStructuralFeature structuralFeature, Object a0) {
 		this.keyValueMap.put(structuralFeature, a0);
 	}
 	
 	public String toString() {
 		String keyValuePairs = recurseFeatureName + ": ";
-		for (org.eclipse.emf.ecore.EStructuralFeature f : keyValueMap.keySet()) {
+		for (EStructuralFeature f : keyValueMap.keySet()) {
 			keyValuePairs += f.getName() + " = " + keyValueMap.get(f) + "\n";
 		}
 		return keyValuePairs;

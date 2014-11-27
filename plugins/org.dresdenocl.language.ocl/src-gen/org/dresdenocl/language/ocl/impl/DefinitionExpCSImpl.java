@@ -31,221 +31,214 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class DefinitionExpCSImpl extends InvariantOrDefinitionCSImpl implements DefinitionExpCS {
 	/**
-   * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #isStatic()
-   * @generated
-   * @ordered
-   */
+	 * @see #isStatic()
+	 * @generated
+	 * @ordered
+	 */
 	protected static final boolean STATIC_EDEFAULT = false;
 
 	/**
-   * The cached value of the '{@link #isStatic() <em>Static</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #isStatic() <em>Static</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #isStatic()
-   * @generated
-   * @ordered
-   */
+	 * @see #isStatic()
+	 * @generated
+	 * @ordered
+	 */
 	protected boolean static_ = STATIC_EDEFAULT;
 
 	/**
-   * The cached value of the '{@link #getDefinitionExpPart() <em>Definition Exp Part</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getDefinitionExpPart() <em>Definition Exp Part</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getDefinitionExpPart()
-   * @generated
-   * @ordered
-   */
+	 * @see #getDefinitionExpPart()
+	 * @generated
+	 * @ordered
+	 */
 	protected DefinitionExpPartCS definitionExpPart;
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected DefinitionExpCSImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-    return OclPackage.Literals.DEFINITION_EXP_CS;
-  }
+		return OclPackage.Literals.DEFINITION_EXP_CS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public boolean isStatic() {
-    return static_;
-  }
+		return static_;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public void setStatic(boolean newStatic) {
-    boolean oldStatic = static_;
-    static_ = newStatic;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.DEFINITION_EXP_CS__STATIC, oldStatic, static_));
-  }
+		boolean oldStatic = static_;
+		static_ = newStatic;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.DEFINITION_EXP_CS__STATIC, oldStatic, static_));
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public DefinitionExpPartCS getDefinitionExpPart() {
-    return definitionExpPart;
-  }
+		return definitionExpPart;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public NotificationChain basicSetDefinitionExpPart(DefinitionExpPartCS newDefinitionExpPart, NotificationChain msgs) {
-    DefinitionExpPartCS oldDefinitionExpPart = definitionExpPart;
-    definitionExpPart = newDefinitionExpPart;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OclPackage.DEFINITION_EXP_CS__DEFINITION_EXP_PART, oldDefinitionExpPart, newDefinitionExpPart);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
+		DefinitionExpPartCS oldDefinitionExpPart = definitionExpPart;
+		definitionExpPart = newDefinitionExpPart;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OclPackage.DEFINITION_EXP_CS__DEFINITION_EXP_PART, oldDefinitionExpPart, newDefinitionExpPart);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public void setDefinitionExpPart(DefinitionExpPartCS newDefinitionExpPart) {
-    if (newDefinitionExpPart != definitionExpPart)
-    {
-      NotificationChain msgs = null;
-      if (definitionExpPart != null)
-        msgs = ((InternalEObject)definitionExpPart).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OclPackage.DEFINITION_EXP_CS__DEFINITION_EXP_PART, null, msgs);
-      if (newDefinitionExpPart != null)
-        msgs = ((InternalEObject)newDefinitionExpPart).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OclPackage.DEFINITION_EXP_CS__DEFINITION_EXP_PART, null, msgs);
-      msgs = basicSetDefinitionExpPart(newDefinitionExpPart, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.DEFINITION_EXP_CS__DEFINITION_EXP_PART, newDefinitionExpPart, newDefinitionExpPart));
-  }
+		if (newDefinitionExpPart != definitionExpPart) {
+			NotificationChain msgs = null;
+			if (definitionExpPart != null)
+				msgs = ((InternalEObject)definitionExpPart).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OclPackage.DEFINITION_EXP_CS__DEFINITION_EXP_PART, null, msgs);
+			if (newDefinitionExpPart != null)
+				msgs = ((InternalEObject)newDefinitionExpPart).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OclPackage.DEFINITION_EXP_CS__DEFINITION_EXP_PART, null, msgs);
+			msgs = basicSetDefinitionExpPart(newDefinitionExpPart, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.DEFINITION_EXP_CS__DEFINITION_EXP_PART, newDefinitionExpPart, newDefinitionExpPart));
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-    switch (featureID)
-    {
-      case OclPackage.DEFINITION_EXP_CS__DEFINITION_EXP_PART:
-        return basicSetDefinitionExpPart(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+		switch (featureID) {
+			case OclPackage.DEFINITION_EXP_CS__DEFINITION_EXP_PART:
+				return basicSetDefinitionExpPart(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID)
-    {
-      case OclPackage.DEFINITION_EXP_CS__STATIC:
-        return isStatic();
-      case OclPackage.DEFINITION_EXP_CS__DEFINITION_EXP_PART:
-        return getDefinitionExpPart();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case OclPackage.DEFINITION_EXP_CS__STATIC:
+				return isStatic();
+			case OclPackage.DEFINITION_EXP_CS__DEFINITION_EXP_PART:
+				return getDefinitionExpPart();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-    switch (featureID)
-    {
-      case OclPackage.DEFINITION_EXP_CS__STATIC:
-        setStatic((Boolean)newValue);
-        return;
-      case OclPackage.DEFINITION_EXP_CS__DEFINITION_EXP_PART:
-        setDefinitionExpPart((DefinitionExpPartCS)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case OclPackage.DEFINITION_EXP_CS__STATIC:
+				setStatic((Boolean)newValue);
+				return;
+			case OclPackage.DEFINITION_EXP_CS__DEFINITION_EXP_PART:
+				setDefinitionExpPart((DefinitionExpPartCS)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public void eUnset(int featureID) {
-    switch (featureID)
-    {
-      case OclPackage.DEFINITION_EXP_CS__STATIC:
-        setStatic(STATIC_EDEFAULT);
-        return;
-      case OclPackage.DEFINITION_EXP_CS__DEFINITION_EXP_PART:
-        setDefinitionExpPart((DefinitionExpPartCS)null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case OclPackage.DEFINITION_EXP_CS__STATIC:
+				setStatic(STATIC_EDEFAULT);
+				return;
+			case OclPackage.DEFINITION_EXP_CS__DEFINITION_EXP_PART:
+				setDefinitionExpPart((DefinitionExpPartCS)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-    switch (featureID)
-    {
-      case OclPackage.DEFINITION_EXP_CS__STATIC:
-        return static_ != STATIC_EDEFAULT;
-      case OclPackage.DEFINITION_EXP_CS__DEFINITION_EXP_PART:
-        return definitionExpPart != null;
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case OclPackage.DEFINITION_EXP_CS__STATIC:
+				return static_ != STATIC_EDEFAULT;
+			case OclPackage.DEFINITION_EXP_CS__DEFINITION_EXP_PART:
+				return definitionExpPart != null;
+		}
+		return super.eIsSet(featureID);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public String toString() {
-    if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (static: ");
-    result.append(static_);
-    result.append(')');
-    return result.toString();
-  }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (static: ");
+		result.append(static_);
+		result.append(')');
+		return result.toString();
+	}
 
 } //DefinitionExpCSImpl

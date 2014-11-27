@@ -6,6 +6,7 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.grammar;
 
+
 public class OclWhiteSpace extends org.dresdenocl.language.ocl.resource.ocl.grammar.OclFormattingElement {
 	
 	private final int amount;

@@ -6,10 +6,12 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
+import org.eclipse.emf.ecore.EClass;
+
 public class OclSyntaxCoverageInformationProvider {
 	
-	public org.eclipse.emf.ecore.EClass[] getClassesWithSyntax() {
-		return new org.eclipse.emf.ecore.EClass[] {
+	public EClass[] getClassesWithSyntax() {
+		return new EClass[] {
 			org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getSimpleNameCS(),
 			org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(),
 			org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationNestedNamespaceCS(),
@@ -77,8 +79,8 @@ public class OclSyntaxCoverageInformationProvider {
 		};
 	}
 	
-	public org.eclipse.emf.ecore.EClass[] getStartSymbols() {
-		return new org.eclipse.emf.ecore.EClass[] {
+	public EClass[] getStartSymbols() {
+		return new EClass[] {
 			org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(),
 			org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithoutNamespaceCS(),
 		};

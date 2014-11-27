@@ -6,20 +6,54 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.ui;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.swt.graphics.Image;
+
 /**
  * A proposal for completing an incomplete document.
  */
-public class OclCompletionProposal implements java.lang.Comparable<OclCompletionProposal> {
-	
-	/**
-	 * The root object of the resource for which this proposal was computed.
-	 */
-	private org.eclipse.emf.ecore.EObject root;
+public class OclCompletionProposal implements Comparable<OclCompletionProposal> {
 	
 	/**
 	 * The terminal that was expected at the cursor position.
 	 */
 	private org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal;
+	
+	/**
+	 * The part of the document right before the cursor that belongs to the proposal.
+	 * This may for example be a partial name of a cross-referenced element.
+	 */
+	private String prefix;
+	
+	/**
+	 * The structural feature (attribute or non-containment reference) that was
+	 * expected at the cursor position.
+	 */
+	private EStructuralFeature structuralFeature;
+	
+	/**
+	 * The container objects that covers the cursor position. This container object
+	 * may not be contained in the resource we're computing proposals for. See {@link
+	 * #materialize(Runnable)} for an explanation of this.
+	 */
+	private EObject container;
+	
+	/**
+	 * The image that will be shown in the pop-up containing the completion proposals.
+	 */
+	private Image image;
+	
+	/**
+	 * The root object of the resource for which this proposal was computed.
+	 */
+	private EObject root;
+	
+	/**
+	 * The target object, if this proposal suggests to insert a reference to another
+	 * object.
+	 */
+	private Object referenceTarget;
 	
 	/**
 	 * The string that will be inserted if the user picks this proposal. This string
@@ -34,40 +68,16 @@ public class OclCompletionProposal implements java.lang.Comparable<OclCompletion
 	private String displayString;
 	
 	/**
-	 * The part of the document right before the cursor that belongs to the proposal.
-	 * This may for example be a partial name of a cross-referenced element.
-	 */
-	private String prefix;
-	
-	/**
 	 * A flag that indicates whether this proposal is valid w.r.t. the prefix (i.e.,
 	 * the text that has already been typed). We do keep proposals that do not match
 	 * the prefix to allow proposal post processors to access these and add valid
 	 * proposals even if the built-in proposal engine did not find a matching
 	 * proposal. The completion pop-up will only show proposals for which this method
-	 * returns true. See also {@link #getMatchesPrefix()}.
+	 * returns true. See also {@link #isMatchesPrefix()}.
 	 */
 	private boolean matchesPrefix;
 	
-	/**
-	 * The structural feature (attribute or non-containment reference) that was
-	 * expected at the cursor position.
-	 */
-	private org.eclipse.emf.ecore.EStructuralFeature structuralFeature;
-	
-	/**
-	 * The container objects that covers the cursor position. This container object
-	 * may not be contained in the resource we're computing proposals for. See {@link
-	 * #materialize(Runnable)} for an explanation of this.
-	 */
-	private org.eclipse.emf.ecore.EObject container;
-	
-	/**
-	 * The image that will be shown in the pop-up containing the completion proposals.
-	 */
-	private org.eclipse.swt.graphics.Image image;
-	
-	public OclCompletionProposal(org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal, String insertString, String prefix, boolean matchesPrefix, org.eclipse.emf.ecore.EStructuralFeature structuralFeature, org.eclipse.emf.ecore.EObject container) {
+	public OclCompletionProposal(org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal, String insertString, String prefix, boolean matchesPrefix, EStructuralFeature structuralFeature, EObject container) {
 		super();
 		this.expectedTerminal = expectedTerminal;
 		this.insertString = insertString;
@@ -77,22 +87,22 @@ public class OclCompletionProposal implements java.lang.Comparable<OclCompletion
 		this.container = container;
 	}
 	
-	public OclCompletionProposal(org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal, String insertString, String prefix, boolean matchesPrefix, org.eclipse.emf.ecore.EStructuralFeature structuralFeature, org.eclipse.emf.ecore.EObject container, org.eclipse.swt.graphics.Image image) {
+	public OclCompletionProposal(org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal, String insertString, String prefix, boolean matchesPrefix, EStructuralFeature structuralFeature, EObject container, Image image) {
 		this(expectedTerminal, insertString, prefix, matchesPrefix, structuralFeature, container);
 		this.image = image;
 	}
 	
-	public OclCompletionProposal(org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal, String insertString, String prefix, boolean matchesPrefix, org.eclipse.emf.ecore.EStructuralFeature structuralFeature, org.eclipse.emf.ecore.EObject container, org.eclipse.swt.graphics.Image image, String displayString) {
+	public OclCompletionProposal(org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal, String insertString, String prefix, boolean matchesPrefix, EStructuralFeature structuralFeature, EObject container, Image image, String displayString) {
 		this(expectedTerminal, insertString, prefix, matchesPrefix, structuralFeature, container, image);
 		this.displayString = displayString;
 	}
 	
-	public org.eclipse.emf.ecore.EObject getRoot() {
+	public EObject getRoot() {
 		return root;
 	}
 	
-	public void setRoot(org.eclipse.emf.ecore.EObject root) {
-		this.root = root;
+	public Object getReferenceTarget() {
+		return referenceTarget;
 	}
 	
 	public String getInsertString() {
@@ -103,21 +113,41 @@ public class OclCompletionProposal implements java.lang.Comparable<OclCompletion
 		return displayString;
 	}
 	
-	public String getPrefix() {
-		return prefix;
-	}
-	
 	/**
 	 * Returns true if this proposal matched the prefix. This does not imply that the
 	 * proposal exactly starts with the prefix, it can also match case-insensitive or
 	 * using the camel case style. Only proposals that return true will be considered
 	 * for the final list of proposals that is presented in the editor.
 	 */
-	public boolean getMatchesPrefix() {
+	public boolean isMatchesPrefix() {
 		return matchesPrefix;
 	}
 	
-	public org.eclipse.swt.graphics.Image getImage() {
+	public void setRoot(EObject root) {
+		this.root = root;
+	}
+	
+	public void setReferenceTarget(Object referenceTarget) {
+		this.referenceTarget = referenceTarget;
+	}
+	
+	public void setInsertString(String insertString) {
+		this.insertString = insertString;
+	}
+	
+	public void setDisplayString(String displayString) {
+		this.displayString = displayString;
+	}
+	
+	public void setMatchesPrefix(boolean matchesPrefix) {
+		this.matchesPrefix = matchesPrefix;
+	}
+	
+	public String getPrefix() {
+		return prefix;
+	}
+	
+	public Image getImage() {
 		return image;
 	}
 	
@@ -125,11 +155,11 @@ public class OclCompletionProposal implements java.lang.Comparable<OclCompletion
 		return structuralFeature != null;
 	}
 	
-	public org.eclipse.emf.ecore.EStructuralFeature getStructuralFeature() {
+	public EStructuralFeature getStructuralFeature() {
 		return structuralFeature;
 	}
 	
-	public org.eclipse.emf.ecore.EObject getContainer() {
+	public EObject getContainer() {
 		return container;
 	}
 	
@@ -153,7 +183,7 @@ public class OclCompletionProposal implements java.lang.Comparable<OclCompletion
 		if (object instanceof OclCompletionProposal) {
 			OclCompletionProposal other = (OclCompletionProposal) object;
 			// proposals that start with the prefix are preferred over the ones that do not
-			int startCompare = (matchesPrefix ? 1 : 0) - (other.getMatchesPrefix() ? 1 : 0);
+			int startCompare = (matchesPrefix ? 1 : 0) - (other.isMatchesPrefix() ? 1 : 0);
 			// if both proposals start with the prefix of both do not the insert string is
 			// compared
 			return startCompare == 0 ? getInsertString().compareTo(other.getInsertString()) : -startCompare;
@@ -162,9 +192,9 @@ public class OclCompletionProposal implements java.lang.Comparable<OclCompletion
 	}
 	
 	public String toString() {
-		String result = (container == null ? "null" : container.eClass().getName()) + ".";
-		result += (structuralFeature == null ? "null" : structuralFeature.getName());
-		result += ": " + insertString;
+		String result = (container == null ? "<NO_ECLASS>" : container.eClass().getName()) + ".";
+		result += (structuralFeature == null ? "<NO_ESTRUCTURALFEATURE>" : structuralFeature.getName());
+		result += ": '" + insertString + "'";
 		return result;
 	}
 	

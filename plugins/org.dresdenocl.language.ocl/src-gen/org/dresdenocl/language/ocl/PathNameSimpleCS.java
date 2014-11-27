@@ -22,29 +22,29 @@ import org.dresdenocl.pivotmodel.NamedElement;
  */
 public interface PathNameSimpleCS extends PathNameCS {
 	/**
-   * Returns the value of the '<em><b>Named Element</b></em>' reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Named Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Named Element</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Named Element</em>' reference.
-   * @see #setNamedElement(NamedElement)
-   * @see org.dresdenocl.language.ocl.OclPackage#getPathNameSimpleCS_NamedElement()
-   * @model required="true"
-   * @generated
-   */
+	 * @return the value of the '<em>Named Element</em>' reference.
+	 * @see #setNamedElement(NamedElement)
+	 * @see org.dresdenocl.language.ocl.OclPackage#getPathNameSimpleCS_NamedElement()
+	 * @model required="true"
+	 * @generated
+	 */
 	NamedElement getNamedElement();
 
 	/**
-   * Sets the value of the '{@link org.dresdenocl.language.ocl.PathNameSimpleCS#getNamedElement <em>Named Element</em>}' reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.dresdenocl.language.ocl.PathNameSimpleCS#getNamedElement <em>Named Element</em>}' reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Named Element</em>' reference.
-   * @see #getNamedElement()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Named Element</em>' reference.
+	 * @see #getNamedElement()
+	 * @generated
+	 */
 	void setNamedElement(NamedElement value);
 
 } // PathNameSimpleCS

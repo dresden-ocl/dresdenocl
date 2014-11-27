@@ -6,42 +6,54 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.util;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import org.eclipse.emf.common.util.EMap;
+
 public class OclMapUtil {
 	
 	/**
-	 * This method encapsulate an unchecked cast from Object to java.util.Map<Object,
-	 * Object>. This case can not be performed type safe, because type parameters are
-	 * not available for reflective access to Ecore models.
+	 * <p>
+	 * This method encapsulate an unchecked cast from Object to Map<Object, Object>.
+	 * This case can not be performed type safe, because type parameters are not
+	 * available for reflective access to Ecore models.
+	 * </p>
 	 * 
 	 * @param value the object to cast
 	 * 
 	 * @return the same object casted to a map
 	 */
-	@SuppressWarnings("unchecked")	
-	public static java.util.Map<Object, Object> castToMap(Object value) {
-		return (java.util.Map<Object,Object>) value;
+	@SuppressWarnings("unchecked")
+	public static Map<Object, Object> castToMap(Object value) {
+		return (Map<Object,Object>) value;
 	}
 	
 	/**
-	 * This method encapsulate an unchecked cast from Object to
-	 * org.eclipse.emf.common.util.EMap<Object, Object>. This case can not be
-	 * performed type safe, because type parameters are not available for reflective
-	 * access to Ecore models.
+	 * <p>
+	 * This method encapsulate an unchecked cast from Object to EMap<Object, Object>.
+	 * This case can not be performed type safe, because type parameters are not
+	 * available for reflective access to Ecore models.
+	 * </p>
 	 * 
 	 * @return the same object casted to a map
 	 */
-	@SuppressWarnings("unchecked")	public static org.eclipse.emf.common.util.EMap<Object, Object> castToEMap(Object value) {
-		return (org.eclipse.emf.common.util.EMap<Object,Object>) value;
+	@SuppressWarnings("unchecked")
+	public static EMap<Object, Object> castToEMap(Object value) {
+		return (EMap<Object,Object>) value;
 	}
 	
-	public static java.util.Map<Object, Object> copySafelyToObjectToObjectMap(java.util.Map<?, ?> map) {
-		java.util.Map<Object, Object> castedCopy = new java.util.LinkedHashMap<Object, Object>();
+	public static Map<Object, Object> copySafelyToObjectToObjectMap(Map<?, ?> map) {
+		Map<Object, Object> castedCopy = new LinkedHashMap<Object, Object>();
 		
 		if (map == null) {
 			return castedCopy;
 		}
 		
-		java.util.Iterator<?> it = map.keySet().iterator();
+		Iterator<?> it = map.keySet().iterator();
 		while (it.hasNext()) {
 			Object nextKey = it.next();
 			castedCopy.put(nextKey, map.get(nextKey));
@@ -53,16 +65,16 @@ public class OclMapUtil {
 	 * Adds a new key,value pair to the given map. If there is already an entry with
 	 * the same key, the two values are collected in a list.
 	 */
-	public static <K> void putAndMergeKeys(java.util.Map<K, Object> map, K key, Object value) {
+	public static <K> void putAndMergeKeys(Map<K, Object> map, K key, Object value) {
 		// check if there is already an option set
 		if (map.containsKey(key)) {
 			Object currentValue = map.get(key);
-			if (currentValue instanceof java.util.List<?>) {
+			if (currentValue instanceof List<?>) {
 				// if the current value is a list, we add the new value to this list
-				java.util.List<?> currentValueAsList = (java.util.List<?>) currentValue;
-				java.util.List<Object> currentValueAsObjectList = org.dresdenocl.language.ocl.resource.ocl.util.OclListUtil.copySafelyToObjectList(currentValueAsList);
-				if (value instanceof java.util.Collection<?>) {
-					currentValueAsObjectList.addAll((java.util.Collection<?>) value);
+				List<?> currentValueAsList = (List<?>) currentValue;
+				List<Object> currentValueAsObjectList = org.dresdenocl.language.ocl.resource.ocl.util.OclListUtil.copySafelyToObjectList(currentValueAsList);
+				if (value instanceof Collection<?>) {
+					currentValueAsObjectList.addAll((Collection<?>) value);
 				} else {
 					currentValueAsObjectList.add(value);
 				}
@@ -70,10 +82,10 @@ public class OclMapUtil {
 			} else {
 				// if the current value is not a list, we create a fresh list and add both the old
 				// (current) and the new value to this list
-				java.util.List<Object> newValueList = new java.util.ArrayList<Object>();
+				List<Object> newValueList = new ArrayList<Object>();
 				newValueList.add(currentValue);
-				if (value instanceof java.util.Collection<?>) {
-					newValueList.addAll((java.util.Collection<?>) value);
+				if (value instanceof Collection<?>) {
+					newValueList.addAll((Collection<?>) value);
 				} else {
 					newValueList.add(value);
 				}

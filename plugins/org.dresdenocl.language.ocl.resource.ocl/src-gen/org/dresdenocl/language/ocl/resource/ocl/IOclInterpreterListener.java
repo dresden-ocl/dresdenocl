@@ -6,7 +6,9 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl;
 
+import org.eclipse.emf.ecore.EObject;
+
 public interface IOclInterpreterListener {
 	
-	public void handleInterpreteObject(org.eclipse.emf.ecore.EObject element);
+	public void handleInterpreteObject(EObject element);
 }

@@ -21,22 +21,22 @@ import org.eclipse.emf.ecore.EClass;
  */
 public class PackageDeclarationWithoutNamespaceCSImpl extends PackageDeclarationCSImpl implements PackageDeclarationWithoutNamespaceCS {
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected PackageDeclarationWithoutNamespaceCSImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-    return OclPackage.Literals.PACKAGE_DECLARATION_WITHOUT_NAMESPACE_CS;
-  }
+		return OclPackage.Literals.PACKAGE_DECLARATION_WITHOUT_NAMESPACE_CS;
+	}
 
 } //PackageDeclarationWithoutNamespaceCSImpl

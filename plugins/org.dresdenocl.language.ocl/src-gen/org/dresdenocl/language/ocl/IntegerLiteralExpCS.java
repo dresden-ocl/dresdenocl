@@ -25,29 +25,29 @@ package org.dresdenocl.language.ocl;
  */
 public interface IntegerLiteralExpCS extends PrimitiveLiteralExpCS {
 	/**
-   * Returns the value of the '<em><b>Integer Literal</b></em>' attribute.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Integer Literal</b></em>' attribute.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Integer Literal</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Integer Literal</em>' attribute.
-   * @see #setIntegerLiteral(int)
-   * @see org.dresdenocl.language.ocl.OclPackage#getIntegerLiteralExpCS_IntegerLiteral()
-   * @model required="true"
-   * @generated
-   */
+	 * @return the value of the '<em>Integer Literal</em>' attribute.
+	 * @see #setIntegerLiteral(int)
+	 * @see org.dresdenocl.language.ocl.OclPackage#getIntegerLiteralExpCS_IntegerLiteral()
+	 * @model required="true"
+	 * @generated
+	 */
 	int getIntegerLiteral();
 
 	/**
-   * Sets the value of the '{@link org.dresdenocl.language.ocl.IntegerLiteralExpCS#getIntegerLiteral <em>Integer Literal</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.dresdenocl.language.ocl.IntegerLiteralExpCS#getIntegerLiteral <em>Integer Literal</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Integer Literal</em>' attribute.
-   * @see #getIntegerLiteral()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Integer Literal</em>' attribute.
+	 * @see #getIntegerLiteral()
+	 * @generated
+	 */
 	void setIntegerLiteral(int value);
 
 } // IntegerLiteralExpCS

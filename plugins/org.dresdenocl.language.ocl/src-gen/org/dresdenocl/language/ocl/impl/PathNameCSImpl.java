@@ -23,23 +23,23 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  */
 public abstract class PathNameCSImpl extends EObjectImpl implements PathNameCS {
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected PathNameCSImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-    return OclPackage.Literals.PATH_NAME_CS;
-  }
+		return OclPackage.Literals.PATH_NAME_CS;
+	}
 
 	/**
 	 * <!-- begin-user-doc -->

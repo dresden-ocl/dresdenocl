@@ -6,19 +6,26 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl;
 
+import java.util.Collection;
+import org.eclipse.emf.ecore.EObject;
+
 public interface IOclQuickFix {
 	
 	/**
+	 * <p>
 	 * Returns a string that briefly describes the quick fix.
+	 * </p>
 	 * 
 	 * @return brief description to display
 	 */
 	public String getDisplayString();
 	
 	/**
+	 * <p>
 	 * Returns an image key that references an image for the quick fix. This key will
 	 * be passed to the ImageProvider class of the resource UI plug-in to obtain the
 	 * image.
+	 * </p>
 	 * 
 	 * @return key of the image to display
 	 */
@@ -34,7 +41,7 @@ public interface IOclQuickFix {
 	 * Returns a collection of objects the fix refers to. This collection is used to
 	 * check whether the fix is can still be applied even after a workbench restart.
 	 */
-	public java.util.Collection<org.eclipse.emf.ecore.EObject> getContextObjects();
+	public Collection<EObject> getContextObjects();
 	
 	/**
 	 * Returns a string representation of the context in which this quick fix can be

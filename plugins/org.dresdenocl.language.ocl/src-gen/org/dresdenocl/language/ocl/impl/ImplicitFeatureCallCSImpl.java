@@ -22,22 +22,22 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  */
 public abstract class ImplicitFeatureCallCSImpl extends EObjectImpl implements ImplicitFeatureCallCS {
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected ImplicitFeatureCallCSImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-    return OclPackage.Literals.IMPLICIT_FEATURE_CALL_CS;
-  }
+		return OclPackage.Literals.IMPLICIT_FEATURE_CALL_CS;
+	}
 
 } //ImplicitFeatureCallCSImpl

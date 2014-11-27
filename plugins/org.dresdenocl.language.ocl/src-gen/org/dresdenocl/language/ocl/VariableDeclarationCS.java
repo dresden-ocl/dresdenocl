@@ -26,29 +26,29 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface VariableDeclarationCS extends EObject {
 	/**
-   * Returns the value of the '<em><b>Variable Name</b></em>' containment reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Variable Name</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Variable Name</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Variable Name</em>' containment reference.
-   * @see #setVariableName(SimpleNameCS)
-   * @see org.dresdenocl.language.ocl.OclPackage#getVariableDeclarationCS_VariableName()
-   * @model containment="true" required="true"
-   * @generated
-   */
+	 * @return the value of the '<em>Variable Name</em>' containment reference.
+	 * @see #setVariableName(SimpleNameCS)
+	 * @see org.dresdenocl.language.ocl.OclPackage#getVariableDeclarationCS_VariableName()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
 	SimpleNameCS getVariableName();
 
 	/**
-   * Sets the value of the '{@link org.dresdenocl.language.ocl.VariableDeclarationCS#getVariableName <em>Variable Name</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.dresdenocl.language.ocl.VariableDeclarationCS#getVariableName <em>Variable Name</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Variable Name</em>' containment reference.
-   * @see #getVariableName()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Variable Name</em>' containment reference.
+	 * @see #getVariableName()
+	 * @generated
+	 */
 	void setVariableName(SimpleNameCS value);
 
 } // VariableDeclarationCS

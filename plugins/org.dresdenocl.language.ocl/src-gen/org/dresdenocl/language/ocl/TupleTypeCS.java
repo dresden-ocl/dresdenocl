@@ -25,29 +25,29 @@ package org.dresdenocl.language.ocl;
  */
 public interface TupleTypeCS extends TypeCS {
 	/**
-   * Returns the value of the '<em><b>Variable Declaration List</b></em>' containment reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Variable Declaration List</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Variable Declaration List</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Variable Declaration List</em>' containment reference.
-   * @see #setVariableDeclarationList(VariableDeclarationWithoutInitListCS)
-   * @see org.dresdenocl.language.ocl.OclPackage#getTupleTypeCS_VariableDeclarationList()
-   * @model containment="true"
-   * @generated
-   */
+	 * @return the value of the '<em>Variable Declaration List</em>' containment reference.
+	 * @see #setVariableDeclarationList(VariableDeclarationWithoutInitListCS)
+	 * @see org.dresdenocl.language.ocl.OclPackage#getTupleTypeCS_VariableDeclarationList()
+	 * @model containment="true"
+	 * @generated
+	 */
 	VariableDeclarationWithoutInitListCS getVariableDeclarationList();
 
 	/**
-   * Sets the value of the '{@link org.dresdenocl.language.ocl.TupleTypeCS#getVariableDeclarationList <em>Variable Declaration List</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.dresdenocl.language.ocl.TupleTypeCS#getVariableDeclarationList <em>Variable Declaration List</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Variable Declaration List</em>' containment reference.
-   * @see #getVariableDeclarationList()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Variable Declaration List</em>' containment reference.
+	 * @see #getVariableDeclarationList()
+	 * @generated
+	 */
 	void setVariableDeclarationList(VariableDeclarationWithoutInitListCS value);
 
 } // TupleTypeCS

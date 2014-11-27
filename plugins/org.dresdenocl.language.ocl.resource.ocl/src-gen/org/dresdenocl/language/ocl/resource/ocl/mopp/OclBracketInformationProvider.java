@@ -6,39 +6,20 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+/**
+ * This class provides information about how brackets must be handled in the
+ * editor (e.g., whether they must be closed automatically).
+ */
 public class OclBracketInformationProvider {
 	
-	public class BracketPair implements org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair {
-		
-		private String opening;
-		private String closing;
-		private boolean closingEnabledInside;
-		
-		public BracketPair(String opening, String closing, boolean closingEnabledInside) {
-			super();
-			this.opening = opening;
-			this.closing = closing;
-			this.closingEnabledInside = closingEnabledInside;
-		}
-		
-		public String getOpeningBracket() {
-			return opening;
-		}
-		
-		public String getClosingBracket() {
-			return closing;
-		}
-		
-		public boolean isClosingEnabledInside() {
-			return closingEnabledInside;
-		}
-	}
-	
-	public java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair> getBracketPairs() {
-		java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair> result = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair>();
-		result.add(new BracketPair("(", ")", true));
-		result.add(new BracketPair("{", "}", true));
-		result.add(new BracketPair("'", "'", false));
+	public Collection<org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair> getBracketPairs() {
+		Collection<org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair> result = new ArrayList<org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair>();
+		result.add(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclBracketPair("(", ")", true, false));
+		result.add(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclBracketPair("{", "}", true, true));
+		result.add(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclBracketPair("'", "'", false, false));
 		return result;
 	}
 	

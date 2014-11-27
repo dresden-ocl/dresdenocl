@@ -6,16 +6,21 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.grammar;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EStructuralFeature;
+
 /**
  * A class to represent an enumeration terminal in the grammar.
  */
 public class OclEnumerationTerminal extends org.dresdenocl.language.ocl.resource.ocl.grammar.OclTerminal {
 	
-	private java.util.Map<String, String> mapping = new java.util.LinkedHashMap<String, String>();
+	private Map<String, String> mapping = new LinkedHashMap<String, String>();
 	
-	public OclEnumerationTerminal(org.eclipse.emf.ecore.EStructuralFeature attribute, String[] literalMappings, org.dresdenocl.language.ocl.resource.ocl.grammar.OclCardinality cardinality, int mandatoryOccurrencesAfter) {
+	public OclEnumerationTerminal(EStructuralFeature attribute, String[] literalMappings, org.dresdenocl.language.ocl.resource.ocl.grammar.OclCardinality cardinality, int mandatoryOccurrencesAfter) {
 		super(attribute, cardinality, mandatoryOccurrencesAfter);
-		assert attribute instanceof org.eclipse.emf.ecore.EAttribute;
+		assert attribute instanceof EAttribute;
 		assert literalMappings.length % 2 == 0;
 		for (int i = 0; i < literalMappings.length; i += 2) {
 			String literalName = literalMappings[i];
@@ -24,12 +29,12 @@ public class OclEnumerationTerminal extends org.dresdenocl.language.ocl.resource
 		}
 	}
 	
-	public java.util.Map<String, String> getLiteralMapping() {
+	public Map<String, String> getLiteralMapping() {
 		return this.mapping;
 	}
 	
-	public org.eclipse.emf.ecore.EAttribute getAttribute() {
-		return (org.eclipse.emf.ecore.EAttribute) getFeature();
+	public EAttribute getAttribute() {
+		return (EAttribute) getFeature();
 	}
 	
 	public String getText(String literalName) {

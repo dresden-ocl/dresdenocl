@@ -6,27 +6,44 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.analysis;
 
+import java.util.Map;
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EEnumLiteral;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+
 /**
+ * <p>
  * A default implementation for token resolvers. Generated token resolvers
  * delegate calls to this class to convert text (i.e., tokens) to Java objects.
  * This default implementation tries to perform this conversion using the
- * EMF-based data type serialization mechanism using
- * org.eclipse.emf.ecore.util.EcoreUtil.createFromString().
+ * EMF-based data type serialization mechanism using EcoreUtil.createFromString().
+ * </p>
  * 
+ * <p>
  * In addition, enumeration literals are converted to the respective literal
  * object, if the text (i.e., the token) matches the literal.
+ * </p>
  * 
+ * <p>
  * For boolean attributes the token is considered to represent <code>true</code>
  * if it matches the name of the attribute. Attributes that have names like
  * <code>isFoo</code> are also interpret as <code>true</code> if the text is
  * <code>foo</code>.
+ * </p>
  * 
+ * <p>
  * The behavior of this resolving can be customized by either changing the
  * generated token resolver classes or by using custom EMF data type converters.
+ * </p>
  */
 public class OclDefaultTokenResolver implements org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver {
 	
-	private java.util.Map<?, ?> options;
+	private Map<?, ?> options;
 	private boolean escapeKeywords;
 	
 	/**
@@ -47,11 +64,11 @@ public class OclDefaultTokenResolver implements org.dresdenocl.language.ocl.reso
 		this.escapeKeywords = escapeKeywords;
 	}
 	
-	public void resolve(String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result) {
+	public void resolve(String lexem, EStructuralFeature feature, org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result) {
 		resolve(lexem, feature, result, null, null, null);
 	}
 	
-	public void resolve(String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result, String suffix, String prefix, String escapeCharacter) {
+	public void resolve(String lexem, EStructuralFeature feature, org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result, String suffix, String prefix, String escapeCharacter) {
 		// Step 1: unescape keywords if required
 		if (escapeKeywords && lexem.startsWith("_")) {
 			for (String keyword : org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.INSTANCE.getKeywords()) {
@@ -84,10 +101,10 @@ public class OclDefaultTokenResolver implements org.dresdenocl.language.ocl.reso
 		}
 		
 		// Step 3: convert text to Java object
-		if (feature instanceof org.eclipse.emf.ecore.EAttribute) {
-			org.eclipse.emf.ecore.EClassifier featureType = feature.getEType();
-			if (featureType instanceof org.eclipse.emf.ecore.EEnum) {
-				org.eclipse.emf.ecore.EEnumLiteral literal = ((org.eclipse.emf.ecore.EEnum) featureType).getEEnumLiteralByLiteral(lexem);
+		if (feature instanceof EAttribute) {
+			EClassifier featureType = feature.getEType();
+			if (featureType instanceof EEnum) {
+				EEnumLiteral literal = ((EEnum) featureType).getEEnumLiteralByLiteral(lexem);
 				if (literal != null) {
 					result.setResolvedToken(literal.getInstance());
 					return;
@@ -95,9 +112,9 @@ public class OclDefaultTokenResolver implements org.dresdenocl.language.ocl.reso
 					result.setErrorMessage("Could not map lexem '" + lexem + "' to enum '" + featureType.getName() + "'.");
 					return;
 				}
-			} else if (featureType instanceof org.eclipse.emf.ecore.EDataType) {
+			} else if (featureType instanceof EDataType) {
 				try {
-					result.setResolvedToken(org.eclipse.emf.ecore.util.EcoreUtil.createFromString((org.eclipse.emf.ecore.EDataType) featureType, lexem));
+					result.setResolvedToken(EcoreUtil.createFromString((EDataType) featureType, lexem));
 				} catch (Exception e) {
 					result.setErrorMessage("Could not convert '" + lexem + "' to '" + featureType.getName() + "'.");
 				}
@@ -129,11 +146,11 @@ public class OclDefaultTokenResolver implements org.dresdenocl.language.ocl.reso
 		}
 	}
 	
-	public String deResolve(Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
+	public String deResolve(Object value, EStructuralFeature feature, EObject container) {
 		return deResolve(value, feature, container, null, null, null);
 	}
 	
-	public String deResolve(Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container, String prefix, String suffix, String escapeCharacter) {
+	public String deResolve(Object value, EStructuralFeature feature, EObject container, String prefix, String suffix, String escapeCharacter) {
 		// Step 1: convert Java object to text
 		String result = "";
 		if (value != null) {
@@ -180,11 +197,11 @@ public class OclDefaultTokenResolver implements org.dresdenocl.language.ocl.reso
 		this.escapeKeywords = escapeKeywords;
 	}
 	
-	public void setOptions(java.util.Map<?, ?> options) {
+	public void setOptions(Map<?, ?> options) {
 		this.options = options;
 	}
 	
-	public java.util.Map<?, ?> getOptions() {
+	public Map<?, ?> getOptions() {
 		return options;
 	}
 	

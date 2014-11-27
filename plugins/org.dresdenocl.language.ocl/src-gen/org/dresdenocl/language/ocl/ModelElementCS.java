@@ -22,37 +22,37 @@ import org.dresdenocl.pivotmodel.NamedElement;
  */
 public interface ModelElementCS extends OclExpressionCS {
 	/**
-   * Returns the value of the '<em><b>Path Name</b></em>' containment reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Path Name</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Path Name</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Path Name</em>' containment reference.
-   * @see #setPathName(PathNameCS)
-   * @see org.dresdenocl.language.ocl.OclPackage#getModelElementCS_PathName()
-   * @model containment="true" required="true"
-   * @generated
-   */
+	 * @return the value of the '<em>Path Name</em>' containment reference.
+	 * @see #setPathName(PathNameCS)
+	 * @see org.dresdenocl.language.ocl.OclPackage#getModelElementCS_PathName()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
 	PathNameCS getPathName();
 
 	/**
-   * Sets the value of the '{@link org.dresdenocl.language.ocl.ModelElementCS#getPathName <em>Path Name</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.dresdenocl.language.ocl.ModelElementCS#getPathName <em>Path Name</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Path Name</em>' containment reference.
-   * @see #getPathName()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Path Name</em>' containment reference.
+	 * @see #getPathName()
+	 * @generated
+	 */
 	void setPathName(PathNameCS value);
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @model kind="operation" required="true"
-   * @generated
-   */
+	 * @model kind="operation" required="true"
+	 * @generated
+	 */
 	NamedElement getNamedElement();
 
 } // ModelElementCS

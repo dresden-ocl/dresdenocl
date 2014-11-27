@@ -6,143 +6,88 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.ui;
 
+import java.net.URL;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExecutableExtension;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.wizard.Wizard;
+import org.eclipse.ui.INewWizard;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
+import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
+import org.osgi.framework.Bundle;
+
 /**
+ * <p>
  * This class is based on:
  * <i>org.eclipse.gef.examples.ui.pde.internal.wizards.ProjectUnzipperNewWizard</i>
  * .
+ * </p>
+ * <p>
  * It is responsible for offering an example project via the new dialog of Eclipse.
+ * </p>
  */
-public class OclNewProjectWizard extends org.eclipse.jface.wizard.Wizard implements org.eclipse.ui.INewWizard, org.eclipse.core.runtime.IExecutableExtension {
+public class OclNewProjectWizard extends Wizard implements INewWizard, IExecutableExtension {
+	
+	/**
+	 * The name of the ZIP file that is used as content for the new project (relative
+	 * to the root of the resource UI plug-in).
+	 */
+	public final static String NEW_PROJECT_ZIP_FILE_NAME = org.dresdenocl.language.ocl.resource.ocl.ui.OclUIResourceBundle.NEW_PROJECT_ZIP_FILE_NAME;
 	
 	/**
 	 * The single page provided by this base implementation. It provides all the
 	 * functionality required to capture the name and location of the target project.
 	 */
-	private org.eclipse.ui.dialogs.WizardNewProjectCreationPage wizardNewProjectCreationPage;
+	protected WizardNewProjectCreationPage wizardNewProjectCreationPage;
 	
 	/**
 	 * The name of the project creation page
 	 */
-	private String pageName = "New " + new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation().getSyntaxName() + " Project";
+	protected String pageName = org.dresdenocl.language.ocl.resource.ocl.ui.OclUIResourceBundle.NEW_PROJECT_WIZARD_PAGE_NAME;
 	
 	/**
 	 * The title of the project creation page
 	 */
-	private String pageTitle = pageName;
+	protected String pageTitle = pageName;
 	
 	/**
 	 * The description of the project creation page
 	 */
-	private String pageDescription = "Enter a name and select a location where the new project shall be created.";
+	protected String pageDescription = org.dresdenocl.language.ocl.resource.ocl.ui.OclUIResourceBundle.NEW_PROJECT_WIZARD_PAGE_DESCRIPTION;
 	
 	/**
-	 *  The name of the project in the project creation page
+	 * The name of the project in the project creation page
 	 */
-	private String  pageProjectName= "";
-	
-	/**
-	 * The name of the new project zip file (relative to the UI plugin's root)
-	 */
-	private String  newProjectZip="newProject.zip";
+	protected String pageProjectName = org.dresdenocl.language.ocl.resource.ocl.ui.OclUIResourceBundle.NEW_PROJECT_WIZARD_PROJECT_NAME;
 	
 	/**
 	 * The configuration element associated with this new project wizard
 	 */
-	private org.eclipse.core.runtime.IConfigurationElement config;
+	protected IConfigurationElement config;
 	
 	/**
-	 * The constructor.
-	 */
-	public OclNewProjectWizard() {
-		super();
-	}
-	
-	/**
-	 * Performs the bulk of the wizard functionality: project creation, the unzip
-	 * operation and classpath update.
-	 * 
-	 * @see org.eclipse.jface.wizard.Wizard#performFinish
+	 * Creates the example project by delegating the work to
+	 * org.dresdenocl.language.ocl.resource.ocl.ui.OclNewProjectWizardLogic.
 	 */
 	public boolean performFinish() {
 		
 		try {
-			org.eclipse.jface.operation.IRunnableWithProgress operation = new org.eclipse.ui.actions.WorkspaceModifyOperation() {
+			IRunnableWithProgress operation = new WorkspaceModifyOperation() {
 				
-				public void execute(org.eclipse.core.runtime.IProgressMonitor monitor) throws InterruptedException {
+				public void execute(IProgressMonitor monitor) throws InterruptedException {
 					try {
-						monitor.beginTask("Creating Example Project", 120);
-						
-						// Create the project folder
-						org.eclipse.core.runtime.IPath projectPath = wizardNewProjectCreationPage.getLocationPath();
-						
-						String projectName = wizardNewProjectCreationPage.getProjectName();
-						String projectFolder = projectPath.toOSString() + java.io.File.separator + projectName;
-						java.io.File projectFolderFile = new java.io.File(projectFolder);
-						
-						org.eclipse.core.resources.IWorkspace workspace = org.eclipse.core.resources.ResourcesPlugin.getWorkspace();
-						org.eclipse.core.resources.IProject project = workspace.getRoot().getProject(projectName);
-						
-						// If the project does not exist, we will create it and populate it.
-						if (!project.exists()) {
-							projectFolderFile.mkdirs();
-							monitor.worked(10);
-							
-							org.osgi.framework.Bundle bundle = org.eclipse.core.runtime.Platform.getBundle("org.dresdenocl.language.ocl.resource.ocl.ui");
-							java.net.URL newProjectZipURL = bundle.getEntry(newProjectZip);
-							
-							if (newProjectZipURL != null) {
-								// Copy plug-in project code
-								extractProject(projectFolderFile, newProjectZipURL, new org.eclipse.core.runtime.SubProgressMonitor(monitor, 100));
-							}
-							
-							if (monitor.isCanceled()) {
-								throw new InterruptedException();
-							}
-							
-							org.eclipse.core.resources.IProjectDescription desc = workspace.newProjectDescription(project.getName());
-							if (!projectPath.equals(workspace.getRoot().getLocation())) {
-								desc.setLocation(new org.eclipse.core.runtime.Path(projectFolder));
-							}
-							
-							String natureID = org.dresdenocl.language.ocl.resource.ocl.mopp.OclNature.NATURE_ID;
-							java.util.List<org.eclipse.core.resources.ICommand> buildCommands = new java.util.ArrayList<org.eclipse.core.resources.ICommand>();
-							for (String builderID : org.dresdenocl.language.ocl.resource.ocl.mopp.OclNature.BUILDER_IDS) {
-								org.eclipse.core.resources.ICommand command = desc.newCommand();
-								command.setBuilderName(builderID);
-								buildCommands.add(command);
-							}
-							
-							desc.setNatureIds(new String[] {natureID});
-							desc.setBuildSpec(buildCommands.toArray(new org.eclipse.core.resources.ICommand[buildCommands.size()]));
-							project.create(desc, monitor);
-							// Now, we ensure that the project is open.
-							project.open(monitor);
-							renameProject(project, projectName);
-							
-							org.eclipse.core.resources.IFile defaultNewFile = project.getFile("NEW_FILE_PLACEHOLDER");
-							if (newProjectZipURL == null) {
-								defaultNewFile.create(new java.io.ByteArrayInputStream(new byte[0]), true, null);
-							}
-							if (defaultNewFile.exists()) {
-								org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation info = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation();
-								String fileName = "new_file." + info.getSyntaxName();
-								String content = info.getNewFileContentProvider().getNewFileContent("new_file." + info.getSyntaxName());
-								defaultNewFile.setContents(new java.io.ByteArrayInputStream(content.getBytes()), org.eclipse.core.resources.IFile.FORCE, null);
-								defaultNewFile.move(project.getProjectRelativePath().append(fileName), true, null);
-							}
-						}
-						
-						monitor.worked(10);
-						if (monitor.isCanceled()) {
-							throw new InterruptedException();
-						}
-						
-					} catch (java.io.IOException e) {
+						doPerformFinish(monitor);
+					} catch (Exception e) {
 						throw new RuntimeException(e);
-					} catch (org.eclipse.core.runtime.CoreException e) {
-						throw new RuntimeException(e);
-					} finally {
-						monitor.done();
 					}
 				}
 			};
@@ -150,172 +95,46 @@ public class OclNewProjectWizard extends org.eclipse.jface.wizard.Wizard impleme
 			getContainer().run(false, true, operation);
 			
 			// Set perspective
-			org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard.updatePerspective(config);
-			
+			BasicNewProjectResourceWizard.updatePerspective(config);
 		} catch (InterruptedException e) {
 			return false;
 		} catch (Exception e) {
 			return false;
 		}
-		
 		return true;
 	}
 	
-	/**
-	 * Unzip the project archive to the specified folder
-	 * 
-	 * @param projectFolderFile The folder where to unzip the project archive
-	 * @param monitor Monitor to display progress and/or cancel operation
-	 * 
-	 * @throws java.io.IOException
-	 * 
-	 * @throws InterruptedException
-	 * 
-	 * @throws java.io.FileNotFoundException
-	 */
-	private void extractProject(java.io.File projectFolderFile, java.net.URL url, org.eclipse.core.runtime.IProgressMonitor monitor) throws java.io.FileNotFoundException, java.io.IOException, InterruptedException {
-		
-		// Get project archive
-		java.net.URL urlZipLocal = org.eclipse.core.runtime.FileLocator.toFileURL(url);
-		
-		// Walk each element and unzip
-		java.util.zip.ZipFile zipFile = new java.util.zip.ZipFile(urlZipLocal.getPath());
-		
-		try {
-			// Allow for a hundred work units
-			monitor.beginTask("Extracting Project", zipFile.size());
-			
-			unzip(zipFile, projectFolderFile, monitor);
-		} finally {
-			zipFile.close();
-			monitor.done();
-		}
+	protected void doPerformFinish(IProgressMonitor monitor) throws Exception {
+		new org.dresdenocl.language.ocl.resource.ocl.ui.OclNewProjectWizardLogic().createExampleProject(monitor, wizardNewProjectCreationPage.getLocationPath(), wizardNewProjectCreationPage.getProjectName(), org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.PLUGIN_ID, NEW_PROJECT_ZIP_FILE_NAME);
 	}
 	
 	/**
-	 * Unzips the platform formatted zip file to specified folder
-	 * 
-	 * @param zipFile The platform formatted zip file
-	 * @param projectFolderFile The folder where to unzip the project archive
-	 * @param monitor Monitor to display progress and/or cancel operation
-	 * 
-	 * @throws java.io.IOException
-	 * 
-	 * @throws java.io.FileNotFoundException
-	 * 
-	 * @throws InterruptedException
-	 */
-	private void unzip(java.util.zip.ZipFile zipFile, java.io.File projectFolderFile, org.eclipse.core.runtime.IProgressMonitor monitor) throws java.io.IOException, java.io.FileNotFoundException, InterruptedException {
-		
-		java.util.Enumeration<? extends java.util.zip.ZipEntry> e = zipFile.entries();
-		
-		while (e.hasMoreElements()) {
-			java.util.zip.ZipEntry zipEntry = (java.util.zip.ZipEntry) e.nextElement();
-			java.io.File file = new java.io.File(projectFolderFile, zipEntry.getName());
-			
-			if (false == zipEntry.isDirectory()) {
-				
-				// Copy files (and make sure parent directory exist)
-				java.io.File parentFile = file.getParentFile();
-				if (null != parentFile && false == parentFile.exists()) {
-					parentFile.mkdirs();
-				}
-				
-				org.eclipse.core.runtime.Path path = new org.eclipse.core.runtime.Path(file.getPath());
-				if ("java".equals(path.getFileExtension())) {
-					java.io.InputStreamReader is = null;
-					java.io.OutputStreamWriter os = null;
-					
-					try {
-						is = new java.io.InputStreamReader(zipFile.getInputStream(zipEntry), "ISO-8859-1");
-						os = new java.io.OutputStreamWriter(new java.io.FileOutputStream(file), org.eclipse.core.resources.ResourcesPlugin.getEncoding());
-						char[] buffer = new char[102400];
-						while (true) {
-							int len = is.read(buffer);
-							if (len < 0)							break;
-							os.write(buffer, 0, len);
-						}
-					} finally {
-						if (null != is) {
-							is.close();
-						}
-						if (null != os) {
-							os.close();
-						}
-					}
-				} else {
-					java.io.InputStream is = null;
-					java.io.OutputStream os = null;
-					
-					try {
-						is = zipFile.getInputStream(zipEntry);
-						os = new java.io.FileOutputStream(file);
-						
-						byte[] buffer = new byte[102400];
-						while (true) {
-							int len = is.read(buffer);
-							if (len < 0)							break;
-							os.write(buffer, 0, len);
-						}
-					} finally {
-						if (null != is) {
-							is.close();
-						}
-						if (null != os) {
-							os.close();
-						}
-					}
-				}
-			}
-			
-			monitor.worked(1);
-			
-			if (monitor.isCanceled()) {
-				throw new InterruptedException();
-			}
-		}
-	}
-	
-	/**
-	 * Renames the specified project to the specified name
-	 * 
-	 * @param project Project to rename
-	 * @param projectName New name for the project
-	 * 
-	 * @throws org.eclipse.core.runtime.CoreException
-	 */
-	private void renameProject(org.eclipse.core.resources.IProject project, String projectName) throws org.eclipse.core.runtime.CoreException {
-		org.eclipse.core.resources.IProjectDescription description = project.getDescription();
-		description.setName(projectName);
-		project.move(description, org.eclipse.core.resources.IResource.FORCE | org.eclipse.core.resources.IResource.SHALLOW, null);
-	}
-	
-	/**
+	 * <p>
 	 * Creates the sole wizard page contributed by this base implementation; the
 	 * standard Eclipse WizardNewProjectCreationPage.
+	 * </p>
 	 * 
-	 * @see
-	 * org.eclipse.ui.dialogs.WizardNewProjectCreationPage#org.eclipse.ui.dialogs.Wizar
-	 * dNewProjectCreationPage(String)
+	 * @see WizardNewProjectCreationPage#WizardNewProjectCreationPage(String)
 	 */
-	public void init(org.eclipse.ui.IWorkbench workbench, org.eclipse.jface.viewers.IStructuredSelection selection) {
+	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		// Set default image for all wizard pages
-		org.eclipse.core.runtime.IPath path = new org.eclipse.core.runtime.Path("icons/new_project_wizban.gif");
-		org.osgi.framework.Bundle bundle = org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getBundle();
-		java.net.URL url = org.eclipse.core.runtime.FileLocator.find(bundle, path, null);
-		org.eclipse.jface.resource.ImageDescriptor descriptor = org.eclipse.jface.resource.ImageDescriptor.createFromURL(url);
+		IPath path = new Path(org.dresdenocl.language.ocl.resource.ocl.ui.OclUIResourceBundle.NEW_PROJECT_WIZARD_PAGE_ICON);
+		Bundle bundle = org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getBundle();
+		URL url = FileLocator.find(bundle, path, null);
+		ImageDescriptor descriptor = ImageDescriptor.createFromURL(url);
 		setDefaultPageImageDescriptor(descriptor);
 		
-		wizardNewProjectCreationPage = new org.eclipse.ui.dialogs.WizardNewProjectCreationPage(pageName);
+		wizardNewProjectCreationPage = new WizardNewProjectCreationPage(pageName);
 		wizardNewProjectCreationPage.setTitle(pageTitle);
 		wizardNewProjectCreationPage.setDescription(pageDescription);
 		wizardNewProjectCreationPage.setInitialProjectName(pageProjectName);
 		
 		this.addPage(wizardNewProjectCreationPage);
+		setWindowTitle(org.dresdenocl.language.ocl.resource.ocl.ui.OclUIResourceBundle.NEW_PROJECT_WIZARD_WINDOW_TITLE);
 	}
 	
-	public void setInitializationData(org.eclipse.core.runtime.IConfigurationElement configIn, String propertyName, Object data) throws org.eclipse.core.runtime.CoreException {
-		config = configIn;
+	public void setInitializationData(IConfigurationElement config, String propertyName, Object data) throws CoreException {
+		this.config = config;
 	}
 	
 }

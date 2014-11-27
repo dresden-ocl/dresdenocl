@@ -6,22 +6,27 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.ui;
 
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+
 public class OclDefaultHoverTextProvider implements org.dresdenocl.language.ocl.resource.ocl.IOclHoverTextProvider {
 	
-	public String getHoverText(org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EObject referencedObject) {
+	public String getHoverText(EObject container, EObject referencedObject) {
 		return getHoverText(referencedObject);
 	}
 	
-	public String getHoverText(org.eclipse.emf.ecore.EObject object) {
+	public String getHoverText(EObject object) {
 		if (object == null) {
 			return null;
 		}
-		org.eclipse.emf.ecore.EClass eClass = object.eClass();
+		EClass eClass = object.eClass();
 		String label = "<strong>" + eClass.getName() + "</strong>";
-		String documentation = org.eclipse.emf.ecore.util.EcoreUtil.getDocumentation(eClass);
+		String documentation = EcoreUtil.getDocumentation(eClass);
 		String documentationHTML = documentation == null ? "" : " (" + documentation +")";
 		label += documentationHTML;
-		for (org.eclipse.emf.ecore.EAttribute attribute : eClass.getEAllAttributes()) {
+		for (EAttribute attribute : eClass.getEAllAttributes()) {
 			Object value = null;
 			try {
 				value = object.eGet(attribute);

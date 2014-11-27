@@ -6,6 +6,9 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.ui;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+
 /**
  * Provides input for the <code>TextHover</code>. The most is copied from
  * <code>org.eclipse.jdt.internal.ui.text.java.hover.JavadocBrowserInformationContr
@@ -15,19 +18,21 @@ public class OclDocBrowserInformationControlInput {
 	
 	private final OclDocBrowserInformationControlInput fPrevious;
 	private OclDocBrowserInformationControlInput fNext;
-	private final org.eclipse.emf.ecore.EObject element;
+	private final EObject element;
 	private final String htmlContent;
 	private final String tokenText;
-	private final org.eclipse.emf.ecore.resource.Resource resource;
+	private final Resource resource;
 	
 	/**
+	 * <p>
 	 * Creates a new browser information control input.
+	 * </p>
 	 * 
 	 * @param previous previous input, or <code>null</code> if none available
 	 * @param element the element, or <code>null</code> if none available
 	 * @param htmlContent HTML contents, must not be null
 	 */
-	public OclDocBrowserInformationControlInput(OclDocBrowserInformationControlInput previous, org.eclipse.emf.ecore.EObject element, org.eclipse.emf.ecore.resource.Resource resource, String htmlContent, String tokenText) {
+	public OclDocBrowserInformationControlInput(OclDocBrowserInformationControlInput previous, EObject element, Resource resource, String htmlContent, String tokenText) {
 		fPrevious= previous;
 		if (previous != null) {
 			previous.fNext= this;
@@ -40,7 +45,9 @@ public class OclDocBrowserInformationControlInput {
 	}
 	
 	/**
+	 * <p>
 	 * Returns the previous input or <code>null</code> if this is the first.
+	 * </p>
 	 * 
 	 * @return the previous input or <code>null</code>
 	 */
@@ -49,7 +56,9 @@ public class OclDocBrowserInformationControlInput {
 	}
 	
 	/**
+	 * <p>
 	 * Returns the next input or <code>null</code> if this is the last.
+	 * </p>
 	 * 
 	 * @return the next input or <code>null</code>
 	 */
@@ -61,7 +70,7 @@ public class OclDocBrowserInformationControlInput {
 	 * 
 	 * @return the resource
 	 */
-	public org.eclipse.emf.ecore.resource.Resource getResource() {
+	public Resource getResource() {
 		return resource;
 	}
 	

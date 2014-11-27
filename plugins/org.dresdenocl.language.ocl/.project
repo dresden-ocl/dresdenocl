@@ -30,11 +30,17 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>org.emftext.sdk.concretesyntax.resource.cs.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.m2e.core.maven2Nature</nature>
 		<nature>org.eclipse.pde.PluginNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.dresdenocl.language.ocl.resource.ocl.nature</nature>
+		<nature>org.emftext.sdk.concretesyntax.resource.cs.nature</nature>
 	</natures>
 </projectDescription>

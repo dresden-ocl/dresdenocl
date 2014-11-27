@@ -29,35 +29,35 @@ import org.emftext.commons.layout.LayoutInformation;
  */
 public interface PackageDeclarationCS extends EObject {
 	/**
-   * Returns the value of the '<em><b>Context Declarations</b></em>' containment reference list.
-   * The list contents are of type {@link org.dresdenocl.language.ocl.ContextDeclarationCS}.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Context Declarations</b></em>' containment reference list.
+	 * The list contents are of type {@link org.dresdenocl.language.ocl.ContextDeclarationCS}.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Context Declarations</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Context Declarations</em>' containment reference list.
-   * @see org.dresdenocl.language.ocl.OclPackage#getPackageDeclarationCS_ContextDeclarations()
-   * @model containment="true"
-   * @generated
-   */
+	 * @return the value of the '<em>Context Declarations</em>' containment reference list.
+	 * @see org.dresdenocl.language.ocl.OclPackage#getPackageDeclarationCS_ContextDeclarations()
+	 * @model containment="true"
+	 * @generated
+	 */
 	EList<ContextDeclarationCS> getContextDeclarations();
 
 	/**
-   * Returns the value of the '<em><b>Layout Information</b></em>' reference list.
-   * The list contents are of type {@link org.emftext.commons.layout.LayoutInformation}.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Layout Information</b></em>' reference list.
+	 * The list contents are of type {@link org.emftext.commons.layout.LayoutInformation}.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Layout Information</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Layout Information</em>' reference list.
-   * @see org.dresdenocl.language.ocl.OclPackage#getPackageDeclarationCS_LayoutInformation()
-   * @model
-   * @generated
-   */
+	 * @return the value of the '<em>Layout Information</em>' reference list.
+	 * @see org.dresdenocl.language.ocl.OclPackage#getPackageDeclarationCS_LayoutInformation()
+	 * @model
+	 * @generated
+	 */
 	EList<LayoutInformation> getLayoutInformation();
 
 } // PackageDeclarationCS

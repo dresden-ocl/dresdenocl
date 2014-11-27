@@ -6,19 +6,25 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
+import java.util.Collection;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+
 /**
+ * <p>
  * A FuzzyResolveResult is an implementation of the IOclReferenceResolveResult
  * interface that delegates all method calls to a given IOclReferenceResolveResult
  * with ReferenceType EObject. It is used by reference resolver switches to
  * collect results from different reference resolvers in a type safe manner.
+ * </p>
  * 
  * @param <ReferenceType> the type of the reference that is resolved
  */
-public class OclFuzzyResolveResult<ReferenceType extends org.eclipse.emf.ecore.EObject> implements org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> {
+public class OclFuzzyResolveResult<ReferenceType extends EObject> implements org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> {
 	
-	private org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<org.eclipse.emf.ecore.EObject> delegate;
+	private org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<EObject> delegate;
 	
-	public OclFuzzyResolveResult(org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<org.eclipse.emf.ecore.EObject> delegate) {
+	public OclFuzzyResolveResult(org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<EObject> delegate) {
 		this.delegate = delegate;
 	}
 	
@@ -26,7 +32,7 @@ public class OclFuzzyResolveResult<ReferenceType extends org.eclipse.emf.ecore.E
 		return delegate.getErrorMessage();
 	}
 	
-	public java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType>> getMappings() {
+	public Collection<org.dresdenocl.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType>> getMappings() {
 		return null;
 	}
 	
@@ -47,22 +53,22 @@ public class OclFuzzyResolveResult<ReferenceType extends org.eclipse.emf.ecore.E
 	}
 	
 	public void addMapping(String identifier, ReferenceType target) {
-		delegate.addMapping(identifier, (org.eclipse.emf.ecore.EObject) target);
+		delegate.addMapping(identifier, (EObject) target);
 	}
 	
-	public void addMapping(String identifier, org.eclipse.emf.common.util.URI uri) {
+	public void addMapping(String identifier, URI uri) {
 		delegate.addMapping(identifier, uri);
 	}
 	
 	public void addMapping(String identifier, ReferenceType target, String warning) {
-		delegate.addMapping(identifier, (org.eclipse.emf.ecore.EObject) target, warning);
+		delegate.addMapping(identifier, (EObject) target, warning);
 	}
 	
-	public void addMapping(String identifier, org.eclipse.emf.common.util.URI uri, String warning) {
+	public void addMapping(String identifier, URI uri, String warning) {
 		delegate.addMapping(identifier, uri, warning);
 	}
 	
-	public java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix> getQuickFixes() {
+	public Collection<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix> getQuickFixes() {
 		return delegate.getQuickFixes();
 	}
 	

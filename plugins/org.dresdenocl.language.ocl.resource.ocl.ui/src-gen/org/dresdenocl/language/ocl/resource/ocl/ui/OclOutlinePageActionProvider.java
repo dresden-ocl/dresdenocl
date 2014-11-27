@@ -6,13 +6,17 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.ui;
 
+import java.util.ArrayList;
+import java.util.List;
+import org.eclipse.jface.action.IAction;
+
 public class OclOutlinePageActionProvider {
 	
-	public java.util.List<org.eclipse.jface.action.IAction> getActions(org.dresdenocl.language.ocl.resource.ocl.ui.OclOutlinePageTreeViewer treeViewer) {
+	public List<IAction> getActions(org.dresdenocl.language.ocl.resource.ocl.ui.OclOutlinePageTreeViewer treeViewer) {
 		// To add custom actions to the outline view, set the
 		// 'overrideOutlinePageActionProvider' option to <code>false</code> and modify
 		// this method.
-		java.util.List<org.eclipse.jface.action.IAction> defaultActions = new java.util.ArrayList<org.eclipse.jface.action.IAction>();
+		List<IAction> defaultActions = new ArrayList<IAction>();
 		defaultActions.add(new org.dresdenocl.language.ocl.resource.ocl.ui.OclOutlinePageLinkWithEditorAction(treeViewer));
 		defaultActions.add(new org.dresdenocl.language.ocl.resource.ocl.ui.OclOutlinePageCollapseAllAction(treeViewer));
 		defaultActions.add(new org.dresdenocl.language.ocl.resource.ocl.ui.OclOutlinePageExpandAllAction(treeViewer));

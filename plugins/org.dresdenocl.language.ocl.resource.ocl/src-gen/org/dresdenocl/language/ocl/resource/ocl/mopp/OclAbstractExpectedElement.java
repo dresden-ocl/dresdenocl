@@ -6,22 +6,27 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import org.eclipse.emf.ecore.EClass;
+
 /**
  * Abstract super class for all expected elements. Provides methods to add
  * followers.
  */
 public abstract class OclAbstractExpectedElement implements org.dresdenocl.language.ocl.resource.ocl.IOclExpectedElement {
 	
-	private org.eclipse.emf.ecore.EClass ruleMetaclass;
+	private EClass ruleMetaclass;
 	
-	private java.util.Set<org.dresdenocl.language.ocl.resource.ocl.util.OclPair<org.dresdenocl.language.ocl.resource.ocl.IOclExpectedElement, org.dresdenocl.language.ocl.resource.ocl.mopp.OclContainedFeature[]>> followers = new java.util.LinkedHashSet<org.dresdenocl.language.ocl.resource.ocl.util.OclPair<org.dresdenocl.language.ocl.resource.ocl.IOclExpectedElement, org.dresdenocl.language.ocl.resource.ocl.mopp.OclContainedFeature[]>>();
+	private Set<org.dresdenocl.language.ocl.resource.ocl.util.OclPair<org.dresdenocl.language.ocl.resource.ocl.IOclExpectedElement, org.dresdenocl.language.ocl.resource.ocl.mopp.OclContainedFeature[]>> followers = new LinkedHashSet<org.dresdenocl.language.ocl.resource.ocl.util.OclPair<org.dresdenocl.language.ocl.resource.ocl.IOclExpectedElement, org.dresdenocl.language.ocl.resource.ocl.mopp.OclContainedFeature[]>>();
 	
-	public OclAbstractExpectedElement(org.eclipse.emf.ecore.EClass ruleMetaclass) {
+	public OclAbstractExpectedElement(EClass ruleMetaclass) {
 		super();
 		this.ruleMetaclass = ruleMetaclass;
 	}
 	
-	public org.eclipse.emf.ecore.EClass getRuleMetaclass() {
+	public EClass getRuleMetaclass() {
 		return ruleMetaclass;
 	}
 	
@@ -29,7 +34,7 @@ public abstract class OclAbstractExpectedElement implements org.dresdenocl.langu
 		followers.add(new org.dresdenocl.language.ocl.resource.ocl.util.OclPair<org.dresdenocl.language.ocl.resource.ocl.IOclExpectedElement, org.dresdenocl.language.ocl.resource.ocl.mopp.OclContainedFeature[]>(follower, path));
 	}
 	
-	public java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.util.OclPair<org.dresdenocl.language.ocl.resource.ocl.IOclExpectedElement, org.dresdenocl.language.ocl.resource.ocl.mopp.OclContainedFeature[]>> getFollowers() {
+	public Collection<org.dresdenocl.language.ocl.resource.ocl.util.OclPair<org.dresdenocl.language.ocl.resource.ocl.IOclExpectedElement, org.dresdenocl.language.ocl.resource.ocl.mopp.OclContainedFeature[]>> getFollowers() {
 		return followers;
 	}
 	

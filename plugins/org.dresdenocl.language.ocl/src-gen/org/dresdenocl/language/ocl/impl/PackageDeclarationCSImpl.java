@@ -37,158 +37,151 @@ import org.emftext.commons.layout.LayoutInformation;
  */
 public abstract class PackageDeclarationCSImpl extends EObjectImpl implements PackageDeclarationCS {
 	/**
-   * The cached value of the '{@link #getContextDeclarations() <em>Context Declarations</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getContextDeclarations() <em>Context Declarations</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getContextDeclarations()
-   * @generated
-   * @ordered
-   */
+	 * @see #getContextDeclarations()
+	 * @generated
+	 * @ordered
+	 */
 	protected EList<ContextDeclarationCS> contextDeclarations;
 
 	/**
-   * The cached value of the '{@link #getLayoutInformation() <em>Layout Information</em>}' reference list.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getLayoutInformation() <em>Layout Information</em>}' reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getLayoutInformation()
-   * @generated
-   * @ordered
-   */
+	 * @see #getLayoutInformation()
+	 * @generated
+	 * @ordered
+	 */
 	protected EList<LayoutInformation> layoutInformation;
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected PackageDeclarationCSImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-    return OclPackage.Literals.PACKAGE_DECLARATION_CS;
-  }
+		return OclPackage.Literals.PACKAGE_DECLARATION_CS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EList<ContextDeclarationCS> getContextDeclarations() {
-    if (contextDeclarations == null)
-    {
-      contextDeclarations = new EObjectContainmentEList<ContextDeclarationCS>(ContextDeclarationCS.class, this, OclPackage.PACKAGE_DECLARATION_CS__CONTEXT_DECLARATIONS);
-    }
-    return contextDeclarations;
-  }
+		if (contextDeclarations == null) {
+			contextDeclarations = new EObjectContainmentEList<ContextDeclarationCS>(ContextDeclarationCS.class, this, OclPackage.PACKAGE_DECLARATION_CS__CONTEXT_DECLARATIONS);
+		}
+		return contextDeclarations;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EList<LayoutInformation> getLayoutInformation() {
-    if (layoutInformation == null)
-    {
-      layoutInformation = new EObjectResolvingEList<LayoutInformation>(LayoutInformation.class, this, OclPackage.PACKAGE_DECLARATION_CS__LAYOUT_INFORMATION);
-    }
-    return layoutInformation;
-  }
+		if (layoutInformation == null) {
+			layoutInformation = new EObjectResolvingEList<LayoutInformation>(LayoutInformation.class, this, OclPackage.PACKAGE_DECLARATION_CS__LAYOUT_INFORMATION);
+		}
+		return layoutInformation;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-    switch (featureID)
-    {
-      case OclPackage.PACKAGE_DECLARATION_CS__CONTEXT_DECLARATIONS:
-        return ((InternalEList<?>)getContextDeclarations()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+		switch (featureID) {
+			case OclPackage.PACKAGE_DECLARATION_CS__CONTEXT_DECLARATIONS:
+				return ((InternalEList<?>)getContextDeclarations()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID)
-    {
-      case OclPackage.PACKAGE_DECLARATION_CS__CONTEXT_DECLARATIONS:
-        return getContextDeclarations();
-      case OclPackage.PACKAGE_DECLARATION_CS__LAYOUT_INFORMATION:
-        return getLayoutInformation();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case OclPackage.PACKAGE_DECLARATION_CS__CONTEXT_DECLARATIONS:
+				return getContextDeclarations();
+			case OclPackage.PACKAGE_DECLARATION_CS__LAYOUT_INFORMATION:
+				return getLayoutInformation();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-    switch (featureID)
-    {
-      case OclPackage.PACKAGE_DECLARATION_CS__CONTEXT_DECLARATIONS:
-        getContextDeclarations().clear();
-        getContextDeclarations().addAll((Collection<? extends ContextDeclarationCS>)newValue);
-        return;
-      case OclPackage.PACKAGE_DECLARATION_CS__LAYOUT_INFORMATION:
-        getLayoutInformation().clear();
-        getLayoutInformation().addAll((Collection<? extends LayoutInformation>)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case OclPackage.PACKAGE_DECLARATION_CS__CONTEXT_DECLARATIONS:
+				getContextDeclarations().clear();
+				getContextDeclarations().addAll((Collection<? extends ContextDeclarationCS>)newValue);
+				return;
+			case OclPackage.PACKAGE_DECLARATION_CS__LAYOUT_INFORMATION:
+				getLayoutInformation().clear();
+				getLayoutInformation().addAll((Collection<? extends LayoutInformation>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public void eUnset(int featureID) {
-    switch (featureID)
-    {
-      case OclPackage.PACKAGE_DECLARATION_CS__CONTEXT_DECLARATIONS:
-        getContextDeclarations().clear();
-        return;
-      case OclPackage.PACKAGE_DECLARATION_CS__LAYOUT_INFORMATION:
-        getLayoutInformation().clear();
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case OclPackage.PACKAGE_DECLARATION_CS__CONTEXT_DECLARATIONS:
+				getContextDeclarations().clear();
+				return;
+			case OclPackage.PACKAGE_DECLARATION_CS__LAYOUT_INFORMATION:
+				getLayoutInformation().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-    switch (featureID)
-    {
-      case OclPackage.PACKAGE_DECLARATION_CS__CONTEXT_DECLARATIONS:
-        return contextDeclarations != null && !contextDeclarations.isEmpty();
-      case OclPackage.PACKAGE_DECLARATION_CS__LAYOUT_INFORMATION:
-        return layoutInformation != null && !layoutInformation.isEmpty();
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case OclPackage.PACKAGE_DECLARATION_CS__CONTEXT_DECLARATIONS:
+				return contextDeclarations != null && !contextDeclarations.isEmpty();
+			case OclPackage.PACKAGE_DECLARATION_CS__LAYOUT_INFORMATION:
+				return layoutInformation != null && !layoutInformation.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //PackageDeclarationCSImpl

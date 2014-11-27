@@ -6,6 +6,19 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.ui;
 
+import java.lang.reflect.Field;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.ui.ISharedImages;
+import org.eclipse.ui.PlatformUI;
+
 /**
  * A provider class for all images that are required by the generated UI plug-in.
  * The default implementation load images from the bundle and caches them to make
@@ -15,30 +28,30 @@ public class OclImageProvider {
 	
 	public final static OclImageProvider INSTANCE = new OclImageProvider();
 	
-	private java.util.Map<String, org.eclipse.swt.graphics.Image> imageCache = new java.util.LinkedHashMap<String, org.eclipse.swt.graphics.Image>();
+	private Map<String, Image> imageCache = new LinkedHashMap<String, Image>();
 	
 	/**
 	 * Returns the image associated with the given key. The key can be either a path
 	 * to an image file in the resource bundle or a shared image from
 	 * org.eclipse.ui.ISharedImages.
 	 */
-	public org.eclipse.swt.graphics.Image getImage(String key) {
+	public Image getImage(String key) {
 		if (key == null) {
 			return null;
 		}
-		org.eclipse.swt.graphics.Image image = null;
+		Image image = null;
 		// try shared images
 		try {
-			java.lang.reflect.Field declaredField = org.eclipse.ui.ISharedImages.class.getDeclaredField(key);
+			Field declaredField = ISharedImages.class.getDeclaredField(key);
 			Object valueObject = declaredField.get(null);
 			if (valueObject instanceof String) {
 				String value = (String) valueObject;
-				image = org.eclipse.ui.PlatformUI.getWorkbench().getSharedImages().getImage(value);
+				image = PlatformUI.getWorkbench().getSharedImages().getImage(value);
 			}
-		} catch (java.lang.SecurityException e) {
-		} catch (java.lang.NoSuchFieldException e) {
-		} catch (java.lang.IllegalArgumentException e) {
-		} catch (java.lang.IllegalAccessException e) {
+		} catch (SecurityException e) {
+		} catch (NoSuchFieldException e) {
+		} catch (IllegalArgumentException e) {
+		} catch (IllegalAccessException e) {
 		}
 		if (image != null) {
 			return image;
@@ -50,7 +63,7 @@ public class OclImageProvider {
 		}
 		
 		// try loading image from UI bundle
-		org.eclipse.jface.resource.ImageDescriptor descriptor = getImageDescriptor(key);
+		ImageDescriptor descriptor = getImageDescriptor(key);
 		if (descriptor == null) {
 			return null;
 		}
@@ -62,21 +75,40 @@ public class OclImageProvider {
 		return image;
 	}
 	
-	public org.eclipse.jface.resource.ImageDescriptor getImageDescriptor(String key) {
-		org.eclipse.core.runtime.IPath path = new org.eclipse.core.runtime.Path(key);
-		org.eclipse.jface.resource.ImageDescriptor descriptor = org.eclipse.jface.resource.ImageDescriptor.createFromURL(org.eclipse.core.runtime.FileLocator.find(org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getBundle(), path, null));
-		if (org.eclipse.jface.resource.ImageDescriptor.getMissingImageDescriptor().equals(descriptor) || descriptor == null) {
+	/**
+	 * <p>
+	 * Returns the image for the given key. Possible keys are:
+	 * </p>
+	 * <p>
+	 * <ul>
+	 * </p>
+	 * <p>
+	 * <li>platform:/plugin/your.plugin/icons/yourIcon.png</li>
+	 * </p>
+	 * <p>
+	 * <li>bundleentry://557.fwk3560063/icons/yourIcon.png</li>
+	 * </p>
+	 * <p>
+	 * </ul>
+	 * </p>
+	 */
+	public ImageDescriptor getImageDescriptor(String key) {
+		IPath path = new Path(key);
+		org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin plugin = org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault();
+		if (plugin == null) {
+			return null;
+		}
+		
+		ImageDescriptor descriptor = ImageDescriptor.createFromURL(FileLocator.find(plugin.getBundle(), path, null));
+		if (ImageDescriptor.getMissingImageDescriptor().equals(descriptor) || descriptor == null) {
 			// try loading image from any bundle
 			try {
-				// possible URLs:
-				// platform:/plugin/your.plugin/icons/yourIcon.png
-				// bundleentry://557.fwk3560063/icons/yourIcon.png
-				java.net.URL pluginUrl = new java.net.URL(key);
-				descriptor = org.eclipse.jface.resource.ImageDescriptor.createFromURL(pluginUrl);
-				if (org.eclipse.jface.resource.ImageDescriptor.getMissingImageDescriptor().equals(descriptor) || descriptor == null) {
+				URL pluginUrl = new URL(key);
+				descriptor = ImageDescriptor.createFromURL(pluginUrl);
+				if (ImageDescriptor.getMissingImageDescriptor().equals(descriptor) || descriptor == null) {
 					return null;
 				}
-			} catch (java.net.MalformedURLException mue) {
+			} catch (MalformedURLException mue) {
 				org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.logError("IconProvider can't load image (URL is malformed).", mue);
 			}
 		}

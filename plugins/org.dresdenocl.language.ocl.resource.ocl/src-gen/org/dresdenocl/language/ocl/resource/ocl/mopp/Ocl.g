@@ -8,19 +8,44 @@ options {
 
 @lexer::header {
 	package org.dresdenocl.language.ocl.resource.ocl.mopp;
+	
+	import java.util.ArrayList;
+import java.util.List;
+import org.antlr.runtime3_4_0.ANTLRStringStream;
+import org.antlr.runtime3_4_0.RecognitionException;
 }
 
 @lexer::members {
-	public java.util.List<org.antlr.runtime3_4_0.RecognitionException> lexerExceptions  = new java.util.ArrayList<org.antlr.runtime3_4_0.RecognitionException>();
-	public java.util.List<Integer> lexerExceptionsPosition = new java.util.ArrayList<Integer>();
+	public List<RecognitionException> lexerExceptions  = new ArrayList<RecognitionException>();
+	public List<Integer> lexerExceptionPositions = new ArrayList<Integer>();
 	
-	public void reportError(org.antlr.runtime3_4_0.RecognitionException e) {
+	public void reportError(RecognitionException e) {
 		lexerExceptions.add(e);
-		lexerExceptionsPosition.add(((org.antlr.runtime3_4_0.ANTLRStringStream) input).index());
+		lexerExceptionPositions.add(((ANTLRStringStream) input).index());
 	}
 }
 @header{
 	package org.dresdenocl.language.ocl.resource.ocl.mopp;
+	
+	import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import org.antlr.runtime3_4_0.ANTLRInputStream;
+import org.antlr.runtime3_4_0.BitSet;
+import org.antlr.runtime3_4_0.CommonToken;
+import org.antlr.runtime3_4_0.CommonTokenStream;
+import org.antlr.runtime3_4_0.IntStream;
+import org.antlr.runtime3_4_0.Lexer;
+import org.antlr.runtime3_4_0.RecognitionException;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 }
 
 @members{
@@ -46,18 +71,18 @@ options {
 	 * This list is only filled if <code>rememberExpectedElements</code> is set to
 	 * true.
 	 */
-	private java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal> expectedElements = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal>();
+	private List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal> expectedElements = new ArrayList<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal>();
 	
 	private int mismatchedTokenRecoveryTries = 0;
 	/**
 	 * A helper list to allow a lexer to pass errors to its parser
 	 */
-	protected java.util.List<org.antlr.runtime3_4_0.RecognitionException> lexerExceptions = java.util.Collections.synchronizedList(new java.util.ArrayList<org.antlr.runtime3_4_0.RecognitionException>());
+	protected List<RecognitionException> lexerExceptions = Collections.synchronizedList(new ArrayList<RecognitionException>());
 	
 	/**
 	 * Another helper list to allow a lexer to pass positions of errors to its parser
 	 */
-	protected java.util.List<Integer> lexerExceptionsPosition = java.util.Collections.synchronizedList(new java.util.ArrayList<Integer>());
+	protected List<Integer> lexerExceptionPositions = Collections.synchronizedList(new ArrayList<Integer>());
 	
 	/**
 	 * A stack for incomplete objects. This stack is used filled when the parser is
@@ -65,7 +90,7 @@ options {
 	 * pushed on the stack. Once the element was parser completely it is popped from
 	 * the stack.
 	 */
-	java.util.List<org.eclipse.emf.ecore.EObject> incompleteObjects = new java.util.ArrayList<org.eclipse.emf.ecore.EObject>();
+	List<EObject> incompleteObjects = new ArrayList<EObject>();
 	
 	private int stopIncludingHiddenTokens;
 	private int stopExcludingHiddenTokens;
@@ -85,6 +110,15 @@ options {
 	 */
 	private int lastStartIncludingHidden;
 	
+	private org.dresdenocl.language.ocl.resource.ocl.IOclLocationMap locationMap;
+	
+	private org.dresdenocl.language.ocl.resource.ocl.mopp.OclSyntaxErrorMessageConverter syntaxErrorMessageConverter = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclSyntaxErrorMessageConverter(tokenNames);
+	
+	@Override
+	public void reportError(RecognitionException re) {
+		addErrorToResource(syntaxErrorMessageConverter.translateParseError(re));
+	}
+	
 	protected void addErrorToResource(final String errorMessage, final int column, final int line, final int startIndex, final int stopIndex) {
 		postParseCommands.add(new org.dresdenocl.language.ocl.resource.ocl.IOclCommand<org.dresdenocl.language.ocl.resource.ocl.IOclTextResource>() {
 			public boolean execute(org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource) {
@@ -102,7 +136,7 @@ options {
 					public String getMessage() {
 						return errorMessage;
 					}
-					public java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix> getQuickFixes() {
+					public Collection<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix> getQuickFixes() {
 						return null;
 					}
 				}, column, line, startIndex, stopIndex);
@@ -111,7 +145,14 @@ options {
 		});
 	}
 	
-	public void addExpectedElement(org.eclipse.emf.ecore.EClass eClass, int[] ids) {
+	protected void addErrorToResource(org.dresdenocl.language.ocl.resource.ocl.mopp.OclLocalizedMessage message) {
+		if (message == null) {
+			return;
+		}
+		addErrorToResource(message.getMessage(), message.getColumn(), message.getLine(), message.getCharStart(), message.getCharEnd());
+	}
+	
+	public void addExpectedElement(EClass eClass, int[] ids) {
 		if (!this.rememberExpectedElements) {
 			return;
 		}
@@ -123,7 +164,7 @@ options {
 			containmentFeatures[i - 2] = org.dresdenocl.language.ocl.resource.ocl.grammar.OclFollowSetProvider.LINKS[ids[i]];
 		}
 		org.dresdenocl.language.ocl.resource.ocl.grammar.OclContainmentTrace containmentTrace = new org.dresdenocl.language.ocl.resource.ocl.grammar.OclContainmentTrace(eClass, containmentFeatures);
-		org.eclipse.emf.ecore.EObject container = getLastIncompleteElement();
+		EObject container = getLastIncompleteElement();
 		org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedElement = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal(container, terminal, followSetID, containmentTrace);
 		setPosition(expectedElement, input.index());
 		int startIncludingHiddenTokens = expectedElement.getStartIncludingHiddenTokens();
@@ -136,20 +177,20 @@ options {
 		this.expectedElements.add(expectedElement);
 	}
 	
-	protected void collectHiddenTokens(org.eclipse.emf.ecore.EObject element) {
+	protected void collectHiddenTokens(EObject element) {
 	}
 	
-	protected void copyLocalizationInfos(final org.eclipse.emf.ecore.EObject source, final org.eclipse.emf.ecore.EObject target) {
+	protected void copyLocalizationInfos(final EObject source, final EObject target) {
 		if (disableLocationMap) {
+			return;
+		}
+		final org.dresdenocl.language.ocl.resource.ocl.IOclLocationMap locationMap = this.locationMap;
+		if (locationMap == null) {
+			// the locationMap can be null if the parser is used for code completion
 			return;
 		}
 		postParseCommands.add(new org.dresdenocl.language.ocl.resource.ocl.IOclCommand<org.dresdenocl.language.ocl.resource.ocl.IOclTextResource>() {
 			public boolean execute(org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource) {
-				org.dresdenocl.language.ocl.resource.ocl.IOclLocationMap locationMap = resource.getLocationMap();
-				if (locationMap == null) {
-					// the locationMap can be null if the parser is used for code completion
-					return true;
-				}
 				locationMap.setCharStart(target, locationMap.getCharStart(source));
 				locationMap.setCharEnd(target, locationMap.getCharEnd(source));
 				locationMap.setColumn(target, locationMap.getColumn(source));
@@ -159,17 +200,17 @@ options {
 		});
 	}
 	
-	protected void copyLocalizationInfos(final org.antlr.runtime3_4_0.CommonToken source, final org.eclipse.emf.ecore.EObject target) {
+	protected void copyLocalizationInfos(final CommonToken source, final EObject target) {
 		if (disableLocationMap) {
+			return;
+		}
+		final org.dresdenocl.language.ocl.resource.ocl.IOclLocationMap locationMap = this.locationMap;
+		if (locationMap == null) {
+			// the locationMap can be null if the parser is used for code completion
 			return;
 		}
 		postParseCommands.add(new org.dresdenocl.language.ocl.resource.ocl.IOclCommand<org.dresdenocl.language.ocl.resource.ocl.IOclTextResource>() {
 			public boolean execute(org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource) {
-				org.dresdenocl.language.ocl.resource.ocl.IOclLocationMap locationMap = resource.getLocationMap();
-				if (locationMap == null) {
-					// the locationMap can be null if the parser is used for code completion
-					return true;
-				}
 				if (source == null) {
 					return true;
 				}
@@ -186,17 +227,17 @@ options {
 	 * Sets the end character index and the last line for the given object in the
 	 * location map.
 	 */
-	protected void setLocalizationEnd(java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.IOclCommand<org.dresdenocl.language.ocl.resource.ocl.IOclTextResource>> postParseCommands , final org.eclipse.emf.ecore.EObject object, final int endChar, final int endLine) {
+	protected void setLocalizationEnd(Collection<org.dresdenocl.language.ocl.resource.ocl.IOclCommand<org.dresdenocl.language.ocl.resource.ocl.IOclTextResource>> postParseCommands , final EObject object, final int endChar, final int endLine) {
 		if (disableLocationMap) {
+			return;
+		}
+		final org.dresdenocl.language.ocl.resource.ocl.IOclLocationMap locationMap = this.locationMap;
+		if (locationMap == null) {
+			// the locationMap can be null if the parser is used for code completion
 			return;
 		}
 		postParseCommands.add(new org.dresdenocl.language.ocl.resource.ocl.IOclCommand<org.dresdenocl.language.ocl.resource.ocl.IOclTextResource>() {
 			public boolean execute(org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource) {
-				org.dresdenocl.language.ocl.resource.ocl.IOclLocationMap locationMap = resource.getLocationMap();
-				if (locationMap == null) {
-					// the locationMap can be null if the parser is used for code completion
-					return true;
-				}
 				locationMap.setCharEnd(object, endChar);
 				locationMap.setLine(object, endLine);
 				return true;
@@ -204,14 +245,14 @@ options {
 		});
 	}
 	
-	public org.dresdenocl.language.ocl.resource.ocl.IOclTextParser createInstance(java.io.InputStream actualInputStream, String encoding) {
+	public org.dresdenocl.language.ocl.resource.ocl.IOclTextParser createInstance(InputStream actualInputStream, String encoding) {
 		try {
 			if (encoding == null) {
-				return new OclParser(new org.antlr.runtime3_4_0.CommonTokenStream(new OclLexer(new org.antlr.runtime3_4_0.ANTLRInputStream(actualInputStream))));
+				return new OclParser(new CommonTokenStream(new OclLexer(new ANTLRInputStream(actualInputStream))));
 			} else {
-				return new OclParser(new org.antlr.runtime3_4_0.CommonTokenStream(new OclLexer(new org.antlr.runtime3_4_0.ANTLRInputStream(actualInputStream, encoding))));
+				return new OclParser(new CommonTokenStream(new OclLexer(new ANTLRInputStream(actualInputStream, encoding))));
 			}
-		} catch (java.io.IOException e) {
+		} catch (IOException e) {
 			new org.dresdenocl.language.ocl.resource.ocl.util.OclRuntimeUtil().logError("Error while creating parser.", e);
 			return null;
 		}
@@ -224,16 +265,16 @@ options {
 		super(null);
 	}
 	
-	protected org.eclipse.emf.ecore.EObject doParse() throws org.antlr.runtime3_4_0.RecognitionException {
+	protected EObject doParse() throws RecognitionException {
 		this.lastPosition = 0;
 		// required because the lexer class can not be subclassed
 		((OclLexer) getTokenStream().getTokenSource()).lexerExceptions = lexerExceptions;
-		((OclLexer) getTokenStream().getTokenSource()).lexerExceptionsPosition = lexerExceptionsPosition;
+		((OclLexer) getTokenStream().getTokenSource()).lexerExceptionPositions = lexerExceptionPositions;
 		Object typeObject = getTypeObject();
 		if (typeObject == null) {
 			return start();
-		} else if (typeObject instanceof org.eclipse.emf.ecore.EClass) {
-			org.eclipse.emf.ecore.EClass type = (org.eclipse.emf.ecore.EClass) typeObject;
+		} else if (typeObject instanceof EClass) {
+			EClass type = (EClass) typeObject;
 			if (type.getInstanceClass() == org.dresdenocl.language.ocl.SimpleNameCS.class) {
 				return parse_org_dresdenocl_language_ocl_SimpleNameCS();
 			}
@@ -350,7 +391,7 @@ options {
 		return mismatchedTokenRecoveryTries;
 	}
 	
-	public Object getMissingSymbol(org.antlr.runtime3_4_0.IntStream arg0, org.antlr.runtime3_4_0.RecognitionException arg1, int arg2, org.antlr.runtime3_4_0.BitSet arg3) {
+	public Object getMissingSymbol(IntStream arg0, RecognitionException arg1, int arg2, BitSet arg3) {
 		mismatchedTokenRecoveryTries++;
 		return super.getMissingSymbol(arg0, arg1, arg2, arg3);
 	}
@@ -364,7 +405,7 @@ options {
 		if (typeObject != null) {
 			return typeObject;
 		}
-		java.util.Map<?,?> options = getOptions();
+		Map<?,?> options = getOptions();
 		if (options != null) {
 			typeObject = options.get(org.dresdenocl.language.ocl.resource.ocl.IOclOptions.RESOURCE_CONTENT_TYPE);
 		}
@@ -376,17 +417,25 @@ options {
 	 * RecognitionExceptions.
 	 */
 	public org.dresdenocl.language.ocl.resource.ocl.IOclParseResult parse() {
+		// Reset parser state
 		terminateParsing = false;
-		postParseCommands = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.IOclCommand<org.dresdenocl.language.ocl.resource.ocl.IOclTextResource>>();
+		postParseCommands = new ArrayList<org.dresdenocl.language.ocl.resource.ocl.IOclCommand<org.dresdenocl.language.ocl.resource.ocl.IOclTextResource>>();
 		org.dresdenocl.language.ocl.resource.ocl.mopp.OclParseResult parseResult = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclParseResult();
+		if (disableLocationMap) {
+			locationMap = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclDevNullLocationMap();
+		} else {
+			locationMap = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclLocationMap();
+		}
+		// Run parser
 		try {
-			org.eclipse.emf.ecore.EObject result =  doParse();
+			EObject result =  doParse();
 			if (lexerExceptions.isEmpty()) {
 				parseResult.setRoot(result);
+				parseResult.setLocationMap(locationMap);
 			}
-		} catch (org.antlr.runtime3_4_0.RecognitionException re) {
-			reportError(re);
-		} catch (java.lang.IllegalArgumentException iae) {
+		} catch (RecognitionException re) {
+			addErrorToResource(syntaxErrorMessageConverter.translateParseError(re));
+		} catch (IllegalArgumentException iae) {
 			if ("The 'no null' constraint is violated".equals(iae.getMessage())) {
 				// can be caused if a null is set on EMF models where not allowed. this will just
 				// happen if other errors occurred before
@@ -394,28 +443,28 @@ options {
 				iae.printStackTrace();
 			}
 		}
-		for (org.antlr.runtime3_4_0.RecognitionException re : lexerExceptions) {
-			reportLexicalError(re);
+		for (RecognitionException re : lexerExceptions) {
+			addErrorToResource(syntaxErrorMessageConverter.translateLexicalError(re, lexerExceptions, lexerExceptionPositions));
 		}
 		parseResult.getPostParseCommands().addAll(postParseCommands);
 		return parseResult;
 	}
 	
-	public java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal> parseToExpectedElements(org.eclipse.emf.ecore.EClass type, org.dresdenocl.language.ocl.resource.ocl.IOclTextResource dummyResource, int cursorOffset) {
+	public List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal> parseToExpectedElements(EClass type, org.dresdenocl.language.ocl.resource.ocl.IOclTextResource dummyResource, int cursorOffset) {
 		this.rememberExpectedElements = true;
 		this.parseToIndexTypeObject = type;
 		this.cursorOffset = cursorOffset;
 		this.lastStartIncludingHidden = -1;
-		final org.antlr.runtime3_4_0.CommonTokenStream tokenStream = (org.antlr.runtime3_4_0.CommonTokenStream) getTokenStream();
+		final CommonTokenStream tokenStream = (CommonTokenStream) getTokenStream();
 		org.dresdenocl.language.ocl.resource.ocl.IOclParseResult result = parse();
-		for (org.eclipse.emf.ecore.EObject incompleteObject : incompleteObjects) {
-			org.antlr.runtime3_4_0.Lexer lexer = (org.antlr.runtime3_4_0.Lexer) tokenStream.getTokenSource();
+		for (EObject incompleteObject : incompleteObjects) {
+			Lexer lexer = (Lexer) tokenStream.getTokenSource();
 			int endChar = lexer.getCharIndex();
 			int endLine = lexer.getLine();
 			setLocalizationEnd(result.getPostParseCommands(), incompleteObject, endChar, endLine);
 		}
 		if (result != null) {
-			org.eclipse.emf.ecore.EObject root = result.getRoot();
+			EObject root = result.getRoot();
 			if (root != null) {
 				dummyResource.getContentsInternal().add(root);
 			}
@@ -426,8 +475,8 @@ options {
 		// remove all expected elements that were added after the last complete element
 		expectedElements = expectedElements.subList(0, expectedElementsIndexOfLastCompleteElement + 1);
 		int lastFollowSetID = expectedElements.get(expectedElementsIndexOfLastCompleteElement).getFollowSetID();
-		java.util.Set<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal> currentFollowSet = new java.util.LinkedHashSet<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal>();
-		java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal> newFollowSet = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal>();
+		Set<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal> currentFollowSet = new LinkedHashSet<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal>();
+		List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal> newFollowSet = new ArrayList<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal>();
 		for (int i = expectedElementsIndexOfLastCompleteElement; i >= 0; i--) {
 			org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedElementI = expectedElements.get(i);
 			if (expectedElementI.getFollowSetID() == lastFollowSetID) {
@@ -439,7 +488,7 @@ options {
 		int followSetID = 255;
 		int i;
 		for (i = tokenIndexOfLastCompleteElement; i < tokenStream.size(); i++) {
-			org.antlr.runtime3_4_0.CommonToken nextToken = (org.antlr.runtime3_4_0.CommonToken) tokenStream.get(i);
+			CommonToken nextToken = (CommonToken) tokenStream.get(i);
 			if (nextToken.getType() < 0) {
 				break;
 			}
@@ -458,10 +507,10 @@ options {
 				for (org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal nextFollow : currentFollowSet) {
 					if (nextFollow.getTerminal().getTokenNames().contains(getTokenNames()[nextToken.getType()])) {
 						// keep this one - it matches
-						java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.util.OclPair<org.dresdenocl.language.ocl.resource.ocl.IOclExpectedElement, org.dresdenocl.language.ocl.resource.ocl.mopp.OclContainedFeature[]>> newFollowers = nextFollow.getTerminal().getFollowers();
+						Collection<org.dresdenocl.language.ocl.resource.ocl.util.OclPair<org.dresdenocl.language.ocl.resource.ocl.IOclExpectedElement, org.dresdenocl.language.ocl.resource.ocl.mopp.OclContainedFeature[]>> newFollowers = nextFollow.getTerminal().getFollowers();
 						for (org.dresdenocl.language.ocl.resource.ocl.util.OclPair<org.dresdenocl.language.ocl.resource.ocl.IOclExpectedElement, org.dresdenocl.language.ocl.resource.ocl.mopp.OclContainedFeature[]> newFollowerPair : newFollowers) {
 							org.dresdenocl.language.ocl.resource.ocl.IOclExpectedElement newFollower = newFollowerPair.getLeft();
-							org.eclipse.emf.ecore.EObject container = getLastIncompleteElement();
+							EObject container = getLastIncompleteElement();
 							org.dresdenocl.language.ocl.resource.ocl.grammar.OclContainmentTrace containmentTrace = new org.dresdenocl.language.ocl.resource.ocl.grammar.OclContainmentTrace(null, newFollowerPair.getRight());
 							org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal newFollowTerminal = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal(container, newFollower, followSetID, containmentTrace);
 							newFollowSet.add(newFollowTerminal);
@@ -489,7 +538,7 @@ options {
 			if (index >= input.size()) {
 				break;
 			}
-			org.antlr.runtime3_4_0.CommonToken tokenAtIndex = (org.antlr.runtime3_4_0.CommonToken) input.get(index);
+			CommonToken tokenAtIndex = (CommonToken) input.get(index);
 			stopIncludingHiddenTokens = tokenAtIndex.getStopIndex() + 1;
 			if (tokenAtIndex.getChannel() != 99 && !anonymousTokens.contains(tokenAtIndex)) {
 				stopExcludingHiddenTokens = tokenAtIndex.getStopIndex() + 1;
@@ -499,7 +548,7 @@ options {
 		expectedElement.setPosition(stopExcludingHiddenTokens, stopIncludingHiddenTokens);
 	}
 	
-	public Object recoverFromMismatchedToken(org.antlr.runtime3_4_0.IntStream input, int ttype, org.antlr.runtime3_4_0.BitSet follow) throws org.antlr.runtime3_4_0.RecognitionException {
+	public Object recoverFromMismatchedToken(IntStream input, int ttype, BitSet follow) throws RecognitionException {
 		if (!rememberExpectedElements) {
 			return super.recoverFromMismatchedToken(input, ttype, follow);
 		} else {
@@ -507,76 +556,9 @@ options {
 		}
 	}
 	
-	/**
-	 * Translates errors thrown by the parser into human readable messages.
-	 */
-	public void reportError(final org.antlr.runtime3_4_0.RecognitionException e)  {
-		String message = e.getMessage();
-		if (e instanceof org.antlr.runtime3_4_0.MismatchedTokenException) {
-			org.antlr.runtime3_4_0.MismatchedTokenException mte = (org.antlr.runtime3_4_0.MismatchedTokenException) e;
-			String expectedTokenName = formatTokenName(mte.expecting);
-			String actualTokenName = formatTokenName(e.token.getType());
-			message = "Syntax error on token \"" + e.token.getText() + " (" + actualTokenName + ")\", \"" + expectedTokenName + "\" expected";
-		} else if (e instanceof org.antlr.runtime3_4_0.MismatchedTreeNodeException) {
-			org.antlr.runtime3_4_0.MismatchedTreeNodeException mtne = (org.antlr.runtime3_4_0.MismatchedTreeNodeException) e;
-			String expectedTokenName = formatTokenName(mtne.expecting);
-			message = "mismatched tree node: " + "xxx" + "; tokenName " + expectedTokenName;
-		} else if (e instanceof org.antlr.runtime3_4_0.NoViableAltException) {
-			message = "Syntax error on token \"" + e.token.getText() + "\", check following tokens";
-		} else if (e instanceof org.antlr.runtime3_4_0.EarlyExitException) {
-			message = "Syntax error on token \"" + e.token.getText() + "\", delete this token";
-		} else if (e instanceof org.antlr.runtime3_4_0.MismatchedSetException) {
-			org.antlr.runtime3_4_0.MismatchedSetException mse = (org.antlr.runtime3_4_0.MismatchedSetException) e;
-			message = "mismatched token: " + e.token + "; expecting set " + mse.expecting;
-		} else if (e instanceof org.antlr.runtime3_4_0.MismatchedNotSetException) {
-			org.antlr.runtime3_4_0.MismatchedNotSetException mse = (org.antlr.runtime3_4_0.MismatchedNotSetException) e;
-			message = "mismatched token: " +  e.token + "; expecting set " + mse.expecting;
-		} else if (e instanceof org.antlr.runtime3_4_0.FailedPredicateException) {
-			org.antlr.runtime3_4_0.FailedPredicateException fpe = (org.antlr.runtime3_4_0.FailedPredicateException) e;
-			message = "rule " + fpe.ruleName + " failed predicate: {" +  fpe.predicateText + "}?";
-		}
-		// the resource may be null if the parser is used for code completion
-		final String finalMessage = message;
-		if (e.token instanceof org.antlr.runtime3_4_0.CommonToken) {
-			final org.antlr.runtime3_4_0.CommonToken ct = (org.antlr.runtime3_4_0.CommonToken) e.token;
-			addErrorToResource(finalMessage, ct.getCharPositionInLine(), ct.getLine(), ct.getStartIndex(), ct.getStopIndex());
-		} else {
-			addErrorToResource(finalMessage, e.token.getCharPositionInLine(), e.token.getLine(), 1, 5);
-		}
-	}
-	
-	/**
-	 * Translates errors thrown by the lexer into human readable messages.
-	 */
-	public void reportLexicalError(final org.antlr.runtime3_4_0.RecognitionException e)  {
-		String message = "";
-		if (e instanceof org.antlr.runtime3_4_0.MismatchedTokenException) {
-			org.antlr.runtime3_4_0.MismatchedTokenException mte = (org.antlr.runtime3_4_0.MismatchedTokenException) e;
-			message = "Syntax error on token \"" + ((char) e.c) + "\", \"" + (char) mte.expecting + "\" expected";
-		} else if (e instanceof org.antlr.runtime3_4_0.NoViableAltException) {
-			message = "Syntax error on token \"" + ((char) e.c) + "\", delete this token";
-		} else if (e instanceof org.antlr.runtime3_4_0.EarlyExitException) {
-			org.antlr.runtime3_4_0.EarlyExitException eee = (org.antlr.runtime3_4_0.EarlyExitException) e;
-			message = "required (...)+ loop (decision=" + eee.decisionNumber + ") did not match anything; on line " + e.line + ":" + e.charPositionInLine + " char=" + ((char) e.c) + "'";
-		} else if (e instanceof org.antlr.runtime3_4_0.MismatchedSetException) {
-			org.antlr.runtime3_4_0.MismatchedSetException mse = (org.antlr.runtime3_4_0.MismatchedSetException) e;
-			message = "mismatched char: '" + ((char) e.c) + "' on line " + e.line + ":" + e.charPositionInLine + "; expecting set " + mse.expecting;
-		} else if (e instanceof org.antlr.runtime3_4_0.MismatchedNotSetException) {
-			org.antlr.runtime3_4_0.MismatchedNotSetException mse = (org.antlr.runtime3_4_0.MismatchedNotSetException) e;
-			message = "mismatched char: '" + ((char) e.c) + "' on line " + e.line + ":" + e.charPositionInLine + "; expecting set " + mse.expecting;
-		} else if (e instanceof org.antlr.runtime3_4_0.MismatchedRangeException) {
-			org.antlr.runtime3_4_0.MismatchedRangeException mre = (org.antlr.runtime3_4_0.MismatchedRangeException) e;
-			message = "mismatched char: '" + ((char) e.c) + "' on line " + e.line + ":" + e.charPositionInLine + "; expecting set '" + (char) mre.a + "'..'" + (char) mre.b + "'";
-		} else if (e instanceof org.antlr.runtime3_4_0.FailedPredicateException) {
-			org.antlr.runtime3_4_0.FailedPredicateException fpe = (org.antlr.runtime3_4_0.FailedPredicateException) e;
-			message = "rule " + fpe.ruleName + " failed predicate: {" + fpe.predicateText + "}?";
-		}
-		addErrorToResource(message, e.charPositionInLine, e.line, lexerExceptionsPosition.get(lexerExceptions.indexOf(e)), lexerExceptionsPosition.get(lexerExceptions.indexOf(e)));
-	}
-	
 	private void startIncompleteElement(Object object) {
-		if (object instanceof org.eclipse.emf.ecore.EObject) {
-			this.incompleteObjects.add((org.eclipse.emf.ecore.EObject) object);
+		if (object instanceof EObject) {
+			this.incompleteObjects.add((EObject) object);
 		}
 	}
 	
@@ -586,13 +568,13 @@ options {
 			if (!exists) {
 			}
 		}
-		if (object instanceof org.eclipse.emf.ecore.EObject) {
+		if (object instanceof EObject) {
 			this.tokenIndexOfLastCompleteElement = getTokenStream().index();
 			this.expectedElementsIndexOfLastCompleteElement = expectedElements.size() - 1;
 		}
 	}
 	
-	private org.eclipse.emf.ecore.EObject getLastIncompleteElement() {
+	private EObject getLastIncompleteElement() {
 		if (incompleteObjects.isEmpty()) {
 			return null;
 		}
@@ -601,7 +583,7 @@ options {
 	
 }
 
-start returns [ org.eclipse.emf.ecore.EObject element = null]
+start returns [ EObject element = null]
 :
 	{
 		// follow set for start rule(s)
@@ -642,7 +624,7 @@ parse_org_dresdenocl_language_ocl_SimpleNameCS returns [org.dresdenocl.language.
 				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.SIMPLE_NAME_CS__SIMPLE_NAME), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((CommonToken) a0).getLine(), ((CommonToken) a0).getCharPositionInLine(), ((CommonToken) a0).getStartIndex(), ((CommonToken) a0).getStopIndex());
 				}
 				java.lang.String resolved = (java.lang.String) resolvedObject;
 				if (resolved != null) {
@@ -652,7 +634,7 @@ parse_org_dresdenocl_language_ocl_SimpleNameCS returns [org.dresdenocl.language.
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_0_0_0_0, resolved, true);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
+				copyLocalizationInfos((CommonToken) a0, element);
 			}
 		}
 	)
@@ -689,7 +671,7 @@ parse_org_dresdenocl_language_ocl_SimpleNameCS returns [org.dresdenocl.language.
 				tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.SIMPLE_NAME_CS__SIMPLE_NAME), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((CommonToken) a1).getLine(), ((CommonToken) a1).getCharPositionInLine(), ((CommonToken) a1).getStartIndex(), ((CommonToken) a1).getStopIndex());
 				}
 				java.lang.String resolved = (java.lang.String) resolvedObject;
 				if (resolved != null) {
@@ -699,7 +681,7 @@ parse_org_dresdenocl_language_ocl_SimpleNameCS returns [org.dresdenocl.language.
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_0_0_1_0, resolved, true);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, element);
+				copyLocalizationInfos((CommonToken) a1, element);
 			}
 		}
 	)
@@ -731,7 +713,7 @@ parse_org_dresdenocl_language_ocl_PackageDeclarationWithNamespaceCS returns [org
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_1_0_0_0, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
+		copyLocalizationInfos((CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
@@ -815,7 +797,7 @@ parse_org_dresdenocl_language_ocl_PackageDeclarationWithNamespaceCS returns [org
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_1_0_0_5, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
+		copyLocalizationInfos((CommonToken)a3, element);
 	}
 	{
 		// expected elements (follow set)
@@ -844,12 +826,12 @@ parse_org_dresdenocl_language_ocl_PackageDeclarationNestedNamespaceCS returns [o
 				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NAMESPACE), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((CommonToken) a0).getLine(), ((CommonToken) a0).getCharPositionInLine(), ((CommonToken) a0).getStartIndex(), ((CommonToken) a0).getStopIndex());
 				}
 				String resolved = (String) resolvedObject;
 				org.dresdenocl.pivotmodel.Namespace proxy = org.dresdenocl.pivotmodel.PivotModelFactory.eINSTANCE.createNamespace();
 				collectHiddenTokens(element);
-				registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.PackageDeclarationNestedNamespaceCS, org.dresdenocl.pivotmodel.Namespace>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getPackageDeclarationNestedNamespaceCSNamespaceReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NAMESPACE), resolved, proxy);
+				registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.PackageDeclarationNestedNamespaceCS, org.dresdenocl.pivotmodel.Namespace>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getPackageDeclarationNestedNamespaceCSNamespaceReferenceResolver()), element, (EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NAMESPACE), resolved, proxy);
 				if (proxy != null) {
 					Object value = proxy;
 					element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NAMESPACE), value);
@@ -857,8 +839,8 @@ parse_org_dresdenocl_language_ocl_PackageDeclarationNestedNamespaceCS returns [o
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_2_0_0_0, proxy, true);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, proxy);
+				copyLocalizationInfos((CommonToken) a0, element);
+				copyLocalizationInfos((CommonToken) a0, proxy);
 			}
 		}
 	)
@@ -880,7 +862,7 @@ parse_org_dresdenocl_language_ocl_PackageDeclarationNestedNamespaceCS returns [o
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_2_0_0_1_0_0_0, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
+				copyLocalizationInfos((CommonToken)a1, element);
 			}
 			{
 				// expected elements (follow set)
@@ -975,7 +957,7 @@ parse_org_dresdenocl_language_ocl_OperationContextDeclarationCS returns [org.dre
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_4_0_0_0, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
+		copyLocalizationInfos((CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
@@ -1058,7 +1040,7 @@ parse_org_dresdenocl_language_ocl_AttributeContextDeclarationCS returns [org.dre
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_0, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
+		copyLocalizationInfos((CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
@@ -1103,7 +1085,7 @@ parse_org_dresdenocl_language_ocl_AttributeContextDeclarationCS returns [org.dre
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_2_0_0_0, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
+				copyLocalizationInfos((CommonToken)a2, element);
 			}
 			{
 				// expected elements (follow set)
@@ -1223,7 +1205,7 @@ parse_org_dresdenocl_language_ocl_ClassifierContextDeclarationCS returns [org.dr
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_6_0_0_0, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
+		copyLocalizationInfos((CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
@@ -1306,7 +1288,7 @@ parse_org_dresdenocl_language_ocl_InitValueCS returns [org.dresdenocl.language.o
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_7_0_0_0, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
+		copyLocalizationInfos((CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
@@ -1320,7 +1302,7 @@ parse_org_dresdenocl_language_ocl_InitValueCS returns [org.dresdenocl.language.o
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_7_0_0_2, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
+		copyLocalizationInfos((CommonToken)a1, element);
 	}
 	{
 		// expected elements (follow set)
@@ -1397,7 +1379,7 @@ parse_org_dresdenocl_language_ocl_DeriveValueCS returns [org.dresdenocl.language
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_8_0_0_0, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
+		copyLocalizationInfos((CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
@@ -1411,7 +1393,7 @@ parse_org_dresdenocl_language_ocl_DeriveValueCS returns [org.dresdenocl.language
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_8_0_0_2, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
+		copyLocalizationInfos((CommonToken)a1, element);
 	}
 	{
 		// expected elements (follow set)
@@ -1488,7 +1470,7 @@ parse_org_dresdenocl_language_ocl_InvariantExpCS returns [org.dresdenocl.languag
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_9_0_0_0, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
+		copyLocalizationInfos((CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
@@ -1532,7 +1514,7 @@ parse_org_dresdenocl_language_ocl_InvariantExpCS returns [org.dresdenocl.languag
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_9_0_0_3, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
+		copyLocalizationInfos((CommonToken)a2, element);
 	}
 	{
 		// expected elements (follow set)
@@ -1622,7 +1604,7 @@ parse_org_dresdenocl_language_ocl_DefinitionExpCS returns [org.dresdenocl.langua
 						tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.DEFINITION_EXP_CS__STATIC), result);
 						Object resolvedObject = result.getResolvedToken();
 						if (resolvedObject == null) {
-							addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
+							addErrorToResource(result.getErrorMessage(), ((CommonToken) a0).getLine(), ((CommonToken) a0).getCharPositionInLine(), ((CommonToken) a0).getStartIndex(), ((CommonToken) a0).getStopIndex());
 						}
 						java.lang.Boolean resolved = (java.lang.Boolean) resolvedObject;
 						if (resolved != null) {
@@ -1632,7 +1614,7 @@ parse_org_dresdenocl_language_ocl_DefinitionExpCS returns [org.dresdenocl.langua
 						}
 						collectHiddenTokens(element);
 						retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_10_0_0_0_0_0_0, resolved, true);
-						copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
+						copyLocalizationInfos((CommonToken) a0, element);
 					}
 				}
 			)
@@ -1655,7 +1637,7 @@ parse_org_dresdenocl_language_ocl_DefinitionExpCS returns [org.dresdenocl.langua
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_10_0_0_1, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
+		copyLocalizationInfos((CommonToken)a1, element);
 	}
 	{
 		// expected elements (follow set)
@@ -1669,7 +1651,7 @@ parse_org_dresdenocl_language_ocl_DefinitionExpCS returns [org.dresdenocl.langua
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_10_0_0_3, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
+		copyLocalizationInfos((CommonToken)a2, element);
 	}
 	{
 		// expected elements (follow set)
@@ -1797,7 +1779,7 @@ parse_org_dresdenocl_language_ocl_DefinitionExpOperationCS returns [org.dresdeno
 				tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.DEFINITION_EXP_OPERATION_CS__EQUAL), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((CommonToken) a1).getLine(), ((CommonToken) a1).getCharPositionInLine(), ((CommonToken) a1).getStartIndex(), ((CommonToken) a1).getStopIndex());
 				}
 				java.lang.String resolved = (java.lang.String) resolvedObject;
 				if (resolved != null) {
@@ -1807,7 +1789,7 @@ parse_org_dresdenocl_language_ocl_DefinitionExpOperationCS returns [org.dresdeno
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_12_0_0_1, resolved, true);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, element);
+				copyLocalizationInfos((CommonToken) a1, element);
 			}
 		}
 	)
@@ -1887,7 +1869,7 @@ parse_org_dresdenocl_language_ocl_PreConditionDeclarationCS returns [org.dresden
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_13_0_0_0, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
+		copyLocalizationInfos((CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
@@ -1938,7 +1920,7 @@ parse_org_dresdenocl_language_ocl_PreConditionDeclarationCS returns [org.dresden
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_13_0_0_3, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
+		copyLocalizationInfos((CommonToken)a2, element);
 	}
 	{
 		// expected elements (follow set)
@@ -2016,7 +1998,7 @@ parse_org_dresdenocl_language_ocl_PostConditionDeclarationCS returns [org.dresde
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_14_0_0_0, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
+		copyLocalizationInfos((CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
@@ -2067,7 +2049,7 @@ parse_org_dresdenocl_language_ocl_PostConditionDeclarationCS returns [org.dresde
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_14_0_0_3, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
+		copyLocalizationInfos((CommonToken)a2, element);
 	}
 	{
 		// expected elements (follow set)
@@ -2145,7 +2127,7 @@ parse_org_dresdenocl_language_ocl_BodyDeclarationCS returns [org.dresdenocl.lang
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_15_0_0_0, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
+		copyLocalizationInfos((CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
@@ -2196,7 +2178,7 @@ parse_org_dresdenocl_language_ocl_BodyDeclarationCS returns [org.dresdenocl.lang
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_15_0_0_3, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
+		copyLocalizationInfos((CommonToken)a2, element);
 	}
 	{
 		// expected elements (follow set)
@@ -2300,7 +2282,7 @@ parse_org_dresdenocl_language_ocl_OperationDefinitionInContextCS returns [org.dr
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_2, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
+		copyLocalizationInfos((CommonToken)a1, element);
 	}
 	{
 		// expected elements (follow set)
@@ -2324,12 +2306,12 @@ parse_org_dresdenocl_language_ocl_OperationDefinitionInContextCS returns [org.dr
 				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__OPERATION), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a2).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((CommonToken) a2).getLine(), ((CommonToken) a2).getCharPositionInLine(), ((CommonToken) a2).getStartIndex(), ((CommonToken) a2).getStopIndex());
 				}
 				String resolved = (String) resolvedObject;
 				org.dresdenocl.pivotmodel.Operation proxy = org.dresdenocl.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
 				collectHiddenTokens(element);
-				registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationDefinitionCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationDefinitionCSOperationReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__OPERATION), resolved, proxy);
+				registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationDefinitionCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationDefinitionCSOperationReferenceResolver()), element, (EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__OPERATION), resolved, proxy);
 				if (proxy != null) {
 					Object value = proxy;
 					element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__OPERATION), value);
@@ -2337,8 +2319,8 @@ parse_org_dresdenocl_language_ocl_OperationDefinitionInContextCS returns [org.dr
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_4, proxy, true);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, element);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, proxy);
+				copyLocalizationInfos((CommonToken) a2, element);
+				copyLocalizationInfos((CommonToken) a2, proxy);
 			}
 		}
 	)
@@ -2354,7 +2336,7 @@ parse_org_dresdenocl_language_ocl_OperationDefinitionInContextCS returns [org.dr
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_6, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
+		copyLocalizationInfos((CommonToken)a3, element);
 	}
 	{
 		// expected elements (follow set)
@@ -2400,7 +2382,7 @@ parse_org_dresdenocl_language_ocl_OperationDefinitionInContextCS returns [org.dr
 						}
 						collectHiddenTokens(element);
 						retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_8_0_0_1_0_0_1, null, true);
-						copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a5, element);
+						copyLocalizationInfos((CommonToken)a5, element);
 					}
 					{
 						// expected elements (follow set)
@@ -2456,7 +2438,7 @@ parse_org_dresdenocl_language_ocl_OperationDefinitionInContextCS returns [org.dr
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_10, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a7, element);
+		copyLocalizationInfos((CommonToken)a7, element);
 	}
 	{
 		// expected elements (follow set)
@@ -2475,7 +2457,7 @@ parse_org_dresdenocl_language_ocl_OperationDefinitionInContextCS returns [org.dr
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_11_0_0_0, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a8, element);
+				copyLocalizationInfos((CommonToken)a8, element);
 			}
 			{
 				// expected elements (follow set)
@@ -2545,12 +2527,12 @@ parse_org_dresdenocl_language_ocl_OperationDefinitionInDefCS returns [org.dresde
 				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_DEFINITION_IN_DEF_CS__OPERATION), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((CommonToken) a0).getLine(), ((CommonToken) a0).getCharPositionInLine(), ((CommonToken) a0).getStartIndex(), ((CommonToken) a0).getStopIndex());
 				}
 				String resolved = (String) resolvedObject;
 				org.dresdenocl.pivotmodel.Operation proxy = org.dresdenocl.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
 				collectHiddenTokens(element);
-				registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationDefinitionCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationDefinitionCSOperationReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_DEFINITION_IN_DEF_CS__OPERATION), resolved, proxy);
+				registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationDefinitionCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationDefinitionCSOperationReferenceResolver()), element, (EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_DEFINITION_IN_DEF_CS__OPERATION), resolved, proxy);
 				if (proxy != null) {
 					Object value = proxy;
 					element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_DEFINITION_IN_DEF_CS__OPERATION), value);
@@ -2558,8 +2540,8 @@ parse_org_dresdenocl_language_ocl_OperationDefinitionInDefCS returns [org.dresde
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_17_0_0_0, proxy, true);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, proxy);
+				copyLocalizationInfos((CommonToken) a0, element);
+				copyLocalizationInfos((CommonToken) a0, proxy);
 			}
 		}
 	)
@@ -2575,7 +2557,7 @@ parse_org_dresdenocl_language_ocl_OperationDefinitionInDefCS returns [org.dresde
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_17_0_0_1, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
+		copyLocalizationInfos((CommonToken)a1, element);
 	}
 	{
 		// expected elements (follow set)
@@ -2621,7 +2603,7 @@ parse_org_dresdenocl_language_ocl_OperationDefinitionInDefCS returns [org.dresde
 						}
 						collectHiddenTokens(element);
 						retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_17_0_0_2_0_0_1_0_0_0, null, true);
-						copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
+						copyLocalizationInfos((CommonToken)a3, element);
 					}
 					{
 						// expected elements (follow set)
@@ -2677,7 +2659,7 @@ parse_org_dresdenocl_language_ocl_OperationDefinitionInDefCS returns [org.dresde
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_17_0_0_3, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a5, element);
+		copyLocalizationInfos((CommonToken)a5, element);
 	}
 	{
 		// expected elements (follow set)
@@ -2694,7 +2676,7 @@ parse_org_dresdenocl_language_ocl_OperationDefinitionInDefCS returns [org.dresde
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_17_0_0_4_0_0_0, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a6, element);
+				copyLocalizationInfos((CommonToken)a6, element);
 			}
 			{
 				// expected elements (follow set)
@@ -2760,12 +2742,12 @@ parse_org_dresdenocl_language_ocl_ParameterCS returns [org.dresdenocl.language.o
 				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.PARAMETER_CS__PARAMETER), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((CommonToken) a0).getLine(), ((CommonToken) a0).getCharPositionInLine(), ((CommonToken) a0).getStartIndex(), ((CommonToken) a0).getStopIndex());
 				}
 				String resolved = (String) resolvedObject;
 				org.dresdenocl.pivotmodel.Parameter proxy = org.dresdenocl.pivotmodel.PivotModelFactory.eINSTANCE.createParameter();
 				collectHiddenTokens(element);
-				registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.ParameterCS, org.dresdenocl.pivotmodel.Parameter>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getParameterCSParameterReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.PARAMETER_CS__PARAMETER), resolved, proxy);
+				registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.ParameterCS, org.dresdenocl.pivotmodel.Parameter>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getParameterCSParameterReferenceResolver()), element, (EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.PARAMETER_CS__PARAMETER), resolved, proxy);
 				if (proxy != null) {
 					Object value = proxy;
 					element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.PARAMETER_CS__PARAMETER), value);
@@ -2773,8 +2755,8 @@ parse_org_dresdenocl_language_ocl_ParameterCS returns [org.dresdenocl.language.o
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_18_0_0_0, proxy, true);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, proxy);
+				copyLocalizationInfos((CommonToken) a0, element);
+				copyLocalizationInfos((CommonToken) a0, proxy);
 			}
 		}
 	)
@@ -2790,7 +2772,7 @@ parse_org_dresdenocl_language_ocl_ParameterCS returns [org.dresdenocl.language.o
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_18_0_0_1, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
+		copyLocalizationInfos((CommonToken)a1, element);
 	}
 	{
 		// expected elements (follow set)
@@ -2853,12 +2835,12 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 					tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), result);
 					Object resolvedObject = result.getResolvedToken();
 					if (resolvedObject == null) {
-						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
+						addErrorToResource(result.getErrorMessage(), ((CommonToken) a0).getLine(), ((CommonToken) a0).getCharPositionInLine(), ((CommonToken) a0).getStartIndex(), ((CommonToken) a0).getStopIndex());
 					}
 					String resolved = (String) resolvedObject;
 					org.dresdenocl.pivotmodel.Operation proxy = org.dresdenocl.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
 					collectHiddenTokens(element);
-					registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationCallBaseExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), resolved, proxy);
+					registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationCallBaseExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), resolved, proxy);
 					if (proxy != null) {
 						Object value = proxy;
 						element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), value);
@@ -2866,8 +2848,8 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 					}
 					collectHiddenTokens(element);
 					retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_0_0, proxy, true);
-					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
-					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, proxy);
+					copyLocalizationInfos((CommonToken) a0, element);
+					copyLocalizationInfos((CommonToken) a0, proxy);
 				}
 			}
 		)
@@ -2894,12 +2876,12 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 					tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), result);
 					Object resolvedObject = result.getResolvedToken();
 					if (resolvedObject == null) {
-						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStopIndex());
+						addErrorToResource(result.getErrorMessage(), ((CommonToken) a1).getLine(), ((CommonToken) a1).getCharPositionInLine(), ((CommonToken) a1).getStartIndex(), ((CommonToken) a1).getStopIndex());
 					}
 					String resolved = (String) resolvedObject;
 					org.dresdenocl.pivotmodel.Operation proxy = org.dresdenocl.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
 					collectHiddenTokens(element);
-					registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationCallBaseExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), resolved, proxy);
+					registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationCallBaseExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), resolved, proxy);
 					if (proxy != null) {
 						Object value = proxy;
 						element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), value);
@@ -2907,8 +2889,8 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 					}
 					collectHiddenTokens(element);
 					retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_1_0, proxy, true);
-					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, element);
-					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, proxy);
+					copyLocalizationInfos((CommonToken) a1, element);
+					copyLocalizationInfos((CommonToken) a1, proxy);
 				}
 			}
 		)
@@ -2935,12 +2917,12 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 					tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), result);
 					Object resolvedObject = result.getResolvedToken();
 					if (resolvedObject == null) {
-						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a2).getStopIndex());
+						addErrorToResource(result.getErrorMessage(), ((CommonToken) a2).getLine(), ((CommonToken) a2).getCharPositionInLine(), ((CommonToken) a2).getStartIndex(), ((CommonToken) a2).getStopIndex());
 					}
 					String resolved = (String) resolvedObject;
 					org.dresdenocl.pivotmodel.Operation proxy = org.dresdenocl.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
 					collectHiddenTokens(element);
-					registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationCallBaseExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), resolved, proxy);
+					registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationCallBaseExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), resolved, proxy);
 					if (proxy != null) {
 						Object value = proxy;
 						element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), value);
@@ -2948,8 +2930,8 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 					}
 					collectHiddenTokens(element);
 					retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_2_0, proxy, true);
-					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, element);
-					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, proxy);
+					copyLocalizationInfos((CommonToken) a2, element);
+					copyLocalizationInfos((CommonToken) a2, proxy);
 				}
 			}
 		)
@@ -2976,12 +2958,12 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 					tokenResolver.resolve(a3.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), result);
 					Object resolvedObject = result.getResolvedToken();
 					if (resolvedObject == null) {
-						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a3).getStopIndex());
+						addErrorToResource(result.getErrorMessage(), ((CommonToken) a3).getLine(), ((CommonToken) a3).getCharPositionInLine(), ((CommonToken) a3).getStartIndex(), ((CommonToken) a3).getStopIndex());
 					}
 					String resolved = (String) resolvedObject;
 					org.dresdenocl.pivotmodel.Operation proxy = org.dresdenocl.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
 					collectHiddenTokens(element);
-					registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationCallBaseExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), resolved, proxy);
+					registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationCallBaseExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), resolved, proxy);
 					if (proxy != null) {
 						Object value = proxy;
 						element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), value);
@@ -2989,8 +2971,8 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 					}
 					collectHiddenTokens(element);
 					retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_3_0, proxy, true);
-					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a3, element);
-					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a3, proxy);
+					copyLocalizationInfos((CommonToken) a3, element);
+					copyLocalizationInfos((CommonToken) a3, proxy);
 				}
 			}
 		)
@@ -3017,12 +2999,12 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 					tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), result);
 					Object resolvedObject = result.getResolvedToken();
 					if (resolvedObject == null) {
-						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a4).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a4).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a4).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a4).getStopIndex());
+						addErrorToResource(result.getErrorMessage(), ((CommonToken) a4).getLine(), ((CommonToken) a4).getCharPositionInLine(), ((CommonToken) a4).getStartIndex(), ((CommonToken) a4).getStopIndex());
 					}
 					String resolved = (String) resolvedObject;
 					org.dresdenocl.pivotmodel.Operation proxy = org.dresdenocl.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
 					collectHiddenTokens(element);
-					registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationCallBaseExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), resolved, proxy);
+					registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationCallBaseExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), resolved, proxy);
 					if (proxy != null) {
 						Object value = proxy;
 						element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), value);
@@ -3030,8 +3012,8 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 					}
 					collectHiddenTokens(element);
 					retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_4_0, proxy, true);
-					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a4, element);
-					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a4, proxy);
+					copyLocalizationInfos((CommonToken) a4, element);
+					copyLocalizationInfos((CommonToken) a4, proxy);
 				}
 			}
 		)
@@ -3058,12 +3040,12 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 					tokenResolver.resolve(a5.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), result);
 					Object resolvedObject = result.getResolvedToken();
 					if (resolvedObject == null) {
-						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a5).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a5).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a5).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a5).getStopIndex());
+						addErrorToResource(result.getErrorMessage(), ((CommonToken) a5).getLine(), ((CommonToken) a5).getCharPositionInLine(), ((CommonToken) a5).getStartIndex(), ((CommonToken) a5).getStopIndex());
 					}
 					String resolved = (String) resolvedObject;
 					org.dresdenocl.pivotmodel.Operation proxy = org.dresdenocl.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
 					collectHiddenTokens(element);
-					registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationCallBaseExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), resolved, proxy);
+					registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationCallBaseExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), resolved, proxy);
 					if (proxy != null) {
 						Object value = proxy;
 						element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), value);
@@ -3071,8 +3053,8 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 					}
 					collectHiddenTokens(element);
 					retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_5_0, proxy, true);
-					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a5, element);
-					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a5, proxy);
+					copyLocalizationInfos((CommonToken) a5, element);
+					copyLocalizationInfos((CommonToken) a5, proxy);
 				}
 			}
 		)
@@ -3099,12 +3081,12 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 					tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), result);
 					Object resolvedObject = result.getResolvedToken();
 					if (resolvedObject == null) {
-						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a6).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a6).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a6).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a6).getStopIndex());
+						addErrorToResource(result.getErrorMessage(), ((CommonToken) a6).getLine(), ((CommonToken) a6).getCharPositionInLine(), ((CommonToken) a6).getStartIndex(), ((CommonToken) a6).getStopIndex());
 					}
 					String resolved = (String) resolvedObject;
 					org.dresdenocl.pivotmodel.Operation proxy = org.dresdenocl.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
 					collectHiddenTokens(element);
-					registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationCallBaseExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), resolved, proxy);
+					registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationCallBaseExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), resolved, proxy);
 					if (proxy != null) {
 						Object value = proxy;
 						element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), value);
@@ -3112,8 +3094,8 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 					}
 					collectHiddenTokens(element);
 					retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_6_0, proxy, true);
-					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a6, element);
-					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a6, proxy);
+					copyLocalizationInfos((CommonToken) a6, element);
+					copyLocalizationInfos((CommonToken) a6, proxy);
 				}
 			}
 		)
@@ -3140,12 +3122,12 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 					tokenResolver.resolve(a7.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), result);
 					Object resolvedObject = result.getResolvedToken();
 					if (resolvedObject == null) {
-						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a7).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a7).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a7).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a7).getStopIndex());
+						addErrorToResource(result.getErrorMessage(), ((CommonToken) a7).getLine(), ((CommonToken) a7).getCharPositionInLine(), ((CommonToken) a7).getStartIndex(), ((CommonToken) a7).getStopIndex());
 					}
 					String resolved = (String) resolvedObject;
 					org.dresdenocl.pivotmodel.Operation proxy = org.dresdenocl.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
 					collectHiddenTokens(element);
-					registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationCallBaseExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), resolved, proxy);
+					registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationCallBaseExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), resolved, proxy);
 					if (proxy != null) {
 						Object value = proxy;
 						element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), value);
@@ -3153,8 +3135,8 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 					}
 					collectHiddenTokens(element);
 					retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_7_0, proxy, true);
-					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a7, element);
-					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a7, proxy);
+					copyLocalizationInfos((CommonToken) a7, element);
+					copyLocalizationInfos((CommonToken) a7, proxy);
 				}
 			}
 		)
@@ -3176,7 +3158,7 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_2, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a8, element);
+		copyLocalizationInfos((CommonToken)a8, element);
 	}
 	{
 		// expected elements (follow set)
@@ -3248,7 +3230,7 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 						}
 						collectHiddenTokens(element);
 						retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_3_0_0_2_0_0_0, null, true);
-						copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a10, element);
+						copyLocalizationInfos((CommonToken)a10, element);
 					}
 					{
 						// expected elements (follow set)
@@ -3330,7 +3312,7 @@ parse_org_dresdenocl_language_ocl_ImplicitOperationCallCS returns [org.dresdenoc
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_5, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a12, element);
+		copyLocalizationInfos((CommonToken)a12, element);
 	}
 	{
 		// expected elements (follow set)
@@ -3398,12 +3380,12 @@ parse_org_dresdenocl_language_ocl_ImplicitPropertyCallCS returns [org.dresdenocl
 				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_PROPERTY_CALL_CS__PROPERTY), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((CommonToken) a0).getLine(), ((CommonToken) a0).getCharPositionInLine(), ((CommonToken) a0).getStartIndex(), ((CommonToken) a0).getStopIndex());
 				}
 				String resolved = (String) resolvedObject;
 				org.dresdenocl.pivotmodel.Property proxy = org.dresdenocl.pivotmodel.PivotModelFactory.eINSTANCE.createProperty();
 				collectHiddenTokens(element);
-				registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.PropertyCallBaseExpCS, org.dresdenocl.pivotmodel.Property>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getPropertyCallBaseExpCSPropertyReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_PROPERTY_CALL_CS__PROPERTY), resolved, proxy);
+				registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.PropertyCallBaseExpCS, org.dresdenocl.pivotmodel.Property>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getPropertyCallBaseExpCSPropertyReferenceResolver()), element, (EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_PROPERTY_CALL_CS__PROPERTY), resolved, proxy);
 				if (proxy != null) {
 					Object value = proxy;
 					element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_PROPERTY_CALL_CS__PROPERTY), value);
@@ -3411,8 +3393,8 @@ parse_org_dresdenocl_language_ocl_ImplicitPropertyCallCS returns [org.dresdenocl
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_31_0_0_0, proxy, true);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, proxy);
+				copyLocalizationInfos((CommonToken) a0, element);
+				copyLocalizationInfos((CommonToken) a0, proxy);
 			}
 		}
 	)
@@ -3479,7 +3461,7 @@ parse_org_dresdenocl_language_ocl_ImplicitPropertyCallCS returns [org.dresdenocl
 						tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.IMPLICIT_PROPERTY_CALL_CS__IS_MARKED_PRE), result);
 						Object resolvedObject = result.getResolvedToken();
 						if (resolvedObject == null) {
-							addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStopIndex());
+							addErrorToResource(result.getErrorMessage(), ((CommonToken) a1).getLine(), ((CommonToken) a1).getCharPositionInLine(), ((CommonToken) a1).getStartIndex(), ((CommonToken) a1).getStopIndex());
 						}
 						java.lang.Boolean resolved = (java.lang.Boolean) resolvedObject;
 						if (resolved != null) {
@@ -3489,7 +3471,7 @@ parse_org_dresdenocl_language_ocl_ImplicitPropertyCallCS returns [org.dresdenocl
 						}
 						collectHiddenTokens(element);
 						retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_31_0_0_1_0_0_1, resolved, true);
-						copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, element);
+						copyLocalizationInfos((CommonToken) a1, element);
 					}
 				}
 			)
@@ -3604,7 +3586,7 @@ parse_org_dresdenocl_language_ocl_IteratorExpCS returns [org.dresdenocl.language
 				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.ITERATOR_EXP_CS__ITERATOR_NAME), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((CommonToken) a0).getLine(), ((CommonToken) a0).getCharPositionInLine(), ((CommonToken) a0).getStartIndex(), ((CommonToken) a0).getStopIndex());
 				}
 				java.lang.String resolved = (java.lang.String) resolvedObject;
 				if (resolved != null) {
@@ -3614,7 +3596,7 @@ parse_org_dresdenocl_language_ocl_IteratorExpCS returns [org.dresdenocl.language
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_32_0_0_0, resolved, true);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
+				copyLocalizationInfos((CommonToken) a0, element);
 			}
 		}
 	)
@@ -3630,7 +3612,7 @@ parse_org_dresdenocl_language_ocl_IteratorExpCS returns [org.dresdenocl.language
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_32_0_0_2, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
+		copyLocalizationInfos((CommonToken)a1, element);
 	}
 	{
 		// expected elements (follow set)
@@ -3703,7 +3685,7 @@ parse_org_dresdenocl_language_ocl_IteratorExpCS returns [org.dresdenocl.language
 						}
 						collectHiddenTokens(element);
 						retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_32_0_0_3_0_0_2_0_0_1, null, true);
-						copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
+						copyLocalizationInfos((CommonToken)a3, element);
 					}
 					{
 						// expected elements (follow set)
@@ -3751,7 +3733,7 @@ parse_org_dresdenocl_language_ocl_IteratorExpCS returns [org.dresdenocl.language
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_32_0_0_3_0_0_3, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a5, element);
+				copyLocalizationInfos((CommonToken)a5, element);
 			}
 			{
 				// expected elements (follow set)
@@ -3850,7 +3832,7 @@ parse_org_dresdenocl_language_ocl_IteratorExpCS returns [org.dresdenocl.language
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_32_0_0_7, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a7, element);
+		copyLocalizationInfos((CommonToken)a7, element);
 	}
 	{
 		// expected elements (follow set)
@@ -3908,7 +3890,7 @@ parse_org_dresdenocl_language_ocl_IterateExpCS returns [org.dresdenocl.language.
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_33_0_0_0, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
+		copyLocalizationInfos((CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
@@ -3922,7 +3904,7 @@ parse_org_dresdenocl_language_ocl_IterateExpCS returns [org.dresdenocl.language.
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_33_0_0_2, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
+		copyLocalizationInfos((CommonToken)a1, element);
 	}
 	{
 		// expected elements (follow set)
@@ -3965,7 +3947,7 @@ parse_org_dresdenocl_language_ocl_IterateExpCS returns [org.dresdenocl.language.
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_33_0_0_3_0_0_2, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
+				copyLocalizationInfos((CommonToken)a3, element);
 			}
 			{
 				// expected elements (follow set)
@@ -4014,7 +3996,7 @@ parse_org_dresdenocl_language_ocl_IterateExpCS returns [org.dresdenocl.language.
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_33_0_0_5, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a5, element);
+		copyLocalizationInfos((CommonToken)a5, element);
 	}
 	{
 		// expected elements (follow set)
@@ -4080,7 +4062,7 @@ parse_org_dresdenocl_language_ocl_IterateExpCS returns [org.dresdenocl.language.
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_33_0_0_8, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a7, element);
+		copyLocalizationInfos((CommonToken)a7, element);
 	}
 	{
 		// expected elements (follow set)
@@ -4169,7 +4151,7 @@ parse_org_dresdenocl_language_ocl_IteratorExpVariableCS returns [org.dresdenocl.
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_34_0_0_1_0_0_0, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
+				copyLocalizationInfos((CommonToken)a1, element);
 			}
 			{
 				// expected elements (follow set)
@@ -4229,7 +4211,7 @@ parse_org_dresdenocl_language_ocl_TupleTypeCS returns [org.dresdenocl.language.o
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_35_0_0_0, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
+		copyLocalizationInfos((CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
@@ -4243,7 +4225,7 @@ parse_org_dresdenocl_language_ocl_TupleTypeCS returns [org.dresdenocl.language.o
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_35_0_0_1, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
+		copyLocalizationInfos((CommonToken)a1, element);
 	}
 	{
 		// expected elements (follow set)
@@ -4287,7 +4269,7 @@ parse_org_dresdenocl_language_ocl_TupleTypeCS returns [org.dresdenocl.language.o
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_35_0_0_5, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
+		copyLocalizationInfos((CommonToken)a3, element);
 	}
 	{
 		// expected elements (follow set)
@@ -4357,12 +4339,12 @@ parse_org_dresdenocl_language_ocl_CollectionTypeIdentifierCS returns [org.dresde
 				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.COLLECTION_TYPE_IDENTIFIER_CS__TYPE_NAME), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((CommonToken) a0).getLine(), ((CommonToken) a0).getCharPositionInLine(), ((CommonToken) a0).getStartIndex(), ((CommonToken) a0).getStopIndex());
 				}
 				String resolved = (String) resolvedObject;
 				org.dresdenocl.pivotmodel.Type proxy = org.dresdenocl.pivotmodel.PivotModelFactory.eINSTANCE.createType();
 				collectHiddenTokens(element);
-				registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.CollectionTypeIdentifierCS, org.dresdenocl.pivotmodel.Type>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getCollectionTypeIdentifierCSTypeNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.COLLECTION_TYPE_IDENTIFIER_CS__TYPE_NAME), resolved, proxy);
+				registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.CollectionTypeIdentifierCS, org.dresdenocl.pivotmodel.Type>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getCollectionTypeIdentifierCSTypeNameReferenceResolver()), element, (EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.COLLECTION_TYPE_IDENTIFIER_CS__TYPE_NAME), resolved, proxy);
 				if (proxy != null) {
 					Object value = proxy;
 					element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.COLLECTION_TYPE_IDENTIFIER_CS__TYPE_NAME), value);
@@ -4370,8 +4352,8 @@ parse_org_dresdenocl_language_ocl_CollectionTypeIdentifierCS returns [org.dresde
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_36_0_0_0, proxy, true);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, proxy);
+				copyLocalizationInfos((CommonToken) a0, element);
+				copyLocalizationInfos((CommonToken) a0, proxy);
 			}
 		}
 	)
@@ -4429,7 +4411,7 @@ parse_org_dresdenocl_language_ocl_CollectionTypeIdentifierCS returns [org.dresde
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_36_0_0_1_0_0_1, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
+				copyLocalizationInfos((CommonToken)a1, element);
 			}
 			{
 				// expected elements (follow set)
@@ -4472,7 +4454,7 @@ parse_org_dresdenocl_language_ocl_CollectionTypeIdentifierCS returns [org.dresde
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_36_0_0_1_0_0_5, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
+				copyLocalizationInfos((CommonToken)a3, element);
 			}
 			{
 				// expected elements (follow set)
@@ -4647,7 +4629,7 @@ parse_org_dresdenocl_language_ocl_VariableDeclarationWithoutInitCS returns [org.
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_38_0_0_1, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
+		copyLocalizationInfos((CommonToken)a1, element);
 	}
 	{
 		// expected elements (follow set)
@@ -4726,7 +4708,7 @@ parse_org_dresdenocl_language_ocl_VariableDeclarationWithoutInitListCS returns [
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_39_0_0_1_0_0_1, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
+				copyLocalizationInfos((CommonToken)a1, element);
 			}
 			{
 				// expected elements (follow set)
@@ -4811,7 +4793,7 @@ parse_org_dresdenocl_language_ocl_VariableDeclarationWithInitCS returns [org.dre
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_40_0_0_1_0_0_0, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
+				copyLocalizationInfos((CommonToken)a1, element);
 			}
 			{
 				// expected elements (follow set)
@@ -4871,7 +4853,7 @@ parse_org_dresdenocl_language_ocl_VariableDeclarationWithInitCS returns [org.dre
 				tokenResolver.resolve(a3.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.VARIABLE_DECLARATION_WITH_INIT_CS__EQUAL), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a3).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((CommonToken) a3).getLine(), ((CommonToken) a3).getCharPositionInLine(), ((CommonToken) a3).getStartIndex(), ((CommonToken) a3).getStopIndex());
 				}
 				java.lang.String resolved = (java.lang.String) resolvedObject;
 				if (resolved != null) {
@@ -4881,7 +4863,7 @@ parse_org_dresdenocl_language_ocl_VariableDeclarationWithInitCS returns [org.dre
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_40_0_0_2, resolved, true);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a3, element);
+				copyLocalizationInfos((CommonToken) a3, element);
 			}
 		}
 	)
@@ -4995,7 +4977,7 @@ parse_org_dresdenocl_language_ocl_VariableDeclarationWithInitListCS returns [org
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_41_0_0_1_0_0_1, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
+				copyLocalizationInfos((CommonToken)a1, element);
 			}
 			{
 				// expected elements (follow set)
@@ -5061,12 +5043,12 @@ parse_org_dresdenocl_language_ocl_PathNameSimpleCS returns [org.dresdenocl.langu
 				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.PATH_NAME_SIMPLE_CS__NAMED_ELEMENT), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((CommonToken) a0).getLine(), ((CommonToken) a0).getCharPositionInLine(), ((CommonToken) a0).getStartIndex(), ((CommonToken) a0).getStopIndex());
 				}
 				String resolved = (String) resolvedObject;
 				org.dresdenocl.pivotmodel.NamedElement proxy = org.dresdenocl.pivotmodel.PivotModelFactory.eINSTANCE.createNamespace();
 				collectHiddenTokens(element);
-				registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.PathNameSimpleCS, org.dresdenocl.pivotmodel.NamedElement>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getPathNameSimpleCSNamedElementReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.PATH_NAME_SIMPLE_CS__NAMED_ELEMENT), resolved, proxy);
+				registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.PathNameSimpleCS, org.dresdenocl.pivotmodel.NamedElement>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getPathNameSimpleCSNamedElementReferenceResolver()), element, (EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.PATH_NAME_SIMPLE_CS__NAMED_ELEMENT), resolved, proxy);
 				if (proxy != null) {
 					Object value = proxy;
 					element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.PATH_NAME_SIMPLE_CS__NAMED_ELEMENT), value);
@@ -5074,8 +5056,8 @@ parse_org_dresdenocl_language_ocl_PathNameSimpleCS returns [org.dresdenocl.langu
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_45_0_0_0, proxy, true);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, proxy);
+				copyLocalizationInfos((CommonToken) a0, element);
+				copyLocalizationInfos((CommonToken) a0, proxy);
 			}
 		}
 	)
@@ -5168,7 +5150,7 @@ parse_org_dresdenocl_language_ocl_PathNamePathCS returns [org.dresdenocl.languag
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_46_0_0_0_0_0_2, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
+				copyLocalizationInfos((CommonToken)a1, element);
 			}
 			{
 				// expected elements (follow set)
@@ -5274,12 +5256,12 @@ parse_org_dresdenocl_language_ocl_NamedElementCS returns [org.dresdenocl.languag
 				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.NAMED_ELEMENT_CS__NAMED_ELEMENT), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((CommonToken) a0).getLine(), ((CommonToken) a0).getCharPositionInLine(), ((CommonToken) a0).getStartIndex(), ((CommonToken) a0).getStopIndex());
 				}
 				String resolved = (String) resolvedObject;
 				org.dresdenocl.pivotmodel.NamedElement proxy = org.dresdenocl.pivotmodel.PivotModelFactory.eINSTANCE.createNamespace();
 				collectHiddenTokens(element);
-				registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.NamedElementCS, org.dresdenocl.pivotmodel.NamedElement>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getNamedElementCSNamedElementReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.NAMED_ELEMENT_CS__NAMED_ELEMENT), resolved, proxy);
+				registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.NamedElementCS, org.dresdenocl.pivotmodel.NamedElement>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getNamedElementCSNamedElementReferenceResolver()), element, (EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.NAMED_ELEMENT_CS__NAMED_ELEMENT), resolved, proxy);
 				if (proxy != null) {
 					Object value = proxy;
 					element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.NAMED_ELEMENT_CS__NAMED_ELEMENT), value);
@@ -5287,8 +5269,8 @@ parse_org_dresdenocl_language_ocl_NamedElementCS returns [org.dresdenocl.languag
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47_0_0_0, proxy, true);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, proxy);
+				copyLocalizationInfos((CommonToken) a0, element);
+				copyLocalizationInfos((CommonToken) a0, proxy);
 			}
 		}
 	)
@@ -5336,7 +5318,7 @@ parse_org_dresdenocl_language_ocl_CollectionRangeCS returns [org.dresdenocl.lang
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_51_0_0_2, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
+		copyLocalizationInfos((CommonToken)a1, element);
 	}
 	{
 		// expected elements (follow set)
@@ -5455,7 +5437,7 @@ parseop_OclExpressionCS_level_4 returns [org.dresdenocl.language.ocl.OclExpressi
 					tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.LOGICAL_IMPLIES_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
 					Object resolvedObject = result.getResolvedToken();
 					if (resolvedObject == null) {
-						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
+						addErrorToResource(result.getErrorMessage(), ((CommonToken) a0).getLine(), ((CommonToken) a0).getCharPositionInLine(), ((CommonToken) a0).getStartIndex(), ((CommonToken) a0).getStopIndex());
 					}
 					java.lang.String resolved = (java.lang.String) resolvedObject;
 					if (resolved != null) {
@@ -5465,7 +5447,7 @@ parseop_OclExpressionCS_level_4 returns [org.dresdenocl.language.ocl.OclExpressi
 					}
 					collectHiddenTokens(element);
 					retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_19_0_0_1, resolved, true);
-					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
+					copyLocalizationInfos((CommonToken) a0, element);
 				}
 			}
 		)
@@ -5568,7 +5550,7 @@ leftArg = parseop_OclExpressionCS_level_6((
 				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.LOGICAL_XOR_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((CommonToken) a0).getLine(), ((CommonToken) a0).getCharPositionInLine(), ((CommonToken) a0).getStartIndex(), ((CommonToken) a0).getStopIndex());
 				}
 				java.lang.String resolved = (java.lang.String) resolvedObject;
 				if (resolved != null) {
@@ -5578,7 +5560,7 @@ leftArg = parseop_OclExpressionCS_level_6((
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_20_0_0_1, resolved, true);
-				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
+				copyLocalizationInfos((CommonToken) a0, element);
 			}
 		}
 	)
@@ -5681,7 +5663,7 @@ leftArg = parseop_OclExpressionCS_level_7((
 			tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.LOGICAL_OR_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
 			Object resolvedObject = result.getResolvedToken();
 			if (resolvedObject == null) {
-				addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
+				addErrorToResource(result.getErrorMessage(), ((CommonToken) a0).getLine(), ((CommonToken) a0).getCharPositionInLine(), ((CommonToken) a0).getStartIndex(), ((CommonToken) a0).getStopIndex());
 			}
 			java.lang.String resolved = (java.lang.String) resolvedObject;
 			if (resolved != null) {
@@ -5691,7 +5673,7 @@ leftArg = parseop_OclExpressionCS_level_7((
 			}
 			collectHiddenTokens(element);
 			retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_21_0_0_1, resolved, true);
-			copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
+			copyLocalizationInfos((CommonToken) a0, element);
 		}
 	}
 )
@@ -5794,7 +5776,7 @@ a0 = AND_OPERATOR
 		tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.LOGICAL_AND_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
 		Object resolvedObject = result.getResolvedToken();
 		if (resolvedObject == null) {
-			addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
+			addErrorToResource(result.getErrorMessage(), ((CommonToken) a0).getLine(), ((CommonToken) a0).getCharPositionInLine(), ((CommonToken) a0).getStartIndex(), ((CommonToken) a0).getStopIndex());
 		}
 		java.lang.String resolved = (java.lang.String) resolvedObject;
 		if (resolved != null) {
@@ -5804,7 +5786,7 @@ a0 = AND_OPERATOR
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_22_0_0_1, resolved, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
+		copyLocalizationInfos((CommonToken) a0, element);
 	}
 }
 )
@@ -5908,7 +5890,7 @@ a0 = EQUALITY_OPERATOR
 		tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.EQUALITY_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
 		Object resolvedObject = result.getResolvedToken();
 		if (resolvedObject == null) {
-			addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
+			addErrorToResource(result.getErrorMessage(), ((CommonToken) a0).getLine(), ((CommonToken) a0).getCharPositionInLine(), ((CommonToken) a0).getStartIndex(), ((CommonToken) a0).getStopIndex());
 		}
 		java.lang.String resolved = (java.lang.String) resolvedObject;
 		if (resolved != null) {
@@ -5918,7 +5900,7 @@ a0 = EQUALITY_OPERATOR
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_23_0_0_1_0_0_0, resolved, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
+		copyLocalizationInfos((CommonToken) a0, element);
 	}
 }
 )
@@ -5971,7 +5953,7 @@ a1 = NEQUALITY_OPERATOR
 		tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.EQUALITY_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
 		Object resolvedObject = result.getResolvedToken();
 		if (resolvedObject == null) {
-			addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStopIndex());
+			addErrorToResource(result.getErrorMessage(), ((CommonToken) a1).getLine(), ((CommonToken) a1).getCharPositionInLine(), ((CommonToken) a1).getStartIndex(), ((CommonToken) a1).getStopIndex());
 		}
 		java.lang.String resolved = (java.lang.String) resolvedObject;
 		if (resolved != null) {
@@ -5981,7 +5963,7 @@ a1 = NEQUALITY_OPERATOR
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_23_0_0_1_0_1_0, resolved, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, element);
+		copyLocalizationInfos((CommonToken) a1, element);
 	}
 }
 )
@@ -6116,7 +6098,7 @@ org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = getFres
 tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.RELATIONAL_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-	addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
+	addErrorToResource(result.getErrorMessage(), ((CommonToken) a0).getLine(), ((CommonToken) a0).getCharPositionInLine(), ((CommonToken) a0).getStartIndex(), ((CommonToken) a0).getStopIndex());
 }
 java.lang.String resolved = (java.lang.String) resolvedObject;
 if (resolved != null) {
@@ -6126,7 +6108,7 @@ if (resolved != null) {
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_24_0_0_1, resolved, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
+copyLocalizationInfos((CommonToken) a0, element);
 }
 }
 )
@@ -6229,7 +6211,7 @@ org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = getFres
 tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.ADDITIVE_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((CommonToken) a0).getLine(), ((CommonToken) a0).getCharPositionInLine(), ((CommonToken) a0).getStartIndex(), ((CommonToken) a0).getStopIndex());
 }
 java.lang.String resolved = (java.lang.String) resolvedObject;
 if (resolved != null) {
@@ -6239,7 +6221,7 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_25_0_0_1, resolved, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
+copyLocalizationInfos((CommonToken) a0, element);
 }
 }
 )
@@ -6342,7 +6324,7 @@ org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = getFres
 tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.MULT_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((CommonToken) a0).getLine(), ((CommonToken) a0).getCharPositionInLine(), ((CommonToken) a0).getStartIndex(), ((CommonToken) a0).getStopIndex());
 }
 java.lang.String resolved = (java.lang.String) resolvedObject;
 if (resolved != null) {
@@ -6352,7 +6334,7 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_26_0_0_1, resolved, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
+copyLocalizationInfos((CommonToken) a0, element);
 }
 }
 )
@@ -6452,7 +6434,7 @@ org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = getFres
 tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.UNARY_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((CommonToken) a0).getLine(), ((CommonToken) a0).getCharPositionInLine(), ((CommonToken) a0).getStartIndex(), ((CommonToken) a0).getStopIndex());
 }
 java.lang.String resolved = (java.lang.String) resolvedObject;
 if (resolved != null) {
@@ -6462,7 +6444,7 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_27_0_0_0, resolved, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
+copyLocalizationInfos((CommonToken) a0, element);
 }
 }
 )
@@ -6518,7 +6500,7 @@ copyLocalizationInfos(arg, element);
 }
 |
 (
-a0 = NOT_OPERATOR
+a2 = NOT_OPERATOR
 {
 if (terminateParsing) {
 throw new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTerminateParsingException();
@@ -6527,14 +6509,14 @@ if (element == null) {
 element = org.dresdenocl.language.ocl.OclFactory.eINSTANCE.createLogicalNotOperationCallExpCS();
 startIncompleteElement(element);
 }
-if (a0 != null) {
+if (a2 != null) {
 org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("NOT_OPERATOR");
 tokenResolver.setOptions(getOptions());
 org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = getFreshTokenResolveResult();
-tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.LOGICAL_NOT_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
+tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.LOGICAL_NOT_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((CommonToken) a2).getLine(), ((CommonToken) a2).getCharPositionInLine(), ((CommonToken) a2).getStartIndex(), ((CommonToken) a2).getStopIndex());
 }
 java.lang.String resolved = (java.lang.String) resolvedObject;
 if (resolved != null) {
@@ -6544,7 +6526,7 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_28_0_0_0, resolved, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
+copyLocalizationInfos((CommonToken) a2, element);
 }
 }
 )
@@ -6625,7 +6607,7 @@ org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = getFres
 tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.NAVIGATION_CALL_EXP__NAVIGATION_OPERATOR), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((CommonToken) a0).getLine(), ((CommonToken) a0).getCharPositionInLine(), ((CommonToken) a0).getStartIndex(), ((CommonToken) a0).getStopIndex());
 }
 java.lang.String resolved = (java.lang.String) resolvedObject;
 if (resolved != null) {
@@ -6635,7 +6617,7 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_29_0_0_2, resolved, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
+copyLocalizationInfos((CommonToken) a0, element);
 }
 }
 )
@@ -6738,7 +6720,7 @@ org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = getFres
 tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.NAVIGATION_CALL_EXP__NAVIGATION_OPERATOR), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a2).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((CommonToken) a2).getLine(), ((CommonToken) a2).getCharPositionInLine(), ((CommonToken) a2).getStartIndex(), ((CommonToken) a2).getStopIndex());
 }
 java.lang.String resolved = (java.lang.String) resolvedObject;
 if (resolved != null) {
@@ -6748,7 +6730,7 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_29_0_0_5_0_0_1, resolved, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, element);
+copyLocalizationInfos((CommonToken) a2, element);
 }
 }
 )
@@ -6947,12 +6929,12 @@ org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = getFres
 tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((CommonToken) a0).getLine(), ((CommonToken) a0).getCharPositionInLine(), ((CommonToken) a0).getStartIndex(), ((CommonToken) a0).getStopIndex());
 }
 String resolved = (String) resolvedObject;
 org.dresdenocl.pivotmodel.Operation proxy = org.dresdenocl.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
 collectHiddenTokens(element);
-registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationCallBaseExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), resolved, proxy);
+registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationCallBaseExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), resolved, proxy);
 if (proxy != null) {
 Object value = proxy;
 element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), value);
@@ -6960,8 +6942,8 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_0_0_0_0, proxy, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, proxy);
+copyLocalizationInfos((CommonToken) a0, element);
+copyLocalizationInfos((CommonToken) a0, proxy);
 }
 }
 )
@@ -6989,12 +6971,12 @@ org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = getFres
 tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((CommonToken) a1).getLine(), ((CommonToken) a1).getCharPositionInLine(), ((CommonToken) a1).getStartIndex(), ((CommonToken) a1).getStopIndex());
 }
 String resolved = (String) resolvedObject;
 org.dresdenocl.pivotmodel.Operation proxy = org.dresdenocl.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
 collectHiddenTokens(element);
-registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationCallBaseExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), resolved, proxy);
+registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationCallBaseExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), resolved, proxy);
 if (proxy != null) {
 Object value = proxy;
 element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), value);
@@ -7002,8 +6984,8 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_0_0_1_0, proxy, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, element);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, proxy);
+copyLocalizationInfos((CommonToken) a1, element);
+copyLocalizationInfos((CommonToken) a1, proxy);
 }
 }
 )
@@ -7031,12 +7013,12 @@ org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = getFres
 tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a2).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((CommonToken) a2).getLine(), ((CommonToken) a2).getCharPositionInLine(), ((CommonToken) a2).getStartIndex(), ((CommonToken) a2).getStopIndex());
 }
 String resolved = (String) resolvedObject;
 org.dresdenocl.pivotmodel.Operation proxy = org.dresdenocl.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
 collectHiddenTokens(element);
-registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationCallBaseExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), resolved, proxy);
+registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationCallBaseExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), resolved, proxy);
 if (proxy != null) {
 Object value = proxy;
 element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), value);
@@ -7044,8 +7026,8 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_0_0_2_0, proxy, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, element);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, proxy);
+copyLocalizationInfos((CommonToken) a2, element);
+copyLocalizationInfos((CommonToken) a2, proxy);
 }
 }
 )
@@ -7073,12 +7055,12 @@ org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = getFres
 tokenResolver.resolve(a3.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a3).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((CommonToken) a3).getLine(), ((CommonToken) a3).getCharPositionInLine(), ((CommonToken) a3).getStartIndex(), ((CommonToken) a3).getStopIndex());
 }
 String resolved = (String) resolvedObject;
 org.dresdenocl.pivotmodel.Operation proxy = org.dresdenocl.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
 collectHiddenTokens(element);
-registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationCallBaseExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), resolved, proxy);
+registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationCallBaseExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), resolved, proxy);
 if (proxy != null) {
 Object value = proxy;
 element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), value);
@@ -7086,8 +7068,8 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_0_0_3_0, proxy, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a3, element);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a3, proxy);
+copyLocalizationInfos((CommonToken) a3, element);
+copyLocalizationInfos((CommonToken) a3, proxy);
 }
 }
 )
@@ -7115,12 +7097,12 @@ org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = getFres
 tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a4).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a4).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a4).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a4).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((CommonToken) a4).getLine(), ((CommonToken) a4).getCharPositionInLine(), ((CommonToken) a4).getStartIndex(), ((CommonToken) a4).getStopIndex());
 }
 String resolved = (String) resolvedObject;
 org.dresdenocl.pivotmodel.Operation proxy = org.dresdenocl.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
 collectHiddenTokens(element);
-registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationCallBaseExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), resolved, proxy);
+registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationCallBaseExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), resolved, proxy);
 if (proxy != null) {
 Object value = proxy;
 element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), value);
@@ -7128,8 +7110,8 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_0_0_4_0, proxy, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a4, element);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a4, proxy);
+copyLocalizationInfos((CommonToken) a4, element);
+copyLocalizationInfos((CommonToken) a4, proxy);
 }
 }
 )
@@ -7157,12 +7139,12 @@ org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = getFres
 tokenResolver.resolve(a5.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a5).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a5).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a5).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a5).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((CommonToken) a5).getLine(), ((CommonToken) a5).getCharPositionInLine(), ((CommonToken) a5).getStartIndex(), ((CommonToken) a5).getStopIndex());
 }
 String resolved = (String) resolvedObject;
 org.dresdenocl.pivotmodel.Operation proxy = org.dresdenocl.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
 collectHiddenTokens(element);
-registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationCallBaseExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), resolved, proxy);
+registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationCallBaseExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), resolved, proxy);
 if (proxy != null) {
 Object value = proxy;
 element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), value);
@@ -7170,8 +7152,8 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_0_0_5_0, proxy, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a5, element);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a5, proxy);
+copyLocalizationInfos((CommonToken) a5, element);
+copyLocalizationInfos((CommonToken) a5, proxy);
 }
 }
 )
@@ -7199,12 +7181,12 @@ org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = getFres
 tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a6).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a6).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a6).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a6).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((CommonToken) a6).getLine(), ((CommonToken) a6).getCharPositionInLine(), ((CommonToken) a6).getStartIndex(), ((CommonToken) a6).getStopIndex());
 }
 String resolved = (String) resolvedObject;
 org.dresdenocl.pivotmodel.Operation proxy = org.dresdenocl.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
 collectHiddenTokens(element);
-registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationCallBaseExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), resolved, proxy);
+registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationCallBaseExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), resolved, proxy);
 if (proxy != null) {
 Object value = proxy;
 element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), value);
@@ -7212,8 +7194,8 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_0_0_6_0, proxy, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a6, element);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a6, proxy);
+copyLocalizationInfos((CommonToken) a6, element);
+copyLocalizationInfos((CommonToken) a6, proxy);
 }
 }
 )
@@ -7241,12 +7223,12 @@ org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = getFres
 tokenResolver.resolve(a7.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a7).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a7).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a7).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a7).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((CommonToken) a7).getLine(), ((CommonToken) a7).getCharPositionInLine(), ((CommonToken) a7).getStartIndex(), ((CommonToken) a7).getStopIndex());
 }
 String resolved = (String) resolvedObject;
 org.dresdenocl.pivotmodel.Operation proxy = org.dresdenocl.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
 collectHiddenTokens(element);
-registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationCallBaseExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), resolved, proxy);
+registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.OperationCallBaseExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), resolved, proxy);
 if (proxy != null) {
 Object value = proxy;
 element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), value);
@@ -7254,8 +7236,8 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_0_0_7_0, proxy, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a7, element);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a7, proxy);
+copyLocalizationInfos((CommonToken) a7, element);
+copyLocalizationInfos((CommonToken) a7, proxy);
 }
 }
 )
@@ -7291,7 +7273,7 @@ org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = getFres
 tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__IS_MARKED_PRE), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a8).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a8).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a8).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a8).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((CommonToken) a8).getLine(), ((CommonToken) a8).getCharPositionInLine(), ((CommonToken) a8).getStartIndex(), ((CommonToken) a8).getStopIndex());
 }
 java.lang.Boolean resolved = (java.lang.Boolean) resolvedObject;
 if (resolved != null) {
@@ -7301,7 +7283,7 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_2_0_0_0, resolved, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a8, element);
+copyLocalizationInfos((CommonToken) a8, element);
 }
 }
 )
@@ -7324,7 +7306,7 @@ startIncompleteElement(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_3, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a9, element);
+copyLocalizationInfos((CommonToken)a9, element);
 }
 {
 // expected elements (follow set)
@@ -7396,7 +7378,7 @@ startIncompleteElement(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_4_0_0_2_0_0_0, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a11, element);
+copyLocalizationInfos((CommonToken)a11, element);
 }
 {
 // expected elements (follow set)
@@ -7478,7 +7460,7 @@ startIncompleteElement(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_6, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a13, element);
+copyLocalizationInfos((CommonToken)a13, element);
 }
 {
 // expected elements (follow set)
@@ -7562,7 +7544,7 @@ startIncompleteElement(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_2, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
+copyLocalizationInfos((CommonToken)a1, element);
 }
 {
 // expected elements (follow set)
@@ -7586,12 +7568,12 @@ org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = getFres
 tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.STATIC_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a2).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((CommonToken) a2).getLine(), ((CommonToken) a2).getCharPositionInLine(), ((CommonToken) a2).getStartIndex(), ((CommonToken) a2).getStopIndex());
 }
 String resolved = (String) resolvedObject;
 org.dresdenocl.pivotmodel.Operation proxy = org.dresdenocl.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
 collectHiddenTokens(element);
-registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.StaticOperationCallExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getStaticOperationCallExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.STATIC_OPERATION_CALL_EXP_CS__OPERATION_NAME), resolved, proxy);
+registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.StaticOperationCallExpCS, org.dresdenocl.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getStaticOperationCallExpCSOperationNameReferenceResolver()), element, (EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.STATIC_OPERATION_CALL_EXP_CS__OPERATION_NAME), resolved, proxy);
 if (proxy != null) {
 Object value = proxy;
 element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.STATIC_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
@@ -7599,8 +7581,8 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_4, proxy, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, element);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, proxy);
+copyLocalizationInfos((CommonToken) a2, element);
+copyLocalizationInfos((CommonToken) a2, proxy);
 }
 }
 )
@@ -7616,7 +7598,7 @@ startIncompleteElement(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_6, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
+copyLocalizationInfos((CommonToken)a3, element);
 }
 {
 // expected elements (follow set)
@@ -7688,7 +7670,7 @@ startIncompleteElement(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_7_0_0_2_0_0_0, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a5, element);
+copyLocalizationInfos((CommonToken)a5, element);
 }
 {
 // expected elements (follow set)
@@ -7770,7 +7752,7 @@ startIncompleteElement(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_9, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a7, element);
+copyLocalizationInfos((CommonToken)a7, element);
 }
 {
 // expected elements (follow set)
@@ -7903,7 +7885,7 @@ startIncompleteElement(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48_0_0_0, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
+copyLocalizationInfos((CommonToken)a0, element);
 }
 {
 // expected elements (follow set)
@@ -7917,7 +7899,7 @@ startIncompleteElement(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48_0_0_1, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
+copyLocalizationInfos((CommonToken)a1, element);
 }
 {
 // expected elements (follow set)
@@ -7958,7 +7940,7 @@ startIncompleteElement(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48_0_0_3, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
+copyLocalizationInfos((CommonToken)a3, element);
 }
 {
 // expected elements (follow set)
@@ -8016,7 +7998,7 @@ startIncompleteElement(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_49_0_0_0, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
+copyLocalizationInfos((CommonToken)a0, element);
 }
 {
 // expected elements (follow set)
@@ -8082,7 +8064,7 @@ startIncompleteElement(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_49_0_0_3, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
+copyLocalizationInfos((CommonToken)a2, element);
 }
 {
 // expected elements (follow set)
@@ -8148,7 +8130,7 @@ startIncompleteElement(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_49_0_0_7, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a4, element);
+copyLocalizationInfos((CommonToken)a4, element);
 }
 {
 // expected elements (follow set)
@@ -8214,7 +8196,7 @@ startIncompleteElement(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_49_0_0_11, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a6, element);
+copyLocalizationInfos((CommonToken)a6, element);
 }
 {
 // expected elements (follow set)
@@ -8298,7 +8280,7 @@ startIncompleteElement(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_50_0_0_1, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
+copyLocalizationInfos((CommonToken)a1, element);
 }
 {
 // expected elements (follow set)
@@ -8370,7 +8352,7 @@ startIncompleteElement(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_50_0_0_2_0_0_1_0_0_1, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
+copyLocalizationInfos((CommonToken)a3, element);
 }
 {
 // expected elements (follow set)
@@ -8452,7 +8434,7 @@ startIncompleteElement(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_50_0_0_3, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a5, element);
+copyLocalizationInfos((CommonToken)a5, element);
 }
 {
 // expected elements (follow set)
@@ -8660,12 +8642,12 @@ org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = getFres
 tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.PROPERTY_CALL_ON_SELF_EXP_CS__PROPERTY), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((CommonToken) a0).getLine(), ((CommonToken) a0).getCharPositionInLine(), ((CommonToken) a0).getStartIndex(), ((CommonToken) a0).getStopIndex());
 }
 String resolved = (String) resolvedObject;
 org.dresdenocl.pivotmodel.Property proxy = org.dresdenocl.pivotmodel.PivotModelFactory.eINSTANCE.createProperty();
 collectHiddenTokens(element);
-registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.PropertyCallBaseExpCS, org.dresdenocl.pivotmodel.Property>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getPropertyCallBaseExpCSPropertyReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.PROPERTY_CALL_ON_SELF_EXP_CS__PROPERTY), resolved, proxy);
+registerContextDependentProxy(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<org.dresdenocl.language.ocl.PropertyCallBaseExpCS, org.dresdenocl.pivotmodel.Property>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getPropertyCallBaseExpCSPropertyReferenceResolver()), element, (EReference) element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.PROPERTY_CALL_ON_SELF_EXP_CS__PROPERTY), resolved, proxy);
 if (proxy != null) {
 Object value = proxy;
 element.eSet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.PROPERTY_CALL_ON_SELF_EXP_CS__PROPERTY), value);
@@ -8673,8 +8655,8 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_55_0_0_0, proxy, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, proxy);
+copyLocalizationInfos((CommonToken) a0, element);
+copyLocalizationInfos((CommonToken) a0, proxy);
 }
 }
 )
@@ -8700,7 +8682,7 @@ org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = getFres
 tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.PROPERTY_CALL_ON_SELF_EXP_CS__IS_MARKED_PRE), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((CommonToken) a1).getLine(), ((CommonToken) a1).getCharPositionInLine(), ((CommonToken) a1).getStartIndex(), ((CommonToken) a1).getStopIndex());
 }
 java.lang.Boolean resolved = (java.lang.Boolean) resolvedObject;
 if (resolved != null) {
@@ -8710,7 +8692,7 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_55_0_0_2, resolved, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, element);
+copyLocalizationInfos((CommonToken) a1, element);
 }
 }
 )
@@ -8770,7 +8752,7 @@ startIncompleteElement(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_56_0_0_0, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
+copyLocalizationInfos((CommonToken)a0, element);
 }
 {
 // expected elements (follow set)
@@ -8814,7 +8796,7 @@ startIncompleteElement(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_56_0_0_2_0_0_1, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
+copyLocalizationInfos((CommonToken)a2, element);
 }
 {
 // expected elements (follow set)
@@ -8864,7 +8846,7 @@ startIncompleteElement(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_56_0_0_3, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a4, element);
+copyLocalizationInfos((CommonToken)a4, element);
 }
 {
 // expected elements (follow set)
@@ -8984,7 +8966,7 @@ org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = getFres
 tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__INT_VALUE), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((CommonToken) a0).getLine(), ((CommonToken) a0).getCharPositionInLine(), ((CommonToken) a0).getStartIndex(), ((CommonToken) a0).getStopIndex());
 }
 java.lang.Integer resolved = (java.lang.Integer) resolvedObject;
 if (resolved != null) {
@@ -8994,7 +8976,7 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_57_0_0_0, resolved, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
+copyLocalizationInfos((CommonToken) a0, element);
 }
 }
 )
@@ -9020,7 +9002,7 @@ org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = getFres
 tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__NAVIGATION_OPERATOR), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((CommonToken) a1).getLine(), ((CommonToken) a1).getCharPositionInLine(), ((CommonToken) a1).getStartIndex(), ((CommonToken) a1).getStopIndex());
 }
 java.lang.String resolved = (java.lang.String) resolvedObject;
 if (resolved != null) {
@@ -9030,7 +9012,7 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_57_0_0_2, resolved, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, element);
+copyLocalizationInfos((CommonToken) a1, element);
 }
 }
 )
@@ -9058,7 +9040,7 @@ org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = getFres
 tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__REAL_VALUE), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a2).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((CommonToken) a2).getLine(), ((CommonToken) a2).getCharPositionInLine(), ((CommonToken) a2).getStartIndex(), ((CommonToken) a2).getStopIndex());
 }
 java.lang.String resolved = (java.lang.String) resolvedObject;
 if (resolved != null) {
@@ -9068,7 +9050,7 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_57_0_0_4_0_0_0, resolved, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, element);
+copyLocalizationInfos((CommonToken) a2, element);
 }
 }
 )
@@ -9133,7 +9115,7 @@ org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = getFres
 tokenResolver.resolve(a3.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__REAL_VALUE), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a3).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((CommonToken) a3).getLine(), ((CommonToken) a3).getCharPositionInLine(), ((CommonToken) a3).getStartIndex(), ((CommonToken) a3).getStopIndex());
 }
 java.lang.String resolved = (java.lang.String) resolvedObject;
 if (resolved != null) {
@@ -9143,7 +9125,7 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_57_0_0_4_0_1_0, resolved, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a3, element);
+copyLocalizationInfos((CommonToken) a3, element);
 }
 }
 )
@@ -9257,7 +9239,7 @@ org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = getFres
 tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.INTEGER_LITERAL_EXP_CS__INTEGER_LITERAL), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((CommonToken) a0).getLine(), ((CommonToken) a0).getCharPositionInLine(), ((CommonToken) a0).getStartIndex(), ((CommonToken) a0).getStopIndex());
 }
 java.lang.Integer resolved = (java.lang.Integer) resolvedObject;
 if (resolved != null) {
@@ -9267,7 +9249,7 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_58_0_0_0, resolved, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
+copyLocalizationInfos((CommonToken) a0, element);
 }
 }
 )
@@ -9337,7 +9319,7 @@ org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = getFres
 tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.BOOLEAN_LITERAL_EXP_CS__BOOLEAN_LITERAL), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((CommonToken) a0).getLine(), ((CommonToken) a0).getCharPositionInLine(), ((CommonToken) a0).getStartIndex(), ((CommonToken) a0).getStopIndex());
 }
 java.lang.Boolean resolved = (java.lang.Boolean) resolvedObject;
 if (resolved != null) {
@@ -9347,7 +9329,7 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_59_0_0_0, resolved, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
+copyLocalizationInfos((CommonToken) a0, element);
 }
 }
 )
@@ -9417,7 +9399,7 @@ org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = getFres
 tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.STRING_LITERAL_EXP_CS__STRING_LITERAL), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((CommonToken) a0).getLine(), ((CommonToken) a0).getCharPositionInLine(), ((CommonToken) a0).getStartIndex(), ((CommonToken) a0).getStopIndex());
 }
 java.lang.String resolved = (java.lang.String) resolvedObject;
 if (resolved != null) {
@@ -9427,7 +9409,7 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_60_0_0_0, resolved, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
+copyLocalizationInfos((CommonToken) a0, element);
 }
 }
 )
@@ -9487,7 +9469,7 @@ startIncompleteElement(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_61_0_0_0, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
+copyLocalizationInfos((CommonToken)a0, element);
 }
 {
 // expected elements (follow set)
@@ -9545,7 +9527,7 @@ startIncompleteElement(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_62_0_0_0, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
+copyLocalizationInfos((CommonToken)a0, element);
 }
 {
 // expected elements (follow set)
@@ -9603,7 +9585,7 @@ startIncompleteElement(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_63_0_0_0, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
+copyLocalizationInfos((CommonToken)a0, element);
 }
 {
 // expected elements (follow set)
@@ -9669,7 +9651,7 @@ startIncompleteElement(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_63_0_0_4, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
+copyLocalizationInfos((CommonToken)a2, element);
 }
 {
 // expected elements (follow set)

@@ -6,6 +6,7 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl;
 
+
 /**
  * A common interface for scanners to be used by EMFText. A scanner is initialized
  * with a text and delivers a sequence of tokens.

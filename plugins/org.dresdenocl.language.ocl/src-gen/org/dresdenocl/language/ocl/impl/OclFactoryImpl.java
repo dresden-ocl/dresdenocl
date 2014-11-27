@@ -92,828 +92,824 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
  */
 public class OclFactoryImpl extends EFactoryImpl implements OclFactory {
 	/**
-   * Creates the default factory implementation.
-   * <!-- begin-user-doc -->
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public static OclFactory init() {
-    try
-    {
-      OclFactory theOclFactory = (OclFactory)EPackage.Registry.INSTANCE.getEFactory(OclPackage.eNS_URI);
-      if (theOclFactory != null)
-      {
-        return theOclFactory;
-      }
-    }
-    catch (Exception exception)
-    {
-      EcorePlugin.INSTANCE.log(exception);
-    }
-    return new OclFactoryImpl();
-  }
+		try {
+			OclFactory theOclFactory = (OclFactory)EPackage.Registry.INSTANCE.getEFactory(OclPackage.eNS_URI);
+			if (theOclFactory != null) {
+				return theOclFactory;
+			}
+		}
+		catch (Exception exception) {
+			EcorePlugin.INSTANCE.log(exception);
+		}
+		return new OclFactoryImpl();
+	}
 
 	/**
-   * Creates an instance of the factory.
-   * <!-- begin-user-doc -->
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public OclFactoryImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public EObject create(EClass eClass) {
-    switch (eClass.getClassifierID())
-    {
-      case OclPackage.BRACKET_EXP_CS: return createBracketExpCS();
-      case OclPackage.MODEL_ELEMENT_CS: return createModelElementCS();
-      case OclPackage.PATH_NAME_SIMPLE_CS: return createPathNameSimpleCS();
-      case OclPackage.PATH_NAME_PATH_CS: return createPathNamePathCS();
-      case OclPackage.NAMED_ELEMENT_CS: return createNamedElementCS();
-      case OclPackage.SIMPLE_NAME_CS: return createSimpleNameCS();
-      case OclPackage.TYPE_MODEL_ELEMENT_CS: return createTypeModelElementCS();
-      case OclPackage.TUPLE_TYPE_CS: return createTupleTypeCS();
-      case OclPackage.COLLECTION_TYPE_LITERAL_EXP_CS: return createCollectionTypeLiteralExpCS();
-      case OclPackage.TUPLE_TYPE_LITERAL_EXP_CS: return createTupleTypeLiteralExpCS();
-      case OclPackage.VARIABLE_DECLARATION_WITH_INIT_CS: return createVariableDeclarationWithInitCS();
-      case OclPackage.VARIABLE_DECLARATION_WITHOUT_INIT_CS: return createVariableDeclarationWithoutInitCS();
-      case OclPackage.VARIABLE_DECLARATION_WITH_INIT_LIST_CS: return createVariableDeclarationWithInitListCS();
-      case OclPackage.VARIABLE_DECLARATION_WITHOUT_INIT_LIST_CS: return createVariableDeclarationWithoutInitListCS();
-      case OclPackage.COLLECTION_LITERAL_EXP_CS: return createCollectionLiteralExpCS();
-      case OclPackage.COLLECTION_TYPE_IDENTIFIER_CS: return createCollectionTypeIdentifierCS();
-      case OclPackage.COLLECTION_LITERAL_PARTS_OCL_EXP_CS: return createCollectionLiteralPartsOclExpCS();
-      case OclPackage.COLLECTION_RANGE_CS: return createCollectionRangeCS();
-      case OclPackage.ITERATOR_EXP_VARIABLE_CS: return createIteratorExpVariableCS();
-      case OclPackage.ITERATOR_EXP_CS: return createIteratorExpCS();
-      case OclPackage.ITERATE_EXP_CS: return createIterateExpCS();
-      case OclPackage.NAVIGATION_CALL_EXP: return createNavigationCallExp();
-      case OclPackage.OPERATION_CALL_BASE_EXP_CS: return createOperationCallBaseExpCS();
-      case OclPackage.PROPERTY_CALL_BASE_EXP_CS: return createPropertyCallBaseExpCS();
-      case OclPackage.IMPLICIT_PROPERTY_CALL_CS: return createImplicitPropertyCallCS();
-      case OclPackage.IMPLICIT_OPERATION_CALL_CS: return createImplicitOperationCallCS();
-      case OclPackage.PROPERTY_CALL_ON_SELF_EXP_CS: return createPropertyCallOnSelfExpCS();
-      case OclPackage.PROPERTY_CALL_EXPLICIT_PATH_EXP_CS: return createPropertyCallExplicitPathExpCS();
-      case OclPackage.OPERATION_CALL_ON_SELF_EXP_CS: return createOperationCallOnSelfExpCS();
-      case OclPackage.STATIC_OPERATION_CALL_EXP_CS: return createStaticOperationCallExpCS();
-      case OclPackage.UNARY_OPERATION_CALL_EXP_CS: return createUnaryOperationCallExpCS();
-      case OclPackage.LOGICAL_NOT_OPERATION_CALL_EXP_CS: return createLogicalNotOperationCallExpCS();
-      case OclPackage.OPERATION_CALL_WITH_SOURCE_EXP_CS: return createOperationCallWithSourceExpCS();
-      case OclPackage.ADDITIVE_OPERATION_CALL_EXP_CS: return createAdditiveOperationCallExpCS();
-      case OclPackage.MULT_OPERATION_CALL_EXP_CS: return createMultOperationCallExpCS();
-      case OclPackage.RELATIONAL_OPERATION_CALL_EXP_CS: return createRelationalOperationCallExpCS();
-      case OclPackage.EQUALITY_OPERATION_CALL_EXP_CS: return createEqualityOperationCallExpCS();
-      case OclPackage.LOGICAL_AND_OPERATION_CALL_EXP_CS: return createLogicalAndOperationCallExpCS();
-      case OclPackage.LOGICAL_OR_OPERATION_CALL_EXP_CS: return createLogicalOrOperationCallExpCS();
-      case OclPackage.LOGICAL_XOR_OPERATION_CALL_EXP_CS: return createLogicalXorOperationCallExpCS();
-      case OclPackage.LOGICAL_IMPLIES_OPERATION_CALL_EXP_CS: return createLogicalImpliesOperationCallExpCS();
-      case OclPackage.OPERATION_CALL_WITH_IMLICIT_SOURCE_EXP_CS: return createOperationCallWithImlicitSourceExpCS();
-      case OclPackage.TUPLE_LITERAL_EXP_CS: return createTupleLiteralExpCS();
-      case OclPackage.INTEGER_LITERAL_EXP_CS: return createIntegerLiteralExpCS();
-      case OclPackage.REAL_LITERAL_EXP_CS: return createRealLiteralExpCS();
-      case OclPackage.BOOLEAN_LITERAL_EXP_CS: return createBooleanLiteralExpCS();
-      case OclPackage.STRING_LITERAL_EXP_CS: return createStringLiteralExpCS();
-      case OclPackage.INVALID_LITERAL_EXP_CS: return createInvalidLiteralExpCS();
-      case OclPackage.NULL_LITERAL_EXP_CS: return createNullLiteralExpCS();
-      case OclPackage.LET_EXP_CS: return createLetExpCS();
-      case OclPackage.IF_EXP_CS: return createIfExpCS();
-      case OclPackage.PACKAGE_DECLARATION_WITH_NAMESPACE_CS: return createPackageDeclarationWithNamespaceCS();
-      case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS: return createPackageDeclarationNestedNamespaceCS();
-      case OclPackage.PACKAGE_DECLARATION_WITHOUT_NAMESPACE_CS: return createPackageDeclarationWithoutNamespaceCS();
-      case OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS: return createAttributeContextDeclarationCS();
-      case OclPackage.CLASSIFIER_CONTEXT_DECLARATION_CS: return createClassifierContextDeclarationCS();
-      case OclPackage.OPERATION_CONTEXT_DECLARATION_CS: return createOperationContextDeclarationCS();
-      case OclPackage.INIT_VALUE_CS: return createInitValueCS();
-      case OclPackage.DERIVE_VALUE_CS: return createDeriveValueCS();
-      case OclPackage.INVARIANT_EXP_CS: return createInvariantExpCS();
-      case OclPackage.DEFINITION_EXP_CS: return createDefinitionExpCS();
-      case OclPackage.DEFINITION_EXP_PROPERTY_CS: return createDefinitionExpPropertyCS();
-      case OclPackage.DEFINITION_EXP_OPERATION_CS: return createDefinitionExpOperationCS();
-      case OclPackage.PRE_CONDITION_DECLARATION_CS: return createPreConditionDeclarationCS();
-      case OclPackage.POST_CONDITION_DECLARATION_CS: return createPostConditionDeclarationCS();
-      case OclPackage.BODY_DECLARATION_CS: return createBodyDeclarationCS();
-      case OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS: return createOperationDefinitionInContextCS();
-      case OclPackage.OPERATION_DEFINITION_IN_DEF_CS: return createOperationDefinitionInDefCS();
-      case OclPackage.PARAMETER_CS: return createParameterCS();
-      default:
-        throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-    }
-  }
+		switch (eClass.getClassifierID()) {
+			case OclPackage.BRACKET_EXP_CS: return createBracketExpCS();
+			case OclPackage.MODEL_ELEMENT_CS: return createModelElementCS();
+			case OclPackage.PATH_NAME_SIMPLE_CS: return createPathNameSimpleCS();
+			case OclPackage.PATH_NAME_PATH_CS: return createPathNamePathCS();
+			case OclPackage.NAMED_ELEMENT_CS: return createNamedElementCS();
+			case OclPackage.SIMPLE_NAME_CS: return createSimpleNameCS();
+			case OclPackage.TYPE_MODEL_ELEMENT_CS: return createTypeModelElementCS();
+			case OclPackage.TUPLE_TYPE_CS: return createTupleTypeCS();
+			case OclPackage.COLLECTION_TYPE_LITERAL_EXP_CS: return createCollectionTypeLiteralExpCS();
+			case OclPackage.TUPLE_TYPE_LITERAL_EXP_CS: return createTupleTypeLiteralExpCS();
+			case OclPackage.VARIABLE_DECLARATION_WITH_INIT_CS: return createVariableDeclarationWithInitCS();
+			case OclPackage.VARIABLE_DECLARATION_WITHOUT_INIT_CS: return createVariableDeclarationWithoutInitCS();
+			case OclPackage.VARIABLE_DECLARATION_WITH_INIT_LIST_CS: return createVariableDeclarationWithInitListCS();
+			case OclPackage.VARIABLE_DECLARATION_WITHOUT_INIT_LIST_CS: return createVariableDeclarationWithoutInitListCS();
+			case OclPackage.COLLECTION_LITERAL_EXP_CS: return createCollectionLiteralExpCS();
+			case OclPackage.COLLECTION_TYPE_IDENTIFIER_CS: return createCollectionTypeIdentifierCS();
+			case OclPackage.COLLECTION_LITERAL_PARTS_OCL_EXP_CS: return createCollectionLiteralPartsOclExpCS();
+			case OclPackage.COLLECTION_RANGE_CS: return createCollectionRangeCS();
+			case OclPackage.ITERATOR_EXP_VARIABLE_CS: return createIteratorExpVariableCS();
+			case OclPackage.ITERATOR_EXP_CS: return createIteratorExpCS();
+			case OclPackage.ITERATE_EXP_CS: return createIterateExpCS();
+			case OclPackage.NAVIGATION_CALL_EXP: return createNavigationCallExp();
+			case OclPackage.OPERATION_CALL_BASE_EXP_CS: return createOperationCallBaseExpCS();
+			case OclPackage.PROPERTY_CALL_BASE_EXP_CS: return createPropertyCallBaseExpCS();
+			case OclPackage.IMPLICIT_PROPERTY_CALL_CS: return createImplicitPropertyCallCS();
+			case OclPackage.IMPLICIT_OPERATION_CALL_CS: return createImplicitOperationCallCS();
+			case OclPackage.PROPERTY_CALL_ON_SELF_EXP_CS: return createPropertyCallOnSelfExpCS();
+			case OclPackage.PROPERTY_CALL_EXPLICIT_PATH_EXP_CS: return createPropertyCallExplicitPathExpCS();
+			case OclPackage.OPERATION_CALL_ON_SELF_EXP_CS: return createOperationCallOnSelfExpCS();
+			case OclPackage.STATIC_OPERATION_CALL_EXP_CS: return createStaticOperationCallExpCS();
+			case OclPackage.UNARY_OPERATION_CALL_EXP_CS: return createUnaryOperationCallExpCS();
+			case OclPackage.LOGICAL_NOT_OPERATION_CALL_EXP_CS: return createLogicalNotOperationCallExpCS();
+			case OclPackage.OPERATION_CALL_WITH_SOURCE_EXP_CS: return createOperationCallWithSourceExpCS();
+			case OclPackage.ADDITIVE_OPERATION_CALL_EXP_CS: return createAdditiveOperationCallExpCS();
+			case OclPackage.MULT_OPERATION_CALL_EXP_CS: return createMultOperationCallExpCS();
+			case OclPackage.RELATIONAL_OPERATION_CALL_EXP_CS: return createRelationalOperationCallExpCS();
+			case OclPackage.EQUALITY_OPERATION_CALL_EXP_CS: return createEqualityOperationCallExpCS();
+			case OclPackage.LOGICAL_AND_OPERATION_CALL_EXP_CS: return createLogicalAndOperationCallExpCS();
+			case OclPackage.LOGICAL_OR_OPERATION_CALL_EXP_CS: return createLogicalOrOperationCallExpCS();
+			case OclPackage.LOGICAL_XOR_OPERATION_CALL_EXP_CS: return createLogicalXorOperationCallExpCS();
+			case OclPackage.LOGICAL_IMPLIES_OPERATION_CALL_EXP_CS: return createLogicalImpliesOperationCallExpCS();
+			case OclPackage.OPERATION_CALL_WITH_IMLICIT_SOURCE_EXP_CS: return createOperationCallWithImlicitSourceExpCS();
+			case OclPackage.TUPLE_LITERAL_EXP_CS: return createTupleLiteralExpCS();
+			case OclPackage.INTEGER_LITERAL_EXP_CS: return createIntegerLiteralExpCS();
+			case OclPackage.REAL_LITERAL_EXP_CS: return createRealLiteralExpCS();
+			case OclPackage.BOOLEAN_LITERAL_EXP_CS: return createBooleanLiteralExpCS();
+			case OclPackage.STRING_LITERAL_EXP_CS: return createStringLiteralExpCS();
+			case OclPackage.INVALID_LITERAL_EXP_CS: return createInvalidLiteralExpCS();
+			case OclPackage.NULL_LITERAL_EXP_CS: return createNullLiteralExpCS();
+			case OclPackage.LET_EXP_CS: return createLetExpCS();
+			case OclPackage.IF_EXP_CS: return createIfExpCS();
+			case OclPackage.PACKAGE_DECLARATION_WITH_NAMESPACE_CS: return createPackageDeclarationWithNamespaceCS();
+			case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS: return createPackageDeclarationNestedNamespaceCS();
+			case OclPackage.PACKAGE_DECLARATION_WITHOUT_NAMESPACE_CS: return createPackageDeclarationWithoutNamespaceCS();
+			case OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS: return createAttributeContextDeclarationCS();
+			case OclPackage.CLASSIFIER_CONTEXT_DECLARATION_CS: return createClassifierContextDeclarationCS();
+			case OclPackage.OPERATION_CONTEXT_DECLARATION_CS: return createOperationContextDeclarationCS();
+			case OclPackage.INIT_VALUE_CS: return createInitValueCS();
+			case OclPackage.DERIVE_VALUE_CS: return createDeriveValueCS();
+			case OclPackage.INVARIANT_EXP_CS: return createInvariantExpCS();
+			case OclPackage.DEFINITION_EXP_CS: return createDefinitionExpCS();
+			case OclPackage.DEFINITION_EXP_PROPERTY_CS: return createDefinitionExpPropertyCS();
+			case OclPackage.DEFINITION_EXP_OPERATION_CS: return createDefinitionExpOperationCS();
+			case OclPackage.PRE_CONDITION_DECLARATION_CS: return createPreConditionDeclarationCS();
+			case OclPackage.POST_CONDITION_DECLARATION_CS: return createPostConditionDeclarationCS();
+			case OclPackage.BODY_DECLARATION_CS: return createBodyDeclarationCS();
+			case OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS: return createOperationDefinitionInContextCS();
+			case OclPackage.OPERATION_DEFINITION_IN_DEF_CS: return createOperationDefinitionInDefCS();
+			case OclPackage.PARAMETER_CS: return createParameterCS();
+			default:
+				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public BracketExpCS createBracketExpCS() {
-    BracketExpCSImpl bracketExpCS = new BracketExpCSImpl();
-    return bracketExpCS;
-  }
+		BracketExpCSImpl bracketExpCS = new BracketExpCSImpl();
+		return bracketExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public ModelElementCS createModelElementCS() {
-    ModelElementCSImpl modelElementCS = new ModelElementCSImpl();
-    return modelElementCS;
-  }
+		ModelElementCSImpl modelElementCS = new ModelElementCSImpl();
+		return modelElementCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public PathNameSimpleCS createPathNameSimpleCS() {
-    PathNameSimpleCSImpl pathNameSimpleCS = new PathNameSimpleCSImpl();
-    return pathNameSimpleCS;
-  }
+		PathNameSimpleCSImpl pathNameSimpleCS = new PathNameSimpleCSImpl();
+		return pathNameSimpleCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public PathNamePathCS createPathNamePathCS() {
-    PathNamePathCSImpl pathNamePathCS = new PathNamePathCSImpl();
-    return pathNamePathCS;
-  }
+		PathNamePathCSImpl pathNamePathCS = new PathNamePathCSImpl();
+		return pathNamePathCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public NamedElementCS createNamedElementCS() {
-    NamedElementCSImpl namedElementCS = new NamedElementCSImpl();
-    return namedElementCS;
-  }
+		NamedElementCSImpl namedElementCS = new NamedElementCSImpl();
+		return namedElementCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public SimpleNameCS createSimpleNameCS() {
-    SimpleNameCSImpl simpleNameCS = new SimpleNameCSImpl();
-    return simpleNameCS;
-  }
+		SimpleNameCSImpl simpleNameCS = new SimpleNameCSImpl();
+		return simpleNameCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public TypeModelElementCS createTypeModelElementCS() {
-    TypeModelElementCSImpl typeModelElementCS = new TypeModelElementCSImpl();
-    return typeModelElementCS;
-  }
+		TypeModelElementCSImpl typeModelElementCS = new TypeModelElementCSImpl();
+		return typeModelElementCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public TupleTypeCS createTupleTypeCS() {
-    TupleTypeCSImpl tupleTypeCS = new TupleTypeCSImpl();
-    return tupleTypeCS;
-  }
+		TupleTypeCSImpl tupleTypeCS = new TupleTypeCSImpl();
+		return tupleTypeCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public CollectionTypeLiteralExpCS createCollectionTypeLiteralExpCS() {
-    CollectionTypeLiteralExpCSImpl collectionTypeLiteralExpCS = new CollectionTypeLiteralExpCSImpl();
-    return collectionTypeLiteralExpCS;
-  }
+		CollectionTypeLiteralExpCSImpl collectionTypeLiteralExpCS = new CollectionTypeLiteralExpCSImpl();
+		return collectionTypeLiteralExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public TupleTypeLiteralExpCS createTupleTypeLiteralExpCS() {
-    TupleTypeLiteralExpCSImpl tupleTypeLiteralExpCS = new TupleTypeLiteralExpCSImpl();
-    return tupleTypeLiteralExpCS;
-  }
+		TupleTypeLiteralExpCSImpl tupleTypeLiteralExpCS = new TupleTypeLiteralExpCSImpl();
+		return tupleTypeLiteralExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public VariableDeclarationWithInitCS createVariableDeclarationWithInitCS() {
-    VariableDeclarationWithInitCSImpl variableDeclarationWithInitCS = new VariableDeclarationWithInitCSImpl();
-    return variableDeclarationWithInitCS;
-  }
+		VariableDeclarationWithInitCSImpl variableDeclarationWithInitCS = new VariableDeclarationWithInitCSImpl();
+		return variableDeclarationWithInitCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public VariableDeclarationWithoutInitCS createVariableDeclarationWithoutInitCS() {
-    VariableDeclarationWithoutInitCSImpl variableDeclarationWithoutInitCS = new VariableDeclarationWithoutInitCSImpl();
-    return variableDeclarationWithoutInitCS;
-  }
+		VariableDeclarationWithoutInitCSImpl variableDeclarationWithoutInitCS = new VariableDeclarationWithoutInitCSImpl();
+		return variableDeclarationWithoutInitCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public VariableDeclarationWithInitListCS createVariableDeclarationWithInitListCS() {
-    VariableDeclarationWithInitListCSImpl variableDeclarationWithInitListCS = new VariableDeclarationWithInitListCSImpl();
-    return variableDeclarationWithInitListCS;
-  }
+		VariableDeclarationWithInitListCSImpl variableDeclarationWithInitListCS = new VariableDeclarationWithInitListCSImpl();
+		return variableDeclarationWithInitListCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public VariableDeclarationWithoutInitListCS createVariableDeclarationWithoutInitListCS() {
-    VariableDeclarationWithoutInitListCSImpl variableDeclarationWithoutInitListCS = new VariableDeclarationWithoutInitListCSImpl();
-    return variableDeclarationWithoutInitListCS;
-  }
+		VariableDeclarationWithoutInitListCSImpl variableDeclarationWithoutInitListCS = new VariableDeclarationWithoutInitListCSImpl();
+		return variableDeclarationWithoutInitListCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public CollectionLiteralExpCS createCollectionLiteralExpCS() {
-    CollectionLiteralExpCSImpl collectionLiteralExpCS = new CollectionLiteralExpCSImpl();
-    return collectionLiteralExpCS;
-  }
+		CollectionLiteralExpCSImpl collectionLiteralExpCS = new CollectionLiteralExpCSImpl();
+		return collectionLiteralExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public CollectionTypeIdentifierCS createCollectionTypeIdentifierCS() {
-    CollectionTypeIdentifierCSImpl collectionTypeIdentifierCS = new CollectionTypeIdentifierCSImpl();
-    return collectionTypeIdentifierCS;
-  }
+		CollectionTypeIdentifierCSImpl collectionTypeIdentifierCS = new CollectionTypeIdentifierCSImpl();
+		return collectionTypeIdentifierCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public CollectionLiteralPartsOclExpCS createCollectionLiteralPartsOclExpCS() {
-    CollectionLiteralPartsOclExpCSImpl collectionLiteralPartsOclExpCS = new CollectionLiteralPartsOclExpCSImpl();
-    return collectionLiteralPartsOclExpCS;
-  }
+		CollectionLiteralPartsOclExpCSImpl collectionLiteralPartsOclExpCS = new CollectionLiteralPartsOclExpCSImpl();
+		return collectionLiteralPartsOclExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public CollectionRangeCS createCollectionRangeCS() {
-    CollectionRangeCSImpl collectionRangeCS = new CollectionRangeCSImpl();
-    return collectionRangeCS;
-  }
+		CollectionRangeCSImpl collectionRangeCS = new CollectionRangeCSImpl();
+		return collectionRangeCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public IteratorExpVariableCS createIteratorExpVariableCS() {
-    IteratorExpVariableCSImpl iteratorExpVariableCS = new IteratorExpVariableCSImpl();
-    return iteratorExpVariableCS;
-  }
+		IteratorExpVariableCSImpl iteratorExpVariableCS = new IteratorExpVariableCSImpl();
+		return iteratorExpVariableCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public IteratorExpCS createIteratorExpCS() {
-    IteratorExpCSImpl iteratorExpCS = new IteratorExpCSImpl();
-    return iteratorExpCS;
-  }
+		IteratorExpCSImpl iteratorExpCS = new IteratorExpCSImpl();
+		return iteratorExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public IterateExpCS createIterateExpCS() {
-    IterateExpCSImpl iterateExpCS = new IterateExpCSImpl();
-    return iterateExpCS;
-  }
+		IterateExpCSImpl iterateExpCS = new IterateExpCSImpl();
+		return iterateExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public NavigationCallExp createNavigationCallExp() {
-    NavigationCallExpImpl navigationCallExp = new NavigationCallExpImpl();
-    return navigationCallExp;
-  }
+		NavigationCallExpImpl navigationCallExp = new NavigationCallExpImpl();
+		return navigationCallExp;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public OperationCallBaseExpCS createOperationCallBaseExpCS() {
-    OperationCallBaseExpCSImpl operationCallBaseExpCS = new OperationCallBaseExpCSImpl();
-    return operationCallBaseExpCS;
-  }
+		OperationCallBaseExpCSImpl operationCallBaseExpCS = new OperationCallBaseExpCSImpl();
+		return operationCallBaseExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public PropertyCallBaseExpCS createPropertyCallBaseExpCS() {
-    PropertyCallBaseExpCSImpl propertyCallBaseExpCS = new PropertyCallBaseExpCSImpl();
-    return propertyCallBaseExpCS;
-  }
+		PropertyCallBaseExpCSImpl propertyCallBaseExpCS = new PropertyCallBaseExpCSImpl();
+		return propertyCallBaseExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public ImplicitPropertyCallCS createImplicitPropertyCallCS() {
-    ImplicitPropertyCallCSImpl implicitPropertyCallCS = new ImplicitPropertyCallCSImpl();
-    return implicitPropertyCallCS;
-  }
+		ImplicitPropertyCallCSImpl implicitPropertyCallCS = new ImplicitPropertyCallCSImpl();
+		return implicitPropertyCallCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public PropertyCallExplicitPathExpCS createPropertyCallExplicitPathExpCS() {
-    PropertyCallExplicitPathExpCSImpl propertyCallExplicitPathExpCS = new PropertyCallExplicitPathExpCSImpl();
-    return propertyCallExplicitPathExpCS;
-  }
+		PropertyCallExplicitPathExpCSImpl propertyCallExplicitPathExpCS = new PropertyCallExplicitPathExpCSImpl();
+		return propertyCallExplicitPathExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public OperationCallOnSelfExpCS createOperationCallOnSelfExpCS() {
-    OperationCallOnSelfExpCSImpl operationCallOnSelfExpCS = new OperationCallOnSelfExpCSImpl();
-    return operationCallOnSelfExpCS;
-  }
+		OperationCallOnSelfExpCSImpl operationCallOnSelfExpCS = new OperationCallOnSelfExpCSImpl();
+		return operationCallOnSelfExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public StaticOperationCallExpCS createStaticOperationCallExpCS() {
-    StaticOperationCallExpCSImpl staticOperationCallExpCS = new StaticOperationCallExpCSImpl();
-    return staticOperationCallExpCS;
-  }
+		StaticOperationCallExpCSImpl staticOperationCallExpCS = new StaticOperationCallExpCSImpl();
+		return staticOperationCallExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public UnaryOperationCallExpCS createUnaryOperationCallExpCS() {
-    UnaryOperationCallExpCSImpl unaryOperationCallExpCS = new UnaryOperationCallExpCSImpl();
-    return unaryOperationCallExpCS;
-  }
+		UnaryOperationCallExpCSImpl unaryOperationCallExpCS = new UnaryOperationCallExpCSImpl();
+		return unaryOperationCallExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public LogicalNotOperationCallExpCS createLogicalNotOperationCallExpCS() {
-    LogicalNotOperationCallExpCSImpl logicalNotOperationCallExpCS = new LogicalNotOperationCallExpCSImpl();
-    return logicalNotOperationCallExpCS;
-  }
+		LogicalNotOperationCallExpCSImpl logicalNotOperationCallExpCS = new LogicalNotOperationCallExpCSImpl();
+		return logicalNotOperationCallExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public OperationCallWithSourceExpCS createOperationCallWithSourceExpCS() {
-    OperationCallWithSourceExpCSImpl operationCallWithSourceExpCS = new OperationCallWithSourceExpCSImpl();
-    return operationCallWithSourceExpCS;
-  }
+		OperationCallWithSourceExpCSImpl operationCallWithSourceExpCS = new OperationCallWithSourceExpCSImpl();
+		return operationCallWithSourceExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public AdditiveOperationCallExpCS createAdditiveOperationCallExpCS() {
-    AdditiveOperationCallExpCSImpl additiveOperationCallExpCS = new AdditiveOperationCallExpCSImpl();
-    return additiveOperationCallExpCS;
-  }
+		AdditiveOperationCallExpCSImpl additiveOperationCallExpCS = new AdditiveOperationCallExpCSImpl();
+		return additiveOperationCallExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public MultOperationCallExpCS createMultOperationCallExpCS() {
-    MultOperationCallExpCSImpl multOperationCallExpCS = new MultOperationCallExpCSImpl();
-    return multOperationCallExpCS;
-  }
+		MultOperationCallExpCSImpl multOperationCallExpCS = new MultOperationCallExpCSImpl();
+		return multOperationCallExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public RelationalOperationCallExpCS createRelationalOperationCallExpCS() {
-    RelationalOperationCallExpCSImpl relationalOperationCallExpCS = new RelationalOperationCallExpCSImpl();
-    return relationalOperationCallExpCS;
-  }
+		RelationalOperationCallExpCSImpl relationalOperationCallExpCS = new RelationalOperationCallExpCSImpl();
+		return relationalOperationCallExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EqualityOperationCallExpCS createEqualityOperationCallExpCS() {
-    EqualityOperationCallExpCSImpl equalityOperationCallExpCS = new EqualityOperationCallExpCSImpl();
-    return equalityOperationCallExpCS;
-  }
+		EqualityOperationCallExpCSImpl equalityOperationCallExpCS = new EqualityOperationCallExpCSImpl();
+		return equalityOperationCallExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public LogicalAndOperationCallExpCS createLogicalAndOperationCallExpCS() {
-    LogicalAndOperationCallExpCSImpl logicalAndOperationCallExpCS = new LogicalAndOperationCallExpCSImpl();
-    return logicalAndOperationCallExpCS;
-  }
+		LogicalAndOperationCallExpCSImpl logicalAndOperationCallExpCS = new LogicalAndOperationCallExpCSImpl();
+		return logicalAndOperationCallExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public LogicalOrOperationCallExpCS createLogicalOrOperationCallExpCS() {
-    LogicalOrOperationCallExpCSImpl logicalOrOperationCallExpCS = new LogicalOrOperationCallExpCSImpl();
-    return logicalOrOperationCallExpCS;
-  }
+		LogicalOrOperationCallExpCSImpl logicalOrOperationCallExpCS = new LogicalOrOperationCallExpCSImpl();
+		return logicalOrOperationCallExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public LogicalXorOperationCallExpCS createLogicalXorOperationCallExpCS() {
-    LogicalXorOperationCallExpCSImpl logicalXorOperationCallExpCS = new LogicalXorOperationCallExpCSImpl();
-    return logicalXorOperationCallExpCS;
-  }
+		LogicalXorOperationCallExpCSImpl logicalXorOperationCallExpCS = new LogicalXorOperationCallExpCSImpl();
+		return logicalXorOperationCallExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public LogicalImpliesOperationCallExpCS createLogicalImpliesOperationCallExpCS() {
-    LogicalImpliesOperationCallExpCSImpl logicalImpliesOperationCallExpCS = new LogicalImpliesOperationCallExpCSImpl();
-    return logicalImpliesOperationCallExpCS;
-  }
+		LogicalImpliesOperationCallExpCSImpl logicalImpliesOperationCallExpCS = new LogicalImpliesOperationCallExpCSImpl();
+		return logicalImpliesOperationCallExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public OperationCallWithImlicitSourceExpCS createOperationCallWithImlicitSourceExpCS() {
-    OperationCallWithImlicitSourceExpCSImpl operationCallWithImlicitSourceExpCS = new OperationCallWithImlicitSourceExpCSImpl();
-    return operationCallWithImlicitSourceExpCS;
-  }
+		OperationCallWithImlicitSourceExpCSImpl operationCallWithImlicitSourceExpCS = new OperationCallWithImlicitSourceExpCSImpl();
+		return operationCallWithImlicitSourceExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public ImplicitOperationCallCS createImplicitOperationCallCS() {
-    ImplicitOperationCallCSImpl implicitOperationCallCS = new ImplicitOperationCallCSImpl();
-    return implicitOperationCallCS;
-  }
+		ImplicitOperationCallCSImpl implicitOperationCallCS = new ImplicitOperationCallCSImpl();
+		return implicitOperationCallCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public PropertyCallOnSelfExpCS createPropertyCallOnSelfExpCS() {
-    PropertyCallOnSelfExpCSImpl propertyCallOnSelfExpCS = new PropertyCallOnSelfExpCSImpl();
-    return propertyCallOnSelfExpCS;
-  }
+		PropertyCallOnSelfExpCSImpl propertyCallOnSelfExpCS = new PropertyCallOnSelfExpCSImpl();
+		return propertyCallOnSelfExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public TupleLiteralExpCS createTupleLiteralExpCS() {
-    TupleLiteralExpCSImpl tupleLiteralExpCS = new TupleLiteralExpCSImpl();
-    return tupleLiteralExpCS;
-  }
+		TupleLiteralExpCSImpl tupleLiteralExpCS = new TupleLiteralExpCSImpl();
+		return tupleLiteralExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public IntegerLiteralExpCS createIntegerLiteralExpCS() {
-    IntegerLiteralExpCSImpl integerLiteralExpCS = new IntegerLiteralExpCSImpl();
-    return integerLiteralExpCS;
-  }
+		IntegerLiteralExpCSImpl integerLiteralExpCS = new IntegerLiteralExpCSImpl();
+		return integerLiteralExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public RealLiteralExpCS createRealLiteralExpCS() {
-    RealLiteralExpCSImpl realLiteralExpCS = new RealLiteralExpCSImpl();
-    return realLiteralExpCS;
-  }
+		RealLiteralExpCSImpl realLiteralExpCS = new RealLiteralExpCSImpl();
+		return realLiteralExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public BooleanLiteralExpCS createBooleanLiteralExpCS() {
-    BooleanLiteralExpCSImpl booleanLiteralExpCS = new BooleanLiteralExpCSImpl();
-    return booleanLiteralExpCS;
-  }
+		BooleanLiteralExpCSImpl booleanLiteralExpCS = new BooleanLiteralExpCSImpl();
+		return booleanLiteralExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public StringLiteralExpCS createStringLiteralExpCS() {
-    StringLiteralExpCSImpl stringLiteralExpCS = new StringLiteralExpCSImpl();
-    return stringLiteralExpCS;
-  }
+		StringLiteralExpCSImpl stringLiteralExpCS = new StringLiteralExpCSImpl();
+		return stringLiteralExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public InvalidLiteralExpCS createInvalidLiteralExpCS() {
-    InvalidLiteralExpCSImpl invalidLiteralExpCS = new InvalidLiteralExpCSImpl();
-    return invalidLiteralExpCS;
-  }
+		InvalidLiteralExpCSImpl invalidLiteralExpCS = new InvalidLiteralExpCSImpl();
+		return invalidLiteralExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public NullLiteralExpCS createNullLiteralExpCS() {
-    NullLiteralExpCSImpl nullLiteralExpCS = new NullLiteralExpCSImpl();
-    return nullLiteralExpCS;
-  }
+		NullLiteralExpCSImpl nullLiteralExpCS = new NullLiteralExpCSImpl();
+		return nullLiteralExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public LetExpCS createLetExpCS() {
-    LetExpCSImpl letExpCS = new LetExpCSImpl();
-    return letExpCS;
-  }
+		LetExpCSImpl letExpCS = new LetExpCSImpl();
+		return letExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public IfExpCS createIfExpCS() {
-    IfExpCSImpl ifExpCS = new IfExpCSImpl();
-    return ifExpCS;
-  }
+		IfExpCSImpl ifExpCS = new IfExpCSImpl();
+		return ifExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public PackageDeclarationWithNamespaceCS createPackageDeclarationWithNamespaceCS() {
-    PackageDeclarationWithNamespaceCSImpl packageDeclarationWithNamespaceCS = new PackageDeclarationWithNamespaceCSImpl();
-    return packageDeclarationWithNamespaceCS;
-  }
+		PackageDeclarationWithNamespaceCSImpl packageDeclarationWithNamespaceCS = new PackageDeclarationWithNamespaceCSImpl();
+		return packageDeclarationWithNamespaceCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public PackageDeclarationNestedNamespaceCS createPackageDeclarationNestedNamespaceCS() {
-    PackageDeclarationNestedNamespaceCSImpl packageDeclarationNestedNamespaceCS = new PackageDeclarationNestedNamespaceCSImpl();
-    return packageDeclarationNestedNamespaceCS;
-  }
+		PackageDeclarationNestedNamespaceCSImpl packageDeclarationNestedNamespaceCS = new PackageDeclarationNestedNamespaceCSImpl();
+		return packageDeclarationNestedNamespaceCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public PackageDeclarationWithoutNamespaceCS createPackageDeclarationWithoutNamespaceCS() {
-    PackageDeclarationWithoutNamespaceCSImpl packageDeclarationWithoutNamespaceCS = new PackageDeclarationWithoutNamespaceCSImpl();
-    return packageDeclarationWithoutNamespaceCS;
-  }
+		PackageDeclarationWithoutNamespaceCSImpl packageDeclarationWithoutNamespaceCS = new PackageDeclarationWithoutNamespaceCSImpl();
+		return packageDeclarationWithoutNamespaceCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public AttributeContextDeclarationCS createAttributeContextDeclarationCS() {
-    AttributeContextDeclarationCSImpl attributeContextDeclarationCS = new AttributeContextDeclarationCSImpl();
-    return attributeContextDeclarationCS;
-  }
+		AttributeContextDeclarationCSImpl attributeContextDeclarationCS = new AttributeContextDeclarationCSImpl();
+		return attributeContextDeclarationCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public ClassifierContextDeclarationCS createClassifierContextDeclarationCS() {
-    ClassifierContextDeclarationCSImpl classifierContextDeclarationCS = new ClassifierContextDeclarationCSImpl();
-    return classifierContextDeclarationCS;
-  }
+		ClassifierContextDeclarationCSImpl classifierContextDeclarationCS = new ClassifierContextDeclarationCSImpl();
+		return classifierContextDeclarationCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public OperationContextDeclarationCS createOperationContextDeclarationCS() {
-    OperationContextDeclarationCSImpl operationContextDeclarationCS = new OperationContextDeclarationCSImpl();
-    return operationContextDeclarationCS;
-  }
+		OperationContextDeclarationCSImpl operationContextDeclarationCS = new OperationContextDeclarationCSImpl();
+		return operationContextDeclarationCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public InitValueCS createInitValueCS() {
-    InitValueCSImpl initValueCS = new InitValueCSImpl();
-    return initValueCS;
-  }
+		InitValueCSImpl initValueCS = new InitValueCSImpl();
+		return initValueCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public DeriveValueCS createDeriveValueCS() {
-    DeriveValueCSImpl deriveValueCS = new DeriveValueCSImpl();
-    return deriveValueCS;
-  }
+		DeriveValueCSImpl deriveValueCS = new DeriveValueCSImpl();
+		return deriveValueCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public InvariantExpCS createInvariantExpCS() {
-    InvariantExpCSImpl invariantExpCS = new InvariantExpCSImpl();
-    return invariantExpCS;
-  }
+		InvariantExpCSImpl invariantExpCS = new InvariantExpCSImpl();
+		return invariantExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public DefinitionExpCS createDefinitionExpCS() {
-    DefinitionExpCSImpl definitionExpCS = new DefinitionExpCSImpl();
-    return definitionExpCS;
-  }
+		DefinitionExpCSImpl definitionExpCS = new DefinitionExpCSImpl();
+		return definitionExpCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public DefinitionExpPropertyCS createDefinitionExpPropertyCS() {
-    DefinitionExpPropertyCSImpl definitionExpPropertyCS = new DefinitionExpPropertyCSImpl();
-    return definitionExpPropertyCS;
-  }
+		DefinitionExpPropertyCSImpl definitionExpPropertyCS = new DefinitionExpPropertyCSImpl();
+		return definitionExpPropertyCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public DefinitionExpOperationCS createDefinitionExpOperationCS() {
-    DefinitionExpOperationCSImpl definitionExpOperationCS = new DefinitionExpOperationCSImpl();
-    return definitionExpOperationCS;
-  }
+		DefinitionExpOperationCSImpl definitionExpOperationCS = new DefinitionExpOperationCSImpl();
+		return definitionExpOperationCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public PreConditionDeclarationCS createPreConditionDeclarationCS() {
-    PreConditionDeclarationCSImpl preConditionDeclarationCS = new PreConditionDeclarationCSImpl();
-    return preConditionDeclarationCS;
-  }
+		PreConditionDeclarationCSImpl preConditionDeclarationCS = new PreConditionDeclarationCSImpl();
+		return preConditionDeclarationCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public PostConditionDeclarationCS createPostConditionDeclarationCS() {
-    PostConditionDeclarationCSImpl postConditionDeclarationCS = new PostConditionDeclarationCSImpl();
-    return postConditionDeclarationCS;
-  }
+		PostConditionDeclarationCSImpl postConditionDeclarationCS = new PostConditionDeclarationCSImpl();
+		return postConditionDeclarationCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public BodyDeclarationCS createBodyDeclarationCS() {
-    BodyDeclarationCSImpl bodyDeclarationCS = new BodyDeclarationCSImpl();
-    return bodyDeclarationCS;
-  }
+		BodyDeclarationCSImpl bodyDeclarationCS = new BodyDeclarationCSImpl();
+		return bodyDeclarationCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public OperationDefinitionInContextCS createOperationDefinitionInContextCS() {
-    OperationDefinitionInContextCSImpl operationDefinitionInContextCS = new OperationDefinitionInContextCSImpl();
-    return operationDefinitionInContextCS;
-  }
+		OperationDefinitionInContextCSImpl operationDefinitionInContextCS = new OperationDefinitionInContextCSImpl();
+		return operationDefinitionInContextCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public OperationDefinitionInDefCS createOperationDefinitionInDefCS() {
-    OperationDefinitionInDefCSImpl operationDefinitionInDefCS = new OperationDefinitionInDefCSImpl();
-    return operationDefinitionInDefCS;
-  }
+		OperationDefinitionInDefCSImpl operationDefinitionInDefCS = new OperationDefinitionInDefCSImpl();
+		return operationDefinitionInDefCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public ParameterCS createParameterCS() {
-    ParameterCSImpl parameterCS = new ParameterCSImpl();
-    return parameterCS;
-  }
+		ParameterCSImpl parameterCS = new ParameterCSImpl();
+		return parameterCS;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public OclPackage getOclPackage() {
-    return (OclPackage)getEPackage();
-  }
+		return (OclPackage)getEPackage();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @deprecated
-   * @generated
-   */
+	 * @deprecated
+	 * @generated
+	 */
 	@Deprecated
 	public static OclPackage getPackage() {
-    return OclPackage.eINSTANCE;
-  }
+		return OclPackage.eINSTANCE;
+	}
 
 } //OclFactoryImpl

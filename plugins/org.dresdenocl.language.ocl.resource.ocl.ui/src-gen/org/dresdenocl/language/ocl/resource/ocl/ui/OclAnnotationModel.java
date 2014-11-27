@@ -6,13 +6,18 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.ui;
 
-public class OclAnnotationModel extends org.eclipse.ui.texteditor.ResourceMarkerAnnotationModel {
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.ui.texteditor.MarkerAnnotation;
+import org.eclipse.ui.texteditor.ResourceMarkerAnnotationModel;
+
+public class OclAnnotationModel extends ResourceMarkerAnnotationModel {
 	
-	public OclAnnotationModel(org.eclipse.core.resources.IResource resource) {
+	public OclAnnotationModel(IResource resource) {
 		super(resource);
 	}
 	
-	protected org.eclipse.ui.texteditor.MarkerAnnotation createMarkerAnnotation(org.eclipse.core.resources.IMarker marker) {
+	protected MarkerAnnotation createMarkerAnnotation(IMarker marker) {
 		return new org.dresdenocl.language.ocl.resource.ocl.ui.OclMarkerAnnotation(marker);
 	}
 	

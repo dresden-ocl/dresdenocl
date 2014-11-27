@@ -6,6 +6,7 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.debug;
 
+
 /**
  * The DebuggerListener receives commands from the Eclipse Debug framework and
  * sends these commands to a debuggable process (e.g., an interpreter or generated

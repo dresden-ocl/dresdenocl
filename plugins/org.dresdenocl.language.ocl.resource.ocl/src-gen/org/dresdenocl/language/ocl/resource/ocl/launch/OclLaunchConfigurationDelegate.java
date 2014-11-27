@@ -6,6 +6,7 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.launch;
 
+
 /**
  * A class that handles launch configurations.
  */

@@ -6,22 +6,32 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.ui;
 
-public class OclQuickAssistAssistant extends org.eclipse.jface.text.quickassist.QuickAssistAssistant implements org.eclipse.jface.text.quickassist.IQuickAssistAssistant {
+import org.eclipse.jface.text.AbstractReusableInformationControlCreator;
+import org.eclipse.jface.text.DefaultInformationControl;
+import org.eclipse.jface.text.DefaultInformationControl.IInformationPresenter;
+import org.eclipse.jface.text.IInformationControl;
+import org.eclipse.jface.text.quickassist.IQuickAssistAssistant;
+import org.eclipse.jface.text.quickassist.IQuickAssistInvocationContext;
+import org.eclipse.jface.text.quickassist.QuickAssistAssistant;
+import org.eclipse.jface.text.source.Annotation;
+import org.eclipse.swt.widgets.Shell;
+
+public class OclQuickAssistAssistant extends QuickAssistAssistant implements IQuickAssistAssistant {
 	
 	public OclQuickAssistAssistant(org.dresdenocl.language.ocl.resource.ocl.IOclResourceProvider resourceProvider, org.dresdenocl.language.ocl.resource.ocl.ui.IOclAnnotationModelProvider annotationModelProvider) {
 		setQuickAssistProcessor(new org.dresdenocl.language.ocl.resource.ocl.ui.OclQuickAssistProcessor(resourceProvider, annotationModelProvider));
-		setInformationControlCreator(new org.eclipse.jface.text.AbstractReusableInformationControlCreator() {
-			public org.eclipse.jface.text.IInformationControl doCreateInformationControl(org.eclipse.swt.widgets.Shell parent) {
-				return new org.eclipse.jface.text.DefaultInformationControl(parent, (org.eclipse.jface.text.DefaultInformationControl.IInformationPresenter) null);
+		setInformationControlCreator(new AbstractReusableInformationControlCreator() {
+			public IInformationControl doCreateInformationControl(Shell parent) {
+				return new DefaultInformationControl(parent, (IInformationPresenter) null);
 			}
 		});
 	}
 	
-	public boolean canAssist(org.eclipse.jface.text.quickassist.IQuickAssistInvocationContext invocationContext) {
+	public boolean canAssist(IQuickAssistInvocationContext invocationContext) {
 		return false;
 	}
 	
-	public boolean canFix(org.eclipse.jface.text.source.Annotation annotation) {
+	public boolean canFix(Annotation annotation) {
 		return true;
 	}
 	

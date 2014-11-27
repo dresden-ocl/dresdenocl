@@ -25,29 +25,29 @@ package org.dresdenocl.language.ocl;
  */
 public interface DefinitionExpPropertyCS extends DefinitionExpPartCS {
 	/**
-   * Returns the value of the '<em><b>Variable Declaration</b></em>' containment reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Variable Declaration</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Variable Declaration</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Variable Declaration</em>' containment reference.
-   * @see #setVariableDeclaration(VariableDeclarationWithInitCS)
-   * @see org.dresdenocl.language.ocl.OclPackage#getDefinitionExpPropertyCS_VariableDeclaration()
-   * @model containment="true" required="true"
-   * @generated
-   */
+	 * @return the value of the '<em>Variable Declaration</em>' containment reference.
+	 * @see #setVariableDeclaration(VariableDeclarationWithInitCS)
+	 * @see org.dresdenocl.language.ocl.OclPackage#getDefinitionExpPropertyCS_VariableDeclaration()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
 	VariableDeclarationWithInitCS getVariableDeclaration();
 
 	/**
-   * Sets the value of the '{@link org.dresdenocl.language.ocl.DefinitionExpPropertyCS#getVariableDeclaration <em>Variable Declaration</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.dresdenocl.language.ocl.DefinitionExpPropertyCS#getVariableDeclaration <em>Variable Declaration</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Variable Declaration</em>' containment reference.
-   * @see #getVariableDeclaration()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Variable Declaration</em>' containment reference.
+	 * @see #getVariableDeclaration()
+	 * @generated
+	 */
 	void setVariableDeclaration(VariableDeclarationWithInitCS value);
 
 } // DefinitionExpPropertyCS

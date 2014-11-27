@@ -6,6 +6,7 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
+
 public class OclTextToken implements org.dresdenocl.language.ocl.resource.ocl.IOclTextToken {
 	
 	private String name;

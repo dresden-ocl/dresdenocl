@@ -31,71 +31,71 @@ import org.dresdenocl.pivotmodel.Operation;
  */
 public interface OperationCallBaseExpCS extends EObject {
 	/**
-   * Returns the value of the '<em><b>Operation Name</b></em>' reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Operation Name</b></em>' reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Operation Name</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Operation Name</em>' reference.
-   * @see #setOperationName(Operation)
-   * @see org.dresdenocl.language.ocl.OclPackage#getOperationCallBaseExpCS_OperationName()
-   * @model required="true"
-   * @generated
-   */
+	 * @return the value of the '<em>Operation Name</em>' reference.
+	 * @see #setOperationName(Operation)
+	 * @see org.dresdenocl.language.ocl.OclPackage#getOperationCallBaseExpCS_OperationName()
+	 * @model required="true"
+	 * @generated
+	 */
 	Operation getOperationName();
 
 	/**
-   * Sets the value of the '{@link org.dresdenocl.language.ocl.OperationCallBaseExpCS#getOperationName <em>Operation Name</em>}' reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.dresdenocl.language.ocl.OperationCallBaseExpCS#getOperationName <em>Operation Name</em>}' reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Operation Name</em>' reference.
-   * @see #getOperationName()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Operation Name</em>' reference.
+	 * @see #getOperationName()
+	 * @generated
+	 */
 	void setOperationName(Operation value);
 
 	/**
-   * Returns the value of the '<em><b>Arguments</b></em>' containment reference list.
-   * The list contents are of type {@link org.dresdenocl.language.ocl.OclExpressionCS}.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Arguments</b></em>' containment reference list.
+	 * The list contents are of type {@link org.dresdenocl.language.ocl.OclExpressionCS}.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Arguments</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Arguments</em>' containment reference list.
-   * @see org.dresdenocl.language.ocl.OclPackage#getOperationCallBaseExpCS_Arguments()
-   * @model containment="true"
-   * @generated
-   */
+	 * @return the value of the '<em>Arguments</em>' containment reference list.
+	 * @see org.dresdenocl.language.ocl.OclPackage#getOperationCallBaseExpCS_Arguments()
+	 * @model containment="true"
+	 * @generated
+	 */
 	EList<OclExpressionCS> getArguments();
 
 	/**
-   * Returns the value of the '<em><b>Is Marked Pre</b></em>' attribute.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Is Marked Pre</b></em>' attribute.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Is Marked Pre</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Is Marked Pre</em>' attribute.
-   * @see #setIsMarkedPre(boolean)
-   * @see org.dresdenocl.language.ocl.OclPackage#getOperationCallBaseExpCS_IsMarkedPre()
-   * @model
-   * @generated
-   */
+	 * @return the value of the '<em>Is Marked Pre</em>' attribute.
+	 * @see #setIsMarkedPre(boolean)
+	 * @see org.dresdenocl.language.ocl.OclPackage#getOperationCallBaseExpCS_IsMarkedPre()
+	 * @model
+	 * @generated
+	 */
 	boolean isIsMarkedPre();
 
 	/**
-   * Sets the value of the '{@link org.dresdenocl.language.ocl.OperationCallBaseExpCS#isIsMarkedPre <em>Is Marked Pre</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.dresdenocl.language.ocl.OperationCallBaseExpCS#isIsMarkedPre <em>Is Marked Pre</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Is Marked Pre</em>' attribute.
-   * @see #isIsMarkedPre()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Is Marked Pre</em>' attribute.
+	 * @see #isIsMarkedPre()
+	 * @generated
+	 */
 	void setIsMarkedPre(boolean value);
 
 } // OperationCallBaseExpCS

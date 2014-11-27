@@ -6,32 +6,41 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.ui;
 
-public class OclPropertySheetPage extends org.eclipse.ui.views.properties.PropertySheetPage implements org.eclipse.jface.viewers.ISelectionChangedListener {
+import java.util.Iterator;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.views.properties.PropertySheetPage;
+
+public class OclPropertySheetPage extends PropertySheetPage implements ISelectionChangedListener {
 	
-	public void selectionChanged(org.eclipse.jface.viewers.SelectionChangedEvent event) {
+	public void selectionChanged(SelectionChangedEvent event) {
 		selectionChanged(null, event.getSelection());
 	}
 	
-	public void selectionChanged(org.eclipse.ui.IWorkbenchPart part, org.eclipse.jface.viewers.ISelection iSelection) {
+	public void selectionChanged(IWorkbenchPart part, ISelection iSelection) {
 		// This is a workaround for a bug in EMF (see
 		// https://bugs.eclipse.org/bugs/show_bug.cgi?id=291301).Unfortunately Ed Merks
 		// refuses to fix it, so we need to solve it here.
 		if (iSelection instanceof org.dresdenocl.language.ocl.resource.ocl.ui.OclEObjectSelection) {
 			final org.dresdenocl.language.ocl.resource.ocl.ui.OclEObjectSelection selection = (org.dresdenocl.language.ocl.resource.ocl.ui.OclEObjectSelection) iSelection;
-			final org.eclipse.emf.ecore.EObject selectedObject = selection.getSelectedObject();
+			final EObject selectedObject = selection.getSelectedObject();
 			// check whether the selected object or one of its children contains a proxy which
 			// is a GenXYZClass (e.g., GenFeature, GenClass, GenPackage)
 			if (containsGenProxy(selectedObject)) {
 				return;
 			}
 		}
-		if (iSelection instanceof org.eclipse.jface.viewers.IStructuredSelection) {
-			org.eclipse.jface.viewers.IStructuredSelection structuredSelection = (org.eclipse.jface.viewers.IStructuredSelection) iSelection;
-			java.util.Iterator<?> it = structuredSelection.iterator();
+		if (iSelection instanceof IStructuredSelection) {
+			IStructuredSelection structuredSelection = (IStructuredSelection) iSelection;
+			Iterator<?> it = structuredSelection.iterator();
 			while (it.hasNext()) {
 				final Object next = it.next();
-				if (next instanceof org.eclipse.emf.ecore.EObject) {
-					if (containsGenProxy((org.eclipse.emf.ecore.EObject) next)) {
+				if (next instanceof EObject) {
+					if (containsGenProxy((EObject) next)) {
 						return;
 					}
 				}
@@ -41,17 +50,17 @@ public class OclPropertySheetPage extends org.eclipse.ui.views.properties.Proper
 		super.selectionChanged(part, iSelection);
 	}
 	
-	private boolean containsGenProxy(org.eclipse.emf.ecore.EObject selectedObject) {
+	private boolean containsGenProxy(EObject selectedObject) {
 		boolean isGenProxy = isGenProxy(selectedObject);
 		if (isGenProxy) {
 			return true;
 		}
-		for (org.eclipse.emf.ecore.EObject child : selectedObject.eCrossReferences()) {
+		for (EObject child : selectedObject.eCrossReferences()) {
 			if (isGenProxy(child)) {
 				return true;
 			}
 		}
-		for (org.eclipse.emf.ecore.EObject child : selectedObject.eContents()) {
+		for (EObject child : selectedObject.eContents()) {
 			if (containsGenProxy(child)) {
 				return true;
 			}
@@ -59,7 +68,7 @@ public class OclPropertySheetPage extends org.eclipse.ui.views.properties.Proper
 		return false;
 	}
 	
-	private boolean isGenProxy(org.eclipse.emf.ecore.EObject selectedObject) {
+	private boolean isGenProxy(EObject selectedObject) {
 		boolean isGenMetaclass = isInstanceOf("org.eclipse.emf.codegen.ecore.genmodel.GenClass", selectedObject);
 		isGenMetaclass |= isInstanceOf("org.eclipse.emf.codegen.ecore.genmodel.GenFeature", selectedObject);
 		isGenMetaclass |= isInstanceOf("org.eclipse.emf.codegen.ecore.genmodel.GenPackage", selectedObject);

@@ -27,55 +27,55 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface PrePostOrBodyDeclarationCS extends EObject {
 	/**
-   * Returns the value of the '<em><b>Name</b></em>' containment reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Name</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Name</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Name</em>' containment reference.
-   * @see #setName(SimpleNameCS)
-   * @see org.dresdenocl.language.ocl.OclPackage#getPrePostOrBodyDeclarationCS_Name()
-   * @model containment="true"
-   * @generated
-   */
+	 * @return the value of the '<em>Name</em>' containment reference.
+	 * @see #setName(SimpleNameCS)
+	 * @see org.dresdenocl.language.ocl.OclPackage#getPrePostOrBodyDeclarationCS_Name()
+	 * @model containment="true"
+	 * @generated
+	 */
 	SimpleNameCS getName();
 
 	/**
-   * Sets the value of the '{@link org.dresdenocl.language.ocl.PrePostOrBodyDeclarationCS#getName <em>Name</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.dresdenocl.language.ocl.PrePostOrBodyDeclarationCS#getName <em>Name</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' containment reference.
-   * @see #getName()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Name</em>' containment reference.
+	 * @see #getName()
+	 * @generated
+	 */
 	void setName(SimpleNameCS value);
 
 	/**
-   * Returns the value of the '<em><b>Ocl Expression</b></em>' containment reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Ocl Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Ocl Expression</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Ocl Expression</em>' containment reference.
-   * @see #setOclExpression(OclExpressionCS)
-   * @see org.dresdenocl.language.ocl.OclPackage#getPrePostOrBodyDeclarationCS_OclExpression()
-   * @model containment="true" required="true"
-   * @generated
-   */
+	 * @return the value of the '<em>Ocl Expression</em>' containment reference.
+	 * @see #setOclExpression(OclExpressionCS)
+	 * @see org.dresdenocl.language.ocl.OclPackage#getPrePostOrBodyDeclarationCS_OclExpression()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
 	OclExpressionCS getOclExpression();
 
 	/**
-   * Sets the value of the '{@link org.dresdenocl.language.ocl.PrePostOrBodyDeclarationCS#getOclExpression <em>Ocl Expression</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.dresdenocl.language.ocl.PrePostOrBodyDeclarationCS#getOclExpression <em>Ocl Expression</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Ocl Expression</em>' containment reference.
-   * @see #getOclExpression()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Ocl Expression</em>' containment reference.
+	 * @see #getOclExpression()
+	 * @generated
+	 */
 	void setOclExpression(OclExpressionCS value);
 
 } // PrePostOrBodyDeclarationCS

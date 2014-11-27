@@ -6,20 +6,26 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
-public class OclNature implements org.eclipse.core.resources.IProjectNature {
+import org.eclipse.core.resources.ICommand;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IProjectDescription;
+import org.eclipse.core.resources.IProjectNature;
+import org.eclipse.core.runtime.CoreException;
+
+public class OclNature implements IProjectNature {
 	
 	public static final String NATURE_ID = "org.dresdenocl.language.ocl.resource.ocl.nature";
 	
-	private org.eclipse.core.resources.IProject project;
+	private IProject project;
 	
 	/**
 	 * the IDs of all builders, IDs of additional builders can be added here
 	 */
 	public final static String[] BUILDER_IDS = {org.dresdenocl.language.ocl.resource.ocl.mopp.OclBuilderAdapter.BUILDER_ID};
 	
-	public static void activate(org.eclipse.core.resources.IProject project) {
+	public static void activate(IProject project) {
 		try {
-			org.eclipse.core.resources.IProjectDescription description = project.getDescription();
+			IProjectDescription description = project.getDescription();
 			String[] natures = description.getNatureIds();
 			
 			for (int i = 0; i < natures.length; ++i) {
@@ -34,13 +40,13 @@ public class OclNature implements org.eclipse.core.resources.IProjectNature {
 			newNatures[natures.length] = NATURE_ID;
 			description.setNatureIds(newNatures);
 			project.setDescription(description, null);
-		} catch (org.eclipse.core.runtime.CoreException e) {
+		} catch (CoreException e) {
 		}
 	}
 	
-	public static void deactivate(org.eclipse.core.resources.IProject project) {
+	public static void deactivate(IProject project) {
 		try {
-			org.eclipse.core.resources.IProjectDescription description = project.getDescription();
+			IProjectDescription description = project.getDescription();
 			String[] natures = description.getNatureIds();
 			
 			for (int i = 0; i < natures.length; ++i) {
@@ -54,43 +60,43 @@ public class OclNature implements org.eclipse.core.resources.IProjectNature {
 					return;
 				}
 			}
-		} catch (org.eclipse.core.runtime.CoreException e) {
+		} catch (CoreException e) {
 		}
 	}
 	
-	public static boolean hasNature(org.eclipse.core.resources.IProject project) {
+	public static boolean hasNature(IProject project) {
 		try {
-			org.eclipse.core.resources.IProjectDescription description = project.getDescription();
+			IProjectDescription description = project.getDescription();
 			String[] natures = description.getNatureIds();
 			for (int i = 0; i < natures.length; ++i) {
 				if (NATURE_ID.equals(natures[i])) {
 					return true;
 				}
 			}
-		} catch (org.eclipse.core.runtime.CoreException e) {
+		} catch (CoreException e) {
 		}
 		return false;
 	}
 	
-	public void configure() throws org.eclipse.core.runtime.CoreException {
-		org.eclipse.core.resources.IProjectDescription desc = project.getDescription();
-		org.eclipse.core.resources.ICommand[] commands = desc.getBuildSpec();
+	public void configure() throws CoreException {
+		IProjectDescription desc = project.getDescription();
+		ICommand[] commands = desc.getBuildSpec();
 		
 		for (int i = 0; i < commands.length; ++i) {
 			if (commands[i].getBuilderName().equals(org.dresdenocl.language.ocl.resource.ocl.mopp.OclBuilderAdapter.BUILDER_ID)) {
 				return;
 			}
 		}
-		org.eclipse.core.resources.ICommand[] newCommands = commands;
+		ICommand[] newCommands = commands;
 		outer: for (int j = 0; j < BUILDER_IDS.length; j++) {
 			for (int i = 0; i < commands.length; ++i) {
 				if (commands[i].getBuilderName().equals(BUILDER_IDS[j])) {
 					continue outer;
 				}
 			}
-			org.eclipse.core.resources.ICommand[] tempCommands = new org.eclipse.core.resources.ICommand[newCommands.length + 1];
+			ICommand[] tempCommands = new ICommand[newCommands.length + 1];
 			System.arraycopy(newCommands, 0, tempCommands, 0, newCommands.length);
-			org.eclipse.core.resources.ICommand command = desc.newCommand();
+			ICommand command = desc.newCommand();
 			command.setBuilderName(BUILDER_IDS[j]);
 			tempCommands[tempCommands.length - 1] = command;
 			newCommands = tempCommands;
@@ -101,14 +107,14 @@ public class OclNature implements org.eclipse.core.resources.IProjectNature {
 		}
 	}
 	
-	public void deconfigure() throws org.eclipse.core.runtime.CoreException {
-		org.eclipse.core.resources.IProjectDescription description = getProject().getDescription();
-		org.eclipse.core.resources.ICommand[] commands = description.getBuildSpec();
-		org.eclipse.core.resources.ICommand[] newCommands = commands;
+	public void deconfigure() throws CoreException {
+		IProjectDescription description = getProject().getDescription();
+		ICommand[] commands = description.getBuildSpec();
+		ICommand[] newCommands = commands;
 		for (int j = 0; j < BUILDER_IDS.length; j++) {
 			for (int i = 0; i < newCommands.length; ++i) {
 				if (newCommands[i].getBuilderName().equals(BUILDER_IDS[j])) {
-					org.eclipse.core.resources.ICommand[] tempCommands = new org.eclipse.core.resources.ICommand[newCommands.length - 1];
+					ICommand[] tempCommands = new ICommand[newCommands.length - 1];
 					System.arraycopy(newCommands, 0, tempCommands, 0, i);
 					System.arraycopy(newCommands, i + 1, tempCommands, i, newCommands.length - i - 1);
 					newCommands = tempCommands;
@@ -121,11 +127,11 @@ public class OclNature implements org.eclipse.core.resources.IProjectNature {
 		}
 	}
 	
-	public org.eclipse.core.resources.IProject getProject() {
+	public IProject getProject() {
 		return project;
 	}
 	
-	public void setProject(org.eclipse.core.resources.IProject project) {
+	public void setProject(IProject project) {
 		this.project = project;
 	}
 	

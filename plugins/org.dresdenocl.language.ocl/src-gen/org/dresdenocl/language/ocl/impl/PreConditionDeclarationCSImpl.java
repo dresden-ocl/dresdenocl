@@ -21,22 +21,22 @@ import org.eclipse.emf.ecore.EClass;
  */
 public class PreConditionDeclarationCSImpl extends PrePostOrBodyDeclarationCSImpl implements PreConditionDeclarationCS {
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected PreConditionDeclarationCSImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-    return OclPackage.Literals.PRE_CONDITION_DECLARATION_CS;
-  }
+		return OclPackage.Literals.PRE_CONDITION_DECLARATION_CS;
+	}
 
 } //PreConditionDeclarationCSImpl

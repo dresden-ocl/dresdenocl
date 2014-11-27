@@ -6,13 +6,21 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+
 /**
+ * <p>
  * An <code>IContextDependentURIFragment</code> points at an element referenced
  * from another element through an <code>identifier</code>. In contrast to a
  * normal EMF URI fragment (<code>URI.fragment</code>), which is a String that can
  * be resolved to an element within a <code>Resource</code>, the
  * <code>identifier</code> of a <code>IContextDependentURIFragment</code> does not
  * have to be globally unique.
+ * </p>
+ * <p>
+ * <p>
+ * </p>
  * <p>
  * An <code>IContextDependentURIFragment</code> is registered a
  * <code>ITextResource</code> for a proxy for which it defines the URI
@@ -20,11 +28,12 @@ package org.dresdenocl.language.ocl.resource.ocl;
  * the<code>IContextDependentURIFragment.resolve()</code> instead of the
  * normal<code>URI.fragment</code>-based resolving when
  * an<code>IContextDependentURIFragment.resolve()</code> is available.
+ * </p>
  * 
  * @param <ReferenceType> the type of the reference that can be resolved by this
  * fragment
  */
-public interface IOclContextDependentURIFragment<ReferenceType extends org.eclipse.emf.ecore.EObject> {
+public interface IOclContextDependentURIFragment<ReferenceType extends EObject> {
 	
 	/**
 	 * A prefix that can be used in a <code>URI.fragment</code> String of a proxy to
@@ -36,7 +45,7 @@ public interface IOclContextDependentURIFragment<ReferenceType extends org.eclip
 	 * 
 	 * @return The proxy object.
 	 */
-	public org.eclipse.emf.ecore.EObject getProxy();
+	public EObject getProxy();
 	
 	/**
 	 * 
@@ -49,14 +58,14 @@ public interface IOclContextDependentURIFragment<ReferenceType extends org.eclip
 	 * 
 	 * @return The element that references the proxy.
 	 */
-	public org.eclipse.emf.ecore.EObject getContainer();
+	public EObject getContainer();
 	
 	/**
 	 * 
 	 * @return The references of the container's <code>EClass</code> that holds the
 	 * proxy.
 	 */
-	public org.eclipse.emf.ecore.EReference getReference();
+	public EReference getReference();
 	
 	/**
 	 * 
@@ -65,7 +74,9 @@ public interface IOclContextDependentURIFragment<ReferenceType extends org.eclip
 	public int getPositionInReference();
 	
 	/**
+	 * <p>
 	 * Resolves the proxy to the real element(s) using context information.
+	 * </p>
 	 * 
 	 * @return result of resolving process
 	 */

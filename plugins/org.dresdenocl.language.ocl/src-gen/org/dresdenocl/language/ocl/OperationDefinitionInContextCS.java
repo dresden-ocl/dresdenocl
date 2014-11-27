@@ -26,29 +26,29 @@ package org.dresdenocl.language.ocl;
 public interface OperationDefinitionInContextCS extends OperationDefinitionCS {
 
 	/**
-   * Returns the value of the '<em><b>Type Name</b></em>' containment reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Type Name</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Type Name</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-   * @return the value of the '<em>Type Name</em>' containment reference.
-   * @see #setTypeName(ModelElementCS)
-   * @see org.dresdenocl.language.ocl.OclPackage#getOperationDefinitionInContextCS_TypeName()
-   * @model containment="true" required="true"
-   * @generated
-   */
+	 * @return the value of the '<em>Type Name</em>' containment reference.
+	 * @see #setTypeName(ModelElementCS)
+	 * @see org.dresdenocl.language.ocl.OclPackage#getOperationDefinitionInContextCS_TypeName()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
 	ModelElementCS getTypeName();
 
 	/**
-   * Sets the value of the '{@link org.dresdenocl.language.ocl.OperationDefinitionInContextCS#getTypeName <em>Type Name</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.dresdenocl.language.ocl.OperationDefinitionInContextCS#getTypeName <em>Type Name</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Type Name</em>' containment reference.
-   * @see #getTypeName()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Type Name</em>' containment reference.
+	 * @see #getTypeName()
+	 * @generated
+	 */
 	void setTypeName(ModelElementCS value);
 
 } // OperationDefinitionInContextCS

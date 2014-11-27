@@ -6,35 +6,53 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.ui;
 
-public class OclMarkerResolutionGenerator implements org.eclipse.ui.IMarkerResolutionGenerator {
+import java.io.ByteArrayInputStream;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.ui.IMarkerResolution;
+import org.eclipse.ui.IMarkerResolution2;
+import org.eclipse.ui.IMarkerResolutionGenerator;
+
+public class OclMarkerResolutionGenerator implements IMarkerResolutionGenerator {
 	
-	public org.eclipse.ui.IMarkerResolution[] getResolutions(org.eclipse.core.resources.IMarker marker) {
+	public IMarkerResolution[] getResolutions(IMarker marker) {
 		try {
 			if (!hasQuickFixes(marker)) {
-				return new org.eclipse.ui.IMarkerResolution[] {};
+				return new IMarkerResolution[] {};
 			}
-			org.eclipse.core.resources.IResource resource = marker.getResource();
-			if (resource instanceof org.eclipse.core.resources.IFile) {
+			IResource resource = marker.getResource();
+			if (resource instanceof IFile) {
 				// load model
-				final org.eclipse.core.resources.IFile file = (org.eclipse.core.resources.IFile) resource;
-				org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createPlatformResourceURI(file.getFullPath().toString(), true);
-				org.eclipse.emf.ecore.resource.ResourceSet rs = new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl();
+				final IFile file = (IFile) resource;
+				URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+				ResourceSet rs = new ResourceSetImpl();
 				rs.getLoadOptions().put(org.dresdenocl.language.ocl.resource.ocl.IOclOptions.DISABLE_CREATING_MARKERS_FOR_PROBLEMS, "true");
-				org.eclipse.emf.ecore.resource.Resource emfResource = rs.getResource(uri, true);
+				Resource emfResource = rs.getResource(uri, true);
 				if (emfResource instanceof org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource) {
 					org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource customResource = (org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource) emfResource;
-					org.eclipse.emf.ecore.util.EcoreUtil.resolveAll(customResource);
-					java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix> quickFixes = getQuickFixes(customResource, marker);
-					java.util.List<org.eclipse.ui.IMarkerResolution2> resolutions = new java.util.ArrayList<org.eclipse.ui.IMarkerResolution2>();
+					EcoreUtil.resolveAll(customResource);
+					Collection<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix> quickFixes = getQuickFixes(customResource, marker);
+					List<IMarkerResolution2> resolutions = new ArrayList<IMarkerResolution2>();
 					for (final org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix quickFix : quickFixes) {
-						resolutions.add(new org.eclipse.ui.IMarkerResolution2() {
+						resolutions.add(new IMarkerResolution2() {
 							
-							public void run(org.eclipse.core.resources.IMarker marker) {
+							public void run(IMarker marker) {
 								String newText = quickFix.apply(null);
 								// set new text as content for resource
 								try {
-									file.setContents(new java.io.ByteArrayInputStream(newText.getBytes()), true, true, null);
-								} catch (org.eclipse.core.runtime.CoreException e) {
+									file.setContents(new ByteArrayInputStream(newText.getBytes()), true, true, null);
+								} catch (CoreException e) {
 									org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.logError("Exception while applying quick fix", e);
 								}
 							}
@@ -43,7 +61,7 @@ public class OclMarkerResolutionGenerator implements org.eclipse.ui.IMarkerResol
 								return quickFix.getDisplayString();
 							}
 							
-							public org.eclipse.swt.graphics.Image getImage() {
+							public Image getImage() {
 								return new org.dresdenocl.language.ocl.resource.ocl.ui.OclUIMetaInformation().getImageProvider().getImage(quickFix.getImageKey());
 							}
 							
@@ -53,17 +71,17 @@ public class OclMarkerResolutionGenerator implements org.eclipse.ui.IMarkerResol
 							
 						});
 					}
-					return resolutions.toArray(new org.eclipse.ui.IMarkerResolution[resolutions.size()]);
+					return resolutions.toArray(new IMarkerResolution[resolutions.size()]);
 				}
 			}
 		} catch (Exception e) {
 			org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.logError("Exception while computing quick fix resolutions", e);
 		}
-		return new org.eclipse.ui.IMarkerResolution[] {};
+		return new IMarkerResolution[] {};
 	}
 	
-	public java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix> getQuickFixes(org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource, org.eclipse.core.resources.IMarker marker) {
-		java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix> foundQuickFixes = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix>();
+	public Collection<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix> getQuickFixes(org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource, IMarker marker) {
+		Collection<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix> foundQuickFixes = new ArrayList<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix>();
 		try {
 			String quickFixContexts = getQuickFixContextString(marker);
 			if (quickFixContexts != null) {
@@ -75,7 +93,7 @@ public class OclMarkerResolutionGenerator implements org.eclipse.ui.IMarkerResol
 					}
 				}
 			}
-		} catch (org.eclipse.core.runtime.CoreException ce) {
+		} catch (CoreException ce) {
 			if (ce.getMessage().matches("Marker.*not found.")) {
 				// ignore
 				System.out.println("getQuickFixes() marker not found: " + ce.getMessage());
@@ -86,14 +104,14 @@ public class OclMarkerResolutionGenerator implements org.eclipse.ui.IMarkerResol
 		return foundQuickFixes;
 	}
 	
-	private String getQuickFixContextString(org.eclipse.core.resources.IMarker marker) throws org.eclipse.core.runtime.CoreException {
-		Object quickFixValue = marker.getAttribute(org.eclipse.core.resources.IMarker.SOURCE_ID);
+	private String getQuickFixContextString(IMarker marker) throws CoreException {
+		Object quickFixValue = marker.getAttribute(IMarker.SOURCE_ID);
 		if (quickFixValue != null && quickFixValue instanceof String) {
 			return (String) quickFixValue;
 		}
 		return null;
 	}
-	private boolean hasQuickFixes(org.eclipse.core.resources.IMarker marker) throws org.eclipse.core.runtime.CoreException {
+	private boolean hasQuickFixes(IMarker marker) throws CoreException {
 		return getQuickFixContextString(marker) != null;
 	}
 }

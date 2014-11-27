@@ -6,47 +6,52 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.ui;
 
+import java.util.Collection;
+import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
+import org.eclipse.jface.preference.IPreferenceStore;
+
 /**
- * A class used to initialize default preference values.
+ * This class can be used to initialize default preference values.
  */
-public class OclPreferenceInitializer extends org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer {
+public class OclPreferenceInitializer extends AbstractPreferenceInitializer {
 	
 	public void initializeDefaultPreferences() {
 		
 		initializeDefaultSyntaxHighlighting();
 		initializeDefaultBrackets();
+		initializeDefaultsContentAssist();
 		
-		org.eclipse.jface.preference.IPreferenceStore store = org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getPreferenceStore();
+		IPreferenceStore store = org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getPreferenceStore();
 		// Set default value for matching brackets
 		store.setDefault(org.dresdenocl.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_MATCHING_BRACKETS_COLOR, "192,192,192");
 		store.setDefault(org.dresdenocl.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_MATCHING_BRACKETS_CHECKBOX, true);
 		
 	}
 	
-	private void initializeDefaultBrackets() {
-		org.eclipse.jface.preference.IPreferenceStore store = org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getPreferenceStore();
+	protected void initializeDefaultBrackets() {
+		IPreferenceStore store = org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getPreferenceStore();
 		initializeDefaultBrackets(store, new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation());
 	}
 	
+	protected void initializeDefaultBrackets(IPreferenceStore store, org.dresdenocl.language.ocl.resource.ocl.IOclMetaInformation metaInformation) {
+		String languageId = metaInformation.getSyntaxName();
+		// set default brackets
+		org.dresdenocl.language.ocl.resource.ocl.ui.OclBracketSet bracketSet = new org.dresdenocl.language.ocl.resource.ocl.ui.OclBracketSet();
+		final Collection<org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair> bracketPairs = metaInformation.getBracketPairs();
+		if (bracketPairs != null) {
+			for (org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair bracketPair : bracketPairs) {
+				bracketSet.addBracketPair(bracketPair.getOpeningBracket(), bracketPair.getClosingBracket(), bracketPair.isClosingEnabledInside(), bracketPair.isCloseAfterEnter());
+			}
+		}
+		store.setDefault(languageId + org.dresdenocl.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_BRACKETS_SUFFIX, bracketSet.serialize());
+	}
+	
 	public void initializeDefaultSyntaxHighlighting() {
-		org.eclipse.jface.preference.IPreferenceStore store = org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getPreferenceStore();
+		IPreferenceStore store = org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getPreferenceStore();
 		initializeDefaultSyntaxHighlighting(store, new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation());
 	}
 	
-	private void initializeDefaultBrackets(org.eclipse.jface.preference.IPreferenceStore store, org.dresdenocl.language.ocl.resource.ocl.IOclMetaInformation metaInformation) {
-		String languageId = metaInformation.getSyntaxName();
-		// set default brackets for ITextResource bracket set
-		org.dresdenocl.language.ocl.resource.ocl.ui.OclBracketSet bracketSet = new org.dresdenocl.language.ocl.resource.ocl.ui.OclBracketSet(null, null);
-		final java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair> bracketPairs = metaInformation.getBracketPairs();
-		if (bracketPairs != null) {
-			for (org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair bracketPair : bracketPairs) {
-				bracketSet.addBracketPair(bracketPair.getOpeningBracket(), bracketPair.getClosingBracket(), bracketPair.isClosingEnabledInside());
-			}
-		}
-		store.setDefault(languageId + org.dresdenocl.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_BRACKETS_SUFFIX, bracketSet.getBracketString());
-	}
-	
-	private void initializeDefaultSyntaxHighlighting(org.eclipse.jface.preference.IPreferenceStore store, org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation metaInformation) {
+	protected void initializeDefaultSyntaxHighlighting(IPreferenceStore store, org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation metaInformation) {
 		String languageId = metaInformation.getSyntaxName();
 		String[] tokenNames = metaInformation.getSyntaxHighlightableTokenNames();
 		if (tokenNames == null) {
@@ -64,7 +69,14 @@ public class OclPreferenceInitializer extends org.eclipse.core.runtime.preferenc
 		}
 	}
 	
-	private void setProperties(org.eclipse.jface.preference.IPreferenceStore store, String languageID, String tokenName, String color, boolean bold, boolean enable, boolean italic, boolean strikethrough, boolean underline) {
+	private void initializeDefaultsContentAssist() {
+		IPreferenceStore store = org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getPreferenceStore();
+		store.setDefault(org.dresdenocl.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_CONTENT_ASSIST_ENABLED, org.dresdenocl.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_CONTENT_ASSIST_ENABLED_DEFAULT);
+		store.setDefault(org.dresdenocl.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_CONTENT_ASSIST_DELAY, org.dresdenocl.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_CONTENT_ASSIST_DELAY_DEFAULT);
+		store.setDefault(org.dresdenocl.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_CONTENT_ASSIST_TRIGGERS, org.dresdenocl.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_CONTENT_ASSIST_TRIGGERS_DEFAULT);
+	}
+	
+	protected void setProperties(IPreferenceStore store, String languageID, String tokenName, String color, boolean bold, boolean enable, boolean italic, boolean strikethrough, boolean underline) {
 		store.setDefault(org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageID, tokenName, org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.BOLD), bold);
 		store.setDefault(org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageID, tokenName, org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.COLOR), color);
 		store.setDefault(org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageID, tokenName, org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.ENABLE), enable);
@@ -73,7 +85,7 @@ public class OclPreferenceInitializer extends org.eclipse.core.runtime.preferenc
 		store.setDefault(org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageID, tokenName, org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.UNDERLINE), underline);
 	}
 	
-	private String getColorString(int[] colorAsRGB) {
+	protected String getColorString(int[] colorAsRGB) {
 		if (colorAsRGB == null) {
 			return "0,0,0";
 		}
@@ -82,4 +94,6 @@ public class OclPreferenceInitializer extends org.eclipse.core.runtime.preferenc
 		}
 		return colorAsRGB[0] + "," +colorAsRGB[1] + ","+ colorAsRGB[2];
 	}
+	
 }
+

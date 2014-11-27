@@ -13,11 +13,14 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
+import java.util.Collections;
+import java.util.Map;
+
 public class OclOptionProvider implements org.dresdenocl.language.ocl.resource.ocl.IOclOptionProvider {
 	
-	public java.util.Map<?,?> getOptions() {
+	public Map<?,?> getOptions() {
 		// create a map with static option providers here
-		return java.util.Collections.emptyMap();
+		return Collections.emptyMap();
 	}
 	
 }

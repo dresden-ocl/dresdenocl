@@ -6,6 +6,12 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
+import java.util.Collections;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.change.ChangeDescription;
+import org.eclipse.emf.ecore.change.util.ChangeRecorder;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+
 /**
  * A representation for a range in a document where a terminal (i.e., a
  * placeholder or a keyword) is expected. The range is expressed using two
@@ -23,14 +29,14 @@ public class OclExpectedTerminal {
 	private Runnable attachmentCode;
 	
 	private int followSetID;
-	private org.eclipse.emf.ecore.EObject container;
+	private EObject container;
 	private org.dresdenocl.language.ocl.resource.ocl.IOclExpectedElement terminal;
 	private int startIncludingHiddenTokens;
 	private int startExcludingHiddenTokens;
 	private String prefix;
 	private org.dresdenocl.language.ocl.resource.ocl.grammar.OclContainmentTrace containmentTrace;
 	
-	public OclExpectedTerminal(org.eclipse.emf.ecore.EObject container, org.dresdenocl.language.ocl.resource.ocl.IOclExpectedElement terminal, int followSetID, org.dresdenocl.language.ocl.resource.ocl.grammar.OclContainmentTrace containmentTrace) {
+	public OclExpectedTerminal(EObject container, org.dresdenocl.language.ocl.resource.ocl.IOclExpectedElement terminal, int followSetID, org.dresdenocl.language.ocl.resource.ocl.grammar.OclContainmentTrace containmentTrace) {
 		super();
 		this.container = container;
 		this.terminal = terminal;
@@ -70,7 +76,7 @@ public class OclExpectedTerminal {
 		return this.terminal.equals((otherExpectedTerminal).terminal) && (containersBothNull || this.container.equals(otherExpectedTerminal.container));
 	}
 	
-	@Override	
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -106,7 +112,7 @@ public class OclExpectedTerminal {
 		return containmentTrace;
 	}
 	
-	public org.eclipse.emf.ecore.EObject getContainer() {
+	public EObject getContainer() {
 		return container;
 	}
 	
@@ -118,13 +124,13 @@ public class OclExpectedTerminal {
 	 * executing the given code, all changes are reverted.
 	 */
 	public void materialize(Runnable code) {
-		org.eclipse.emf.ecore.EObject root = org.eclipse.emf.ecore.util.EcoreUtil.getRootContainer(getContainer());
+		EObject root = EcoreUtil.getRootContainer(getContainer());
 		if (root == null) {
 			code.run();
 			return;
 		}
-		org.eclipse.emf.ecore.change.util.ChangeRecorder recorder = new org.eclipse.emf.ecore.change.util.ChangeRecorder();
-		recorder.beginRecording(java.util.Collections.singleton(root));
+		ChangeRecorder recorder = new ChangeRecorder();
+		recorder.beginRecording(Collections.singleton(root));
 		
 		// attach proposal model fragment to main model
 		Runnable attachmentCode = getAttachmentCode();
@@ -133,7 +139,7 @@ public class OclExpectedTerminal {
 			attachmentCode.run();
 		}
 		
-		org.eclipse.emf.ecore.change.ChangeDescription changes = recorder.endRecording();
+		ChangeDescription changes = recorder.endRecording();
 		code.run();
 		// revert changes
 		changes.apply();

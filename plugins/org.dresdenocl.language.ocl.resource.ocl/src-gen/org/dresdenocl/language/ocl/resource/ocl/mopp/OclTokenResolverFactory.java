@@ -6,6 +6,9 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 /**
  * The OclTokenResolverFactory class provides access to all generated token
  * resolvers. By giving the name of a defined token, the corresponding resolve can
@@ -16,13 +19,13 @@ package org.dresdenocl.language.ocl.resource.ocl.mopp;
  */
 public class OclTokenResolverFactory implements org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolverFactory {
 	
-	private java.util.Map<String, org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver> tokenName2TokenResolver;
-	private java.util.Map<String, org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver> featureName2CollectInTokenResolver;
+	private Map<String, org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver> tokenName2TokenResolver;
+	private Map<String, org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver> featureName2CollectInTokenResolver;
 	private static org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver defaultResolver = new org.dresdenocl.language.ocl.resource.ocl.analysis.OclDefaultTokenResolver();
 	
 	public OclTokenResolverFactory() {
-		tokenName2TokenResolver = new java.util.LinkedHashMap<String, org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver>();
-		featureName2CollectInTokenResolver = new java.util.LinkedHashMap<String, org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver>();
+		tokenName2TokenResolver = new LinkedHashMap<String, org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver>();
+		featureName2CollectInTokenResolver = new LinkedHashMap<String, org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver>();
 		registerTokenResolver("NAVIGATION_OPERATOR", new org.dresdenocl.language.ocl.resource.ocl.analysis.OclNAVIGATION_OPERATORTokenResolver());
 		registerTokenResolver("ADDITIVE_OPERATOR", new org.dresdenocl.language.ocl.resource.ocl.analysis.OclADDITIVE_OPERATORTokenResolver());
 		registerTokenResolver("MULT_OPERATOR", new org.dresdenocl.language.ocl.resource.ocl.analysis.OclMULT_OPERATORTokenResolver());
@@ -65,7 +68,7 @@ public class OclTokenResolverFactory implements org.dresdenocl.language.ocl.reso
 		return tokenName2TokenResolver.remove(tokenName);
 	}
 	
-	private org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver internalCreateResolver(java.util.Map<String, org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver> resolverMap, String key) {
+	private org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver internalCreateResolver(Map<String, org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver> resolverMap, String key) {
 		if (resolverMap.containsKey(key)){
 			return resolverMap.get(key);
 		} else {
@@ -73,7 +76,7 @@ public class OclTokenResolverFactory implements org.dresdenocl.language.ocl.reso
 		}
 	}
 	
-	private boolean internalRegisterTokenResolver(java.util.Map<String, org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver> resolverMap, String key, org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver resolver) {
+	private boolean internalRegisterTokenResolver(Map<String, org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver> resolverMap, String key, org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver resolver) {
 		if (!resolverMap.containsKey(key)) {
 			resolverMap.put(key,resolver);
 			return true;

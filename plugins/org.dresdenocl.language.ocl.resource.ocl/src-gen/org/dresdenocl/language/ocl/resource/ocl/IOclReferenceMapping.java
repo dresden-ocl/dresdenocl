@@ -6,12 +6,17 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl;
 
+
 /**
+ * <p>
  * A mapping from an identifier to something else. The &quot;something else&quot;
  * is defined by subclasses of this interface. Implementors of such subclasses are
  * used during the process of resolving references, where identifiers need to be
  * mapped to other objects.
+ * </p>
+ * <p>
  * This interface must not be implemented by clients.
+ * </p>
  * 
  * @param <ReferenceType> the type of the reference this mapping points to.
  */

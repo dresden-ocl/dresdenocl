@@ -25,6 +25,8 @@
 		</page>
 		<page name="Brackets" id="org.dresdenocl.language.ocl.resource.ocl.ui.OclBracketPreferencePage" class="org.dresdenocl.language.ocl.resource.ocl.ui.OclBracketPreferencePage" category="org.dresdenocl.language.ocl.resource.ocl.ui.OclPreferencePage">
 		</page>
+		<page name="Content Assist" id="org.dresdenocl.language.ocl.resource.ocl.ui.OclContentAssistPreferencePage" class="org.dresdenocl.language.ocl.resource.ocl.ui.OclContentAssistPreferencePage" category="org.dresdenocl.language.ocl.resource.ocl.ui.OclPreferencePage">
+		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
@@ -70,6 +72,28 @@
 		</specification>
 		<specification annotationType="org.dresdenocl.language.ocl.resource.ocl.ui.occurences.declaration" label="Declarations (in .ocl files)" textPreferenceKey="ocl.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="ocl.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="ocl.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="ocl.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="ocl.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="ocl.declarationTextStyle" textStylePreferenceValue="NONE">
 		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.ui.commands">
+		<category description="All commands belonging to Ocl" id="org.dresdenocl.language.ocl.resource.ocl.ui.command.category" name="Ocl">
+		</category>
+		<command categoryId="org.dresdenocl.language.ocl.resource.ocl.ui.command.category" description="Toggle comment of the selected lines" id="org.dresdenocl.language.ocl.resource.ocl.ui.command.togglecomment" name="Toggle Comment">
+		</command>
+	</extension>
+	
+	<extension point="org.eclipse.ui.handlers">
+		<handler class="org.dresdenocl.language.ocl.resource.ocl.ui.OclToggleCommentHandler" commandId="org.dresdenocl.language.ocl.resource.ocl.ui.command.togglecomment">
+		</handler>
+	</extension>
+	
+	<extension point="org.eclipse.ui.contexts">
+		<context name="Editing Ocl Files" description="Editing Ocl Files Context" parentId="org.eclipse.ui.textEditorScope" id="org.dresdenocl.language.ocl.resource.ocl.EditorScope">
+		</context>
+	</extension>
+	
+	<extension point="org.eclipse.ui.bindings">
+		<key sequence="M1+7" commandId="org.dresdenocl.language.ocl.resource.ocl.ui.command.togglecomment" schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" contextId="org.dresdenocl.language.ocl.resource.ocl.EditorScope">
+		</key>
 	</extension>
 	
 </plugin>

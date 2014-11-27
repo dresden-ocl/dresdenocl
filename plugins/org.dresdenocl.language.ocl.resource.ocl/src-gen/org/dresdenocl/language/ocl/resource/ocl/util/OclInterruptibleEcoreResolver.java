@@ -6,6 +6,16 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.util;
 
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+
 /**
  * A utility class to resolve proxy objects that allows to terminate resolving.
  */
@@ -18,24 +28,28 @@ public class OclInterruptibleEcoreResolver {
 	}
 	
 	/**
+	 * <p>
 	 * Visits all proxies in the resource set and tries to resolve them.
+	 * </p>
 	 * 
 	 * @param resourceSet the objects to visit.
 	 */
-	public void resolveAll(org.eclipse.emf.ecore.resource.ResourceSet resourceSet) {
-		java.util.List<org.eclipse.emf.ecore.resource.Resource> resources = resourceSet.getResources();
+	public void resolveAll(ResourceSet resourceSet) {
+		List<Resource> resources = resourceSet.getResources();
 		for (int i = 0; i < resources.size() && !terminate; i++) {
 			resolveAll(resources.get(i));
 		}
 	}
 	
 	/**
+	 * <p>
 	 * Visits all proxies in the resource and tries to resolve them.
+	 * </p>
 	 * 
 	 * @param resource the objects to visit.
 	 */
-	public void resolveAll(org.eclipse.emf.ecore.resource.Resource resource) {
-		for (org.eclipse.emf.ecore.EObject eObject : resource.getContents()) {
+	public void resolveAll(Resource resource) {
+		for (EObject eObject : resource.getContents()) {
 			if (terminate) {
 				return;
 			}
@@ -44,25 +58,27 @@ public class OclInterruptibleEcoreResolver {
 	}
 	
 	/**
+	 * <p>
 	 * Visits all proxies referenced by the object and recursively any of its
 	 * contained objects.
+	 * </p>
 	 * 
 	 * @param eObject the object to visit.
 	 */
-	public void resolveAll(org.eclipse.emf.ecore.EObject eObject) {
+	public void resolveAll(EObject eObject) {
 		eObject.eContainer();
 		resolveCrossReferences(eObject);
-		for (java.util.Iterator<org.eclipse.emf.ecore.EObject> i = eObject.eAllContents(); i.hasNext();) {
+		for (Iterator<EObject> i = eObject.eAllContents(); i.hasNext();) {
 			if (terminate) {
 				return;
 			}
-			org.eclipse.emf.ecore.EObject childEObject = i.next();
+			EObject childEObject = i.next();
 			resolveCrossReferences(childEObject);
 		}
 	}
 	
-	protected void resolveCrossReferences(org.eclipse.emf.ecore.EObject eObject) {
-		for (java.util.Iterator<org.eclipse.emf.ecore.EObject> i = eObject.eCrossReferences().iterator(); i.hasNext(); i.next()) {
+	protected void resolveCrossReferences(EObject eObject) {
+		for (Iterator<EObject> i = eObject.eCrossReferences().iterator(); i.hasNext(); i.next()) {
 			// The loop resolves the cross references by visiting them.
 			if (terminate) {
 				return;
@@ -71,28 +87,30 @@ public class OclInterruptibleEcoreResolver {
 	}
 	
 	/**
+	 * <p>
 	 * Searches for all unresolved proxy objects in the given resource.
+	 * </p>
 	 * 
 	 * @param resource
 	 * 
 	 * @return all proxy objects that are not resolvable
 	 */
-	public java.util.Set<org.eclipse.emf.ecore.EObject> findUnresolvedProxies(org.eclipse.emf.ecore.resource.Resource resource) {
-		java.util.Set<org.eclipse.emf.ecore.EObject> unresolvedProxies = new java.util.LinkedHashSet<org.eclipse.emf.ecore.EObject>();
+	public Set<EObject> findUnresolvedProxies(Resource resource) {
+		Set<EObject> unresolvedProxies = new LinkedHashSet<EObject>();
 		
-		for (java.util.Iterator<org.eclipse.emf.ecore.EObject> elementIt = org.eclipse.emf.ecore.util.EcoreUtil.getAllContents(resource, true); elementIt.hasNext(); ) {
-			org.eclipse.emf.ecore.InternalEObject nextElement = (org.eclipse.emf.ecore.InternalEObject) elementIt.next();
+		for (Iterator<EObject> elementIt = EcoreUtil.getAllContents(resource, true); elementIt.hasNext(); ) {
+			InternalEObject nextElement = (InternalEObject) elementIt.next();
 			if (terminate) {
 				return unresolvedProxies;
 			}
 			if (nextElement.eIsProxy()) {
 				unresolvedProxies.add(nextElement);
 			}
-			for (org.eclipse.emf.ecore.EObject crElement : nextElement.eCrossReferences()) {
+			for (EObject crElement : nextElement.eCrossReferences()) {
 				if (terminate) {
 					return unresolvedProxies;
 				}
-				crElement = org.eclipse.emf.ecore.util.EcoreUtil.resolve(crElement, resource);
+				crElement = EcoreUtil.resolve(crElement, resource);
 				if (crElement.eIsProxy()) {
 					unresolvedProxies.add(crElement);
 				}
@@ -102,16 +120,18 @@ public class OclInterruptibleEcoreResolver {
 	}
 	
 	/**
+	 * <p>
 	 * Searches for all unresolved proxy objects in the given resource set.
+	 * </p>
 	 * 
 	 * @param resourceSet
 	 * 
 	 * @return all proxy objects that are not resolvable
 	 */
-	public java.util.Set<org.eclipse.emf.ecore.EObject> findUnresolvedProxies(org.eclipse.emf.ecore.resource.ResourceSet resourceSet) {
-		java.util.Set<org.eclipse.emf.ecore.EObject> unresolvedProxies = new java.util.LinkedHashSet<org.eclipse.emf.ecore.EObject>();
+	public Set<EObject> findUnresolvedProxies(ResourceSet resourceSet) {
+		Set<EObject> unresolvedProxies = new LinkedHashSet<EObject>();
 		
-		for (org.eclipse.emf.ecore.resource.Resource resource : resourceSet.getResources()) {
+		for (Resource resource : resourceSet.getResources()) {
 			if (terminate) {
 				return unresolvedProxies;
 			}
