@@ -4,12 +4,12 @@ More information is also available at the [Toolkit Website](http://dresden-ocl.o
 
 #Build and run the source code
 
-We develop with Eclipse 4.4.1 and Java 6. However, TravisCI tests Dresden OCL althought against Java 7.
-
 __Prerequisites__:
 
-1. Import luna.target from the */target/luna* folder
-2. Set luna.target as Target Platform
+1. Eclipse Luna (4.4.1a)
+2. Java 7
+3. Import luna.target from the */target/luna* folder
+4. Set luna.target as Target Platform
 	* Window -> Preferences -> Plug-in Development -> Target Platform
 
 __Installation__:
