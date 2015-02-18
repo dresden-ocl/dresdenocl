@@ -3,6 +3,8 @@
 More information is also available at the [Toolkit Website](http://dresden-ocl.org/).
 
 ##Build and run the source code
+
+[![Join the chat at https://gitter.im/dresden-ocl/dresdenocl](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/dresden-ocl/dresdenocl?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 We develop with Eclipse 4.4.1 and Java 6. However, TravisCI tests Dresden OCL althought against Java 7.
 
 __Prerequisites__:
