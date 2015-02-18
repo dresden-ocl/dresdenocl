@@ -13,15 +13,14 @@ __Prerequisites__:
 	* Window -> Preferences -> Plug-in Development -> Target Platform
 
 __Installation__:
+
 1. Add repository: https://github.com/dresden-ocl/dresdenocl.git
 2. Check out the following projects from the folders
 	* plugins/**
 	* tests/**
 3. Build the project (otherwise it will complain about Ocl22Parser not found)
 	* *mvn verify* at the root of Dresden OCL
-4. Final
-	* In order to run the project now right-click any Dresden OCL Plug-in and select
-	  	Run as -> Eclipse Plug-in 
+4. In order to run the project now right-click any Dresden OCL Plug-in and select Run as -> Eclipse Plug-in 
 
 #Code Contribution
 If you plan to submit any code to the Dresden OCL repository, please use the JDT code
