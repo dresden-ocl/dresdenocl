@@ -1,10 +1,9 @@
-[![Build Status](https://travis-ci.org/dresden-ocl/dresdenocl.svg?branch=master)](https://travis-ci.org/dresden-ocl/dresdenocl)
+[![Build Status](https://travis-ci.org/dresden-ocl/dresdenocl.svg?branch=master)](https://travis-ci.org/dresden-ocl/dresdenocl) [![Join the chat at https://gitter.im/dresden-ocl/dresdenocl](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/dresden-ocl/dresdenocl?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 More information is also available at the [Toolkit Website](http://dresden-ocl.org/).
 
 ##Build and run the source code
 
-[![Join the chat at https://gitter.im/dresden-ocl/dresdenocl](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/dresden-ocl/dresdenocl?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 We develop with Eclipse 4.4.1 and Java 6. However, TravisCI tests Dresden OCL althought against Java 7.
 
 __Prerequisites__:
@@ -33,6 +32,5 @@ Bugs already found are listed on the issue tracker. **Please feel free to contri
 #Code Contribution
 If you plan to submit any code to the Dresden OCL repository, please use the JDT code
 formatter available at http://www.dresden-ocl.org/update/stuff/formatter.xml.
-Please note the [best practices](http://st.inf.tu-dresden.de/stwiki/index.php/OCL:Best_Practices).
 
 **Just fork Dresden OCL on GitHub and make a pull request!**
