@@ -18,10 +18,10 @@ notifications:
 
 install: /bin/true
 script:
-  - mvn clean install integration-test -B 
+  - mvn clean install -B 
   #- mvn clean cobertura:cobertura coveralls:report
 after_success:
   - if [ "$TRAVIS_BRANCH" == "develop" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] ; then
-    mvn install -B -P upload-latest ; fi
+    mvn install -Dmaven.test.skip=true -B -P upload-latest ; fi
   - if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] ; then
-    mvn install -B -P upload-release ; fi
+    mvn install -Dmaven.test.skip=true -B -P upload-release ; fi
