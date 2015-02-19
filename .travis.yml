@@ -5,3 +5,4 @@ script:
   - mvn integration-test -B
 after_success:
   - mvn clean cobertura:cobertura coveralls:report
+  - mvn install -B -P upload-latest
