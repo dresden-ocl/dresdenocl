@@ -27,7 +27,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
  <profiles>
   <!-- This profile is used to upload the repo -->
   <profile>
-   <id>upload-repo</id>
+   <id>upload-latest</id>
    <properties>
     <!-- Properties relative to the 
     distant host where to upload the repo -->
