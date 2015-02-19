@@ -22,6 +22,6 @@ script:
   #- mvn clean cobertura:cobertura coveralls:report
 after_success:
   - if [ "$TRAVIS_BRANCH" == "develop" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] ; then
-    mvn deploy -B -P upload-latest ; fi
+    mvn install -B -P upload-latest ; fi
   - if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] ; then
-    mvn deploy -B -P upload-release ; fi
+    mvn install -B -P upload-release ; fi
