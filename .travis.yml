@@ -1,8 +1,19 @@
+# Use docker-based build environment (instead of openvz)
+sudo: false
+
 language: java
-jdk:
-  - openjdk6
+jdk: oraclejdk6
+
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+
+install: /bin/true
 script:
-  - mvn integration-test -B
+  - mvn clean install integration-test -B 
+  #- mvn clean cobertura:cobertura coveralls:report
 after_success:
-  - mvn clean cobertura:cobertura coveralls:report
-  - mvn install -B -P upload-latest
+  - if [ "$TRAVIS_BRANCH" == "develop"] && [ "$TRAVIS_PULL_REQUEST" == "false" ] ; then
+    mvn deploy -B -P upload-latest ; fi
+  - if [ "$TRAVIS_BRANCH" == "master"] && [ "$TRAVIS_PULL_REQUEST" == "false" ] ; then
+    mvn deploy -B -P upload-release ; fi
