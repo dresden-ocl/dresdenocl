@@ -43,7 +43,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
      <plugin>
       <groupId>org.codehaus.mojo</groupId>
       <artifactId>wagon-maven-plugin</artifactId>
-      <version>1.0-beta-6</version>
+      <version>1.0-beta-5</version>
       <executions>
        <execution>
         <id>upload-repo</id>
