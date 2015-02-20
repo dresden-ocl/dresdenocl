@@ -17,7 +17,8 @@ notifications:
     on_start: false     # default: false
 
 before_script:
-  - echo -e "Host lars.inf.tu-dresden.de\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+  #- echo -e "Host lars.inf.tu-dresden.de\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+  - echo -e "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 install: /bin/true
 script:
   - mvn clean install -B 
