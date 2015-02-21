@@ -19,8 +19,8 @@ notifications:
     on_failure: always  # options: [always|never|change] default: always
 
 before_script:
-  #- echo -e "Host lars.inf.tu-dresden.de\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-  - echo -e "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+  - echo -e "Host lars.inf.tu-dresden.de\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+  - ssh-keyscan -H -t rsa,dsa lars.inf.tu-dresden.de >> ~/.ssh/known_hosts
 install: /bin/true
 script:
   - mvn clean install -B 
