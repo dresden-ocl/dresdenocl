@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/dresden-ocl/dresdenocl.svg?branch=master)](https://travis-ci.org/dresden-ocl/dresdenocl) [![Coverage Status](https://coveralls.io/repos/dresden-ocl/dresdenocl/badge.svg)](https://coveralls.io/r/dresden-ocl/dresdenocl) [![Join the chat at https://gitter.im/dresden-ocl/dresdenocl](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/dresden-ocl/dresdenocl?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build Status](https://travis-ci.org/dresden-ocl/dresdenocl.svg?branch=master)](https://travis-ci.org/dresden-ocl/dresdenocl) [![Coverage Status](https://coveralls.io/repos/dresden-ocl/dresdenocl/badge.svg)](https://coveralls.io/r/dresden-ocl/dresdenocl) [![Coverity Scan Build Status](https://scan.coverity.com/projects/2747/badge.svg)](https://scan.coverity.com/projects/2747) [![Join the chat at https://gitter.im/dresden-ocl/dresdenocl](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/dresden-ocl/dresdenocl?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 More information is also available at the [Toolkit Website](http://dresden-ocl.org/).
 
