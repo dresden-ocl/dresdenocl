@@ -8,6 +8,8 @@ env:
   global:
     - secure: "FUV1hPOEUWCQ5vLNQOxZwB6EaNGmWymEA3EHJ/FjPJjz0GTt8NqvrwNakfCYlFAF9+ifZ60J1CC+R0u74GnAj1Ae0kVOtyduYTPTBazQX7Jcr6lsxp5EOzkuVaRVySLs5fgOrVxYv7Isv2PimEkMF3dZEh7vHdhvBvSR9H9ZKDw="
     - COVERITY_SCAN_PROJECT_NAME: dresden-ocl/dresdenocl
+    - JAVA_OPTS: "--server -J-Xms1500m -J-Xmx1500m"
+    
 cache:
   directories:
     - '$HOME/.m2/repository'
