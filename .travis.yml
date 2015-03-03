@@ -33,8 +33,8 @@ notifications:
 before_script:
   - echo -e "Host lars.inf.tu-dresden.de\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
   - ssh-keyscan -H -t rsa,dsa lars.inf.tu-dresden.de >> ~/.ssh/known_hosts
-  - export JAVA_OPTS="$JAVA_OPTS --server -Xms1500m -Xmx1500m"
-  - echo $JAVA_OPTS
+  #- export JAVA_OPTS="$JAVA_OPTS --server -Xms1500m -Xmx1500m"
+  - export MAVEN_OPTS="$MAVEN_OPTS -Xmx1024m"
 
 install: /bin/true
 
