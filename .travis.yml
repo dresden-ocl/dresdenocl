@@ -21,7 +21,7 @@ addons:
       version: 3.4.0
     notification_email: dev@larsschuetze.de
     build_command_prepend: cov-configure --java
-    build_command: mvn install -Dmaven.test.skip=true -DskipTests -B -q
+    build_command: mvn install -Dmaven.test.skip=true -DskipTests -B
     branch_pattern: coverity_scan
 
 notifications:
@@ -36,13 +36,13 @@ before_script: export MAVEN_OPTS="-Xms512m -Xmx1024m -XX:MaxPermSize=256m"
 install: /bin/true
 
 script:
-  - if [ ${COVERITY_SCAN_BRANCH} != 1 ]; then mvn clean install -B -q ; fi
+  - if [ ${COVERITY_SCAN_BRANCH} != 1 ]; then mvn clean install -B ; fi
   #- mvn clean cobertura:cobertura coveralls:report
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "develop" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] ; then
-    mvn install -Dmaven.test.skip=true -DskipTests -B -q -P latest-luna ; fi
+    mvn install -Dmaven.test.skip=true -DskipTests -B -P latest-luna ; fi
   - if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] ; then
-    mvn install -Dmaven.test.skip=true -DskipTests -B -q -P release-luna ; fi
+    mvn install -Dmaven.test.skip=true -DskipTests -B -P release-luna ; fi
   # dont waste space in keeping every single version
   - mv ~/.m2/repository/org/dresden-ocl /tmp/dresden-ocl
