@@ -13,6 +13,10 @@
 	<artifactId>tests</artifactId>
 	<packaging>pom</packaging>
 
+	<properties>
+        <vmargs>-XX:MaxPermSize=1024m -Xmx1024m</vmargs>
+    </properties>
+
 	<modules>
 		<module>org.dresdenocl.debug.test</module>
 		<module>org.dresdenocl.essentialocl.tests</module>
@@ -43,4 +47,19 @@
 		<module>org.dresdenocl.tools.transformation.test</module>
 		<module>org.dresdenocl.tracer.test</module>
 	</modules>
+
+	<build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.eclipse.tycho</groupId>
+                    <artifactId>tycho-surefire-plugin</artifactId>
+                    <version>${tycho.version}</version>
+                    <configuration>
+                        <argLine>${vmargs}</argLine>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+	</build>
 </project> 

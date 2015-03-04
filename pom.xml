@@ -164,15 +164,6 @@
 						<target>${java.version}</target>
 					</configuration>
 				</plugin>
-
-				<plugin>
-					<groupId>org.eclipse.tycho</groupId>
-					<artifactId>tycho-surefire-plugin</artifactId>
-					<version>${tycho.version}</version>
-					<configuration>
-						<!--<argLine>-Xmx1596m -XX:MaxPermSize=1024m</argLine>-->
-					</configuration>
-				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
