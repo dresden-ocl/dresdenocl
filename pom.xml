@@ -31,6 +31,7 @@
 		<maven.compiler.target>1.6</maven.compiler.target>
 		<project.build.sourceEncoding>CP1252</project.build.sourceEncoding>
 		<maven.test.failure.ignore>true</maven.test.failure.ignore>
+		<tycho.disableP2Mirrors>true</tycho.disableP2Mirrors>
 		<java.version>1.6</java.version>
 	</properties>
 
