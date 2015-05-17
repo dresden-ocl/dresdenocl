@@ -35,12 +35,13 @@ before_script:
 install: /bin/true
 
 script:
-  - if [ ${COVERITY_SCAN_BRANCH} != 1 ]; then mvn install -DskipTests -Dmaven.javadoc.skip=true -B -V ; fi
-  - if [ ${COVERITY_SCAN_BRANCH} != 1 ]; then mvn verify -e --file tests/pom.xml -Dtycho.showEclipseLog=true ; fi
+  - if [ ${COVERITY_SCAN_BRANCH} != 1 ]; then mvn install -Dmaven.javadoc.skip=true -Dtycho.disableP2Mirrors=true -B -V ; fi
+  #- if [ ${COVERITY_SCAN_BRANCH} != 1 ]; then mvn install -DskipTests -Dmaven.javadoc.skip=true -Dtycho.disableP2Mirrors=true -B -V ; fi
+  #- if [ ${COVERITY_SCAN_BRANCH} != 1 ]; then mvn verify -e --file tests/pom.xml -Dtycho.showEclipseLog=true ; fi
   #- if [ ${COVERITY_SCAN_BRANCH} != 1 ]; then mvn cobertura:cobertura coveralls:report ; fi
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "develop" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] ; then
-    mvn install -Dmaven.test.skip=true -DskipTests -B -P latest-luna ; fi
+    mvn install -Dmaven.test.skip=true -DskipTests -Dtycho.disableP2Mirrors=true -B -P latest-luna ; fi
   - if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] ; then
-    mvn install -Dmaven.test.skip=true -DskipTests -B -P release-luna ; fi
+    mvn install -Dmaven.test.skip=true -DskipTests -Dtycho.disableP2Mirrors=true -B -P release-luna ; fi
