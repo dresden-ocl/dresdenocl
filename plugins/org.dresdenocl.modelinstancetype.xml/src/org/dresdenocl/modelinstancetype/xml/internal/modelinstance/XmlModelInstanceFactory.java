@@ -99,8 +99,7 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.dresdenocl.modelbus.modelinstance.types.IModelInstanceFactory
+	 * @see org.dresdenocl.modelbus.modelinstance.types.IModelInstanceFactory
 	 * #createModelInstanceElement(java.lang.Object)
 	 */
 	@Override
@@ -131,10 +130,9 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 
 		else {
 			throw new IllegalArgumentException(
-					NLS
-							.bind(
-									XmlModelInstanceTypeMessages.XmlModelInstanceFactory_UnknownClassOfAdaptee,
-									adapted.getClass().getCanonicalName()));
+					NLS.bind(
+							XmlModelInstanceTypeMessages.XmlModelInstanceFactory_UnknownClassOfAdaptee,
+							adapted.getClass().getCanonicalName()));
 		}
 
 		/* Probably debug the exit of this method. */
@@ -153,8 +151,7 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.dresdenocl.modelbus.modelinstance.types.IModelInstanceFactory
+	 * @see org.dresdenocl.modelbus.modelinstance.types.IModelInstanceFactory
 	 * #createModelInstanceElement(java.lang.Object,
 	 * org.dresdenocl.pivotmodel.Type)
 	 */
@@ -218,11 +215,9 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 
 				default:
 					throw new IllegalArgumentException(
-							NLS
-									.bind(
-											XmlModelInstanceTypeMessages.XmlModelInstanceFactory_UnknownClassOfAdaptee,
-											adapted.getClass()
-													.getCanonicalName()));
+							NLS.bind(
+									XmlModelInstanceTypeMessages.XmlModelInstanceFactory_UnknownClassOfAdaptee,
+									adapted.getClass().getCanonicalName()));
 				}
 				// end select.
 			}
@@ -254,10 +249,9 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 
 		else {
 			throw new IllegalArgumentException(
-					NLS
-							.bind(
-									XmlModelInstanceTypeMessages.XmlModelInstanceFactory_UnknownClassOfAdaptee,
-									adapted.getClass().getCanonicalName()));
+					NLS.bind(
+							XmlModelInstanceTypeMessages.XmlModelInstanceFactory_UnknownClassOfAdaptee,
+							adapted.getClass().getCanonicalName()));
 		}
 
 		/* Probably debug the exit of this method. */
@@ -414,8 +408,8 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 		else {
 			Long longValue;
 			try {
-				longValue = new Double(Double
-						.parseDouble(node.getTextContent())).longValue();
+				longValue = new Double(
+						Double.parseDouble(node.getTextContent())).longValue();
 			}
 
 			catch (NumberFormatException e) {
@@ -556,8 +550,8 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 
 			/* Try to find the type of the root node. */
 			Type rootType;
-			rootType = this.findTypeOfRootNode(parents
-					.remove(parents.size() - 1));
+			rootType = this
+					.findTypeOfRootNode(parents.remove(parents.size() - 1));
 
 			if (rootType != null) {
 
@@ -598,10 +592,9 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 
 		if (result == null) {
 			throw new TypeNotFoundInModelException(
-					NLS
-							.bind(
-									XmlModelInstanceTypeMessages.XmlModelInstanceFactory_UnknownTypeOfAdaptee,
-									node));
+					NLS.bind(
+							XmlModelInstanceTypeMessages.XmlModelInstanceFactory_UnknownTypeOfAdaptee,
+							node));
 		}
 		// no else.
 
@@ -629,12 +622,26 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 
 		List<String> pathName;
 		pathName = new ArrayList<String>();
-
 		pathName.add(nodeName);
 
 		/* FIXME Claas: Probably handle the node's name space. */
 		try {
 			result = this.model.findType(pathName);
+
+			/* FIXME Lars: Try to handle the namespace */
+			if (result == null) {
+				String typeName = pathName.get(pathName.size() - 1);
+				while (typeName.contains(":")) {
+					typeName = pathName.remove(pathName.size() - 1);
+					typeName = typeName.substring(typeName.indexOf(":") + 1);
+
+					pathName.add(typeName);
+					result = this.model.findType(pathName);
+					if (result != null) {
+						break;
+					}
+				}
+			}
 
 			/*
 			 * FIXME Claas: This is a very hacky dependency to the XSD
@@ -670,10 +677,9 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 		catch (ModelAccessException e) {
 
 			throw new TypeNotFoundInModelException(
-					NLS
-							.bind(
-									XmlModelInstanceTypeMessages.XmlModelInstanceFactory_UnknownTypeOfAdaptee,
-									node), e);
+					NLS.bind(
+							XmlModelInstanceTypeMessages.XmlModelInstanceFactory_UnknownTypeOfAdaptee,
+							node), e);
 		}
 		// end catch.
 

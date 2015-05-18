@@ -33,7 +33,7 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ TestBugFix01.class, TestBugFix02.class,
-		TestBugFix03.class, TestValueProperty.class,
+		TestBugFix03.class, TestBugFix04.class, TestValueProperty.class,
 		TestXmlModelInstanceType.class })
 public class AllXmlInstanceTests extends AbstractDresdenOclTest {
 	/*

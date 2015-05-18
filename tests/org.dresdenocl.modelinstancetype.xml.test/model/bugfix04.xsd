@@ -1,0 +1,3822 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:vec="http://www.prostep.org/ecad-if/2011/vec" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" targetNamespace="http://www.prostep.org/ecad-if/2011/vec" version="1.1.1">
+   <xs:element name="VecContent" type="vec:VecContent"/>
+   <xs:complexType name="AbrasionResistanceClass">
+      <xs:sequence>
+         <xs:element name="ClassKey" type="xs:string"/>
+         <xs:element name="ReferenceSystem" type="xs:string"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType abstract="true" name="AbstractLocalizedString">
+      <xs:sequence>
+         <xs:element name="LanguageCode" type="vec:LanguageCode"/>
+         <xs:element name="Value" type="xs:string"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType abstract="true" name="AbstractSlot">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="SlotNumber" type="xs:string"/>
+               <xs:element minOccurs="0" name="SlotSpecification" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to SlotSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="Coding" type="vec:Coding"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType abstract="true" name="AbstractSlotReference">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="Identification" type="xs:string"/>
+               <xs:element name="ReferencedSlot" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to AbstractSlot</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="AliasIdentification">
+      <xs:sequence>
+         <xs:element name="IdentificationValue" type="xs:string"/>
+         <xs:element minOccurs="0" name="Scope" type="xs:string"/>
+         <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="vec:AbstractLocalizedString"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType name="AntennaSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:EEComponentSpecification">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="FMin" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="FMax" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="Impedance" type="vec:NumericalValue"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="Approval">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="Identification" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="vec:AbstractLocalizedString"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="CompanyInScope" type="xs:string"/>
+               <xs:element name="Status" type="vec:StatusOfApproval"/>
+               <xs:element minOccurs="0" name="LevelOfApproval" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Permission" type="vec:Permission"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="BSplineCurve">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="Degree" type="xs:integer"/>
+               <xs:element minOccurs="0" name="ControlPoint" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to CartesianPoint3D</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="BatterySpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:EEComponentSpecification">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="U" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="I" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="ICool" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="Capacity" type="vec:NumericalValue"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="BoltMountedFixingSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:FixingSpecification">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="BoltType" type="vec:BoltMountedFixingSpecification"/>
+               <xs:element minOccurs="0" name="BoltDiameter" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="BoltHeight" type="vec:NumericalValue"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="BuildingBlockPositioning2D">
+      <xs:complexContent>
+         <xs:extension base="vec:ConfigurableElement">
+            <xs:sequence>
+               <xs:element name="Referenced2DBuildingBlock" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to BuildingBlockSpecification2D</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="CenterPoint" type="vec:CartesianPoint2D"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="BuildingBlockPositioning3D">
+      <xs:complexContent>
+         <xs:extension base="vec:ConfigurableElement">
+            <xs:sequence>
+               <xs:element name="Referenced3DBuildingBlock" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to BuildingBlockSpecification3D</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="Positioning" type="vec:Transformation3D"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="BuildingBlockSpecification2D">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element name="BaseUnit" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to Unit</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="BoundingBox" type="vec:CartesianDimension"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="CartesianPoint" type="vec:CartesianPoint2D"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="GeometryNode" type="vec:GeometryNode2D"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="GeometrySegment" type="vec:GeometrySegment2D"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="PlacedElementViewItem" type="vec:OccurrenceOrUsageViewItem2D"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="BuildingBlockSpecification3D">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="Zone" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to Zone</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="BaseUnit" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to Unit</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="CartesianPoint" type="vec:CartesianPoint3D"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="GeometryNode" type="vec:GeometryNode3D"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="GeometrySegment" type="vec:GeometrySegment3D"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="PlacedElementViewItem3D" type="vec:OccurrenceOrUsageViewItem3D"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="CableDuctOutlet">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="Identification" type="xs:string"/>
+               <xs:element minOccurs="0" name="PlacementPoint" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to PlacementPoint</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="CableDuctRole">
+      <xs:complexContent>
+         <xs:extension base="vec:Role">
+            <xs:sequence>
+               <xs:element name="CableDuctSpecification" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to CableDuctSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="CableDuctSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:PartOrUsageRelatedSpecification">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Outlet" type="vec:CableDuctOutlet"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="CableLeadThrough">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="Identification" type="xs:string"/>
+               <xs:element minOccurs="0" name="PlacementPoint" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to PlacementPoint</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="CartesianDimension">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="Height" type="xs:double"/>
+               <xs:element name="Width" type="xs:double"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="CartesianPoint2D">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="X" type="xs:double"/>
+               <xs:element name="Y" type="xs:double"/>
+               <xs:element minOccurs="0" name="Sheet" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to SheetOrChapter</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="CartesianPoint3D">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="X" type="xs:double"/>
+               <xs:element name="Y" type="xs:double"/>
+               <xs:element name="Z" type="xs:double"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType abstract="true" name="CartesianVector">
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType name="CartesianVector2D">
+      <xs:complexContent>
+         <xs:extension base="vec:CartesianVector">
+            <xs:sequence>
+               <xs:element name="X" type="xs:double"/>
+               <xs:element name="Y" type="xs:double"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="CartesianVector3D">
+      <xs:complexContent>
+         <xs:extension base="vec:CartesianVector">
+            <xs:sequence>
+               <xs:element name="X" type="xs:double"/>
+               <xs:element name="Y" type="xs:double"/>
+               <xs:element name="Z" type="xs:double"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="Cavity">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="Available" type="xs:boolean"/>
+               <xs:element minOccurs="0" name="CavityNumber" type="xs:string"/>
+               <xs:element minOccurs="0" name="WireAddOn" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="CavitySpecification" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to CavitySpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="CavityMapping">
+      <xs:sequence>
+         <xs:element name="IdentificationA" type="xs:string"/>
+         <xs:element name="IdentificationB" type="xs:string"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType name="CavityMounting">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="EquippedCavityRef" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to CavityReference</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="ReplacedPlug" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to CavityPlugRole</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="CavityMountingDetail" type="vec:CavityMountingDetail"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="CavityMountingDetail">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="EquippedCavityRef" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to CavityReference</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="TerminalReceptionReference" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to TerminalReceptionReference</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="CavityPlugRole">
+      <xs:complexContent>
+         <xs:extension base="vec:Role">
+            <xs:sequence>
+               <xs:element name="CavityPlugSpecification" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to CavityPlugSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="PluggedCavityRef" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to CavityReference</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="CavityPlugSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:PartOrUsageRelatedSpecification">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="CavityDiameter" type="vec:ValueRange"/>
+               <xs:element minOccurs="0" name="Hardness" type="vec:NumericalValue"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="SealingClass" type="vec:SealingClass"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="CavityReference">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="Identification" type="xs:string"/>
+               <xs:element minOccurs="0" name="ComponentPort" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to ComponentPort</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="ReferencedCavity" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to Cavity</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="CavitySealRole">
+      <xs:complexContent>
+         <xs:extension base="vec:Role">
+            <xs:sequence>
+               <xs:element name="CavitySealSpecification" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to CavitySealSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="CavitySealSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:PartOrUsageRelatedSpecification">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="CavityDiameter" type="vec:ValueRange"/>
+               <xs:element minOccurs="0" name="Hardness" type="vec:NumericalValue"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="SealingClass" type="vec:SealingClass"/>
+               <xs:element minOccurs="0" name="WireElementOutsideDiameter" type="vec:ValueRange"/>
+               <xs:element minOccurs="0" name="WireReceptionType" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="CompatibleTerminalType" type="vec:TerminalType"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="CavitySpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element maxOccurs="2" minOccurs="0" name="Angle" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="CavityDesign" type="xs:string"/>
+               <xs:element minOccurs="0" name="CavityDiameter" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="MaxWireElementOutsideDiameter" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="PrimaryLockingType" type="xs:string"/>
+               <xs:element minOccurs="0" name="Sealable" type="xs:boolean"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="CompatibleTerminalType" type="vec:TerminalType"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ChangeDescription">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="Identification" type="xs:string"/>
+               <xs:element minOccurs="0" name="Label" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="vec:AbstractLocalizedString"/>
+               <xs:element minOccurs="0" name="Approver" type="vec:Person"/>
+               <xs:element minOccurs="0" name="ChangeDate" type="xs:dateTime"/>
+               <xs:element name="ResponsibleDesigner" type="vec:Person"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="RelatedChangeRequest" type="xs:string"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="Coding">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="Coding" type="xs:string"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="Color">
+      <xs:sequence>
+         <xs:element name="Key" type="xs:string"/>
+         <xs:element name="ReferenceSystem" type="xs:string"/>
+         <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="vec:LocalizedString"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType name="CompatibilitySpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="CompatibilityStatement" type="vec:CompatibilityStatement"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="CompatibilityStatement">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="HasCompatibility" type="xs:boolean"/>
+               <xs:element minOccurs="0" name="Cavity" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to Cavity</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="CavityPlugSpecification" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to CavityPlugSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="CavitySealSpecification" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to CavitySealSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="CavitySpecification" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to CavitySpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="ConnectorHousingSpecification" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to ConnectorHousingSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="Slot" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to AbstractSlot</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="TerminalSpecification" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to TerminalSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="WireSpecification" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to WireSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ComponentNode">
+      <xs:complexContent>
+         <xs:extension base="vec:ConfigurableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Abbreviation" type="vec:LocalizedString"/>
+               <xs:element minOccurs="0" name="ComponentNodeType" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="vec:AbstractLocalizedString"/>
+               <xs:element minOccurs="0" name="NetworkNode" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to NetworkNode</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="RealizedUsageNode" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to UsageNode</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="ChildNode" type="vec:ComponentNode"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="ComponentPort" type="vec:ComponentPort"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ComponentPort">
+      <xs:complexContent>
+         <xs:extension base="vec:ConfigurableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element minOccurs="0" name="SignalDirection" type="vec:SignalDirection"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="vec:AbstractLocalizedString"/>
+               <xs:element minOccurs="0" name="NetworkPort" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to NetworkPort</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="Signal" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to Signal</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="CompositeUnit">
+      <xs:complexContent>
+         <xs:extension base="vec:Unit">
+            <xs:sequence>
+               <xs:element name="Factors" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to Unit</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="CompositionSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Component" type="vec:PartOccurrence"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ConductorCurrentInformation">
+      <xs:sequence>
+         <xs:element name="MaxCurrent" type="vec:NumericalValue"/>
+         <xs:element name="EnvironmentTemperature" type="vec:NumericalValue"/>
+         <xs:element name="Voltage" type="vec:NumericalValue"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType abstract="true" name="ConductorSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="CrossSectionArea" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="MassInformation" type="vec:MassInformation"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Material" type="vec:Material"/>
+               <xs:element minOccurs="0" name="Resistance" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="Structure" type="xs:string"/>
+               <xs:element minOccurs="0" name="Type" type="xs:string"/>
+               <xs:element minOccurs="0" name="NumberOfStrands" type="vec:NumericalValue"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="PlatingMaterial" type="vec:Material"/>
+               <xs:element minOccurs="0" name="StrandDiameter" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="VoltageRange" type="vec:NumericalValue"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="CurrentInformation" type="vec:ConductorCurrentInformation"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType abstract="true" name="ConfigurableElement">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="ConfigInfo" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to VariantConfiguration</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ConformanceClass">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element name="Version" type="xs:string"/>
+               <xs:element minOccurs="0" name="Url" type="xs:string"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="Connection">
+      <xs:complexContent>
+         <xs:extension base="vec:RoutableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="vec:AbstractLocalizedString"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="InstallationInstruction" type="vec:Instruction"/>
+               <xs:element minOccurs="0" name="Net" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to Net</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="Signal" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to Signal</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element maxOccurs="unbounded" minOccurs="2" name="ConnectionEnd" type="vec:ConnectionEnd"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ConnectionEnd">
+      <xs:complexContent>
+         <xs:extension base="vec:ConfigurableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element name="IsExternalEnd" type="xs:boolean"/>
+               <xs:element minOccurs="0" name="Gender" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="InstallationInstruction" type="vec:Instruction"/>
+               <xs:element name="ConnectedComponentPort" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to ComponentPort</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ConnectionGroup">
+      <xs:complexContent>
+         <xs:extension base="vec:ConfigurableElement">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="Identification" type="xs:string"/>
+               <xs:element name="ConnectionGroupType" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="InstallationInstruction" type="vec:Instruction"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="vec:AbstractLocalizedString"/>
+               <xs:element name="Connection" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to Connection</xs:documentation>
+                     <xs:appinfo>There shall be at least 2 elements referenced.</xs:appinfo>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="NetGroup" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to NetGroup</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="SubGroup" type="vec:ConnectionGroup"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ConnectionSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="ComponentNode" type="vec:ComponentNode"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Connection" type="vec:Connection"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="ConnectionGroup" type="vec:ConnectionGroup"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ConnectorHousingRole">
+      <xs:complexContent>
+         <xs:extension base="vec:Role">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="SealState" type="vec:SealState"/>
+               <xs:element minOccurs="0" name="ComponentNode" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to ComponentNode</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="ConnectorHousingSpecification" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to ConnectorHousingSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="SlotReference" type="vec:AbstractSlotReference"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ConnectorHousingSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:PartOrUsageRelatedSpecification">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="AverageWireLengthAddOn" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="VoltageRange" type="vec:ValueRange"/>
+               <xs:element minOccurs="0" name="Coupleable" type="xs:boolean"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="SealingClass" type="vec:SealingClass"/>
+               <xs:element minOccurs="0" name="Coding" type="vec:Coding"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="SegmentConnectionPoint" type="vec:SegmentConnectionPoint"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Slot" type="vec:AbstractSlot"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ContactPoint">
+      <xs:complexContent>
+         <xs:extension base="vec:ConfigurableElement">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="Identification" type="xs:string"/>
+               <xs:element minOccurs="0" name="MountedTerminal" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to TerminalRole</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="CavityMounting" type="vec:CavityMounting"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="WireMounting" type="vec:WireMounting"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ContactSystem">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="ContactResistance" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="JoiningForce" type="vec:NumericalValue"/>
+               <xs:element name="FirstTerminal" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to PartVersion</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="ReferencedCoreSpecification" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to ConductorSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="SecondTerminal" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to PartVersion</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ContactSystemSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="ContactSystem" type="vec:ContactSystem"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ContactingSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="ContactPoint" type="vec:ContactPoint"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="Contract">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="CompanyName" type="xs:string"/>
+               <xs:element name="ContractRole" type="vec:ContractRole"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="CopyrightInformation">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="CopyrightNote" type="vec:LocalizedString"/>
+               <xs:element name="Item" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to ItemVersion</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="CoreSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:ConductorSpecification">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="OutsideDiameter" type="vec:NumericalValue"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="CorrugatedPipeSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:TubeSpecification">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="CorrugationHeight" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="CorrugationWidth" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="CorrugationGradient" type="vec:NumericalValue"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="Creation">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="CreationDate" type="xs:dateTime"/>
+               <xs:element minOccurs="0" name="Creator" type="vec:Person"/>
+               <xs:element minOccurs="0" name="ResponsibleDesigner" type="vec:Person"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType abstract="true" name="CustomProperty">
+      <xs:sequence>
+         <xs:element name="PropertyType" type="xs:string"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType name="CustomUnit">
+      <xs:complexContent>
+         <xs:extension base="vec:Unit">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="Dimension">
+      <xs:complexContent>
+         <xs:extension base="vec:ConfigurableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element name="DimensionValue" type="vec:NumericalValue"/>
+               <xs:element name="DimensionAnchor" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to DimensionAnchor</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="ReferenceAnchor" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to DimensionAnchor</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element maxOccurs="2" minOccurs="0" name="DefinedLocations" type="vec:Location"/>
+               <xs:element minOccurs="0" name="Path" type="vec:Path"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType abstract="true" name="DimensionAnchor">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement"/>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="DocumentBasedInstruction">
+      <xs:complexContent>
+         <xs:extension base="vec:Instruction">
+            <xs:sequence>
+               <xs:element name="ReferencedDocument" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to DocumentVersion</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="ReferencedSheetOrChapter" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to SheetOrChapter</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="DocumentVersion">
+      <xs:complexContent>
+         <xs:extension base="vec:ItemVersion">
+            <xs:sequence>
+               <xs:element name="DocumentNumber" type="xs:string"/>
+               <xs:element minOccurs="0" name="DocumentType" type="xs:string"/>
+               <xs:element name="DocumentVersion" type="xs:string"/>
+               <xs:element minOccurs="0" name="CreatingSystem" type="xs:string"/>
+               <xs:element minOccurs="0" name="DataFormat" type="xs:string"/>
+               <xs:element minOccurs="0" name="FileName" type="xs:string"/>
+               <xs:element minOccurs="0" name="Location" type="xs:string"/>
+               <xs:element minOccurs="0" name="NumberOfSheets" type="xs:string"/>
+               <xs:element minOccurs="0" name="ReferencedPart" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to PartVersion</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="RelatedDocument" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to DocumentVersion</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="ItemEquivalence" type="vec:ItemEquivalence"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="SheetOrChapter" type="vec:SheetOrChapter"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Specification" type="vec:Specification"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="EEComponentRole">
+      <xs:complexContent>
+         <xs:extension base="vec:Role">
+            <xs:sequence>
+               <xs:element name="EEComponentSpecification" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to EEComponentSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="ComponentNode" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to ComponentNode</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="MountingCavity" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to CavityReference</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="MountingHousing" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to ConnectorHousingRole</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="MountingSlot" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to AbstractSlotReference</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="HousingComponentRef" type="vec:HousingComponentReference"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="EEComponentSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:PartOrUsageRelatedSpecification">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="PowerConsumption" type="vec:PowerConsumption"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="HousingComponent" type="vec:HousingComponent"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="EdgeMountedFixingSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:FixingSpecification">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="EdgeThickness" type="vec:ValueRange"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType abstract="true" name="ExtendableElement">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" minOccurs="0" name="CustomProperty" type="vec:CustomProperty"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType name="ExternalMapping">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="ExternalReference" type="xs:string"/>
+               <xs:element name="MappedElement" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to ExtendableElement</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ExternalMappingSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element name="MappedDocument" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to DocumentVersion</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Mappings" type="vec:ExternalMapping"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="FileBasedInstruction">
+      <xs:complexContent>
+         <xs:extension base="vec:Instruction">
+            <xs:sequence>
+               <xs:element name="FileName" type="xs:string"/>
+               <xs:element minOccurs="0" name="LastModified" type="xs:dateTime"/>
+               <xs:element minOccurs="0" name="DataFormat" type="xs:string"/>
+               <xs:element minOccurs="0" name="Location" type="xs:string"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="FillerSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Material" type="vec:Material"/>
+               <xs:element minOccurs="0" name="Diameter" type="vec:NumericalValue"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="FittingOutlet">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="Identification" type="xs:string"/>
+               <xs:element minOccurs="0" name="InnerDiameter" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="OuterDiameter" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="NominalSize" type="xs:string"/>
+               <xs:element minOccurs="0" name="PlacementPoint" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to PlacementPoint</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="FittingSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:WireProtectionSpecification">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="Form" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Outlet" type="vec:FittingOutlet"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="FixingRole">
+      <xs:complexContent>
+         <xs:extension base="vec:Role">
+            <xs:sequence>
+               <xs:element name="FixingSpecification" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to FixingSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="FixingSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:PartOrUsageRelatedSpecification">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="Offset" type="vec:NumericalValue"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="FuseSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:EEComponentSpecification">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="FuseType" type="xs:string"/>
+               <xs:element minOccurs="0" name="IMax" type="vec:NumericalValue"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="GeneralTechnicalPartSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:PartOrUsageRelatedSpecification">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="ColorInformation" type="vec:Color"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="MassInformation" type="vec:MassInformation"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="MaterialInformation" type="vec:Material"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="RobustnessProperties" type="vec:RobustnessProperties"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="TemperatureInformation" type="vec:TemperatureInformation"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="PartRelation" type="vec:PartRelation"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType abstract="true" name="GeometryNode">
+      <xs:complexContent>
+         <xs:extension base="vec:ConfigurableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="AliasId" type="vec:AliasIdentification"/>
+               <xs:element minOccurs="0" name="ReferenceNode" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to TopologyNode</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="GeometryNode2D">
+      <xs:complexContent>
+         <xs:extension base="vec:GeometryNode">
+            <xs:sequence>
+               <xs:element name="CartesianPoint" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to CartesianPoint2D</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="GeometryNode3D">
+      <xs:complexContent>
+         <xs:extension base="vec:GeometryNode">
+            <xs:sequence>
+               <xs:element name="CartesianPoint" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to CartesianPoint3D</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType abstract="true" name="GeometrySegment">
+      <xs:complexContent>
+         <xs:extension base="vec:ConfigurableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="AliasId" type="vec:AliasIdentification"/>
+               <xs:element minOccurs="0" name="ReferenceSegment" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to TopologySegment</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="GeometrySegment2D">
+      <xs:complexContent>
+         <xs:extension base="vec:GeometrySegment">
+            <xs:sequence>
+               <xs:element name="StartVector" type="vec:CartesianVector2D"/>
+               <xs:element name="EndVector" type="vec:CartesianVector2D"/>
+               <xs:element name="EndNode" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to GeometryNode2D</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="StartNode" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to GeometryNode2D</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="PathSegment" type="vec:PathSegment"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="GeometrySegment3D">
+      <xs:complexContent>
+         <xs:extension base="vec:GeometrySegment">
+            <xs:sequence>
+               <xs:element name="StartVector" type="vec:CartesianVector3D"/>
+               <xs:element name="EndVector" type="vec:CartesianVector3D"/>
+               <xs:element name="EndNode" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to GeometryNode3D</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="StartNode" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to GeometryNode3D</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="BSplineCurve" type="vec:BSplineCurve"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="GrommetRole">
+      <xs:complexContent>
+         <xs:extension base="vec:Role">
+            <xs:sequence>
+               <xs:element name="GrommetSpecification" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to GrommetSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="GrommetSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:PartOrUsageRelatedSpecification">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="Hardness" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="HoleDiameter" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="PlateThickness" type="vec:ValueRange"/>
+               <xs:element minOccurs="0" name="GrommetType" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="SealingClass" type="vec:SealingClass"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="CableLeadThrough" type="vec:CableLeadThrough"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="HarnessDrawingSpecification2D">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" name="BuildingBlockPositionings" type="vec:BuildingBlockPositioning2D"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="HarnessGeometrySpecification3D">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element name="Type" type="vec:GeometryType"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="BuildingBlockPositionings" type="vec:BuildingBlockPositioning3D"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="HoleMountedFixingSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:FixingSpecification">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="HoleDiameter" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="PlateThickness" type="vec:ValueRange"/>
+               <xs:element minOccurs="0" name="HoleType" type="xs:string"/>
+               <xs:element minOccurs="0" name="HoleShape" type="xs:string"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="HousingComponent">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="vec:AbstractLocalizedString"/>
+               <xs:element minOccurs="0" name="HousingSpecification" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to ConnectorHousingSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="PinComponent" type="vec:PinComponent"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="HousingComponentReference">
+      <xs:sequence>
+         <xs:element minOccurs="0" name="Identification" type="xs:string"/>
+         <xs:element name="HousingComponent" type="xs:IDREF">
+            <xs:annotation>
+               <xs:documentation>ref to HousingComponent</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element maxOccurs="unbounded" minOccurs="0" name="PinComponentRef" type="vec:PinComponentReference"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType name="IECUnit">
+      <xs:complexContent>
+         <xs:extension base="vec:Unit">
+            <xs:sequence>
+               <xs:element name="IecUnitName" type="vec:IECUnitName"/>
+               <xs:element minOccurs="0" name="IecPrefix" type="vec:IECPrefix"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ImperialUnit">
+      <xs:complexContent>
+         <xs:extension base="vec:Unit">
+            <xs:sequence>
+               <xs:element name="ImperialUnitName" type="vec:ImperialUnitName"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType abstract="true" name="Instruction">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement"/>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="InsulationSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="BaseColor" type="vec:Color"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="FirstIdentificationColor" type="vec:Color"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="SecondIdentificationColor" type="vec:Color"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="LabelIdentificationColor" type="vec:Color"/>
+               <xs:element minOccurs="0" name="LabelIdentificationType" type="xs:string"/>
+               <xs:element minOccurs="0" name="LabelIdentificationValue" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Material" type="vec:Material"/>
+               <xs:element minOccurs="0" name="Thickness" type="vec:NumericalValue"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="InternalTerminalConnection">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element minOccurs="0" name="TerminalReception" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to TerminalReception</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="WireReception" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to WireReception</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ItemEquivalence">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="CompanyName" type="xs:string"/>
+               <xs:element name="Item" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to ItemVersion</xs:documentation>
+                     <xs:appinfo>There shall be at least 2 elements referenced.</xs:appinfo>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ItemHistoryEntry">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="Type" type="vec:HistoryEntryType"/>
+               <xs:element name="PredecessorVersion" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to ItemVersion</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="SuccessorVersion" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to ItemVersion</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType abstract="true" name="ItemVersion">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Abbreviation" type="vec:LocalizedString"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="vec:AbstractLocalizedString"/>
+               <xs:element name="CompanyName" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="ProcessingInstruction" type="vec:Instruction"/>
+               <xs:element minOccurs="0" name="Contract" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to Contract</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Approval" type="vec:Approval"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="ChangeDescription" type="vec:ChangeDescription"/>
+               <xs:element minOccurs="0" name="Creation" type="vec:Creation"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="LocalizedString">
+      <xs:complexContent>
+         <xs:extension base="vec:AbstractLocalizedString"/>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="LocalizedStringProperty">
+      <xs:complexContent>
+         <xs:extension base="vec:CustomProperty">
+            <xs:sequence>
+               <xs:element name="Value" type="vec:LocalizedString"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="LocalizedTypedString">
+      <xs:complexContent>
+         <xs:extension base="vec:AbstractLocalizedString">
+            <xs:sequence>
+               <xs:element name="Type" type="xs:string"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType abstract="true" name="Location">
+      <xs:complexContent>
+         <xs:extension base="vec:DimensionAnchor">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element minOccurs="0" name="MatchingId" type="xs:string"/>
+               <xs:element minOccurs="0" name="PlacedPlacementPoints" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to PlacementPointReference</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="Mapping">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="A" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to PartVersion</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="B" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to PartVersion</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="SlotMapping" type="vec:SlotMapping"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="MappingSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Mapping" type="vec:Mapping"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="MassInformation">
+      <xs:sequence>
+         <xs:element minOccurs="0" name="DeterminationType" type="vec:ValueDetermination"/>
+         <xs:element name="Value" type="vec:NumericalValue"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType name="Material">
+      <xs:sequence>
+         <xs:element name="Key" type="xs:string"/>
+         <xs:element name="ReferenceSystem" type="xs:string"/>
+         <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="vec:LocalizedString"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType name="MatingDetail">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element name="FirstTerminalReception" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to TerminalReceptionReference</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="SecondTerminalReception" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to TerminalReceptionReference</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="MatingPoint">
+      <xs:complexContent>
+         <xs:extension base="vec:ConfigurableElement">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="Identification" type="xs:string"/>
+               <xs:element name="FirstTerminalRole" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to TerminalRole</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="SecondTerminalRole" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to TerminalRole</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="MatingDetail" type="vec:MatingDetail"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="MatingSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="MatingPoint" type="vec:MatingPoint"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="MeasurementPoint">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="MeasurementPointReference">
+      <xs:complexContent>
+         <xs:extension base="vec:DimensionAnchor">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element name="MeasurementPoint" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to MeasurementPoint</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ModularSlot">
+      <xs:complexContent>
+         <xs:extension base="vec:AbstractSlot">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="Optional" type="xs:boolean"/>
+               <xs:element minOccurs="0" name="AllowedInserts" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to ConnectorHousingSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ModularSlotReference">
+      <xs:complexContent>
+         <xs:extension base="vec:AbstractSlotReference">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="UsedInserts" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to ConnectorHousingRole</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ModuleFamily">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="Identification" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="vec:AbstractLocalizedString"/>
+               <xs:element name="ModuleInFamily" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to PartWithSubComponentsRole</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ModuleFamilySpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" name="ModuleFamily" type="vec:ModuleFamily"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ModuleList">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="Identification" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="vec:AbstractLocalizedString"/>
+               <xs:element name="CompletionComponents" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to PartOccurrence</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="ModuleInList" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to PartWithSubComponentsRole</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ModuleListSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" name="ModuleListConfiguration" type="vec:ModuleList"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="MultiCavityPlugSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:CavityPlugSpecification">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Assignment" type="vec:SealedCavitiesAssignment"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="MultiCavitySealSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:CavitySealSpecification">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Assignment" type="vec:OpenCavitiesAssignment"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="Net">
+      <xs:complexContent>
+         <xs:extension base="vec:ConfigurableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="vec:AbstractLocalizedString"/>
+               <xs:element name="NetworkPort" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to NetworkPort</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="Signal" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to Signal</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="NetGroup">
+      <xs:complexContent>
+         <xs:extension base="vec:ConfigurableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element minOccurs="0" name="NetGroupType" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="vec:AbstractLocalizedString"/>
+               <xs:element name="Net" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to Net</xs:documentation>
+                     <xs:appinfo>There shall be at least 2 elements referenced.</xs:appinfo>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="NetSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Net" type="vec:Net"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="NetGroup" type="vec:NetGroup"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="NetworkNode" type="vec:NetworkNode"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="NetworkNode">
+      <xs:complexContent>
+         <xs:extension base="vec:ConfigurableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Abbreviation" type="vec:LocalizedString"/>
+               <xs:element minOccurs="0" name="NetworkNodeType" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="vec:AbstractLocalizedString"/>
+               <xs:element minOccurs="0" name="RealizedUsageNode" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to UsageNode</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Port" type="vec:NetworkPort"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="NetworkPort">
+      <xs:complexContent>
+         <xs:extension base="vec:ConfigurableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element minOccurs="0" name="SignalDirection" type="vec:SignalDirection"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="vec:AbstractLocalizedString"/>
+               <xs:element minOccurs="0" name="Signal" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to Signal</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="NodeLocation">
+      <xs:complexContent>
+         <xs:extension base="vec:Location">
+            <xs:sequence>
+               <xs:element name="ReferencedNode" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to TopologyNode</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="NumericalValue">
+      <xs:complexContent>
+         <xs:extension base="vec:ValueWithUnit">
+            <xs:sequence>
+               <xs:element name="ValueComponent" type="xs:double"/>
+               <xs:element minOccurs="0" name="Tolerance" type="vec:Tolerance"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="NumericalValueProperty">
+      <xs:complexContent>
+         <xs:extension base="vec:CustomProperty">
+            <xs:sequence>
+               <xs:element name="Value" type="vec:NumericalValue"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType abstract="true" name="OccurrenceOrUsage">
+      <xs:complexContent>
+         <xs:extension base="vec:ConfigurableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="AliasId" type="vec:AliasIdentification"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Abbreviation" type="vec:LocalizedString"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="vec:AbstractLocalizedString"/>
+               <xs:element minOccurs="0" name="RealizedUsageNode" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to UsageNode</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="InstallationInstruction" type="vec:Instruction"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Role" type="vec:Role"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="OccurrenceOrUsageViewItem2D">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="AliasId" type="vec:AliasIdentification"/>
+               <xs:element minOccurs="0" name="GridSquare" type="xs:string"/>
+               <xs:element minOccurs="0" name="OccurrenceOrUsage" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to OccurrenceOrUsage</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="Orientation" type="vec:Transformation2D"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="OccurrenceOrUsageViewItem3D">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="AliasId" type="vec:AliasIdentification"/>
+               <xs:element minOccurs="0" name="OccurrenceOrUsage" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to OccurrenceOrUsage</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="Orientation" type="vec:Transformation3D"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="OnPointPlacement">
+      <xs:complexContent>
+         <xs:extension base="vec:Placement">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" name="Location" type="vec:Location"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="OnWayPlacement">
+      <xs:complexContent>
+         <xs:extension base="vec:Placement">
+            <xs:sequence>
+               <xs:element name="EndLocation" type="vec:Location"/>
+               <xs:element minOccurs="0" name="Path" type="vec:Path"/>
+               <xs:element name="StartLocation" type="vec:Location"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="OpenCavitiesAssignment">
+      <xs:sequence>
+         <xs:element name="OpenCavities" type="xs:IDREFS">
+            <xs:annotation>
+               <xs:documentation>ref to Cavity</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType name="OtherUnit">
+      <xs:complexContent>
+         <xs:extension base="vec:Unit">
+            <xs:sequence>
+               <xs:element name="OtherUnitName" type="vec:OtherUnitName"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="PartOccurrence">
+      <xs:complexContent>
+         <xs:extension base="vec:OccurrenceOrUsage">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="IsSecondaryAlternative" type="xs:boolean"/>
+               <xs:element minOccurs="0" name="AlternativeOccurrence" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to PartOccurrence</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="InstanciatedOccurrence" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to PartOccurrence</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="Part" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to PartVersion</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="RealizedPartUsage" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to PartUsage</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="ReferenceElement" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to PartOccurrence</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="PartOrUsageRelatedSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="SpecialPartType" type="xs:string"/>
+               <xs:element minOccurs="0" name="DescribedPart" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to PartVersion</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="PartRelation">
+      <xs:sequence>
+         <xs:element name="RelationType" type="vec:PartRelationType"/>
+         <xs:element name="AccessoryPart" type="xs:IDREFS">
+            <xs:annotation>
+               <xs:documentation>ref to PartVersion</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType name="PartStructureSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:PartOrUsageRelatedSpecification">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="Content" type="xs:string"/>
+               <xs:element minOccurs="0" name="InBillOfMaterial" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to PartOccurrence</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="PartUsage">
+      <xs:complexContent>
+         <xs:extension base="vec:OccurrenceOrUsage">
+            <xs:sequence>
+               <xs:element name="PrimaryPartUsageType" type="vec:PrimaryPartType"/>
+               <xs:element minOccurs="0" name="PartOrUsageRelatedSpecification" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to PartOrUsageRelatedSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="PartUsageSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="PartUsage" type="vec:PartUsage"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="PartVersion">
+      <xs:complexContent>
+         <xs:extension base="vec:ItemVersion">
+            <xs:sequence>
+               <xs:element name="PartNumber" type="xs:string"/>
+               <xs:element name="PartVersion" type="xs:string"/>
+               <xs:element name="PrimaryPartType" type="vec:PrimaryPartType"/>
+               <xs:element minOccurs="0" name="IsPreferredPart" type="xs:string"/>
+               <xs:element minOccurs="0" name="PreferredUseCase" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="AliasId" type="vec:AliasIdentification"/>
+               <xs:element minOccurs="0" name="Project" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to Project</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="PartWithSubComponentsRole">
+      <xs:complexContent>
+         <xs:extension base="vec:Role">
+            <xs:sequence>
+               <xs:element name="PartStructureSpecification" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to PartStructureSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="SubComponent" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to OccurrenceOrUsage</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="Path">
+      <xs:complexContent>
+         <xs:extension base="vec:ConfigurableElement">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="Segment" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to TopologySegment</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="PathSegment">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="CurveRadius" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="ControlPoint" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to CartesianPoint2D</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="Permission">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="Permission" type="vec:TypeOfPermission"/>
+               <xs:element minOccurs="0" name="PermissionDate" type="xs:dateTime"/>
+               <xs:element minOccurs="0" name="Permitter" type="vec:Person"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="Person">
+      <xs:sequence>
+         <xs:element minOccurs="0" name="CompanyName" type="xs:string"/>
+         <xs:element minOccurs="0" name="Department" type="xs:string"/>
+         <xs:element minOccurs="0" name="FirstName" type="xs:string"/>
+         <xs:element name="LastName" type="xs:string"/>
+         <xs:element maxOccurs="unbounded" minOccurs="0" name="PhoneNumber" type="xs:string"/>
+         <xs:element maxOccurs="unbounded" minOccurs="0" name="EmailAddress" type="xs:string"/>
+         <xs:element maxOccurs="unbounded" minOccurs="0" name="AliasId" type="vec:AliasIdentification"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType name="PinComponent">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="vec:AbstractLocalizedString"/>
+               <xs:element minOccurs="0" name="PinSpecification" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to TerminalSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="ReferencedCavity" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to Cavity</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Behaviour" type="vec:PinComponentBehavior"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="PinComponentBehavior">
+      <xs:complexContent>
+         <xs:extension base="vec:ConfigurableElement">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="SignalDirection" type="vec:SignalDirection"/>
+               <xs:element minOccurs="0" name="PinType" type="vec:PinType"/>
+               <xs:element minOccurs="0" name="ApplianceType" type="vec:PinApplianceType"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="vec:AbstractLocalizedString"/>
+               <xs:element minOccurs="0" name="Signal" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to Signal</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="CurrentInformation" type="vec:PinCurrentInformation"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="OpticalInformation" type="vec:PinOpticalInformation"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="VoltageInformation" type="vec:PinVoltageInformation"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="PinComponentReference">
+      <xs:sequence>
+         <xs:element minOccurs="0" name="Identification" type="xs:string"/>
+         <xs:element name="PinComponent" type="xs:IDREF">
+            <xs:annotation>
+               <xs:documentation>ref to PinComponent</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element minOccurs="0" name="TerminalRole" type="vec:TerminalRole"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType name="PinCurrentInformation">
+      <xs:sequence>
+         <xs:element name="Type" type="vec:PinCurrentType"/>
+         <xs:element name="Current" type="vec:NumericalValue"/>
+         <xs:element minOccurs="0" name="Time" type="vec:PinTiming"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType name="PinOpticalInformation">
+      <xs:sequence>
+         <xs:element name="Frequency" type="vec:NumericalValue"/>
+         <xs:element minOccurs="0" name="Attenuation" type="vec:NumericalValue"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType name="PinTiming">
+      <xs:sequence>
+         <xs:element name="Type" type="vec:PinTimingType"/>
+         <xs:element name="Time" type="vec:NumericalValue"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType name="PinVoltageInformation">
+      <xs:sequence>
+         <xs:element name="Type" type="vec:PinVoltageType"/>
+         <xs:element name="Voltage" type="vec:NumericalValue"/>
+         <xs:element minOccurs="0" name="Time" type="vec:PinTiming"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType name="PlaceableElementRole">
+      <xs:complexContent>
+         <xs:extension base="vec:Role">
+            <xs:sequence>
+               <xs:element name="PlaceableElementSpecification" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to PlaceableElementSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="MeasurementPointReference" type="vec:MeasurementPointReference"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="PlacementPointReference" type="vec:PlacementPointReference"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="PlaceableElementSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:PartOrUsageRelatedSpecification">
+            <xs:sequence>
+               <xs:element maxOccurs="2" name="ValidPlacementTypes" type="vec:PlacementType"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="MeasurementPoint" type="vec:MeasurementPoint"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="PlacementPoint" type="vec:PlacementPoint"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType abstract="true" name="Placement">
+      <xs:complexContent>
+         <xs:extension base="vec:ConfigurableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element minOccurs="0" name="Type" type="xs:string"/>
+               <xs:element minOccurs="0" name="IsOnTopOf" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to Placement</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="PlacedElement" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to PlaceableElementRole</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="PlacementPoint">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element minOccurs="0" name="SegmentDiameter" type="vec:ValueRange"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="PlacementPointReference">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element name="PlacementPoint" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to PlacementPoint</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="PlacementSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Dimension" type="vec:Dimension"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Placement" type="vec:Placement"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="PluggableTerminalRole">
+      <xs:complexContent>
+         <xs:extension base="vec:TerminalRole"/>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="PluggableTerminalSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:TerminalSpecification"/>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="PowerConsumption">
+      <xs:sequence>
+         <xs:element name="Type" type="xs:string"/>
+         <xs:element name="Value" type="vec:NumericalValue"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType name="Project">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="CarClassificationLevel2" type="xs:string"/>
+               <xs:element minOccurs="0" name="CarClassificationLevel3" type="xs:string"/>
+               <xs:element minOccurs="0" name="CarClassificationLevel4" type="xs:string"/>
+               <xs:element minOccurs="0" name="Identification" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="vec:AbstractLocalizedString"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="RelaySpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:EEComponentSpecification">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="IMax" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="RelaisType" type="xs:string"/>
+               <xs:element maxOccurs="1" minOccurs="0" name="CoilContact" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to PinComponent</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="SwitchContact" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to PinComponent</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="RingTerminalRole">
+      <xs:complexContent>
+         <xs:extension base="vec:TerminalRole"/>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="RingTerminalSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:TerminalSpecification">
+            <xs:sequence>
+               <xs:element name="BoltDiameter" type="vec:NumericalValue"/>
+               <xs:element name="Thickness" type="vec:NumericalValue"/>
+               <xs:element name="BoltType" type="xs:string"/>
+               <xs:element minOccurs="0" name="OutsideDimension" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="TorsionProtection" type="xs:boolean"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="RobustnessProperties">
+      <xs:sequence>
+         <xs:element name="Class" type="xs:string"/>
+         <xs:element minOccurs="0" name="ClassKey" type="xs:string"/>
+         <xs:element name="ClassReferenceSystem" type="xs:string"/>
+         <xs:element name="HasRobustness" type="xs:boolean"/>
+         <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="vec:LocalizedString"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType abstract="true" name="Role">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="Identification" type="xs:string"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType abstract="true" name="RoutableElement">
+      <xs:complexContent>
+         <xs:extension base="vec:ConfigurableElement"/>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="Routing">
+      <xs:complexContent>
+         <xs:extension base="vec:ConfigurableElement">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="Identification" type="xs:string"/>
+               <xs:element minOccurs="0" name="SpecialRoutedComment" type="vec:LocalizedString"/>
+               <xs:element minOccurs="0" name="SpecialRouted" type="xs:boolean"/>
+               <xs:element minOccurs="0" name="MandatorySegment" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to TopologySegment</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="RoutedElement" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to RoutableElement</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="Path" type="vec:Path"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="RoutingSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Routing" type="vec:Routing"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="SIUnit">
+      <xs:complexContent>
+         <xs:extension base="vec:Unit">
+            <xs:sequence>
+               <xs:element name="SiUnitName" type="vec:SiUnitName"/>
+               <xs:element minOccurs="0" name="SiPrefix" type="vec:SiPrefix"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="SealedCavitiesAssignment">
+      <xs:sequence>
+         <xs:element name="SealedCavities" type="xs:IDREFS">
+            <xs:annotation>
+               <xs:documentation>ref to Cavity</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType name="SealingClass">
+      <xs:sequence>
+         <xs:element name="Class" type="xs:string"/>
+         <xs:element name="ClassKey" type="xs:string"/>
+         <xs:element name="ClassReferenceSystem" type="xs:string"/>
+         <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="vec:AbstractLocalizedString"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType name="SegmentConnectionPoint">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element minOccurs="0" name="PlacementPoint" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to PlacementPoint</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="ReachableCavities" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to Cavity</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="SegmentCrossSectionArea">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="Area" type="vec:NumericalValue"/>
+               <xs:element name="ValueDetermination" type="vec:ValueDetermination"/>
+               <xs:element minOccurs="0" name="CrossSectionAreaType" type="xs:string"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="SegmentLength">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="Length" type="vec:NumericalValue"/>
+               <xs:element name="Classification" type="vec:LengthClassification"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="SegmentLocation">
+      <xs:complexContent>
+         <xs:extension base="vec:Location">
+            <xs:sequence>
+               <xs:element name="Offset" type="vec:NumericalValue"/>
+               <xs:element name="Anchor" type="vec:AnchorType"/>
+               <xs:element name="ReferencedSegment" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to TopologySegment</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="SheetOrChapter">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element minOccurs="0" name="ReferencedPart" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to PartVersion</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ShieldSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:ConductorSpecification">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="OpticalTissueDensity" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="WindingType" type="xs:string"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ShrinkableTubeSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:TubeSpecification">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="ShrinkingFactor" type="xs:double"/>
+               <xs:element minOccurs="0" name="MaximumLongitudinalShrinkage" type="vec:NumericalValue"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Resin" type="vec:Material"/>
+               <xs:element minOccurs="0" name="WaterAbsorbtion" type="vec:NumericalValue"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="Signal">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="SignalName" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="AliasId" type="vec:AliasIdentification"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="vec:AbstractLocalizedString"/>
+               <xs:element minOccurs="0" name="SignalInformationType" type="vec:SignalInformationType"/>
+               <xs:element minOccurs="0" name="SignalTransmissionMediumType" type="vec:SignalTransmissionMediumType"/>
+               <xs:element minOccurs="0" name="SignalForm" type="vec:SignalForm"/>
+               <xs:element minOccurs="0" name="SignalCurve" type="vec:SignalCurve"/>
+               <xs:element minOccurs="0" name="RecommendedConductorSpecification" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to ConductorSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="RecommendedInsulationSpecification" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to InsulationSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="SignalSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Signal" type="vec:Signal"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="SimpleValueProperty">
+      <xs:complexContent>
+         <xs:extension base="vec:CustomProperty">
+            <xs:sequence>
+               <xs:element name="Value" type="xs:string"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="Size">
+      <xs:sequence>
+         <xs:element name="Width" type="vec:NumericalValue"/>
+         <xs:element name="Height" type="vec:NumericalValue"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType name="Slot">
+      <xs:complexContent>
+         <xs:extension base="vec:AbstractSlot">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="ColorInformation" type="vec:Color"/>
+               <xs:element minOccurs="0" name="SealingType" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" name="Cavity" type="vec:Cavity"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="SlotLayout">
+      <xs:sequence>
+         <xs:element minOccurs="0" name="GridX" type="vec:NumericalValue"/>
+         <xs:element minOccurs="0" name="GridY" type="vec:NumericalValue"/>
+         <xs:element minOccurs="0" name="RowCount" type="xs:integer"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType name="SlotMapping">
+      <xs:sequence>
+         <xs:element name="IdentificationA" type="xs:string"/>
+         <xs:element name="IdentificationB" type="xs:string"/>
+         <xs:element maxOccurs="unbounded" minOccurs="0" name="CavityMapping" type="vec:CavityMapping"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType name="SlotReference">
+      <xs:complexContent>
+         <xs:extension base="vec:AbstractSlotReference">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="CavityReference" type="vec:CavityReference"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="SlotSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="EmvProtectionRequired" type="xs:boolean"/>
+               <xs:element minOccurs="0" name="Gender" type="vec:SlotGender"/>
+               <xs:element minOccurs="0" name="LayoutType" type="xs:string"/>
+               <xs:element minOccurs="0" name="SecondaryLocking" type="xs:boolean"/>
+               <xs:element name="NumberOfCavities" type="xs:integer"/>
+               <xs:element minOccurs="0" name="SlotLayout" type="vec:SlotLayout"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="SoundDampingClass">
+      <xs:sequence>
+         <xs:element name="ClassKey" type="xs:string"/>
+         <xs:element name="ReferenceSystem" type="xs:string"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType name="SpecificRole">
+      <xs:complexContent>
+         <xs:extension base="vec:Role">
+            <xs:sequence>
+               <xs:element name="SpecificRoleType" type="xs:string"/>
+               <xs:element name="Specification" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to PartOrUsageRelatedSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType abstract="true" name="Specification">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="vec:AbstractLocalizedString"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="SpliceTerminalRole">
+      <xs:complexContent>
+         <xs:extension base="vec:TerminalRole">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="SpliceType" type="vec:SpliceType"/>
+               <xs:element minOccurs="0" name="InsulationState" type="vec:InsulationState"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="SpliceTerminalSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:TerminalSpecification"/>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="StripeSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:WireProtectionSpecification">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="Length" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="SegmentDiameter" type="vec:ValueRange"/>
+               <xs:element minOccurs="0" name="Width" type="vec:NumericalValue"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="TapeSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:WireProtectionSpecification">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Backing" type="vec:Material"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Adhesive" type="vec:Material"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Width" type="vec:NumericalValue"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Thickness" type="vec:NumericalValue"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="CoilCoreDiameter" type="vec:NumericalValue"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="TemperatureInformation">
+      <xs:sequence>
+         <xs:element minOccurs="0" name="TemperatureRange" type="vec:ValueRange"/>
+         <xs:element minOccurs="0" name="TemperatureType" type="xs:string"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType name="TerminalCurrentInformation">
+      <xs:sequence>
+         <xs:element name="CurrentRange" type="vec:ValueRange"/>
+         <xs:element name="NominalVoltage" type="vec:NumericalValue"/>
+         <xs:element name="CoreCrossSectionArea" type="vec:NumericalValue"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType name="TerminalReception">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element minOccurs="0" name="Gender" type="xs:string"/>
+               <xs:element minOccurs="0" name="TerminalReceptionSpecification" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to TerminalReceptionSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="TerminalReceptionReference">
+      <xs:sequence>
+         <xs:element minOccurs="0" name="Identification" type="xs:string"/>
+         <xs:element name="TerminalReception" type="xs:IDREF">
+            <xs:annotation>
+               <xs:documentation>ref to TerminalReception</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType name="TerminalReceptionSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="CavityDesign" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="PlatingMaterial" type="vec:Material"/>
+               <xs:element minOccurs="0" name="PrimaryLockingType" type="xs:string"/>
+               <xs:element minOccurs="0" name="PullOutForce" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="TerminalType" type="vec:TerminalType"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="TerminalRole">
+      <xs:complexContent>
+         <xs:extension base="vec:Role">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="SealState" type="vec:SealState"/>
+               <xs:element minOccurs="0" name="ComponentPort" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to ComponentPort</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="TerminalSpecification" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to TerminalSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="TerminalReceptionReference" type="vec:TerminalReceptionReference"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="WireReceptionReference" type="vec:WireReceptionReference"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="TerminalSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:PartOrUsageRelatedSpecification">
+            <xs:sequence>
+               <xs:element maxOccurs="2" minOccurs="0" name="Angle" type="vec:NumericalValue"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="SealingClass" type="vec:SealingClass"/>
+               <xs:element minOccurs="0" name="VoltageRange" type="vec:ValueRange"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="CurrentInformation" type="vec:TerminalCurrentInformation"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="InternalTerminalConnection" type="vec:InternalTerminalConnection"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="TerminalReception" type="vec:TerminalReception"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="WireReception" type="vec:WireReception"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="TerminalType">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="Name" type="xs:string"/>
+               <xs:element minOccurs="0" name="NominalSize" type="xs:string"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="TextBasedInstruction">
+      <xs:complexContent>
+         <xs:extension base="vec:Instruction">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" name="InstallationInstruction" type="vec:LocalizedString"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="Tolerance">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="LowerBoundary" type="xs:double"/>
+               <xs:element name="UpperBoundary" type="xs:double"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="TopologyGroupSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:TopologySpecification">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="TopologySpecification" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to TopologySpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="TopologyNode">
+      <xs:complexContent>
+         <xs:extension base="vec:ConfigurableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="AliasId" type="vec:AliasIdentification"/>
+               <xs:element minOccurs="0" name="MatchingPointId" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="ProcessingInstruction" type="vec:LocalizedString"/>
+               <xs:element minOccurs="0" name="NodeType" type="vec:NodeType"/>
+               <xs:element minOccurs="0" name="RealizedUsageNode" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to UsageNode</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="TopologySegment">
+      <xs:complexContent>
+         <xs:extension base="vec:ConfigurableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element name="Form" type="vec:SegmentForm"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="AliasId" type="vec:AliasIdentification"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="ProcessingInstruction" type="vec:LocalizedString"/>
+               <xs:element name="EndNode" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to TopologyNode</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="StartNode" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to TopologyNode</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="CrossSectionAreaInformation" type="vec:SegmentCrossSectionArea"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="LengthInformation" type="vec:SegmentLength"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="TopologySpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="TopologyNode" type="vec:TopologyNode"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="TopologySegment" type="vec:TopologySegment"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Zone" type="vec:Zone"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="Transformation2D">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="A11" type="xs:double"/>
+               <xs:element name="A12" type="xs:double"/>
+               <xs:element name="A21" type="xs:double"/>
+               <xs:element name="A22" type="xs:double"/>
+               <xs:element name="Origin" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to CartesianPoint2D</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="Transformation3D">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="A11" type="xs:double"/>
+               <xs:element name="A12" type="xs:double"/>
+               <xs:element name="A13" type="xs:double"/>
+               <xs:element name="A21" type="xs:double"/>
+               <xs:element name="A22" type="xs:double"/>
+               <xs:element name="A23" type="xs:double"/>
+               <xs:element name="A31" type="xs:double"/>
+               <xs:element name="A32" type="xs:double"/>
+               <xs:element name="A33" type="xs:double"/>
+               <xs:element name="Origin" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to CartesianPoint3D</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="TubeSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:WireProtectionSpecification">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="BendRadius" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="InnerDiameter" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="WallThickness" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="IsSlit" type="xs:boolean"/>
+               <xs:element minOccurs="0" name="NominalSize" type="xs:string"/>
+               <xs:element minOccurs="0" name="OuterDiameter" type="vec:NumericalValue"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="USUnit">
+      <xs:complexContent>
+         <xs:extension base="vec:Unit">
+            <xs:sequence>
+               <xs:element name="UsUnitName" type="vec:USUnitName"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType abstract="true" name="Unit">
+      <xs:sequence>
+         <xs:element minOccurs="0" name="Exponent" type="xs:integer"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType name="UsageConstraint">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="Type" type="vec:UsageConstraintType"/>
+               <xs:element minOccurs="0" name="FromDate" type="xs:dateTime"/>
+               <xs:element minOccurs="0" name="ToDate" type="xs:dateTime"/>
+               <xs:element minOccurs="0" name="FromSerialNumber" type="xs:string"/>
+               <xs:element minOccurs="0" name="ToSerialNumber" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="ProjectPhase" type="xs:string"/>
+               <xs:element minOccurs="0" name="Project" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to Project</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="UsageNode" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to UsageNode</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="UsageConstraintSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="ConstrainedParts" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to PartVersion</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element maxOccurs="unbounded" name="PartUsageConstraint" type="vec:UsageConstraint"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="UsageNode">
+      <xs:complexContent>
+         <xs:extension base="vec:ConfigurableElement">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Abbreviation" type="vec:LocalizedString"/>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="vec:AbstractLocalizedString"/>
+               <xs:element minOccurs="0" name="UsageNodeType" type="vec:UsageNodeType"/>
+               <xs:element minOccurs="0" name="UsedInProject" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to Project</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="SubUsageNodes" type="vec:UsageNode"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="UsageNodeSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="UsageNodes" type="vec:UsageNode"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ValueRange">
+      <xs:complexContent>
+         <xs:extension base="vec:ValueWithUnit">
+            <xs:sequence>
+               <xs:element name="Minimum" type="xs:double"/>
+               <xs:element name="Maximum" type="xs:double"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ValueRangeProperty">
+      <xs:complexContent>
+         <xs:extension base="vec:CustomProperty">
+            <xs:sequence>
+               <xs:element name="Value" type="vec:ValueRange"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType abstract="true" name="ValueWithUnit">
+      <xs:sequence>
+         <xs:element name="UnitComponent" type="xs:IDREF">
+            <xs:annotation>
+               <xs:documentation>ref to Unit</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType name="VariantCode">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element minOccurs="0" name="CodeType" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="vec:AbstractLocalizedString"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="VariantCodeSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="VariantCode" type="vec:VariantCode"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="VariantConfiguration">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="Identification" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="vec:AbstractLocalizedString"/>
+               <xs:element minOccurs="0" name="LogisticControlString" type="xs:string"/>
+               <xs:element minOccurs="0" name="LogisticControlExpression" type="xs:string"/>
+               <xs:element minOccurs="0" name="ConfigurationType" type="xs:string"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="VariantConfigurationSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="VariantConfiguration" type="vec:VariantConfiguration"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="VariantGroup">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="vec:AbstractLocalizedString"/>
+               <xs:element minOccurs="0" name="GroupType" type="xs:string"/>
+               <xs:element minOccurs="0" name="VariantCode" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to VariantCode</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="VariantGroupSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="VariantGroup" type="vec:VariantGroup"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="VecContent">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="VecVersion" type="vec:VecVersion"/>
+               <xs:element minOccurs="0" name="GeneratingSystemName" type="xs:string"/>
+               <xs:element minOccurs="0" name="DateOfCreation" type="xs:dateTime"/>
+               <xs:element minOccurs="0" name="GeneratingSystemVersion" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="CompliantConformanceClass" type="vec:ConformanceClass"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Contract" type="vec:Contract"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="CopyrightInformation" type="vec:CopyrightInformation"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="DocumentVersion" type="vec:DocumentVersion"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="ItemHistoryEntry" type="vec:ItemHistoryEntry"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="PartVersion" type="vec:PartVersion"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Project" type="vec:Project"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Unit" type="vec:Unit"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="WireElement">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element name="WireElementSpecification" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to WireElementSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="WireElementReference">
+      <xs:complexContent>
+         <xs:extension base="vec:RoutableElement">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="Identification" type="xs:string"/>
+               <xs:element minOccurs="0" name="Connection" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to Connection</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="ReferencedWireElement" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to WireElement</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="Signal" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to Signal</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="WireEnd" type="vec:WireEnd"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="WireLength" type="vec:WireLength"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="WireElementSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Type" type="vec:WireType"/>
+               <xs:element minOccurs="0" name="MinBendRadiusDynamic" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="MinBendRadiusStatic" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="OutsideDiameter" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="SuitedForDynamicUse" type="xs:boolean"/>
+               <xs:element minOccurs="0" name="Impedance" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="Size" type="vec:Size"/>
+               <xs:element minOccurs="0" name="ConductorSpecification" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to ConductorSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="FillerSpecification" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to FillerSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="InsulationSpecification" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to InsulationSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="SubWireElementSpecification" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to WireElementSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="WireGroupSpecification" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to WireGroupSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="WireEnd">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="Identification" type="xs:string"/>
+               <xs:element name="PositionOnWire" type="xs:double"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="WireGroupSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element name="GroupType" type="xs:string"/>
+               <xs:element minOccurs="0" name="LengthOfTwist" type="vec:NumericalValue"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="WireGrouping">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element name="RelatedWireRole" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to WireElementReference</xs:documentation>
+                     <xs:appinfo>There shall be at least 2 elements referenced.</xs:appinfo>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="WireGroupSpecification" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to WireGroupSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="WireGroupingSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" name="WireGrouping" type="vec:WireGrouping"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="WireLength">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="LengthType" type="xs:string"/>
+               <xs:element name="LengthValue" type="vec:NumericalValue"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="WireMounting">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="MountedCavitySeal" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to CavitySealRole</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="ReferencedWireEnd" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to WireEnd</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="WireMountingDetail" type="vec:WireMountingDetail"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="WireMountingDetail">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="ContactedWireReception" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to WireReceptionReference</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="ReferencedWireEnd" type="xs:IDREFS">
+                  <xs:annotation>
+                     <xs:documentation>ref to WireEnd</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="WireProtectionRole">
+      <xs:complexContent>
+         <xs:extension base="vec:Role">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="ProtectionLength" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="TapeOverlap" type="xs:string"/>
+               <xs:element minOccurs="0" name="TapingDirection" type="vec:TapingDirection"/>
+               <xs:element minOccurs="0" name="Gradient" type="vec:ValueWithUnit"/>
+               <xs:element name="WireProtectionSpecification" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to WireProtectionSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="WireProtectionSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:PartOrUsageRelatedSpecification">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="AbrasionResistanceClass" type="vec:AbrasionResistanceClass"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="SoundDampingClass" type="vec:SoundDampingClass"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="WireReception">
+      <xs:complexContent>
+         <xs:extension base="vec:ExtendableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element minOccurs="0" name="PlacementPoint" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to PlacementPoint</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element minOccurs="0" name="WireReceptionSpecification" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to WireReceptionSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="WireReceptionReference">
+      <xs:sequence>
+         <xs:element minOccurs="0" name="Identification" type="xs:string"/>
+         <xs:element name="WireReception" type="xs:IDREF">
+            <xs:annotation>
+               <xs:documentation>ref to WireReception</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType name="WireReceptionSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:Specification">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="CoreCrossSectionArea" type="vec:ValueRange"/>
+               <xs:element minOccurs="0" name="InsulationDisplacementLength" type="vec:NumericalValue"/>
+               <xs:element minOccurs="0" name="MultiContact" type="xs:boolean"/>
+               <xs:element minOccurs="0" name="WireReceptionType" type="xs:string"/>
+               <xs:element minOccurs="0" name="WireElementOutsideDiameter" type="vec:ValueRange"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="PlatingMaterial" type="vec:Material"/>
+               <xs:element minOccurs="0" name="Sealable" type="xs:boolean"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="WireRole">
+      <xs:complexContent>
+         <xs:extension base="vec:Role">
+            <xs:sequence>
+               <xs:element name="WireSpecification" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to WireSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="WireElementReference" type="vec:WireElementReference"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="WireSpecification">
+      <xs:complexContent>
+         <xs:extension base="vec:PartOrUsageRelatedSpecification">
+            <xs:sequence>
+               <xs:element name="WireElementSpecification" type="xs:IDREF">
+                  <xs:annotation>
+                     <xs:documentation>ref to WireElementSpecification</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element maxOccurs="unbounded" name="WireElement" type="vec:WireElement"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="WireType">
+      <xs:sequence>
+         <xs:element name="Type" type="xs:string"/>
+         <xs:element name="ReferenceSystem" type="xs:string"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+   </xs:complexType>
+   <xs:complexType name="Zone">
+      <xs:complexContent>
+         <xs:extension base="vec:ConfigurableElement">
+            <xs:sequence>
+               <xs:element name="Identification" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="vec:AbstractLocalizedString"/>
+               <xs:element minOccurs="0" name="AmbientTemperature" type="vec:TemperatureInformation"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="RequiredRobustnessProperties" type="vec:RobustnessProperties"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="RequiredSealingClass" type="vec:SealingClass"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="SubZone" type="vec:Zone"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:simpleType name="AnchorType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="FromStartNode"/>
+         <xs:enumeration value="FromEndNode"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="ContractRole">
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>
+   <xs:simpleType name="GeometryType">
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>
+   <xs:simpleType name="HistoryEntryType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="Derivation"/>
+         <xs:enumeration value="Sequence"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="IECPrefix">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="Yobi"/>
+         <xs:enumeration value="Zebi"/>
+         <xs:enumeration value="Exbi"/>
+         <xs:enumeration value="Pebi"/>
+         <xs:enumeration value="Tebi"/>
+         <xs:enumeration value="Gibi"/>
+         <xs:enumeration value="Mebi"/>
+         <xs:enumeration value="Kibi"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="IECUnitName">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="Bit"/>
+         <xs:enumeration value="Byte"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="ImperialUnitName">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="Thou"/>
+         <xs:enumeration value="Inch"/>
+         <xs:enumeration value="Foot"/>
+         <xs:enumeration value="Yard"/>
+         <xs:enumeration value="Chain"/>
+         <xs:enumeration value="Furlong"/>
+         <xs:enumeration value="Mile"/>
+         <xs:enumeration value="League"/>
+         <xs:enumeration value="FluidOunce"/>
+         <xs:enumeration value="Gill"/>
+         <xs:enumeration value="Pint"/>
+         <xs:enumeration value="Quart"/>
+         <xs:enumeration value="Gallon"/>
+         <xs:enumeration value="Grain"/>
+         <xs:enumeration value="Drachm"/>
+         <xs:enumeration value="Ounce"/>
+         <xs:enumeration value="Pound"/>
+         <xs:enumeration value="Stone"/>
+         <xs:enumeration value="Quarter"/>
+         <xs:enumeration value="HundredWeight"/>
+         <xs:enumeration value="Ton"/>
+         <xs:enumeration value="Perch"/>
+         <xs:enumeration value="Rood"/>
+         <xs:enumeration value="Acre"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="InsulationState">
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>
+   <xs:simpleType name="LanguageCode">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="Aa"/>
+         <xs:enumeration value="Ab"/>
+         <xs:enumeration value="Af"/>
+         <xs:enumeration value="Am"/>
+         <xs:enumeration value="Ar"/>
+         <xs:enumeration value="As"/>
+         <xs:enumeration value="Ay"/>
+         <xs:enumeration value="Az"/>
+         <xs:enumeration value="Ba"/>
+         <xs:enumeration value="Be"/>
+         <xs:enumeration value="Bg"/>
+         <xs:enumeration value="Bh"/>
+         <xs:enumeration value="Bi"/>
+         <xs:enumeration value="Bn"/>
+         <xs:enumeration value="Bo"/>
+         <xs:enumeration value="Br"/>
+         <xs:enumeration value="Ca"/>
+         <xs:enumeration value="Co"/>
+         <xs:enumeration value="Cs"/>
+         <xs:enumeration value="Cy"/>
+         <xs:enumeration value="Da"/>
+         <xs:enumeration value="De"/>
+         <xs:enumeration value="Dz"/>
+         <xs:enumeration value="El"/>
+         <xs:enumeration value="En"/>
+         <xs:enumeration value="Eo"/>
+         <xs:enumeration value="Es"/>
+         <xs:enumeration value="Et"/>
+         <xs:enumeration value="Eu"/>
+         <xs:enumeration value="Fa"/>
+         <xs:enumeration value="Fi"/>
+         <xs:enumeration value="Fj"/>
+         <xs:enumeration value="Fo"/>
+         <xs:enumeration value="Fr"/>
+         <xs:enumeration value="Fy"/>
+         <xs:enumeration value="Ga"/>
+         <xs:enumeration value="Gd"/>
+         <xs:enumeration value="Gl"/>
+         <xs:enumeration value="Gn"/>
+         <xs:enumeration value="Gu"/>
+         <xs:enumeration value="Ha"/>
+         <xs:enumeration value="Hi"/>
+         <xs:enumeration value="He"/>
+         <xs:enumeration value="Hr"/>
+         <xs:enumeration value="Hu"/>
+         <xs:enumeration value="Hy"/>
+         <xs:enumeration value="Ia"/>
+         <xs:enumeration value="Id"/>
+         <xs:enumeration value="Ie"/>
+         <xs:enumeration value="Ik"/>
+         <xs:enumeration value="In"/>
+         <xs:enumeration value="Is"/>
+         <xs:enumeration value="It"/>
+         <xs:enumeration value="Iu"/>
+         <xs:enumeration value="Iw"/>
+         <xs:enumeration value="Ja"/>
+         <xs:enumeration value="Ji"/>
+         <xs:enumeration value="Jw"/>
+         <xs:enumeration value="Ka"/>
+         <xs:enumeration value="Kk"/>
+         <xs:enumeration value="Kl"/>
+         <xs:enumeration value="Km"/>
+         <xs:enumeration value="Kn"/>
+         <xs:enumeration value="Ko"/>
+         <xs:enumeration value="Ks"/>
+         <xs:enumeration value="Ku"/>
+         <xs:enumeration value="Ky"/>
+         <xs:enumeration value="La"/>
+         <xs:enumeration value="Ln"/>
+         <xs:enumeration value="Lo"/>
+         <xs:enumeration value="Lt"/>
+         <xs:enumeration value="Lv"/>
+         <xs:enumeration value="Mg"/>
+         <xs:enumeration value="Mi"/>
+         <xs:enumeration value="Mk"/>
+         <xs:enumeration value="Ml"/>
+         <xs:enumeration value="Mn"/>
+         <xs:enumeration value="Mo"/>
+         <xs:enumeration value="Mr"/>
+         <xs:enumeration value="Ms"/>
+         <xs:enumeration value="Mt"/>
+         <xs:enumeration value="My"/>
+         <xs:enumeration value="Na"/>
+         <xs:enumeration value="Ne"/>
+         <xs:enumeration value="Nl"/>
+         <xs:enumeration value="No"/>
+         <xs:enumeration value="Oc"/>
+         <xs:enumeration value="Om"/>
+         <xs:enumeration value="Or"/>
+         <xs:enumeration value="Pa"/>
+         <xs:enumeration value="Pl"/>
+         <xs:enumeration value="Ps"/>
+         <xs:enumeration value="Pt"/>
+         <xs:enumeration value="Qu"/>
+         <xs:enumeration value="Rm"/>
+         <xs:enumeration value="Rn"/>
+         <xs:enumeration value="Ro"/>
+         <xs:enumeration value="Ru"/>
+         <xs:enumeration value="Rw"/>
+         <xs:enumeration value="Sa"/>
+         <xs:enumeration value="Sd"/>
+         <xs:enumeration value="Sg"/>
+         <xs:enumeration value="Sh"/>
+         <xs:enumeration value="Si"/>
+         <xs:enumeration value="Sk"/>
+         <xs:enumeration value="Sl"/>
+         <xs:enumeration value="Sm"/>
+         <xs:enumeration value="Sn"/>
+         <xs:enumeration value="So"/>
+         <xs:enumeration value="Sq"/>
+         <xs:enumeration value="Sr"/>
+         <xs:enumeration value="Ss"/>
+         <xs:enumeration value="St"/>
+         <xs:enumeration value="Su"/>
+         <xs:enumeration value="Sv"/>
+         <xs:enumeration value="Sw"/>
+         <xs:enumeration value="Ta"/>
+         <xs:enumeration value="Te"/>
+         <xs:enumeration value="Tg"/>
+         <xs:enumeration value="Th"/>
+         <xs:enumeration value="Zi"/>
+         <xs:enumeration value="Tk"/>
+         <xs:enumeration value="Tl"/>
+         <xs:enumeration value="Tn"/>
+         <xs:enumeration value="To"/>
+         <xs:enumeration value="Tr"/>
+         <xs:enumeration value="Ts"/>
+         <xs:enumeration value="Tt"/>
+         <xs:enumeration value="Tw"/>
+         <xs:enumeration value="Ug"/>
+         <xs:enumeration value="Uk"/>
+         <xs:enumeration value="Ur"/>
+         <xs:enumeration value="Uz"/>
+         <xs:enumeration value="Vi"/>
+         <xs:enumeration value="Vo"/>
+         <xs:enumeration value="Wo"/>
+         <xs:enumeration value="Xh"/>
+         <xs:enumeration value="Yi"/>
+         <xs:enumeration value="Yo"/>
+         <xs:enumeration value="Za"/>
+         <xs:enumeration value="Zh"/>
+         <xs:enumeration value="Zu"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="LengthClassification">
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>
+   <xs:simpleType name="NodeType">
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>
+   <xs:simpleType name="OtherUnitName">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="Pi"/>
+         <xs:enumeration value="Piece"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="PartRelationType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="Mandatory"/>
+         <xs:enumeration value="Optional"/>
+         <xs:enumeration value="OneOfAll"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="PinApplianceType">
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>
+   <xs:simpleType name="PinCurrentType">
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>
+   <xs:simpleType name="PinTimingType">
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>
+   <xs:simpleType name="PinType">
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>
+   <xs:simpleType name="PinVoltageType">
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>
+   <xs:simpleType name="PlacementType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="OnWay"/>
+         <xs:enumeration value="OnPoint"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="PrimaryPartType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="Antenna"/>
+         <xs:enumeration value="Battery"/>
+         <xs:enumeration value="BoltMountedFixing"/>
+         <xs:enumeration value="CableDuct"/>
+         <xs:enumeration value="CavityPlug"/>
+         <xs:enumeration value="CavitySeal"/>
+         <xs:enumeration value="ConnectorHousing"/>
+         <xs:enumeration value="CorrugatedPipe"/>
+         <xs:enumeration value="EEComponent"/>
+         <xs:enumeration value="Fitting"/>
+         <xs:enumeration value="Fixing"/>
+         <xs:enumeration value="Fuse"/>
+         <xs:enumeration value="Grommet"/>
+         <xs:enumeration value="HoleMountedFixing"/>
+         <xs:enumeration value="MultiCavityPlug"/>
+         <xs:enumeration value="MultiCavitySeal"/>
+         <xs:enumeration value="Other"/>
+         <xs:enumeration value="PartStructure"/>
+         <xs:enumeration value="PluggableTerminal"/>
+         <xs:enumeration value="Relay"/>
+         <xs:enumeration value="RingTerminal"/>
+         <xs:enumeration value="ShrinkableTube"/>
+         <xs:enumeration value="SpliceTerminal"/>
+         <xs:enumeration value="Stripe"/>
+         <xs:enumeration value="Tape"/>
+         <xs:enumeration value="Terminal"/>
+         <xs:enumeration value="Tube"/>
+         <xs:enumeration value="Wire"/>
+         <xs:enumeration value="WireProtection"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="SealState">
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>
+   <xs:simpleType name="SegmentForm">
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>
+   <xs:simpleType name="SiPrefix">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="Yotta"/>
+         <xs:enumeration value="Zetta"/>
+         <xs:enumeration value="Exa"/>
+         <xs:enumeration value="Peta"/>
+         <xs:enumeration value="Tera"/>
+         <xs:enumeration value="Giga"/>
+         <xs:enumeration value="Mega"/>
+         <xs:enumeration value="Kilo"/>
+         <xs:enumeration value="Hecto"/>
+         <xs:enumeration value="Deca"/>
+         <xs:enumeration value="Deci"/>
+         <xs:enumeration value="Centi"/>
+         <xs:enumeration value="Milli"/>
+         <xs:enumeration value="Micro"/>
+         <xs:enumeration value="Nano"/>
+         <xs:enumeration value="Pico"/>
+         <xs:enumeration value="Femto"/>
+         <xs:enumeration value="Atto"/>
+         <xs:enumeration value="Zepto"/>
+         <xs:enumeration value="Yocto"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="SiUnitName">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="Metre"/>
+         <xs:enumeration value="Gram"/>
+         <xs:enumeration value="Second"/>
+         <xs:enumeration value="Ampere"/>
+         <xs:enumeration value="Kelvin"/>
+         <xs:enumeration value="Mole"/>
+         <xs:enumeration value="Candela"/>
+         <xs:enumeration value="Radian"/>
+         <xs:enumeration value="Steradian"/>
+         <xs:enumeration value="Hertz"/>
+         <xs:enumeration value="Newton"/>
+         <xs:enumeration value="Pascal"/>
+         <xs:enumeration value="Joule"/>
+         <xs:enumeration value="Watt"/>
+         <xs:enumeration value="Coulomb"/>
+         <xs:enumeration value="Volt"/>
+         <xs:enumeration value="Farad"/>
+         <xs:enumeration value="Ohm"/>
+         <xs:enumeration value="Siemens"/>
+         <xs:enumeration value="Weber"/>
+         <xs:enumeration value="Tesla"/>
+         <xs:enumeration value="Henry"/>
+         <xs:enumeration value="DegreeCelsius"/>
+         <xs:enumeration value="Lumen"/>
+         <xs:enumeration value="Lux"/>
+         <xs:enumeration value="Becquerel"/>
+         <xs:enumeration value="Gray"/>
+         <xs:enumeration value="Sievert"/>
+         <xs:enumeration value="Katal"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="SignalCurve">
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>
+   <xs:simpleType name="SignalDirection">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="In"/>
+         <xs:enumeration value="Out"/>
+         <xs:enumeration value="InOut"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="SignalForm">
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>
+   <xs:simpleType name="SignalInformationType">
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>
+   <xs:simpleType name="SignalTransmissionMediumType">
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>
+   <xs:simpleType name="SlotGender">
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>
+   <xs:simpleType name="SpliceType">
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>
+   <xs:simpleType name="StatusOfApproval">
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>
+   <xs:simpleType name="TapingDirection">
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>
+   <xs:simpleType name="TypeOfPermission">
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>
+   <xs:simpleType name="USUnitName">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="Thou"/>
+         <xs:enumeration value="Inch"/>
+         <xs:enumeration value="Foot"/>
+         <xs:enumeration value="Yard"/>
+         <xs:enumeration value="Chain"/>
+         <xs:enumeration value="Furlong"/>
+         <xs:enumeration value="Mile"/>
+         <xs:enumeration value="League"/>
+         <xs:enumeration value="FluidOunce"/>
+         <xs:enumeration value="Gill"/>
+         <xs:enumeration value="Pint"/>
+         <xs:enumeration value="Quart"/>
+         <xs:enumeration value="Gallon"/>
+         <xs:enumeration value="Grain"/>
+         <xs:enumeration value="Drachm"/>
+         <xs:enumeration value="Ounce"/>
+         <xs:enumeration value="Pound"/>
+         <xs:enumeration value="Stone"/>
+         <xs:enumeration value="Quarter"/>
+         <xs:enumeration value="HundredWeight"/>
+         <xs:enumeration value="Ton"/>
+         <xs:enumeration value="Perch"/>
+         <xs:enumeration value="Rood"/>
+         <xs:enumeration value="Acre"/>
+         <xs:enumeration value="AWG"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="UsageConstraintType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="Allow"/>
+         <xs:enumeration value="Deny"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="UsageNodeType">
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>
+   <xs:simpleType name="ValueDetermination">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="Calculated"/>
+         <xs:enumeration value="Measured"/>
+         <xs:enumeration value="Estimated"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="VecVersion">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="1.1.1"/>
+      </xs:restriction>
+   </xs:simpleType>
+</xs:schema>
