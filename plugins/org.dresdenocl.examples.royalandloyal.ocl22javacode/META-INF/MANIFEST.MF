@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Royal and Loyal Example, Generated Java Code and Test Cases
 Bundle-SymbolicName: org.dresdenocl.examples.royalandloyal.ocl22javacode;singleton:=true
-Bundle-Version: 3.4.0.qualifier
+Bundle-Version: 3.4.1.qualifier
 Export-Package: org.dresdenocl.examples.royalandloyal.ocl22javacode,
  org.dresdenocl.examples.royalandloyal.ocl22javacode.constraints,
  org.dresdenocl.examples.royalandloyal.ocl22javacode.test

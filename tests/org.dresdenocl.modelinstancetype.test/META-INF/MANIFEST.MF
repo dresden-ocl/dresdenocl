@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Generic Model Instance Type Test Plug-in
 Bundle-SymbolicName: org.dresdenocl.modelinstancetype.test;singleton:=true
-Bundle-Version: 3.4.0.qualifier
+Bundle-Version: 3.4.1.qualifier
 Bundle-Activator: org.dresdenocl.modelinstancetype.test.ModelInstanceTypeTestPlugin
 Bundle-Vendor: TU Dresden, Software Technology Group
 Require-Bundle: org.eclipse.core.runtime,

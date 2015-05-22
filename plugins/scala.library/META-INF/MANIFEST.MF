@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Scala Library
 Bundle-SymbolicName: scala.library;singleton:=true
-Bundle-Version: 3.4.0.qualifier
+Bundle-Version: 3.4.1.qualifier
 Bundle-ClassPath: lib/scala-library.jar,
  lib/scala-compiler.jar
 Created-By: 1.5.0_16-b02 (Sun Microsystems Inc.)

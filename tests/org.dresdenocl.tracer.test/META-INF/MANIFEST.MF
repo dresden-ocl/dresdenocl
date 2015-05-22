@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: OCL Tracer Tests
 Bundle-SymbolicName: org.dresdenocl.tracer.test;singleton:=true
-Bundle-Version: 3.4.0.qualifier
+Bundle-Version: 3.4.1.qualifier
 Bundle-Activator: org.dresdenocl.tracer.test.TracerTestPlugin
 Require-Bundle: org.eclipse.core.runtime,
  org.dresdenocl.interpreter,

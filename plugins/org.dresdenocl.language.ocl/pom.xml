@@ -8,7 +8,7 @@
 		<relativePath>../pom.xml</relativePath>
 		<groupId>org.dresdenocl</groupId>
 		<artifactId>plugins</artifactId>
-		<version>3.4.0-SNAPSHOT</version>
+		<version>3.4.1-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>org.dresdenocl.language.ocl</artifactId>

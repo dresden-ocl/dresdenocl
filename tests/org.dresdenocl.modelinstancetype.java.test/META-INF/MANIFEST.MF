@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Java Model Instance Type Test Plug-in
 Bundle-SymbolicName: org.dresdenocl.modelinstancetype.java.test;singleton:=true
-Bundle-Version: 3.4.0.qualifier
+Bundle-Version: 3.4.1.qualifier
 Bundle-Activator: org.dresdenocl.modelinstancetype.java.test.JavaModelInstanceTypeTestPlugin
 Require-Bundle: org.eclipse.core.runtime,
  org.junit,

@@ -2,7 +2,7 @@
 <feature
       id="org.dresdenocl.feature.metamodels"
       label="Dresden OCL Metamodels"
-      version="3.4.0.qualifier"
+      version="3.4.1.qualifier"
       provider-name="TU Dresden, Software Technology Group">
 
    <description url="http://dresden-ocl.sourceforge.net/4eclipse_intro.html">

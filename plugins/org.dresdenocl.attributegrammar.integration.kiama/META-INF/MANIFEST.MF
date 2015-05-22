@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Kiama Integration
 Bundle-SymbolicName: org.dresdenocl.attributegrammar.integration.kiama;singleton:=true
-Bundle-Version: 3.4.0.qualifier
+Bundle-Version: 3.4.1.qualifier
 Bundle-Activator: org.dresdenocl.attributegrammar.integration.kiama.KiamaIntegrationPlugin
 Require-Bundle: org.eclipse.emf.ecore,
  org.dresdenocl.essentialocl;bundle-version="3.3.0",

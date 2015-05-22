@@ -2,7 +2,7 @@
 <feature
       id="org.dresdenocl.feature.metrics"
       label="Dresden OCL Metrics"
-      version="3.4.0.qualifier"
+      version="3.4.1.qualifier"
       provider-name="TU Dresden, Software Technology Group">
 
    <description url="http://www.example.com/description">

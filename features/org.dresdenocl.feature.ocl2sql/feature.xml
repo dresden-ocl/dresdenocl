@@ -2,7 +2,7 @@
 <feature
       id="org.dresdenocl.feature.ocl2sql"
       label="Dresden OCL Ocl2Sql Code Generator"
-      version="3.4.0.qualifier"
+      version="3.4.1.qualifier"
       provider-name="TU Dresden, Software Technoloy Group">
 
    <description url="http://www.example.com/description">
