@@ -27,7 +27,7 @@ public final class ModelLoaderUtility {
 
 	/**
 	 * <p>
-	 * Helper method which substitutes the "/src/" with "/bin/" and set the file
+	 * Helper method which substitutes the "/src/" with "/target/classes/" and set the file
 	 * ending to ".class"
 	 * </p>
 	 * 
@@ -44,9 +44,9 @@ public final class ModelLoaderUtility {
 		// Check which type of slashes are used and replace src with bin
 		String pathToClassFile = null;
 		if (pathToJavaFile.contains("\\src\\")) {
-			pathToClassFile = pathToJavaFile.replace("\\src\\", "\\bin\\");
+			pathToClassFile = pathToJavaFile.replace("\\src\\", "\\target\\classes\\");
 		} else if (pathToJavaFile.contains("/src/")) {
-			pathToClassFile = pathToJavaFile.replace("/src/", "/bin/");
+			pathToClassFile = pathToJavaFile.replace("/src/", "/target/classes/");
 		}
 
 		// now check the file ending
