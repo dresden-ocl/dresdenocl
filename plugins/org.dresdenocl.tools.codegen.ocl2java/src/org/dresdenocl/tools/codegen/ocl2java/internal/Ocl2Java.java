@@ -2142,7 +2142,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	private String getUrl(String path) throws IOException {
 
 		File file = null;
-		
+
 		if (Platform.isRunning()) {
 			Bundle bundle = Platform.getBundle(Ocl2JavaPlugin.PLUGIN_ID);
 			if (bundle != null) {
@@ -2160,8 +2160,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 					e.printStackTrace();
 				}
 			}
-		}
-		else {
+		} else {
 
 			File testLocation = new File(
 					System.getProperty("DRESDENOCL_LOCATION_TESTS")
@@ -2187,7 +2186,11 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 				throw new RuntimeException("Bundle or directory '"
 						+ Ocl2JavaPlugin.PLUGIN_ID + "' was not found.");
 		}
-		return file.getAbsolutePath();
+		if (file != null) {
+			return file.getAbsolutePath();
+		} else {
+			throw new IOException("File with path " + path + " does not exist.");
+		}
 	}
 
 	/**
